@@ -1,0 +1,49 @@
+PODS:
+  - Bolts/Tasks (1.9.1)
+  - BRYXBanner (0.8.4)
+  - Parse (1.19.3):
+    - Parse/Core (= 1.19.3)
+  - Parse/Core (1.19.3):
+    - Bolts/Tasks (= 1.9.1)
+  - Parse/UI (1.19.3):
+    - Parse/Core
+  - Reusable (4.1.2):
+    - Reusable/Storyboard (= 4.1.2)
+    - Reusable/View (= 4.1.2)
+  - Reusable/Storyboard (4.1.2)
+  - Reusable/View (4.1.2)
+  - SCLAlertView (0.8)
+  - SnapKit (5.0.1)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - BRYXBanner
+  - Parse
+  - Parse/UI
+  - Reusable
+  - SCLAlertView
+  - SnapKit (~> 5.0.0)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  trunk:
+    - Bolts
+    - BRYXBanner
+    - Parse
+    - Reusable
+    - SCLAlertView
+    - SnapKit
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  BRYXBanner: 4fbd266f96ce000e4c6cc9a0558c446bd88d9801
+  Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
+  Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: 1cc0d2c3978046e8110ae7309234b138fb215455
+
+COCOAPODS: 1.11.3

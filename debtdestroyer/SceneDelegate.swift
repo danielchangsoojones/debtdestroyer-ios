@@ -48,11 +48,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func setStartingVC(windowScene: UIScene) {
-       
-            let vc = RoundUpTabBarViewController()
-            let navController = UINavigationController(rootViewController: vc)
-            set(windowScene: windowScene, startingVC: navController)
-        
+        let vc = RoundUpTabBarViewController()
+        set(windowScene: windowScene, startingVC: vc)
     }
 
     private func set(windowScene: UIScene, startingVC: UIViewController) {

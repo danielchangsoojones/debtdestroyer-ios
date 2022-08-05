@@ -11,61 +11,37 @@ class RoundUpTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().barTintColor = .black
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
         
         self.delegate = self
         setTabs()
-        
     }
-    
     
     private func setTabs(){
         let vc1 = RoundUpViewController()//TicketsViewController()
-        let tickets = UINavigationController(rootViewController: vc1)
-        tickets.setNavigationBarHidden(true, animated: false)
-        
         let vc2 = BankViewController()
-        let bank = UINavigationController(rootViewController: vc2)
-        bank.setNavigationBarHidden(true, animated: false)
-        
         let vc3 = SettingsViewController()
-        let settings = UINavigationController(rootViewController: vc3)
-        settings.setNavigationBarHidden(true, animated: false)
-
-        let controllers = [tickets,bank,settings]
-        self.viewControllers = controllers
-
+     
+        let controllers = [vc1,vc2,vc3]
+        self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
+        
         let tabTickets = tabBar.items![0]
-        tabTickets.title = "Tickets" // tabbar titlee
-//        tabTickets.image=UIImage(named: "icon_home.png")?.withRenderingMode(.alwaysOriginal) // deselect image
-//        tabTickets.selectedImage = UIImage(named: "icon_home.png")?.withRenderingMode(.alwaysOriginal) // select image
-//        tabTickets.titlePositionAdjustment.vertical = tabTickets.titlePositionAdjustment.vertical-4 // title position change
-
+        tabTickets.image = UIImage(named: "ticketBW")?.withRenderingMode(.alwaysOriginal)
+        tabTickets.selectedImage = UIImage(named: "ticketC")?.withRenderingMode(.alwaysOriginal)
         
         let tabBank = tabBar.items![1]
-        tabBank.title = "Bank" // tabbar titlee
-//        tabBank.image=UIImage(named: "icon_home.png")?.withRenderingMode(.alwaysOriginal) // deselect image
-//        tabBank.selectedImage = UIImage(named: "icon_home.png")?.withRenderingMode(.alwaysOriginal) // select image
-//        tabBank.titlePositionAdjustment.vertical = tabBank.titlePositionAdjustment.vertical-4 // title position change
-//
-      
+        tabBank.image = UIImage(named: "bankBW")?.withRenderingMode(.alwaysOriginal)
+        tabBank.selectedImage = UIImage(named: "bankC")?.withRenderingMode(.alwaysOriginal)
+        
         let tabSettings = tabBar.items![2]
-        tabSettings.title = "Settings" // tabbar titlee
-//        tabSettings.image=UIImage(named: "icon_home.png")?.withRenderingMode(.alwaysOriginal) // deselect image
-//        tabSettings.selectedImage = UIImage(named: "icon_home.png")?.withRenderingMode(.alwaysOriginal) // select image
-//        tabSettings.titlePositionAdjustment.vertical = tabSettings.titlePositionAdjustment.vertical-4 // title position change
-        
-        
-        
+        tabSettings.image = UIImage(named: "settingsBW")?.withRenderingMode(.alwaysOriginal)
+        tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
     }
-    
-    
 }
+
 extension RoundUpTabBarViewController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
     }
-    
 }

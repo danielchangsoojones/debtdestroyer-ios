@@ -15,7 +15,6 @@ class HowDoesRoundUpWorksViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setTableView()
-        
     }
     
     private func setTableView() {
@@ -31,7 +30,6 @@ class HowDoesRoundUpWorksViewController: UIViewController {
     }
 
     @objc private func closePressed() {
-        
         dismiss(animated: true, completion: nil)
     }
 }

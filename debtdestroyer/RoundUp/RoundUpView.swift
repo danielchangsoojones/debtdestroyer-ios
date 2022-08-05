@@ -44,7 +44,7 @@ class RoundUpView: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 10
         stack.axis = .horizontal
-        stack.distribution = .fillEqually
+        stack.distribution = .equalCentering
         stack.alignment = .center
         stack.backgroundColor = .clear
         
@@ -84,7 +84,6 @@ class RoundUpView: UIView {
         backgroundCanvas1.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.trailing.equalToSuperview().inset(10)
-           // make.height.equalTo(frame.width * 0.8)
         }
         setStackView()
         setHowItWorksButton()
@@ -107,6 +106,7 @@ class RoundUpView: UIView {
         stackView.addArrangedSubview(stackViewYouBuy)
         stackViewYouBuy.snp.makeConstraints{ make in
             make.top.bottom.equalToSuperview()
+            make.width.equalTo(120)
         }
         setYouBuyLabel()
         setYouBuyAmountLabel()
@@ -117,6 +117,7 @@ class RoundUpView: UIView {
         stackView.addArrangedSubview(stackViewRoundup)
         stackViewRoundup.snp.makeConstraints{ make in
             make.top.bottom.equalToSuperview()
+            make.width.equalTo(120)
         }
         setRoundUpLabel()
         setRoundUpAmountLabel()
@@ -157,6 +158,10 @@ class RoundUpView: UIView {
         roundUpLabel.textAlignment = .center
         roundUpLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         stackViewRoundup.addArrangedSubview(roundUpLabel)
+        roundUpLabel.snp.makeConstraints{ make in
+            make.width.equalTo(120)
+            
+        }
 
     }
     
@@ -183,6 +188,9 @@ class RoundUpView: UIView {
         imageViewArrow.contentMode = .center
         imageViewArrow.image = UIImage.init(named: "arrow")
         stackView.addArrangedSubview(imageViewArrow)
+        imageViewArrow.snp.makeConstraints{ make in
+            make.width.equalTo(50).priority(.high)
+        }
     }
     
     private func setHowItWorksButton() {
@@ -209,7 +217,6 @@ class RoundUpView: UIView {
         backgroundCanvas2.snp.makeConstraints { make in
             make.top.equalTo(backgroundCanvas1.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(10)
-            //            make.centerY.equalToSuperview()
         }
         setPrivateLoanStatusLabel()
     }
@@ -228,7 +235,6 @@ class RoundUpView: UIView {
     }
     
     private func setConnectAccountButton() {
-//        connectAccountBtn.titleLabel?.text = "+ Securely connect my account"
         connectAccountBtn.backgroundColor = .black
         connectAccountBtn.setTitle("+ Securely connect my account", for: .normal)
         connectAccountBtn.layer.cornerRadius = 8

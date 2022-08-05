@@ -11,19 +11,15 @@ class TicketsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .fuchsiaPink
+        setupNavBar()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    fileprivate func setupNavBar() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
-    */
-
 }

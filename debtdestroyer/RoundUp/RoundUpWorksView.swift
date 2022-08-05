@@ -65,7 +65,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 10
         stack.axis = .horizontal
-        stack.distribution = .fillEqually
+        stack.distribution = .equalCentering
         stack.alignment = .center
         stack.backgroundColor = .clear
         
@@ -79,7 +79,6 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = .clear
-        selectionStyle = .none
         
         setCloseButton()
         setbackgroundCanvas()
@@ -135,6 +134,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         stackView.addArrangedSubview(stackViewYouBuy)
         stackViewYouBuy.snp.makeConstraints{ make in
             make.top.bottom.equalToSuperview()
+            make.width.equalTo(120)
         }
         setYouBuyLabel()
         setYouBuyAmountLabel(emoji: "🍔", lbl: buyAmountLabel1, txt: "9.10")
@@ -146,6 +146,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         stackView.addArrangedSubview(stackViewArrow)
         stackViewArrow.snp.makeConstraints{ make in
             make.top.bottom.equalToSuperview()
+            make.width.equalTo(50).priority(.high)
         }
         setEmptyView()
         setImgViewArrow(imgView: imageViewArrow1)
@@ -157,6 +158,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         stackView.addArrangedSubview(stackViewRoundup)
         stackViewRoundup.snp.makeConstraints{ make in
             make.top.bottom.equalToSuperview()
+            make.width.equalTo(120)
         }
         setRoundUpLabel()
         setRoundUpAmountLabel(lbl: roundUpAmountLabel1, txt: "0.90")

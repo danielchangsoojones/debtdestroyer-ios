@@ -32,13 +32,14 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
     private func setLogoImg() {
         logoImg.contentMode = .scaleAspectFill
         logoImg.clipsToBounds = true
-        let dimension: CGFloat = 50
+        let dimension: CGFloat = 40
         logoImg.layer.cornerRadius = dimension * 0.2
         contentView.addSubview(logoImg)
         logoImg.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(15)
             make.height.width.equalTo(dimension)
+            make.top.bottom.equalToSuperview().inset(10)
         }
     }
     

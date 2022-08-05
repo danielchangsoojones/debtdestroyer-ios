@@ -20,7 +20,7 @@ class RoundUpTabBarViewController: UITabBarController {
     
     private func setTabs(){
         let vc1 = RoundUpViewController()//TicketsViewController()
-        let vc2 = BankViewController()
+        let vc2 = PrizeViewController()//BankViewController()
         let vc3 = SettingsViewController()
      
         let controllers = [vc1,vc2,vc3]

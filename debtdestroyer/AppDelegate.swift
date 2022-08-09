@@ -6,15 +6,24 @@
 //
 
 import UIKit
+import Parse
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setupServer()
         return true
+    }
+    
+    private func setupServer() {
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = Configuration.environment.appID
+            $0.server = Configuration.environment.serverURL
+        }
+        
+        Parse.initialize(with: configuration)
+        User.registerSubclass()
     }
 
     // MARK: UISceneSession Lifecycle

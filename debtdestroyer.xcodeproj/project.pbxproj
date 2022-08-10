@@ -101,12 +101,63 @@
 		0A11C834289BC25E00AEF89D /* RoundUp */ = {
 			isa = PBXGroup;
 			children = (
+				0A25F65728A3683C00D5D183 /* View */,
 				0A11C829289BBB9B00AEF89D /* RoundUpViewController.swift */,
-				0A11C828289BBB9B00AEF89D /* RoundUpView.swift */,
-				0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */,
-				0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */,
+				0A25F65828A3685700D5D183 /* HowRoundUpsWork */,
 			);
 			path = RoundUp;
+			sourceTree = "<group>";
+		};
+		0A25F65428A367D400D5D183 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0A25F65528A3680500D5D183 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A25F65628A3681B00D5D183 /* Cells */,
+				0A2E73AE289D4260006E67F9 /* PrizeView.swift */,
+				0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A25F65628A3681B00D5D183 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */,
+				0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0A25F65728A3683C00D5D183 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A11C828289BBB9B00AEF89D /* RoundUpView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A25F65828A3685700D5D183 /* HowRoundUpsWork */ = {
+			isa = PBXGroup;
+			children = (
+				0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */,
+				0A25F65928A3686E00D5D183 /* View */,
+			);
+			path = HowRoundUpsWork;
+			sourceTree = "<group>";
+		};
+		0A25F65928A3686E00D5D183 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0A2E73A0289C2CAE006E67F9 /* Tickets */ = {
@@ -128,7 +179,7 @@
 		0A2E73A2289C2CC3006E67F9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */,
+				0A25F65428A367D400D5D183 /* Cells */,
 				0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */,
 			);
 			path = Settings;
@@ -137,10 +188,7 @@
 		0A2E73AD289D4106006E67F9 /* Prize */ = {
 			isa = PBXGroup;
 			children = (
-				0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */,
-				0A2E73AE289D4260006E67F9 /* PrizeView.swift */,
-				0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */,
-				0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */,
+				0A25F65528A3680500D5D183 /* View */,
 				0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */,
 			);
 			path = Prize;

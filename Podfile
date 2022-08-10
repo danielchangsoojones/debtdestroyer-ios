@@ -13,6 +13,4 @@ target 'debtdestroyer' do
   pod 'BRYXBanner'
   pod 'SCLAlertView'
   pod 'SwiftyJSON', '~> 4.0'
-  pod 'TextFieldEffects'
-
 end

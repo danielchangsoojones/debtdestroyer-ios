@@ -9,4 +9,8 @@ import Parse
 
 class User: PFUser {
     @NSManaged var phoneNumber: String
+    @NSManaged var isDeleted: Bool
+    @NSManaged var deviceType: String?
+    @NSManaged var name: String
+
 }

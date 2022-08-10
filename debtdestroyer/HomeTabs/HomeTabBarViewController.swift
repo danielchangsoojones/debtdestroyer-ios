@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RoundUpTabBarViewController: UITabBarController {
+class HomeTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class RoundUpTabBarViewController: UITabBarController {
     }
 }
 
-extension RoundUpTabBarViewController: UITabBarControllerDelegate {
+extension HomeTabBarViewController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
     }

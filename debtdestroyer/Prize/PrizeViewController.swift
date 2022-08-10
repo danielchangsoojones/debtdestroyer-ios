@@ -13,11 +13,11 @@ class PrizeViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        setTableView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTableView()
 
     }
     
@@ -27,6 +27,7 @@ class PrizeViewController: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         tableView.register(cellType: PrizeView.self)
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
@@ -43,8 +44,6 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PrizeView.self)
-        
-     
         return cell
     }
     
@@ -53,6 +52,6 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 1000
+        return UITableView.automaticDimension
     }
 }

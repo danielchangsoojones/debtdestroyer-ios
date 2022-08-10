@@ -20,9 +20,9 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataArr = ["Notifications", "Appearance", "Privacy & Safety", "Leave Feedback", "Invites", "Terms of Service", "Privacy Policy", "Logout", "Delete Account"]
+        dataArr = ["Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
         
-        imgNameArr = ["bankC", "bankC","bankC", "bankC","bankC", "bankC","bankC", "bankC","bankC"]
+        imgNameArr = ["accounts", "contactUs","legal", "feedback","logout", "deleteAcc"]
     }
     
     
@@ -54,22 +54,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SettingsTableViewCell.self)
         
         cell.titleLabel.text = dataArr[indexPath.row]
-        if indexPath.row == 8 {
-            cell.titleLabel.textColor = .red
-        }
         cell.logoImg.image = UIImage.init(named: imgNameArr[indexPath.row])
-        if indexPath.row == 5 || indexPath.row == 6 {
-            cell.chevronImageView.image = UIImage.init(systemName: "arrow.up.right")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
-        } else {
-            cell.chevronImageView.image = UIImage(named: "chevronGrey")
-        }
-        if indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7 {
-            cell.whitePadding()
-            cell.setLine(check: true)
-            cell.whitePadding()
-        }else{
-            cell.setLine(check: false)
-        }
         return cell
     }
     
@@ -82,22 +67,15 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.row == 0 {
-            //Notifications
+            //Connected Accounts
         } else if indexPath.row == 1 {
-            //Appearance
+            //Contact Us
         } else if indexPath.row == 2 {
-            //Privacy & Safety
+            //Legal Disclosures
         } else if indexPath.row == 3 {
             //Leave Feedback
         } else if indexPath.row == 4 {
-            //Invites
-        } else if indexPath.row == 5 {
-            //Terms of Service
-        } else if indexPath.row == 6 {
-            //Privacy Policy
-        } else if indexPath.row == 7 {
             //Logout
         } else {
             //Delete Account

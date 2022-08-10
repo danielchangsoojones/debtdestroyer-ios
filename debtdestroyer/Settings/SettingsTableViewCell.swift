@@ -53,30 +53,6 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
         }
     }
     
-    func whitePadding() {
-        lineWhite.backgroundColor = .systemGray4
-        contentView.addSubview(lineWhite)
-        lineWhite.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(70)
-            make.trailing.equalToSuperview().inset(10)
-            make.height.equalTo(3)
-            make.bottom.equalToSuperview()
-        }
-    }
-    
-    func setLine(check : Bool) {
-        if check {
-            line.backgroundColor = .systemGray6
-            contentView.addSubview(line)
-            line.snp.makeConstraints { make in
-                make.leading.equalToSuperview().offset(70)
-                make.trailing.equalToSuperview().inset(10)
-                make.height.equalTo(1)
-                make.bottom.equalToSuperview()
-            }
-        }
-    }
-    
     private func setChevron() {
         chevronImageView.contentMode = .scaleAspectFit
         contentView.addSubview(chevronImageView)

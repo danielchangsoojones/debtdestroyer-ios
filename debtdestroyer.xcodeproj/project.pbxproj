@@ -15,6 +15,8 @@
 		0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C830289BC19500AEF89D /* ColorExtension.swift */; };
 		0A25F65128A22C0100D5D183 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */; };
 		0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */; };
+		0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */; };
+		0A25F67128A369B000D5D183 /* SpinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66F28A369B000D5D183 /* SpinningButton.swift */; };
 		0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739A289BD924006E67F9 /* TicketsViewController.swift */; };
 		0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739C289BD941006E67F9 /* BankViewController.swift */; };
 		0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */; };
@@ -40,6 +42,8 @@
 		0A11C830289BC19500AEF89D /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
 		0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnTicketCell.swift; sourceTree = "<group>"; };
+		0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWithGradButton.swift; sourceTree = "<group>"; };
+		0A25F66F28A369B000D5D183 /* SpinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningButton.swift; sourceTree = "<group>"; };
 		0A2E739A289BD924006E67F9 /* TicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsViewController.swift; sourceTree = "<group>"; };
 		0A2E739C289BD941006E67F9 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 		0A11C832289BC1B800AEF89D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				0A25F66F28A369B000D5D183 /* SpinningButton.swift */,
+				0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */,
 				0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */,
 				0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */,
 				0A11C830289BC19500AEF89D /* ColorExtension.swift */,
@@ -354,11 +360,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A25F65128A22C0100D5D183 /* CustomProgressBar.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
+				0A25F67128A369B000D5D183 /* SpinningButton.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ticket.png",
+      "filename" : "tickets-alt.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ticket-2.png",
+      "filename" : "tickets-alt@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ticket-3.png",
+      "filename" : "tickets-alt@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -13,6 +13,10 @@
 		0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C829289BBB9B00AEF89D /* RoundUpViewController.swift */; };
 		0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */; };
 		0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C830289BC19500AEF89D /* ColorExtension.swift */; };
+		0A25F65128A22C0100D5D183 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */; };
+		0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */; };
+		0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */; };
+		0A25F67128A369B000D5D183 /* SpinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66F28A369B000D5D183 /* SpinningButton.swift */; };
 		0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739A289BD924006E67F9 /* TicketsViewController.swift */; };
 		0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739C289BD941006E67F9 /* BankViewController.swift */; };
 		0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */; };
@@ -20,6 +24,8 @@
 		0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */; };
 		0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73AE289D4260006E67F9 /* PrizeView.swift */; };
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
+		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
+		0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */; };
 		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
@@ -36,6 +42,10 @@
 		0A11C829289BBB9B00AEF89D /* RoundUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundUpViewController.swift; sourceTree = "<group>"; };
 		0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundUpWorksView.swift; sourceTree = "<group>"; };
 		0A11C830289BC19500AEF89D /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
+		0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnTicketCell.swift; sourceTree = "<group>"; };
+		0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWithGradButton.swift; sourceTree = "<group>"; };
+		0A25F66F28A369B000D5D183 /* SpinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningButton.swift; sourceTree = "<group>"; };
 		0A2E739A289BD924006E67F9 /* TicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsViewController.swift; sourceTree = "<group>"; };
 		0A2E739C289BD941006E67F9 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +53,8 @@
 		0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		0A2E73AE289D4260006E67F9 /* PrizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeView.swift; sourceTree = "<group>"; };
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
+		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
 		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,7 +91,10 @@
 		0A11C832289BC1B800AEF89D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				0A25F66F28A369B000D5D183 /* SpinningButton.swift */,
+				0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */,
 				0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */,
+				0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */,
 				0A11C830289BC19500AEF89D /* ColorExtension.swift */,
 			);
 			path = Helper;
@@ -96,12 +111,63 @@
 		0A11C834289BC25E00AEF89D /* RoundUp */ = {
 			isa = PBXGroup;
 			children = (
+				0A25F65728A3683C00D5D183 /* View */,
 				0A11C829289BBB9B00AEF89D /* RoundUpViewController.swift */,
-				0A11C828289BBB9B00AEF89D /* RoundUpView.swift */,
-				0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */,
-				0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */,
+				0A25F65828A3685700D5D183 /* HowRoundUpsWork */,
 			);
 			path = RoundUp;
+			sourceTree = "<group>";
+		};
+		0A25F65428A367D400D5D183 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0A25F65528A3680500D5D183 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A25F65628A3681B00D5D183 /* Cells */,
+				0A2E73AE289D4260006E67F9 /* PrizeView.swift */,
+				0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A25F65628A3681B00D5D183 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */,
+				0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0A25F65728A3683C00D5D183 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A11C828289BBB9B00AEF89D /* RoundUpView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A25F65828A3685700D5D183 /* HowRoundUpsWork */ = {
+			isa = PBXGroup;
+			children = (
+				0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */,
+				0A25F65928A3686E00D5D183 /* View */,
+			);
+			path = HowRoundUpsWork;
+			sourceTree = "<group>";
+		};
+		0A25F65928A3686E00D5D183 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0A2E73A0289C2CAE006E67F9 /* Tickets */ = {
@@ -123,7 +189,7 @@
 		0A2E73A2289C2CC3006E67F9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */,
+				0A25F65428A367D400D5D183 /* Cells */,
 				0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */,
 			);
 			path = Settings;
@@ -132,7 +198,7 @@
 		0A2E73AD289D4106006E67F9 /* Prize */ = {
 			isa = PBXGroup;
 			children = (
-				0A2E73AE289D4260006E67F9 /* PrizeView.swift */,
+				0A25F65528A3680500D5D183 /* View */,
 				0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */,
 			);
 			path = Prize;
@@ -308,11 +374,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
+				0A25F65128A22C0100D5D183 /* CustomProgressBar.swift in Sources */,
+				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
+				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
+				0A25F67128A369B000D5D183 /* SpinningButton.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
+				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* RoundUpTabBarViewController.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
@@ -482,7 +554,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -512,7 +584,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

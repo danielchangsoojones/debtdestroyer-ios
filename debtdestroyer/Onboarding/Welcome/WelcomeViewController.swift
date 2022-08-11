@@ -11,7 +11,8 @@ class WelcomeViewController: UIViewController {
     private var messageHelper: MessageHelper?
     private var logInButton = UIButton()
     private var registerButton = UIButton()
-    
+    var termsAndPolicyLabel = UILabel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
@@ -19,6 +20,7 @@ class WelcomeViewController: UIViewController {
         self.view = welcomeView
         logInButton = welcomeView.logInButton
         registerButton = welcomeView.registerButton
+        termsAndPolicyLabel = welcomeView.termsAndPolicyLabel
         welcomeView.logInButton.addTarget(self, action: #selector(logInPressed), for: .touchUpInside)
         welcomeView.registerButton.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
         setNavBarBtns()

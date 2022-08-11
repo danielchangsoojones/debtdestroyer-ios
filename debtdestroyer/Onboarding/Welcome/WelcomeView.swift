@@ -15,13 +15,14 @@ class WelcomeView: UIView {
     private var logInView: UIView!
     var logInButton: UIButton!
     var registerButton: UIButton!
-    
+    var termsAndPolicyLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
         addLogInView()
         addButtons()
+        setLabelForTermsPolicy()
         addLogo()
     }
     
@@ -49,8 +50,56 @@ class WelcomeView: UIView {
             make.top.equalTo(logInView.snp.top).inset(20)
         }
     }
-
     
+    private func setLabelForTermsPolicy() {
+        termsAndPolicyLabel.textColor = .black
+        termsAndPolicyLabel.numberOfLines = 0
+        termsAndPolicyLabel.textAlignment = .center
+        termsAndPolicyLabel.font = UIFont.systemFont(ofSize: 8, weight: .regular)
+        termsAndPolicyLabel.isUserInteractionEnabled = true
+        
+        let attributedString = NSMutableAttributedString(string: "By signing up, you agree to our Terms of Service and Privacy Policy")
+        let text = "By signing up, you agree to our Terms of Service and Privacy Policy"
+        let str = NSString(string: text)
+        let theRangeTerm = str.range(of: "Terms of Service")
+        let theRangePolicy = str.range(of: "Privacy Policy")
+
+        attributedString.addAttribute(.link, value:"https://developer.apple.com/tutorials/app-dev-training/creating-a-progress-view", range: theRangeTerm)
+        attributedString.addAttribute(.underlineStyle, value: 1, range: theRangeTerm)
+
+        attributedString.addAttribute(.link, value:"https://developer.apple.com/tutorials/app-dev-training/creating-a-progress-view", range: theRangePolicy)
+        attributedString.addAttribute(.underlineStyle, value: 1, range: theRangePolicy)
+
+        termsAndPolicyLabel.attributedText = attributedString
+        termsAndPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
+
+        
+        logInView.addSubview(termsAndPolicyLabel)
+        termsAndPolicyLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(15)
+            make.bottom.equalTo(stackView.snp.top).offset(-10)
+        }
+    }
+    
+    @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        
+        let text = "By signing up, you agree to our Terms of Service and Privacy Policy"
+        let str = NSString(string: text)
+        let theRangeTerm = str.range(of: "Terms of Service")
+        let theRangePolicy = str.range(of: "Privacy Policy")
+        let url = URL(string: "https://developer.apple.com/tutorials/app-dev-training/creating-a-progress-view")!
+
+        
+        if gesture.didTapAttributedTextInLabel(label: termsAndPolicyLabel, inRange: theRangeTerm) {
+            
+            UIApplication.shared.open(url)
+        } else if gesture.didTapAttributedTextInLabel(label: termsAndPolicyLabel, inRange: theRangePolicy) {
+            UIApplication.shared.open(url)
+        } else {
+            print("Tapped none")
+        }
+    }
+  
     private func addButtons() {
         logInButton = createButton(image: "logIn")
         registerButton = createButton(image: "signUp")
@@ -144,6 +193,7 @@ class WelcomeView: UIView {
     }
     
 }
+
 extension UIView{
     
     func gradientButton(_ buttonText:String, startColor:UIColor, endColor:UIColor) {
@@ -161,5 +211,35 @@ extension UIView{
         
         button.layer.cornerRadius =  button.frame.size.height / 2
         button.layer.borderWidth = 5.0
+    }
+}
+
+extension UITapGestureRecognizer {
+    
+    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+        
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = label.lineBreakMode
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        let labelSize = label.bounds.size
+        textContainer.size = labelSize
+        
+        let locationOfTouchInLabel = self.location(in: label)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+    
+        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+      
+        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        return NSLocationInRange(indexOfCharacter, targetRange)
     }
 }

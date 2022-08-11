@@ -13,6 +13,7 @@ class EarnTicketCell: UITableViewCell, Reusable {
     let titleLabel = UILabel()
     private let line = UIView()
     let infoBtn = UIButton()
+    let setUpBtn = UIButton()
 
     let chevronImageView = UIImageView(image: UIImage(named: "chevronGrey"))
     
@@ -26,7 +27,7 @@ class EarnTicketCell: UITableViewCell, Reusable {
     
     
     func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = .jaguarBlack
         let dimension: CGFloat = 40
         titleLabel.numberOfLines = 0
@@ -36,7 +37,7 @@ class EarnTicketCell: UITableViewCell, Reusable {
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(15)
-           // make.height.equalTo(dimension)
+            make.height.equalTo(dimension).priority(.high)
             make.top.bottom.equalToSuperview().inset(10)
         }
     }
@@ -48,22 +49,23 @@ class EarnTicketCell: UITableViewCell, Reusable {
             imageview.snp.makeConstraints{ make in
                 make.top.bottom.equalToSuperview()
                 make.leading.trailing.equalToSuperview()
-                make.height.equalTo(50)
+                make.height.equalTo(80).priority(.high)
             }
         }
       
     }
     
     func setInfoBtn() {
-        infoBtn.setBackgroundImage(UIImage.init(named: "info"), for: .normal)
+        infoBtn.setBackgroundImage(UIImage.init(named: "Info"), for: .normal)
         infoBtn.addTarget(self,
                                    action: #selector(howToEarnInfoBtnClicked),
                                    for: .touchUpInside)
         contentView.addSubview(infoBtn)
         infoBtn.snp.makeConstraints{ make in
-            make.top.bottom.equalToSuperview().inset(10)
+//            make.top.bottom.equalToSuperview().inset(10)
             make.leading.equalTo(titleLabel.snp.trailing).offset(5)
             make.height.width.equalTo(25)
+            make.centerY.equalToSuperview()
         }
     }
     
@@ -71,12 +73,32 @@ class EarnTicketCell: UITableViewCell, Reusable {
         print("howToEarnInfoBtnClicked")
     }
     
+    func setSetUpBtn() {
+        setUpBtn.setBackgroundImage(UIImage.init(named: "setUpBack"), for: .normal)
+        setUpBtn.setTitle("Set up", for: .normal)
+
+        setUpBtn.addTarget(self,
+                          action: #selector(setUpBtnClicked),
+                          for: .touchUpInside)
+        contentView.addSubview(setUpBtn)
+        setUpBtn.snp.makeConstraints{ make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(chevronImageView.snp.leading).offset(-10)
+            make.height.equalTo(22)
+            make.width.equalTo(70)
+
+        }
+    }
+    
+    @objc private func setUpBtnClicked() {
+        print("setUpBtnClicked")
+    }
+    
     func setLine() {
             line.backgroundColor = .systemGray3
             contentView.addSubview(line)
             line.snp.makeConstraints { make in
-                make.leading.equalToSuperview()
-                make.trailing.equalToSuperview()
+                make.leading.trailing.equalToSuperview().inset(10)
                 make.height.equalTo(2)
                 make.bottom.equalToSuperview()
             }

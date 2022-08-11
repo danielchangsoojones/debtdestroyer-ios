@@ -19,8 +19,8 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     private func setTabs(){
-        let vc1 = RoundUpViewController()//TicketsViewController()
-        let vc2 = PrizeViewController()//BankViewController()
+        let vc1 = PrizeViewController()//TicketsViewController()
+        let vc2 = BankViewController()//RoundUpViewController()
         let vc3 = SettingsViewController()
      
         let controllers = [vc1,vc2,vc3]

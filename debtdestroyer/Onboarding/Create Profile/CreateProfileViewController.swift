@@ -11,6 +11,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()
+        self.hideKeyboardWhenTappedAround()
     }
     
     private func updateLabels() {
@@ -18,7 +19,9 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         emailTextField.placeholder = "(123)-456-7890"
         passwordLabel.isHidden = true
         passwordTextField.isHidden = true
-        
+        emailTextField.keyboardType = .phonePad
+        emailTextField.delegate = self
+       
     }
     
     override func nextBtnPressed() {
@@ -47,10 +50,23 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         }
         
         if !phoneStr.isPhoneNumber {
-            BannerAlert.show(title: "Invalid Phone Number", subtitle: "A proper phone number has only 9 digits", type: .error)
+            BannerAlert.show(title: "Invalid Phone Number", subtitle: "A proper phone number has only 10 digits", type: .error)
             return false
         }
         
         return true
+    }
+}
+extension CreateProfileViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            
+        guard let text = self.emailTextField.text else { return true }
+        
+        emailTextField.text = text.applyPatternOnNumbers(pattern: "+# (###) ###-####", replacementCharacter: "#")
+        let d = emailTextField.text?.numbersOnly
+        let count = d!.count + string.count - range.length
+        print(count <= 11)
+    
+        return count <= 11
     }
 }

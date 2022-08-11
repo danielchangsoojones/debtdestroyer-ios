@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 
 class WelcomeView: UIView {
-    
-    var loginBtn = UIButton()
     private var stackView: UIStackView!
     private var logInView: UIView!
     var logInButton: UIButton!
@@ -55,7 +53,7 @@ class WelcomeView: UIView {
         termsAndPolicyLabel.textColor = .black
         termsAndPolicyLabel.numberOfLines = 0
         termsAndPolicyLabel.textAlignment = .center
-        termsAndPolicyLabel.font = UIFont.systemFont(ofSize: 8, weight: .regular)
+        termsAndPolicyLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
         termsAndPolicyLabel.isUserInteractionEnabled = true
         
         let attributedString = NSMutableAttributedString(string: "By signing up, you agree to our Terms of Service and Privacy Policy")
@@ -82,7 +80,6 @@ class WelcomeView: UIView {
     }
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
-        
         let text = "By signing up, you agree to our Terms of Service and Privacy Policy"
         let str = NSString(string: text)
         let theRangeTerm = str.range(of: "Terms of Service")
@@ -105,11 +102,11 @@ class WelcomeView: UIView {
         registerButton = createButton(image: "signUp")
         stackView.addArrangedSubview(logInButton)
         logInButton.snp.makeConstraints{ make in
-            make.height.equalTo(50)
+            make.height.equalTo(logInButton.snp.width).multipliedBy(0.34)
         }
         stackView.addArrangedSubview(registerButton)
         registerButton.snp.makeConstraints{ make in
-            make.height.equalTo(50)
+            make.height.equalTo(registerButton.snp.width).multipliedBy(0.34)
         }
     }
     
@@ -118,40 +115,11 @@ class WelcomeView: UIView {
         button.setBackgroundImage(UIImage.init(named: image), for: .normal)
         let horizontalInset: CGFloat = 20
         let verticalInset: CGFloat = 20
+        
+        button.imageView?.contentMode = .scaleAspectFit
         button.contentEdgeInsets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
         return button
     }
-    
-//    func setupLoginBtn(){
-//       // loginBtn = UIButton()
-// loginBtn = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 100))
-//
-//        let color1 = hexStringToUIColor(hex: "FF2474")
-//        let color2 = hexStringToUIColor(hex: "FF7910")
-//
-//        let gradient = CAGradientLayer()
-//        gradient.frame =  CGRect(origin: .zero, size: loginBtn.frame.size)
-//        gradient.colors = [color1.cgColor, color2.cgColor]
-//        let shape = CAShapeLayer()
-//        shape.lineWidth = 3
-//        shape.path = UIBezierPath(rect: loginBtn.bounds).cgPath
-//        shape.strokeColor = UIColor.black.cgColor
-//        shape.fillColor = UIColor.clear.cgColor
-//        gradient.mask = shape
-//        loginBtn.layer.addSublayer(gradient)
-//
-//        loginBtn.setTitle("Log In", for: .normal)
-//        loginBtn.setTitleColor(.black, for: .normal)
-//        loginBtn.clipsToBounds = true
-//
-//        addSubview(loginBtn)
-////        loginBtn.snp.makeConstraints { (make) in
-////            make.leading.trailing.equalToSuperview().inset(20)
-////            make.bottom.equalToSuperview().offset(-40)
-////        }
-//
-//
-//    }
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -184,34 +152,13 @@ class WelcomeView: UIView {
             logoImageView.contentMode = .scaleAspectFit
             addSubview(logoImageView)
             logoImageView.snp.makeConstraints { (make) in
-                make.centerY.equalToSuperview()
+                make.centerY.equalToSuperview().inset(50)
                 make.centerX.equalToSuperview()
-//                make.leading.trailing.equalToSuperview().inset(50)
                 make.width.equalTo(self.frame.width * 0.5 )
             }
         }
     }
     
-}
-
-extension UIView{
-    
-    func gradientButton(_ buttonText:String, startColor:UIColor, endColor:UIColor) {
-        
-        let button:UIButton = UIButton(frame: self.bounds)
-        button.setTitle(buttonText, for: .normal)
-        
-        let gradient = CAGradientLayer()
-        gradient.colors = [startColor.cgColor, endColor.cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
-        gradient.frame = self.bounds
-        self.layer.insertSublayer(gradient, at: 0)
-        self.mask = button
-        
-        button.layer.cornerRadius =  button.frame.size.height / 2
-        button.layer.borderWidth = 5.0
-    }
 }
 
 extension UITapGestureRecognizer {

@@ -23,6 +23,7 @@
 		0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */; };
 		0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73AE289D4260006E67F9 /* PrizeView.swift */; };
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
+		0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
 		0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */; };
 		0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A49E028A386C6009EDE5E /* WelcomeViewController.swift */; };
@@ -65,6 +66,7 @@
 		0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		0A2E73AE289D4260006E67F9 /* PrizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeView.swift; sourceTree = "<group>"; };
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
+		0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
 		0A7A49E028A386C6009EDE5E /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */,
+				0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */,
 				0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */,
 				0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */,
 				0A7A4A0428A3D5D5009EDE5E /* GardientButton.swift */,
@@ -471,6 +474,7 @@
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
+				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,

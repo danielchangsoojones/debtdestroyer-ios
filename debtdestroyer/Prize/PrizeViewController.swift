@@ -18,6 +18,7 @@ class PrizeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        ForceUpdate.checkIfForceUpdate()
 
     }
     

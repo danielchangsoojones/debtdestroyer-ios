@@ -20,11 +20,11 @@ class LogInViewController: RegisterViewController {
         super.viewDidLoad()
         updateLabels()
         setUpforgotPasswordBtn()
-
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func runServerAuthentication() {
-//    dataStore.logIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
+    dataStore.logIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
     }
     
     private func updateLabels() {

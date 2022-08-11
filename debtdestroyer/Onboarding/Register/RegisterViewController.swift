@@ -33,7 +33,7 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
         registerView.nextButton.addTarget(self, action: #selector(nextBtnPressed), for: .touchUpInside)
       
         dataStore = OnboardingDataStore(delegate: self)
-        
+        self.hideKeyboardWhenTappedAround()
         let logo = UIImage(named: "Sign-Up")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
@@ -69,7 +69,7 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
 //        nextButton.startSpinning()
         if validateEmail() && validatePassword() {
             segueIntoApp()
-           // runServerAuthentication()
+            runServerAuthentication()
         } else {
 //            nextButton.stopSpinning()
         }

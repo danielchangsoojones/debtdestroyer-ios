@@ -10,13 +10,32 @@ import UIKit
 class SpinningWithGradButton: UIButton {
     private let spinner = UIActivityIndicatorView()
     private let gradientLayer = CAGradientLayer()
+    var color1 = UIColor()
+    var color2 = UIColor()
+    var customImage : UIImage? {
+        didSet {
+            updateImageView()
+        }
+    }
+    let customImageView = UIImageView()
+    
+    convenience init(image: UIImage) {
+        self.init()
+    
+        customImage = image
+        updateImageView()
+        
+        setSpinner()
+        setGradient()
+        setTitleColor(.white, for: .normal)
+        setOriginalInsets()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setSpinner()
         setGradient()
-//        setTitle("", for: .disabled)
-//        setTitleColor(.white, for: .normal)
+        setTitleColor(.white, for: .normal)
         
         setOriginalInsets()
     }
@@ -65,28 +84,35 @@ class SpinningWithGradButton: UIButton {
     }
     
     func setGradient() {
-        //shadow
-        //        layer.shadowOffset = CGSize.zero
-        //        layer.shadowColor = UIColor.gray.cgColor
-        //        layer.shadowOpacity = 1.0
-        
+        color1 = hexStringToUIColor(hex: "FF2474")
+        color2 = hexStringToUIColor(hex: "FF7910")
         //gradient
         gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.colors = [UIColor.systemPink.cgColor, UIColor.systemOrange.cgColor]
+        gradientLayer.colors = [color1.cgColor, color2.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.8)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.8)
         gradientLayer.frame = bounds
-        //rounded corners
-//        gradientLayer.cornerRadius = gradientLayer.frame.height / 2
-        
+     
         layer.insertSublayer(gradientLayer, at: 0)
+        layer.layoutIfNeeded()
+        
+        addSubview(customImageView)
+        customImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        customImageView.contentMode = .scaleAspectFit
+
+    }
+    
+    func updateImageView() {
+        customImageView.image = customImage
+        customImageView.image = customImageView.image?.withRenderingMode(.alwaysTemplate)
+        customImageView.tintColor = UIColor.white
+        customImageView.alpha = 0.2
+        layoutSubviews()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = self.bounds
-        gradientLayer.cornerRadius = gradientLayer.frame.height / 2
-
     }
 }
 

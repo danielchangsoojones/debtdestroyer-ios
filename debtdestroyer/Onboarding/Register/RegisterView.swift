@@ -13,7 +13,7 @@ class RegisterView: UIView {
     var passwordTextField: UITextField!
     var emailLabel: UILabel!
     var passwordLabel: UILabel!
-    var nextButton: UIButton!
+    var nextButton: SpinningWithGradButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,9 +50,8 @@ class RegisterView: UIView {
     }
     
     private func setUpNextButton() {
-        nextButton = UIButton()
+        nextButton = SpinningWithGradButton.init(image: UIImage.init(named: "arrow-down-alt")!)
         let dimenssion = 45
-        nextButton.setBackgroundImage(UIImage.init(named: "nextButton"), for: .normal)
         nextButton.layer.cornerRadius = CGFloat(dimenssion / 2)
         nextButton.clipsToBounds = true
         addSubview(nextButton)

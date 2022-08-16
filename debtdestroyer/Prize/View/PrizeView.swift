@@ -71,6 +71,24 @@ class PrizeView: UITableViewCell, Reusable {
         setAutomaticallyEnteredLbl()
     }
     
+    private func setProgressBar() {
+        var arrPointsRange = [0, 10, 20, 30, 40, 50]
+        var currenPoint = 18
+        
+        ticketProgressBar.progressImage = UIImage.init(named: "backgroundGrad")
+        let dimension: CGFloat = 30
+        ticketProgressBar.layer.cornerRadius = dimension / 2
+        ticketProgressBar.clipsToBounds = true
+        ticketProgressBar.progress = 0.25
+        ticketProgressBar.trackTintColor = .progrssBarBackgroundColor
+        earnedTicketView.addSubview(ticketProgressBar)
+        ticketProgressBar.snp.makeConstraints{ make in
+            make.top.equalTo(lblNoOfTickets.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(15)
+            make.height.equalTo(dimension)
+        }
+    }
+
     private func setWeekPrizeView() {
         self.contentView.addSubview(weekPrizeView)
         weekPrizeView.snp.makeConstraints{ make in
@@ -97,7 +115,7 @@ class PrizeView: UITableViewCell, Reusable {
         howToEarnTicketView.snp.makeConstraints{ make in
             make.top.equalTo(weekPrizeView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(10)
-            make.height.equalTo(120)
+            make.height.equalTo(180)
             make.bottom.equalToSuperview().offset(-20)
         }
         setEarnTicketTableView()
@@ -128,7 +146,7 @@ class PrizeView: UITableViewCell, Reusable {
     }
     
     private func setInfoBtn() {
-        weekPrizeInfoBtn.setBackgroundImage(UIImage.init(named: "info"), for: .normal)
+        weekPrizeInfoBtn.setBackgroundImage(UIImage.init(named: "Info"), for: .normal)
         weekPrizeInfoBtn.addTarget(self,
                                    action: #selector(weekPrizeInfoBtnClicked),
                                    for: .touchUpInside)
@@ -153,7 +171,8 @@ class PrizeView: UITableViewCell, Reusable {
         weekPrizeView.addSubview(winLbl)
         winLbl.snp.makeConstraints{ make in
             make.top.equalTo(weekPrizeLbl.snp.bottom).offset(15)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(230)
         }
     }
     
@@ -279,24 +298,6 @@ class PrizeView: UITableViewCell, Reusable {
         }
     }
     
-    private func setProgressBar() {
-        var arrPointsRange = [0, 10, 20, 30, 40, 50]
-        var currenPoint = 18
-        
-        ticketProgressBar.progressImage = UIImage.init(named: "backgroundGrad")
-        let dimension: CGFloat = 30
-        ticketProgressBar.layer.cornerRadius = dimension / 2
-        ticketProgressBar.clipsToBounds = true
-        ticketProgressBar.progress = 0.25
-        ticketProgressBar.trackTintColor = .progrssBarBackgroundColor
-        earnedTicketView.addSubview(ticketProgressBar)
-        ticketProgressBar.snp.makeConstraints{ make in
-            make.top.equalTo(lblNoOfTickets.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.height.equalTo(dimension)
-        }
-    }
-    
     private func setAutomaticallyEnteredLbl() {
         lblAutomatically.text = "your tickets are automatically entered into the weekly prize pool"
         lblAutomatically.textColor = .white
@@ -317,7 +318,7 @@ class PrizeView: UITableViewCell, Reusable {
         earnTicketTable.dataSource = self
         earnTicketTable.backgroundColor = .white
         earnTicketTable.separatorStyle = .none
-        earnTicketTable.allowsSelection = false
+        earnTicketTable.allowsSelection = true
         earnTicketTable.register(cellType: EarnTicketCell.self)
         howToEarnTicketView.addSubview(earnTicketTable)
         earnTicketTable.snp.makeConstraints{ make in
@@ -343,13 +344,23 @@ extension PrizeView: UITableViewDataSource, UITableViewDelegate {
             cell.setInfoBtn()
         } else if indexPath.row == 1 {
             cell.setLine()
+            cell.setSetUpBtn()
             cell.setTitleLabel()
             cell.titleLabel.text = "Round Ups (2x Tickets)"
         } else if indexPath.row == 2 {
+            cell.setSetUpBtn()
             cell.setTitleLabel()
             cell.titleLabel.text = "One Time Payment"
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0{
+
+        }else{
+            print("didSelectRowAt ",indexPath.row)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -357,7 +368,7 @@ extension PrizeView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 80
     }
 }
 
@@ -399,7 +410,6 @@ extension PrizeView: UICollectionViewDataSource, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 2{
-            print("helloooooo")
             //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "viewAll"), object: nil)
         }
     }

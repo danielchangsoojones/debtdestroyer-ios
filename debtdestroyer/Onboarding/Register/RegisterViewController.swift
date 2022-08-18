@@ -66,15 +66,13 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     }
     
     @objc func nextBtnPressed() {
-        nextButton.isUserInteractionEnabled = false
         nextButton.startSpinning()
         if validateEmail() && validatePassword() {
-            segueIntoApp()
             runServerAuthentication()
+            nextButton.stopSpinning()
+
         } else {
             nextButton.stopSpinning()
-            nextButton.isUserInteractionEnabled = true
-
         }
     }
     
@@ -85,7 +83,6 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     
     func segueIntoApp() {
         nextButton.stopSpinning()
-        nextButton.isUserInteractionEnabled = true
         let profileVC = CreateProfileViewController()
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
@@ -114,7 +111,7 @@ extension RegisterViewController {
     }
     
     func showError(title: String, subtitle: String) {
-        nextButton.stopSpinning()
+     //   nextButton.stopSpinning()
         BannerAlert.show(title: title, subtitle: subtitle, type: .error)
     }
 }

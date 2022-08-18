@@ -74,7 +74,6 @@ class WelcomeView: UIView {
     }
     
     func setLoginBtn(){
-        
         logInButton = UIButton()//(frame: CGRect(x: 0, y: 0, width: 90, height: 50))
         logInButton.setTitle("Log In", for: .normal)
         logInButton.layer.cornerRadius =  8
@@ -94,18 +93,23 @@ class WelcomeView: UIView {
     }
     
     func gradientColor(bounds: CGRect, gradientLayer :CAGradientLayer) -> UIColor? {
+        gradientLayer.cornerRadius = 8
+        self.layoutIfNeeded()
+        gradientLayer.masksToBounds = true
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-        
-        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return UIColor(patternImage: image!)
+        if let context = UIGraphicsGetCurrentContext() {
+            gradientLayer.render(in: context )
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return UIColor(patternImage: image!)
+        }
+        return UIColor()
     }
     
     func getGradientLayer(bounds : CGRect) -> CAGradientLayer{
         let gradient = CAGradientLayer()
         gradient.frame = bounds
-        gradient.cornerRadius = 8
+     //   gradient.cornerRadius = 8
         clipsToBounds = true
         gradient.colors = [color1.cgColor, color2.cgColor]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
@@ -128,10 +132,7 @@ class WelcomeView: UIView {
         let theRangeTerm = str.range(of: "Terms of Service")
         let theRangePolicy = str.range(of: "Privacy Policy")
         
-        attributedString.addAttribute(.link, value:"https://developer.apple.com/tutorials/app-dev-training/creating-a-progress-view", range: theRangeTerm)
         attributedString.addAttribute(.underlineStyle, value: 1, range: theRangeTerm)
-        
-        attributedString.addAttribute(.link, value:"https://developer.apple.com/tutorials/app-dev-training/creating-a-progress-view", range: theRangePolicy)
         attributedString.addAttribute(.underlineStyle, value: 1, range: theRangePolicy)
         
         termsAndPolicyLabel.attributedText = attributedString
@@ -163,8 +164,6 @@ class WelcomeView: UIView {
     private func addButtons() {
         setLoginBtn()
         setSignupBtn()
-       
-       
     }
 
     //    private func createButton(image: String) -> UIButton {

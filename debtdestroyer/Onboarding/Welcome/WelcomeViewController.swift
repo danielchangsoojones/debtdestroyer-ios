@@ -44,15 +44,16 @@ class WelcomeViewController: UIViewController {
         gradient.frame =  CGRect(origin: .zero, size: logInButton.frame.size)
         gradient.colors = [color1.cgColor, color2.cgColor]
         gradient.cornerRadius = 8
-        let shape = CAShapeLayer()
-        shape.lineWidth = 4
-        shape.path = UIBezierPath(rect: logInButton.bounds).cgPath
-        shape.strokeColor = UIColor.black.cgColor
-        shape.fillColor = UIColor.clear.cgColor
-        gradient.mask = shape
-        
+
+        let border = CAShapeLayer()
+        border.path = UIBezierPath(roundedRect:logInButton.bounds, cornerRadius:8).cgPath
+        border.frame = logInButton.bounds
+        border.fillColor = nil
+        border.strokeColor = UIColor.purple.cgColor
+        border.lineWidth = 4
+        gradient.mask = border
+
         logInButton.layer.addSublayer(gradient)
-        
     }
     
     

@@ -14,7 +14,7 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
     private let line = UIView()
     private let lineWhite = UIView()
 
-    let chevronImageView = UIImageView(image: UIImage(named: "chevronGrey"))
+    var chevronImageView = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,7 +22,7 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
         selectionStyle = .none
         setLogoImg()
         setTitleLabel()
-        setChevron()
+        setChevron(imageName: "chevronGrey")
     }
     
     required init?(coder: NSCoder) {
@@ -53,7 +53,8 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
         }
     }
     
-    private func setChevron() {
+    func setChevron(imageName: String) {
+        chevronImageView = UIImageView(image: UIImage(named: imageName))
         chevronImageView.contentMode = .scaleAspectFit
         contentView.addSubview(chevronImageView)
         chevronImageView.snp.makeConstraints { make in

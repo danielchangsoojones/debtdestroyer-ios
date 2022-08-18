@@ -21,9 +21,9 @@ class PrizeView: UITableViewCell, Reusable {
     let earningTicketsBtn = UIButton()
     
     //collection view data
-    let giflinkStr = "https://media.giphy.com/media/sa6TjxRMvmgYtuIylU/giphy.gif"
-    let giflinkStr2 = "https://media.giphy.com/media/2k8EwXEwhoQGQ/giphy.gif"
-    let giflinkStr3 = "https://media.giphy.com/media/APyaOLRFskWNpvNRFc/giphy.gif"
+    let giflinkStr = "https://media.giphy.com/media/26u4cqiYI30juCOGY/giphy.gif"
+    let giflinkStr2 = "https://media.giphy.com/media/26u4cqiYI30juCOGY/giphy.gif"
+    let giflinkStr3 = "https://media.giphy.com/media/26u4cqiYI30juCOGY/giphy.gif"
     var dataArr = [String]()
     
     var earnedTicketView = UIView()

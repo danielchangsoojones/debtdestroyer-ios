@@ -17,26 +17,40 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
         selectionStyle = .none
-        // add shadow on cell
-        layer.masksToBounds = false
-        layer.shadowOpacity = 0.23
-        layer.shadowRadius = 4
-        layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowColor = UIColor.black.cgColor
-        
-        // add corner radius on `contentView`
         contentView.backgroundColor = .white
-        contentView.layer.cornerRadius = 8
-        setLogoImg()
-        setTitleLabel()
-        setBalanceLabel()
-        setRemoveButton()
+        setBackground()
+//        setLogoImg()
+//        setTitleLabel()
+//        setBalanceLabel()
+//        setRemoveButton()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setBackground() {
+        background.backgroundColor = .white
+        background.layer.cornerRadius = 8
+        // add shadow on cell
+        background.layer.masksToBounds = false
+        background.layer.shadowOpacity = 0.23
+        background.layer.shadowRadius = 4
+        background.layer.shadowOffset = CGSize(width: 0, height: 0)
+        background.layer.shadowColor = UIColor.black.cgColor
+        contentView.addSubview(background)
+        background.snp.makeConstraints { make in
+            make.leading.equalTo(contentView.snp.leading).inset(15)
+            make.trailing.equalTo(contentView.snp.trailing).inset(15)
+            make.top.equalTo(contentView.snp.top).inset(8)
+            make.bottom.equalTo(contentView.snp.bottom).inset(8)
+        }
+        
+        setLogoImg()
+        setTitleLabel()
+        setBalanceLabel()
+        setRemoveButton()
     }
     
     private func setLogoImg() {
@@ -44,7 +58,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
         logoImg.clipsToBounds = true
         let dimension: CGFloat = 40
         logoImg.layer.cornerRadius = dimension * 0.2
-        contentView.addSubview(logoImg)
+        background.addSubview(logoImg)
         logoImg.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(15)
@@ -56,7 +70,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     private func setTitleLabel() {
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         titleLabel.textColor = .jaguarBlack
-        contentView.addSubview(titleLabel)
+        background.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalTo(logoImg.snp.trailing).offset(20)
@@ -67,7 +81,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     private func setBalanceLabel() {
         balanceLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         balanceLabel.textColor = .jaguarBlack
-        contentView.addSubview(balanceLabel)
+        background.addSubview(balanceLabel)
         balanceLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.leading.equalTo(logoImg.snp.trailing).offset(20)
@@ -77,9 +91,10 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     
     private func setRemoveButton() {
         removeButton.setTitle("Remove", for: .normal)
+        removeButton.titleLabel?.textAlignment = .left
         removeButton.setTitleColor(.red, for: .normal)
-        removeButton.backgroundColor = .green
-        contentView.addSubview(removeButton)
+        removeButton.backgroundColor = .clear
+        background.addSubview(removeButton)
         removeButton.snp.makeConstraints { make in
             make.top.equalTo(balanceLabel.snp.bottom).offset(10)
             make.leading.equalTo(logoImg.snp.trailing).offset(20)

@@ -55,7 +55,12 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
         cell.titleLabel.text = dataArr[indexPath.row]
         cell.balanceLabel.text = "Balance: $" + balanceArr[indexPath.row]
         cell.logoImg.image = UIImage.init(named: imgNameArr[indexPath.row])
+        cell.removeButton.addTarget(self, action: #selector(removeStudentLoanAccBtnPressed), for: .touchUpInside)
         return cell
+    }
+    
+    @objc private func removeStudentLoanAccBtnPressed() {
+     print("removeStudentLoanAccBtnPressed")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -72,9 +77,21 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        footer.backgroundColor = UIColor.blue
-        let connectLoanAccountBtn = UIButton(frame: CGRect(x:10,y: 10 ,width:footer.frame.width - 20,height:50))
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70))
+        footer.backgroundColor = .white
+        let connectLoanAccountBtn = UIButton(frame: CGRect(x:15,y: 10 ,width:footer.frame.width - 30,height:70))
+        connectLoanAccountBtn.backgroundColor = .white
+        
+        connectLoanAccountBtn.layer.cornerRadius =  8
+        connectLoanAccountBtn.layer.masksToBounds = false
+        connectLoanAccountBtn.layer.shadowColor = UIColor.black.cgColor
+        connectLoanAccountBtn.layer.shadowOpacity = 0.23
+        connectLoanAccountBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
+        connectLoanAccountBtn.layer.shadowRadius = 5
+        connectLoanAccountBtn.layer.shouldRasterize = true
+        connectLoanAccountBtn.layer.rasterizationScale = UIScreen.main.scale
+        
+        connectLoanAccountBtn.addDashBorder()
         connectLoanAccountBtn.setTitle("+ Connect Another Student Loan Account", for: .normal)
         connectLoanAccountBtn.setTitleColor(.black, for: .normal)
         connectLoanAccountBtn.addTarget(self, action: #selector(connectLoanAccountBtnPressed), for: .touchUpInside)
@@ -87,6 +104,6 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-        return 70
+        return 90
     }
 }

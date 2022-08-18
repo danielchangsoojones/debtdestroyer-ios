@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        messageHelper = MessageHelper(currentVC: self)
         dataArr = ["Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
         
         imgNameArr = ["accounts", "contactUs","legal", "feedback","logout", "deleteAcc"]
@@ -74,20 +75,27 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             //Connected Accounts
             let vc = ConnectedAccountsViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 1 || indexPath.row == 3 {
             //Contact Us
-//            let msg = "please help me reset my password for debtdestroyer"
-            messageHelper?.text("3176905323")
+            //Leave Feedback
+            messageHelper?.text("3176905323", body: "")
         } else if indexPath.row == 2 {
             //Legal Disclosures
             let vc = LegalDisclosuresViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 3 {
-            //Leave Feedback
-//            let msg = "please help me reset my password for debtdestroyer"
-            messageHelper?.text("3176905323")
         } else if indexPath.row == 4 {
             //Logout
+            User.logOutInBackground { error in
+                if let error = error {
+                    BannerAlert.show(with: error)
+                } else {
+                    //successfully logged out
+                    let welcomeVC = WelcomeViewController()
+                    let navController = UINavigationController(rootViewController: welcomeVC)
+                    navController.modalPresentationStyle = .fullScreen
+                    self.present(navController, animated: true)
+                }
+            }
         } else {
             //Delete Account
             let vc = DeleteAccountViewController()

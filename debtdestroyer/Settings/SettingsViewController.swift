@@ -12,6 +12,7 @@ class SettingsViewController: UIViewController {
     private var tableView: UITableView!
     var dataArr = [String]()
     var imgNameArr = [String]()
+    private var messageHelper: MessageHelper?
     
     override func loadView() {
         super.loadView()
@@ -20,6 +21,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        messageHelper = MessageHelper(currentVC: self)
         dataArr = ["Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
         
         imgNameArr = ["accounts", "contactUs","legal", "feedback","logout", "deleteAcc"]
@@ -69,14 +71,25 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             //Connected Accounts
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 1 || indexPath.row == 3 {
             //Contact Us
+            //Leave Feedback
+            messageHelper?.text("3176905323", body: "")
         } else if indexPath.row == 2 {
             //Legal Disclosures
-        } else if indexPath.row == 3 {
-            //Leave Feedback
         } else if indexPath.row == 4 {
             //Logout
+            User.logOutInBackground { error in
+                if let error = error {
+                    BannerAlert.show(with: error)
+                } else {
+                    //successfully logged out
+                    let welcomeVC = WelcomeViewController()
+                    let navController = UINavigationController(rootViewController: welcomeVC)
+                    navController.modalPresentationStyle = .fullScreen
+                    self.present(navController, animated: true)
+                }
+            }
         } else {
             //Delete Account
         }

@@ -49,8 +49,10 @@ class RegisterView: UIView {
         passwordTextField = createTextField(placeHolder: "**********")
     }
     
-    private func setUpNextButton() {
-        nextButton = SpinningWithGradButton.init(image: UIImage.init(named: "arrow-down-alt")!)
+    private func setUpNextButton(){
+        nextButton = SpinningWithGradButton()
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.setTitle("→", for: .normal)
         let dimenssion = 45
         nextButton.layer.cornerRadius = CGFloat(dimenssion / 2)
         nextButton.clipsToBounds = true

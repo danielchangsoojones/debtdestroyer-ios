@@ -41,6 +41,12 @@
 		0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */; };
 		0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */; };
 		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
+		0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */; };
+		0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */; };
+		0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */; };
+		0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2E28ACD422006301DE /* DeleteAccountViewController.swift */; };
+		0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D3028ACDDE7006301DE /* DeleteAccountView.swift */; };
+		0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */; };
 		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
@@ -85,6 +91,12 @@
 		0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
 		0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDisclosuresViewController.swift; sourceTree = "<group>"; };
+		0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
+		0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsTableViewCell.swift; sourceTree = "<group>"; };
+		0AC23D2E28ACD422006301DE /* DeleteAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewController.swift; sourceTree = "<group>"; };
+		0AC23D3028ACDDE7006301DE /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
+		0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataStore.swift; sourceTree = "<group>"; };
 		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -227,8 +239,13 @@
 		0A2E73A2289C2CC3006E67F9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0AC23D3228ACE3B1006301DE /* Data Store */,
 				0A25F65428A367D400D5D183 /* Cells */,
 				0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */,
+				0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */,
+				0AC23D2E28ACD422006301DE /* DeleteAccountViewController.swift */,
+				0AC23D3028ACDDE7006301DE /* DeleteAccountView.swift */,
+				0AC23D2C28AC6D31006301DE /* Connected Accounts */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -294,6 +311,31 @@
 				0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */,
 			);
 			path = "Create Profile";
+			sourceTree = "<group>";
+		};
+		0AC23D2C28AC6D31006301DE /* Connected Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */,
+				0AC23D2D28AC6D53006301DE /* Cells */,
+			);
+			path = "Connected Accounts";
+			sourceTree = "<group>";
+		};
+		0AC23D2D28AC6D53006301DE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0AC23D3228ACE3B1006301DE /* Data Store */ = {
+			isa = PBXGroup;
+			children = (
+				0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */,
+			);
+			path = "Data Store";
 			sourceTree = "<group>";
 		};
 		18F686FBEE11973D8590571D /* Pods */ = {
@@ -477,6 +519,7 @@
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
+				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
@@ -485,19 +528,24 @@
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
+				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */,
 				0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */,
 				0A7A4A0228A3D384009EDE5E /* RegisterView.swift in Sources */,
+				0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */,
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
+				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
+				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
+				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,

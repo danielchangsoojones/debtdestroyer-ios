@@ -433,6 +433,6 @@ extension PrizeView: UICollectionViewDataSource, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (contentView.frame.width - 10) * 0.3, height: (contentView.frame.width - 10) * 0.4)
+        return CGSize(width: (contentView.frame.width - 10) * 0.25, height: (contentView.frame.width - 10) * 0.4)
     }
 }

@@ -58,15 +58,15 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     }
 }
 extension CreateProfileViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            
-        guard let text = self.emailTextField.text else { return true }
-        
-        emailTextField.text = text.applyPatternOnNumbers(pattern: "+# (###) ###-####", replacementCharacter: "#")
-        let d = emailTextField.text?.numbersOnly
-        let count = d!.count + string.count - range.length
-        print(count <= 11)
-    
-        return count <= 11
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//            
+//        guard let text = self.emailTextField.text else { return true }
+//        
+//        emailTextField.text = text.applyPatternOnNumbers(pattern: "+# (###) ###-####", replacementCharacter: "#")
+//        let d = emailTextField.text?.numbersOnly
+//        let count = d!.count + string.count - range.length
+//        print(count <= 11)
+//    
+//        return count <= 11
+//    }
 }

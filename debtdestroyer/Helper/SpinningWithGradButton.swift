@@ -12,24 +12,6 @@ class SpinningWithGradButton: UIButton {
     private let gradientLayer = CAGradientLayer()
     var color1 = UIColor()
     var color2 = UIColor()
-    var customImage : UIImage? {
-        didSet {
-            updateImageView()
-        }
-    }
-    let customImageView = UIImageView()
-    
-    convenience init(image: UIImage) {
-        self.init()
-    
-        customImage = image
-        updateImageView()
-        
-        setSpinner()
-        setGradient()
-        setTitleColor(.white, for: .normal)
-        setOriginalInsets()
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -95,19 +77,6 @@ class SpinningWithGradButton: UIButton {
      
         layer.insertSublayer(gradientLayer, at: 0)
         layer.layoutIfNeeded()
-        
-        addSubview(customImageView)
-        customImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        customImageView.contentMode = .scaleAspectFit
-
-    }
-    
-    func updateImageView() {
-        customImageView.image = customImage
-        customImageView.image = customImageView.image?.withRenderingMode(.alwaysTemplate)
-        customImageView.tintColor = UIColor.white
-        customImageView.alpha = 0.2
-        layoutSubviews()
     }
     
     override func layoutSubviews() {

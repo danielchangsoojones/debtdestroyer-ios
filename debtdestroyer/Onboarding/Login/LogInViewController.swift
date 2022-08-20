@@ -39,7 +39,7 @@ class LogInViewController: RegisterViewController {
             attributes: buttonAttributes
         )
         forgotPasswordBtn.setAttributedTitle(attributeString, for: .normal)
-        
+        forgotPasswordBtn.addTarget(self, action: #selector(forgetBtnPressed), for: .touchUpInside)
         self.view.addSubview(forgotPasswordBtn)
         forgotPasswordBtn.snp.makeConstraints{ make in
             make.height.equalTo(40)

@@ -11,6 +11,9 @@ class BankViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .white
+        
+        let bankView = BankView(frame: self.view.bounds)
+        self.view = bankView
     }
 }

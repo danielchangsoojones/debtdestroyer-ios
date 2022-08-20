@@ -33,7 +33,17 @@ class PrizeView: UITableViewCell, Reusable {
     var lblNoOfTickets = UILabel()
     var ticketProgressBar = UIProgressView()
     var lblAutomatically = UILabel()
-    
+    let stackView : UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 0
+        stack.axis = .horizontal
+        stack.distribution = .equalCentering
+        stack.alignment = .center
+        stack.backgroundColor = .clear
+        
+        return stack
+    }()
     var howToEarnTicketView = UIView()
     var lblHeader = UILabel()
     var lblRoundUps = UILabel()
@@ -74,12 +84,12 @@ class PrizeView: UITableViewCell, Reusable {
     private func setProgressBar() {
         var arrPointsRange = [0, 10, 20, 30, 40, 50]
         var currenPoint = 18
-        
+        let totalPoints = 50
         ticketProgressBar.progressImage = UIImage.init(named: "backgroundGrad")
         let dimension: CGFloat = 30
         ticketProgressBar.layer.cornerRadius = dimension / 2
         ticketProgressBar.clipsToBounds = true
-        ticketProgressBar.progress = 0.25
+        ticketProgressBar.progress = 0.18
         ticketProgressBar.trackTintColor = .progrssBarBackgroundColor
         earnedTicketView.addSubview(ticketProgressBar)
         ticketProgressBar.snp.makeConstraints{ make in
@@ -87,6 +97,10 @@ class PrizeView: UITableViewCell, Reusable {
             make.leading.trailing.equalToSuperview().inset(15)
             make.height.equalTo(dimension)
         }
+    }
+    
+    private func setStackForProgress() {
+        
     }
 
     private func setWeekPrizeView() {

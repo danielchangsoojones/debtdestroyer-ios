@@ -15,6 +15,7 @@ class WelcomeView: UIView {
     var signUpButton: GradientBtn!
     var termsAndPolicyLabel = UILabel()
     var loginBtn = UIButton()
+    var titleLabel = UILabel()
 
     var color1 = UIColor()
     var color2 = UIColor()
@@ -184,11 +185,21 @@ class WelcomeView: UIView {
             logoImageView.contentMode = .scaleAspectFit
             addSubview(logoImageView)
             logoImageView.snp.makeConstraints { (make) in
-                make.centerY.equalToSuperview().inset(50)
+                make.centerY.equalToSuperview().inset(150)
                 make.centerX.equalToSuperview()
                 make.width.equalTo(self.frame.width * 0.5 )
             }
         }
+        
+        titleLabel.text = "LavaDrop"
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints{ make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.top.equalTo(logoImageView.snp.bottom).offset(10)
+        }
+      
     }
     
 }

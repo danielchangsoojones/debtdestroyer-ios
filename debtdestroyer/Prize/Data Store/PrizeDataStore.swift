@@ -7,6 +7,7 @@
 
 import Foundation
 import Parse
+import SwiftyJSON
 
 class PrizeDataStore {
     func savingsInfo() {

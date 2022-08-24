@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.initialize(with: configuration)
         User.registerSubclass()
+//        TransactionParse.registerSubclass()
     }
 
     // MARK: UISceneSession Lifecycle

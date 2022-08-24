@@ -9,7 +9,8 @@ import UIKit
 import Reusable
 
 class PrizeView: UITableViewCell, Reusable {
-    
+    let gradientLayer:CAGradientLayer = CAGradientLayer()
+
     var weekPrizeView = UIView()
     var weekPrizeBackgroundImgView = UIImageView()
     let weekPrizeLbl = UILabel()
@@ -54,6 +55,7 @@ class PrizeView: UITableViewCell, Reusable {
     }
 
     private func setWeekPrizeView() {
+        weekPrizeView.backgroundColor = .clear
         self.contentView.addSubview(weekPrizeView)
         weekPrizeView.snp.makeConstraints{ make in
             make.top.leading.trailing.equalToSuperview()
@@ -63,9 +65,9 @@ class PrizeView: UITableViewCell, Reusable {
         setInfoBtn()
         setWinAmountLbl(amount: "2,500")
         setAnnouncementLbl(day: "Tuesday", time: "9am")
-        setPastWinnersLbl()
-        setupCollectionView()
-        setEarningTicketsBtn()
+//        setPastWinnersLbl()
+//        setupCollectionView()
+//        setEarningTicketsBtn()
     }
 
     private func setHowToEarnTicketView() {
@@ -87,9 +89,10 @@ class PrizeView: UITableViewCell, Reusable {
         weekPrizeBackgroundImgView.layer.cornerRadius = 8
         weekPrizeView.addSubview(weekPrizeBackgroundImgView)
         weekPrizeBackgroundImgView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(260).priority(.high)
         }
     }
     
@@ -147,6 +150,7 @@ class PrizeView: UITableViewCell, Reusable {
         announcementLbl.snp.makeConstraints{ make in
             make.top.equalTo(winLbl.snp.bottom).offset(25)
             make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     

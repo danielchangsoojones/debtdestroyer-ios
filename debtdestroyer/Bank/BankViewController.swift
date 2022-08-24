@@ -10,6 +10,8 @@ import UIKit
 class BankViewController: UIViewController {
     
     private var tableView: UITableView!
+    private let dataStore = BankDataStore()
+    private var messageHelper: MessageHelper?
     
     override func loadView() {
         super.loadView()
@@ -18,6 +20,11 @@ class BankViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        dataStore.transactionHistory()
+        tableView.reloadData()
     }
     
     private func setTableView() {

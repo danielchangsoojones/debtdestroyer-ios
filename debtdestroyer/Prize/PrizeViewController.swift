@@ -24,6 +24,7 @@ class PrizeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         dataStore.savingsInfo()
+        tableView.reloadData()
     }
     
     private func setTableView() {

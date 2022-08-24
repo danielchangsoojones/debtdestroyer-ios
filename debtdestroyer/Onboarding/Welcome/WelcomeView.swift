@@ -15,21 +15,15 @@ class WelcomeView: UIView {
     var signUpButton: GradientBtn!
     var termsAndPolicyLabel = UILabel()
     var loginBtn = UIButton()
-
-    var color1 = UIColor()
-    var color2 = UIColor()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        color1 = hexStringToUIColor(hex: "FF2474")
-        color2 = hexStringToUIColor(hex: "FF7910")
-        
+       
         addLogInView()
         addButtons()
         setLabelForTermsPolicy()
         addLogo()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,32 +85,7 @@ class WelcomeView: UIView {
       
        
     }
-    
-    func gradientColor(bounds: CGRect, gradientLayer :CAGradientLayer) -> UIColor? {
-        gradientLayer.cornerRadius = 8
-        self.layoutIfNeeded()
-        gradientLayer.masksToBounds = true
-        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-        if let context = UIGraphicsGetCurrentContext() {
-            gradientLayer.render(in: context )
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return UIColor(patternImage: image!)
-        }
-        return UIColor()
-    }
-    
-    func getGradientLayer(bounds : CGRect) -> CAGradientLayer{
-        let gradient = CAGradientLayer()
-        gradient.frame = bounds
-     //   gradient.cornerRadius = 8
-        clipsToBounds = true
-        gradient.colors = [color1.cgColor, color2.cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
-        return gradient
-    }
-    
+ 
     private func setLabelForTermsPolicy() {
         termsAndPolicyLabel.textColor = .black
         termsAndPolicyLabel.numberOfLines = 1
@@ -166,17 +135,6 @@ class WelcomeView: UIView {
         setSignupBtn()
     }
 
-    //    private func createButton(image: String) -> UIButton {
-    //        let button = UIButton()
-    //        button.setBackgroundImage(UIImage.init(named: image), for: .normal)
-    //        let horizontalInset: CGFloat = 20
-    //        let verticalInset: CGFloat = 20
-    //
-    //        button.imageView?.contentMode = .scaleAspectFit
-    //        button.contentEdgeInsets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
-    //        return button
-    //    }
-    
     private func addLogo() {
         let logoImageView = UIImageView()
         if let logoImage = UIImage(named: "logo") {
@@ -191,34 +149,4 @@ class WelcomeView: UIView {
         }
     }
     
-}
-
-extension UITapGestureRecognizer {
-    
-    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
-        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
-        let layoutManager = NSLayoutManager()
-        let textContainer = NSTextContainer(size: CGSize.zero)
-        let textStorage = NSTextStorage(attributedString: label.attributedText!)
-        
-        // Configure layoutManager and textStorage
-        layoutManager.addTextContainer(textContainer)
-        textStorage.addLayoutManager(layoutManager)
-        
-        // Configure textContainer
-        textContainer.lineFragmentPadding = 0.0
-        textContainer.lineBreakMode = label.lineBreakMode
-        textContainer.maximumNumberOfLines = label.numberOfLines
-        let labelSize = label.bounds.size
-        textContainer.size = labelSize
-        
-        let locationOfTouchInLabel = self.location(in: label)
-        let textBoundingBox = layoutManager.usedRect(for: textContainer)
-        
-        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
-        
-        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
-        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        return NSLocationInRange(indexOfCharacter, targetRange)
-    }
 }

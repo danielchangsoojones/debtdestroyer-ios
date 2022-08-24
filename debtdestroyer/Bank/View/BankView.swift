@@ -10,13 +10,15 @@ import Reusable
 
 class BankView: UITableViewCell, Reusable {
     
+    private let dataStore = BankDataStore()
     var connectedAccountsTable = UITableView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        print(dataStore.transactionHistoryJSON)
         self.contentView.backgroundColor = .white
         setConnectedAccountsTableView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -53,23 +55,31 @@ extension BankView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: EarnTicketCell.self)
+        let cell = UITableViewCell()
         
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                cell.backgroundColor = .systemGray6
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanAccountCell.self)
+            if dataStore.transactionHistoryJSON.count == 0{
+              
+                
+                cell.chevronImageView.image = UIImage.init(named: "")
+                cell.titleLabel.text = "Connect Your Student Loan Account"
+                cell.balanceLabel.textColor = hexStringToUIColor(hex: "FF1A7E")
+                cell.balanceLabel.text = "to start earning tickets everytime you pay down your student loans"
+
             } else {
-                cell.backgroundColor = .systemGray4
+                cell.balanceLabel.textColor = .black
+
+
             }
-            
             
         } else {
-            if indexPath.row == 0 {
-                cell.backgroundColor = .systemGray2
-            } else {
-                cell.backgroundColor = .systemGray6
-            }
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TransactionHistoryCell.self)
+            cell.titleLabel.text = "Loan Payment"
+            cell.balanceLabel.text = "$386.60"
+            cell.dateLabel.text = "12/05/2021"
+            cell.ticketCount = "20"
+            cell.setTicketsLabel()
             
         }
         return cell
@@ -128,43 +138,8 @@ extension BankView: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        if section == 0 {
-            
-            let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70))
-            footer.backgroundColor = .white
-            let connectLoanAccountBtn = UIButton(frame: CGRect(x:15,y: 10 ,width:footer.frame.width - 30,height:70))
-            connectLoanAccountBtn.backgroundColor = .white
-            
-            connectLoanAccountBtn.layer.cornerRadius =  8
-            connectLoanAccountBtn.titleLabel?.numberOfLines = 0
-            connectLoanAccountBtn.layer.masksToBounds = false
-            connectLoanAccountBtn.layer.shadowColor = UIColor.black.cgColor
-            connectLoanAccountBtn.layer.shadowOpacity = 0.23
-            connectLoanAccountBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
-            connectLoanAccountBtn.layer.shadowRadius = 5
-            connectLoanAccountBtn.layer.shouldRasterize = true
-            connectLoanAccountBtn.layer.rasterizationScale = UIScreen.main.scale
-            
-            connectLoanAccountBtn.addDashBorder()
-            connectLoanAccountBtn.setTitle("+ Connect Another Student Loan Account", for: .normal)
-            connectLoanAccountBtn.setTitleColor(.black, for: .normal)
-            connectLoanAccountBtn.addTarget(self, action: #selector(connectLoanAccountBtnPressed), for: .touchUpInside)
-            footer.addSubview(connectLoanAccountBtn)
-            return footer
-            
-        } else {
-            let footer = UIView.init(frame: .zero)
-            return footer
-        }
-    }
-    
     @objc private func connectLoanAccountBtnPressed() {
         print("connectLoanAccountBtnPressed")
     }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-        return 90
-    }
+
 }

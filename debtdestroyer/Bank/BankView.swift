@@ -6,155 +6,165 @@
 //
 
 import UIKit
+import Reusable
 
-class BankView: UIView {
-    let stackView : UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.spacing = 0
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.alignment = .center
-        stack.backgroundColor = .clear
-        
-        return stack
-    }()
+class BankView: UITableViewCell, Reusable {
     
-    var ticketProgressBar = UIProgressView()
-    var stepImgView10 = UIImageView()
-    var stepImgView20 = UIImageView()
-    var stepImgView30 = UIImageView()
-    var stepImgView40 = UIImageView()
-    var stepImgView0 = UIImageView()
-    var stepImgView50 = UIImageView()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .systemGray
-        setProgressBar()
-        setStackForProgress()
-        setupStepImgView()
-        let p = ticketProgressBar.frame.width / 5
-print("p========",p)
+    var connectedAccountsTable = UITableView()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.contentView.backgroundColor = .white
+        setConnectedAccountsTableView()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setProgressBar() {
-        var arrPointsRange = [0, 10, 20, 30, 40, 50]
-        var currenPoint = 18
-        let totalPoints = 50
-        ticketProgressBar.progressImage = UIImage.init(named: "backgroundGrad")
-        let dimension: CGFloat = 30
-        ticketProgressBar.layer.cornerRadius = dimension / 2
-        ticketProgressBar.clipsToBounds = true
-        ticketProgressBar.progress = 18
-        ticketProgressBar.trackTintColor = .progrssBarBackgroundColor
-        addSubview(ticketProgressBar)
-        ticketProgressBar.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(200)
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.height.equalTo(dimension)
+    private func setConnectedAccountsTableView() {
+        connectedAccountsTable = UITableView()
+        connectedAccountsTable.delegate = self
+        connectedAccountsTable.dataSource = self
+        connectedAccountsTable.backgroundColor = .systemPink
+        connectedAccountsTable.separatorStyle = .none
+        connectedAccountsTable.allowsSelection = true
+        connectedAccountsTable.register(cellType: EarnTicketCell.self)
+        self.contentView.addSubview(connectedAccountsTable)
+        connectedAccountsTable.snp.makeConstraints{ make in
+            make.left.right.top.bottom.equalToSuperview()
+            make.height.equalTo(500)
+        }
+    }
+}
+
+extension BankView: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 2
+        } else {
+            return 2
         }
     }
     
-    private func setStackForProgress() {
-        stackView.backgroundColor = .blue
-        stackView.layer.opacity = 0.2
-        addSubview(stackView)
-
-        stackView.snp.makeConstraints{ make in
-            make.leading.equalTo(ticketProgressBar.snp.leading)
-            make.trailing.equalTo(ticketProgressBar.snp.trailing)
-
-            make.top.equalToSuperview().offset(150)
-//            make.centerY.equalTo(ticketProgressBar.snp.centerY)
-            make.height.equalTo(90)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: EarnTicketCell.self)
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                cell.backgroundColor = .systemGray6
+            } else {
+                cell.backgroundColor = .systemGray4
+            }
+            
+            
+        } else {
+            if indexPath.row == 0 {
+                cell.backgroundColor = .systemGray2
+            } else {
+                cell.backgroundColor = .systemGray6
+            }
+            
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("didSelectRowAt ",indexPath.row)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
+            headerView.backgroundColor = .blue
+            let headerLbl = UILabel()
+            headerLbl.backgroundColor = .red
+            
+            headerLbl.text = "Connected Accounts"
+            headerLbl.numberOfLines = 0
+            headerLbl.textColor = .black
+            headerLbl.textAlignment = .left
+            headerLbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            headerView.addSubview(headerLbl)
+            headerLbl.snp.makeConstraints{ make in
+                make.top.bottom.equalToSuperview()
+                make.leading.trailing.equalToSuperview().inset(15)
+            }
+            return headerView
+        } else {
+            let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
+            headerView.backgroundColor = .blue
+            let headerLbl = UILabel()
+            headerLbl.backgroundColor = .red
+            
+            headerLbl.text = "Transaction History"
+            headerLbl.numberOfLines = 0
+            headerLbl.textColor = .black
+            headerLbl.textAlignment = .left
+            headerLbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            headerView.addSubview(headerLbl)
+            headerLbl.snp.makeConstraints{ make in
+                make.top.bottom.equalToSuperview()
+                make.leading.trailing.equalToSuperview().inset(15)
+            }
+            return headerView
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if section == 0 {
+            
+            let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70))
+            footer.backgroundColor = .white
+            let connectLoanAccountBtn = UIButton(frame: CGRect(x:15,y: 10 ,width:footer.frame.width - 30,height:70))
+            connectLoanAccountBtn.backgroundColor = .white
+            
+            connectLoanAccountBtn.layer.cornerRadius =  8
+            connectLoanAccountBtn.titleLabel?.numberOfLines = 0
+            connectLoanAccountBtn.layer.masksToBounds = false
+            connectLoanAccountBtn.layer.shadowColor = UIColor.black.cgColor
+            connectLoanAccountBtn.layer.shadowOpacity = 0.23
+            connectLoanAccountBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
+            connectLoanAccountBtn.layer.shadowRadius = 5
+            connectLoanAccountBtn.layer.shouldRasterize = true
+            connectLoanAccountBtn.layer.rasterizationScale = UIScreen.main.scale
+            
+            connectLoanAccountBtn.addDashBorder()
+            connectLoanAccountBtn.setTitle("+ Connect Another Student Loan Account", for: .normal)
+            connectLoanAccountBtn.setTitleColor(.black, for: .normal)
+            connectLoanAccountBtn.addTarget(self, action: #selector(connectLoanAccountBtnPressed), for: .touchUpInside)
+            footer.addSubview(connectLoanAccountBtn)
+            return footer
+            
+        } else {
+            let footer = UIView.init(frame: .zero)
+            return footer
         }
     }
     
-    private func setupStepImgView(){
-        
-        
-//        stepImgView0.image = UIImage.init(named: "stepC")
-//        stepImgView0.contentMode = .scaleAspectFit
-//        stepImgView0.backgroundColor = .clear
-//
-//        stackView.addArrangedSubview(stepImgView0)
-//
-//        stepImgView0.snp.makeConstraints{ make in
-//            //                        make.top.equalToSuperview()
-//            make.centerY.equalTo(ticketProgressBar)
-//            make.height.equalTo(90).priority(.high)
-//            make.width.equalTo(35).priority(.high)
-//        }
-        
-        stepImgView10.image = UIImage.init(named: "stepC")
-        stepImgView10.contentMode = .scaleAspectFit
-        stepImgView10.backgroundColor = .red
-
-        stackView.addArrangedSubview(stepImgView10)
-        
-        stepImgView10.snp.makeConstraints{ make in
-
-            make.height.equalTo(90).priority(.high)
-            make.width.equalTo(35).priority(.high)
-        }
-        
-        stepImgView20.image = UIImage.init(named: "stepC")
-        stepImgView20.contentMode = .scaleAspectFit
-        stepImgView20.backgroundColor = .clear
-        
-        stackView.addArrangedSubview(stepImgView20)
-        
-        stepImgView20.snp.makeConstraints{ make in
-//            make.top.equalToSuperview()
-            make.centerY.equalTo(ticketProgressBar)
-            make.height.equalTo(90).priority(.high)
-            make.width.equalTo(35).priority(.high)
-        }
-        
-        stepImgView30.image = UIImage.init(named: "stepC")
-        stepImgView30.contentMode = .scaleAspectFit
-        stepImgView30.backgroundColor = .clear
-        
-        stackView.addArrangedSubview(stepImgView30)
-        
-        stepImgView30.snp.makeConstraints{ make in
-            //            make.top.equalToSuperview()
-            make.centerY.equalTo(ticketProgressBar)
-            make.height.equalTo(90).priority(.high)
-            make.width.equalTo(35).priority(.high)
-        }
-        
-        stepImgView40.image = UIImage.init(named: "stepC")
-        stepImgView40.contentMode = .scaleAspectFit
-        stepImgView40.backgroundColor = .clear
-        
-        stackView.addArrangedSubview(stepImgView40)
-        
-        stepImgView40.snp.makeConstraints{ make in
-            //            make.top.equalToSuperview()
-            make.centerY.equalTo(ticketProgressBar)
-            make.height.equalTo(90).priority(.high)
-            make.width.equalTo(35).priority(.high)
-        }
-        
-//        stepImgView50.image = UIImage.init(named: "stepC")
-//        stepImgView50.contentMode = .scaleAspectFit
-//        stepImgView50.backgroundColor = .clear
-//
-//        stackView.addArrangedSubview(stepImgView50)
-//
-//        stepImgView50.snp.makeConstraints{ make in
-//            //            make.top.equalToSuperview()
-//            make.centerY.equalTo(ticketProgressBar)
-//            make.height.equalTo(90).priority(.high)
-//            make.width.equalTo(35).priority(.high)
-//        }
+    @objc private func connectLoanAccountBtnPressed() {
+        print("connectLoanAccountBtnPressed")
     }
-
-
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
+        return 90
+    }
 }

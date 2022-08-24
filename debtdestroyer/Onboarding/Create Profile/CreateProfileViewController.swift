@@ -25,17 +25,18 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     }
     
     override func nextBtnPressed() {
-//        nextButton.startSpinning()
+        nextButton.startSpinning()
         if isComplete {
             let bottomText = emailTextField?.text ?? "1111111111"
             let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly)?.doubleValue ?? 1111111111
-            //dataStore.save( phoneNumber: String(phoneNumber))
+            dataStore.save(phoneNumber: String(phoneNumber))
             
             let vc = HomeTabBarViewController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
+            nextButton.stopSpinning()
         } else {
-//            nextButton.stopSpinning()
+            nextButton.stopSpinning()
         }
     }
     
@@ -57,6 +58,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         return true
     }
 }
+
 extension CreateProfileViewController: UITextFieldDelegate {
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //            

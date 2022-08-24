@@ -10,7 +10,8 @@ import UIKit
 class PrizeViewController: UIViewController {
 
     private var tableView: UITableView!
-
+    private let dataStore = PrizeDataStore()
+    private var messageHelper: MessageHelper?
     override func loadView() {
         super.loadView()
     }
@@ -19,7 +20,10 @@ class PrizeViewController: UIViewController {
         super.viewDidLoad()
         setTableView()
         ForceUpdate.checkIfForceUpdate()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        dataStore.savingsInfo()
     }
     
     private func setTableView() {
@@ -30,22 +34,31 @@ class PrizeViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.register(cellType: PrizeView.self)
+        tableView.register(cellType: TicketTopView.self)
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.left.right.top.bottom.equalToSuperview()
         }
     }
-
 }
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PrizeView.self)
-        return cell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
+            cell.lblAmntPaidTo.text = UserDefaults.standard.string(forKey: "progress_meter_title")
+            cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
+            cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
+            cell.setLblNoOfTickets()
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PrizeView.self)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

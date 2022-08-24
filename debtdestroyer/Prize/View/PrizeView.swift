@@ -26,24 +26,6 @@ class PrizeView: UITableViewCell, Reusable {
     let giflinkStr3 = "https://media.giphy.com/media/26u4cqiYI30juCOGY/giphy.gif"
     var dataArr = [String]()
     
-    var earnedTicketView = UIView()
-    var earnedTicketBackgroundImgView = UIImageView()
-    var lblAmntPaidTo = UILabel()
-    var lblAmntPaid = UILabel()
-    var lblNoOfTickets = UILabel()
-    var ticketProgressBar = UIProgressView()
-    var lblAutomatically = UILabel()
-    let stackView : UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.spacing = 0
-        stack.axis = .horizontal
-        stack.distribution = .equalCentering
-        stack.alignment = .center
-        stack.backgroundColor = .clear
-        
-        return stack
-    }()
     var howToEarnTicketView = UIView()
     var lblHeader = UILabel()
     var lblRoundUps = UILabel()
@@ -59,44 +41,12 @@ class PrizeView: UITableViewCell, Reusable {
         
         dataArr = [giflinkStr, giflinkStr3, giflinkStr, giflinkStr2, giflinkStr3, giflinkStr, giflinkStr3, giflinkStr3, giflinkStr2]
 
-        setEarnedTicketView()
         setWeekPrizeView()
         setHowToEarnTicketView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setEarnedTicketView() {
-        self.contentView.addSubview(earnedTicketView)
-        earnedTicketView.snp.makeConstraints{ make in
-            make.top.leading.trailing.equalToSuperview()
-        }
-        setEarnedTicketBackgroundImgView()
-        setAmountPaidToLbl()
-        setAmountPaidLbl()
-        setLblNoOfTickets()
-        setProgressBar()
-        setAutomaticallyEnteredLbl()
-    }
-    
-    private func setProgressBar() {
-        var arrPointsRange = [0, 10, 20, 30, 40, 50]
-        var currenPoint = 18
-        let totalPoints = 50
-        ticketProgressBar.progressImage = UIImage.init(named: "backgroundGrad")
-        let dimension: CGFloat = 30
-        ticketProgressBar.layer.cornerRadius = dimension / 2
-        ticketProgressBar.clipsToBounds = true
-        ticketProgressBar.progress = 0.18
-        ticketProgressBar.trackTintColor = .progrssBarBackgroundColor
-        earnedTicketView.addSubview(ticketProgressBar)
-        ticketProgressBar.snp.makeConstraints{ make in
-            make.top.equalTo(lblNoOfTickets.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.height.equalTo(dimension)
-        }
     }
     
     private func setStackForProgress() {
@@ -106,10 +56,7 @@ class PrizeView: UITableViewCell, Reusable {
     private func setWeekPrizeView() {
         self.contentView.addSubview(weekPrizeView)
         weekPrizeView.snp.makeConstraints{ make in
-            make.top.equalTo(earnedTicketView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            //            make.height.equalTo(self.frame.width * 2)
-//            make.bottom.equalToSuperview().offset(-20)
+            make.top.leading.trailing.equalToSuperview()
         }
         setWeekPrizeBackgroundImgView()
         setWeekPrizeLbl()
@@ -253,79 +200,7 @@ class PrizeView: UITableViewCell, Reusable {
     @objc private func earningTicketsBtnClicked() {
         
     }
-  
-    private func setEarnedTicketBackgroundImgView() {
-        earnedTicketBackgroundImgView.image = UIImage.init(named: "ticketB")
-        earnedTicketView.addSubview(earnedTicketBackgroundImgView)
-        earnedTicketBackgroundImgView.snp.makeConstraints{ make in
-            make.top.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-    
-    private func setAmountPaidToLbl() {
-        lblAmntPaidTo.text = "Amount Paid To Your Student Loans This Week"
-        lblAmntPaidTo.textColor = .white
-        lblAmntPaidTo.numberOfLines = 1
-        lblAmntPaidTo.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        earnedTicketView.addSubview(lblAmntPaidTo)
-        lblAmntPaidTo.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(15)
-            make.leading.trailing.equalToSuperview().inset(15)
-        }
-    }
-    
-    private func setAmountPaidLbl() {
-        lblAmntPaid.text = "$" + "20.22"
-        lblAmntPaid.textColor = .white
-        lblAmntPaid.numberOfLines = 0
-        lblAmntPaid.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        let dimension: CGFloat = 30
-        earnedTicketView.addSubview(lblAmntPaid)
-        lblAmntPaid.snp.makeConstraints{ make in
-            make.top.equalTo(lblAmntPaidTo.snp.bottom).offset(10)
-            make.leading.equalToSuperview().inset(15)
-            make.height.equalTo(dimension)
-        }
-    }
-    
-    private func setLblNoOfTickets() {
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: "tickets-alt")
-        let attachmentString = NSAttributedString(attachment: attachment)
-        let lblString = NSMutableAttributedString(string: " " + "3" + " Tickets ")
-        lblString.append(attachmentString)
-        let space = NSMutableAttributedString(string: " ")
-        lblString.append(space)
-        lblNoOfTickets.attributedText = lblString
-        lblNoOfTickets.textColor = .black
-        lblNoOfTickets.backgroundColor = .sunGlow
-        let dimension: CGFloat = 30
-        lblNoOfTickets.layer.cornerRadius = dimension / 2
-        lblNoOfTickets.layer.masksToBounds = true
-        lblNoOfTickets.numberOfLines = 0
-        lblNoOfTickets.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        earnedTicketView.addSubview(lblNoOfTickets)
-        lblNoOfTickets.snp.makeConstraints{ make in
-            make.top.equalTo(lblAmntPaidTo.snp.bottom).offset(10)
-            make.leading.equalTo(lblAmntPaid.snp.trailing).offset(10)
-            make.height.equalTo(dimension)
-        }
-    }
-    
-    private func setAutomaticallyEnteredLbl() {
-        lblAutomatically.text = "your tickets are automatically entered into the weekly prize pool"
-        lblAutomatically.textColor = .white
-        lblAutomatically.numberOfLines = 0
-        lblAutomatically.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
-        earnedTicketView.addSubview(lblAutomatically)
-        lblAutomatically.snp.makeConstraints{ make in
-            make.top.equalTo(ticketProgressBar.snp.bottom).offset(40)
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.bottom.equalToSuperview().offset(-20)
-            
-        }
-    }
-    
+
     private func setEarnTicketTableView() {
         earnTicketTable = UITableView()
         earnTicketTable.delegate = self
@@ -371,7 +246,7 @@ extension PrizeView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
-
+            //Do Nothing. Header Cell
         }else{
             print("didSelectRowAt ",indexPath.row)
         }

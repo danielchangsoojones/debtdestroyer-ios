@@ -34,7 +34,7 @@ class TicketTopView: UITableViewCell, Reusable {
         self.contentView.addSubview(earnedTicketView)
         earnedTicketView.snp.makeConstraints{ make in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-10)
         }
         setEarnedTicketBackgroundImgView()
         setAmountPaidToLbl()

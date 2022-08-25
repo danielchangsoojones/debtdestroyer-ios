@@ -12,7 +12,7 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
     
     var ticketCount = String()
     let titleLabel = UILabel()
-    let balanceLabel = UILabel()
+    let amountPaidToLoanLabel = UILabel()
     let dateLabel = UILabel()
     let ticketsLabel = UILabel()
     private let background = UIView()
@@ -47,7 +47,7 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
         }
         
         setTitleLabel()
-        setBalanceLabel()
+        setamountPaidToLoanLabel()
         setDateLabel()
         setTitleLabel()
     }
@@ -63,12 +63,12 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
         }
     }
     
-    private func setBalanceLabel() {
-        balanceLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        balanceLabel.textColor = .jaguarBlack
-        balanceLabel.textAlignment = .right
-        background.addSubview(balanceLabel)
-        balanceLabel.snp.makeConstraints { make in
+    private func setamountPaidToLoanLabel() {
+        amountPaidToLoanLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        amountPaidToLoanLabel.textColor = .jaguarBlack
+        amountPaidToLoanLabel.textAlignment = .right
+        background.addSubview(amountPaidToLoanLabel)
+        amountPaidToLoanLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().inset(15)
             make.leading.equalTo(titleLabel.snp.trailing).offset(10)
@@ -81,7 +81,7 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
         dateLabel.textColor = .jaguarBlack
         background.addSubview(dateLabel)
         dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-10)
         }
@@ -89,9 +89,9 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
     
     func setTicketsLabel() {
         let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: "tickets-alt")
+        attachment.image = UIImage(named: "Tickets")
         let attachmentString = NSAttributedString(attachment: attachment)
-        let lblString = NSMutableAttributedString(string: " " + ticketCount + " Tickets ")
+        let lblString = NSMutableAttributedString(string: ticketCount + " Tickets ")
         lblString.append(attachmentString)
         let space = NSMutableAttributedString(string: " ")
         lblString.append(space)

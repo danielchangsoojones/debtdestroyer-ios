@@ -58,7 +58,8 @@ class PrizeView: UITableViewCell, Reusable {
         weekPrizeView.backgroundColor = .clear
         self.contentView.addSubview(weekPrizeView)
         weekPrizeView.snp.makeConstraints{ make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(20)
+            make.leading.trailing.equalToSuperview()
         }
         setWeekPrizeBackgroundImgView()
         setWeekPrizeLbl()

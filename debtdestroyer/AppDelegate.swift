@@ -13,6 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setupServer()
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = 0.0
+        }
         return true
     }
     
@@ -24,9 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.initialize(with: configuration)
         User.registerSubclass()
-//        TransactionParse.registerSubclass()
+        TransactionParse.registerSubclass()
     }
 
+    // Lock the orientation to Portrait mode
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask(rawValue: UIInterfaceOrientationMask.portrait.rawValue)
+    }
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

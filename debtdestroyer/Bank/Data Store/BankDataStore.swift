@@ -11,13 +11,10 @@ import SwiftyJSON
 
 class BankDataStore {
     
-    var transactionHistoryJSON = JSON()
-
-    func transactionHistory() {
+    func loadTransactionHistory(completion: @escaping ([TransactionParse]) -> Void) {
         PFCloud.callFunction(inBackground: "getTransactions", withParameters: nil) { (result, error) in
-            if let transactions = result {
-                print("transactions",transactions)
-                self.transactionHistoryJSON = transactions as! JSON
+            if let transactions = result as? [TransactionParse] {
+                completion(transactions)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {

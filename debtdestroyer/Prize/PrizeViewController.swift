@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PrizeViewController: UIViewController {
 
@@ -36,6 +37,7 @@ class PrizeViewController: UIViewController {
         tableView.allowsSelection = false
         tableView.register(cellType: TicketTopView.self)
         tableView.register(cellType: WeekPrizeCell.self)
+        tableView.register(cellType: PastWeeksPrizeCell.self)
         tableView.register(cellType: HowToEarnTicketsCell.self)
 
         view.addSubview(tableView)
@@ -62,7 +64,7 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
             return cell
         } else if indexPath.row == 2 {
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWeeksPrizeCell.self)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)

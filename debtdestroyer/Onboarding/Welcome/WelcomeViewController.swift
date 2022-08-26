@@ -15,6 +15,7 @@ class WelcomeViewController: UIViewController {
     var color1 = UIColor()
     var color2 = UIColor()
     var welcomeView = WelcomeView()
+    var titleLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class WelcomeViewController: UIViewController {
         signUpButton = welcomeView.signUpButton
         color1 = welcomeView.hexStringToUIColor(hex: "FF2474")
         color2 = welcomeView.hexStringToUIColor(hex: "FF7910")
-        
+        titleLabel = welcomeView.titleLabel
         termsAndPolicyLabel = welcomeView.termsAndPolicyLabel
         welcomeView.logInButton.addTarget(self, action: #selector(logInPressed), for: .touchUpInside)
         welcomeView.signUpButton.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
@@ -54,6 +55,12 @@ class WelcomeViewController: UIViewController {
         gradient.mask = border
 
         logInButton.layer.addSublayer(gradient)
+        
+        let gradientLabel = welcomeView.getGradientLayer(bounds: titleLabel.bounds)
+        titleLabel.textColor = welcomeView.gradientColor(bounds: titleLabel.bounds, gradientLayer: gradientLabel)
+        
+        
+        
     }
     
     

@@ -34,8 +34,10 @@ class PrizeViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        tableView.register(cellType: PrizeView.self)
         tableView.register(cellType: TicketTopView.self)
+        tableView.register(cellType: WeekPrizeCell.self)
+        tableView.register(cellType: HowToEarnTicketsCell.self)
+
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.left.right.top.bottom.equalToSuperview()
@@ -45,7 +47,7 @@ class PrizeViewController: UIViewController {
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,8 +58,14 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
             cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
             cell.setLblNoOfTickets()
             return cell
+        } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
+            return cell
+        } else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
+            return cell
         } else {
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PrizeView.self)
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
             return cell
         }
     }

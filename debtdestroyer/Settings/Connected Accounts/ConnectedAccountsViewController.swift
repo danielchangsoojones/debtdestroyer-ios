@@ -81,7 +81,7 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
         footer.backgroundColor = .white
         let connectLoanAccountBtn = UIButton(frame: CGRect(x:15,y: 10 ,width:footer.frame.width - 30,height:70))
         connectLoanAccountBtn.backgroundColor = .white
-        
+        connectLoanAccountBtn.titleLabel?.numberOfLines = 0
         connectLoanAccountBtn.layer.cornerRadius =  8
         connectLoanAccountBtn.layer.masksToBounds = false
         connectLoanAccountBtn.layer.shadowColor = UIColor.black.cgColor

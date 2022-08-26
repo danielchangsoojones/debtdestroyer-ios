@@ -98,9 +98,8 @@ class OnboardingDataStore: NSObject {
 //        }
 //    }
     
-    func save(name: String, phoneNumber: String) {
+    func save(phoneNumber: String) {
         if let currentUser = User.current() {
-            currentUser.name = name
             currentUser.phoneNumber = phoneNumber
             currentUser.saveInBackground()
         }

@@ -58,4 +58,50 @@ extension UIView {
 
     }
 
+    func gradientColor(bounds: CGRect, gradientLayer :CAGradientLayer) -> UIColor? {
+        gradientLayer.cornerRadius = 8
+        self.layoutIfNeeded()
+        gradientLayer.masksToBounds = true
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        if let context = UIGraphicsGetCurrentContext() {
+            gradientLayer.render(in: context )
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return UIColor(patternImage: image!)
+        }
+        return UIColor()
+    }
+    
+    func getGradientLayer(bounds : CGRect) -> CAGradientLayer{
+       
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        clipsToBounds = true
+        let color1 = hexStringToUIColor(hex: "FF2474")
+        let color2 = hexStringToUIColor(hex: "FF7910")
+        gradient.colors = [color1.cgColor, color2.cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        return gradient
+    }
+    
+    func applyGradient(isVertical: Bool, colorArray: [UIColor]) {
+        layer.sublayers?.filter({ $0 is CAGradientLayer }).forEach({ $0.removeFromSuperlayer() })
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colorArray.map({ $0.cgColor })
+        if isVertical {
+            //top to bottom
+            gradientLayer.locations = [0.0, 1.0]
+        } else {
+            //left to right
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        }
+        
+        backgroundColor = .clear
+        gradientLayer.frame = bounds
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
 }

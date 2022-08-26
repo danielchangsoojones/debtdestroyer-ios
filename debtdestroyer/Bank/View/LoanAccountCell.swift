@@ -1,22 +1,25 @@
 //
-//  ConnectedAccountsTableViewCell.swift
+//  LoanAccountCell.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 17/08/22.
+//  Created by Rashmi Aher on 24/08/22.
 //
 
 import UIKit
 import Reusable
 
-class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
+class LoanAccountCell: UITableViewCell, Reusable {
+
     let logoImg = UIImageView()
     let titleLabel = UILabel()
     let balanceLabel = UILabel()
     let removeButton = UIButton()
     private let background = UIView()
-    
+    var chevronImageView = UIImageView()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         selectionStyle = .none
         contentView.backgroundColor = .white
         setBackground()
@@ -28,77 +31,79 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     
     private func setBackground() {
         background.backgroundColor = .white
-        background.layer.cornerRadius = 8
-        // add shadow on cell
+        background.layer.cornerRadius =  8
         background.layer.masksToBounds = false
-        background.layer.shadowOpacity = 0.23
-        background.layer.shadowRadius = 4
-        background.layer.shadowOffset = CGSize(width: 0, height: 0)
         background.layer.shadowColor = UIColor.black.cgColor
+        background.layer.shadowOpacity = 0.23
+        background.layer.shadowOffset = CGSize(width: 0, height: 0)
+        background.layer.shadowRadius = 5
+        background.layer.shouldRasterize = true
+        background.layer.rasterizationScale = UIScreen.main.scale
+        
+        background.addDashBorder()
         contentView.addSubview(background)
         background.snp.makeConstraints { make in
             make.leading.equalTo(contentView.snp.leading).inset(15)
             make.trailing.equalTo(contentView.snp.trailing).inset(15)
-            make.top.equalTo(contentView.snp.top).inset(8)
+            make.top.equalTo(contentView.snp.top).inset(25)
             make.bottom.equalTo(contentView.snp.bottom).inset(8)
         }
         
         setLogoImg()
+        setChevron(imageName: "chevronGrey")
         setTitleLabel()
         setBalanceLabel()
-        setRemoveButton()
+
     }
     
     private func setLogoImg() {
-        logoImg.contentMode = .scaleAspectFill
+        logoImg.image = UIImage.init(named: "Plus")
+        logoImg.contentMode = .center
         logoImg.clipsToBounds = true
-        let dimension: CGFloat = 40
+        let dimension: CGFloat = 30
         logoImg.layer.cornerRadius = dimension * 0.2
         background.addSubview(logoImg)
         logoImg.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().offset(10)
             make.height.width.equalTo(dimension)
-           // make.top.bottom.equalToSuperview().inset(10)
         }
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        titleLabel.textColor = .jaguarBlack
+        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        titleLabel.textColor = .black
+        titleLabel.numberOfLines = 0
         background.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
-            make.leading.equalTo(logoImg.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(15)
+            make.leading.equalTo(logoImg.snp.trailing).offset(10)
+            make.trailing.equalTo(chevronImageView.snp.leading).inset(10)
         }
     }
     
     private func setBalanceLabel() {
-        balanceLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        balanceLabel.textColor = .jaguarBlack
+        balanceLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        balanceLabel.textColor = .black
+        balanceLabel.numberOfLines = 0
         background.addSubview(balanceLabel)
         balanceLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.equalTo(logoImg.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(15)
-        }
-    }
-    
-    private func setRemoveButton() {
-        removeButton.setTitle("Remove", for: .normal)
-        removeButton.titleLabel?.textAlignment = .left
-        removeButton.setTitleColor(.red, for: .normal)
-        removeButton.backgroundColor = .clear
-        background.addSubview(removeButton)
-        removeButton.snp.makeConstraints { make in
-            make.top.equalTo(balanceLabel.snp.bottom).offset(10)
-            make.leading.equalTo(logoImg.snp.trailing).offset(20)
-            make.width.equalTo(80)
+            make.leading.equalTo(logoImg.snp.trailing).offset(10)
+            make.trailing.equalTo(chevronImageView.snp.leading).inset(10)
             make.bottom.equalToSuperview().offset(-10)
         }
     }
-    
-    
-}
+        
+    func setChevron(imageName: String) {
+        chevronImageView = UIImageView(image: UIImage(named: imageName))
+        chevronImageView.contentMode = .scaleAspectFit
+        background.addSubview(chevronImageView)
+        chevronImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(5)
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(15)
+        }
+    }
 
+}

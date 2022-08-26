@@ -54,7 +54,14 @@ class DeleteAccountViewController: UIViewController {
     
     @objc private func deleteAccBtnPressed() {
         if self.deleteAccButton.tag == 1122 {
-            self.segueToWelcomeVC()
+            User.logOutInBackground { error in
+                if let error = error {
+                    BannerAlert.show(with: error)
+                } else {
+                    //successfully logged out
+                    self.segueToWelcomeVC()
+                }
+            }
         } else {
             //deleteAccBtnPressed
             showAlert()

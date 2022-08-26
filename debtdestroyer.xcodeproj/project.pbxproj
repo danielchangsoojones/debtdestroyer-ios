@@ -14,7 +14,6 @@
 		0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */; };
 		0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C830289BC19500AEF89D /* ColorExtension.swift */; };
 		0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A637F28A6592200EFCC4D /* ViewExtension.swift */; };
-		0A25F65128A22C0100D5D183 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */; };
 		0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */; };
 		0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */; };
 		0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739A289BD924006E67F9 /* TicketsViewController.swift */; };
@@ -26,6 +25,11 @@
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
 		0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA528B3816600C551FA /* TicketTopView.swift */; };
 		0A432FA828B3AB5A00C551FA /* ProgressViewUITry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA728B3AB5A00C551FA /* ProgressViewUITry.swift */; };
+		0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */; };
+		0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */; };
+		0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */; };
+		0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */; };
+		0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536E028B903E400F4A8CA /* PlayerView.swift */; };
 		0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */; };
 		0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
@@ -73,7 +77,6 @@
 		0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundUpWorksView.swift; sourceTree = "<group>"; };
 		0A11C830289BC19500AEF89D /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		0A1A637F28A6592200EFCC4D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
-		0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
 		0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnTicketCell.swift; sourceTree = "<group>"; };
 		0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWithGradButton.swift; sourceTree = "<group>"; };
 		0A2E739A289BD924006E67F9 /* TicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +88,11 @@
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
 		0A432FA528B3816600C551FA /* TicketTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTopView.swift; sourceTree = "<group>"; };
 		0A432FA728B3AB5A00C551FA /* ProgressViewUITry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewUITry.swift; sourceTree = "<group>"; };
+		0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpsCell.swift; sourceTree = "<group>"; };
+		0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPrizeCell.swift; sourceTree = "<group>"; };
+		0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEarnTicketsCell.swift; sourceTree = "<group>"; };
+		0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWeeksPrizeCell.swift; sourceTree = "<group>"; };
+		0A4536E028B903E400F4A8CA /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperParseObject.swift; sourceTree = "<group>"; };
 		0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -200,8 +208,6 @@
 			children = (
 				0A25F65628A3681B00D5D183 /* Cells */,
 				0A2E73AE289D4260006E67F9 /* PrizeView.swift */,
-				0A432FA528B3816600C551FA /* TicketTopView.swift */,
-				0A25F65028A22C0100D5D183 /* CustomProgressBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,6 +217,11 @@
 			children = (
 				0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */,
 				0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */,
+				0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */,
+				0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */,
+				0A4536E028B903E400F4A8CA /* PlayerView.swift */,
+				0A432FA528B3816600C551FA /* TicketTopView.swift */,
+				0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -350,6 +361,7 @@
 			children = (
 				0A9E94A028B62F2A00985179 /* TransactionHistoryCell.swift */,
 				0A9E94A828B6623100985179 /* LoanAccountCell.swift */,
+				0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -564,12 +576,12 @@
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
-				0A25F65128A22C0100D5D183 /* CustomProgressBar.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
+				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
@@ -580,11 +592,14 @@
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
+				0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
+				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,
+				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */,
@@ -603,6 +618,7 @@
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
+				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,

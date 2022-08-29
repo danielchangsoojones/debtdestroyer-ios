@@ -22,7 +22,14 @@ class BankViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadTransactions()
+        dataStore.loadPastWinners()
+        dataStore.loadDebtAccounts()
+
     }
     
     private func setTableView() {
@@ -73,7 +80,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+        
         if indexPath.section == 0 {
             // MARK: Ticket Top View Section
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
@@ -105,15 +112,49 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TransactionHistoryCell.self)
             print("self.transactionHistory",self.transactionHistory)
             let transaction = transactionHistory[indexPath.row]
-
-            cell.titleLabel.text = transaction.value(forKey: "title") as? CVarArg as? String ?? "Loan Payment"
- 
-            let amount =  transaction.value(forKey: "amountPaidToLoan") as? CVarArg ?? " "
-            cell.amountPaidToLoanLabel.text = amount as? String
-//            print("transaction.updatedAt",transaction.value(forKey: "title") as? String )
-            cell.dateLabel.text = "12/05/2021"
-            cell.ticketCount = transaction.value(forKey: "ticketsEarned") as? CVarArg as? String ?? "0"
-            cell.setTicketsLabel()
+            
+            if let title = transaction.value(forKey: "title")
+            {
+                print(title) //optional String
+                cell.titleLabel.text = title as? String
+                
+            }else {
+                cell.titleLabel.text = "Loan Payment"
+                
+            }
+            
+            
+            if let amount = transaction.value(forKey: "amountPaidToLoan")
+            {
+                print(amount) //optional String
+                cell.amountPaidToLoanLabel.text = "$" + String(describing: amount)
+                
+                
+            }
+            
+            if let ticketCount = transaction.value(forKey: "ticketsEarned")
+            {
+                print(ticketCount) //optional String
+                cell.ticketCount = String(describing: ticketCount)
+                // ticketCount as? String
+                cell.setTicketsLabel()
+            }
+            if let updatedAt = transaction.value(forKey: "updatedAt")
+            {
+                print(updatedAt) //optional String
+    
+                let from = dateTimeStatus(date: String(describing: updatedAt))
+                
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "2022-08-23 06:11:13 +0000"
+//                let date = dateFormatter.date(from: String(describing: from))
+//                dateFormatter.dateFormat = "yyyy-MM-dd"
+//                let resultString = dateFormatter.string(from: date ?? Date())
+                
+                cell.dateLabel.text = String(describing: from)
+                
+                
+            }
             
             return cell
         }

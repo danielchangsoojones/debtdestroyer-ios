@@ -30,7 +30,7 @@ extension UIView {
             alpha: CGFloat(1.0)
         )
     }
-
+    
     func addDashBorder() {
         let color = UIColor.white.cgColor
         
@@ -53,11 +53,11 @@ extension UIView {
         
         self.layer.addSublayer(shapeLayer)
         
-//        How to remove border again
-//        let _ = vw.layer.sublayers?.filter({$0.name == "DashBorder"}).map({$0.removeFromSuperlayer()})
-
+        //        How to remove border again
+        //        let _ = vw.layer.sublayers?.filter({$0.name == "DashBorder"}).map({$0.removeFromSuperlayer()})
+        
     }
-
+    
     func gradientColor(bounds: CGRect, gradientLayer :CAGradientLayer) -> UIColor? {
         gradientLayer.cornerRadius = 8
         self.layoutIfNeeded()
@@ -73,7 +73,7 @@ extension UIView {
     }
     
     func getGradientLayer(bounds : CGRect) -> CAGradientLayer{
-       
+        
         let gradient = CAGradientLayer()
         gradient.frame = bounds
         clipsToBounds = true
@@ -84,24 +84,17 @@ extension UIView {
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
         return gradient
     }
-    
-    func applyGradient(isVertical: Bool, colorArray: [UIColor]) {
-        layer.sublayers?.filter({ $0 is CAGradientLayer }).forEach({ $0.removeFromSuperlayer() })
         
+    func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = colorArray.map({ $0.cgColor })
-        if isVertical {
-            //top to bottom
-            gradientLayer.locations = [0.0, 1.0]
-        } else {
-            //left to right
-            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-        }
-        
-        backgroundColor = .clear
+        let color1 = hexStringToUIColor(hex: "FF2474")
+        let color2 = hexStringToUIColor(hex: "FF7910")
+        gradientLayer.colors = [color1.cgColor, color2.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.locations = [0, 1]
         gradientLayer.frame = bounds
+        
         layer.insertSublayer(gradientLayer, at: 0)
     }
-    
 }

@@ -35,7 +35,7 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
             make.top.equalToSuperview().offset(20)
             make.leading.trailing.equalToSuperview().inset(10)
             make.height.equalTo(180)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-120)
         }
         setEarnTicketTableView()
     }
@@ -84,10 +84,13 @@ extension HowToEarnTicketsCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0{
+        if indexPath.row == 0 {
             //Do Nothing. Header Cell
-        }else{
+        } else if indexPath.row == 1 {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RoundUps"), object: nil)
+        } else {
             print("didSelectRowAt ",indexPath.row)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "OneTimePayment"), object: nil)
         }
     }
     

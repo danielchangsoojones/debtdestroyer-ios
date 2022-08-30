@@ -25,7 +25,6 @@ class EarnTicketCell: UITableViewCell, Reusable {
         setChevron()
     }
     
-    
     func setTitleLabel() {
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = .jaguarBlack
@@ -41,6 +40,7 @@ class EarnTicketCell: UITableViewCell, Reusable {
             make.top.bottom.equalToSuperview().inset(10)
         }
     }
+    
     func setBackground(check: Bool){
         if check {
             let imageview = UIImageView.init(image: UIImage.init(named: "howToB"))
@@ -77,7 +77,7 @@ class EarnTicketCell: UITableViewCell, Reusable {
         setUpBtn.setBackgroundImage(UIImage.init(named: "setUpBack"), for: .normal)
         setUpBtn.setTitle("Set up", for: .normal)
 
-        setUpBtn.addTarget(self,
+        setUpBtn.addTarget(PrizeViewController.self,
                           action: #selector(setUpBtnClicked),
                           for: .touchUpInside)
         contentView.addSubview(setUpBtn)

@@ -34,6 +34,7 @@
 		0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
 		0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */; };
+		0A74408E28BE407E00AD0489 /* SubcsriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A74408D28BE407E00AD0489 /* SubcsriptionCell.swift */; };
 		0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A49E028A386C6009EDE5E /* WelcomeViewController.swift */; };
 		0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A49E128A386C6009EDE5E /* WelcomeView.swift */; };
 		0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A49F228A38746009EDE5E /* MessageHelper.swift */; };
@@ -56,7 +57,6 @@
 		0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */; };
 		0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58428BCEC4E0081758C /* Helper.swift */; };
 		0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */; };
-		0AB3F58928BCF9BF0081758C /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58828BCF9BF0081758C /* SubscriptionView.swift */; };
 		0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */; };
 		0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */; };
 		0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */; };
@@ -100,6 +100,7 @@
 		0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
+		0A74408D28BE407E00AD0489 /* SubcsriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcsriptionCell.swift; sourceTree = "<group>"; };
 		0A7A49E028A386C6009EDE5E /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		0A7A49E128A386C6009EDE5E /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0A7A49F228A38746009EDE5E /* MessageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHelper.swift; sourceTree = "<group>"; };
@@ -122,7 +123,6 @@
 		0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDataStore.swift; sourceTree = "<group>"; };
 		0AB3F58428BCEC4E0081758C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
-		0AB3F58828BCF9BF0081758C /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDisclosuresViewController.swift; sourceTree = "<group>"; };
 		0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
 		0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsTableViewCell.swift; sourceTree = "<group>"; };
@@ -301,6 +301,15 @@
 			path = Prize;
 			sourceTree = "<group>";
 		};
+		0A74408C28BE405000AD0489 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */,
+				0A74408D28BE407E00AD0489 /* SubcsriptionCell.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
 		0A7A49DE28A386C6009EDE5E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,8 +454,7 @@
 				0A2E73A1289C2CB9006E67F9 /* Bank */,
 				0A2E73A2289C2CC3006E67F9 /* Settings */,
 				0A2E73AD289D4106006E67F9 /* Prize */,
-				0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */,
-				0AB3F58828BCF9BF0081758C /* SubscriptionView.swift */,
+				0A74408C28BE405000AD0489 /* Subscription */,
 				0A11C834289BC25E00AEF89D /* RoundUp */,
 				0A11C832289BC1B800AEF89D /* Helper */,
 				92021FD5289B07A6007901A6 /* Assets.xcassets */,
@@ -596,7 +604,6 @@
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
-				0AB3F58928BCF9BF0081758C /* SubscriptionView.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
@@ -631,6 +638,7 @@
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
+				0A74408E28BE407E00AD0489 /* SubcsriptionCell.swift in Sources */,
 				0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,

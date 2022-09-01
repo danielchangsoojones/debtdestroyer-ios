@@ -57,6 +57,8 @@
 		0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */; };
 		0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58428BCEC4E0081758C /* Helper.swift */; };
 		0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */; };
+		0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */; };
+		0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */; };
 		0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */; };
 		0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */; };
 		0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */; };
@@ -123,6 +125,8 @@
 		0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDataStore.swift; sourceTree = "<group>"; };
 		0AB3F58428BCEC4E0081758C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtAccountsParse.swift; sourceTree = "<group>"; };
+		0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDisclosuresViewController.swift; sourceTree = "<group>"; };
 		0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
 		0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsTableViewCell.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 			children = (
 				0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */,
 				0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */,
+				0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */,
 				0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */,
 				0A1A637F28A6592200EFCC4D /* ViewExtension.swift */,
 				0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */,
@@ -470,6 +475,7 @@
 				925BD26628A24E5F009303AF /* User.swift */,
 				925BD26428A24D2E009303AF /* Enviroment.swift */,
 				0A9E94A628B6577200985179 /* TransactionParse.swift */,
+				0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */,
 				0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */,
 			);
 			path = Models;
@@ -611,6 +617,7 @@
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */,
+				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
@@ -649,6 +656,7 @@
 				0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
+				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
 				0A432FA828B3AB5A00C551FA /* ProgressViewUITry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

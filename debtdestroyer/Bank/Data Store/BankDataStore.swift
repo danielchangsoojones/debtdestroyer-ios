@@ -23,11 +23,10 @@ class BankDataStore {
         }
     }
     
-    func loadDebtAccounts() {
+    func loadDebtAccounts(completion: @escaping ([DebtAccountsParse]) -> Void) {
         PFCloud.callFunction(inBackground: "getDebtAccounts", withParameters: nil) { (result, error) in
-            if let acc = result as? JSON {
-                self.myDict = acc
-                
+            if let acc = result  as? [DebtAccountsParse]  {
+                completion(acc)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
@@ -35,7 +34,7 @@ class BankDataStore {
             }
         }
     }
-
+    
     func loadPastWinners() {
         PFCloud.callFunction(inBackground: "getPastWinners", withParameters: nil) { (result, error) in
             if let acc = result as? JSON {
@@ -48,5 +47,4 @@ class BankDataStore {
             }
         }
     }
-
 }

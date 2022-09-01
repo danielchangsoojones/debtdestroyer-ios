@@ -14,6 +14,7 @@ class BankViewController: UIViewController {
     private let dataStore = BankDataStore()
     private var messageHelper: MessageHelper?
     private var transactionHistory: [TransactionParse] = []
+    private var debtAccountsData: [DebtAccountsParse] = []
     
     override func loadView() {
         super.loadView()
@@ -27,9 +28,8 @@ class BankViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         loadTransactions()
-        dataStore.loadPastWinners()
-        dataStore.loadDebtAccounts()
-
+        loadDebtAccounts()
+        
     }
     
     private func setTableView() {
@@ -37,7 +37,7 @@ class BankViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.backgroundColor = .white
         tableView.register(cellType: TicketTopView.self)
         tableView.register(cellType: LoanAccountCell.self)
@@ -56,6 +56,12 @@ class BankViewController: UIViewController {
         }
     }
     
+    private func loadDebtAccounts() {
+        dataStore.loadDebtAccounts { debtAccounts in
+            self.debtAccountsData = debtAccounts
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension BankViewController: UITableViewDataSource, UITableViewDelegate {
@@ -69,8 +75,12 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             return 1
         } else if section == 1 {
             // MARK: Connected Accounts Section
-            return 1
-        } else if section == 1 {
+            if self.debtAccountsData.count > 0 {
+                return self.debtAccountsData.count
+            } else {
+                return 1
+            }
+        } else if section == 2 {
             // MARK: Power ups Section
             return 1
         } else {
@@ -93,75 +103,104 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             // MARK: Connected Accounts Section
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanAccountCell.self)
             
-            cell.titleLabel.text = "Connect Your Student Loan Account"
-            cell.balanceLabel.textColor = hexStringToUIColor(hex: "FF1A7E")
-            cell.balanceLabel.text = "to start earning tickets everytime you pay down your student loans"
+            if self.debtAccountsData.count > 0 {
+                let debtAccount = debtAccountsData[indexPath.row]
+                cell.balanceLabel.textColor = .black
+                
+                if let title = debtAccount.value(forKey: "title")
+                {
+                    print(title) //optional String
+                    cell.titleLabel.text = title as? String
+                }else {
+                    cell.titleLabel.text = "Loan Account"
+                }
+                
+                if let remaining_balance = debtAccount.value(forKey: "remaining_balance")
+                {
+                    print(remaining_balance) //optional String
+                    cell.balanceLabel.text = "Balance: $" + String(describing: remaining_balance)
+                }
+                
+                cell.logoImg.loadFromFile(debtAccount.logoImg)
+                cell.setChevron(imageName: "chevronGrey")
+                
+            }
+            
+            else {
+                cell.logoImg.image = UIImage.init(named: "Plus")
+                cell.titleLabel.text = "Connect Your Student Loan Account"
+                cell.balanceLabel.textColor = hexStringToUIColor(hex: "FF1A7E")
+                cell.balanceLabel.text = "to start earning tickets everytime you pay down your student loans"
+            }
             return cell
             
         }else if indexPath.section == 2 {
             // MARK: Power ups Section
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PowerUpsCell.self)
             
-            cell.titleLabel.text = "Connect Your Student Loan Account"
+            cell.titleLabel.text = "Earn 10x tickets and more..."
             cell.balanceLabel.textColor = hexStringToUIColor(hex: "FF1A7E")
-            cell.balanceLabel.text = "to start earning tickets everytime you pay down your student loans"
+            cell.balanceLabel.text = "When you upgrade to the Diamond subscriptio2"
             return cell
             
         } else {
             // MARK: transaction History Section
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TransactionHistoryCell.self)
-            print("self.transactionHistory",self.transactionHistory)
             let transaction = transactionHistory[indexPath.row]
             
-            if let title = transaction.value(forKey: "title")
+            if let title = transaction.title
             {
-                print(title) //optional String
-                cell.titleLabel.text = title as? String
-                
-            }else {
-                cell.titleLabel.text = "Loan Payment"
-                
+                if title == ""{
+                    cell.titleLabel.text = "Loan Payment"
+                } else {
+                    cell.titleLabel.text = title
+                }
             }
-            
             
             if let amount = transaction.value(forKey: "amountPaidToLoan")
             {
-                print(amount) //optional String
                 cell.amountPaidToLoanLabel.text = "$" + String(describing: amount)
-                
-                
             }
             
             if let ticketCount = transaction.value(forKey: "ticketsEarned")
             {
-                print(ticketCount) //optional String
                 cell.ticketCount = String(describing: ticketCount)
-                // ticketCount as? String
                 cell.setTicketsLabel()
             }
+            
             if let updatedAt = transaction.value(forKey: "updatedAt")
             {
                 print(updatedAt) //optional String
-    
                 let from = dateTimeStatus(date: String(describing: updatedAt))
-                
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateFormat = "2022-08-23 06:11:13 +0000"
-//                let date = dateFormatter.date(from: String(describing: from))
-//                dateFormatter.dateFormat = "yyyy-MM-dd"
-//                let resultString = dateFormatter.string(from: date ?? Date())
+                //                let dateFormatter = DateFormatter()
+                //                dateFormatter.dateFormat = "2022-08-23 06:11:13 +0000"
+                //                let date = dateFormatter.date(from: String(describing: from))
+                //                dateFormatter.dateFormat = "yyyy-MM-dd"
+                //                let resultString = dateFormatter.string(from: date ?? Date())
                 
                 cell.dateLabel.text = String(describing: from)
-                
-                
             }
-            
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt ",indexPath.row)
+        if indexPath.section == 0 {
+            // MARK: Ticket Top View Section
+            
+        } else if indexPath.section == 1 {
+            // MARK: Connected Accounts Section
+            
+        }else if indexPath.section == 2 {
+            // MARK: Power ups Section
+            let vc = SubscriptionViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        } else {
+            // MARK: transaction History Section
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -190,8 +229,30 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             headerView.addSubview(headerLbl)
             headerLbl.snp.makeConstraints{ make in
                 make.top.bottom.equalToSuperview()
-                make.leading.trailing.equalToSuperview().inset(15)
+                make.leading.equalToSuperview().inset(15)
             }
+            
+            if self.debtAccountsData.count > 0 {
+                let editBtn = UIButton()
+                editBtn.setTitle("edit", for: .normal)
+                let dimenssion = 25
+                editBtn.layer.cornerRadius = CGFloat(dimenssion / 2)
+                editBtn.layer.borderWidth = 1
+                editBtn.layer.borderColor = UIColor.black.cgColor
+                editBtn.setTitleColor(.black, for: .normal)
+                editBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+                editBtn.addTarget(self,
+                                  action: #selector(editConnectedAccountsBtnClicked),
+                                  for: .touchUpInside)
+                headerView.addSubview(editBtn)
+                editBtn.snp.makeConstraints{ make in
+                    make.centerY.equalToSuperview()
+                    make.leading.equalTo(headerLbl.snp.trailing).offset(10)
+                    make.width.equalTo(dimenssion * 2)
+                    make.height.equalTo(dimenssion)
+                }
+            }
+            
             return headerView
         } else if section == 2 {
             // MARK: Power ups Section
@@ -237,5 +298,11 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             return 40
         }
     }
+    
+    @objc private func editConnectedAccountsBtnClicked() {
+        let vc = ConnectedAccountsViewController()
+        self.navigationController?.pushViewController(vc.self, animated: true)
+    }
+    
 }
 

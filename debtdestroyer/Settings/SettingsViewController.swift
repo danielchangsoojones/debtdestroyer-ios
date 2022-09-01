@@ -72,19 +72,19 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            //Connected Accounts
+            // MARK: Connected Accounts
             let vc = ConnectedAccountsViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
         } else if indexPath.row == 1 || indexPath.row == 3 {
-            //Contact Us
-            //Leave Feedback
+            // MARK: Contact Us
+            // MARK: Leave Feedback
             messageHelper?.text("3176905323", body: "")
         } else if indexPath.row == 2 {
-            //Legal Disclosures
+            // MARK: Legal Disclosures
             let vc = LegalDisclosuresViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
         } else if indexPath.row == 4 {
-            //Logout
+            // MARK: Logout
             User.logOutInBackground { error in
                 if let error = error {
                     BannerAlert.show(with: error)
@@ -97,7 +97,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
         } else {
-            //Delete Account
+            // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
         }

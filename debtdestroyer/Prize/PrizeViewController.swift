@@ -44,8 +44,8 @@ class PrizeViewController: UIViewController {
     }
     
     @objc func roundUpsClicked() {
-        let vc = SubscriptionViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+       
+        
     }
     
     @objc func oneTimePaymentClicked() {

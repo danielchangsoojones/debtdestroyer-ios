@@ -21,12 +21,26 @@ class ConnectedAccountsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imgNameArr = ["accounts", "contactUs","legal"]
-        dataArr = ["Connected Accounts", "Contact Us", "Legal Disclosures"]
-        balanceArr = ["36,245", "36,245", "36,245"]
+        imgNameArr = ["accounts", "contactUs"]
+        dataArr = ["Loan 1", "Loan 2"]
+        balanceArr = ["36,245", "36,245"]
+        
+        setNavBarBtns()
     }
     
-    
+    private func setNavBarBtns() {
+        navigationItem.hidesBackButton = true
+        var backImg = UIImage.init(named: "arrow-left-alt")
+        backImg = backImg?.withRenderingMode(.alwaysOriginal)
+        let back = UIBarButtonItem(image: backImg , style: .plain, target: self, action: #selector(backPressed))
+        navigationItem.leftBarButtonItem = back
+        
+        navigationController?.navigationBar.backgroundColor = .clear
+    }
+
+    @objc private func backPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     private func setTableView() {
         tableView = UITableView()

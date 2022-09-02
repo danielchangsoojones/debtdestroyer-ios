@@ -109,7 +109,6 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 if let title = debtAccount.value(forKey: "title")
                 {
-                    print(title) //optional String
                     cell.titleLabel.text = title as? String
                 }else {
                     cell.titleLabel.text = "Loan Account"
@@ -117,7 +116,6 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 if let remaining_balance = debtAccount.value(forKey: "remaining_balance")
                 {
-                    print(remaining_balance) //optional String
                     cell.balanceLabel.text = "Balance: $" + String(describing: remaining_balance)
                 }
                 
@@ -170,7 +168,6 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             
             if let updatedAt = transaction.value(forKey: "updatedAt")
             {
-                print(updatedAt) //optional String
                 let from = dateTimeStatus(date: String(describing: updatedAt))
                 //                let dateFormatter = DateFormatter()
                 //                dateFormatter.dateFormat = "2022-08-23 06:11:13 +0000"
@@ -185,7 +182,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt ",indexPath.row)
+//        print("didSelectRowAt ",indexPath.row)
         if indexPath.section == 0 {
             // MARK: Ticket Top View Section
             
@@ -300,7 +297,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     @objc private func editConnectedAccountsBtnClicked() {
-        let vc = ConnectedAccountsViewController()
+        let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
         self.navigationController?.pushViewController(vc.self, animated: true)
     }
     

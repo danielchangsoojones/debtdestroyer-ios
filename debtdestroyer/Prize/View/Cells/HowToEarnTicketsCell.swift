@@ -89,7 +89,6 @@ extension HowToEarnTicketsCell: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.row == 1 {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RoundUps"), object: nil)
         } else {
-            print("didSelectRowAt ",indexPath.row)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "OneTimePayment"), object: nil)
         }
     }

@@ -50,7 +50,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     }
     
     private func setLogoImg() {
-        logoImg.contentMode = .scaleAspectFill
+        logoImg.contentMode = .scaleAspectFit
         logoImg.clipsToBounds = true
         let dimension: CGFloat = 40
         logoImg.layer.cornerRadius = dimension * 0.2

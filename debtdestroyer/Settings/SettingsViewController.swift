@@ -13,7 +13,9 @@ class SettingsViewController: UIViewController {
     private var tableView: UITableView!
     var dataArr = [String]()
     var imgNameArr = [String]()
-    
+    private var debtAccountsData: [DebtAccountsParse] = []
+    private let dataStore = BankDataStore()
+
     override func loadView() {
         super.loadView()
         setTableView()
@@ -21,6 +23,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
         dataArr = ["Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
         
@@ -44,6 +47,14 @@ class SettingsViewController: UIViewController {
             make.left.right.top.bottom.equalToSuperview()
         }
     }
+    
+    private func loadDebtAccounts() {
+        dataStore.loadDebtAccounts { debtAccounts in
+            self.debtAccountsData = debtAccounts
+            self.tableView.reloadData()
+        }
+    }
+
 }
 
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -73,7 +84,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             // MARK: Connected Accounts
-            let vc = ConnectedAccountsViewController()
+            let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
             self.navigationController?.pushViewController(vc.self, animated: true)
         } else if indexPath.row == 1 || indexPath.row == 3 {
             // MARK: Contact Us

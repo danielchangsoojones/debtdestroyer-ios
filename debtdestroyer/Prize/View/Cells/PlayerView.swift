@@ -54,15 +54,7 @@ class PlayerView: UIView {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-        
-        activityIndicator.center = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        activityIndicator.color = UIColor.white
-        addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        
-        
+       
         // Only handle observations for the playerItemContext
         guard context == &playerItemContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -88,7 +80,6 @@ class PlayerView: UIView {
                 @unknown default:
                     print("@unknown default")
             }
-            activityIndicator.stopAnimating()
         }
     }
     

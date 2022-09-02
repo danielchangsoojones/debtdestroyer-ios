@@ -13,7 +13,18 @@ class ConnectedAccountsViewController: UIViewController {
     var dataArr = [String]()
     var imgNameArr = [String]()
     var balanceArr = [String]()
+    private var debtAccountsData: [DebtAccountsParse] = []
 
+    init(debtAccounts: [DebtAccountsParse]) {
+        self.debtAccountsData = debtAccounts
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func loadView() {
         super.loadView()
         setTableView()
@@ -61,14 +72,29 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArr.count
+        return self.debtAccountsData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConnectedAccountsTableViewCell.self)
-        cell.titleLabel.text = dataArr[indexPath.row]
-        cell.balanceLabel.text = "Balance: $" + balanceArr[indexPath.row]
-        cell.logoImg.image = UIImage.init(named: imgNameArr[indexPath.row])
+        
+        
+        let debtAccount = debtAccountsData[indexPath.row]
+        cell.balanceLabel.textColor = .black
+        
+        if let title = debtAccount.value(forKey: "title")
+        {
+            cell.titleLabel.text = title as? String
+        }else {
+            cell.titleLabel.text = "Loan Account"
+        }
+        
+        if let remaining_balance = debtAccount.value(forKey: "remaining_balance")
+        {
+            cell.balanceLabel.text = "Balance: $" + String(describing: remaining_balance)
+        }
+        
+        cell.logoImg.loadFromFile(debtAccount.logoImg)
         cell.removeButton.addTarget(self, action: #selector(removeStudentLoanAccBtnPressed), for: .touchUpInside)
         return cell
     }
@@ -95,6 +121,7 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
         footer.backgroundColor = .white
         let connectLoanAccountBtn = UIButton(frame: CGRect(x:15,y: 10 ,width:footer.frame.width - 30,height:70))
         connectLoanAccountBtn.backgroundColor = .white
+        connectLoanAccountBtn.titleLabel?.textAlignment = .center
         connectLoanAccountBtn.titleLabel?.numberOfLines = 0
         connectLoanAccountBtn.layer.cornerRadius =  8
         connectLoanAccountBtn.layer.masksToBounds = false

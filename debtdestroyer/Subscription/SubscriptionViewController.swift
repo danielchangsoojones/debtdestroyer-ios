@@ -39,6 +39,8 @@ class SubscriptionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(cellType: SubcsriptionCell.self)
+        collectionView.register(cellType: SubscriptionCurrentCell.self)
+        collectionView.register(cellType: SubscriptionDiamondCell.self)
         self.view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
@@ -46,7 +48,6 @@ class SubscriptionViewController: UIViewController {
             make.top.equalToSuperview()
             make.height.equalTo((self.view.frame.width) * 1.5)
 //            make.bottom.equalToSuperview().offset(-20)
-            
         }
     }
     
@@ -65,9 +66,22 @@ extension SubscriptionViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubcsriptionCell.self)
         
-        return cell
+        if indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubcsriptionCell.self)
+            
+            return cell
+        } else if indexPath.row == 1 {
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubscriptionCurrentCell.self)
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubscriptionDiamondCell.self)
+            
+            return cell
+        }
+        
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

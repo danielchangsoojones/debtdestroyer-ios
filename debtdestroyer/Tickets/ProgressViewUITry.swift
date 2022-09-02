@@ -35,7 +35,7 @@ class ProgressViewUITry: UIView {
         setStackForProgress()
         setupStepImgView()
         let p = ticketProgressBar.frame.width / 5
-        print("p========",p)
+//        print("p========",p)
     }
     
     required init?(coder aDecoder: NSCoder) {

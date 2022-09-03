@@ -11,8 +11,6 @@ import Reusable
 class SettingsTableViewCell: UITableViewCell, Reusable {
     let logoImg = UIImageView()
     let titleLabel = UILabel()
-    private let line = UIView()
-    private let lineWhite = UIView()
 
     var chevronImageView = UIImageView()
     

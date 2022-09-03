@@ -71,15 +71,14 @@ class LoanAccountCell: UITableViewCell, Reusable {
         }
         
         setLogoImg()
-        setChevron(imageName: "chevronGrey")
+        setChevron(imageName: "")
         setTitleLabel()
         setBalanceLabel()
 
     }
     
     private func setLogoImg() {
-        logoImg.image = UIImage.init(named: "Plus")
-        logoImg.contentMode = .center
+        logoImg.contentMode = .scaleAspectFit
         logoImg.clipsToBounds = true
         let dimension: CGFloat = 30
         logoImg.layer.cornerRadius = dimension * 0.2
@@ -92,9 +91,10 @@ class LoanAccountCell: UITableViewCell, Reusable {
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         titleLabel.textColor = .black
         titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byCharWrapping
         background.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
@@ -104,7 +104,7 @@ class LoanAccountCell: UITableViewCell, Reusable {
     }
     
     private func setBalanceLabel() {
-        balanceLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        balanceLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         balanceLabel.textColor = .black
         balanceLabel.numberOfLines = 0
         background.addSubview(balanceLabel)

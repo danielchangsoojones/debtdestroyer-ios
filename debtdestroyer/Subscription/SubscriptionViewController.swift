@@ -16,7 +16,7 @@ class SubscriptionViewController: UIViewController {
         setupCollectionView()
         self.navigationItem.title = "Subscription"
         self.navigationController?.navigationBar.tintColor = .black
-        
+        self.view.backgroundColor = .white
         setNavBarBtns()
        
     }
@@ -77,11 +77,26 @@ extension SubscriptionViewController: UICollectionViewDataSource, UICollectionVi
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubscriptionDiamondCell.self)
-            
+//            let gradientLabel = cell.getGradientLayer(bounds: cell.priceLbl.bounds)
+//            cell.priceLbl.textColor = cell.gradientColor(bounds: cell.priceLbl.bounds, gradientLayer: gradientLabel)
             return cell
         }
         
        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubcsriptionCell.self)
+
+        } else if indexPath.row == 1 {
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubscriptionCurrentCell.self)
+
+        } else {
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubscriptionDiamondCell.self)
+            let gradientLabel = cell.getGradientLayer(bounds: cell.priceLbl.bounds)
+            cell.priceLbl.textColor = cell.gradientColor(bounds: cell.priceLbl.bounds, gradientLayer: gradientLabel)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -93,7 +108,11 @@ extension SubscriptionViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (self.view.frame.width) * 0.32, height: (self.view.frame.width) * 1.5)
+        if indexPath.row == 0 {
+            return CGSize(width: 110, height: (self.view.frame.width) * 1.5)
+        } else {
+            return CGSize(width: (self.view.frame.width - 120) * 0.5, height: (self.view.frame.width) * 1.5)
+        }
     }
     
 }

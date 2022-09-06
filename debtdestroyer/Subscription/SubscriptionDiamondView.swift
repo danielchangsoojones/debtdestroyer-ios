@@ -1,16 +1,15 @@
 //
-//  SubscriptionCurrentCell.swift
+//  SubscriptionDiamondCell.swift
 //  debtdestroyer
 //
 //  Created by Rashmi Aher on 02/09/22.
 //
 
 import UIKit
-import Reusable
 
-class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
+class SubscriptionDiamondView: UIView {
     let background = UIView()
-    let topBtn = UIButton()
+    let topBtn = GradientBtn()
     let ticketsLbl = UILabel()
     let emailNewsLetterLbl = UILabel()
     let loanConnectionsLbl = UILabel()
@@ -19,8 +18,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
     private let line1 = UIView()
     private let line2 = UIView()
     private let line3 = UIView()
-
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -32,12 +30,10 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
     }
     
     private func setBackground() {
-        background.backgroundColor = .systemGray5
-        background.layer.cornerRadius = 8
-        
-        contentView.addSubview(background)
+        addSubview(background)
         background.snp.makeConstraints { make in
-            make.edges.equalTo(contentView.snp.edges)
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalToSuperview()
         }
         setTopBtn()
         setTicketsLbl()
@@ -49,11 +45,12 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
         setPriceLbl()
         setLine3()
     }
-
+    
     func setPriceLbl() {
-        priceLbl.text = "Free"
+        priceLbl.text = "$5.99/month"
         priceLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         priceLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
+        priceLbl.numberOfLines = 0
         priceLbl.textAlignment = .center
         priceLbl.backgroundColor = .clear
         background.addSubview(priceLbl)
@@ -63,9 +60,10 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
             make.top.equalTo(loanConnectionsLbl.snp.bottom).offset(30)
         }
     }
-        
+    
     func setLoanConnectionsLbl() {
-        loanConnectionsLbl.text = "1"
+        loanConnectionsLbl.text = "unlimited"
+        loanConnectionsLbl.adjustsFontSizeToFitWidth = true
         loanConnectionsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         loanConnectionsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         loanConnectionsLbl.textAlignment = .center
@@ -90,25 +88,25 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
             make.leading.trailing.equalToSuperview().inset(5)
             make.top.equalTo(ticketsLbl.snp.bottom).offset(30)
         }
-        
     }
     
     func setTopBtn() {
-        topBtn.setTitle("Current", for: .normal)
+        topBtn.setTitle("Diamond", for: .normal)
         topBtn.layer.cornerRadius =  8
         topBtn.clipsToBounds = true
-        topBtn.backgroundColor = hexStringToUIColor(hex: "8A8A8A")
+        topBtn.backgroundColor = .clear
         topBtn.isUserInteractionEnabled = false
         background.addSubview(topBtn)
         topBtn.snp.makeConstraints{ make in
-            make.top.equalToSuperview().inset(50)
+            make.top.equalToSuperview().inset(15)
             make.height.width.equalTo(80)
             make.centerX.equalToSuperview()
         }
     }
+
     
     func setTicketsLbl() {
-        ticketsLbl.text = "1x"
+        ticketsLbl.text = "10x"
         ticketsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         ticketsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         ticketsLbl.textAlignment = .center
@@ -122,7 +120,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
     }
     
     func setLine() {
-        line.backgroundColor = hexStringToUIColor(hex: "8A8A8A")
+        line.backgroundColor = hexStringToUIColor(hex: "FF7021")
         background.addSubview(line)
         line.snp.makeConstraints { make in
             make.height.equalTo(1)
@@ -130,9 +128,9 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
             make.top.equalTo(ticketsLbl.snp.bottom).offset(2)
         }
     }
-
+    
     func setLine1() {
-        line1.backgroundColor = hexStringToUIColor(hex: "8A8A8A")
+        line1.backgroundColor = hexStringToUIColor(hex: "FF7021")
         background.addSubview(line1)
         line1.snp.makeConstraints { make in
             make.height.equalTo(1)
@@ -142,7 +140,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
     }
     
     func setLine2() {
-        line2.backgroundColor = hexStringToUIColor(hex: "8A8A8A")
+        line2.backgroundColor = hexStringToUIColor(hex: "FF7021")
         background.addSubview(line2)
         line2.snp.makeConstraints { make in
             make.height.equalTo(1)
@@ -152,7 +150,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
     }
     
     func setLine3() {
-        line3.backgroundColor = hexStringToUIColor(hex: "8A8A8A")
+        line3.backgroundColor = hexStringToUIColor(hex: "FF7021")
         background.addSubview(line3)
         line3.snp.makeConstraints { make in
             make.height.equalTo(1)
@@ -161,4 +159,5 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
         }
     }
 
+    
 }

@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import Reusable
 
-class SubcsriptionCell: UICollectionViewCell, Reusable{
+class SubcsriptionBasicView: UIView {
     let background = UIView()
     let topBtn = UIButton()
     let ticketsLbl = UILabel()
@@ -76,13 +75,11 @@ class SubcsriptionCell: UICollectionViewCell, Reusable{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setBackground() {
-        background.backgroundColor = .systemGray5
-        background.layer.cornerRadius = 8
-    
-        contentView.addSubview(background)
+    private func setBackground() {    
+        addSubview(background)
         background.snp.makeConstraints { make in
-            make.edges.equalTo(contentView.snp.edges)
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalToSuperview()
         }
         setTopBtn()
         setStack()
@@ -120,8 +117,8 @@ class SubcsriptionCell: UICollectionViewCell, Reusable{
         background.addSubview(stackView2)
         stackView2.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(5)
-            make.top.equalTo(emailNewsLetterLbl.snp.bottom).offset(30)
-            make.height.equalTo(50)
+            make.top.equalTo(emailNewsLetterLbl.snp.bottom).offset(20)
+            make.height.equalTo(70)
         }
         setLoanConnectionsLbl()
         setLoanConnectionsBtn()
@@ -132,7 +129,7 @@ class SubcsriptionCell: UICollectionViewCell, Reusable{
         background.addSubview(stackView3)
         stackView3.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(5)
-            make.top.equalTo(loanConnectionsLbl.snp.bottom).offset(30)
+            make.top.equalTo(loanConnectionsLbl.snp.bottom).offset(20)
             make.height.equalTo(50)
         }
         setPriceLbl()
@@ -166,6 +163,7 @@ class SubcsriptionCell: UICollectionViewCell, Reusable{
     func setLoanConnectionsLbl() {
         loanConnectionsLbl.text = "Loan Account Connections"
         loanConnectionsLbl.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        loanConnectionsLbl.adjustsFontSizeToFitWidth = true
         loanConnectionsLbl.textColor = .jaguarBlack
         loanConnectionsLbl.numberOfLines = 0
         loanConnectionsLbl.textAlignment = .left
@@ -217,7 +215,7 @@ class SubcsriptionCell: UICollectionViewCell, Reusable{
         topBtn.isUserInteractionEnabled = false
         background.addSubview(topBtn)
         topBtn.snp.makeConstraints{ make in
-            make.top.equalToSuperview().inset(50)
+            make.top.equalToSuperview().inset(15)
             make.height.width.equalTo(80)
             make.centerX.equalToSuperview()
         }

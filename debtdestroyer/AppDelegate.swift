@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         TransactionParse.registerSubclass()
         DebtAccountsParse.registerSubclass()
+        WinnerParse.registerSubclass()
     }
 
     // Lock the orientation to Portrait mode

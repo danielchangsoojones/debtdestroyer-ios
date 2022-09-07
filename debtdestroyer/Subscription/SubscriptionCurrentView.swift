@@ -6,15 +6,14 @@
 //
 
 import UIKit
-import Reusable
 
-class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
+class SubscriptionCurrentView: UIView {
     let background = UIView()
     let topBtn = UIButton()
-    let ticketsTxt = UITextField()
-    let emailNewsLetterTxt = UITextField()
-    let loanConnectionsTxt = UITextField()
-    let priceTxt = UITextField()
+    let ticketsLbl = UILabel()
+    let emailNewsLetterLbl = UILabel()
+    let loanConnectionsLbl = UILabel()
+    let priceLbl = UILabel()
     private let line = UIView()
     private let line1 = UIView()
     private let line2 = UIView()
@@ -32,63 +31,64 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
     }
     
     private func setBackground() {
-        background.backgroundColor = .systemGray5
         background.layer.cornerRadius = 8
-        
-        contentView.addSubview(background)
+        background.layer.borderWidth = 0.5
+        background.layer.borderColor = hexStringToUIColor(hex: "8A8A8A").cgColor
+        addSubview(background)
         background.snp.makeConstraints { make in
-            make.edges.equalTo(contentView.snp.edges)
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalToSuperview()
         }
         setTopBtn()
-        setTicketsTxt()
+        setTicketsLbl()
         setLine()
-        setEmailNewsLetterTxt()
+        setEmailNewsLetterLbl()
         setLine1()
-        setLoanConnectionsTxt()
+        setLoanConnectionsLbl()
         setLine2()
-        setPriceTxt()
+        setPriceLbl()
         setLine3()
     }
 
-    func setPriceTxt() {
-        priceTxt.text = "Free"
-        priceTxt.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        priceTxt.textColor = hexStringToUIColor(hex: "8A8A8A")
-        priceTxt.textAlignment = .justified
-        priceTxt.backgroundColor = .clear
-        background.addSubview(priceTxt)
-        priceTxt.snp.makeConstraints { make in
+    func setPriceLbl() {
+        priceLbl.text = "Free"
+        priceLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        priceLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
+        priceLbl.textAlignment = .center
+        priceLbl.backgroundColor = .clear
+        background.addSubview(priceLbl)
+        priceLbl.snp.makeConstraints { make in
             make.height.equalTo(45)
-            make.leading.equalToSuperview().inset(5)
-            make.top.equalTo(loanConnectionsTxt.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(5)
+            make.top.equalTo(loanConnectionsLbl.snp.bottom).offset(30)
         }
     }
         
-    func setLoanConnectionsTxt() {
-        loanConnectionsTxt.text = "1"
-        loanConnectionsTxt.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        loanConnectionsTxt.textColor = hexStringToUIColor(hex: "8A8A8A")
-        loanConnectionsTxt.textAlignment = .center
-        loanConnectionsTxt.backgroundColor = .clear
-        background.addSubview(loanConnectionsTxt)
-        loanConnectionsTxt.snp.makeConstraints { make in
+    func setLoanConnectionsLbl() {
+        loanConnectionsLbl.text = "1"
+        loanConnectionsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        loanConnectionsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
+        loanConnectionsLbl.textAlignment = .center
+        loanConnectionsLbl.backgroundColor = .clear
+        background.addSubview(loanConnectionsLbl)
+        loanConnectionsLbl.snp.makeConstraints { make in
             make.height.equalTo(45)
             make.leading.trailing.equalToSuperview().inset(5)
-            make.top.equalTo(emailNewsLetterTxt.snp.bottom).offset(30)
+            make.top.equalTo(emailNewsLetterLbl.snp.bottom).offset(30)
         }
     }
     
-    func setEmailNewsLetterTxt() {
-        emailNewsLetterTxt.text = ""
-        emailNewsLetterTxt.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        emailNewsLetterTxt.textColor = hexStringToUIColor(hex: "8A8A8A")
-        emailNewsLetterTxt.textAlignment = .center
-        emailNewsLetterTxt.backgroundColor = .clear
-        background.addSubview(emailNewsLetterTxt)
-        emailNewsLetterTxt.snp.makeConstraints { make in
+    func setEmailNewsLetterLbl() {
+        emailNewsLetterLbl.text = ""
+        emailNewsLetterLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        emailNewsLetterLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
+        emailNewsLetterLbl.textAlignment = .center
+        emailNewsLetterLbl.backgroundColor = .clear
+        background.addSubview(emailNewsLetterLbl)
+        emailNewsLetterLbl.snp.makeConstraints { make in
             make.height.equalTo(45)
             make.leading.trailing.equalToSuperview().inset(5)
-            make.top.equalTo(ticketsTxt.snp.bottom).offset(30)
+            make.top.equalTo(ticketsLbl.snp.bottom).offset(30)
         }
         
     }
@@ -101,20 +101,20 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
         topBtn.isUserInteractionEnabled = false
         background.addSubview(topBtn)
         topBtn.snp.makeConstraints{ make in
-            make.top.equalToSuperview().inset(50)
+            make.top.equalToSuperview().inset(15)
             make.height.width.equalTo(80)
             make.centerX.equalToSuperview()
         }
     }
     
-    func setTicketsTxt() {
-        ticketsTxt.text = "1x"
-        ticketsTxt.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        ticketsTxt.textColor = hexStringToUIColor(hex: "8A8A8A")
-        ticketsTxt.textAlignment = .center
-        ticketsTxt.backgroundColor = .clear
-        background.addSubview(ticketsTxt)
-        ticketsTxt.snp.makeConstraints { make in
+    func setTicketsLbl() {
+        ticketsLbl.text = "1x"
+        ticketsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        ticketsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
+        ticketsLbl.textAlignment = .center
+        ticketsLbl.backgroundColor = .clear
+        background.addSubview(ticketsLbl)
+        ticketsLbl.snp.makeConstraints { make in
             make.height.equalTo(45)
             make.leading.trailing.equalToSuperview().inset(5)
             make.top.equalTo(topBtn.snp.bottom).offset(15)
@@ -127,7 +127,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
         line.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(ticketsTxt.snp.bottom).offset(2)
+            make.top.equalTo(ticketsLbl.snp.bottom).offset(2)
         }
     }
 
@@ -137,7 +137,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
         line1.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(emailNewsLetterTxt.snp.bottom).offset(2)
+            make.top.equalTo(emailNewsLetterLbl.snp.bottom).offset(2)
         }
     }
     
@@ -147,7 +147,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
         line2.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(loanConnectionsTxt.snp.bottom).offset(2)
+            make.top.equalTo(loanConnectionsLbl.snp.bottom).offset(2)
         }
     }
     
@@ -157,7 +157,7 @@ class SubscriptionCurrentCell: UICollectionViewCell, Reusable{
         line3.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(priceTxt.snp.bottom).inset(2)
+            make.top.equalTo(priceLbl.snp.bottom).inset(2)
         }
     }
 

@@ -15,6 +15,7 @@ class PrizeViewController: UIViewController {
     private var messageHelper: MessageHelper?
 //    private var footer : UIView!
     var earningTicketsBtn : UIButton!
+    private var pastWinnersData: [WinnerParse] = []
 
     override func loadView() {
         super.loadView()
@@ -34,8 +35,10 @@ class PrizeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        dataStore.savingsInfo()
-        tableView.reloadData()
+        loadSavingsInfo()
+        loadSweepstakesInfo()
+        loadPastWinners()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,13 +47,31 @@ class PrizeViewController: UIViewController {
     }
     
     @objc func roundUpsClicked() {
-       
-        
+        let vc = ScrollableViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func oneTimePaymentClicked() {
         
     }
+    
+    private func loadPastWinners() {
+        dataStore.loadPastWinners { pastWinners in
+            self.pastWinnersData = pastWinners
+            self.tableView.reloadData()
+        }
+    }
+
+    private func loadSavingsInfo() {
+        dataStore.savingsInfo()
+        tableView.reloadData()
+    }
+    
+    private func loadSweepstakesInfo() {
+        dataStore.sweepstakesInfo()
+        tableView.reloadData()
+    }
+
     
     private func setTableView() {
         tableView = UITableView()
@@ -151,19 +172,34 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
+            // MARK: Savings Info View
+            
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
-            cell.lblAmntPaidTo.text = UserDefaults.standard.string(forKey: "progress_meter_title")
-            cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
-            cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
+            cell.lblAmntPaidTo.text = dataStore.savingsInfoJSON["progress_meter_title"].stringValue
+            cell.lblAmntPaid.text = "$" + dataStore.savingsInfoJSON["totalAmountPaidToLoan"].stringValue
+            cell.ticketCount = dataStore.savingsInfoJSON["ticketCount"].stringValue
             cell.setLblNoOfTickets()
+            
+            
+//            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
+//            cell.lblAmntPaidTo.text = UserDefaults.standard.string(forKey: "progress_meter_title")
+//            cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
+//            cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
+//            cell.setLblNoOfTickets()
             return cell
         } else if indexPath.row == 1 {
+            // MARK: Sweepstakes Info View
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
+            cell.announcementLbl.text = dataStore.sweepstakesInfoJSON["deadlineTxt"].stringValue
+            cell.winLbl.text = dataStore.sweepstakesInfoJSON["prizeAmountTxt"].stringValue
+            cell.weekPrizeLbl.text = dataStore.sweepstakesInfoJSON["title"].stringValue
             return cell
         } else if indexPath.row == 2 {
+            // MARK: Past Winners View
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWeeksPrizeCell.self)
             return cell
         } else {
+            // MARK: How to Earn View
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
             return cell
         }

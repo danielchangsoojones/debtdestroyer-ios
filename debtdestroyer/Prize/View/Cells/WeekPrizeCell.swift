@@ -38,8 +38,8 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         setWeekPrizeBackgroundImgView()
         setWeekPrizeLbl()
         setInfoBtn()
-        setWinAmountLbl(amount: "2,500")
-        setAnnouncementLbl(day: "Tuesday", time: "9am")
+        setWinAmountLbl()
+        setAnnouncementLbl()
     }
 
     private func setWeekPrizeBackgroundImgView() {
@@ -84,8 +84,8 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         print("weekPrizeInfoBtnClicked")
     }
     
-    func setWinAmountLbl(amount : String) {
-        winLbl.text = "WIN $\(amount) towards your student loans!"
+    func setWinAmountLbl() {
+        winLbl.text = "WIN $2,500 towards your student loans!"
         winLbl.numberOfLines = 3
         winLbl.textColor = UIColor.sunGlow
         winLbl.textAlignment = .left
@@ -98,8 +98,8 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         }
     }
     
-    func setAnnouncementLbl(day: String, time: String) {
-        announcementLbl.text = "The winner will be announced \(day) at \(time) PT"
+    func setAnnouncementLbl() {
+        announcementLbl.text = "The winner will be announced soon..!"
         announcementLbl.numberOfLines = 2
         announcementLbl.textColor = .white
         announcementLbl.textAlignment = .left

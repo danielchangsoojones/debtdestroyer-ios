@@ -1,16 +1,15 @@
 //
-//  SubscriptionDiamondCell.swift
+//  SubcsriptionCell.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 02/09/22.
+//  Created by Rashmi Aher on 30/08/22.
 //
 
 import UIKit
-import Reusable
 
-class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
+class SubcsriptionBasicView: UIView {
     let background = UIView()
-    let topBtn = GradientBtn()
+    let topBtn = UIButton()
     let ticketsLbl = UILabel()
     let emailNewsLetterLbl = UILabel()
     let loanConnectionsLbl = UILabel()
@@ -65,24 +64,22 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
         return stack
     }()
     
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setBackground()
+       setBackground()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setBackground() {
-        background.backgroundColor = .systemGray5
-        background.layer.cornerRadius = 8
-        
-        contentView.addSubview(background)
+    private func setBackground() {    
+        addSubview(background)
         background.snp.makeConstraints { make in
-            make.edges.equalTo(contentView.snp.edges)
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalToSuperview()
         }
         setTopBtn()
         setStack()
@@ -90,13 +87,14 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
         setStack2()
         setStack3()
     }
-    
+
     func setStack(){
         stackView.backgroundColor = .clear
         background.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(5)
             make.top.equalTo(topBtn.snp.bottom).offset(15)
+            make.height.equalTo(50)
         }
         setTicketsLbl()
         setTicketsBtn()
@@ -108,6 +106,7 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
         stackView1.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(5)
             make.top.equalTo(ticketsLbl.snp.bottom).offset(30)
+            make.height.equalTo(50)
         }
         setEmailNewsLetterLbl()
         setEmailNewsLetterBtn()
@@ -118,7 +117,8 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
         background.addSubview(stackView2)
         stackView2.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(5)
-            make.top.equalTo(emailNewsLetterLbl.snp.bottom).offset(30)
+            make.top.equalTo(emailNewsLetterLbl.snp.bottom).offset(20)
+            make.height.equalTo(70)
         }
         setLoanConnectionsLbl()
         setLoanConnectionsBtn()
@@ -129,7 +129,8 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
         background.addSubview(stackView3)
         stackView3.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(5)
-            make.top.equalTo(loanConnectionsLbl.snp.bottom).offset(30)
+            make.top.equalTo(loanConnectionsLbl.snp.bottom).offset(20)
+            make.height.equalTo(50)
         }
         setPriceLbl()
         setPriceBtn()
@@ -162,6 +163,7 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
     func setLoanConnectionsLbl() {
         loanConnectionsLbl.text = "Loan Account Connections"
         loanConnectionsLbl.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        loanConnectionsLbl.adjustsFontSizeToFitWidth = true
         loanConnectionsLbl.textColor = .jaguarBlack
         loanConnectionsLbl.numberOfLines = 0
         loanConnectionsLbl.textAlignment = .left
@@ -206,18 +208,15 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
             make.height.width.equalTo(15)
         }
     }
-    
+
     
     func setTopBtn() {
-        topBtn.setTitle("Diamond", for: .normal)
-        topBtn.layer.cornerRadius =  8
-        topBtn.clipsToBounds = true
         topBtn.backgroundColor = .clear
         topBtn.isUserInteractionEnabled = false
         background.addSubview(topBtn)
         topBtn.snp.makeConstraints{ make in
-            make.top.equalToSuperview().inset(50)
-            make.height.width.equalTo(60)
+            make.top.equalToSuperview().inset(15)
+            make.height.width.equalTo(80)
             make.centerX.equalToSuperview()
         }
     }
@@ -235,7 +234,7 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
             make.trailing.equalToSuperview().inset(20)
         }
     }
-    
+
     func setTicketsBtn() {
         ticketsInfo.setBackgroundImage(UIImage.init(named: "InfoBlack"), for: .normal)
         stackView.addArrangedSubview(ticketsInfo)
@@ -245,5 +244,5 @@ class SubscriptionDiamondCell: UICollectionViewCell, Reusable{
             make.height.width.equalTo(15)
         }
     }
-    
+
 }

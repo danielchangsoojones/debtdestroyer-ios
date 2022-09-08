@@ -8,6 +8,7 @@
 import UIKit
 import Reusable
 import AVFoundation
+import Parse
 
 class PastWeeksPrizeCell: UITableViewCell, Reusable {
     
@@ -16,18 +17,25 @@ class PastWeeksPrizeCell: UITableViewCell, Reusable {
     private var playerView: PlayerView!
     var isPlaying = false
     
-    // URL for the test video.
+    var obj : AnyObject!
     private let videoURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        selectionStyle = .none
         contentView.backgroundColor = .white
         setUpPlayerContainerView()
         setUpPlayerView()
-//        playVideo()
-setUpPlayerPalyPauseButton()
+        setUpPlayerPalyPauseButton()
+        
+//        let query = PFQuery(className: "Winner")
+//        query.getObjectInBackground(withId: obj as! String) { object, error in
+//            if (error == nil && object != nil) {
+//                let videoFile = object!["keyForVideoPFFile"] as! PFFileObject
+//                self.videoURL = videoFile.url ?? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+//            }
+//
+//        }
     }
     
     required init?(coder: NSCoder) {

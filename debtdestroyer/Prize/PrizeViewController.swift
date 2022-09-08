@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import SwiftyJSON
 
 class PrizeViewController: UIViewController {
     
@@ -15,6 +16,7 @@ class PrizeViewController: UIViewController {
     private var messageHelper: MessageHelper?
 //    private var footer : UIView!
     var earningTicketsBtn : UIButton!
+//    private var pastWinnersData = JSON()
     private var pastWinnersData: [WinnerParse] = []
 
     override func loadView() {
@@ -84,7 +86,7 @@ class PrizeViewController: UIViewController {
         tableView.register(cellType: WeekPrizeCell.self)
         tableView.register(cellType: PastWeeksPrizeCell.self)
         tableView.register(cellType: HowToEarnTicketsCell.self)
-        
+        tableView.reloadData()
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.edges.equalToSuperview()
@@ -124,21 +126,21 @@ class PrizeViewController: UIViewController {
 
         gradientLayer.frame = CGRect.init(
             x: earningTicketsBtn.frame.minX - 30,
-            y: earningTicketsBtn.frame.minY - 20,
+            y: earningTicketsBtn.frame.minY - 30,
             width: earningTicketsBtn.frame.width + 60,
-            height: earningTicketsBtn.frame.height + 40)
+            height: earningTicketsBtn.frame.height + 50)
         gradientLayer.masksToBounds = true
         
         
         let shadowLayer = CALayer.init()
         shadowLayer.frame = gradientLayer.bounds
         shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowOpacity = 0.95
-        shadowLayer.shadowOffset = CGSize(width: 0, height: 0)
+        shadowLayer.shadowOpacity = 0.99
+        shadowLayer.shadowOffset = CGSize(width: 2, height: 2)
         shadowLayer.shouldRasterize = true
         shadowLayer.rasterizationScale = UIScreen.main.scale
         
-        shadowLayer.shadowRadius = 25
+        shadowLayer.shadowRadius = 30
         shadowLayer.shadowPath = CGPath.init(rect: shadowLayer.bounds, transform: nil)
         
         gradientLayer.mask = shadowLayer
@@ -166,37 +168,66 @@ class PrizeViewController: UIViewController {
 }
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            // MARK: Savings Info View
+                return 1
+        } else if section == 1 {
+            // MARK: Sweepstakes Info View
+                return 1
+        } else if section == 2 {
+            // MARK: Past Winners View
+//            if dataStore.pastWinnersJSON.count > 0 {
+            return self.pastWinnersData.count
+//            }
+//            else {
+//                return 1
+//            }
+        } else {
+            // MARK: How to Earn View
+            return 1
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             // MARK: Savings Info View
             
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
-            cell.lblAmntPaidTo.text = dataStore.savingsInfoJSON["progress_meter_title"].stringValue
-            cell.lblAmntPaid.text = "$" + dataStore.savingsInfoJSON["totalAmountPaidToLoan"].stringValue
-            cell.ticketCount = dataStore.savingsInfoJSON["ticketCount"].stringValue
-            cell.setLblNoOfTickets()
-            
-            
 //            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
-//            cell.lblAmntPaidTo.text = UserDefaults.standard.string(forKey: "progress_meter_title")
-//            cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
-//            cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
+//            cell.lblAmntPaidTo.text = dataStore.savingsInfoJSON["progress_meter_title"].stringValue
+//            cell.lblAmntPaid.text = "$" + dataStore.savingsInfoJSON["totalAmountPaidToLoan"].stringValue
+//            cell.ticketCount = dataStore.savingsInfoJSON["ticketCount"].stringValue
 //            cell.setLblNoOfTickets()
+            
+            
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
+            cell.lblAmntPaidTo.text = UserDefaults.standard.string(forKey: "progress_meter_title")
+            cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
+            cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
+            cell.setLblNoOfTickets()
             return cell
-        } else if indexPath.row == 1 {
+        } else if indexPath.section == 1 {
             // MARK: Sweepstakes Info View
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
-            cell.announcementLbl.text = dataStore.sweepstakesInfoJSON["deadlineTxt"].stringValue
-            cell.winLbl.text = dataStore.sweepstakesInfoJSON["prizeAmountTxt"].stringValue
-            cell.weekPrizeLbl.text = dataStore.sweepstakesInfoJSON["title"].stringValue
+            
+//            cell.announcementLbl.text = dataStore.sweepstakesInfoJSON["deadlineTxt"].stringValue
+//            cell.winLbl.text = dataStore.sweepstakesInfoJSON["prizeAmountTxt"].stringValue
+//            cell.weekPrizeLbl.text = dataStore.sweepstakesInfoJSON["title"].stringValue
+
+            cell.announcementLbl.text = UserDefaults.standard.string(forKey: "deadlineTxt")
+            cell.winLbl.text = UserDefaults.standard.string(forKey: "prizeAmountTxt")
+            cell.weekPrizeLbl.text = UserDefaults.standard.string(forKey: "title")
             return cell
-        } else if indexPath.row == 2 {
+        } else if indexPath.section == 2 {
             // MARK: Past Winners View
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWeeksPrizeCell.self)
+//            cell.obj = self.pastWinnersData[0].value(forKey: "video") as AnyObject
+            
+            
             return cell
         } else {
             // MARK: How to Earn View

@@ -10,9 +10,6 @@ import UIKit
 class ConnectedAccountsViewController: UIViewController {
     private var messageHelper: MessageHelper?
     private var tableView: UITableView!
-    var dataArr = [String]()
-    var imgNameArr = [String]()
-    var balanceArr = [String]()
     private var debtAccountsData: [DebtAccountsParse] = []
 
     init(debtAccounts: [DebtAccountsParse]) {
@@ -32,10 +29,6 @@ class ConnectedAccountsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imgNameArr = ["accounts", "contactUs"]
-        dataArr = ["Loan 1", "Loan 2"]
-        balanceArr = ["36,245", "36,245"]
-        
         setNavBarBtns()
     }
     

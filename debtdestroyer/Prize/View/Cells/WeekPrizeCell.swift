@@ -7,6 +7,7 @@
 
 import UIKit
 import Reusable
+import SCLAlertView
 
 class WeekPrizeCell: UITableViewCell, Reusable {
         
@@ -82,6 +83,18 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     
     @objc private func weekPrizeInfoBtnClicked() {
         print("weekPrizeInfoBtnClicked")
+        self.showAlert()
+    }
+    
+    private func showAlert() {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("OK", action: {
+            print("hello")
+        })
+        alertView.showInfo("Warning", subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
     }
     
     func setWinAmountLbl() {

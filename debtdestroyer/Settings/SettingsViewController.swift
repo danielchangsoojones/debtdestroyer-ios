@@ -25,9 +25,9 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
+        dataArr = ["Connected Accounts", "Subscription", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
         
-        imgNameArr = ["accounts", "contactUs","legal", "feedback","logout", "deleteAcc"]
+        imgNameArr = ["accounts","contactUs","contactUs","legal", "feedback","logout", "deleteAcc"]
         
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
@@ -86,15 +86,19 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             // MARK: Connected Accounts
             let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
             self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 1 || indexPath.row == 3 {
+        } else if indexPath.row == 1 {
+            // MARK: Subscription
+            let vc = SubscriptionViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 2 || indexPath.row == 4 {
             // MARK: Contact Us
             // MARK: Leave Feedback
             messageHelper?.text("3176905323", body: "")
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 3 {
             // MARK: Legal Disclosures
             let vc = LegalDisclosuresViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 5 {
             // MARK: Logout
             User.logOutInBackground { error in
                 if let error = error {

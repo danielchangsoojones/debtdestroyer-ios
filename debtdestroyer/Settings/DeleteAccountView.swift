@@ -45,6 +45,9 @@ class DeleteAccountView: UIView {
         deleteAccButton.backgroundColor = color1
         deleteAccButton.setTitleColor(.white, for: .normal)
         deleteAccButton.layer.cornerRadius = 8
+        deleteAccButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        let spacing: CGFloat = 8.0
+        deleteAccButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
         let dimenssion = 50
         addSubview(deleteAccButton)
         deleteAccButton.snp.makeConstraints{ make in

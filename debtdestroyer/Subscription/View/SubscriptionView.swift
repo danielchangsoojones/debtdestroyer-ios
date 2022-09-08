@@ -52,7 +52,7 @@ class SubscriptionView: UIView {
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalTo(scrollView)
             make.left.right.equalTo(self)
-            make.height.equalTo(700)
+            make.height.equalTo(650)
         }
     }
     

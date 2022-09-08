@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class SubscriptionViewController: UIViewController {
     var ticketsLbl = UILabel()
@@ -19,7 +20,12 @@ class SubscriptionViewController: UIViewController {
     let cell1 = SubcsriptionBasicView()
     let cell2 = SubscriptionCurrentView()
     let cell3 = SubscriptionDiamondView()
-    let upgradeBtn = SpinningWithGradButton()
+    var upgradeBtn = SpinningWithGradButton()
+    var dataStore = SubscriptionDataStore()
+    var ticketsInfo = UIButton()
+    var emailNewsLetterInfo = UIButton()
+    var loanConnectionsInfo = UIButton()
+    var priceInfo = UIButton()
     
     let mainStackView : UIStackView = {
         let stack = UIStackView()
@@ -45,7 +51,23 @@ class SubscriptionViewController: UIViewController {
         self.priceLbl = subscriptionView.cell3.priceLbl
         self.background = subscriptionView.cell3.background
         self.suggestedLbl = subscriptionView.suggestedLbl
+        self.upgradeBtn = subscriptionView.upgradeBtn
+        self.priceInfo = subscriptionView.cell1.priceInfo
+        self.ticketsInfo = subscriptionView.cell1.ticketsInfo
+        self.loanConnectionsInfo = subscriptionView.cell1.loanConnectionsInfo
+        self.emailNewsLetterInfo = subscriptionView.cell1.emailNewsLetterInfo
         setNavBarBtns()
+        
+        self.upgradeBtn.addTarget(self, action: #selector(upgradeToPremiumSubscription), for: .touchUpInside)
+        
+        self.ticketsInfo.addTarget(self, action: #selector(ticktsInfoBtnClicked), for: .touchUpInside)
+        
+        self.priceInfo.addTarget(self, action: #selector(priceInfoBtnClicked), for: .touchUpInside)
+        
+        self.loanConnectionsInfo.addTarget(self, action: #selector(loanConnectionsInfoBtnClicked), for: .touchUpInside)
+        
+        self.emailNewsLetterInfo.addTarget(self, action: #selector(emailNewsLetterInfoBtnClicked), for: .touchUpInside)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,6 +123,43 @@ class SubscriptionViewController: UIViewController {
     
     @objc private func ticktsInfoBtnClicked() {
         print("ticktsInfoBtnClicked")
+        self.showAlert()
+    }
+    
+    @objc private func priceInfoBtnClicked() {
+        print("priceInfoBtnClicked")
+        self.showAlert()
+    }
+    
+    @objc private func loanConnectionsInfoBtnClicked() {
+        print("loanConnectionsInfoBtnClicked")
+        self.showAlert()
+    }
+    
+    @objc private func emailNewsLetterInfoBtnClicked() {
+        print("emailNewsLetterInfoBtnClicked")
+        self.showAlert()
+    }
+    
+    private func showAlert() {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("OK", action: {
+            print("hello")
+        })
+        alertView.showInfo("Warning", subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+    }
+    
+    @objc private func upgradeToPremiumSubscription() {
+        self.dataStore.upgradeToPremiumSubscription { result, error in
+            if result != nil {
+               
+            } else {
+                BannerAlert.show(with: error)
+            }
+        }
     }
     
 }

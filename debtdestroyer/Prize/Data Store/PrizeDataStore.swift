@@ -38,12 +38,7 @@ class PrizeDataStore {
     }
     
     func loadPastWinners(completion: @escaping ([WinnerParse]) -> Void) {
-//    func loadPastWinners(completion: @escaping (JSON) -> Void) {
         PFCloud.callFunction(inBackground: "getPastWinners", withParameters: nil) { (result, error) in
-//            if let data = result {
-//                self.pastWinnersJSON = JSON(data)
-//                completion(self.pastWinnersJSON)
-//            }
             if let winners = result  as? [WinnerParse]  {
                 completion(winners)
             }

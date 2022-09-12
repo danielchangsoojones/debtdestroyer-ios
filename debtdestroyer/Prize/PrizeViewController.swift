@@ -7,16 +7,14 @@
 
 import UIKit
 import AVFoundation
-import SwiftyJSON
+import Parse
 
 class PrizeViewController: UIViewController {
     
     private var tableView: UITableView!
     private let dataStore = PrizeDataStore()
     private var messageHelper: MessageHelper?
-//    private var footer : UIView!
     var earningTicketsBtn : UIButton!
-//    private var pastWinnersData = JSON()
     private var pastWinnersData: [WinnerParse] = []
 
     override func loadView() {
@@ -26,7 +24,6 @@ class PrizeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-//        setBottomStickView()
         setEarningTicketsBtn()
         ForceUpdate.checkIfForceUpdate()
         
@@ -44,8 +41,7 @@ class PrizeViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        footer.setGradientBackground()
-//        footer.layer.opacity = 0.9
+        
     }
     
     @objc func roundUpsClicked() {
@@ -92,20 +88,6 @@ class PrizeViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-    
-//    private func setBottomStickView() {
-//        let tabBarHeight =  (self.tabBarController?.tabBar.frame.height ?? 50) as CGFloat
-//        footer = UIView.init(frame: .init(x: 0, y: self.view.frame.height - tabBarHeight - 110, width: self.view.frame.width, height: 110))
-//        footer.backgroundColor = .clear
-//        view.addSubview(footer)
-////        footer.snp.makeConstraints{ make in
-////            make.leading.trailing.equalToSuperview()
-////            let h = self.tabBarController?.tabBar.frame.height
-////            make.bottom.equalToSuperview().inset((h ?? 50) as CGFloat)
-////            make.height.equalTo(110).priority(.high)
-////        }
-//        setEarningTicketsBtn()
-//    }
     
     private func setEarningTicketsBtn() {
         let tabBarHeight =  (self.tabBarController?.tabBar.frame.height ?? 50) as CGFloat
@@ -181,12 +163,7 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
                 return 1
         } else if section == 2 {
             // MARK: Past Winners View
-//            if dataStore.pastWinnersJSON.count > 0 {
             return self.pastWinnersData.count
-//            }
-//            else {
-//                return 1
-//            }
         } else {
             // MARK: How to Earn View
             return 1
@@ -225,8 +202,29 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.section == 2 {
             // MARK: Past Winners View
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWeeksPrizeCell.self)
-//            cell.obj = self.pastWinnersData[0].value(forKey: "video") as AnyObject
+            let file = self.pastWinnersData[0].value(forKey: "video") as AnyObject
             
+            if let parseFile = file as? PFFileObject {
+                let query = PFQuery(className: "Winner")
+               
+        // posted a question on stack overflow to retrive video data from PFFileObject. here is a link. https://stackoverflow.com/questions/73661168/how-to-get-video-data-or-url-from-pffileobject
+                
+                
+                
+//                query.getObjectInBackground(withId: parseFile ) { object, error in
+//                    if (error == nil && object != nil) {
+//                        let videoFile = object!["keyForVideoPFFile"] as! PFFileObject
+//                        self.videoURL = videoFile.url!
+//                    }
+//
+//                }
+                
+            }
+            
+        
+            
+           
+
             
             return cell
         } else {

@@ -28,14 +28,6 @@ class PastWeeksPrizeCell: UITableViewCell, Reusable {
         setUpPlayerView()
         setUpPlayerPalyPauseButton()
         
-//        let query = PFQuery(className: "Winner")
-//        query.getObjectInBackground(withId: obj as! String) { object, error in
-//            if (error == nil && object != nil) {
-//                let videoFile = object!["keyForVideoPFFile"] as! PFFileObject
-//                self.videoURL = videoFile.url ?? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-//            }
-//
-//        }
     }
     
     required init?(coder: NSCoder) {

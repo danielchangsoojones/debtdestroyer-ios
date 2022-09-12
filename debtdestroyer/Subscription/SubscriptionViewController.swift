@@ -123,25 +123,58 @@ class SubscriptionViewController: UIViewController {
     
     @objc private func ticktsInfoBtnClicked() {
         print("ticktsInfoBtnClicked")
-        self.showAlert()
+        self.showAlertTicktsInfo()
     }
     
     @objc private func priceInfoBtnClicked() {
         print("priceInfoBtnClicked")
-        self.showAlert()
+        self.showAlertPriceInfo()
     }
     
     @objc private func loanConnectionsInfoBtnClicked() {
         print("loanConnectionsInfoBtnClicked")
-        self.showAlert()
+        self.showAlertLoanConnectionsInfo()
     }
     
     @objc private func emailNewsLetterInfoBtnClicked() {
         print("emailNewsLetterInfoBtnClicked")
-        self.showAlert()
+        self.showAlertEmailNewsLetterInfo()
     }
     
-    private func showAlert() {
+    private func showAlertTicktsInfo() {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("OK", action: {
+            print("hello")
+        })
+        alertView.showInfo("Warning", subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+    }
+    
+    private func showAlertPriceInfo() {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("OK", action: {
+            print("hello")
+        })
+        alertView.showInfo("Warning", subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+    }
+    
+    private func showAlertLoanConnectionsInfo() {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("OK", action: {
+            print("hello")
+        })
+        alertView.showInfo("Warning", subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+    }
+    
+    private func showAlertEmailNewsLetterInfo() {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
         )

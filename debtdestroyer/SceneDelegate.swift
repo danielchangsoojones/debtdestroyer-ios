@@ -48,14 +48,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func setStartingVC(windowScene: UIScene) {
-        if User.current() == nil {
-            let welcomeVC = WelcomeViewController()
-            let navController = UINavigationController(rootViewController: welcomeVC)
-            set(windowScene: windowScene, startingVC: navController)
-        } else {
-            let vc = HomeTabBarViewController()
-            set(windowScene: windowScene, startingVC: vc)
-        }
+//        if User.current() == nil {
+//            let welcomeVC = WelcomeViewController()
+//            let navController = UINavigationController(rootViewController: welcomeVC)
+//            set(windowScene: windowScene, startingVC: navController)
+//        } else {
+//            let vc = HomeTabBarViewController()
+//            set(windowScene: windowScene, startingVC: vc)
+//        }
+        let quizVC = QuizViewController()
+        let navController = UINavigationController(rootViewController: quizVC)
+        set(windowScene: windowScene, startingVC: navController)
     }
 
     private func set(windowScene: UIScene, startingVC: UIViewController) {

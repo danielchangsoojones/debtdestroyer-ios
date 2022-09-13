@@ -18,6 +18,7 @@ class QuizView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .black
         setNextButton()
         setContentContainer()
         setIconImgView()
@@ -88,12 +89,15 @@ class QuizView: UIView {
     private func setNextButton() {
         nextButton.backgroundColor = .white
         nextButton.setTitleColor(.black, for: .normal)
-        nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        nextButton.setTitle("Take Quiz", for: .normal)
+        let height: CGFloat = 55
+        nextButton.layer.cornerRadius = height / 2
         addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().inset(5)
-            make.height.equalTo(35)
+            make.bottom.equalToSuperview().inset(10)
+            make.height.equalTo(height)
         }
     }
 }

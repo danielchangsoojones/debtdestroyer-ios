@@ -80,6 +80,8 @@
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
 		925F086B28D0F70A00AD8FD1 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086A28D0F70A00AD8FD1 /* QuizViewController.swift */; };
 		925F086D28D0F73300AD8FD1 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086C28D0F73300AD8FD1 /* QuizView.swift */; };
+		925F086F28D10ADC00AD8FD1 /* QuizDataParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086E28D10ADC00AD8FD1 /* QuizDataParse.swift */; };
+		925F087128D10B2D00AD8FD1 /* QuizTopicParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F087028D10B2D00AD8FD1 /* QuizTopicParse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +160,8 @@
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		925F086A28D0F70A00AD8FD1 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		925F086C28D0F73300AD8FD1 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		925F086E28D10ADC00AD8FD1 /* QuizDataParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataParse.swift; sourceTree = "<group>"; };
+		925F087028D10B2D00AD8FD1 /* QuizTopicParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTopicParse.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -516,6 +520,8 @@
 				0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */,
 				0A50659428C7496F00207759 /* WinnerParse.swift */,
 				0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */,
+				925F086E28D10ADC00AD8FD1 /* QuizDataParse.swift */,
+				925F087028D10B2D00AD8FD1 /* QuizTopicParse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -666,6 +672,7 @@
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
+				925F087128D10B2D00AD8FD1 /* QuizTopicParse.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
@@ -719,6 +726,7 @@
 				0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
+				925F086F28D10ADC00AD8FD1 /* QuizDataParse.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,
 				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
 				0A432FA828B3AB5A00C551FA /* ProgressViewUITry.swift in Sources */,

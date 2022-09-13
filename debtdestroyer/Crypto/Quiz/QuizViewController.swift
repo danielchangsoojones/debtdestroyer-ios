@@ -14,4 +14,6 @@ class QuizViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    //TODO: hide navigation bar
 }

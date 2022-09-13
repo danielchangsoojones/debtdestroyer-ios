@@ -7,11 +7,11 @@
 
 import UIKit
 
-class QuizView: UIView {
+class LearnView: UIView {
     let containerView = UIView()
     let iconImgView = UIImageView()
     let descriptionLabel = UILabel()
-    private let leadingOffset: CGFloat = 10
+    private let leadingOffset: CGFloat = 20
     let tickerLabel = UILabel()
     let explainerImgView = UIImageView()
     let nextButton = UIButton()
@@ -55,9 +55,11 @@ class QuizView: UIView {
     private func setTickerSymbol() {
         let coinbaseGray = UIColor(red: 240 / 255.0, green: 242 / 255.0, blue: 247 / 255.0, alpha: 1)
         tickerLabel.backgroundColor = coinbaseGray
-        let height: CGFloat = 50
-        tickerLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        tickerLabel.textAlignment = .center
+        let height: CGFloat = 30
+        tickerLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         tickerLabel.layer.cornerRadius = height / 2
+        tickerLabel.clipsToBounds = true
         containerView.addSubview(tickerLabel)
         tickerLabel.snp.makeConstraints { make in
             make.leading.equalTo(iconImgView.snp.trailing).offset(5)
@@ -72,6 +74,7 @@ class QuizView: UIView {
         descriptionLabel.numberOfLines = 0
         containerView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(iconImgView.snp.bottom).offset(10)
             make.leading.equalTo(iconImgView)
             make.trailing.equalTo(leadingOffset)
         }

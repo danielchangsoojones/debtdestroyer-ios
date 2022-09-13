@@ -56,7 +56,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            let vc = HomeTabBarViewController()
 //            set(windowScene: windowScene, startingVC: vc)
 //        }
-        let quizVC = QuizViewController()
+        
+        let quizDataParse = QuizDataParse()
+        let topic = QuizTopicParse()
+        topic.name = "Nano"
+        topic.ticker = "XNO"
+        quizDataParse.quizTopic = topic
+        quizDataParse.question = "Transaction fee is zero that means if you send 1 nano counter party will receive exactly 1 nano not more or less"
+        let quizVC = LearnViewController(quizDatas: [quizDataParse, quizDataParse], currentIndex: 0)
         let navController = UINavigationController(rootViewController: quizVC)
         set(windowScene: windowScene, startingVC: navController)
     }

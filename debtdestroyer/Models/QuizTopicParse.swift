@@ -9,9 +9,10 @@ import Foundation
 import Parse
 
 class QuizTopicParse: SuperParseObject, PFSubclassing {
-    @NSManaged var remaining_balance: String?
-    @NSManaged var title: String?
-    @NSManaged var logoImg: PFFileObject?
+    @NSManaged var name: String
+    @NSManaged var ticker: String
+    @NSManaged var intro_img: PFFileObject
+    @NSManaged var icon_img: PFFileObject
 
     class func parseClassName() -> String {
         return "QuizTopic"

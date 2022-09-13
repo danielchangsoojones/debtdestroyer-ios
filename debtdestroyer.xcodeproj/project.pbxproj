@@ -78,8 +78,8 @@
 		92021FD9289B07A6007901A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92021FD7289B07A6007901A6 /* LaunchScreen.storyboard */; };
 		925BD26528A24D2E009303AF /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26428A24D2E009303AF /* Enviroment.swift */; };
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
-		925F086B28D0F70A00AD8FD1 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086A28D0F70A00AD8FD1 /* QuizViewController.swift */; };
-		925F086D28D0F73300AD8FD1 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086C28D0F73300AD8FD1 /* QuizView.swift */; };
+		925F086B28D0F70A00AD8FD1 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086A28D0F70A00AD8FD1 /* LearnViewController.swift */; };
+		925F086D28D0F73300AD8FD1 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086C28D0F73300AD8FD1 /* LearnView.swift */; };
 		925F086F28D10ADC00AD8FD1 /* QuizDataParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F086E28D10ADC00AD8FD1 /* QuizDataParse.swift */; };
 		925F087128D10B2D00AD8FD1 /* QuizTopicParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F087028D10B2D00AD8FD1 /* QuizTopicParse.swift */; };
 /* End PBXBuildFile section */
@@ -158,8 +158,8 @@
 		92021FDA289B07A6007901A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		925BD26428A24D2E009303AF /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		925F086A28D0F70A00AD8FD1 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
-		925F086C28D0F73300AD8FD1 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		925F086A28D0F70A00AD8FD1 /* LearnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
+		925F086C28D0F73300AD8FD1 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		925F086E28D10ADC00AD8FD1 /* QuizDataParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataParse.swift; sourceTree = "<group>"; };
 		925F087028D10B2D00AD8FD1 /* QuizTopicParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTopicParse.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
@@ -537,8 +537,8 @@
 		925F086928D0F6B200AD8FD1 /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
-				925F086A28D0F70A00AD8FD1 /* QuizViewController.swift */,
-				925F086C28D0F73300AD8FD1 /* QuizView.swift */,
+				925F086A28D0F70A00AD8FD1 /* LearnViewController.swift */,
+				925F086C28D0F73300AD8FD1 /* LearnView.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -658,7 +658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
-				925F086B28D0F70A00AD8FD1 /* QuizViewController.swift in Sources */,
+				925F086B28D0F70A00AD8FD1 /* LearnViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
@@ -694,7 +694,7 @@
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
-				925F086D28D0F73300AD8FD1 /* QuizView.swift in Sources */,
+				925F086D28D0F73300AD8FD1 /* LearnView.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,
 				92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */,

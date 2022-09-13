@@ -36,8 +36,8 @@ class LearnView: UIView {
         containerView.backgroundColor = .white
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(5)
-            make.leading.trailing.equalToSuperview().inset(3)
+            make.top.equalToSuperview().inset(30)
+            make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalTo(nextButton.snp.top).offset(-10)
         }
     }
@@ -76,7 +76,7 @@ class LearnView: UIView {
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(iconImgView.snp.bottom).offset(10)
             make.leading.equalTo(iconImgView)
-            make.trailing.equalTo(leadingOffset)
+            make.trailing.equalToSuperview().inset(leadingOffset)
         }
     }
     

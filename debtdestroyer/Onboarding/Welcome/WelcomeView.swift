@@ -14,7 +14,6 @@ class WelcomeView: UIView {
     var logInButton: UIButton!
     var signUpButton: GradientBtn!
     var termsAndPolicyLabel = UILabel()
-    var loginBtn = UIButton()
     var titleLabel = UILabel()
 
     var color1 = UIColor()

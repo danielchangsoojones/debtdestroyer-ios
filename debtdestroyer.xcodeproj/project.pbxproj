@@ -30,6 +30,14 @@
 		0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */; };
 		0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */; };
 		0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536E028B903E400F4A8CA /* PlayerView.swift */; };
+		0A45739128D1A7E900A237CD /* QuizDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45739028D1A7E900A237CD /* QuizDataStore.swift */; };
+		0A45739928D1B12F00A237CD /* StartQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45739828D1B12F00A237CD /* StartQuizViewController.swift */; };
+		0A45739B28D1B14A00A237CD /* StartQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45739A28D1B14A00A237CD /* StartQuizView.swift */; };
+		0A45739E28D1DCAB00A237CD /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45739D28D1DCAB00A237CD /* AddressView.swift */; };
+		0A4573A028D1DCC500A237CD /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45739F28D1DCC500A237CD /* AddressViewController.swift */; };
+		0A4573A228D20CDD00A237CD /* CryptoAddressParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4573A128D20CDD00A237CD /* CryptoAddressParse.swift */; };
+		0A4573A528D20E6900A237CD /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4573A428D20E6900A237CD /* ProvideFeedbackViewController.swift */; };
+		0A4573A728D20E7700A237CD /* ProvideFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4573A628D20E7700A237CD /* ProvideFeedbackView.swift */; };
 		0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */; };
 		0A50659128C346D200207759 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659028C346D200207759 /* SubscriptionView.swift */; };
 		0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659228C7072F00207759 /* ScrollableViewController.swift */; };
@@ -111,6 +119,14 @@
 		0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEarnTicketsCell.swift; sourceTree = "<group>"; };
 		0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWeeksPrizeCell.swift; sourceTree = "<group>"; };
 		0A4536E028B903E400F4A8CA /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		0A45739028D1A7E900A237CD /* QuizDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataStore.swift; sourceTree = "<group>"; };
+		0A45739828D1B12F00A237CD /* StartQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizViewController.swift; sourceTree = "<group>"; };
+		0A45739A28D1B14A00A237CD /* StartQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizView.swift; sourceTree = "<group>"; };
+		0A45739D28D1DCAB00A237CD /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		0A45739F28D1DCC500A237CD /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		0A4573A128D20CDD00A237CD /* CryptoAddressParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoAddressParse.swift; sourceTree = "<group>"; };
+		0A4573A428D20E6900A237CD /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
+		0A4573A628D20E7700A237CD /* ProvideFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackView.swift; sourceTree = "<group>"; };
 		0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperParseObject.swift; sourceTree = "<group>"; };
 		0A50659028C346D200207759 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		0A50659228C7072F00207759 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +349,43 @@
 			path = Prize;
 			sourceTree = "<group>";
 		};
+		0A45739228D1A7FD00A237CD /* Data Store */ = {
+			isa = PBXGroup;
+			children = (
+				0A45739028D1A7E900A237CD /* QuizDataStore.swift */,
+			);
+			path = "Data Store";
+			sourceTree = "<group>";
+		};
+		0A45739728D1B0DC00A237CD /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				925F086A28D0F70A00AD8FD1 /* LearnViewController.swift */,
+				925F086C28D0F73300AD8FD1 /* LearnView.swift */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
+		0A45739C28D1B17A00A237CD /* Start Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				0A45739828D1B12F00A237CD /* StartQuizViewController.swift */,
+				0A45739A28D1B14A00A237CD /* StartQuizView.swift */,
+			);
+			path = "Start Quiz";
+			sourceTree = "<group>";
+		};
+		0A4573A328D20E4400A237CD /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				0A45739D28D1DCAB00A237CD /* AddressView.swift */,
+				0A45739F28D1DCC500A237CD /* AddressViewController.swift */,
+				0A4573A428D20E6900A237CD /* ProvideFeedbackViewController.swift */,
+				0A4573A628D20E7700A237CD /* ProvideFeedbackView.swift */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
 		0A74408C28BE405000AD0489 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +581,7 @@
 				0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */,
 				925F086E28D10ADC00AD8FD1 /* QuizDataParse.swift */,
 				925F087028D10B2D00AD8FD1 /* QuizTopicParse.swift */,
+				0A4573A128D20CDD00A237CD /* CryptoAddressParse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -543,9 +597,11 @@
 		925F086928D0F6B200AD8FD1 /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				0A45739228D1A7FD00A237CD /* Data Store */,
 				925F087228D139FB00AD8FD1 /* Question */,
-				925F086A28D0F70A00AD8FD1 /* LearnViewController.swift */,
-				925F086C28D0F73300AD8FD1 /* LearnView.swift */,
+				0A45739728D1B0DC00A237CD /* Learn */,
+				0A45739C28D1B17A00A237CD /* Start Quiz */,
+				0A4573A328D20E4400A237CD /* Address */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -695,15 +751,19 @@
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
+				0A4573A728D20E7700A237CD /* ProvideFeedbackView.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				925F087128D10B2D00AD8FD1 /* QuizTopicParse.swift in Sources */,
+				0A45739B28D1B14A00A237CD /* StartQuizView.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
+				0A4573A028D1DCC500A237CD /* AddressViewController.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
+				0A4573A528D20E6900A237CD /* ProvideFeedbackViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
@@ -714,6 +774,7 @@
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
+				0A45739928D1B12F00A237CD /* StartQuizViewController.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
@@ -730,6 +791,7 @@
 				0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */,
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
+				0A4573A228D20CDD00A237CD /* CryptoAddressParse.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
@@ -754,7 +816,9 @@
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
 				925F087A28D13AF900AD8FD1 /* AnswerChoiceView.swift in Sources */,
+				0A45739128D1A7E900A237CD /* QuizDataStore.swift in Sources */,
 				925F086F28D10ADC00AD8FD1 /* QuizDataParse.swift in Sources */,
+				0A45739E28D1DCAB00A237CD /* AddressView.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,
 				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
 				0A432FA828B3AB5A00C551FA /* ProgressViewUITry.swift in Sources */,

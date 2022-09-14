@@ -10,7 +10,7 @@ import UIKit
 class QuestionViewController: UIViewController {
     private let quizDatas: [QuizDataParse]
     private let currentIndex: Int
-    private let answerViews: [AnswerChoiceView] = []
+    private var answerViews: [AnswerChoiceView] = []
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -20,6 +20,10 @@ class QuestionViewController: UIViewController {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func loadView() {
@@ -38,8 +42,8 @@ class QuestionViewController: UIViewController {
     }
     
     private func addAnswers(to stackView: UIStackView) {
-        if let answers = answers {
-            for answer in currentData.answers {
+        if let answers = currentData.answers {
+            for answer in answers {
                 let answerView = AnswerChoiceView(answer: answer)
                 answerViews.append(answerView)
                 stackView.addArrangedSubview(answerView)

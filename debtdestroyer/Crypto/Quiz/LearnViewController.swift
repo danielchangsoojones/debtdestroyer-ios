@@ -50,6 +50,9 @@ class LearnViewController: UIViewController {
     }
     
     @objc private func nextBtnPressed() {
-        //TODO: segue to next screen.
+        let nextIndex = currentIndex + 1
+        let questionVC = QuestionViewController(quizDatas: quizDatas,
+                                                currentIndex: nextIndex)
+        self.navigationController?.pushViewController(questionVC, animated: true)
     }
 }

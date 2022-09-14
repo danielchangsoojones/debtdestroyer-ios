@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import BEMCheckBox
 
 class AnswerChoiceView: UIView {
     //TODO: make this a checkbox view
-    let checkBoxView = UIView()
+    let checkBoxView = BEMCheckBox()
     let answerLabel = UILabel()
     
     init(answer: String) {
@@ -39,6 +40,11 @@ class AnswerChoiceView: UIView {
     }
     
     private func setCheckbox() {
+        checkBoxView.boxType = .circle
+        checkBoxView.tintColor = .white.withAlphaComponent(0.7)
+        let coinbaseBlue = UIColor(red: 64 / 255.0, green: 124 / 255.0, blue: 232 / 255.0, alpha: 1)
+        checkBoxView.onFillColor = coinbaseBlue
+        checkBoxView.onCheckColor = .white
         addSubview(checkBoxView)
     }
     

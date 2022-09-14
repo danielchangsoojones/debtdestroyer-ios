@@ -34,6 +34,9 @@ class QuestionViewController: UIViewController {
         
         questionView.questionLabel.text = currentData.question
         addAnswers(to: questionView.answerStackView)
+        questionView.submitBtn.addTarget(self,
+                                         action: #selector(submitPressed),
+                                         for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -52,6 +55,25 @@ class QuestionViewController: UIViewController {
                 answerView.answerLabel.text = answer
                 stackView.addArrangedSubview(answerView)
             }
+        }
+    }
+    
+    @objc private func submitPressed() {
+        let hasCheckedBox = answerViews.contains { answerView in
+            return answerView.checkBoxView.on
+        }
+        if !hasCheckedBox {
+            BannerAlert.show(title: "Error", subtitle: "Please choose an answer", type: .error)
+            return
+        }
+        
+        let selectedAnswerIndex = answerViews.firstIndex { answerView in
+            return answerView.checkBoxView.on
+        }
+        let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+        if isIncorrectAnswer {
+            BannerAlert.show(title: "Incorrect Answer", subtitle: "This answer is incorrect. Please select a different one.", type: .error)
+            return
         }
     }
 }

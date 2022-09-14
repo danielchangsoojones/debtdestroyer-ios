@@ -27,14 +27,14 @@ class AnswerChoiceView: UIView {
     private func setConstraints() {
         
         checkBoxView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview()
             make.centerY.equalTo(answerLabel.snp.centerY)
             make.height.width.equalTo(30)
         }
         
         answerLabel.snp.makeConstraints { make in
-            make.leading.equalTo(checkBoxView.snp.trailing).offset(5)
-            make.trailing.equalToSuperview().offset(-5)
+            make.leading.equalTo(checkBoxView.snp.trailing).offset(10)
+            make.trailing.equalToSuperview()
             make.top.bottom.equalToSuperview().inset(10)
         }
     }

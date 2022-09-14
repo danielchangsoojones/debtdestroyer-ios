@@ -42,6 +42,7 @@ class QuestionView: UIView {
         answerStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(questionLabel)
             make.top.equalTo(questionLabel.snp.bottom).offset(10)
+            make.height.equalTo(300)
         }
     }
 }

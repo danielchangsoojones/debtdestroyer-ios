@@ -46,6 +46,7 @@ class QuestionViewController: UIViewController {
             for answer in answers {
                 let answerView = AnswerChoiceView(answer: answer)
                 answerViews.append(answerView)
+                answerView.answerLabel.text = answer
                 stackView.addArrangedSubview(answerView)
             }
         }

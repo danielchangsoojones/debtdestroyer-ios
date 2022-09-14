@@ -44,9 +44,16 @@ class AnswerChoiceView: UIView {
     
     private func setAnswerLabel() {
         answerLabel.numberOfLines = 0
-        answerLabel.font = .systemFont(ofSize: 14, weight: .light)
-        let coinbaseGray = UIColor(red: 135 / 255.0, green: 135 / 255.0, blue: 139 / 255.0, alpha: 1)
-        answerLabel.textColor = coinbaseGray
+        answerLabel.font = .systemFont(ofSize: 16)
+        deselect()
         addSubview(answerLabel)
+    }
+    
+    func deselect() {
+        answerLabel.textColor = .white.withAlphaComponent(0.6)
+    }
+    
+    func select() {
+        answerLabel.textColor = .white
     }
 }

@@ -57,6 +57,7 @@ class AnswerChoiceView: UIView {
     
     func deselect() {
         answerLabel.textColor = .white.withAlphaComponent(0.6)
+        checkBoxView.on = false
     }
     
     func select() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BEMCheckBox
 
 class QuestionViewController: UIViewController {
     private let quizDatas: [QuizDataParse]
@@ -43,11 +44,25 @@ class QuestionViewController: UIViewController {
     
     private func addAnswers(to stackView: UIStackView) {
         if let answers = currentData.answers {
-            for answer in answers {
+            for (index, answer) in answers.enumerated() {
                 let answerView = AnswerChoiceView(answer: answer)
+                answerView.checkBoxView.tag = index
+                answerView.checkBoxView.delegate = self
                 answerViews.append(answerView)
                 answerView.answerLabel.text = answer
                 stackView.addArrangedSubview(answerView)
+            }
+        }
+    }
+}
+
+extension QuestionViewController: BEMCheckBoxDelegate {
+    func didTap(_ checkBox: BEMCheckBox) {
+        for (index, answerView) in answerViews.enumerated() {
+            if index == checkBox.tag {
+                answerView.select()
+            } else {
+                answerView.deselect()
             }
         }
     }

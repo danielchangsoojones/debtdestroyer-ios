@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WinnerParse.registerSubclass()
         QuizDataParse.registerSubclass()
         QuizTopicParse.registerSubclass()
+        CryptoAddressParse.registerSubclass()
     }
 
     // Lock the orientation to Portrait mode

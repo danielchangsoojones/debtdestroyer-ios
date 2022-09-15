@@ -80,8 +80,8 @@ extension UIView {
         let color1 = hexStringToUIColor(hex: "FF2474")
         let color2 = hexStringToUIColor(hex: "FF7910")
         gradient.colors = [color1.cgColor, color2.cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 0, y: 1)
         return gradient
     }
         

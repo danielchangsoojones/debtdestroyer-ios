@@ -75,6 +75,16 @@ class QuestionViewController: UIViewController {
             BannerAlert.show(title: "Incorrect Answer", subtitle: "This answer is incorrect. Please select a different one.", type: .error)
             return
         }
+        
+        let nextIndex = currentIndex + 1
+        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+        if let quizTopic = quizDatas.first?.quizTopic, isLastQuestion {
+            let addressVC = AddressViewController(quizTopicDatas: quizTopic)
+            self.navigationController?.pushViewController(addressVC, animated: true)
+        } else {
+            let learnVC = LearnViewController(quizDatas: quizDatas, currentIndex: nextIndex)
+            self.navigationController?.pushViewController(learnVC, animated: true)
+        }
     }
 }
 

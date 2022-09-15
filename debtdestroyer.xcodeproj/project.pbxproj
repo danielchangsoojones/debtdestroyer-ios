@@ -68,6 +68,9 @@
 		0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A228B64B6200985179 /* BankDataStore.swift */; };
 		0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A628B6577200985179 /* TransactionParse.swift */; };
 		0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A828B6623100985179 /* LoanAccountCell.swift */; };
+		0AA2D53728D33DB00082D2D6 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2D53628D33DB00082D2D6 /* CircularProgressView.swift */; };
+		0AA2D53928D33E670082D2D6 /* FinishAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2D53828D33E670082D2D6 /* FinishAnimationViewController.swift */; };
+		0AA2D53B28D33F190082D2D6 /* FinishAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2D53A28D33F190082D2D6 /* FinishAnimationView.swift */; };
 		0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */; };
 		0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58428BCEC4E0081758C /* Helper.swift */; };
 		0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */; };
@@ -157,6 +160,9 @@
 		0A9E94A228B64B6200985179 /* BankDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDataStore.swift; sourceTree = "<group>"; };
 		0A9E94A628B6577200985179 /* TransactionParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionParse.swift; sourceTree = "<group>"; };
 		0A9E94A828B6623100985179 /* LoanAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanAccountCell.swift; sourceTree = "<group>"; };
+		0AA2D53628D33DB00082D2D6 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		0AA2D53828D33E670082D2D6 /* FinishAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishAnimationViewController.swift; sourceTree = "<group>"; };
+		0AA2D53A28D33F190082D2D6 /* FinishAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishAnimationView.swift; sourceTree = "<group>"; };
 		0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDataStore.swift; sourceTree = "<group>"; };
 		0AB3F58428BCEC4E0081758C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +388,9 @@
 				0A45739F28D1DCC500A237CD /* AddressViewController.swift */,
 				0A4573A428D20E6900A237CD /* ProvideFeedbackViewController.swift */,
 				0A4573A628D20E7700A237CD /* ProvideFeedbackView.swift */,
+				0AA2D53628D33DB00082D2D6 /* CircularProgressView.swift */,
+				0AA2D53828D33E670082D2D6 /* FinishAnimationViewController.swift */,
+				0AA2D53A28D33F190082D2D6 /* FinishAnimationView.swift */,
 			);
 			path = Address;
 			sourceTree = "<group>";
@@ -750,6 +759,7 @@
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
+				0AA2D53928D33E670082D2D6 /* FinishAnimationViewController.swift in Sources */,
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
 				0A4573A728D20E7700A237CD /* ProvideFeedbackView.swift in Sources */,
 				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
@@ -796,6 +806,7 @@
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
+				0AA2D53728D33DB00082D2D6 /* CircularProgressView.swift in Sources */,
 				0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */,
 				0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */,
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
@@ -811,6 +822,7 @@
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,
 				0A7A49FE28A3D294009EDE5E /* StringExtension.swift in Sources */,
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,
+				0AA2D53B28D33F190082D2D6 /* FinishAnimationView.swift in Sources */,
 				0A7A4A0328A3D384009EDE5E /* RegisterViewController.swift in Sources */,
 				0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,

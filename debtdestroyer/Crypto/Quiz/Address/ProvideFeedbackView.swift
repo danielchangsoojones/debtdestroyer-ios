@@ -60,11 +60,11 @@ class ProvideFeedbackView: UIView {
             make.leading.trailing.equalToSuperview()
         }
         
-        setLoginBtn()
-        setSignupBtn()
+        setNextQuizButton()
+        setFeedbackButton()
     }
     
-    func setSignupBtn() {
+    func setFeedbackButton() {
         feedbackButton = GradientBtn()
         feedbackButton.setTitle("Provide Feedback", for: .normal)
         
@@ -81,7 +81,7 @@ class ProvideFeedbackView: UIView {
         }
     }
     
-    func setLoginBtn(){
+    func setNextQuizButton(){
         nextQuizButton = UIButton()
         nextQuizButton.titleLabel?.textColor = .fuchsiaPink
         nextQuizButton.setTitle("Start Next Quiz", for: .normal)

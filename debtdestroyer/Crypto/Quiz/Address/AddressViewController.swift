@@ -39,7 +39,7 @@ class AddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        
+        messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
     }
     

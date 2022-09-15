@@ -83,8 +83,8 @@ class AddressViewController: UIViewController {
     }
     
     @objc private func nextBtnPressed() {
-        
-        
+        let provideFeedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopicDatas)
+        self.navigationController?.pushViewController(provideFeedbackVC, animated: true)
     }
 }
 

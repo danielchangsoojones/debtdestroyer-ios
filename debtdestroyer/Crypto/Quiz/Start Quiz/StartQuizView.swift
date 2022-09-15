@@ -20,7 +20,6 @@ class StartQuizView: UIView {
         setbackgroudImgView()
         setNextButton()
         setDescriptionLabel()
-        setNameLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -46,19 +45,6 @@ class StartQuizView: UIView {
             make.bottom.equalTo(nextButton.snp.top).offset(-10)
             make.leading.equalToSuperview().inset(leadingOffset)
             make.trailing.equalToSuperview().inset(leadingOffset)
-        }
-    }
-    
-    private func setNameLabel() {
-        nameLabel.font = UIFont.systemFont(ofSize: 32, weight: .thin)
-        nameLabel.textColor = .white
-        nameLabel.backgroundColor = .clear
-        nameLabel.textAlignment = .center
-        nameLabel.numberOfLines = 0
-        addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
         }
     }
     

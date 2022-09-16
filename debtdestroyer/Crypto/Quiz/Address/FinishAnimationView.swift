@@ -48,7 +48,7 @@ class FinishAnimationView: UIView {
     }
     
     private func setEarnedLabel() {
-        earnedLabel.text = "You just earned 2 Nano!"
+        earnedLabel.text = "Correct Answer!"
         earnedLabel.numberOfLines = 0
         earnedLabel.textAlignment = .center
         earnedLabel.textColor = .white

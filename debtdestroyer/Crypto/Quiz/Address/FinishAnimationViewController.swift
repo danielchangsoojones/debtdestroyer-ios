@@ -43,7 +43,7 @@ class FinishAnimationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        duration = 3
+        duration = 1
         circularView.progressAnimation(duration: duration)
     }
     

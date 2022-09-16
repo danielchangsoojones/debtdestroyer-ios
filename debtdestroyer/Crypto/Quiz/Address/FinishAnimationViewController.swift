@@ -48,7 +48,9 @@ class FinishAnimationViewController: UIViewController {
     }
     
     @objc private func nextBtnPressed() {
-       print("nextBtnPressed")
+        let nextIndex = currentIndex + 1
+        let learnVC = LearnViewController(quizDatas: quizDatas, currentIndex: nextIndex)
+        navigationController?.pushViewController(learnVC, animated: true)
     }
 
 }

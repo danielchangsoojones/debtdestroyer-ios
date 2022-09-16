@@ -115,7 +115,7 @@ class ProvideFeedbackViewController: UIViewController {
     }
     
     @objc private func nextQuizButtonPressed() {
-        print("nextQuizButtonPressed")
+        
     }
     
     @objc private func feedbackButtonPressed() {

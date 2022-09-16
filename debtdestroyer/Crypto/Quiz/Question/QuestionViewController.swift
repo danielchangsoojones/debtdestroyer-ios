@@ -79,8 +79,13 @@ class QuestionViewController: UIViewController {
         let nextIndex = currentIndex + 1
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if let quizTopic = quizDatas.first?.quizTopic, isLastQuestion {
-            let addressVC = AddressViewController(quizTopicDatas: quizTopic)
-            self.navigationController?.pushViewController(addressVC, animated: true)
+            if User.current()?.email == "testerapple@gmail.com" {
+                let feedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopic)
+                self.navigationController?.pushViewController(feedbackVC, animated: true)
+            } else {
+                let addressVC = AddressViewController(quizTopicDatas: quizTopic)
+                self.navigationController?.pushViewController(addressVC, animated: true)
+            }
         } else {
             let correctVC = FinishAnimationViewController(quizDatas: quizDatas,
                                                           currentIndex: currentIndex)

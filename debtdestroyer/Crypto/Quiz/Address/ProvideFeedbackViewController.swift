@@ -29,7 +29,6 @@ class ProvideFeedbackViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         feedbackView = ProvideFeedbackView(frame: self.view.bounds)
         self.view = feedbackView
@@ -39,10 +38,10 @@ class ProvideFeedbackViewController: UIViewController {
         color2 = feedbackView.hexStringToUIColor(hex: "FF7910")
         feedbackView.nextQuizButton.addTarget(self, action: #selector(nextQuizButtonPressed), for: .touchUpInside)
         feedbackView.feedbackButton.addTarget(self, action: #selector(feedbackButtonPressed), for: .touchUpInside)
-        
-        feedbackView.descriptionLabel1.text = "Your " + quizTopicDatas.name + " will be sent within 24 hours. It takes us up to 24 hours since we have to manually send out the rewards currently."
-        feedbackView.descriptionLabel1.text = "Thanks for learning about " + quizTopicDatas.name + "! Please come back tommorow for our next coin quiz about a new coin where you’ll earn airdrops for that coin!"
-        
+        if User.current()?.email != "appletester@gmail.com" {
+            feedbackView.descriptionLabel1.text = "Your " + quizTopicDatas.name + " will be sent within 24 hours. It takes us up to 24 hours since we have to manually send out the rewards currently."
+            feedbackView.descriptionLabel1.text = "Thanks for learning about " + quizTopicDatas.name + "! Please come back tommorow for our next coin quiz about a new coin where you’ll earn airdrops for that coin!"
+        }
     }
     
     
@@ -58,13 +57,15 @@ class ProvideFeedbackViewController: UIViewController {
     }
     
     private func setGradientNavigationTitle() {
-        let navTitle = UILabel.init(frame: CGRect(x: 0, y: 0, width: 120, height: 25))
-        navTitle.text = "You’ve Earned 2 " + quizTopicDatas.name + "!"
-        navTitle.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
-        navTitle.textAlignment = .center
-        let gradientLabel = feedbackView.getGradientLayer(bounds: navTitle.bounds)
-        navTitle.textColor = feedbackView.gradientColor(bounds: navTitle.bounds, gradientLayer: gradientLabel)
-        self.navigationItem.titleView = navTitle
+        if User.current()?.email != "appletester@gmail.com" {
+            let navTitle = UILabel.init(frame: CGRect(x: 0, y: 0, width: 120, height: 25))
+            navTitle.text = "You’ve Earned 2 " + quizTopicDatas.name + "!"
+            navTitle.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
+            navTitle.textAlignment = .center
+            let gradientLabel = feedbackView.getGradientLayer(bounds: navTitle.bounds)
+            navTitle.textColor = feedbackView.gradientColor(bounds: navTitle.bounds, gradientLayer: gradientLabel)
+            self.navigationItem.titleView = navTitle
+        }
     }
     
     private func setUIforStartQuizBtn() {

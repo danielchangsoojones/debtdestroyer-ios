@@ -84,7 +84,8 @@ class LearnView: UIView {
         explainerImgView.contentMode = .scaleAspectFit
         containerView.addSubview(explainerImgView)
         explainerImgView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(200)
             make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
         }
     }

@@ -51,6 +51,10 @@ class ProvideFeedbackViewController: UIViewController {
         setNavBarBtns()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         setGradientNavigationTitle()
         setUIforStartQuizBtn()

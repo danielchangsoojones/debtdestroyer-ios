@@ -65,11 +65,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         quizDataParse.correct_answer_index = 2
         quizDataParse.answers = ["buttsajlf aslkjdfklaf sajkdfla;f lskjdf;ajsf lsdajflkajsdf;l aslkdjflksaf", "alkjdf;lafk sdajfals;jdfl aslkjdflk;asjdf saldkjflksaf lasjdfl;aj sadlfjla;k", "faskljfl;js sadjflasjdf;las ladjsflkaj asldkjfas;jf ", "asdflk askjdfkla asdkfjlsajdfk saldjfklsajflk"]
         quizDataParse.question = "Transaction fee is zero that means if you send 1 nano counter party will receive exactly 1 nano not more or less"
-//        let quizVC = LearnViewController(quizDatas: [quizDataParse, quizDataParse], currentIndex: 0)
-        let vc = StartQuizViewController()
-        
-        let navController = UINavigationController(rootViewController: vc)
-        set(windowScene: windowScene, startingVC: navController)
+
+        let vc = CryptoTabBarViewController()
+//        let navController = UINavigationController(rootViewController: vc)
+        set(windowScene: windowScene, startingVC: vc)
     }
 
     private func set(windowScene: UIScene, startingVC: UIViewController) {

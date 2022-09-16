@@ -23,6 +23,8 @@
 		0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */; };
 		0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73AE289D4260006E67F9 /* PrizeView.swift */; };
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
+		0A305E0728D42988007A27CF /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A305E0628D42988007A27CF /* CryptoSettingsViewController.swift */; };
+		0A305E0A28D43808007A27CF /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A305E0928D43808007A27CF /* CryptoTabBarViewController.swift */; };
 		0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA528B3816600C551FA /* TicketTopView.swift */; };
 		0A432FA828B3AB5A00C551FA /* ProgressViewUITry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA728B3AB5A00C551FA /* ProgressViewUITry.swift */; };
 		0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */; };
@@ -115,6 +117,8 @@
 		0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		0A2E73AE289D4260006E67F9 /* PrizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeView.swift; sourceTree = "<group>"; };
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
+		0A305E0628D42988007A27CF /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
+		0A305E0928D43808007A27CF /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A432FA528B3816600C551FA /* TicketTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTopView.swift; sourceTree = "<group>"; };
 		0A432FA728B3AB5A00C551FA /* ProgressViewUITry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewUITry.swift; sourceTree = "<group>"; };
 		0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpsCell.swift; sourceTree = "<group>"; };
@@ -355,6 +359,41 @@
 			path = Prize;
 			sourceTree = "<group>";
 		};
+		0A305E0328D428B2007A27CF /* Provide Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				0A4573A428D20E6900A237CD /* ProvideFeedbackViewController.swift */,
+				0A4573A628D20E7700A237CD /* ProvideFeedbackView.swift */,
+			);
+			path = "Provide Feedback";
+			sourceTree = "<group>";
+		};
+		0A305E0428D428C9007A27CF /* Correct Answer */ = {
+			isa = PBXGroup;
+			children = (
+				0AA2D53628D33DB00082D2D6 /* CircularProgressView.swift */,
+				0AA2D53828D33E670082D2D6 /* FinishAnimationViewController.swift */,
+				0AA2D53A28D33F190082D2D6 /* FinishAnimationView.swift */,
+			);
+			path = "Correct Answer";
+			sourceTree = "<group>";
+		};
+		0A305E0828D42991007A27CF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0A305E0628D42988007A27CF /* CryptoSettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0A305E0B28D44974007A27CF /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				0A305E0928D43808007A27CF /* CryptoTabBarViewController.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
 		0A45739228D1A7FD00A237CD /* Data Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,11 +425,6 @@
 			children = (
 				0A45739D28D1DCAB00A237CD /* AddressView.swift */,
 				0A45739F28D1DCC500A237CD /* AddressViewController.swift */,
-				0A4573A428D20E6900A237CD /* ProvideFeedbackViewController.swift */,
-				0A4573A628D20E7700A237CD /* ProvideFeedbackView.swift */,
-				0AA2D53628D33DB00082D2D6 /* CircularProgressView.swift */,
-				0AA2D53828D33E670082D2D6 /* FinishAnimationViewController.swift */,
-				0AA2D53A28D33F190082D2D6 /* FinishAnimationView.swift */,
 			);
 			path = Address;
 			sourceTree = "<group>";
@@ -606,11 +640,15 @@
 		925F086928D0F6B200AD8FD1 /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				0A305E0B28D44974007A27CF /* Tabs */,
 				0A45739228D1A7FD00A237CD /* Data Store */,
 				925F087228D139FB00AD8FD1 /* Question */,
 				0A45739728D1B0DC00A237CD /* Learn */,
 				0A45739C28D1B17A00A237CD /* Start Quiz */,
 				0A4573A328D20E4400A237CD /* Address */,
+				0A305E0328D428B2007A27CF /* Provide Feedback */,
+				0A305E0428D428C9007A27CF /* Correct Answer */,
+				0A305E0828D42991007A27CF /* Settings */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -817,8 +855,10 @@
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,
 				0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */,
 				925F087428D13A1300AD8FD1 /* QuestionViewController.swift in Sources */,
+				0A305E0728D42988007A27CF /* CryptoSettingsViewController.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
+				0A305E0A28D43808007A27CF /* CryptoTabBarViewController.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,
 				0A7A49FE28A3D294009EDE5E /* StringExtension.swift in Sources */,
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,

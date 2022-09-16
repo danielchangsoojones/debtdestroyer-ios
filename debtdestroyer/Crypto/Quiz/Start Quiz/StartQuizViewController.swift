@@ -40,7 +40,7 @@ class StartQuizViewController: UIViewController {
             let quizTopic = quizData.first?.quizTopic
             self.backgroundImgView.loadFromFile(quizTopic?.intro_img)
             self.descriptionLabel.text = "Complete the quiz, receive 2 " + (quizTopic?.name ?? "coins") + " (payouts occur within 24 hours)."
-            self.descriptionLabel.isHidden = User.current()?.email == "testerapple@gmail.com"
+            self.descriptionLabel.isHidden = User.current()?.email == User.appleTesterEmail
             self.nameLabel.text = quizData.first?.quizTopic.name
             activityIndicator.stopAnimating()
         }

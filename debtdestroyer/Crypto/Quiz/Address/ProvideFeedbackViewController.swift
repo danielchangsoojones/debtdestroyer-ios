@@ -116,6 +116,8 @@ class ProvideFeedbackViewController: UIViewController {
     
     @objc private func nextQuizButtonPressed() {
         print("nextQuizButtonPressed")
+        let vc = FinishAnimationViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func feedbackButtonPressed() {

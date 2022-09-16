@@ -27,6 +27,14 @@ class StartQuizViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+
+        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        
+        activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
+        activityIndicator.color = UIColor.black
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         dataStore.getQuizData { quizData in
             self.quizDatas = quizData
             let quizTopic = quizData.first?.quizTopic
@@ -34,7 +42,12 @@ class StartQuizViewController: UIViewController {
             self.descriptionLabel.text = "Complete the quiz, receive 2 " + (quizTopic?.name ?? "coins") + " (payouts occur within 24 hours)."
             self.descriptionLabel.isHidden = User.current()?.email == "testerapple@gmail.com"
             self.nameLabel.text = quizData.first?.quizTopic.name
+            activityIndicator.stopAnimating()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -43,6 +43,10 @@ class AddressViewController: UIViewController {
         setNavBarBtns()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
        setGradientNavigationTitle()
     }

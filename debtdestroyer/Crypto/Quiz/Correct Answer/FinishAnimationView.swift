@@ -54,7 +54,6 @@ class FinishAnimationView: UIView {
         earnedLabel.textColor = .white
         earnedLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         addSubview(earnedLabel)
-        // lable constraints not getting set proprerly. Pending
         earnedLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.center).offset(100)

@@ -14,7 +14,19 @@ class FinishAnimationViewController: UIViewController {
     var earnedLabel = UILabel()
     var nextButton = UIButton()
     var imgView = UIImageView()
-
+    private let quizDatas: [QuizDataParse]
+    private let currentIndex: Int
+    
+    init(quizDatas: [QuizDataParse], currentIndex: Int) {
+        self.quizDatas = quizDatas
+        self.currentIndex = currentIndex
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         super.loadView()
         

@@ -12,7 +12,11 @@ class AddressViewController: UIViewController {
     private var dataStore = QuizDataStore()
     var addView = AddressView()
     private let quizTopicDatas: QuizTopicParse
-    
+    var addTextField: UITextField!
+    var addLabel: UILabel!
+    var descriptionLabel: UILabel!
+    var nextButton: SpinningWithGradButton!
+
     init(quizTopicDatas: QuizTopicParse) {
         self.quizTopicDatas = quizTopicDatas
         super.init(nibName: nil, bundle: nil)
@@ -27,11 +31,16 @@ class AddressViewController: UIViewController {
         let addView = AddressView(frame: self.view.frame)
         self.view = addView
     
-        addView.addLabel.text = "Enter Your " + quizTopicDatas.name + " Address"
-        addView.addTextField.placeholder = quizTopicDatas.name + "_sfjlsdfisdlfjsljfls"
-        addView.descriptionLabel.text = "This is the address where you would like to have your " + quizTopicDatas.name + " sent. It takes us up to 24 hours to send you your coin rewards since we currently have to manually send out the rewards."
+        self.addTextField = addView.addTextField
+        self.addLabel = addView.addLabel
+        self.descriptionLabel = addView.descriptionLabel
+        self.nextButton = addView.nextButton
+
+        self.addLabel.text = "Enter Your " + quizTopicDatas.name + " Address"
+        self.addTextField.placeholder = quizTopicDatas.name + "_sfjlsdfisdlfjsljfls"
+        self.descriptionLabel.text = "This is the address where you would like to have your " + quizTopicDatas.name + " sent. It takes us up to 24 hours to send you your coin rewards since we currently have to manually send out the rewards."
         
-        addView.nextButton.addTarget(self,
+        self.nextButton.addTarget(self,
                                        action: #selector(nextBtnPressed),
                                        for: .touchUpInside)
     }
@@ -87,8 +96,15 @@ class AddressViewController: UIViewController {
     }
     
     @objc private func nextBtnPressed() {
-        let provideFeedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopicDatas)
-        self.navigationController?.pushViewController(provideFeedbackVC, animated: true)
+        
+        dataStore.saveCryptoAddress(crypto_address: self.addTextField.text ?? "", quizTopicID: quizTopicDatas.objectId!) { response in
+            
+            let provideFeedbackVC = ProvideFeedbackViewController(quizTopicDatas: self.quizTopicDatas)
+            self.navigationController?.pushViewController(provideFeedbackVC, animated: true)
+        }
+        
+        
+        
     }
 }
 

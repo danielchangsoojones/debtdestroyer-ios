@@ -55,7 +55,7 @@ class LogInViewController: RegisterViewController {
     }
     
     override func segueIntoApp() {
-        let vc = HomeTabBarViewController()
+        let vc = CryptoTabBarViewController()//HomeTabBarViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }

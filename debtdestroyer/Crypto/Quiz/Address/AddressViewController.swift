@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class AddressViewController: UIViewController {
     private var messageHelper: MessageHelper?
@@ -49,6 +50,7 @@ class AddressViewController: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         messageHelper = MessageHelper(currentVC: self, delegate: nil)
+        self.addTextField.becomeFirstResponder()
         setNavBarBtns()
     }
     
@@ -95,7 +97,25 @@ class AddressViewController: UIViewController {
         messageHelper?.text(MessageHelper.customerServiceNum)
     }
     
+    private func showAlert() {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("OK", action: {
+            self.addTextField.becomeFirstResponder()
+        })
+        alertView.showInfo("", subTitle: "Please enter your " + quizTopicDatas.name + " address!")
+    }
+    
     @objc private func nextBtnPressed() {
+        let address = self.addTextField.text?.trimmingCharacters(in: .whitespaces)
+        
+        if address == "" {
+            showAlert()
+            self.addTextField.text = ""
+            return
+        }
         
         dataStore.saveCryptoAddress(crypto_address: self.addTextField.text ?? "", quizTopicID: quizTopicDatas.objectId!) { response in
             

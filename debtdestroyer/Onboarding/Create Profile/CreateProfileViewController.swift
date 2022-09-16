@@ -31,7 +31,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
             let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly)?.doubleValue ?? 1111111111
             dataStore.save(phoneNumber: String(phoneNumber))
             
-            let vc = HomeTabBarViewController()
+            let vc = CryptoTabBarViewController()//HomeTabBarViewController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
             nextButton.stopSpinning()

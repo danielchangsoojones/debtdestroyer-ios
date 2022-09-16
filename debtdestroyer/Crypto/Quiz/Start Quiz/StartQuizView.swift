@@ -54,12 +54,11 @@ class StartQuizView: UIView {
         nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         nextButton.setTitle("Start Quiz", for: .normal)
         let height: CGFloat = 55
-        let tabBarHeight: CGFloat = 50
         nextButton.layer.cornerRadius = height / 2
         addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().inset(tabBarHeight + 10)
+            make.bottomMargin.equalToSuperview().inset(20)
             make.height.equalTo(height)
         }
     }

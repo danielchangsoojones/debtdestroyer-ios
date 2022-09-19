@@ -33,6 +33,6 @@ public enum Environment: String {
 
 class Configuration {
     static var environment: Environment = {
-        return .development
+        return .production
     }()
 }

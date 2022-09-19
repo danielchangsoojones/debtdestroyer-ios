@@ -120,7 +120,8 @@ class ProvideFeedbackViewController: UIViewController {
     }
     
     @objc private func nextQuizButtonPressed() {
-        
+        let startQuizVC = StartQuizViewController()
+        self.navigationController?.pushViewController(startQuizVC, animated: true)
     }
     
     @objc private func feedbackButtonPressed() {

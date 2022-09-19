@@ -35,13 +35,18 @@ class StartQuizViewController: UIViewController {
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
+        
+        
         dataStore.getQuizData { quizData in
             self.quizDatas = quizData
             let quizTopic = quizData.first?.quizTopic
             self.backgroundImgView.loadFromFile(quizTopic?.intro_img)
-            self.descriptionLabel.text = "Complete the quiz, receive 2 " + (quizTopic?.name ?? "coins") + " (payouts occur within 24 hours)."
-            self.descriptionLabel.isHidden = User.current()?.email == User.appleTesterEmail
             self.nameLabel.text = quizData.first?.quizTopic.name
+            self.dataStore.shouldShowEarnings { shouldShowEarnings in
+                User.shouldShowEarnings = shouldShowEarnings
+                self.descriptionLabel.text = "Complete the quiz, receive 2 " + (quizTopic?.name ?? "coins") + " (payouts occur within 24 hours)."
+                self.descriptionLabel.isHidden = User.current()?.email == User.appleTesterEmail || !shouldShowEarnings
+            }
             activityIndicator.stopAnimating()
         }
     }

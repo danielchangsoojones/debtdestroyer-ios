@@ -13,6 +13,5 @@ class User: PFUser {
     @NSManaged var deviceType: String?
     @NSManaged var name: String
     
-    static let appleTesterEmail = "appletester@gmail.com"
-
+    static var shouldShowEarnings = true
 }

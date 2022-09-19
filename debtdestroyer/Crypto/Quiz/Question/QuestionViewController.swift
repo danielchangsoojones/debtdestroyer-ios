@@ -79,7 +79,7 @@ class QuestionViewController: UIViewController {
         let nextIndex = currentIndex + 1
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if let quizTopic = quizDatas.first?.quizTopic, isLastQuestion {
-            if User.current()?.email == User.appleTesterEmail {
+            if !User.shouldShowEarnings {
                 let feedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopic)
                 self.navigationController?.pushViewController(feedbackVC, animated: true)
             } else {

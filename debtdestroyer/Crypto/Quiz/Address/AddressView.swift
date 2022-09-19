@@ -36,7 +36,7 @@ class AddressView: UIView {
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20).priority(.high)
-            make.top.equalToSuperview().offset(70)
+            make.topMargin.equalToSuperview().offset(20)
         }
     }
     

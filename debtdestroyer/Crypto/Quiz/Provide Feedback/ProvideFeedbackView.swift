@@ -38,12 +38,12 @@ class ProvideFeedbackView: UIView {
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalToSuperview().offset(70)
+            make.topMargin.equalToSuperview().offset(20)
         }
     }
     
     private func setUpStackViewContent() {
-        if User.current()?.email != User.appleTesterEmail {
+        if User.shouldShowEarnings {
             descriptionLabel1 = createLabel(title: "Your Nano will be sent within 24 hours. It takes us up to 24 hours since we have to manually send out the rewards currently.")
             descriptionLabel2 = createLabel(title: "Thanks for learning about Nano! Please come back tommorow for our next coin quiz about a new coin where you’ll earn airdrops for that coin!")
         }

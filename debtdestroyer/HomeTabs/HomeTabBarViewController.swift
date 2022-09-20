@@ -19,7 +19,7 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     private func setTabs(){
-        let vc1 = PrizeViewController()//TicketsViewController()
+        let vc1 = PrizeViewController()
         let vc2 = BankViewController()//RoundUpViewController()
         let vc3 = SettingsViewController()
      

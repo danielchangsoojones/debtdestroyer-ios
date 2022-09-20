@@ -30,7 +30,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     
     private func addOptionalLabel() {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .light)
         label.text = "(Optional): providing your phone number is optional. We will alert you when new crypto quizzes come out and you can collect coins. Also, we will ask you for feedback on the app!"
         label.numberOfLines = 0
         self.view.addSubview(label)

@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import SnapKit
 
 class CreateProfileViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    var quizTopicDatas: QuizTopicParse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()
         self.hideKeyboardWhenTappedAround()
+        addOptionalLabel()
     }
     
     private func updateLabels() {
@@ -24,6 +28,18 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
        
     }
     
+    private func addOptionalLabel() {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.text = "(Optional): providing your phone number is optional. We will alert you when new crypto quizzes come out and you can collect coins. Also, we will ask you for feedback on the app!"
+        label.numberOfLines = 0
+        self.view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(stackView)
+            make.top.equalTo(stackView.snp.bottom).offset(5)
+        }
+    }
+    
     override func nextBtnPressed() {
         nextButton.startSpinning()
         if isComplete {
@@ -31,9 +47,13 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
             let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly)?.doubleValue ?? 1111111111
             dataStore.save(phoneNumber: String(phoneNumber))
             
-            let vc = CryptoTabBarViewController()//HomeTabBarViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+            if let quizTopicDatas = quizTopicDatas {
+                let feedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopicDatas)
+                self.navigationController?.pushViewController(feedbackVC, animated: true)
+            } else {
+                BannerAlert.show(title: "Error", subtitle: "couldn't find the quizTopic", type: .error)
+            }
+            
             nextButton.stopSpinning()
         } else {
             nextButton.stopSpinning()
@@ -41,19 +61,19 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     }
     
     var isComplete: Bool {
-        guard let phoneStr = emailTextField?.text else {
-            return false
-        }
-       
-        if phoneStr.isEmpty {
-            BannerAlert.show(title: "Phone Number Needed", subtitle: "Please input your phone number", type: .error)
-            return false
-        }
-        
-        if !phoneStr.isPhoneNumber {
-            BannerAlert.show(title: "Invalid Phone Number", subtitle: "A proper phone number has only 10 digits", type: .error)
-            return false
-        }
+//        guard let phoneStr = emailTextField?.text else {
+//            return false
+//        }
+//
+//        if phoneStr.isEmpty {
+//            BannerAlert.show(title: "Phone Number Needed", subtitle: "Please input your phone number", type: .error)
+//            return false
+//        }
+//
+//        if !phoneStr.isPhoneNumber {
+//            BannerAlert.show(title: "Invalid Phone Number", subtitle: "A proper phone number has only 10 digits", type: .error)
+//            return false
+//        }
         
         return true
     }

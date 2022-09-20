@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class ProvideFeedbackViewController: UIViewController {
     private var messageHelper: MessageHelper?
@@ -120,8 +121,16 @@ class ProvideFeedbackViewController: UIViewController {
     }
     
     @objc private func nextQuizButtonPressed() {
-        let startQuizVC = StartQuizViewController()
-        self.navigationController?.pushViewController(startQuizVC, animated: true)
+        dataStore.shouldShowNextQuiz { shouldShowNextQuiz, error in
+            if shouldShowNextQuiz {
+                let startQuizVC = StartQuizViewController()
+                self.navigationController?.pushViewController(startQuizVC, animated: true)
+            } else {
+                let alertView = SCLAlertView()
+                let subtitle = error?.localizedDescription ?? "Please come into the app tommorow to see the next quiz."
+                alertView.showInfo("Next Quiz", subTitle: subtitle, closeButtonTitle: "Okay")
+            }
+        }
     }
     
     @objc private func feedbackButtonPressed() {

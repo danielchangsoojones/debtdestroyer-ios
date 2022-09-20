@@ -16,10 +16,83 @@ class TicketTopView: UITableViewCell, Reusable {
     var lblAmntPaidTo = UILabel()
     var lblAmntPaid = UILabel()
     var lblNoOfTickets = UILabel()
-    var ticketProgressBar = UIProgressView()
     var lblAutomatically = UILabel()
     var ticketCount = String()
     let infoBtn = UIButton()
+    
+    let stackViewHorizontal : UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 0
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        stack.alignment = .fill
+        stack.backgroundColor = .clear
+        return stack
+    }()
+    
+    let stackViewVertical10 : UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 0
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.alignment = .fill
+        stack.backgroundColor = .clear
+        return stack
+    }()
+    
+    let stackViewVertical20 : UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 0
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.alignment = .fill
+        stack.backgroundColor = .clear
+        return stack
+    }()
+    
+    let stackViewVertical30 : UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 0
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.alignment = .fill
+        stack.backgroundColor = .clear
+        return stack
+    }()
+    
+    let stackViewVertical40 : UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 0
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.alignment = .fill
+        stack.backgroundColor = .clear
+        return stack
+    }()
+    
+    
+    var ticketProgressBar = UIProgressView()
+    var stepImgView10 = UIImageView()
+    var stepImgView20 = UIImageView()
+    var stepImgView30 = UIImageView()
+    var stepImgView40 = UIImageView()
+    
+    var Label10 = UILabel()
+    var Label20 = UILabel()
+    var Label30 = UILabel()
+    var Label40 = UILabel()
+    
+    let emptyView1 = UIView()
+    let emptyView2 = UIView()
+    let emptyView3 = UIView()
+    let emptyView4 = UIView()
+    let emptyView5 = UIView()
+    let containerView = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,7 +105,6 @@ class TicketTopView: UITableViewCell, Reusable {
     }
     
     private func setEarnedTicketView() {
-        
         self.contentView.addSubview(earnedTicketView)
         earnedTicketView.snp.makeConstraints{ make in
             make.top.leading.trailing.equalToSuperview()
@@ -43,30 +115,202 @@ class TicketTopView: UITableViewCell, Reusable {
         setInfoBtn()
         setAmountPaidLbl()
         setLblNoOfTickets()
+        setContainerView()
+    }
+    
+    private func setContainerView() {
+        addSubview(containerView)
+        containerView.snp.makeConstraints{ make in
+            make.top.equalTo(lblNoOfTickets.snp.bottom).offset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
+            make.height.equalTo(88)
+            make.bottom.equalToSuperview().offset(-20)
+            
+        }
         setProgressBar()
+        setStackViewHorizontal()
     }
     
     private func setProgressBar() {
-        //        var arrPointsRange = [0, 10, 20, 30, 40, 50]
-        //        var currenPoint = 18
-        //        let totalPoints = 50
         ticketProgressBar.progressImage = UIImage.init(named: "backgroundGrad")
         let dimension: CGFloat = 30
         ticketProgressBar.layer.cornerRadius = dimension / 2
         ticketProgressBar.clipsToBounds = true
-        ticketProgressBar.progress = 0.18
+        ticketProgressBar.progress = 0.36
         ticketProgressBar.trackTintColor = .progrssBarBackgroundColor
-        earnedTicketView.addSubview(ticketProgressBar)
+        containerView.addSubview(ticketProgressBar)
         ticketProgressBar.snp.makeConstraints{ make in
-            //            make.top.equalTo(lblNoOfTickets.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.height.equalTo(dimension)
-            make.bottom.equalToSuperview().offset(-40)
+            make.top.equalTo(containerView).offset(35)
+            make.leading.trailing.equalTo(containerView)
+            make.height.equalTo(32)
         }
     }
     
-    private func setStackForProgress() {
+    private func setStackViewHorizontal() {
+        containerView.addSubview(stackViewHorizontal)
+        stackViewHorizontal.snp.makeConstraints{ make in
+            make.top.leading.trailing.bottom.equalTo(containerView)
+        }
+        setupEmptyView1()
+        setStackViewVertical10()
+        setupEmptyView2()
+        setStackViewVertical20()
+        setupEmptyView3()
+        setStackViewVertical30()
+        setupEmptyView4()
+        setStackViewVertical40()
+        setupEmptyView5()
+    }
+    
+    private func setStackViewVertical10() {
+        stackViewHorizontal.addArrangedSubview(stackViewVertical10)
+        stackViewVertical10.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(32)
+        }
         
+        stepImgView10.image = UIImage.init(named: "stepW")
+        stepImgView10.contentMode = .scaleAspectFit
+        stepImgView10.backgroundColor = .clear
+        stackViewVertical10.addArrangedSubview(stepImgView10)
+        stepImgView10.snp.makeConstraints{ make in
+            make.leading.trailing.top.equalTo(stackViewVertical10)
+        }
+        
+        Label10 = createLabel(title: "$10")
+        stackViewVertical10.addArrangedSubview(Label10)
+        Label10.snp.makeConstraints{ make in
+            make.leading.trailing.bottom.equalTo(stackViewVertical10)
+            make.top.equalTo(stepImgView10.snp.bottom)
+            make.height.equalTo(12)
+        }
+    }
+    
+    
+    private func setStackViewVertical20() {
+        stackViewHorizontal.addArrangedSubview(stackViewVertical20)
+        stackViewVertical20.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(32)
+        }
+        
+        stepImgView20.image = UIImage.init(named: "stepW")
+        stepImgView20.contentMode = .scaleAspectFit
+        stepImgView20.backgroundColor = .clear
+        stackViewVertical20.addArrangedSubview(stepImgView20)
+        stepImgView20.snp.makeConstraints{ make in
+            make.leading.trailing.top.equalTo(stackViewVertical20)
+        }
+        
+        Label20 = createLabel(title: "$20")
+        stackViewVertical20.addArrangedSubview(Label20)
+        Label20.snp.makeConstraints{ make in
+            make.leading.trailing.bottom.equalTo(stackViewVertical20)
+            make.top.equalTo(stepImgView20.snp.bottom)
+            make.height.equalTo(12)
+        }
+    }
+    
+    private func setStackViewVertical30() {
+        stackViewHorizontal.addArrangedSubview(stackViewVertical30)
+        stackViewVertical30.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(32)
+        }
+        
+        stepImgView30.image = UIImage.init(named: "stepW")
+        stepImgView30.contentMode = .scaleAspectFit
+        stepImgView30.backgroundColor = .clear
+        stackViewVertical30.addArrangedSubview(stepImgView30)
+        stepImgView30.snp.makeConstraints{ make in
+            make.leading.trailing.top.equalTo(stackViewVertical30)
+        }
+        
+        Label30 = createLabel(title: "$30")
+        stackViewVertical30.addArrangedSubview(Label30)
+        Label30.snp.makeConstraints{ make in
+            make.leading.trailing.bottom.equalTo(stackViewVertical30)
+            make.top.equalTo(stepImgView30.snp.bottom)
+            make.height.equalTo(12)
+        }
+    }
+    
+    private func setStackViewVertical40() {
+        stackViewHorizontal.addArrangedSubview(stackViewVertical40)
+        stackViewVertical40.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(32)
+        }
+        
+        stepImgView40.image = UIImage.init(named: "stepW")
+        stepImgView40.contentMode = .scaleAspectFit
+        stepImgView40.backgroundColor = .clear
+        stackViewVertical40.addArrangedSubview(stepImgView40)
+        stepImgView40.snp.makeConstraints{ make in
+            make.leading.trailing.top.equalTo(stackViewVertical40)
+        }
+        
+        Label40 = createLabel(title: "$40")
+        stackViewVertical40.addArrangedSubview(Label40)
+        Label40.snp.makeConstraints{ make in
+            make.leading.trailing.bottom.equalTo(stackViewVertical40)
+            make.top.equalTo(stepImgView40.snp.bottom)
+            make.height.equalTo(12)
+        }
+    }
+    
+    private func setupEmptyView1(){
+        emptyView1.backgroundColor = .clear
+        stackViewHorizontal.addArrangedSubview(emptyView1)
+        emptyView1.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setupEmptyView2(){
+        emptyView2.backgroundColor = .clear
+        stackViewHorizontal.addArrangedSubview(emptyView2)
+        emptyView2.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(emptyView1)
+        }
+    }
+    
+    private func setupEmptyView3(){
+        emptyView3.backgroundColor = .clear
+        stackViewHorizontal.addArrangedSubview(emptyView3)
+        emptyView3.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(emptyView1)
+        }
+    }
+    
+    private func setupEmptyView4(){
+        emptyView4.backgroundColor = .clear
+        stackViewHorizontal.addArrangedSubview(emptyView4)
+        emptyView4.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(emptyView1)
+        }
+    }
+    
+    private func setupEmptyView5(){
+        emptyView5.backgroundColor = .clear
+        stackViewHorizontal.addArrangedSubview(emptyView5)
+        emptyView5.snp.makeConstraints{ make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(emptyView1)
+        }
+    }
+    
+    private func createLabel(title: String) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        return label
     }
     
     private func setEarnedTicketBackgroundImgView() {
@@ -117,7 +361,6 @@ class TicketTopView: UITableViewCell, Reusable {
         })
         alertView.showInfo("Warning", subTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
     }
-
     
     private func setAmountPaidLbl() {
         lblAmntPaid.text = "$" + "20.22"

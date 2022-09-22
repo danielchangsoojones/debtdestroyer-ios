@@ -145,7 +145,7 @@ class SubcsriptionBasicView: UIView {
         priceLbl.backgroundColor = .clear
         stackView3.addArrangedSubview(priceLbl)
         priceLbl.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview().inset(5)
+//            make.leading.top.bottom.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().inset(20)
         }
     }
@@ -155,7 +155,7 @@ class SubcsriptionBasicView: UIView {
         stackView3.addArrangedSubview(priceInfo)
         priceInfo.snp.makeConstraints{ make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(5)
+//            make.trailing.equalToSuperview().inset(5)
             make.height.width.equalTo(15)
         }
     }
@@ -170,7 +170,7 @@ class SubcsriptionBasicView: UIView {
         loanConnectionsLbl.backgroundColor = .clear
         stackView2.addArrangedSubview(loanConnectionsLbl)
         loanConnectionsLbl.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview().inset(5)
+//            make.leading.top.bottom.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().inset(20)
         }
     }
@@ -180,7 +180,7 @@ class SubcsriptionBasicView: UIView {
         stackView2.addArrangedSubview(loanConnectionsInfo)
         loanConnectionsInfo.snp.makeConstraints{ make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(5)
+//            make.trailing.equalToSuperview().inset(5)
             make.height.width.equalTo(15)
         }
     }
@@ -194,7 +194,7 @@ class SubcsriptionBasicView: UIView {
         emailNewsLetterLbl.backgroundColor = .clear
         stackView1.addArrangedSubview(emailNewsLetterLbl)
         emailNewsLetterLbl.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview().inset(5)
+//            make.leading.top.bottom.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().inset(20)
         }
     }
@@ -204,7 +204,7 @@ class SubcsriptionBasicView: UIView {
         stackView1.addArrangedSubview(emailNewsLetterInfo)
         emailNewsLetterInfo.snp.makeConstraints{ make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(5)
+//            make.trailing.equalToSuperview().inset(5)
             make.height.width.equalTo(15)
         }
     }
@@ -230,7 +230,7 @@ class SubcsriptionBasicView: UIView {
         ticketsLbl.backgroundColor = .clear
         stackView.addArrangedSubview(ticketsLbl)
         ticketsLbl.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview().inset(5)
+//            make.leading.top.bottom.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().inset(20)
         }
     }
@@ -240,7 +240,7 @@ class SubcsriptionBasicView: UIView {
         stackView.addArrangedSubview(ticketsInfo)
         ticketsInfo.snp.makeConstraints{ make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(5)
+//            make.trailing.equalToSuperview().inset(5)
             make.height.width.equalTo(15)
         }
     }

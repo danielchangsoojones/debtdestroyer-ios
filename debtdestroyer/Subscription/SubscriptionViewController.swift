@@ -7,6 +7,7 @@
 
 import UIKit
 import SCLAlertView
+import StoreKit
 
 class SubscriptionViewController: UIViewController {
     var ticketsLbl = UILabel()
@@ -38,7 +39,9 @@ class SubscriptionViewController: UIViewController {
         
         return stack
     }()
-    
+    var activityIndicator = UIActivityIndicatorView()
+    var viewModel = ViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         subscriptionView = SubscriptionView(frame: self.view.bounds)
@@ -68,6 +71,13 @@ class SubscriptionViewController: UIViewController {
         
         self.emailNewsLetterInfo.addTarget(self, action: #selector(emailNewsLetterInfoBtnClicked), for: .touchUpInside)
         
+        viewModel.delegate = self
+        
+         activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        
+        activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
+        activityIndicator.color = UIColor.black
+        self.view.addSubview(activityIndicator)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,7 +114,8 @@ class SubscriptionViewController: UIViewController {
         let gradientLabel4 = view.getGradientLayer(bounds: priceLbl.bounds)
         priceLbl.textColor = view.gradientColor(bounds: priceLbl.bounds, gradientLayer: gradientLabel4)
 
-
+        // Notify the ViewModel object that the View part is ready.
+        viewModel.viewDidSetup()
     }
     
     private func setNavBarBtns() {
@@ -186,13 +197,94 @@ class SubscriptionViewController: UIViewController {
     }
     
     @objc private func upgradeToPremiumSubscription() {
-        self.dataStore.upgradeToPremiumSubscription { result, error in
-            if result != nil {
-               
-            } else {
-                BannerAlert.show(with: error)
-            }
+        
+        guard let product = viewModel.getProductForItem(at: 0) else {
+            showSingleAlert(withMessage: "Renewing this item is not possible at the moment.")
+            activityIndicator.stopAnimating()
+            return
+        }
+        activityIndicator.stopAnimating()
+
+        showAlert(for: product)
+        
+//        self.dataStore.upgradeToPremiumSubscription { result, error in
+//            if result != nil {
+//               
+//            } else {
+//                BannerAlert.show(with: error)
+//            }
+//        }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .lightContent
+        } else {
+            // Fallback on earlier versions
+            return .default
         }
     }
     
+    func showSingleAlert(withMessage message: String) {
+        let alertController = UIAlertController(title: "Subscription Alert", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlert(for product: SKProduct) {
+        guard let price = IAPManager.shared.getPriceFormatted(for: product) else { return }
+        
+        let alertController = UIAlertController(title: product.localizedTitle,
+                                                message: product.localizedDescription,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Buy now for \(price)", style: .default, handler: { (_) in
+            
+            if !self.viewModel.purchase(product: product) {
+                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                self.activityIndicator.stopAnimating()
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            self.activityIndicator.stopAnimating()
+        }))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+}
+
+// MARK: - ViewModelDelegate
+extension SubscriptionViewController: ViewModelDelegate {
+    func willStartLongProcess() {
+        activityIndicator.startAnimating()
+    }
+    
+    func didFinishLongProcess() {
+        activityIndicator.stopAnimating()
+    }
+    
+    
+    func showIAPRelatedError(_ error: Error) {
+        let message = error.localizedDescription
+        showSingleAlert(withMessage: message)
+    }
+    
+    
+    func shouldUpdateUI() {
+//        tableView.reloadData()
+        // ToDoMark: - update UI for success manege here
+
+    }
+    
+    
+    func didFinishRestoringPurchasesWithZeroProducts() {
+        showSingleAlert(withMessage: "There are no purchased items to restore.")
+    }
+    
+    
+    func didFinishRestoringPurchasedProducts() {
+        showSingleAlert(withMessage: "All previous In-App Purchases have been restored!")
+    }
 }

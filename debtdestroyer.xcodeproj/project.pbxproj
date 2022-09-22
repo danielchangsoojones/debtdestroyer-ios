@@ -22,6 +22,12 @@
 		0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */; };
 		0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73AE289D4260006E67F9 /* PrizeView.swift */; };
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
+		0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A421C0528DB3AED008792B8 /* StoreKit.framework */; };
+		0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */; };
+		0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0928DB4A7B008792B8 /* IAPManager.swift */; };
+		0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0B28DB4E5F008792B8 /* ViewModel.swift */; };
+		0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0D28DB4E8A008792B8 /* Model.swift */; };
+		0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */; };
 		0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA528B3816600C551FA /* TicketTopView.swift */; };
 		0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */; };
 		0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */; };
@@ -94,6 +100,12 @@
 		0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		0A2E73AE289D4260006E67F9 /* PrizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeView.swift; sourceTree = "<group>"; };
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
+		0A421C0528DB3AED008792B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
+		0A421C0928DB4A7B008792B8 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		0A421C0B28DB4E5F008792B8 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		0A421C0D28DB4E8A008792B8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManageable.swift; sourceTree = "<group>"; };
 		0A432FA528B3816600C551FA /* TicketTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTopView.swift; sourceTree = "<group>"; };
 		0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpsCell.swift; sourceTree = "<group>"; };
 		0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPrizeCell.swift; sourceTree = "<group>"; };
@@ -160,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */,
+				0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +182,7 @@
 		00BB18DBCAA76C38BFDFB46B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A421C0528DB3AED008792B8 /* StoreKit.framework */,
 				1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */,
 			);
 			name = Frameworks;
@@ -306,12 +320,25 @@
 			path = Prize;
 			sourceTree = "<group>";
 		};
+		0A421C1128DC84EB008792B8 /* In-App Purchaes */ = {
+			isa = PBXGroup;
+			children = (
+				0A421C0928DB4A7B008792B8 /* IAPManager.swift */,
+				0A421C0B28DB4E5F008792B8 /* ViewModel.swift */,
+				0A421C0D28DB4E8A008792B8 /* Model.swift */,
+				0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */,
+				0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */,
+			);
+			path = "In-App Purchaes";
+			sourceTree = "<group>";
+		};
 		0A74408C28BE405000AD0489 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
 				0A7635AF28C9A6B500316FD4 /* View */,
 				0A7635B228C9A6FD00316FD4 /* Data Store */,
 				0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */,
+				0A421C1128DC84EB008792B8 /* In-App Purchaes */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -561,6 +588,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */,
 				92021FD9289B07A6007901A6 /* LaunchScreen.storyboard in Resources */,
 				92021FD6289B07A6007901A6 /* Assets.xcassets in Resources */,
 			);
@@ -615,6 +643,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */,
 				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,
@@ -629,6 +658,7 @@
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
+				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
@@ -642,12 +672,14 @@
 				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
+				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
+				0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,

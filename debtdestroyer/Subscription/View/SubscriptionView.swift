@@ -104,8 +104,9 @@ class SubscriptionView: UIView {
         contentView.addSubview(upgradeBtn)
         upgradeBtn.snp.makeConstraints{ make in
             make.leading.trailing.equalToSuperview().inset(15)
-            make.bottom.equalToSuperview().offset(-20)
-            make.height.width.equalTo(50)
+            make.top.equalTo(mainStackView.snp.bottom).offset(50)
+//            make.bottom.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
         }
     }
 }

@@ -44,7 +44,8 @@ class StartQuizViewController: UIViewController {
             self.nameLabel.text = quizData.first?.quizTopic.name
             self.dataStore.shouldShowEarnings { shouldShowEarnings in
                 User.shouldShowEarnings = shouldShowEarnings
-                self.descriptionLabel.text = "Complete the quiz, receive 2 " + (quizTopic?.name ?? "coins") + " (payouts occur within 24 hours)."
+                let prizeAmount = quizTopic?.prize_amount ?? 0
+                self.descriptionLabel.text = "Complete the quiz, receive \(prizeAmount) " + (quizTopic?.name ?? "coins") + " (payouts occur within 24 hours)."
                 self.descriptionLabel.isHidden = !shouldShowEarnings
             }
             activityIndicator.stopAnimating()

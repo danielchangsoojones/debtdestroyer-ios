@@ -152,7 +152,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 
                 cell.logoImg.loadFromFile(debtAccount.logoImg)
-                cell.setChevron(imageName: "chevronGrey")
+               // cell.setChevron(imageName: "chevronGrey")
                 
             }
             

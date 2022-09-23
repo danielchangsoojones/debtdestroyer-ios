@@ -41,6 +41,15 @@ class SubscriptionViewController: UIViewController {
     }()
     var activityIndicator = UIActivityIndicatorView()
     var viewModel = ViewModel()
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .lightContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    var purchase = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +87,23 @@ class SubscriptionViewController: UIViewController {
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
         activityIndicator.color = UIColor.black
         self.view.addSubview(activityIndicator)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseNotification(_:)),
+                                               name: .IAPHelperPurchaseNotification,
+                                               object: nil)
+        
+        purchase = UserDefaults.standard.bool(forKey: "purchase")
+        
+        if purchase == true {
+            print("already purchased")
+            upgradeBtn.titleLabel?.text = "Upgraded to Diamond..!"
+            upgradeBtn.isUserInteractionEnabled = false
+            suggestedLbl.text = ""
+        }
+        else {
+            print("not purchased")
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,8 +125,10 @@ class SubscriptionViewController: UIViewController {
 
         background.layer.addSublayer(gradient)
 
+        if suggestedLbl.text != "" {
         let gradientLabel = view.getGradientLayer(bounds: suggestedLbl.bounds)
         suggestedLbl.textColor = view.gradientColor(bounds: suggestedLbl.bounds, gradientLayer: gradientLabel)
+        }
 
         let gradientLabel1 = view.getGradientLayer(bounds: ticketsLbl.bounds)
         ticketsLbl.textColor = view.gradientColor(bounds: ticketsLbl.bounds, gradientLayer: gradientLabel1)
@@ -126,6 +154,27 @@ class SubscriptionViewController: UIViewController {
         navigationItem.leftBarButtonItem = back
         
         navigationController?.navigationBar.backgroundColor = .clear
+    }
+    
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        
+        print(notification)
+        let firstopen = UserDefaults.standard.bool(forKey: "first")
+        if firstopen {
+            purchase = UserDefaults.standard.bool(forKey: "purchase")
+        }
+        else {
+            UserDefaults.standard.set(true, forKey: "first")
+            UserDefaults.standard.set(true, forKey: "purchase")
+        }
+        
+        self.dataStore.upgradeToPremiumSubscription { result, error in
+            if result != nil {
+                
+            } else {
+                BannerAlert.show(with: error)
+            }
+        }
     }
     
     @objc private func backPressed() {
@@ -206,23 +255,6 @@ class SubscriptionViewController: UIViewController {
         activityIndicator.stopAnimating()
 
         showAlert(for: product)
-        
-//        self.dataStore.upgradeToPremiumSubscription { result, error in
-//            if result != nil {
-//               
-//            } else {
-//                BannerAlert.show(with: error)
-//            }
-//        }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            return .lightContent
-        } else {
-            // Fallback on earlier versions
-            return .default
-        }
     }
     
     func showSingleAlert(withMessage message: String) {
@@ -251,8 +283,6 @@ class SubscriptionViewController: UIViewController {
         }))
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    
 }
 
 // MARK: - ViewModelDelegate
@@ -273,9 +303,17 @@ extension SubscriptionViewController: ViewModelDelegate {
     
     
     func shouldUpdateUI() {
-//        tableView.reloadData()
-        // ToDoMark: - update UI for success manege here
-
+//        self.dataStore.upgradeToPremiumSubscription { result, error in
+//            if result != nil {
+//
+//            } else {
+//                BannerAlert.show(with: error)
+//            }
+//        }
+        
+        upgradeBtn.titleLabel?.text = "Upgraded to Diamond..!"
+        upgradeBtn.isUserInteractionEnabled = false
+        suggestedLbl.text = ""
     }
     
     

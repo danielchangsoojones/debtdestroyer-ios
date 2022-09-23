@@ -123,6 +123,7 @@
 		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
 		0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcsriptionBasicView.swift; sourceTree = "<group>"; };
 		0A7635B028C9A6D600316FD4 /* SubscriptionDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataStore.swift; sourceTree = "<group>"; };
+		0A7A13C928DD8F5F00275E7F /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		0A7A49E028A386C6009EDE5E /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		0A7A49E128A386C6009EDE5E /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0A7A49F228A38746009EDE5E /* MessageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHelper.swift; sourceTree = "<group>"; };
@@ -328,6 +329,7 @@
 				0A421C0D28DB4E8A008792B8 /* Model.swift */,
 				0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */,
 				0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */,
+				0A7A13C928DD8F5F00275E7F /* Products.storekit */,
 			);
 			path = "In-App Purchaes";
 			sourceTree = "<group>";

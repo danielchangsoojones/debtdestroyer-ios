@@ -170,7 +170,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.titleLabel.text = "Earn 10x tickets and more..."
             cell.balanceLabel.textColor = hexStringToUIColor(hex: "FF1A7E")
-            cell.balanceLabel.text = "When you upgrade to the Diamond subscriptio2"
+            cell.balanceLabel.text = "When you upgrade to the Diamond subscription"
             return cell
             
         } else {

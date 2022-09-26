@@ -71,7 +71,7 @@ class LoanAccountCell: UITableViewCell, Reusable {
         }
         
         setLogoImg()
-        setChevron(imageName: "")
+        setChevron(imageName: "xyz")
         setTitleLabel()
         setBalanceLabel()
 

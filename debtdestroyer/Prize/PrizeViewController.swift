@@ -186,6 +186,38 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
             cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
             cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
             cell.setLblNoOfTickets()
+            let progressValue = (Int(cell.ticketCount) ?? 0)
+            cell.ticketProgressBar.progress = Float(progressValue)/50
+            
+            if progressValue >= 40 {
+                cell.stepImgView10.image = UIImage.init(named: "stepC")
+                cell.stepImgView20.image = UIImage.init(named: "stepC")
+                cell.stepImgView30.image = UIImage.init(named: "stepC")
+                cell.stepImgView40.image = UIImage.init(named: "stepC")
+                
+                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
+                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
+                cell.Label30.textColor = hexStringToUIColor(hex: "FF385E")
+                cell.Label40.textColor = hexStringToUIColor(hex: "FF385E")
+            } else if progressValue >= 30 {
+                cell.stepImgView10.image = UIImage.init(named: "stepC")
+                cell.stepImgView20.image = UIImage.init(named: "stepC")
+                cell.stepImgView30.image = UIImage.init(named: "stepC")
+                
+                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
+                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
+                cell.Label30.textColor = hexStringToUIColor(hex: "FF385E")
+            } else if progressValue >= 20 {
+                cell.stepImgView10.image = UIImage.init(named: "stepC")
+                cell.stepImgView20.image = UIImage.init(named: "stepC")
+                
+                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
+                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
+            } else if progressValue >= 10 {
+                cell.stepImgView10.image = UIImage.init(named: "stepC")
+                
+                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
+            }
             return cell
         } else if indexPath.section == 1 {
             // MARK: Sweepstakes Info View

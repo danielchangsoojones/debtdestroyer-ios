@@ -58,6 +58,9 @@
 		0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0D28E19727001B774A /* QuizDataParse.swift */; };
 		0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0E28E19727001B774A /* QuizTopicParse.swift */; };
 		0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */; };
+		0A59AD1428E1B53E001B774A /* QuestionNewUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1328E1B53E001B774A /* QuestionNewUIViewController.swift */; };
+		0A59AD1628E1B562001B774A /* QuestionNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1528E1B562001B774A /* QuestionNewUIView.swift */; };
+		0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */; };
 		0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */; };
 		0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */; };
 		0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F2E6028C228F900F7D70D /* SubscriptionDiamondView.swift */; };
@@ -156,6 +159,9 @@
 		0A59AD0D28E19727001B774A /* QuizDataParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataParse.swift; sourceTree = "<group>"; };
 		0A59AD0E28E19727001B774A /* QuizTopicParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTopicParse.swift; sourceTree = "<group>"; };
 		0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoAddressParse.swift; sourceTree = "<group>"; };
+		0A59AD1328E1B53E001B774A /* QuestionNewUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionNewUIViewController.swift; sourceTree = "<group>"; };
+		0A59AD1528E1B562001B774A /* QuestionNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionNewUIView.swift; sourceTree = "<group>"; };
+		0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressCountdownTimerView.swift; sourceTree = "<group>"; };
 		0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCurrentView.swift; sourceTree = "<group>"; };
 		0A5F2E6028C228F900F7D70D /* SubscriptionDiamondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDiamondView.swift; sourceTree = "<group>"; };
@@ -436,6 +442,9 @@
 		0A59ACEC28E183F4001B774A /* Question */ = {
 			isa = PBXGroup;
 			children = (
+				0A59AD1528E1B562001B774A /* QuestionNewUIView.swift */,
+				0A59AD1328E1B53E001B774A /* QuestionNewUIViewController.swift */,
+				0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */,
 				0A59ACED28E183F4001B774A /* QuestionView.swift */,
 				0A59ACEE28E183F4001B774A /* QuestionViewController.swift */,
 				0A59ACEF28E183F4001B774A /* Choice */,
@@ -820,6 +829,7 @@
 				0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
+				0A59AD1628E1B562001B774A /* QuestionNewUIView.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
@@ -874,6 +884,7 @@
 				0A59AD0328E183F4001B774A /* QuestionView.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
+				0A59AD1428E1B53E001B774A /* QuestionNewUIViewController.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
@@ -881,6 +892,7 @@
 				0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
+				0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,
 				0A7A49FE28A3D294009EDE5E /* StringExtension.swift in Sources */,
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,

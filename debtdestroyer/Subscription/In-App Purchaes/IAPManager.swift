@@ -95,34 +95,60 @@ class IAPManager: NSObject {
     }
 }
 
+extension Notification.Name {
+    static let IAPHelperPurchaseNotification = Notification.Name("IAPHelperPurchaseNotification")
+}
+
 // MARK: - SKPaymentTransactionObserver
 extension IAPManager: SKPaymentTransactionObserver{
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         transactions.forEach { (transaction) in
             switch transaction.transactionState {
                 case .purchased:
-                    onBuyProductHandler?(.success(true))
-                    SKPaymentQueue.default().finishTransaction(transaction)
-
+                    complete(transaction: transaction)
                 case .restored:
-                    totalRestoredPurchases += 1
-                    SKPaymentQueue.default().finishTransaction(transaction)
-
+                  restore(transaction: transaction)
                 case .failed:
-                    if let error = transaction.error as? SKError {
-                        if error.code != .paymentCancelled {
-                            onBuyProductHandler?(.failure(error))
-                        } else {
-                            onBuyProductHandler?(.failure(IAPManagerError.paymentWasCancelled))
-                        }
-                        print("IAP Error:", error.localizedDescription)
-                    }
-                    SKPaymentQueue.default().finishTransaction(transaction)
+                  fail(transaction: transaction)
 
                 case .deferred, .purchasing: break
                 @unknown default: break
             }
         }
+    }
+    
+    private func complete(transaction: SKPaymentTransaction) {
+        print("complete...")
+        onBuyProductHandler?(.success(true))
+        SKPaymentQueue.default().finishTransaction(transaction)
+        deliverPurchaseNotificationFor(identifier: transaction.payment.productIdentifier)
+
+    }
+    
+    private func restore(transaction: SKPaymentTransaction) {
+        guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
+        print("restore... \(productIdentifier)")
+        totalRestoredPurchases += 1
+        SKPaymentQueue.default().finishTransaction(transaction)
+        deliverPurchaseNotificationFor(identifier: productIdentifier)
+    }
+    
+    private func fail(transaction: SKPaymentTransaction) {
+        print("fail...")
+        if let error = transaction.error as? SKError {
+            if error.code != .paymentCancelled {
+                onBuyProductHandler?(.failure(error))
+            } else {
+                onBuyProductHandler?(.failure(IAPManagerError.paymentWasCancelled))
+            }
+            print("IAP Error:", error.localizedDescription)
+        }
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+
+    private func deliverPurchaseNotificationFor(identifier: String?) {
+        guard let identifier = identifier else { return }
+        NotificationCenter.default.post(name: .IAPHelperPurchaseNotification, object: identifier)
     }
 
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {

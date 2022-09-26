@@ -16,7 +16,6 @@
 		0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A637F28A6592200EFCC4D /* ViewExtension.swift */; };
 		0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */; };
 		0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */; };
-		0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739A289BD924006E67F9 /* TicketsViewController.swift */; };
 		0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739C289BD941006E67F9 /* BankViewController.swift */; };
 		0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */; };
 		0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */; };
@@ -25,8 +24,13 @@
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
 		0A305E0728D42988007A27CF /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A305E0628D42988007A27CF /* CryptoSettingsViewController.swift */; };
 		0A305E0A28D43808007A27CF /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A305E0928D43808007A27CF /* CryptoTabBarViewController.swift */; };
+		0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A421C0528DB3AED008792B8 /* StoreKit.framework */; };
+		0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */; };
+		0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0928DB4A7B008792B8 /* IAPManager.swift */; };
+		0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0B28DB4E5F008792B8 /* ViewModel.swift */; };
+		0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0D28DB4E8A008792B8 /* Model.swift */; };
+		0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */; };
 		0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA528B3816600C551FA /* TicketTopView.swift */; };
-		0A432FA828B3AB5A00C551FA /* ProgressViewUITry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA728B3AB5A00C551FA /* ProgressViewUITry.swift */; };
 		0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */; };
 		0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */; };
 		0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */; };
@@ -110,7 +114,6 @@
 		0A1A637F28A6592200EFCC4D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnTicketCell.swift; sourceTree = "<group>"; };
 		0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWithGradButton.swift; sourceTree = "<group>"; };
-		0A2E739A289BD924006E67F9 /* TicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsViewController.swift; sourceTree = "<group>"; };
 		0A2E739C289BD941006E67F9 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -119,8 +122,13 @@
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
 		0A305E0628D42988007A27CF /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
 		0A305E0928D43808007A27CF /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
+		0A421C0528DB3AED008792B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
+		0A421C0928DB4A7B008792B8 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		0A421C0B28DB4E5F008792B8 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		0A421C0D28DB4E8A008792B8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManageable.swift; sourceTree = "<group>"; };
 		0A432FA528B3816600C551FA /* TicketTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTopView.swift; sourceTree = "<group>"; };
-		0A432FA728B3AB5A00C551FA /* ProgressViewUITry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewUITry.swift; sourceTree = "<group>"; };
 		0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpsCell.swift; sourceTree = "<group>"; };
 		0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPrizeCell.swift; sourceTree = "<group>"; };
 		0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEarnTicketsCell.swift; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */,
+				0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +222,7 @@
 		00BB18DBCAA76C38BFDFB46B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A421C0528DB3AED008792B8 /* StoreKit.framework */,
 				1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */,
 			);
 			name = Frameworks;
@@ -313,15 +323,6 @@
 				0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		0A2E73A0289C2CAE006E67F9 /* Tickets */ = {
-			isa = PBXGroup;
-			children = (
-				0A2E739A289BD924006E67F9 /* TicketsViewController.swift */,
-				0A432FA728B3AB5A00C551FA /* ProgressViewUITry.swift */,
-			);
-			path = Tickets;
 			sourceTree = "<group>";
 		};
 		0A2E73A1289C2CB9006E67F9 /* Bank */ = {
@@ -429,12 +430,25 @@
 			path = Address;
 			sourceTree = "<group>";
 		};
+		0A421C1128DC84EB008792B8 /* In-App Purchaes */ = {
+			isa = PBXGroup;
+			children = (
+				0A421C0928DB4A7B008792B8 /* IAPManager.swift */,
+				0A421C0B28DB4E5F008792B8 /* ViewModel.swift */,
+				0A421C0D28DB4E8A008792B8 /* Model.swift */,
+				0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */,
+				0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */,
+			);
+			path = "In-App Purchaes";
+			sourceTree = "<group>";
+		};
 		0A74408C28BE405000AD0489 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
 				0A7635AF28C9A6B500316FD4 /* View */,
 				0A7635B228C9A6FD00316FD4 /* Data Store */,
 				0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */,
+				0A421C1128DC84EB008792B8 /* In-App Purchaes */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -599,7 +613,6 @@
 				925BD26328A24CF1009303AF /* Models */,
 				0A7A49DE28A386C6009EDE5E /* Onboarding */,
 				0A11C833289BC22B00AEF89D /* HomeTabs */,
-				0A2E73A0289C2CAE006E67F9 /* Tickets */,
 				0A2E73A1289C2CB9006E67F9 /* Bank */,
 				0A2E73A2289C2CC3006E67F9 /* Settings */,
 				0A2E73AD289D4106006E67F9 /* Prize */,
@@ -731,6 +744,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */,
 				92021FD9289B07A6007901A6 /* LaunchScreen.storyboard in Resources */,
 				92021FD6289B07A6007901A6 /* Assets.xcassets in Resources */,
 			);
@@ -785,6 +799,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */,
 				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
 				925F086B28D0F70A00AD8FD1 /* LearnViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
@@ -800,11 +815,11 @@
 				0AA2D53928D33E670082D2D6 /* FinishAnimationViewController.swift in Sources */,
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
 				0A4573A728D20E7700A237CD /* ProvideFeedbackView.swift in Sources */,
-				0A2E739B289BD924006E67F9 /* TicketsViewController.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				925F087128D10B2D00AD8FD1 /* QuizTopicParse.swift in Sources */,
 				0A45739B28D1B14A00A237CD /* StartQuizView.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
+				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0A4573A028D1DCC500A237CD /* AddressViewController.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
@@ -821,6 +836,7 @@
 				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
+				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
 				0A45739928D1B12F00A237CD /* StartQuizViewController.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
@@ -828,6 +844,7 @@
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
+				0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				925F086D28D0F73300AD8FD1 /* LearnView.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
@@ -873,7 +890,6 @@
 				0A45739E28D1DCAB00A237CD /* AddressView.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,
 				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
-				0A432FA828B3AB5A00C551FA /* ProgressViewUITry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

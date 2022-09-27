@@ -54,6 +54,10 @@ class LearnViewController: UIViewController {
         let nextIndex = currentIndex + 1
         let questionVC = QuestionNewUIViewController(quizDatas: quizDatas,
                                                 currentIndex: nextIndex)
-        self.navigationController?.pushViewController(questionVC, animated: true)
+        //Added on main thread because Timer.scheduleTime not working
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(questionVC, animated: true)
+
+        }
     }
 }

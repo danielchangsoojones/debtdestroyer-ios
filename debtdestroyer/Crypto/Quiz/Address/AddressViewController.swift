@@ -56,6 +56,7 @@ class AddressViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

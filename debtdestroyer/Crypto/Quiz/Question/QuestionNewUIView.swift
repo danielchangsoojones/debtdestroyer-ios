@@ -19,7 +19,7 @@ class QuestionNewUIView: UIView {
     private let leadingOffset: CGFloat = 20
     var timerLabel = UILabel()
     var circularView = CircularProgressCountdownTimerView()
-    var backImgView = UIImageView()
+    var backBtn = UIButton()
     let favLabel = UILabel()
 
     override init(frame: CGRect) {
@@ -27,7 +27,8 @@ class QuestionNewUIView: UIView {
         self.backgroundColor = .blue
         setScrollView()
         setUpProgressView()
-        setBackImageView()
+        setTimerLabel()
+        setBackButtonView()
         setFavLabel()
         setQuestionImgView()
         setQuestionNoLabel()
@@ -62,12 +63,24 @@ class QuestionNewUIView: UIView {
         }
     }
     
-    func setBackImageView() {
-        backImgView.image = UIImage.init(named: "cancel")// Close icon with white tint download
-        backImgView.backgroundColor = .white
-        let dimenssion = 35
-        contentView.addSubview(backImgView)
-        backImgView.snp.makeConstraints { make in
+    func setTimerLabel() {
+        timerLabel.text = "10"
+        timerLabel.numberOfLines = 0
+        timerLabel.textAlignment = .center
+        timerLabel.textColor = .white
+        timerLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        contentView.addSubview(timerLabel)
+        timerLabel.snp.makeConstraints { make in
+            make.center.equalTo(circularView)
+        }
+    }
+    
+    func setBackButtonView() {
+        backBtn.setImage(UIImage.init(named: "cancel"), for: .normal)
+        backBtn.backgroundColor = .clear
+        let dimenssion = 30
+        contentView.addSubview(backBtn)
+        backBtn.snp.makeConstraints { make in
             make.height.width.equalTo(dimenssion)
             make.centerY.equalTo(circularView)
             make.leading.equalToSuperview().inset(20)
@@ -75,18 +88,14 @@ class QuestionNewUIView: UIView {
     }
     
     func setFavLabel() {
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: "cancel")// Heart icon download
-        let attachmentString = NSAttributedString(attachment: attachment)
-        let lblString = NSMutableAttributedString(string: "")
-        lblString.append(attachmentString)
-        let count = NSMutableAttributedString(string: " 3")
-        lblString.append(count)
-        favLabel.attributedText = lblString
-        favLabel.textColor = .black
+        favLabel.text = " ♥ 3 "
+        favLabel.textColor = .white
         favLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        favLabel.textAlignment = .right
-        let dimenssion = 35
+        favLabel.textAlignment = .center
+        favLabel.layer.borderColor = UIColor.white.cgColor
+        favLabel.layer.borderWidth = 1
+        favLabel.layer.cornerRadius = 15
+        let dimenssion = 30
         contentView.addSubview(favLabel)
         favLabel.snp.makeConstraints { make in
             make.height.equalTo(dimenssion)
@@ -95,7 +104,6 @@ class QuestionNewUIView: UIView {
             make.trailing.equalToSuperview().inset(20)
         }
     }
-
 
     private func setQuestionImgView() {
         quesImgView.image = UIImage.init(named: "coffee")
@@ -116,7 +124,7 @@ class QuestionNewUIView: UIView {
         contentView.addSubview(questionNoLabel)
         questionNoLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(quesImgView.snp.bottom).offset(20)
+            make.top.equalTo(quesImgView.snp.bottom).offset(30)
         }
     }
     
@@ -126,37 +134,24 @@ class QuestionNewUIView: UIView {
         questionLabel.textColor = .white
         contentView.addSubview(questionLabel)
         questionLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(10)
             make.top.equalTo(questionNoLabel.snp.bottom).offset(20)
         }
     }
     
     private func setStackView() {
         answerStackView.axis = .vertical
-        answerStackView.alignment = .leading
-        answerStackView.distribution = .fillProportionally
-        answerStackView.spacing = 5
+        answerStackView.alignment = .center
+        answerStackView.distribution = .fillEqually
+        answerStackView.spacing = 15
         contentView.addSubview(answerStackView)
         answerStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(questionLabel)
             make.top.equalTo(questionLabel.snp.bottom).offset(50)
-            make.height.equalTo(300)
+            make.height.equalTo(250)
         }
     }
     
-    func setTimerLabel() {
-        timerLabel.text = "10"
-        timerLabel.numberOfLines = 0
-        timerLabel.textAlignment = .center
-        timerLabel.textColor = .white
-        timerLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        addSubview(timerLabel)
-        timerLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.center).offset(100)
-        }
-    }
-
     
 //    private func setSubmitBtn() {
 //        let coinbaseBlue = UIColor(red: 64 / 255.0, green: 124 / 255.0, blue: 232 / 255.0, alpha: 1)

@@ -1,22 +1,22 @@
 //
-//  AnswerChoiceView.swift
+//  AnswerChoiceNewUIView.swift
 //  debtdestroyer
 //
-//  Created by Daniel Jones on 9/13/22.
+//  Created by Rashmi Aher on 28/09/22.
 //
 
 import UIKit
 import BEMCheckBox
 
-class AnswerChoiceView: UIView {
+class AnswerChoiceNewUIView: UIView {
     //TODO: make this a checkbox view
     let checkBoxView = BEMCheckBox()
     let answerLabel = UILabel()
     
     init(answer: String) {
         super.init(frame: .zero)
-        setCheckbox()
         setAnswerLabel()
+        setCheckbox()
         setConstraints()
     }
     
@@ -27,40 +27,45 @@ class AnswerChoiceView: UIView {
     private func setConstraints() {
         
         checkBoxView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.centerY.equalTo(answerLabel.snp.centerY)
-            make.height.width.equalTo(30)
+            make.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(40)
+            make.width.equalTo(50)
         }
         
         answerLabel.snp.makeConstraints { make in
-            make.leading.equalTo(checkBoxView.snp.trailing).offset(10)
-            make.trailing.equalToSuperview()
-            make.top.bottom.equalToSuperview().inset(10)
+            make.leading.trailing.centerY.equalToSuperview()
+            make.height.equalTo(50)
         }
     }
     
     private func setCheckbox() {
-        checkBoxView.boxType = .circle
-        checkBoxView.tintColor = .white.withAlphaComponent(0.7)
-        let coinbaseBlue = UIColor(red: 64 / 255.0, green: 124 / 255.0, blue: 232 / 255.0, alpha: 1)
-        checkBoxView.onFillColor = coinbaseBlue
+        checkBoxView.boxType = .square
+        checkBoxView.tintColor = .white
+        checkBoxView.lineWidth = 4
+        checkBoxView.onTintColor = .clear
         checkBoxView.onCheckColor = .white
         addSubview(checkBoxView)
     }
     
     private func setAnswerLabel() {
         answerLabel.numberOfLines = 0
-        answerLabel.font = .systemFont(ofSize: 16)
+        answerLabel.font = .systemFont(ofSize: 18, weight: .heavy)
+        answerLabel.textAlignment = .center
         deselect()
         addSubview(answerLabel)
     }
     
     func deselect() {
-        answerLabel.textColor = .white.withAlphaComponent(0.6)
+        answerLabel.textColor = .coinbaseBlue
+        self.backgroundColor = .white
+        checkBoxView.tintColor = .white
         checkBoxView.on = false
     }
     
     func select() {
         answerLabel.textColor = .white
+        self.backgroundColor = .green
+        checkBoxView.tintColor = .green
     }
 }

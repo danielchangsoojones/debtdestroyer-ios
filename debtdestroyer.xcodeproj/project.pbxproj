@@ -82,6 +82,7 @@
 		0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */; };
 		0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */; };
 		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
+		0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */; };
 		0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */; };
 		0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A028B62F2A00985179 /* TransactionHistoryCell.swift */; };
 		0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A228B64B6200985179 /* BankDataStore.swift */; };
@@ -184,6 +185,7 @@
 		0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
 		0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerChoiceNewUIView.swift; sourceTree = "<group>"; };
 		0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerExtension.swift; sourceTree = "<group>"; };
 		0A9E94A028B62F2A00985179 /* TransactionHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryCell.swift; sourceTree = "<group>"; };
 		0A9E94A228B64B6200985179 /* BankDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDataStore.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				0A59ACF028E183F4001B774A /* AnswerChoiceView.swift */,
+				0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */,
 			);
 			path = Choice;
 			sourceTree = "<group>";
@@ -857,6 +860,7 @@
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
 				0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */,
+				0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */,
 				0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */,
 				0A59AD0528E183F4001B774A /* AnswerChoiceView.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,

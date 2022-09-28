@@ -23,7 +23,7 @@ class QuestionNewUIViewController: UIViewController {
     }()
     private let quizDatas: [QuizDataParse]
     private let currentIndex: Int
-    private var answerViews: [AnswerChoiceView] = []
+    private var answerViews: [AnswerChoiceNewUIView] = []
     var backBtn = UIButton()
 
     private var currentData: QuizDataParse {
@@ -120,7 +120,7 @@ class QuestionNewUIViewController: UIViewController {
     private func addAnswers(to stackView: UIStackView) {
         if let answers = currentData.answers {
             for (index, answer) in answers.enumerated() {
-                let answerView = AnswerChoiceView(answer: answer)
+                let answerView = AnswerChoiceNewUIView(answer: answer)
                 answerView.backgroundColor = .white
                 answerView.layer.cornerRadius = 12
                 answerView.checkBoxView.tag = index

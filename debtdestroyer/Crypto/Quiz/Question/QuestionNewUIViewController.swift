@@ -6,26 +6,21 @@
 //
 
 import UIKit
-import BEMCheckBox
+import Foundation
 
 class QuestionNewUIViewController: UIViewController {
     var circularView = CircularProgressCountdownTimerView()
-    var duration: TimeInterval!
-    var targetDate: Date = Date()
+    var timeLeft: TimeInterval = 15
+    var endTime: Date?
+    var timeLabel =  UILabel()
     var timer = Timer()
-    
-    lazy var durationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.day, .hour, .minute, .second]
-        formatter.unitsStyle = .brief
-        
-        return formatter
-    }()
     private let quizDatas: [QuizDataParse]
     private let currentIndex: Int
     private var answerViews: [AnswerChoiceNewUIView] = []
     var backBtn = UIButton()
-
+    let gifCheckMark = "https://media.giphy.com/media/QAUxbMqnNcMo9U0jt8/giphy.gif"
+    let gifCrossMark = "https://media.giphy.com/media/VIz2F9yck4NhxmoC59/giphy.gif"
+    
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
@@ -49,72 +44,40 @@ class QuestionNewUIViewController: UIViewController {
         addAnswers(to: questionView.answerStackView)
         self.circularView = questionView.circularView
         self.backBtn = questionView.backBtn
+        self.timeLabel = questionView.timerLabel
         backBtn.addTarget(self,action: #selector(backPressed),for: .touchUpInside)
 //        questionView.submitBtn.addTarget(self,
 //                                         action: #selector(submitPressed),
 //                                         for: .touchUpInside)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        let calendar = Calendar.current
-        targetDate = calendar.date(byAdding: .day, value: 7, to: Date())!
-        
-        formatDuration(from: Date(), to: targetDate)
-        
-        duration = 15
-        circularView.progressAnimation(duration: duration)
-        
+
+        circularView.progressAnimation(duration: timeLeft)
+        endTime = Date().addingTimeInterval(timeLeft)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        formatDuration(from: Date(), to: targetDate)
-        
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        let timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerTicked(_:)), userInfo: nil, repeats: true)
-
-//        self.timer = timer
+    @objc func updateTime() {
+        if timeLeft > 0 {
+            timeLeft = endTime?.timeIntervalSinceNow ?? 0
+            timeLabel.text = timeLeft.time
+        } else {
+            timeLabel.text = "00"
+            timer.invalidate()
+        }
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-//        timer.invalidate()
-//        timer = nil
-    }
-    
-    @objc func timerTicked(_ timer: Timer) {
-        formatDuration(from: Date(), to: targetDate)
-    }
-    
-    func formatDuration(from: Date, to: Date) {
-        let text = durationFormatter.string(from: to.timeIntervalSince(from))
-//        label.text = text
-    }
-    
+  
     @objc private func backPressed() {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func tapLabel(gesture: UITapGestureRecognizer) {
-        for (index, answerView) in answerViews.enumerated() {
-            if index == gesture.view?.tag {
-                answerView.select()
-                answerView.checkBoxView.on = true
-                submitPressed()
-
-            } else {
-                answerView.deselect()
-            }
-        }
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -123,9 +86,7 @@ class QuestionNewUIViewController: UIViewController {
                 let answerView = AnswerChoiceNewUIView(answer: answer)
                 answerView.backgroundColor = .white
                 answerView.layer.cornerRadius = 12
-                answerView.checkBoxView.tag = index
                 answerView.tag = index
-                answerView.checkBoxView.delegate = self
                 answerView.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
 
                 answerViews.append(answerView)
@@ -138,28 +99,59 @@ class QuestionNewUIViewController: UIViewController {
         }
     }
     
-    @objc private func submitPressed() {
-        let hasCheckedBox = answerViews.contains { answerView in
-            return answerView.checkBoxView.on
-        }
-        if !hasCheckedBox {
-            BannerAlert.show(title: "Error", subtitle: "Please choose an answer", type: .error)
-            return
-        }
-        
-        let selectedAnswerIndex = answerViews.firstIndex { answerView in
-            return answerView.checkBoxView.on
-        }
-        let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
-        if isIncorrectAnswer {
-            BannerAlert.show(title: "Incorrect Answer", subtitle: "This answer is incorrect. Please select a different one.", type: .error)
-            
-            for (index, answerView) in answerViews.enumerated() {
-                if index == selectedAnswerIndex {
-                    answerView.deselect()
+    @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        for (index, answerView) in answerViews.enumerated() {
+            if index == gesture.view?.tag {
+                answerView.select()
+ 
+                let isIncorrectAnswer = index != currentData.correct_answer_index
+                var gifURL : String!
+                if isIncorrectAnswer {
+                    gifURL = gifCrossMark
+                    answerView.backgroundColor = self.hexStringToUIColor(hex: "EB5757")
+                    
+                } else {
+                    gifURL = gifCheckMark
+                }
+                
+                DispatchQueue.global().async {
+                    
+                    if let gifURL : String = gifURL {
+                        if let imagefromURL = UIImage.gifImageWithURL(gifURL) {
+                            DispatchQueue.main.async {
+                                answerView.gifImgView.image = imagefromURL
+                                
+                            }
+                        }
+                    }
                 }
             }
-            return
+            
+        }
+        
+        Timer.runThisAfterDelay(seconds: 2 , after: {
+            self.submitAnswer()
+        })
+    }
+        
+    func submitAnswer() {
+        let selectedAnswerIndex = answerViews.firstIndex { answerView in
+            if answerView.backgroundColor != .white {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+        if isIncorrectAnswer {
+            let vc = WrongAnswerAnimationViewController(quizDatas: quizDatas,
+                                                                 currentIndex: currentIndex)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = CorrectAnswerAnimationViewController(quizDatas: quizDatas,
+                                                                 currentIndex: currentIndex)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         let nextIndex = currentIndex + 1
@@ -172,21 +164,17 @@ class QuestionNewUIViewController: UIViewController {
                 let addressVC = AddressViewController(quizTopicDatas: quizTopic)
                 self.navigationController?.pushViewController(addressVC, animated: true)
             }
-        } else {
-            let correctVC = FinishAnimationViewController(quizDatas: quizDatas,
-                                                          currentIndex: currentIndex)
-            self.navigationController?.pushViewController(correctVC, animated: true)
-        }
+        } 
     }
 }
-extension QuestionNewUIViewController: BEMCheckBoxDelegate {
-    func didTap(_ checkBox: BEMCheckBox) {
-        for (index, answerView) in answerViews.enumerated() {
-            if index == checkBox.tag {
-                answerView.select()
-            } else {
-                answerView.deselect()
-            }
-        }
+
+extension TimeInterval {
+    var time: String {
+        return String(format:"%02d", Int(ceil(truncatingRemainder(dividingBy: 60))) )
+    }
+}
+extension Int {
+    var degreesToRadians : CGFloat {
+        return CGFloat(self) * .pi / 180
     }
 }

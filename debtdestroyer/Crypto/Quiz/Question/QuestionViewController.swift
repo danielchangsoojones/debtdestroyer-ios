@@ -87,7 +87,7 @@ class QuestionViewController: UIViewController {
                 self.navigationController?.pushViewController(addressVC, animated: true)
             }
         } else {
-            let correctVC = FinishAnimationViewController(quizDatas: quizDatas,
+            let correctVC = CorrectAnswerAnimationViewController(quizDatas: quizDatas,
                                                           currentIndex: currentIndex)
             self.navigationController?.pushViewController(correctVC, animated: true)
         }

@@ -10,8 +10,8 @@ import UIKit
 
 class CircularProgressView: UIView {
     // First create two layer properties
-    private var circleLayer = CAShapeLayer()
-    private var progressLayer = CAShapeLayer()
+    var circleLayer = CAShapeLayer()
+    var progressLayer = CAShapeLayer()
     override init(frame: CGRect) {
         super.init(frame: frame)
         createCircularPath()

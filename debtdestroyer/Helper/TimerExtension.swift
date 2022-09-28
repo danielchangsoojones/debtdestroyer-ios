@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Timer: NSObject {
+extension Timer {
     public static func runThisAfterDelay(seconds: Double, after: @escaping () -> Void) {
         runThisAfterDelay(seconds: seconds, queue: DispatchQueue.main, after: after)
     }

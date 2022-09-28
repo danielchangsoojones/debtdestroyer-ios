@@ -6,17 +6,15 @@
 //
 
 import UIKit
-import BEMCheckBox
 
 class AnswerChoiceNewUIView: UIView {
-    //TODO: make this a checkbox view
-    let checkBoxView = BEMCheckBox()
+    let gifImgView = UIImageView()
     let answerLabel = UILabel()
-    
+
     init(answer: String) {
         super.init(frame: .zero)
         setAnswerLabel()
-        setCheckbox()
+        setGifImage()
         setConstraints()
     }
     
@@ -26,7 +24,7 @@ class AnswerChoiceNewUIView: UIView {
     
     private func setConstraints() {
         
-        checkBoxView.snp.makeConstraints { make in
+        gifImgView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()
             make.height.equalTo(40)
@@ -39,13 +37,9 @@ class AnswerChoiceNewUIView: UIView {
         }
     }
     
-    private func setCheckbox() {
-        checkBoxView.boxType = .square
-        checkBoxView.tintColor = .white
-        checkBoxView.lineWidth = 4
-        checkBoxView.onTintColor = .clear
-        checkBoxView.onCheckColor = .white
-        addSubview(checkBoxView)
+    private func setGifImage() {
+        gifImgView.backgroundColor = .clear
+        addSubview(gifImgView)
     }
     
     private func setAnswerLabel() {
@@ -59,13 +53,10 @@ class AnswerChoiceNewUIView: UIView {
     func deselect() {
         answerLabel.textColor = .coinbaseBlue
         self.backgroundColor = .white
-        checkBoxView.tintColor = .white
-        checkBoxView.on = false
     }
     
     func select() {
         answerLabel.textColor = .white
         self.backgroundColor = .green
-        checkBoxView.tintColor = .green
     }
 }

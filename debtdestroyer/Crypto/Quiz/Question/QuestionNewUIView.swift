@@ -51,7 +51,7 @@ class QuestionNewUIView: UIView {
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalTo(scrollView)
             make.left.right.equalTo(self)
-            make.height.greaterThanOrEqualTo(1500)
+            make.height.greaterThanOrEqualTo(800)
         }
     }
     
@@ -64,7 +64,7 @@ class QuestionNewUIView: UIView {
     }
     
     func setTimerLabel() {
-        timerLabel.text = "10"
+        timerLabel.text = "15"
         timerLabel.numberOfLines = 0
         timerLabel.textAlignment = .center
         timerLabel.textColor = .white

@@ -1,13 +1,13 @@
 //
-//  FinishAnimationViewController.swift
+//  WrongAnswerAnimationViewController.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 15/09/22.
+//  Created by Rashmi Aher on 28/09/22.
 //
 
 import UIKit
 
-class FinishAnimationViewController: UIViewController {
+class WrongAnswerAnimationViewController: UIViewController {
     var circularView = CircularProgressView()
     var duration: TimeInterval!
     var animationView = FinishAnimationView()
@@ -16,7 +16,8 @@ class FinishAnimationViewController: UIViewController {
     var imgView = UIImageView()
     private let quizDatas: [QuizDataParse]
     private let currentIndex: Int
-    
+    let answerColor = "EB5757"
+
     init(quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
@@ -37,8 +38,11 @@ class FinishAnimationViewController: UIViewController {
         self.earnedLabel = animationView.earnedLabel
         self.nextButton = animationView.nextButton
         self.nextButton.addTarget(self,
-                                       action: #selector(nextBtnPressed),
-                                       for: .touchUpInside)
+                                  action: #selector(nextBtnPressed),
+                                  for: .touchUpInside)
+        self.earnedLabel.text = "Wrong Answer!"
+        self.imgView.image = UIImage.init(named: "cross")
+        self.circularView.progressLayer.strokeColor = hexStringToUIColor(hex: answerColor).cgColor
     }
     
     override func viewDidLoad() {
@@ -47,10 +51,14 @@ class FinishAnimationViewController: UIViewController {
         circularView.progressAnimation(duration: duration)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     @objc private func nextBtnPressed() {
         let nextIndex = currentIndex + 1
         let learnVC = LearnViewController(quizDatas: quizDatas, currentIndex: nextIndex)
         navigationController?.pushViewController(learnVC, animated: true)
     }
-
+    
 }

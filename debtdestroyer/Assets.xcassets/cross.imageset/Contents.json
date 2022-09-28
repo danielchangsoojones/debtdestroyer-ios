@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "check-mark-black-outline.png",
+      "filename" : "cross.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "check-mark-black-outline-2.png",
+      "filename" : "cross-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "check-mark-black-outline-3.png",
+      "filename" : "cross-3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

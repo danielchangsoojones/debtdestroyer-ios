@@ -98,6 +98,27 @@ extension UIView {
         layer.insertSublayer(gradientLayer, at: 0)
     }
     
+    func setGradientBackground(color1 : UIColor, color2 : UIColor, radi : CGFloat) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [color1.cgColor, color2.cgColor]
+        gradientLayer.locations = [0, 1]
+        gradientLayer.frame = bounds
+        gradientLayer.cornerRadius = radi
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+    func removeGradientSublayer(_ view: UIView, layerIndex index: Int) {
+        guard let sublayers = view.layer.sublayers else {
+            print("The view does not have any sublayers.")
+            return
+        }
+        if sublayers.count > index {
+            view.layer.sublayers!.remove(at: index)
+        } else {
+            print("There are not enough sublayers to remove that index.")
+        }
+    }
+    
     func shake(){
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07

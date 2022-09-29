@@ -64,6 +64,7 @@ class QuestionNewUIViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        self.view.setGradientBackground(color1: .topBlue, color2: .bottomBlue, radi: 0)
     }
     
     @objc func updateTime() {
@@ -73,6 +74,8 @@ class QuestionNewUIViewController: UIViewController {
         } else {
             timeLabel.text = "00"
             timer.invalidate()
+            
+            // TODO: time up code
         }
     }
   
@@ -108,10 +111,12 @@ class QuestionNewUIViewController: UIViewController {
                 var gifURL : String!
                 if isIncorrectAnswer {
                     gifURL = gifCrossMark
-                    answerView.backgroundColor = self.hexStringToUIColor(hex: "EB5757")
-                    
+//                    answerView.layer.sublayers?.remove(at: 0)
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 12)
                 } else {
                     gifURL = gifCheckMark
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 12)
+
                 }
                 
                 DispatchQueue.global().async {

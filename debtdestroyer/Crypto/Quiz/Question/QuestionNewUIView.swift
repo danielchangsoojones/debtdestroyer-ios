@@ -24,7 +24,7 @@ class QuestionNewUIView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .blue
+//        self.backgroundColor = .blue
         setScrollView()
         setUpProgressView()
         setTimerLabel()
@@ -42,11 +42,13 @@ class QuestionNewUIView: UIView {
     }
     
     private func setScrollView() {
+        scrollView.backgroundColor = .clear
         addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(self)
         }
         
+        contentView.backgroundColor = .clear
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalTo(scrollView)
@@ -76,7 +78,9 @@ class QuestionNewUIView: UIView {
     }
     
     func setBackButtonView() {
-        backBtn.setImage(UIImage.init(named: "cancel"), for: .normal)
+        backBtn.setTitle("ⓧ", for: .normal)
+        backBtn.setTitleColor(.white, for: .normal)
+        backBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         backBtn.backgroundColor = .clear
         let dimenssion = 30
         contentView.addSubview(backBtn)
@@ -134,8 +138,8 @@ class QuestionNewUIView: UIView {
         questionLabel.textColor = .white
         contentView.addSubview(questionLabel)
         questionLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(10)
-            make.top.equalTo(questionNoLabel.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(questionNoLabel.snp.bottom).offset(10)
         }
     }
     
@@ -147,7 +151,7 @@ class QuestionNewUIView: UIView {
         contentView.addSubview(answerStackView)
         answerStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(questionLabel)
-            make.top.equalTo(questionLabel.snp.bottom).offset(50)
+            make.top.equalTo(questionLabel.snp.bottom).offset(30)
             make.height.equalTo(250)
         }
     }

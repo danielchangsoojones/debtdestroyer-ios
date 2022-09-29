@@ -148,7 +148,7 @@ class WelcomeView: UIView {
             logoImageView.snp.makeConstraints { (make) in
                 make.centerY.equalToSuperview().inset(150)
                 make.centerX.equalToSuperview()
-                make.width.equalTo(self.frame.width * 0.5 )
+                make.width.height.equalTo(self.frame.width * 0.5)
             }
         }
         

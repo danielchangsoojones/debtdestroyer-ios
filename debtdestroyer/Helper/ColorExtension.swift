@@ -20,4 +20,5 @@ extension UIColor {
     static let coinbaseBlue = UIColor(red: 64 / 255.0, green: 124 / 255.0, blue: 232 / 255.0, alpha: 1)
     static let bottomBlue = UIColor(red: 67 / 255.0, green: 90 / 255.0, blue: 232 / 255.0, alpha: 1)
     static let topBlue = UIColor(red: 39 / 255.0, green: 126 / 255.0, blue: 241 / 255.0, alpha: 1)
+    static let oliveGreen = UIColor(red: 25 / 255.0, green: 180 / 255.0, blue: 126 / 255.0, alpha: 1)
 }

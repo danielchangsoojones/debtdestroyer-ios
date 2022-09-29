@@ -29,6 +29,8 @@
 		0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0D28DB4E8A008792B8 /* Model.swift */; };
 		0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */; };
 		0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA528B3816600C551FA /* TicketTopView.swift */; };
+		0A44EF9A28E5907B006305B8 /* StartQuizNewUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */; };
+		0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */; };
 		0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */; };
 		0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */; };
 		0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */; };
@@ -132,6 +134,8 @@
 		0A421C0D28DB4E8A008792B8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManageable.swift; sourceTree = "<group>"; };
 		0A432FA528B3816600C551FA /* TicketTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTopView.swift; sourceTree = "<group>"; };
+		0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizNewUIViewController.swift; sourceTree = "<group>"; };
+		0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizNewUIView.swift; sourceTree = "<group>"; };
 		0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpsCell.swift; sourceTree = "<group>"; };
 		0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPrizeCell.swift; sourceTree = "<group>"; };
 		0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEarnTicketsCell.swift; sourceTree = "<group>"; };
@@ -469,6 +473,8 @@
 		0A59ACF128E183F4001B774A /* Start Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */,
+				0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */,
 				0A59ACF228E183F4001B774A /* StartQuizView.swift */,
 				0A59ACF328E183F4001B774A /* StartQuizViewController.swift */,
 			);
@@ -853,6 +859,7 @@
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
+				0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */,
 				0A59ACFE28E183F4001B774A /* LearnView.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
@@ -895,6 +902,7 @@
 				0A59AD1428E1B53E001B774A /* QuestionNewUIViewController.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
+				0A44EF9A28E5907B006305B8 /* StartQuizNewUIViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,
 				0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */,

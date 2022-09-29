@@ -65,7 +65,7 @@ class QuestionNewUIView: UIView {
         }
     }
     
-    func setTimerLabel() {
+    private func setTimerLabel() {
         timerLabel.text = "15"
         timerLabel.numberOfLines = 0
         timerLabel.textAlignment = .center
@@ -77,7 +77,7 @@ class QuestionNewUIView: UIView {
         }
     }
     
-    func setBackButtonView() {
+    private func setBackButtonView() {
         backBtn.setTitle("ⓧ", for: .normal)
         backBtn.setTitleColor(.white, for: .normal)
         backBtn.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -91,7 +91,7 @@ class QuestionNewUIView: UIView {
         }
     }
     
-    func setFavLabel() {
+    private func setFavLabel() {
         favLabel.text = " ♥ 3 "
         favLabel.textColor = .white
         favLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)

@@ -31,6 +31,12 @@
 		0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA528B3816600C551FA /* TicketTopView.swift */; };
 		0A44EF9A28E5907B006305B8 /* StartQuizNewUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */; };
 		0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */; };
+		0A44EF9E28E5B970006305B8 /* BottomSheetContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9D28E5B970006305B8 /* BottomSheetContainerViewController.swift */; };
+		0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA028E5B9E5006305B8 /* ChampionsViewController.swift */; };
+		0A44EFA328E5BA21006305B8 /* ChampionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA228E5BA21006305B8 /* ChampionsListViewController.swift */; };
+		0A44EFA528E5BA3D006305B8 /* ChampionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA428E5BA3D006305B8 /* ChampionsListView.swift */; };
+		0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA628E5BA50006305B8 /* ChampionsView.swift */; };
+		0A44EFA928E5BB4B006305B8 /* BestChampionsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA828E5BB4B006305B8 /* BestChampionsContainerViewController.swift */; };
 		0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */; };
 		0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */; };
 		0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */; };
@@ -136,6 +142,12 @@
 		0A432FA528B3816600C551FA /* TicketTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTopView.swift; sourceTree = "<group>"; };
 		0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizNewUIViewController.swift; sourceTree = "<group>"; };
 		0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizNewUIView.swift; sourceTree = "<group>"; };
+		0A44EF9D28E5B970006305B8 /* BottomSheetContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetContainerViewController.swift; sourceTree = "<group>"; };
+		0A44EFA028E5B9E5006305B8 /* ChampionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsViewController.swift; sourceTree = "<group>"; };
+		0A44EFA228E5BA21006305B8 /* ChampionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsListViewController.swift; sourceTree = "<group>"; };
+		0A44EFA428E5BA3D006305B8 /* ChampionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsListView.swift; sourceTree = "<group>"; };
+		0A44EFA628E5BA50006305B8 /* ChampionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsView.swift; sourceTree = "<group>"; };
+		0A44EFA828E5BB4B006305B8 /* BestChampionsContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestChampionsContainerViewController.swift; sourceTree = "<group>"; };
 		0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpsCell.swift; sourceTree = "<group>"; };
 		0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPrizeCell.swift; sourceTree = "<group>"; };
 		0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEarnTicketsCell.swift; sourceTree = "<group>"; };
@@ -388,6 +400,19 @@
 			path = "In-App Purchaes";
 			sourceTree = "<group>";
 		};
+		0A44EF9F28E5B975006305B8 /* Best Champions */ = {
+			isa = PBXGroup;
+			children = (
+				0A44EF9D28E5B970006305B8 /* BottomSheetContainerViewController.swift */,
+				0A44EFA828E5BB4B006305B8 /* BestChampionsContainerViewController.swift */,
+				0A44EFA028E5B9E5006305B8 /* ChampionsViewController.swift */,
+				0A44EFA628E5BA50006305B8 /* ChampionsView.swift */,
+				0A44EFA228E5BA21006305B8 /* ChampionsListViewController.swift */,
+				0A44EFA428E5BA3D006305B8 /* ChampionsListView.swift */,
+			);
+			path = "Best Champions";
+			sourceTree = "<group>";
+		};
 		0A59ACDF28E183F4001B774A /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +469,7 @@
 				0A59ACEA28E183F4001B774A /* FinishAnimationView.swift */,
 				0A59ACEB28E183F4001B774A /* CorrectAnswerAnimationViewController.swift */,
 				0A92F1A628E437D60094C3E9 /* WrongAnswerAnimationViewController.swift */,
+				0A44EF9F28E5B975006305B8 /* Best Champions */,
 			);
 			path = Answer;
 			sourceTree = "<group>";
@@ -860,12 +886,15 @@
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */,
+				0A44EF9E28E5B970006305B8 /* BottomSheetContainerViewController.swift in Sources */,
+				0A44EFA928E5BB4B006305B8 /* BestChampionsContainerViewController.swift in Sources */,
 				0A59ACFE28E183F4001B774A /* LearnView.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
 				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
+				0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
@@ -876,6 +905,7 @@
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,
+				0A44EFA528E5BA3D006305B8 /* ChampionsListView.swift in Sources */,
 				92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */,
 				0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */,
 				0A59AD0428E183F4001B774A /* QuestionViewController.swift in Sources */,
@@ -902,6 +932,8 @@
 				0A59AD1428E1B53E001B774A /* QuestionNewUIViewController.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
+				0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */,
+				0A44EFA328E5BA21006305B8 /* ChampionsListViewController.swift in Sources */,
 				0A44EF9A28E5907B006305B8 /* StartQuizNewUIViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,

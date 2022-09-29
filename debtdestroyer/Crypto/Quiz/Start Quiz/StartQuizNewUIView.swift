@@ -52,7 +52,6 @@ class StartQuizNewUIView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLabel.text = "Ready to get more from your money?"
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         titleLabel.textColor = .white
         titleLabel.backgroundColor = .clear
@@ -66,7 +65,6 @@ class StartQuizNewUIView: UIView {
     }
     
     private func setDescriptionLabel() {
-        descriptionLabel.text = "Welcome to LavaDrop. One app to manage all things money. Join a global community of 10 millions who spend, save, invest through us."
         descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descriptionLabel.textColor = .white
         descriptionLabel.backgroundColor = .clear

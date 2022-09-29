@@ -12,7 +12,6 @@ class StartQuizNewUIViewController: UIViewController {
     private var quizDatas: [QuizDataParse] = []
     private var backgroundImgView: UIImageView!
     private var descriptionLabel = UILabel()
-    private var nameLabel = UILabel()
     private var titleLabel = UILabel()
     
     override func loadView() {
@@ -20,9 +19,8 @@ class StartQuizNewUIViewController: UIViewController {
         let startView = StartQuizNewUIView(frame: self.view.frame)
         self.view = startView
         self.backgroundImgView = startView.backgroudImgView
-        self.nameLabel = startView.nameLabel
         self.descriptionLabel = startView.descriptionLabel
-        self.titleLabel = startView.descriptionLabel
+        self.titleLabel = startView.titleLabel
         startView.nextButton.addTarget(self,
                                        action: #selector(nextBtnPressed),
                                        for: .touchUpInside)
@@ -44,11 +42,16 @@ class StartQuizNewUIViewController: UIViewController {
             let quizTopic = quizData.first?.quizTopic
             self.backgroundImgView.image = UIImage.init(named: "startTrivia")
             self.backgroundImgView.backgroundColor = .oliveGreen
+            
             self.dataStore.shouldShowEarnings { shouldShowEarnings in
                 User.shouldShowEarnings = shouldShowEarnings
-//                let prizeAmount = quizTopic?.prize_amount ?? 0
-//                self.descriptionLabel.text = "Complete the quiz, receive \(prizeAmount) " + (quizTopic?.name ?? "coins") + " (payouts occur within 24 hours)."
-//                self.descriptionLabel.isHidden = !shouldShowEarnings
+                if shouldShowEarnings {
+                    self.titleLabel.text = quizTopic?.name ?? "Win our trivia to earn cash towards your student loan"
+                    self.descriptionLabel.text = quizTopic?.ticker ?? ""
+                } else {
+                    self.titleLabel.text = "Become the trivia champion"
+                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
+                }
             }
             activityIndicator.stopAnimating()
         }

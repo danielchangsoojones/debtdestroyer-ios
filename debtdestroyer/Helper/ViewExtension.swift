@@ -87,8 +87,8 @@ extension UIView {
         
     func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
-        let color1 = hexStringToUIColor(hex: "FF2474")
-        let color2 = hexStringToUIColor(hex: "FF7910")
+        let color1 = hexStringToUIColor(hex: "FF7910")
+        let color2 = hexStringToUIColor(hex: "FF2474")
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
@@ -96,5 +96,36 @@ extension UIView {
         gradientLayer.frame = bounds
         
         layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setGradientBackground(color1 : UIColor, color2 : UIColor, radi : CGFloat) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [color1.cgColor, color2.cgColor]
+        gradientLayer.locations = [0, 1]
+        gradientLayer.frame = bounds
+        gradientLayer.cornerRadius = radi
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+    func removeGradientSublayer(_ view: UIView, layerIndex index: Int) {
+        guard let sublayers = view.layer.sublayers else {
+            print("The view does not have any sublayers.")
+            return
+        }
+        if sublayers.count > index {
+            view.layer.sublayers!.remove(at: index)
+        } else {
+            print("There are not enough sublayers to remove that index.")
+        }
+    }
+    
+    func shake(){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 3
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10, y: self.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
+        self.layer.add(animation, forKey: "position")
     }
 }

@@ -98,10 +98,16 @@ class OnboardingDataStore: NSObject {
 //        }
 //    }
     
-    func save(phoneNumber: String) {
-        if let currentUser = User.current() {
-            currentUser.phoneNumber = phoneNumber
-            currentUser.saveInBackground()
+    func save(phoneNumber: String, crypto_address: String) {
+        let parameters: [String : Any] = ["crypto_address_public_key" : crypto_address, "phoneStr": phoneNumber]
+        PFCloud.callFunction(inBackground: "savePhoneNum", withParameters: parameters) { (result, error) in
+            if result != nil {
+                //TODO: eventually we might want to do something with successful result
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getQuizData")
+            }
         }
     }
 }

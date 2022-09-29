@@ -17,5 +17,8 @@ extension UIColor {
     static let gradPink = UIColor(red: 217 / 255.0, green: 77 / 255.0, blue: 120 / 255.0, alpha: 1)
     static let gradOrange = UIColor(red: 223 / 255.0, green: 124 / 255.0, blue: 73 / 255.0, alpha: 1)
     static let progrssBarBackgroundColor = UIColor(red: 240 / 255.0, green: 223 / 255.0, blue: 186 / 255.0, alpha: 1)
-
+    static let coinbaseBlue = UIColor(red: 64 / 255.0, green: 124 / 255.0, blue: 232 / 255.0, alpha: 1)
+    static let bottomBlue = UIColor(red: 67 / 255.0, green: 90 / 255.0, blue: 232 / 255.0, alpha: 1)
+    static let topBlue = UIColor(red: 39 / 255.0, green: 126 / 255.0, blue: 241 / 255.0, alpha: 1)
+    static let oliveGreen = UIColor(red: 25 / 255.0, green: 180 / 255.0, blue: 126 / 255.0, alpha: 1)
 }

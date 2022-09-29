@@ -24,7 +24,7 @@ class LogInViewController: RegisterViewController {
     }
     
     override func runServerAuthentication() {
-    dataStore.logIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
+        dataStore.logIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
     }
     
     private func updateLabels() {
@@ -55,7 +55,7 @@ class LogInViewController: RegisterViewController {
     }
     
     override func segueIntoApp() {
-        let vc = HomeTabBarViewController()
+        let vc = CryptoTabBarViewController()//HomeTabBarViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }

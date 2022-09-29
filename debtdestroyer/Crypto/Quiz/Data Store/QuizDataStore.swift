@@ -41,7 +41,7 @@ class QuizDataStore {
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
-                BannerAlert.showUnknownError(functionName: "saveCryptoAddress")
+                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
             }
         }
     }

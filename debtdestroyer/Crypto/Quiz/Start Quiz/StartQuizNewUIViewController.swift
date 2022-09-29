@@ -64,7 +64,11 @@ class StartQuizNewUIViewController: UIViewController {
     }
     
     @objc private func nextBtnPressed() {
-        let learnVC = LearnViewController(quizDatas: quizDatas, currentIndex: 0)
-        self.navigationController?.pushViewController(learnVC, animated: true)
+//        let learnVC = LearnViewController(quizDatas: quizDatas, currentIndex: 0)
+//        self.navigationController?.pushViewController(learnVC, animated: true)
+        let vc = BestChampionsContainerViewController(contentViewController: ChampionsViewController(quizDatas: quizDatas, currentIndex: 0), bottomSheetViewController: ChampionsListViewController(quizDatas: quizDatas, currentIndex: 0), bottomSheetConfiguration: .init(
+            height: UIScreen.main.bounds.height * 0.8,
+            initialOffset: ((UIScreen.main.bounds.height) - 380) + UIWindow().safeAreaInsets.bottom))
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

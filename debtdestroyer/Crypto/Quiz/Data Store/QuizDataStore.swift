@@ -35,7 +35,9 @@ class QuizDataStore {
     }
     
     func shouldShowEarnings(completion: @escaping (Bool) -> Void) {
-        PFCloud.callFunction(inBackground: "shouldShowEarnings", withParameters: [:]) { (result, error) in
+        let versionStr = Helpers.getVersionStr() ?? ""
+        let parameters: [String : Any] = ["version_str" : versionStr, "deviceType": "ios"]
+        PFCloud.callFunction(inBackground: "shouldShowEarnings", withParameters: parameters) { (result, error) in
             if let shouldShowEarnings = result as? Bool {
                 completion(shouldShowEarnings)
             } else if let error = error {

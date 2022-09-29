@@ -11,7 +11,7 @@ import SCLAlertView
 
 class ForceUpdate {
     static func checkIfForceUpdate() {
-        let version_str = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        let version_str = Helpers.getVersionStr()
         if let version_str = version_str {
             let parameters: [String : Any] = ["app_version" : version_str, "deviceType": "ios"]
             PFCloud.callFunction(inBackground: "checkForceUpdate", withParameters: parameters) { (result, error) in

@@ -81,4 +81,9 @@ struct Helpers {
 //        let submitVC = UploadViewController(communityID: communityID)
 //        currentVC.navigationController?.pushViewController(submitVC, animated: true)
 //    }
+    
+    static func getVersionStr() -> String? {
+        let version_str = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        return version_str
+    }
 }

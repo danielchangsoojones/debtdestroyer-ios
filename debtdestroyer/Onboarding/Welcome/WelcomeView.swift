@@ -160,7 +160,5 @@ class WelcomeView: UIView {
             make.leading.trailing.equalToSuperview().inset(30)
             make.top.equalTo(logoImageView.snp.bottom).offset(10)
         }
-      
     }
-    
 }

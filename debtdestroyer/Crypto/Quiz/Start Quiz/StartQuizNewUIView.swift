@@ -17,7 +17,7 @@ class StartQuizNewUIView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .oliveGreen
         setbackgroudImgView()
         setNextButton()
         setNameLabel()
@@ -33,7 +33,9 @@ class StartQuizNewUIView: UIView {
         backgroudImgView.contentMode = .scaleAspectFill
         addSubview(backgroudImgView)
         backgroudImgView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottomMargin.equalToSuperview()
+            make.top.equalTo(self.snp.centerY)
         }
     }
  

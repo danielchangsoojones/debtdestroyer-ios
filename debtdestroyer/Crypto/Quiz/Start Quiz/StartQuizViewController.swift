@@ -62,7 +62,7 @@ class StartQuizViewController: UIViewController {
     }
     
     @objc private func nextBtnPressed() {
-        let learnVC = LearnViewController(quizDatas: quizDatas, currentIndex: 0)
+        let learnVC = QuestionNewUIViewController(quizDatas: quizDatas, currentIndex: 0)
         self.navigationController?.pushViewController(learnVC, animated: true)
     }
 }

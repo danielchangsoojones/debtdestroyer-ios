@@ -150,12 +150,10 @@ class QuestionNewUIViewController: UIViewController {
         
         let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
         if isIncorrectAnswer {
-            let vc = WrongAnswerAnimationViewController(quizDatas: quizDatas,
-                                                                 currentIndex: currentIndex)
+            let vc = ChampionsViewController(quizDatas: quizDatas, currentIndex: currentIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            let vc = CorrectAnswerAnimationViewController(quizDatas: quizDatas,
-                                                                 currentIndex: currentIndex)
+            let vc = QuestionNewUIViewController(quizDatas: quizDatas, currentIndex: currentIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

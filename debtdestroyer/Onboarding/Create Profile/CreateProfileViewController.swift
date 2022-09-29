@@ -62,34 +62,34 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     }
     
     var isComplete: Bool {
-        //        guard let phoneStr = emailTextField?.text else {
-        //            return false
-        //        }
-        //
-        //        if phoneStr.isEmpty {
-        //            BannerAlert.show(title: "Phone Number Needed", subtitle: "Please input your phone number", type: .error)
-        //            return false
-        //        }
-        //
-        //        if !phoneStr.isPhoneNumber {
-        //            BannerAlert.show(title: "Invalid Phone Number", subtitle: "A proper phone number has only 10 digits", type: .error)
-        //            return false
-        //        }
+        guard let phoneStr = emailTextField?.text else {
+            return false
+        }
+        
+        if phoneStr.isEmpty {
+            BannerAlert.show(title: "Phone Number Needed", subtitle: "Please input your phone number", type: .error)
+            return false
+        }
+        
+        if !phoneStr.isPhoneNumber {
+            BannerAlert.show(title: "Invalid Phone Number", subtitle: "A proper phone number has only 10 digits", type: .error)
+            return false
+        }
         
         return true
     }
 }
 
 extension CreateProfileViewController: UITextFieldDelegate {
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//
-//        guard let text = self.emailTextField.text else { return true }
-//
-//        emailTextField.text = text.applyPatternOnNumbers(pattern: "+# (###) ###-####", replacementCharacter: "#")
-//        let d = emailTextField.text?.numbersOnly
-//        let count = d!.count + string.count - range.length
-//        print(count <= 11)
-//
-//        return count <= 11
-//    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        guard let text = self.emailTextField.text else { return true }
+
+        emailTextField.text = text.applyPatternOnNumbers(pattern: "+# (###) ###-####", replacementCharacter: "#")
+        let d = emailTextField.text?.numbersOnly
+        let count = d!.count + string.count - range.length
+        print(count <= 11)
+
+        return count <= 11
+    }
 }

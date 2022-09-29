@@ -48,8 +48,6 @@
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
-		0A59ACFE28E183F4001B774A /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE628E183F4001B774A /* LearnView.swift */; };
-		0A59ACFF28E183F4001B774A /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE728E183F4001B774A /* LearnViewController.swift */; };
 		0A59AD0028E183F4001B774A /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE928E183F4001B774A /* CircularProgressView.swift */; };
 		0A59AD0128E183F4001B774A /* FinishAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACEA28E183F4001B774A /* FinishAnimationView.swift */; };
 		0A59AD0228E183F4001B774A /* CorrectAnswerAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACEB28E183F4001B774A /* CorrectAnswerAnimationViewController.swift */; };
@@ -160,8 +158,6 @@
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
-		0A59ACE628E183F4001B774A /* LearnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
-		0A59ACE728E183F4001B774A /* LearnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
 		0A59ACE928E183F4001B774A /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		0A59ACEA28E183F4001B774A /* FinishAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishAnimationView.swift; sourceTree = "<group>"; };
 		0A59ACEB28E183F4001B774A /* CorrectAnswerAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorrectAnswerAnimationViewController.swift; sourceTree = "<group>"; };
@@ -429,7 +425,6 @@
 			children = (
 				0A59ACE128E183F4001B774A /* Tabs */,
 				0A59ACE328E183F4001B774A /* Settings */,
-				0A59ACE528E183F4001B774A /* Learn */,
 				0A59ACE828E183F4001B774A /* Answer */,
 				0A59ACEC28E183F4001B774A /* Question */,
 				0A59ACF128E183F4001B774A /* Start Quiz */,
@@ -454,15 +449,6 @@
 				0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		0A59ACE528E183F4001B774A /* Learn */ = {
-			isa = PBXGroup;
-			children = (
-				0A59ACE628E183F4001B774A /* LearnView.swift */,
-				0A59ACE728E183F4001B774A /* LearnViewController.swift */,
-			);
-			path = Learn;
 			sourceTree = "<group>";
 		};
 		0A59ACE828E183F4001B774A /* Answer */ = {
@@ -891,7 +877,6 @@
 				0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */,
 				0A44EF9E28E5B970006305B8 /* BottomSheetContainerViewController.swift in Sources */,
 				0A44EFA928E5BB4B006305B8 /* BestChampionsContainerViewController.swift in Sources */,
-				0A59ACFE28E183F4001B774A /* LearnView.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
 				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
@@ -921,7 +906,6 @@
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A92F1A728E437D60094C3E9 /* WrongAnswerAnimationViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
-				0A59ACFF28E183F4001B774A /* LearnViewController.swift in Sources */,
 				0A59AD0728E183F4001B774A /* StartQuizViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,

@@ -34,6 +34,7 @@ class ChampionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLeaderboardTableView()
+        loadLeaderboard()
     }
     
     private func setLeaderboardTableView() {

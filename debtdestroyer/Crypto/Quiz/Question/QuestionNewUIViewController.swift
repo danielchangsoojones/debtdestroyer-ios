@@ -20,6 +20,7 @@ class QuestionNewUIViewController: UIViewController {
     var backBtn = UIButton()
     let gifCheckMark = "https://media.giphy.com/media/QAUxbMqnNcMo9U0jt8/giphy.gif"
     let gifCrossMark = "https://media.giphy.com/media/VIz2F9yck4NhxmoC59/giphy.gif"
+    private let dataStore = QuizDataStore()
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -153,6 +154,7 @@ class QuestionNewUIViewController: UIViewController {
             let vc = ChampionsViewController(quizTopic: currentData.quizTopic)
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
+            dataStore.saveCorrectAnswer(for: currentData.quizTopic)
             let vc = QuestionNewUIViewController(quizDatas: quizDatas, currentIndex: currentIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         }

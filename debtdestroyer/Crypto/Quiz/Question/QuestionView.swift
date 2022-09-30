@@ -24,7 +24,6 @@ class QuestionView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.backgroundColor = .blue
         setScrollView()
         setUpProgressView()
         setTimerLabel()
@@ -34,7 +33,6 @@ class QuestionView: UIView {
         setQuestionNoLabel()
         setQuestionLabel()
         setStackView()
-//        setSubmitBtn()
     }
     
     required init?(coder: NSCoder) {
@@ -156,20 +154,4 @@ class QuestionView: UIView {
             make.height.equalTo(250)
         }
     }
-    
-    
-//    private func setSubmitBtn() {
-//        let coinbaseBlue = UIColor(red: 64 / 255.0, green: 124 / 255.0, blue: 232 / 255.0, alpha: 1)
-//        submitBtn.backgroundColor = coinbaseBlue
-//        let height: CGFloat = 50
-//        submitBtn.layer.cornerRadius = height / 2
-//        submitBtn.setTitle("Submit", for: .normal)
-//        submitBtn.setTitleColor(.white, for: .normal)
-//        contentView.addSubview(submitBtn)
-//        submitBtn.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview().inset(20)
-//            make.bottom.equalToSuperview().offset(-10)
-//            make.height.equalTo(50)
-//        }
-//    }
 }

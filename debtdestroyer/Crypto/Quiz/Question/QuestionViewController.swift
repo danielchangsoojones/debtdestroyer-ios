@@ -17,6 +17,8 @@ class QuestionViewController: UIViewController {
     private let quizDatas: [QuizDataParse]
     private let currentIndex: Int
     private var answerViews: [AnswerChoiceNewUIView] = []
+    var answerStackView = UIStackView()
+
     var backBtn = UIButton()
     let gifCheckMark = "https://media.giphy.com/media/QAUxbMqnNcMo9U0jt8/giphy.gif"
     let gifCrossMark = "https://media.giphy.com/media/VIz2F9yck4NhxmoC59/giphy.gif"
@@ -46,11 +48,8 @@ class QuestionViewController: UIViewController {
         self.circularView = questionView.circularView
         self.backBtn = questionView.backBtn
         self.timeLabel = questionView.timerLabel
+        self.answerStackView = questionView.answerStackView
         backBtn.addTarget(self,action: #selector(backPressed),for: .touchUpInside)
-//        questionView.submitBtn.addTarget(self,
-//                                         action: #selector(submitPressed),
-//                                         for: .touchUpInside)
-        
     }
     
     override func viewDidLoad() {
@@ -103,6 +102,9 @@ class QuestionViewController: UIViewController {
     }
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        timer.invalidate()
+        circularView.pause()
+        self.answerStackView.isUserInteractionEnabled = false // added this line so user can answer once only. if immediadely clicked can select more
         for (index, answerView) in answerViews.enumerated() {
             if index == gesture.view?.tag {
                 answerView.select()
@@ -111,7 +113,6 @@ class QuestionViewController: UIViewController {
                 var gifURL : String!
                 if isIncorrectAnswer {
                     gifURL = gifCrossMark
-//                    answerView.layer.sublayers?.remove(at: 0)
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 12)
                 } else {
                     gifURL = gifCheckMark
@@ -134,7 +135,7 @@ class QuestionViewController: UIViewController {
             
         }
         
-        Timer.runThisAfterDelay(seconds: 1.5, after: {
+        Timer.runThisAfterDelay(seconds: 2, after: {
             self.submitAnswer()
         })
     }

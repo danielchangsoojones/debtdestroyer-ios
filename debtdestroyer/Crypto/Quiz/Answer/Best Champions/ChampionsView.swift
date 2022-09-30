@@ -14,6 +14,7 @@ class ChampionsView: UIView {
     let champImgView = UIImageView()
     let champNameLabel = UILabel()
     let pointsLabel = UILabel()
+    let numberTagLabel = UILabel()
     let containerView = UIView()
     let leaderboardTableView = UITableView()
     
@@ -25,6 +26,7 @@ class ChampionsView: UIView {
         setTitleLabel()
         setDescriptionLabel()
         setChampImgView()
+        setNumberTagLabel()
         setNameLabel()
         setpointsLabel()
     }
@@ -90,8 +92,25 @@ class ChampionsView: UIView {
         }
     }
     
+    private func setNumberTagLabel() {
+        numberTagLabel.text = "1"
+        numberTagLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        numberTagLabel.textColor = .white
+        numberTagLabel.textAlignment = .center
+        numberTagLabel.backgroundColor = .fuchsiaPink
+        numberTagLabel.layer.cornerRadius = 12.5
+        numberTagLabel.layer.masksToBounds = true
+
+        addSubview(numberTagLabel)
+        numberTagLabel.snp.makeConstraints { make in
+            make.top.equalTo(champImgView.snp.top).inset(8)
+            make.trailing.equalTo(champImgView.snp.trailing).inset(8)
+            make.height.width.equalTo(25)
+        }
+    }
+    
     private func setpointsLabel() {
-        pointsLabel.text = " 6 Points "
+        pointsLabel.text = " 0 Points "
         pointsLabel.textColor = .white
         pointsLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         pointsLabel.textAlignment = .center
@@ -110,11 +129,12 @@ class ChampionsView: UIView {
     
     private func setContainerView() {
         containerView.backgroundColor = .white
-        containerView.layer.cornerRadius = 10
+        containerView.layer.cornerRadius = 15
+        containerView.layer.masksToBounds = true
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.bottomMargin.equalToSuperview()
-            make.top.equalTo(self.snp.centerY)
+            make.top.equalTo(375)
         }
     }
     

@@ -109,6 +109,7 @@
 		92021FD9289B07A6007901A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92021FD7289B07A6007901A6 /* LaunchScreen.storyboard */; };
 		9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */; };
 		9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */; };
+		9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */; };
 		924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */; };
 		925BD26528A24D2E009303AF /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26428A24D2E009303AF /* Enviroment.swift */; };
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
@@ -220,6 +221,7 @@
 		92021FDA289B07A6007901A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizScoreParse.swift; sourceTree = "<group>"; };
 		9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableCell.swift; sourceTree = "<group>"; };
+		9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardDataStore.swift; sourceTree = "<group>"; };
 		924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		925BD26428A24D2E009303AF /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				0A44EFA228E5BA21006305B8 /* ChampionsListViewController.swift */,
 				0A44EFA428E5BA3D006305B8 /* ChampionsListView.swift */,
 				9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */,
+				9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */,
 			);
 			path = "Best Champions";
 			sourceTree = "<group>";
@@ -868,6 +871,7 @@
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */,
+				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A44EF9E28E5B970006305B8 /* BottomSheetContainerViewController.swift in Sources */,
 				0A44EFA928E5BB4B006305B8 /* BestChampionsContainerViewController.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,

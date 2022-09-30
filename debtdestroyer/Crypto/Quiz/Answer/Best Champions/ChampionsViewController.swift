@@ -11,6 +11,8 @@ class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
     private let quizTopic: QuizTopicParse
     private var quizScores: [QuizScoreParse] = []
+    private var descriptionLabel: UILabel!
+    private let dataStore = LeaderboardDataStore()
     
     init(quizTopic: QuizTopicParse) {
         self.quizTopic = quizTopic
@@ -26,6 +28,7 @@ class ChampionsViewController: UIViewController {
         let championsView = ChampionsView(frame: self.view.frame)
         self.view = championsView
         self.tableView = championsView.leaderboardTableView
+        self.descriptionLabel = championsView.descriptionLabel
     }
     
     override func viewDidLoad() {
@@ -37,6 +40,14 @@ class ChampionsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: LeaderboardTableCell.self)
+    }
+    
+    private func loadLeaderboard() {
+        dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
+            self.quizScores = quizScores
+            self.descriptionLabel.text = deadlineMessage
+            self.tableView.reloadData()
+        }
     }
 }
 

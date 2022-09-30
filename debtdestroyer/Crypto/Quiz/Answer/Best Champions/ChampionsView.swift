@@ -14,10 +14,12 @@ class ChampionsView: UIView {
     let champImgView = UIImageView()
     let champNameLabel = UILabel()
     let pointsLabel = UILabel()
+    let containerView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
+        setContainerView()
         setTitleLabel()
         setDescriptionLabel()
         setChampImgView()
@@ -101,6 +103,17 @@ class ChampionsView: UIView {
             make.width.equalTo(80)
             make.centerX.equalToSuperview()
             make.top.equalTo(champNameLabel.snp.bottom).offset(10)
+        }
+    }
+    
+    private func setContainerView() {
+        let containerView = UIView()
+        containerView.backgroundColor = .white
+        containerView.layer.cornerRadius = 10
+        addSubview(containerView)
+        containerView.snp.makeConstraints { make in
+            make.leading.trailing.bottomMargin.equalToSuperview()
+            make.top.equalTo(self.snp.centerY)
         }
     }
 

@@ -94,6 +94,7 @@ class QuestionNewUIView: UIView {
     private func setFavLabel() {
         favLabel.text = " ♥ 3 "
         favLabel.textColor = .white
+        favLabel.isHidden = true
         favLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         favLabel.textAlignment = .center
         favLabel.layer.borderColor = UIColor.white.cgColor
@@ -121,7 +122,6 @@ class QuestionNewUIView: UIView {
     }
     
     private func setQuestionNoLabel() {
-        questionNoLabel.text = "question 5 of 10"
         questionNoLabel.numberOfLines = 0
         questionNoLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         questionNoLabel.textColor = .white

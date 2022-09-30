@@ -103,7 +103,7 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
         let quizScore = quizScores[indexPath.row + 1]
         cell.numberLabel.text = String(indexPath.row + 2) + ". "
-        cell.nameLabel.text = quizScore.user.name
+        cell.nameLabel.text = quizScore.user.fullName
         cell.pointsLabel.text = String(quizScore.score) + " Points"
         return cell
     }

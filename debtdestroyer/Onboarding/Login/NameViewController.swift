@@ -13,6 +13,7 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         super.viewDidLoad()
         updateLabels()
         self.hideKeyboardWhenTappedAround()
+        passwordTextField.isSecureTextEntry = false
     }
     
     private func updateLabels() {
@@ -25,7 +26,7 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
     override func nextBtnPressed() {
         nextButton.startSpinning()
         if isComplete {
-            if let firstName = emailLabel.text, let lastName = passwordTextField.text {
+            if let firstName = emailTextField.text, let lastName = passwordTextField.text {
                 dataStore.save(firstName: firstName, lastName: lastName)
             }
             nextButton.stopSpinning()

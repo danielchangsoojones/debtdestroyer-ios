@@ -10,7 +10,6 @@ import SnapKit
 
 class CreateProfileViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var quizTopicDatas: QuizTopicParse?
-    var crypto_address: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,14 +45,9 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         if isComplete {
             let bottomText = emailTextField?.text ?? "1111111111"
             let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly)?.doubleValue ?? 1111111111
-            dataStore.save(phoneNumber: String(phoneNumber), crypto_address: crypto_address ?? "")
-            
-            if let quizTopicDatas = quizTopicDatas {
-                let feedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopicDatas)
-                self.navigationController?.pushViewController(feedbackVC, animated: true)
-            } else {
-                BannerAlert.show(title: "Error", subtitle: "couldn't find the quizTopic", type: .error)
-            }
+            dataStore.save(phoneNumber: String(phoneNumber))
+            let nameVC = NameViewController()
+            self.navigationController?.pushViewController(nameVC, animated: true)
             
             nextButton.stopSpinning()
         } else {

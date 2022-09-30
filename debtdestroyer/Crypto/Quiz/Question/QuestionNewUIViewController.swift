@@ -75,8 +75,7 @@ class QuestionNewUIViewController: UIViewController {
         } else {
             timeLabel.text = "00"
             timer.invalidate()
-            
-            // TODO: time up code
+            incorrectAnswered()
         }
     }
   
@@ -151,8 +150,7 @@ class QuestionNewUIViewController: UIViewController {
         
         let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
         if isIncorrectAnswer {
-            let vc = ChampionsViewController(quizTopic: currentData.quizTopic)
-            self.navigationController?.pushViewController(vc, animated: true)
+            incorrectAnswered()
         } else {
             dataStore.saveCorrectAnswer(for: currentData.quizTopic)
             
@@ -168,6 +166,11 @@ class QuestionNewUIViewController: UIViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
+    }
+    
+    func incorrectAnswered() {
+        let vc = ChampionsViewController(quizTopic: currentData.quizTopic)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -9,13 +9,10 @@ import UIKit
 import SnapKit
 
 class CreateProfileViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    var quizTopicDatas: QuizTopicParse?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()
         self.hideKeyboardWhenTappedAround()
-        addOptionalLabel()
     }
     
     private func updateLabels() {
@@ -26,18 +23,6 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         emailTextField.keyboardType = .phonePad
         emailTextField.delegate = self
         
-    }
-    
-    private func addOptionalLabel() {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        label.text = "(Optional): providing your phone number is optional. We will alert you when new crypto quizzes come out and you can collect coins. Also, we will ask you for feedback on the app!"
-        label.numberOfLines = 0
-        self.view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(stackView)
-            make.top.equalTo(stackView.snp.bottom).offset(5)
-        }
     }
     
     override func nextBtnPressed() {

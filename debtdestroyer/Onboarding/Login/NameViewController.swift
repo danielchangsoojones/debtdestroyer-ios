@@ -9,9 +9,6 @@ import UIKit
 import SnapKit
 
 class NameViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    var quizTopicDatas: QuizTopicParse?
-    var crypto_address: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()
@@ -28,16 +25,11 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
     override func nextBtnPressed() {
         nextButton.startSpinning()
         if isComplete {
-//            dataStore.save(phoneNumber: String(phoneNumber), crypto_address: crypto_address ?? "")
-            
-            if let quizTopicDatas = quizTopicDatas {
-                let feedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopicDatas)
-                self.navigationController?.pushViewController(feedbackVC, animated: true)
-            } else {
-                BannerAlert.show(title: "Error", subtitle: "couldn't find the quizTopic", type: .error)
+            if let firstName = emailLabel.text, let lastName = passwordTextField.text {
+                dataStore.save(firstName: firstName, lastName: lastName)
             }
-            
             nextButton.stopSpinning()
+            segueIntoApp()
         } else {
             nextButton.stopSpinning()
         }
@@ -62,5 +54,11 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         }
         
         return true
+    }
+    
+    override func segueIntoApp() {
+        let vc = CryptoTabBarViewController()//HomeTabBarViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }

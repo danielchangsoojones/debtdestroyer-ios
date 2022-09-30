@@ -11,7 +11,12 @@ class User: PFUser {
     @NSManaged var phoneNumber: String
     @NSManaged var isDeleted: Bool
     @NSManaged var deviceType: String?
-    @NSManaged var name: String
+    @NSManaged var firstName: String
+    @NSManaged var lastName: String
     
     static var shouldShowEarnings = true
+    
+    var fullName: String {
+        return firstName + " " + lastName
+    }
 }

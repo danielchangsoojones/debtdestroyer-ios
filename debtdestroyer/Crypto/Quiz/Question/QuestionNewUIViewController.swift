@@ -161,6 +161,7 @@ class QuestionNewUIViewController: UIViewController {
             if isLastQuestion {
                 let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
                 let navController = UINavigationController(rootViewController: leaderboardVC)
+                navController.modalPresentationStyle = .fullScreen
                 self.present(navController, animated: true)
             } else {
                 let vc = QuestionNewUIViewController(quizDatas: quizDatas, currentIndex: nextIndex)

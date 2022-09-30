@@ -30,7 +30,7 @@ class ChampionsView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLabel.text = "Best Champions"
+        titleLabel.text = "Current Leading Score"
         titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
@@ -45,7 +45,6 @@ class ChampionsView: UIView {
     }
     
     private func setDescriptionLabel() {
-        descriptionLabel.text = "The winner will be announced at 12pm PT."
         descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .center

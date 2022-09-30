@@ -30,12 +30,13 @@ class ChampionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setLeaderboardTableView()
     }
     
     private func setLeaderboardTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(cellType: LeaderboardTableCell.self)
     }
 }
 
@@ -45,6 +46,11 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
+        let quizScore = quizScores[indexPath.row]
+        cell.numberLabel.text = String(indexPath.row + 1)
+        cell.nameLabel.text = quizScore.user.name
+        cell.pointsLabel.text = String(quizScore.score)
+        return cell
     }
 }

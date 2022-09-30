@@ -15,11 +15,13 @@ class ChampionsView: UIView {
     let champNameLabel = UILabel()
     let pointsLabel = UILabel()
     let containerView = UIView()
+    let leaderboardTableView = UITableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
         setContainerView()
+        setTableView()
         setTitleLabel()
         setDescriptionLabel()
         setChampImgView()
@@ -116,6 +118,11 @@ class ChampionsView: UIView {
             make.top.equalTo(self.snp.centerY)
         }
     }
-
-
+    
+    private func setTableView() {
+        containerView.addSubview(leaderboardTableView)
+        leaderboardTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 }

@@ -8,17 +8,12 @@
 import UIKit
 
 class ChampionsViewController: UIViewController {
-  
-    private let quizDatas: [QuizDataParse]
-    private let currentIndex: Int
+    private var tableView: UITableView!
+    private let quizTopic: QuizTopicParse
+    private var quizScores: [QuizScoreParse] = []
     
-    private var currentData: QuizDataParse {
-        return quizDatas[currentIndex]
-    }
-    
-    init(quizDatas: [QuizDataParse], currentIndex: Int) {
-        self.quizDatas = quizDatas
-        self.currentIndex = currentIndex
+    init(quizTopic: QuizTopicParse) {
+        self.quizTopic = quizTopic
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +25,7 @@ class ChampionsViewController: UIViewController {
         super.loadView()
         let championsView = ChampionsView(frame: self.view.frame)
         self.view = championsView
-  
+        self.tableView = championsView.leaderboardTableView
     }
     
     override func viewDidLoad() {
@@ -38,15 +33,18 @@ class ChampionsViewController: UIViewController {
 
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setLeaderboardTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
-    */
+}
 
+extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return quizScores.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
 }

@@ -41,6 +41,7 @@ class ChampionsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: LeaderboardTableCell.self)
+        tableView.backgroundColor = .blue
     }
     
     private func loadLeaderboard() {
@@ -64,5 +65,13 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = quizScore.user.name
         cell.pointsLabel.text = String(quizScore.score)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

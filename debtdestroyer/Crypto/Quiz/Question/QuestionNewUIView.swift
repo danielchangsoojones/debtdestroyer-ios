@@ -79,6 +79,7 @@ class QuestionNewUIView: UIView {
     
     private func setBackButtonView() {
         backBtn.setTitle("ⓧ", for: .normal)
+        backBtn.isHidden = true
         backBtn.setTitleColor(.white, for: .normal)
         backBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         backBtn.backgroundColor = .clear

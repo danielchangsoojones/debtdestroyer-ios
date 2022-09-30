@@ -16,7 +16,7 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setNumLabel()
-        setNumLabel()
+        setNameLabel()
         setPointsLabel()
         setConstraints()
     }
@@ -46,7 +46,6 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     private func setNumLabel() {
         numberLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
         contentView.addSubview(numberLabel)
-        
     }
     
     private func setNameLabel() {

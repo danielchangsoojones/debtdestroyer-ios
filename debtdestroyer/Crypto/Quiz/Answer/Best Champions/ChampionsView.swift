@@ -109,7 +109,6 @@ class ChampionsView: UIView {
     }
     
     private func setContainerView() {
-        let containerView = UIView()
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 10
         addSubview(containerView)

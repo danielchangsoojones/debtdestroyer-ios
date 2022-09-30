@@ -134,7 +134,7 @@ class QuestionNewUIViewController: UIViewController {
             
         }
         
-        Timer.runThisAfterDelay(seconds: 2 , after: {
+        Timer.runThisAfterDelay(seconds: 1.5, after: {
             self.submitAnswer()
         })
     }

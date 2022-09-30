@@ -110,4 +110,17 @@ class OnboardingDataStore: NSObject {
             }
         }
     }
+    
+//    func save(firstName: String, lastName: String) {
+//        let parameters: [String : Any] = ["firstName" : firstName, "lastName": lastName]
+//        PFCloud.callFunction(inBackground: "savePhoneNum", withParameters: parameters) { (result, error) in
+//            if result != nil {
+//                //TODO: eventually we might want to do something with successful result
+//            } else if let error = error {
+//                BannerAlert.show(with: error)
+//            } else {
+//                BannerAlert.showUnknownError(functionName: "getQuizData")
+//            }
+//        }
+//    }
 }

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class CircularProgressCountdownTimerView: UIView {
-    // First create two layer properties
     private var circleLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
 
@@ -48,4 +47,12 @@ class CircularProgressCountdownTimerView: UIView {
         progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
     }
     
+    func pause() {
+        guard let presentation = progressLayer.presentation()
+        else {
+            return
+        }
+        progressLayer.strokeEnd = presentation.strokeEnd
+        progressLayer.removeAnimation(forKey: "progressAnim")
+    }
 }

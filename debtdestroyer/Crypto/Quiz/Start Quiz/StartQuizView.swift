@@ -1,8 +1,8 @@
 //
-//  StartQuizView.swift
+//  StartQuizNewUIView.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 14/09/22.
+//  Created by Rashmi Aher on 29/09/22.
 //
 
 import UIKit
@@ -11,14 +11,17 @@ class StartQuizView: UIView {
     let backgroudImgView = UIImageView()
     let descriptionLabel = UILabel()
     let nameLabel = UILabel()
+    let titleLabel = UILabel()
     private let leadingOffset: CGFloat = 20
     let nextButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .oliveGreen
         setbackgroudImgView()
         setNextButton()
+        setNameLabel()
+        setTitleLabel()
         setDescriptionLabel()
     }
     
@@ -30,29 +33,57 @@ class StartQuizView: UIView {
         backgroudImgView.contentMode = .scaleAspectFill
         addSubview(backgroudImgView)
         backgroudImgView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottomMargin.equalToSuperview()
+            make.top.equalTo(self.snp.centerY)
+        }
+    }
+ 
+    private func setNameLabel() {
+        nameLabel.text = "LavaDrop"
+        nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        nameLabel.textColor = .white
+        nameLabel.backgroundColor = .clear
+        nameLabel.numberOfLines = 0
+        addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(leadingOffset)
+            make.leading.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(leadingOffset)
+        }
+    }
+    
+    private func setTitleLabel() {
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        titleLabel.textColor = .white
+        titleLabel.backgroundColor = .clear
+        titleLabel.numberOfLines = 0
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(15)
+            make.leading.equalToSuperview().inset(leadingOffset)
+            make.trailing.equalToSuperview().inset(leadingOffset)
         }
     }
     
     private func setDescriptionLabel() {
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         descriptionLabel.textColor = .white
         descriptionLabel.backgroundColor = .clear
-        descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
         addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(nextButton.snp.top).offset(-10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.equalToSuperview().inset(leadingOffset)
             make.trailing.equalToSuperview().inset(leadingOffset)
         }
     }
     
     private func setNextButton() {
-        nextButton.backgroundColor = .white
-        nextButton.setTitleColor(.black, for: .normal)
+        nextButton.backgroundColor = .black
+        nextButton.setTitleColor(.white, for: .normal)
         nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        nextButton.setTitle("Start Quiz", for: .normal)
+        nextButton.setTitle("Start Trivia", for: .normal)
         let height: CGFloat = 55
         nextButton.layer.cornerRadius = height / 2
         addSubview(nextButton)

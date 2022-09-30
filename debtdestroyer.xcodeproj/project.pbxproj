@@ -29,30 +29,23 @@
 		0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0D28DB4E8A008792B8 /* Model.swift */; };
 		0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */; };
 		0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A432FA528B3816600C551FA /* TicketTopView.swift */; };
-		0A44EF9A28E5907B006305B8 /* StartQuizNewUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */; };
-		0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */; };
-		0A44EF9E28E5B970006305B8 /* BottomSheetContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9D28E5B970006305B8 /* BottomSheetContainerViewController.swift */; };
+		0A44EF9A28E5907B006305B8 /* StartQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9928E5907B006305B8 /* StartQuizViewController.swift */; };
+		0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EF9B28E59096006305B8 /* StartQuizView.swift */; };
 		0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA028E5B9E5006305B8 /* ChampionsViewController.swift */; };
-		0A44EFA328E5BA21006305B8 /* ChampionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA228E5BA21006305B8 /* ChampionsListViewController.swift */; };
-		0A44EFA528E5BA3D006305B8 /* ChampionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA428E5BA3D006305B8 /* ChampionsListView.swift */; };
 		0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA628E5BA50006305B8 /* ChampionsView.swift */; };
-		0A44EFA928E5BB4B006305B8 /* BestChampionsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44EFA828E5BB4B006305B8 /* BestChampionsContainerViewController.swift */; };
 		0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */; };
 		0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */; };
 		0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */; };
 		0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */; };
 		0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4536E028B903E400F4A8CA /* PlayerView.swift */; };
 		0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */; };
+		0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F809F28E6C6C6001B573E /* NameViewController.swift */; };
 		0A50659128C346D200207759 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659028C346D200207759 /* SubscriptionView.swift */; };
 		0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659228C7072F00207759 /* ScrollableViewController.swift */; };
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
-		0A59AD0328E183F4001B774A /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACED28E183F4001B774A /* QuestionView.swift */; };
-		0A59AD0428E183F4001B774A /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACEE28E183F4001B774A /* QuestionViewController.swift */; };
 		0A59AD0528E183F4001B774A /* AnswerChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF028E183F4001B774A /* AnswerChoiceView.swift */; };
-		0A59AD0628E183F4001B774A /* StartQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF228E183F4001B774A /* StartQuizView.swift */; };
-		0A59AD0728E183F4001B774A /* StartQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF328E183F4001B774A /* StartQuizViewController.swift */; };
 		0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */; };
 		0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF628E183F4001B774A /* ProvideFeedbackView.swift */; };
 		0A59AD0A28E183F4001B774A /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF828E183F4001B774A /* AddressView.swift */; };
@@ -61,8 +54,8 @@
 		0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0D28E19727001B774A /* QuizDataParse.swift */; };
 		0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0E28E19727001B774A /* QuizTopicParse.swift */; };
 		0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */; };
-		0A59AD1428E1B53E001B774A /* QuestionNewUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1328E1B53E001B774A /* QuestionNewUIViewController.swift */; };
-		0A59AD1628E1B562001B774A /* QuestionNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1528E1B562001B774A /* QuestionNewUIView.swift */; };
+		0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1328E1B53E001B774A /* QuestionViewController.swift */; };
+		0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1528E1B562001B774A /* QuestionView.swift */; };
 		0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */; };
 		0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */; };
 		0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */; };
@@ -138,30 +131,23 @@
 		0A421C0D28DB4E8A008792B8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0A421C0F28DB4F11008792B8 /* SettingsManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManageable.swift; sourceTree = "<group>"; };
 		0A432FA528B3816600C551FA /* TicketTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTopView.swift; sourceTree = "<group>"; };
-		0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizNewUIViewController.swift; sourceTree = "<group>"; };
-		0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizNewUIView.swift; sourceTree = "<group>"; };
-		0A44EF9D28E5B970006305B8 /* BottomSheetContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetContainerViewController.swift; sourceTree = "<group>"; };
+		0A44EF9928E5907B006305B8 /* StartQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizViewController.swift; sourceTree = "<group>"; };
+		0A44EF9B28E59096006305B8 /* StartQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizView.swift; sourceTree = "<group>"; };
 		0A44EFA028E5B9E5006305B8 /* ChampionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsViewController.swift; sourceTree = "<group>"; };
-		0A44EFA228E5BA21006305B8 /* ChampionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsListViewController.swift; sourceTree = "<group>"; };
-		0A44EFA428E5BA3D006305B8 /* ChampionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsListView.swift; sourceTree = "<group>"; };
 		0A44EFA628E5BA50006305B8 /* ChampionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionsView.swift; sourceTree = "<group>"; };
-		0A44EFA828E5BB4B006305B8 /* BestChampionsContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestChampionsContainerViewController.swift; sourceTree = "<group>"; };
 		0A4536D828B8CE3700F4A8CA /* PowerUpsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpsCell.swift; sourceTree = "<group>"; };
 		0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPrizeCell.swift; sourceTree = "<group>"; };
 		0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEarnTicketsCell.swift; sourceTree = "<group>"; };
 		0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWeeksPrizeCell.swift; sourceTree = "<group>"; };
 		0A4536E028B903E400F4A8CA /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0A4594AB28B7435B00F6B232 /* SuperParseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperParseObject.swift; sourceTree = "<group>"; };
+		0A4F809F28E6C6C6001B573E /* NameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
 		0A50659028C346D200207759 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		0A50659228C7072F00207759 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
-		0A59ACED28E183F4001B774A /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
-		0A59ACEE28E183F4001B774A /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		0A59ACF028E183F4001B774A /* AnswerChoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerChoiceView.swift; sourceTree = "<group>"; };
-		0A59ACF228E183F4001B774A /* StartQuizView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartQuizView.swift; sourceTree = "<group>"; };
-		0A59ACF328E183F4001B774A /* StartQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartQuizViewController.swift; sourceTree = "<group>"; };
 		0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
 		0A59ACF628E183F4001B774A /* ProvideFeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackView.swift; sourceTree = "<group>"; };
 		0A59ACF828E183F4001B774A /* AddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
@@ -170,8 +156,8 @@
 		0A59AD0D28E19727001B774A /* QuizDataParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataParse.swift; sourceTree = "<group>"; };
 		0A59AD0E28E19727001B774A /* QuizTopicParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTopicParse.swift; sourceTree = "<group>"; };
 		0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoAddressParse.swift; sourceTree = "<group>"; };
-		0A59AD1328E1B53E001B774A /* QuestionNewUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionNewUIViewController.swift; sourceTree = "<group>"; };
-		0A59AD1528E1B562001B774A /* QuestionNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionNewUIView.swift; sourceTree = "<group>"; };
+		0A59AD1328E1B53E001B774A /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		0A59AD1528E1B562001B774A /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressCountdownTimerView.swift; sourceTree = "<group>"; };
 		0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCurrentView.swift; sourceTree = "<group>"; };
@@ -400,12 +386,8 @@
 		0A44EF9F28E5B975006305B8 /* Best Champions */ = {
 			isa = PBXGroup;
 			children = (
-				0A44EF9D28E5B970006305B8 /* BottomSheetContainerViewController.swift */,
-				0A44EFA828E5BB4B006305B8 /* BestChampionsContainerViewController.swift */,
 				0A44EFA028E5B9E5006305B8 /* ChampionsViewController.swift */,
 				0A44EFA628E5BA50006305B8 /* ChampionsView.swift */,
-				0A44EFA228E5BA21006305B8 /* ChampionsListViewController.swift */,
-				0A44EFA428E5BA3D006305B8 /* ChampionsListView.swift */,
 				9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */,
 				9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */,
 			);
@@ -462,11 +444,9 @@
 		0A59ACEC28E183F4001B774A /* Question */ = {
 			isa = PBXGroup;
 			children = (
-				0A59AD1528E1B562001B774A /* QuestionNewUIView.swift */,
-				0A59AD1328E1B53E001B774A /* QuestionNewUIViewController.swift */,
+				0A59AD1528E1B562001B774A /* QuestionView.swift */,
+				0A59AD1328E1B53E001B774A /* QuestionViewController.swift */,
 				0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */,
-				0A59ACED28E183F4001B774A /* QuestionView.swift */,
-				0A59ACEE28E183F4001B774A /* QuestionViewController.swift */,
 				0A59ACEF28E183F4001B774A /* Choice */,
 			);
 			path = Question;
@@ -484,10 +464,8 @@
 		0A59ACF128E183F4001B774A /* Start Quiz */ = {
 			isa = PBXGroup;
 			children = (
-				0A44EF9928E5907B006305B8 /* StartQuizNewUIViewController.swift */,
-				0A44EF9B28E59096006305B8 /* StartQuizNewUIView.swift */,
-				0A59ACF228E183F4001B774A /* StartQuizView.swift */,
-				0A59ACF328E183F4001B774A /* StartQuizViewController.swift */,
+				0A44EF9928E5907B006305B8 /* StartQuizViewController.swift */,
+				0A44EF9B28E59096006305B8 /* StartQuizView.swift */,
 			);
 			path = "Start Quiz";
 			sourceTree = "<group>";
@@ -590,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */,
+				0A4F809F28E6C6C6001B573E /* NameViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -852,7 +831,8 @@
 				0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
-				0A59AD1628E1B562001B774A /* QuestionNewUIView.swift in Sources */,
+				0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */,
+				0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
@@ -870,10 +850,8 @@
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
-				0A44EF9C28E59096006305B8 /* StartQuizNewUIView.swift in Sources */,
+				0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
-				0A44EF9E28E5B970006305B8 /* BottomSheetContainerViewController.swift in Sources */,
-				0A44EFA928E5BB4B006305B8 /* BestChampionsContainerViewController.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
 				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
@@ -891,10 +869,8 @@
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,
-				0A44EFA528E5BA3D006305B8 /* ChampionsListView.swift in Sources */,
 				92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */,
 				0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */,
-				0A59AD0428E183F4001B774A /* QuestionViewController.swift in Sources */,
 				0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */,
 				0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */,
 				0A7A4A0228A3D384009EDE5E /* RegisterView.swift in Sources */,
@@ -903,22 +879,19 @@
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
-				0A59AD0728E183F4001B774A /* StartQuizViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
 				0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */,
 				0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */,
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
-				0A59AD0328E183F4001B774A /* QuestionView.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
-				0A59AD1428E1B53E001B774A /* QuestionNewUIViewController.swift in Sources */,
+				0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
 				0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */,
-				0A44EFA328E5BA21006305B8 /* ChampionsListViewController.swift in Sources */,
-				0A44EF9A28E5907B006305B8 /* StartQuizNewUIViewController.swift in Sources */,
+				0A44EF9A28E5907B006305B8 /* StartQuizViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,
@@ -930,7 +903,6 @@
 				0A7A49FE28A3D294009EDE5E /* StringExtension.swift in Sources */,
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,
 				0A7A4A0328A3D384009EDE5E /* RegisterViewController.swift in Sources */,
-				0A59AD0628E183F4001B774A /* StartQuizView.swift in Sources */,
 				0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
@@ -1079,6 +1051,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LavaDrop;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We ask for location access to provide you with relevant rewards to your account";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1110,6 +1083,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LavaDrop;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We ask for location access to provide you with relevant rewards to your account";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

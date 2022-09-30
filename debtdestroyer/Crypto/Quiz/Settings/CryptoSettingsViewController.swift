@@ -25,9 +25,9 @@ class CryptoSettingsViewController: UIViewController {
         super.viewDidLoad()
         loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Contact Us", "Leave Feedback"]
+        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
         
-        imgNameArr = ["contactUs", "feedback"]
+        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc"]
         
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black

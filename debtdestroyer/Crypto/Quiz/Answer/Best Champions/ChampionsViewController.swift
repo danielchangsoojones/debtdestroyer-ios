@@ -76,7 +76,6 @@ class ChampionsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: LeaderboardTableCell.self)
-        tableView.backgroundColor = .blue
     }
     
     private func loadLeaderboard() {

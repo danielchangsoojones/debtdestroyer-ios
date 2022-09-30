@@ -71,4 +71,12 @@ class QuizDataStore {
             }
         }
     }
+    
+    func checkIfAlreadyTakenQuiz(for quizTopic: QuizTopicParse, completion: @escaping (Any?, Error?) -> Void) {
+        let quizTopicID = quizTopic.objectId ?? ""
+        let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
+        PFCloud.callFunction(inBackground: "checkIfAlreadyTakenQuiz", withParameters: parameters) { (result, error) in
+            completion(result, error)
+        }
+    }
 }

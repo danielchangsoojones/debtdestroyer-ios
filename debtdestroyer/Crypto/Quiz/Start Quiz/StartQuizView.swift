@@ -13,7 +13,7 @@ class StartQuizView: UIView {
     let nameLabel = UILabel()
     let titleLabel = UILabel()
     private let leadingOffset: CGFloat = 20
-    let nextButton = UIButton()
+    let nextButton = SpinningButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

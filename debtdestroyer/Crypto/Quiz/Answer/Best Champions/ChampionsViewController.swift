@@ -82,8 +82,11 @@ class ChampionsViewController: UIViewController {
         dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
             self.quizScores = quizScores
             self.descriptionLabel.text = deadlineMessage
+            if User.shouldShowEarnings {
+                self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
+            }
             let quizScore = quizScores[0]
-            self.champNameLabel.text = "Anny Maxwell"//quizScore.user.name
+            self.champNameLabel.text = quizScore.user.fullName
             self.pointsLabel.text = " " + String(quizScore.score) + " Points "
             self.tableView.reloadData()
         }

@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class StartQuizViewController: UIViewController {
     private var backgroundImgView: UIImageView!
     private var descriptionLabel = UILabel()
     private var titleLabel = UILabel()
+    private var nextButton: SpinningButton!
     
     private var dataStore = QuizDataStore()
     private var quizDatas: [QuizDataParse] = []
@@ -36,6 +38,7 @@ class StartQuizViewController: UIViewController {
         self.backgroundImgView = startView.backgroudImgView
         self.descriptionLabel = startView.descriptionLabel
         self.titleLabel = startView.titleLabel
+        self.nextButton = startView.nextButton
         startView.nextButton.addTarget(self,
                                        action: #selector(nextBtnPressed),
                                        for: .touchUpInside)
@@ -110,8 +113,20 @@ class StartQuizViewController: UIViewController {
     }
     
     @objc private func nextBtnPressed() {
-        let questionVC = QuestionViewController(quizDatas: quizDatas, currentIndex: 0)
-        self.navigationController?.pushViewController(questionVC,
-                                                      animated: true)
+        nextButton.startSpinning()
+        dataStore.checkIfAlreadyTakenQuiz(for: currentData.quizTopic) { result, error in
+            self.nextButton.stopSpinning()
+            if let hasAlreadyTakenQuiz = result as? Bool {
+                if !hasAlreadyTakenQuiz {
+                    let questionVC = QuestionViewController(quizDatas: self.quizDatas, currentIndex: 0)
+                    self.navigationController?.pushViewController(questionVC,
+                                                                  animated: true)
+                }
+            } else {
+                let alertView = SCLAlertView()
+                let subtitle = error?.localizedDescription ?? "Please come into the app tommorow to see the next quiz."
+                alertView.showInfo("Next Quiz", subTitle: subtitle, closeButtonTitle: "Okay")
+            }
+        }
     }
 }

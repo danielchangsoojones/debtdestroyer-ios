@@ -45,7 +45,6 @@
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
-		0A59AD0528E183F4001B774A /* AnswerChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF028E183F4001B774A /* AnswerChoiceView.swift */; };
 		0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */; };
 		0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF628E183F4001B774A /* ProvideFeedbackView.swift */; };
 		0A59AD0A28E183F4001B774A /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF828E183F4001B774A /* AddressView.swift */; };
@@ -147,7 +146,6 @@
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
-		0A59ACF028E183F4001B774A /* AnswerChoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerChoiceView.swift; sourceTree = "<group>"; };
 		0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
 		0A59ACF628E183F4001B774A /* ProvideFeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackView.swift; sourceTree = "<group>"; };
 		0A59ACF828E183F4001B774A /* AddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
@@ -455,7 +453,6 @@
 		0A59ACEF28E183F4001B774A /* Choice */ = {
 			isa = PBXGroup;
 			children = (
-				0A59ACF028E183F4001B774A /* AnswerChoiceView.swift */,
 				0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */,
 			);
 			path = Choice;
@@ -865,7 +862,6 @@
 				0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */,
 				0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */,
 				0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */,
-				0A59AD0528E183F4001B774A /* AnswerChoiceView.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,

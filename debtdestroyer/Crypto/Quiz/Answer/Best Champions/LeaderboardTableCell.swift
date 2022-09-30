@@ -45,16 +45,19 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     
     private func setNumLabel() {
         numberLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
+        numberLabel.textColor = .black
         contentView.addSubview(numberLabel)
     }
     
     private func setNameLabel() {
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        nameLabel.textColor = .black
         contentView.addSubview(nameLabel)
     }
     
     private func setPointsLabel() {
         pointsLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
+        pointsLabel.textColor = .black
         contentView.addSubview(pointsLabel)
     }
 }

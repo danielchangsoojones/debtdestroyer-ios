@@ -17,7 +17,7 @@ public enum Environment: String {
         case .development:
             return "debtDestroyerDevelopment13749495030"
         case .production:
-            return "nbawidgetprod138506038070"
+            return "debtDestroyerProduction58694069"
         }
     }
     
@@ -26,7 +26,7 @@ public enum Environment: String {
         case .development:
             return "https://debt-destroyer-development.herokuapp.com/parse"
         case .production:
-            return "https://nbawidget-prod.herokuapp.com/parse"
+            return "https://debt-destroyer-production.herokuapp.com/parse"
 //        case .localHost:
 //            return "https://nbawidgetdev.ngrok.io/parse"
         }

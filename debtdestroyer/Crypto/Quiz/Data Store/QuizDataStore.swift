@@ -57,4 +57,18 @@ class QuizDataStore {
             }
         }
     }
+    
+    func saveCorrectAnswer(for quizTopic: QuizTopicParse) {
+        let quizTopicID = quizTopic.objectId ?? ""
+        let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
+        PFCloud.callFunction(inBackground: "saveCorrectAnswer", withParameters: parameters) { (result, error) in
+            if result != nil {
+                print("save the correct answer to the user")
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
+            }
+        }
+    }
 }

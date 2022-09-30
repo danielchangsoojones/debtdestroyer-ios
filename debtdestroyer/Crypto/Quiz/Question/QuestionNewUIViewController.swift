@@ -155,21 +155,18 @@ class QuestionNewUIViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             dataStore.saveCorrectAnswer(for: currentData.quizTopic)
-            let vc = QuestionNewUIViewController(quizDatas: quizDatas, currentIndex: currentIndex)
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        let nextIndex = currentIndex + 1
-        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
-        if let quizTopic = quizDatas.first?.quizTopic, isLastQuestion {
-            if !User.shouldShowEarnings {
-                let feedbackVC = ProvideFeedbackViewController(quizTopicDatas: quizTopic)
-                self.navigationController?.pushViewController(feedbackVC, animated: true)
+            
+            let nextIndex = currentIndex + 1
+            let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+            if isLastQuestion {
+                let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
+                let navController = UINavigationController(rootViewController: leaderboardVC)
+                self.present(navController, animated: true)
             } else {
-                let addressVC = AddressViewController(quizTopicDatas: quizTopic)
-                self.navigationController?.pushViewController(addressVC, animated: true)
+                let vc = QuestionNewUIViewController(quizDatas: quizDatas, currentIndex: nextIndex)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-        } 
+        }
     }
 }
 

@@ -47,7 +47,7 @@ class StartQuizView: UIView {
         nameLabel.numberOfLines = 0
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(leadingOffset)
+            make.topMargin.equalToSuperview().offset(10)
             make.leading.equalToSuperview().inset(10)
             make.trailing.equalToSuperview().inset(leadingOffset)
         }

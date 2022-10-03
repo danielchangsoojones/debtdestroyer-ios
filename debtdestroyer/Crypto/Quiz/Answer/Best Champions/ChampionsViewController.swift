@@ -16,8 +16,9 @@ class ChampionsViewController: UIViewController {
     private var messageHelper: MessageHelper?
     private var champImgView = UIImageView()
     private var champNameLabel = UILabel()
-    private var pointsLabel = UILabel()
-    
+    private var champPointsLabel = UILabel()
+    private var bottomView = MyRoundBottomView()
+
     init(quizTopic: QuizTopicParse) {
         self.quizTopic = quizTopic
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +36,8 @@ class ChampionsViewController: UIViewController {
         self.descriptionLabel = championsView.descriptionLabel
         self.champImgView = championsView.champImgView
         self.champNameLabel = championsView.champNameLabel
-        self.pointsLabel = championsView.pointsLabel
+        self.champPointsLabel = championsView.champPointsLabel
+        self.bottomView = championsView.bottomView
     }
     
     override func viewDidLoad() {
@@ -45,6 +47,11 @@ class ChampionsViewController: UIViewController {
         loadLeaderboard()
     }
     
+    override func viewDidLayoutSubviews() {
+//        self.bottomView.roundCorners(corners: [.topLeft, .topRight], radius: 300)
+        
+
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavBarBtns()
@@ -87,7 +94,7 @@ class ChampionsViewController: UIViewController {
             }
             if let quizScore = quizScores.first {
                 self.champNameLabel.text = quizScore.user.fullName
-                self.pointsLabel.text = " " + String(quizScore.score) + " Points "
+                self.champPointsLabel.text = " " + String(quizScore.score) + " Points "
                 self.tableView.reloadData()
             }
         }
@@ -114,5 +121,14 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+extension UIView {
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
     }
 }

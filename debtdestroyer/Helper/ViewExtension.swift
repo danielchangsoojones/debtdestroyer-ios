@@ -129,3 +129,34 @@ extension UIView {
         self.layer.add(animation, forKey: "position")
     }
 }
+class MyRoundBottomView: UIView {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let y = bounds.size.height - 80.0
+        
+        let p1 = CGPoint(x: 0.0, y: y)
+        let p2 = CGPoint(x: bounds.size.width, y: y)
+        
+        let cp1 = CGPoint(x: p1.y, y: bounds.size.height)
+        let cp2 = CGPoint(x: bounds.size.width, y: bounds.size.height)
+        
+        let myBez = UIBezierPath()
+        
+        myBez.move(to: CGPoint(x: 0.0, y: y))
+        
+        myBez.addCurve(to: p2, controlPoint1: cp1, controlPoint2: cp2)
+        
+        myBez.addLine(to: CGPoint(x: bounds.size.width, y: 0.0))
+        myBez.addLine(to: CGPoint.zero)
+        
+        myBez.close()
+        
+        let l = CAShapeLayer()
+        l.path = myBez.cgPath
+        layer.mask = l
+        
+    }
+    
+}

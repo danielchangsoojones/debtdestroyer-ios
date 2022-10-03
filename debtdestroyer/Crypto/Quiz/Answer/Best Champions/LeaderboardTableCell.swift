@@ -66,8 +66,6 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     }
     
     private func setImgView() {
-//        imgView.image = UIImage.init(systemName: "person.fill")?.withRenderingMode(.alwaysTemplate)
-//        imgView.tintColor = .lightGray
         imgView.backgroundColor = .coinbaseBlue
         imgView.contentMode = .scaleAspectFill
         imgView.layer.cornerRadius = 20

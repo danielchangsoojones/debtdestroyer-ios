@@ -39,9 +39,9 @@ class CryptoSettingsViewController: UIViewController {
         super.viewDidLoad()
         loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Leader Board", "Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
+        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
         
-        imgNameArr = ["contactUs", "contactUs", "feedback", "logout", "deleteAcc"]
+        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc"]
         
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
@@ -98,15 +98,11 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
-            self.navigationController?.pushViewController(leaderboardVC, animated: true)
-
-        } else if indexPath.row == 1 || indexPath.row == 2 {
+       if indexPath.row == 0 || indexPath.row == 1 {
             // MARK: Contact Us
             // MARK: Leave Feedback
             messageHelper?.text("3176905323", body: "")
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 2 {
             // MARK: Logout
             User.logOutInBackground { error in
                 if let error = error {

@@ -13,22 +13,30 @@ class ChampionsView: UIView {
     let titleLabel = UILabel()
     let champImgView = UIImageView()
     let champNameLabel = UILabel()
-    let pointsLabel = UILabel()
+    let champPointsLabel = UILabel()
     let numberTagLabel = UILabel()
     let containerView = UIView()
     let leaderboardTableView = UITableView()
-    
+    let numberLabel = UILabel()
+    let nameLabel = UILabel()
+    let pointsLabel = UILabel()
+    let imgView = UIImageView()
+    let bottomViewContainer = UIView()
+    let bottomView = UIView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
         setContainerView()
         setTableView()
+        setBottomViewContainer()
+        setBottomView()
         setTitleLabel()
         setDescriptionLabel()
         setChampImgView()
         setNumberTagLabel()
-        setNameLabel()
-        setpointsLabel()
+        setChampNameLabel()
+        setChampPointsLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -78,7 +86,7 @@ class ChampionsView: UIView {
         }
     }
     
-    private func setNameLabel() {
+    private func setChampNameLabel() {
         champNameLabel.text = "Anny Maxwell"
         champNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         champNameLabel.textColor = .white
@@ -109,17 +117,17 @@ class ChampionsView: UIView {
         }
     }
     
-    private func setpointsLabel() {
-        pointsLabel.text = " 0 Points "
-        pointsLabel.textColor = .white
-        pointsLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        pointsLabel.textAlignment = .center
-        pointsLabel.layer.borderColor = UIColor.white.cgColor
-        pointsLabel.layer.borderWidth = 1
-        pointsLabel.layer.cornerRadius = 15
+    private func setChampPointsLabel() {
+        champPointsLabel.text = " 0 Points "
+        champPointsLabel.textColor = .white
+        champPointsLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        champPointsLabel.textAlignment = .center
+        champPointsLabel.layer.borderColor = UIColor.white.cgColor
+        champPointsLabel.layer.borderWidth = 1
+        champPointsLabel.layer.cornerRadius = 15
         let dimenssion = 30
-        addSubview(pointsLabel)
-        pointsLabel.snp.makeConstraints { make in
+        addSubview(champPointsLabel)
+        champPointsLabel.snp.makeConstraints { make in
             make.height.equalTo(dimenssion)
             make.width.equalTo(80)
             make.centerX.equalToSuperview()
@@ -130,12 +138,103 @@ class ChampionsView: UIView {
     private func setContainerView() {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 15
+        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         containerView.layer.masksToBounds = true
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
-            make.leading.trailing.bottomMargin.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(375)
+            make.bottom.equalToSuperview().offset(-95)
         }
+    }
+    
+    private func setBottomViewContainer() {
+        bottomViewContainer.backgroundColor = .clear
+        addSubview(bottomViewContainer)
+        bottomViewContainer.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(65)
+            make.bottomMargin.equalToSuperview().offset(-10)
+        }
+    }
+    
+    private func setBottomView() {
+        bottomView.backgroundColor = .fuchsiaPink
+        bottomView.setTopCurve()
+        bottomViewContainer.addSubview(bottomView)
+        bottomView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        setNumLabel()
+        setNameLabel()
+        setPointsLabel()
+        setImgView()
+        setConstraints()
+    }
+    
+    private func setConstraints() {
+        numberLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.centerY.equalTo(imgView)
+            make.width.equalTo(15)
+        }
+        
+        imgView.snp.makeConstraints { make in
+            make.height.width.equalTo(40)
+            make.bottom.equalToSuperview().inset(5)
+            make.top.equalToSuperview().inset(20)
+            make.leading.equalTo(numberLabel.snp.trailing).offset(5)
+        }
+        
+        pointsLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(10)
+            make.centerY.equalTo(imgView)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(imgView.snp.trailing).offset(5)
+            make.bottom.equalToSuperview().inset(10)
+            make.trailing.equalTo(pointsLabel.snp.leading).offset(5)
+            make.width.lessThanOrEqualToSuperview()
+            make.centerY.equalTo(imgView)
+
+        }
+    }
+    
+    private func setNumLabel() {
+        numberLabel.text = "23"
+        numberLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
+        numberLabel.textColor = .black
+        bottomView.addSubview(numberLabel)
+    }
+    
+    private func setImgView() {
+        imgView.backgroundColor = .coinbaseBlue
+        imgView.contentMode = .scaleAspectFill
+        imgView.layer.cornerRadius = 20
+        bottomView.addSubview(imgView)
+    }
+    
+    private func setNameLabel() {
+        nameLabel.text = "test"
+        nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        nameLabel.textColor = .black
+        bottomView.addSubview(nameLabel)
+    }
+    
+    private func setPointsLabel() {
+        pointsLabel.text = "12 Points"
+        pointsLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        pointsLabel.textColor = .black
+        pointsLabel.textAlignment = .center
+        pointsLabel.layer.borderColor = UIColor.darkGray.cgColor
+        pointsLabel.layer.borderWidth = 0.5
+        pointsLabel.layer.cornerRadius = 15
+        bottomView.addSubview(pointsLabel)
     }
     
     private func setTableView() {

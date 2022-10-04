@@ -16,7 +16,12 @@ class ChampionsViewController: UIViewController {
     private var messageHelper: MessageHelper?
     private var champImgView = UIImageView()
     private var champNameLabel = UILabel()
+    private var champPointsLabel = UILabel()
+    private var bottomView = UIView()
+    private var numberLabel = UILabel()
+    private var nameLabel = UILabel()
     private var pointsLabel = UILabel()
+    private var imgView = UIImageView()
     
     init(quizTopic: QuizTopicParse) {
         self.quizTopic = quizTopic
@@ -35,6 +40,11 @@ class ChampionsViewController: UIViewController {
         self.descriptionLabel = championsView.descriptionLabel
         self.champImgView = championsView.champImgView
         self.champNameLabel = championsView.champNameLabel
+        self.champPointsLabel = championsView.champPointsLabel
+        self.bottomView = championsView.bottomView
+        self.numberLabel = championsView.numberLabel
+        self.nameLabel = championsView.nameLabel
+        self.imgView = championsView.imgView
         self.pointsLabel = championsView.pointsLabel
     }
     
@@ -44,10 +54,15 @@ class ChampionsViewController: UIViewController {
         setLeaderboardTableView()
         loadLeaderboard()
     }
+  
+    override func viewWillLayoutSubviews() {
+        self.bottomView.addTopRoundedCornerToView(targetView: bottomView, desiredCurve: 10.0)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavBarBtns()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     private func setNavBarBtns() {
@@ -86,10 +101,30 @@ class ChampionsViewController: UIViewController {
                 self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
             }
             if let quizScore = quizScores.first {
-                self.champNameLabel.text = quizScore.user.fullName
-                self.pointsLabel.text = " " + String(quizScore.score) + " Points "
+                self.champNameLabel.text = quizScore.user.fullName.capitalized
+                self.champPointsLabel.text = " " + String(quizScore.score) + " Points "
                 self.tableView.reloadData()
             }
+            
+            // MARK: This code will update info in bottom view if user never attended quiz before... No entry in table for current user.
+            self.nameLabel.text = User.current()?.fullName.capitalized
+            self.pointsLabel.text = " 0 Points "
+            self.numberLabel.text = String(quizScores.count + 1) + ". "
+            
+            
+            // MARK: this code will update info in bottom view if user attended quiz before
+            var index = 1
+            for quizScore in quizScores {
+                if User.current()?.objectId == quizScore.user.objectId {
+                    print(quizScore.score)
+                    self.nameLabel.text = quizScore.user.fullName.capitalized
+                    self.pointsLabel.text = " " + String(quizScore.score) + " Points "
+                    self.numberLabel.text = String(index) + ". "
+                    return
+                }
+                index += 1
+            }
+
         }
     }
 }
@@ -103,16 +138,25 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
         let quizScore = quizScores[indexPath.row + 1]
         cell.numberLabel.text = String(indexPath.row + 2) + ". "
-        cell.nameLabel.text = quizScore.user.fullName
+        cell.nameLabel.text = quizScore.user.fullName.capitalized
         cell.pointsLabel.text = String(quizScore.score) + " Points"
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 50.5
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+extension UIView {
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
     }
 }

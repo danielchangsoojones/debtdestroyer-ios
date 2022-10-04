@@ -128,35 +128,46 @@ extension UIView {
         animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
         self.layer.add(animation, forKey: "position")
     }
-}
-class MyRoundBottomView: UIView {
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func addTopRoundedCornerToView(targetView:UIView?, desiredCurve:CGFloat?)
+    {
+        let offset:CGFloat =  targetView!.frame.width/desiredCurve!
+        let bounds: CGRect = targetView!.bounds
         
-        let y = bounds.size.height - 80.0
+        //Top side curve
+        let rectBounds: CGRect = CGRect(x: bounds.origin.x, y: bounds.origin.y+bounds.size.height / 2, width: bounds.size.width, height: bounds.size.height / 2)
         
-        let p1 = CGPoint(x: 0.0, y: y)
-        let p2 = CGPoint(x: bounds.size.width, y: y)
+        let rectPath: UIBezierPath = UIBezierPath(rect: rectBounds)
         
-        let cp1 = CGPoint(x: p1.y, y: bounds.size.height)
-        let cp2 = CGPoint(x: bounds.size.width, y: bounds.size.height)
+        //Top side curve
+        let ovalBounds: CGRect = CGRect(x: bounds.origin.x - offset / 2, y: bounds.origin.y, width: bounds.size.width + offset, height: bounds.size.height)
         
-        let myBez = UIBezierPath()
+        let ovalPath: UIBezierPath = UIBezierPath(ovalIn: ovalBounds)
+        rectPath.append(ovalPath)
         
-        myBez.move(to: CGPoint(x: 0.0, y: y))
+        // Create the shape layer and set its path
+        let maskLayer: CAShapeLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = rectPath.cgPath
         
-        myBez.addCurve(to: p2, controlPoint1: cp1, controlPoint2: cp2)
-        
-        myBez.addLine(to: CGPoint(x: bounds.size.width, y: 0.0))
-        myBez.addLine(to: CGPoint.zero)
-        
-        myBez.close()
-        
-        let l = CAShapeLayer()
-        l.path = myBez.cgPath
-        layer.mask = l
-        
+        // Set the newly created shape layer as the mask for the view's layer
+        targetView!.layer.mask = maskLayer
     }
     
+    func setTopCurve(){
+        let offset = CGFloat(self.frame.size.height/4)
+        let bounds = self.bounds
+        let rectBounds = CGRect(x: bounds.origin.x, y: bounds.origin.y + bounds.size.height/2  , width:  bounds.size.width, height: bounds.size.height / 2)
+        
+        let rectPath = UIBezierPath(rect: rectBounds)
+        
+        let ovalBounds = CGRect(x: bounds.origin.x , y: bounds.origin.y - offset / 2, width: bounds.size.width + offset, height: bounds.size.height)
+        let ovalPath = UIBezierPath(ovalIn: ovalBounds)
+        rectPath.append(ovalPath)
+        
+        let maskLayer = CAShapeLayer.init()
+        maskLayer.frame = bounds
+        maskLayer.path = rectPath.cgPath
+        self.layer.mask = maskLayer
+    }
 }

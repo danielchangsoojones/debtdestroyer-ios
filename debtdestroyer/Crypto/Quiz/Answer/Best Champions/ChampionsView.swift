@@ -22,15 +22,15 @@ class ChampionsView: UIView {
     let pointsLabel = UILabel()
     let imgView = UIImageView()
     let bottomViewContainer = UIView()
-    let bottomView = MyRoundBottomView()
+    let bottomView = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
-        setBottomViewContainer()
-        setBottomView()
         setContainerView()
         setTableView()
+        setBottomViewContainer()
+        setBottomView()
         setTitleLabel()
         setDescriptionLabel()
         setChampImgView()
@@ -144,27 +144,23 @@ class ChampionsView: UIView {
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(375)
-            make.bottom.equalTo(bottomViewContainer.snp.top)
+            make.bottom.equalToSuperview().offset(-95)
         }
     }
     
     private func setBottomViewContainer() {
-        bottomViewContainer.backgroundColor = .white
+        bottomViewContainer.backgroundColor = .clear
         addSubview(bottomViewContainer)
         bottomViewContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(120)
+            make.height.equalTo(65)
             make.bottomMargin.equalToSuperview().offset(-10)
         }
     }
     
     private func setBottomView() {
         bottomView.backgroundColor = .fuchsiaPink
-//        let circlePath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight], cornerRadii: CGSize.init(width: bounds.size.width/3, height: bounds.size.width/6))
-//        let circleShape = CAShapeLayer()
-//        circleShape.path = circlePath.cgPath
-//        bottomView.layer.mask = circleShape
-        
+        bottomView.setTopCurve()
         bottomViewContainer.addSubview(bottomView)
         bottomView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -187,10 +183,9 @@ class ChampionsView: UIView {
         
         imgView.snp.makeConstraints { make in
             make.height.width.equalTo(40)
-            make.bottom.equalToSuperview().inset(10)
-            make.top.equalToSuperview().inset(50)
+            make.bottom.equalToSuperview().inset(5)
+            make.top.equalToSuperview().inset(20)
             make.leading.equalTo(numberLabel.snp.trailing).offset(5)
-            make.centerY.equalToSuperview()
         }
         
         pointsLabel.snp.makeConstraints { make in
@@ -208,8 +203,6 @@ class ChampionsView: UIView {
             make.centerY.equalTo(imgView)
 
         }
-        
-        
     }
     
     private func setNumLabel() {

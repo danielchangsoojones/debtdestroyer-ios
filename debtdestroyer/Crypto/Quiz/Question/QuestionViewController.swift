@@ -9,8 +9,12 @@ import UIKit
 import Foundation
 
 class QuestionViewController: UIViewController {
+    struct Constants {
+        static let originalStartTime: TimeInterval = 15
+    }
+    
     var circularView = CircularProgressCountdownTimerView()
-    var timeLeft: TimeInterval = 15
+    private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
     var timeLabel =  UILabel()
     var timer = Timer()
@@ -160,21 +164,27 @@ class QuestionViewController: UIViewController {
         }
         
         let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+        let time_answered_seconds = Constants.originalStartTime - timeLeft
+        dataStore.saveAnswer(for: currentData.quizTopic,
+                             isCorrect: true,
+                             quizData: currentData,
+                             time_answered_seconds: time_answered_seconds)
+        
+        let nextIndex = currentIndex + 1
+        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+        if isLastQuestion {
+            appD.quizRunning = false
+            let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
+            self.navigationController?.pushViewController(leaderboardVC, animated: true)
+        } else {
+            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         if isIncorrectAnswer {
             incorrectAnswered()
         } else {
-            dataStore.saveCorrectAnswer(for: currentData.quizTopic)
             
-            let nextIndex = currentIndex + 1
-            let isLastQuestion = !quizDatas.indices.contains(nextIndex)
-            if isLastQuestion {
-                appD.quizRunning = false
-                let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
-                self.navigationController?.pushViewController(leaderboardVC, animated: true)
-            } else {
-                let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
         }
     }
     

@@ -58,8 +58,8 @@ class QuizDataStore {
         }
     }
     
-    func saveAnswer(for quizTopic: QuizTopicParse, isCorrect: Bool, quizData: QuizDataParse, time_answered_seconds: Double) {
-        let questionStatus = isCorrect ? "correct" : "incorrect"
+    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse, time_answered_seconds: Double) {
+        let questionStatus = answerStatus.rawValue
         let quizDataID = quizData.objectId ?? ""
         let quizTopicID = quizTopic.objectId ?? ""
         

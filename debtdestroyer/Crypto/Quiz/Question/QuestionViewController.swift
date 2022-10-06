@@ -13,6 +13,12 @@ class QuestionViewController: UIViewController {
         static let originalStartTime: TimeInterval = 15
     }
     
+    enum AnswerStatus: String {
+        case incorrect = "incorrect"
+        case correct = "correct"
+        case time_ran_out = "time_ran_out"
+    }
+    
     var circularView = CircularProgressCountdownTimerView()
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
@@ -65,8 +71,7 @@ class QuestionViewController: UIViewController {
         circularView.progressAnimation(duration: timeLeft)
         endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        NotificationCenter.default.addObserver(self, selector: #selector(wrongAnswerOrLoseQuiz), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +89,7 @@ class QuestionViewController: UIViewController {
         } else {
             timeLabel.text = "00"
             timer.invalidate()
-            incorrectAnswered()
+            submitAnswer(answerStatus: .time_ran_out)
         }
     }
   
@@ -92,8 +97,8 @@ class QuestionViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc private func wrongAnswerOrLoseQuiz() {
-        incorrectAnswered()
+    @objc private func enteredAppBackground() {
+        //TODO: exited app, so they lose the entire quiz.
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -149,24 +154,25 @@ class QuestionViewController: UIViewController {
             
         }
         
-        Timer.runThisAfterDelay(seconds: 2, after: {
-            self.submitAnswer()
+        Timer.runThisAfterDelay(seconds: 1.7, after: {
+            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+                if answerView.backgroundColor != .white {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            
+            let isCorrectAnswer = selectedAnswerIndex == self.currentData.correct_answer_index
+            let answerStatus: AnswerStatus = isCorrectAnswer ? .correct : .incorrect
+            self.submitAnswer(answerStatus: answerStatus)
         })
     }
         
-    func submitAnswer() {
-        let selectedAnswerIndex = answerViews.firstIndex { answerView in
-            if answerView.backgroundColor != .white {
-                return true
-            } else {
-                return false
-            }
-        }
-        
-        let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+    func submitAnswer(answerStatus: AnswerStatus) {
         let time_answered_seconds = Constants.originalStartTime - timeLeft
         dataStore.saveAnswer(for: currentData.quizTopic,
-                             isCorrect: true,
+                             answerStatus: answerStatus,
                              quizData: currentData,
                              time_answered_seconds: time_answered_seconds)
         

@@ -37,9 +37,8 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
         
         imgView.snp.makeConstraints { make in
             make.height.width.equalTo(40)
-            make.top.bottom.equalToSuperview().inset(5)
+            make.bottom.equalToSuperview().inset(5)
             make.leading.equalTo(numberLabel.snp.trailing).offset(5)
-            make.centerY.equalToSuperview()
         }
         
         pointsLabel.snp.makeConstraints { make in
@@ -66,8 +65,6 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     }
     
     private func setImgView() {
-//        imgView.image = UIImage.init(systemName: "person.fill")?.withRenderingMode(.alwaysTemplate)
-//        imgView.tintColor = .lightGray
         imgView.backgroundColor = .coinbaseBlue
         imgView.contentMode = .scaleAspectFill
         imgView.layer.cornerRadius = 20

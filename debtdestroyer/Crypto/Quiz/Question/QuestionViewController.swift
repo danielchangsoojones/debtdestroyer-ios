@@ -64,6 +64,7 @@ class QuestionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
         self.view.setGradientBackground(color1: .topBlue, color2: .bottomBlue, radi: 0)
     }
     
@@ -159,9 +160,7 @@ class QuestionViewController: UIViewController {
             let isLastQuestion = !quizDatas.indices.contains(nextIndex)
             if isLastQuestion {
                 let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
-                let navController = UINavigationController(rootViewController: leaderboardVC)
-                navController.modalPresentationStyle = .fullScreen
-                self.present(navController, animated: true)
+                self.navigationController?.pushViewController(leaderboardVC, animated: true)
             } else {
                 let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
                 self.navigationController?.pushViewController(vc, animated: true)

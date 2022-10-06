@@ -35,6 +35,8 @@ class StartQuizViewController: UIViewController {
         self.backgroundImgView.image = UIImage.init(named: "startTrivia")
         self.backgroundImgView.backgroundColor = .oliveGreen
         
+        NotificationCenter.default.addObserver(self, selector: #selector(startQuizLoadData), name: NSNotification.Name(rawValue: "StartQuizLoadData"), object: nil)
+        
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
         activityIndicator.color = UIColor.black
         self.view.addSubview(activityIndicator)
@@ -60,37 +62,9 @@ class StartQuizViewController: UIViewController {
         }
     }
     
-    
-    //    override func viewDidLoad() {
-    //
-    //        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
-    //
-    //        activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
-    //        activityIndicator.color = UIColor.black
-    //        self.view.addSubview(activityIndicator)
-    //        activityIndicator.startAnimating()
-    //
-    //
-    //
-    //        dataStore.getQuizData { quizData in
-    //            self.quizDatas = quizData
-    //            let quizTopic = quizData.first?.quizTopic
-    //            self.backgroundImgView.image = UIImage.init(named: "startTrivia")
-    //            self.backgroundImgView.backgroundColor = .oliveGreen
-    //
-    //            self.dataStore.shouldShowEarnings { shouldShowEarnings in
-    //                User.shouldShowEarnings = shouldShowEarnings
-    //                if shouldShowEarnings {
-    //                    self.titleLabel.text = quizTopic?.name ?? "Win our trivia to earn cash towards your student loan"
-    //                    self.descriptionLabel.text = quizTopic?.ticker ?? ""
-    //                } else {
-    //                    self.titleLabel.text = "Become the trivia champion"
-    //                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
-    //                }
-    //            }
-    //            activityIndicator.stopAnimating()
-    //        }
-    //    }
+    @objc func startQuizLoadData() {
+        loadData()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

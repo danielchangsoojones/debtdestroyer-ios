@@ -41,9 +41,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        let appD = UIApplication.shared.delegate as! AppDelegate
+        if appD.quizRunning {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
+
+        }
+        
     }
 
     private func setStartingVC(windowScene: UIScene) {

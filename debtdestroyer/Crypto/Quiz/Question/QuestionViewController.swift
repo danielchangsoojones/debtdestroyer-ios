@@ -27,7 +27,8 @@ class QuestionViewController: UIViewController {
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
-    
+    let appD = UIApplication.shared.delegate as! AppDelegate
+
     init(quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
@@ -45,6 +46,8 @@ class QuestionViewController: UIViewController {
         
         questionView.questionLabel.text = currentData.question
         addAnswers(to: questionView.answerStackView)
+        questionView.questionNoLabel.text = "question \(currentIndex + 1) of \(quizDatas.count)"
+        print("question \(currentIndex + 1) of \(quizDatas.count)")
         self.circularView = questionView.circularView
         self.backBtn = questionView.backBtn
         self.timeLabel = questionView.timerLabel
@@ -58,6 +61,7 @@ class QuestionViewController: UIViewController {
         circularView.progressAnimation(duration: timeLeft)
         endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(wrongAnswerOrLoseQuiz), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
 
     }
     
@@ -66,6 +70,7 @@ class QuestionViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
         self.view.setGradientBackground(color1: .topBlue, color2: .bottomBlue, radi: 0)
+        appD.quizRunning = true
     }
     
     @objc func updateTime() {
@@ -81,6 +86,10 @@ class QuestionViewController: UIViewController {
   
     @objc private func backPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func wrongAnswerOrLoseQuiz() {
+        incorrectAnswered()
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -159,6 +168,7 @@ class QuestionViewController: UIViewController {
             let nextIndex = currentIndex + 1
             let isLastQuestion = !quizDatas.indices.contains(nextIndex)
             if isLastQuestion {
+                appD.quizRunning = false
                 let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
                 self.navigationController?.pushViewController(leaderboardVC, animated: true)
             } else {
@@ -169,6 +179,7 @@ class QuestionViewController: UIViewController {
     }
     
     func incorrectAnswered() {
+        //TODO: wrong answer API call & loos the quiz
         let vc = ChampionsViewController(quizTopic: currentData.quizTopic)
         self.navigationController?.pushViewController(vc, animated: true)
     }

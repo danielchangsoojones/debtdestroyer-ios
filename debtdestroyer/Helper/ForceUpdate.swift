@@ -35,7 +35,7 @@ class ForceUpdate {
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Update", action: {
             //TODO: a bitly link for now until we get the actual app link
-            Helpers.open(urlString: "https://apps.apple.com/us/app/pinscope/id1630557496")
+            Helpers.open(urlString: "https://apps.apple.com/us/app/lavadrop/id1639968618")
         })
         alertView.showSuccess("Update App", subTitle: "There is a new Pinscope version available. Please update your app!")
     }

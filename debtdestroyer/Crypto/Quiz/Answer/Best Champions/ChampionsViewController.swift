@@ -53,7 +53,6 @@ class ChampionsViewController: UIViewController {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setLeaderboardTableView()
-        loadLeaderboard()
     }
   
     override func viewWillLayoutSubviews() {
@@ -64,6 +63,7 @@ class ChampionsViewController: UIViewController {
         super.viewWillAppear(animated)
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
+        loadLeaderboard()
     }
     
     private func setNavBarBtns() {
@@ -149,7 +149,6 @@ class ChampionsViewController: UIViewController {
             var index = 1
             for quizScore in quizScores {
                 if User.current()?.objectId == quizScore.user.objectId {
-                    print(quizScore.score)
                     self.nameLabel.text = quizScore.user.fullName.capitalized
                     self.pointsLabel.text = " " + String(quizScore.score) + " Points "
                     self.numberLabel.text = String(index) + ". "

@@ -180,18 +180,6 @@ class QuestionViewController: UIViewController {
             let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        
-        if isIncorrectAnswer {
-            incorrectAnswered()
-        } else {
-            
-        }
-    }
-    
-    func incorrectAnswered() {
-        //TODO: wrong answer API call & loos the quiz
-        let vc = ChampionsViewController(quizTopic: currentData.quizTopic)
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

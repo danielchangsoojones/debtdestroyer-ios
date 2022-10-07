@@ -43,6 +43,10 @@ class CryptoSettingsViewController: UIViewController {
         
         imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc"]
         
+//        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
+//
+//        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc", "deleteAcc"]
+        
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isHidden = false
@@ -115,10 +119,15 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.present(navController, animated: true)
                 }
             }
-        } else {
+        } else if indexPath.row == 3 {
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
+        } else {
+            // MARK: Notification Permission
+            let vc = NotificationPermissionViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
         }
         
     }

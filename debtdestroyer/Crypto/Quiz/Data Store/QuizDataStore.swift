@@ -85,4 +85,21 @@ class QuizDataStore {
             completion(result, error)
         }
     }
+    
+    func exitedAppDuringTrivia(for quizTopic: QuizTopicParse, quizData: QuizDataParse) {
+        let quizTopicID = quizTopic.objectId ?? ""
+        let currentQuizIndex = quizData.order
+        
+        let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
+                                          "quizDataIndex": currentQuizIndex]
+        PFCloud.callFunction(inBackground: "exitedAppDuringTrivia", withParameters: parameters) { (result, error) in
+            if result != nil {
+                print("the user has lost the quiz")
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
+            }
+        }
+    }
 }

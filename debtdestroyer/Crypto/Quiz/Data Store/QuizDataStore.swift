@@ -69,7 +69,7 @@ class QuizDataStore {
                                           "time_answered_seconds": time_answered_seconds]
         PFCloud.callFunction(inBackground: "saveAnswer", withParameters: parameters) { (result, error) in
             if result != nil {
-                print("save the correct answer to the user")
+                print("the answer was saved for the user")
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {

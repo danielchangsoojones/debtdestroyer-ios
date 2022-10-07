@@ -98,6 +98,7 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func enteredAppBackground() {
+        dataStore.exitedAppDuringTrivia(for: currentData.quizTopic, quizData: currentData)
         //TODO: exited app, so they lose the entire quiz.
     }
     

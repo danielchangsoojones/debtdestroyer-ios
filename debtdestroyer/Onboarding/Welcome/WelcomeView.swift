@@ -152,7 +152,7 @@ class WelcomeView: UIView {
             }
         }
         
-        titleLabel.text = "LavaDrop"
+        titleLabel.text = "Debt Destroyed"
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         addSubview(titleLabel)

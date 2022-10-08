@@ -40,7 +40,7 @@ class StartQuizView: UIView {
     }
  
     private func setNameLabel() {
-        nameLabel.text = "LavaDrop"
+        nameLabel.text = "Debt Destroyed"
         nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         nameLabel.textColor = .white
         nameLabel.backgroundColor = .clear

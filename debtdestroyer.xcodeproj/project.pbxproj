@@ -1062,7 +1062,7 @@
 				DEVELOPMENT_TEAM = WGU25444T9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyed";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We ask for location access to provide you with relevant rewards to your account";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1094,7 +1094,7 @@
 				DEVELOPMENT_TEAM = WGU25444T9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyed";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We ask for location access to provide you with relevant rewards to your account";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

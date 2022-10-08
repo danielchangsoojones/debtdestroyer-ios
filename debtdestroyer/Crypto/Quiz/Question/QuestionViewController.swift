@@ -9,8 +9,18 @@ import UIKit
 import Foundation
 
 class QuestionViewController: UIViewController {
+    struct Constants {
+        static let originalStartTime: TimeInterval = 15
+    }
+    
+    enum AnswerStatus: String {
+        case incorrect = "incorrect"
+        case correct = "correct"
+        case time_ran_out = "time_ran_out"
+    }
+    
     var circularView = CircularProgressCountdownTimerView()
-    var timeLeft: TimeInterval = 15
+    private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
     var timeLabel =  UILabel()
     var timer = Timer()
@@ -27,7 +37,8 @@ class QuestionViewController: UIViewController {
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
-    
+    let appD = UIApplication.shared.delegate as! AppDelegate
+
     init(quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
@@ -45,6 +56,8 @@ class QuestionViewController: UIViewController {
         
         questionView.questionLabel.text = currentData.question
         addAnswers(to: questionView.answerStackView)
+        questionView.questionNoLabel.text = "question \(currentIndex + 1) of \(quizDatas.count)"
+        print("question \(currentIndex + 1) of \(quizDatas.count)")
         self.circularView = questionView.circularView
         self.backBtn = questionView.backBtn
         self.timeLabel = questionView.timerLabel
@@ -55,10 +68,10 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
         circularView.progressAnimation(duration: timeLeft)
         endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +79,7 @@ class QuestionViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
         self.view.setGradientBackground(color1: .topBlue, color2: .bottomBlue, radi: 0)
+        appD.quizRunning = true
     }
     
     @objc func updateTime() {
@@ -75,12 +89,17 @@ class QuestionViewController: UIViewController {
         } else {
             timeLabel.text = "00"
             timer.invalidate()
-            incorrectAnswered()
+            submitAnswer(answerStatus: .time_ran_out)
         }
     }
   
     @objc private func backPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func enteredAppBackground() {
+        dataStore.exitedAppDuringTrivia(for: currentData.quizTopic, quizData: currentData)
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -136,41 +155,38 @@ class QuestionViewController: UIViewController {
             
         }
         
-        Timer.runThisAfterDelay(seconds: 2, after: {
-            self.submitAnswer()
+        Timer.runThisAfterDelay(seconds: 1.7, after: {
+            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+                if answerView.backgroundColor != .white {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            
+            let isCorrectAnswer = selectedAnswerIndex == self.currentData.correct_answer_index
+            let answerStatus: AnswerStatus = isCorrectAnswer ? .correct : .incorrect
+            self.submitAnswer(answerStatus: answerStatus)
         })
     }
         
-    func submitAnswer() {
-        let selectedAnswerIndex = answerViews.firstIndex { answerView in
-            if answerView.backgroundColor != .white {
-                return true
-            } else {
-                return false
-            }
-        }
+    func submitAnswer(answerStatus: AnswerStatus) {
+        let time_answered_seconds = Constants.originalStartTime - timeLeft
+        dataStore.saveAnswer(for: currentData.quizTopic,
+                             answerStatus: answerStatus,
+                             quizData: currentData,
+                             time_answered_seconds: time_answered_seconds)
         
-        let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
-        if isIncorrectAnswer {
-            incorrectAnswered()
+        let nextIndex = currentIndex + 1
+        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+        if isLastQuestion {
+            appD.quizRunning = false
+            let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
+            self.navigationController?.pushViewController(leaderboardVC, animated: true)
         } else {
-            dataStore.saveCorrectAnswer(for: currentData.quizTopic)
-            
-            let nextIndex = currentIndex + 1
-            let isLastQuestion = !quizDatas.indices.contains(nextIndex)
-            if isLastQuestion {
-                let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
-                self.navigationController?.pushViewController(leaderboardVC, animated: true)
-            } else {
-                let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    
-    func incorrectAnswered() {
-        let vc = ChampionsViewController(quizTopic: currentData.quizTopic)
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

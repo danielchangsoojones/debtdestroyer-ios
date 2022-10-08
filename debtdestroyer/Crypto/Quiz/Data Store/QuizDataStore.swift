@@ -58,12 +58,18 @@ class QuizDataStore {
         }
     }
     
-    func saveCorrectAnswer(for quizTopic: QuizTopicParse) {
+    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse, time_answered_seconds: Double) {
+        let questionStatus = answerStatus.rawValue
+        let quizDataID = quizData.objectId ?? ""
         let quizTopicID = quizTopic.objectId ?? ""
-        let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
-        PFCloud.callFunction(inBackground: "saveCorrectAnswer", withParameters: parameters) { (result, error) in
+        
+        let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
+                                          "questionStatus":questionStatus,
+                                          "quizDataID": quizDataID,
+                                          "time_answered_seconds": time_answered_seconds]
+        PFCloud.callFunction(inBackground: "saveAnswer", withParameters: parameters) { (result, error) in
             if result != nil {
-                print("save the correct answer to the user")
+                print("the answer was saved for the user")
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
@@ -77,6 +83,23 @@ class QuizDataStore {
         let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
         PFCloud.callFunction(inBackground: "checkIfAlreadyTakenQuiz", withParameters: parameters) { (result, error) in
             completion(result, error)
+        }
+    }
+    
+    func exitedAppDuringTrivia(for quizTopic: QuizTopicParse, quizData: QuizDataParse) {
+        let quizTopicID = quizTopic.objectId ?? ""
+        let currentQuizIndex = quizData.order
+        
+        let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
+                                          "quizDataIndex": currentQuizIndex]
+        PFCloud.callFunction(inBackground: "exitedAppDuringTrivia", withParameters: parameters) { (result, error) in
+            if result != nil {
+                print("the user has lost the quiz")
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
+            }
         }
     }
 }

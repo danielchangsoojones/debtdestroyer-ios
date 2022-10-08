@@ -22,6 +22,7 @@ class ChampionsViewController: UIViewController {
     private var nameLabel = UILabel()
     private var pointsLabel = UILabel()
     private var imgView = UIImageView()
+    private var tweetText = String()
     
     init(quizTopic: QuizTopicParse) {
         self.quizTopic = quizTopic
@@ -52,7 +53,6 @@ class ChampionsViewController: UIViewController {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setLeaderboardTableView()
-        loadLeaderboard()
     }
   
     override func viewWillLayoutSubviews() {
@@ -63,6 +63,7 @@ class ChampionsViewController: UIViewController {
         super.viewWillAppear(animated)
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
+        loadLeaderboard()
     }
     
     private func setNavBarBtns() {
@@ -85,6 +86,38 @@ class ChampionsViewController: UIViewController {
     
     @objc private func helpPressed() {
         messageHelper?.text(MessageHelper.customerServiceNum)
+//        shareOnTwitter()
+    }
+    
+    private func shareOnTwitter() {
+        
+        let tweetUrl = "https://apps.apple.com/app/id1639968618"
+     
+        let appURL = "twitter://intent/tweet?text=\(self.tweetText)&url=\(tweetUrl)"
+        let webURL = "https://twitter.com/intent/tweet?text=\(self.tweetText)&url=\(tweetUrl)"
+        
+        let appURLescapedShareString = appURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+
+        let webURLescapedShareString = webURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        
+                let urlapp = URL(string: appURLescapedShareString)!
+                let urlweb = URL(string: webURLescapedShareString)!
+
+
+        if UIApplication.shared.canOpenURL(urlapp as URL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(urlapp)
+            } else {
+                UIApplication.shared.openURL(urlapp)
+            }
+        } else {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(urlweb)
+            } else {
+                UIApplication.shared.openURL(urlweb)
+            }
+        }
+        
     }
     
     private func setLeaderboardTableView() {
@@ -110,16 +143,17 @@ class ChampionsViewController: UIViewController {
             self.nameLabel.text = User.current()?.fullName.capitalized
             self.pointsLabel.text = " 0 Points "
             self.numberLabel.text = String(quizScores.count + 1) + ". "
-            
+            self.tweetText = "Hey.. I have earned 0 Points and scored \(quizScores.count + 1)."
             
             // MARK: this code will update info in bottom view if user attended quiz before
             var index = 1
             for quizScore in quizScores {
                 if User.current()?.objectId == quizScore.user.objectId {
-                    print(quizScore.score)
                     self.nameLabel.text = quizScore.user.fullName.capitalized
                     self.pointsLabel.text = " " + String(quizScore.score) + " Points "
                     self.numberLabel.text = String(index) + ". "
+                    self.tweetText = "Hey.. I have earned \(quizScore.score) Points and scored \(index)."
+
                     return
                 }
                 index += 1

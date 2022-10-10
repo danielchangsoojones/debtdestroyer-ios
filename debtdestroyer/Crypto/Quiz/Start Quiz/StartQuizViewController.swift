@@ -12,7 +12,7 @@ class StartQuizViewController: UIViewController {
     private var backgroundImgView: UIImageView!
     private var descriptionLabel = UILabel()
     private var titleLabel = UILabel()
-    private var nextButton: SpinningButton!
+    private var nextButton: SpinningWithGradButton!
     private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     private let dataStore = QuizDataStore()
     private var quizDatas: [QuizDataParse] = []
@@ -33,7 +33,6 @@ class StartQuizViewController: UIViewController {
     override func viewDidLoad() {
         
         self.backgroundImgView.image = UIImage.init(named: "startTrivia")
-        self.backgroundImgView.backgroundColor = .oliveGreen
         
         NotificationCenter.default.addObserver(self, selector: #selector(startQuizLoadData), name: NSNotification.Name(rawValue: "StartQuizLoadData"), object: nil)
         
@@ -51,11 +50,13 @@ class StartQuizViewController: UIViewController {
                 if shouldShowEarnings {
                     let quizTopic = self.quizDatas.first?.quizTopic
                     
-                    self.titleLabel.text = quizTopic?.name ?? "Win our trivia to earn cash towards your student loan"
-                    self.descriptionLabel.text = quizTopic?.ticker ?? ""
+                    self.titleLabel.text = quizTopic?.name ?? "Play Daily Trivia"
+                    self.descriptionLabel.text = quizTopic?.ticker ?? "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins $50 towards their student loan. Good Luck!"
                 } else {
-                    self.titleLabel.text = "Become the trivia champion"
-                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
+                    self.titleLabel.text = "Play Daily Trivia"
+                    self.descriptionLabel.text = "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins $50 towards their student loan. Good Luck!"
+//                    self.titleLabel.text = "Become the trivia champion"
+//                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
                 }
                 self.activityIndicator.stopAnimating()
             }

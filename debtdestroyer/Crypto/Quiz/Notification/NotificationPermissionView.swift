@@ -12,7 +12,7 @@ class NotificationPermissionView: UIView {
     let descriptionLabel = UILabel()
     let titleLabel = UILabel()
     private let leadingOffset: CGFloat = 20
-    let allowBtn = SpinningButton()
+    let allowBtn = SpinningWithGradButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,7 +41,7 @@ class NotificationPermissionView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLabel.text = "Enable Notification"
+        titleLabel.text = "Keep me posted"
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         titleLabel.textColor = .black
         titleLabel.backgroundColor = .clear
@@ -71,15 +71,16 @@ class NotificationPermissionView: UIView {
     }
     
     private func setAllowNotificationButton() {
-        allowBtn.backgroundColor = .black
+        allowBtn.backgroundColor = .clear
         allowBtn.setTitleColor(.white, for: .normal)
         allowBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        allowBtn.setTitle("Allow Notifications", for: .normal)
+        allowBtn.setTitle("I WANT TO BE NOTIFIED", for: .normal)
         let height: CGFloat = 55
         allowBtn.layer.cornerRadius = height / 2
+        allowBtn.layer.masksToBounds = true
         addSubview(allowBtn)
         allowBtn.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(5)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.bottomMargin.equalToSuperview().inset(20)
             make.height.equalTo(height)
         }

@@ -9,16 +9,18 @@ import UIKit
 
 class StartQuizView: UIView {
     let backgroudImgView = UIImageView()
+    let logoImgView = UIImageView()
     let descriptionLabel = UILabel()
     let nameLabel = UILabel()
     let titleLabel = UILabel()
     private let leadingOffset: CGFloat = 20
-    let nextButton = SpinningButton()
+    let nextButton = SpinningWithGradButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .oliveGreen
+        backgroundColor = .clear
         setbackgroudImgView()
+        setLogoImgView()
         setNextButton()
         setNameLabel()
         setTitleLabel()
@@ -35,27 +37,39 @@ class StartQuizView: UIView {
         backgroudImgView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottomMargin.equalToSuperview()
-            make.top.equalTo(self.snp.centerY)
+            make.topMargin.equalToSuperview()
+        }
+    }
+    
+    private func setLogoImgView() {
+        logoImgView.image = UIImage.init(named: "drop")
+        logoImgView.contentMode = .scaleAspectFill
+        addSubview(logoImgView)
+        logoImgView.snp.makeConstraints { make in
+            make.topMargin.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().inset(10)
+            make.height.width.equalTo(18)
+            
         }
     }
  
     private func setNameLabel() {
         nameLabel.text = "Debt Destroyed"
         nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        nameLabel.textColor = .white
+        nameLabel.textColor = .black
         nameLabel.backgroundColor = .clear
         nameLabel.numberOfLines = 0
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview().offset(10)
-            make.leading.equalToSuperview().inset(10)
-            make.trailing.equalToSuperview().inset(leadingOffset)
+            make.centerY.equalTo(logoImgView)
+            make.leading.equalTo(logoImgView.snp.trailing).offset(5)
+            make.trailing.equalToSuperview()
         }
     }
     
     private func setTitleLabel() {
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        titleLabel.textColor = .white
+        titleLabel.textColor = .black
         titleLabel.backgroundColor = .clear
         titleLabel.numberOfLines = 0
         addSubview(titleLabel)
@@ -68,7 +82,7 @@ class StartQuizView: UIView {
     
     private func setDescriptionLabel() {
         descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        descriptionLabel.textColor = .white
+        descriptionLabel.textColor = .black
         descriptionLabel.backgroundColor = .clear
         descriptionLabel.numberOfLines = 0
         addSubview(descriptionLabel)
@@ -80,15 +94,16 @@ class StartQuizView: UIView {
     }
     
     private func setNextButton() {
-        nextButton.backgroundColor = .black
+        nextButton.backgroundColor = .clear
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         nextButton.setTitle("Start Trivia", for: .normal)
         let height: CGFloat = 55
         nextButton.layer.cornerRadius = height / 2
+        nextButton.layer.masksToBounds = true
         addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(5)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.bottomMargin.equalToSuperview().inset(20)
             make.height.equalTo(height)
         }

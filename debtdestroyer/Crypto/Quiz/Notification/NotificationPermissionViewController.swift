@@ -9,7 +9,7 @@ import UIKit
 
 class NotificationPermissionViewController: UIViewController, UNUserNotificationCenterDelegate {
 
-    private var allowBtn = SpinningButton()
+    private var allowBtn = SpinningWithGradButton()
 
     override func loadView() {
         super.loadView()

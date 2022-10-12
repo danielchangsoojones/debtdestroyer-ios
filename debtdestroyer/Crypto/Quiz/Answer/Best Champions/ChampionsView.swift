@@ -11,16 +11,12 @@ class ChampionsView: UIView {
    
     let descriptionLabel = UILabel()
     let titleLabel = UILabel()
-    let champImgView = UIImageView()
-    let champNameLabel = UILabel()
-    let champPointsLabel = UILabel()
-    let numberTagLabel = UILabel()
     let containerView = UIView()
     let leaderboardTableView = UITableView()
     let numberLabel = UILabel()
     let nameLabel = UILabel()
     let pointsLabel = UILabel()
-    let imgView = UIImageView()
+    let timeLable = UILabel()
     let bottomViewContainer = UIView()
     let bottomView = UIView()
 
@@ -33,10 +29,6 @@ class ChampionsView: UIView {
         setBottomView()
         setTitleLabel()
         setDescriptionLabel()
-        setChampImgView()
-        setNumberTagLabel()
-        setChampNameLabel()
-        setChampPointsLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -71,70 +63,7 @@ class ChampionsView: UIView {
             make.trailing.equalToSuperview().inset(20)
         }
     }
-    
-    private func setChampImgView() {
-        champImgView.image = UIImage.init(systemName: "person.circle")?.withRenderingMode(.alwaysTemplate)
-        champImgView.tintColor = .darkGray
-        champImgView.contentMode = .scaleAspectFill
-        let dimenssion = 100
-        champImgView.layer.cornerRadius = CGFloat(dimenssion / 2)
-        addSubview(champImgView)
-        champImgView.snp.makeConstraints { make in
-            make.height.width.equalTo(dimenssion)
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(15)
-            make.centerX.equalToSuperview()
-        }
-    }
-    
-    private func setChampNameLabel() {
-        champNameLabel.text = "Anny Maxwell"
-        champNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        champNameLabel.textColor = .white
-        champNameLabel.textAlignment = .center
-        champNameLabel.backgroundColor = .clear
-        champNameLabel.numberOfLines = 0
-        addSubview(champNameLabel)
-        champNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(champImgView.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
-        }
-    }
-    
-    private func setNumberTagLabel() {
-        numberTagLabel.text = "1"
-        numberTagLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        numberTagLabel.textColor = .white
-        numberTagLabel.textAlignment = .center
-        numberTagLabel.backgroundColor = .fuchsiaPink
-        numberTagLabel.layer.cornerRadius = 12.5
-        numberTagLabel.layer.masksToBounds = true
 
-        addSubview(numberTagLabel)
-        numberTagLabel.snp.makeConstraints { make in
-            make.top.equalTo(champImgView.snp.top).inset(8)
-            make.trailing.equalTo(champImgView.snp.trailing).inset(8)
-            make.height.width.equalTo(25)
-        }
-    }
-    
-    private func setChampPointsLabel() {
-        champPointsLabel.text = " 0 Points "
-        champPointsLabel.textColor = .white
-        champPointsLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        champPointsLabel.textAlignment = .center
-        champPointsLabel.layer.borderColor = UIColor.white.cgColor
-        champPointsLabel.layer.borderWidth = 1
-        champPointsLabel.layer.cornerRadius = 15
-        let dimenssion = 30
-        addSubview(champPointsLabel)
-        champPointsLabel.snp.makeConstraints { make in
-            make.height.equalTo(dimenssion)
-            make.width.equalTo(80)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(champNameLabel.snp.bottom).offset(10)
-        }
-    }
-    
     private func setContainerView() {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 15
@@ -143,7 +72,7 @@ class ChampionsView: UIView {
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(375)
+            make.top.equalTo(180)
             make.bottom.equalToSuperview().offset(-95)
         }
     }
@@ -159,7 +88,7 @@ class ChampionsView: UIView {
     }
     
     private func setBottomView() {
-        bottomView.backgroundColor = .fuchsiaPink
+        bottomView.backgroundColor = .clear
         bottomView.setTopCurve()
         bottomViewContainer.addSubview(bottomView)
         bottomView.snp.makeConstraints { make in
@@ -170,37 +99,38 @@ class ChampionsView: UIView {
         setNumLabel()
         setNameLabel()
         setPointsLabel()
-        setImgView()
+        setTimeLabel()
         setConstraints()
     }
     
     private func setConstraints() {
         numberLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
-            make.centerY.equalTo(imgView)
+            make.centerY.equalTo(nameLabel)
             make.width.equalTo(15)
         }
         
-        imgView.snp.makeConstraints { make in
-            make.height.width.equalTo(40)
-            make.bottom.equalToSuperview().inset(5)
-            make.top.equalToSuperview().inset(20)
-            make.leading.equalTo(numberLabel.snp.trailing).offset(5)
-        }
-        
-        pointsLabel.snp.makeConstraints { make in
+        timeLable.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(10)
-            make.centerY.equalTo(imgView)
+            make.centerY.equalTo(nameLabel)
             make.width.equalTo(80)
             make.height.equalTo(30)
         }
         
+        pointsLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(timeLable.snp.leading).inset(10)
+            make.centerY.equalTo(nameLabel)
+            make.width.equalTo(40)
+            make.height.equalTo(30)
+        }
+        
         nameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(imgView.snp.trailing).offset(5)
+            make.leading.equalTo(numberLabel.snp.trailing).offset(5)
             make.bottom.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(20)
             make.trailing.equalTo(pointsLabel.snp.leading).offset(5)
             make.width.lessThanOrEqualToSuperview()
-            make.centerY.equalTo(imgView)
+            make.height.equalTo(40)
 
         }
     }
@@ -212,11 +142,13 @@ class ChampionsView: UIView {
         bottomView.addSubview(numberLabel)
     }
     
-    private func setImgView() {
-        imgView.backgroundColor = .coinbaseBlue
-        imgView.contentMode = .scaleAspectFill
-        imgView.layer.cornerRadius = 20
-        bottomView.addSubview(imgView)
+    private func setTimeLabel() {
+        timeLable.text = "2.23"
+        timeLable.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        timeLable.textColor = .black
+        pointsLabel.textAlignment = .center
+
+        bottomView.addSubview(timeLable)
     }
     
     private func setNameLabel() {
@@ -227,13 +159,10 @@ class ChampionsView: UIView {
     }
     
     private func setPointsLabel() {
-        pointsLabel.text = "12 Points"
-        pointsLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        pointsLabel.text = "12"
+        pointsLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         pointsLabel.textColor = .black
         pointsLabel.textAlignment = .center
-        pointsLabel.layer.borderColor = UIColor.darkGray.cgColor
-        pointsLabel.layer.borderWidth = 0.5
-        pointsLabel.layer.cornerRadius = 15
         bottomView.addSubview(pointsLabel)
     }
     

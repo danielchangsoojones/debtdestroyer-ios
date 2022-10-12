@@ -44,12 +44,12 @@ class CryptoTabBarViewController: UITabBarController {
         self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
         
         let tabQuiz = tabBar.items![0]
-        tabQuiz.image = UIImage(named: "quizB")?.withRenderingMode(.alwaysOriginal)
-        tabQuiz.selectedImage = UIImage(named: "quizC")?.withRenderingMode(.alwaysOriginal)
+        tabQuiz.image = UIImage(named: "houseBW")?.withRenderingMode(.alwaysOriginal)
+        tabQuiz.selectedImage = UIImage(named: "houseC")?.withRenderingMode(.alwaysOriginal)
      
         let tabLeadboard = tabBar.items![1]
-        tabLeadboard.image = UIImage(named: "Tickets")?.withRenderingMode(.alwaysOriginal)
-        tabLeadboard.selectedImage = UIImage(named: "Tickets")?.withRenderingMode(.alwaysOriginal)
+        tabLeadboard.image = UIImage(named: "ticketBW")?.withRenderingMode(.alwaysOriginal)
+        tabLeadboard.selectedImage = UIImage(named: "ticketC")?.withRenderingMode(.alwaysOriginal)
         
         let tabSettings = tabBar.items![2]
         tabSettings.image = UIImage(named: "settingsBW")?.withRenderingMode(.alwaysOriginal)

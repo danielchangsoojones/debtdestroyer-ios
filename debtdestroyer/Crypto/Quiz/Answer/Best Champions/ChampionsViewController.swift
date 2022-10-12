@@ -14,16 +14,14 @@ class ChampionsViewController: UIViewController {
     private var descriptionLabel: UILabel!
     private let dataStore = LeaderboardDataStore()
     private var messageHelper: MessageHelper?
-    private var champImgView = UIImageView()
-    private var champNameLabel = UILabel()
-    private var champPointsLabel = UILabel()
     private var bottomView = UIView()
+    private var containerView = UIView()
     private var numberLabel = UILabel()
     private var nameLabel = UILabel()
     private var pointsLabel = UILabel()
-    private var imgView = UIImageView()
     private var tweetText = String()
-    
+    private var timeLable = UILabel()
+
     init(quizTopic: QuizTopicParse) {
         self.quizTopic = quizTopic
         super.init(nibName: nil, bundle: nil)
@@ -39,13 +37,11 @@ class ChampionsViewController: UIViewController {
         self.view = championsView
         self.tableView = championsView.leaderboardTableView
         self.descriptionLabel = championsView.descriptionLabel
-        self.champImgView = championsView.champImgView
-        self.champNameLabel = championsView.champNameLabel
-        self.champPointsLabel = championsView.champPointsLabel
         self.bottomView = championsView.bottomView
+        self.containerView = championsView.containerView
         self.numberLabel = championsView.numberLabel
         self.nameLabel = championsView.nameLabel
-        self.imgView = championsView.imgView
+        self.timeLable = championsView.timeLable
         self.pointsLabel = championsView.pointsLabel
     }
     
@@ -64,6 +60,15 @@ class ChampionsViewController: UIViewController {
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
         loadLeaderboard()
+//        setNeedsStatusBarAppearanceUpdate()
+    }
+
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }// code not working yet
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.bottomView.setGradientBackground()
     }
     
     private func setNavBarBtns() {
@@ -128,20 +133,23 @@ class ChampionsViewController: UIViewController {
     
     private func loadLeaderboard() {
         dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
+            
+//            if quizScores.isEmpty {
+//                self.containerView.backgroundColor = .clear
+//                self.tableView.backgroundColor = .clear
+//            } else {
+//                self.containerView.backgroundColor = .white
+//                self.tableView.backgroundColor = .white
+//            }
             self.quizScores = quizScores
             self.descriptionLabel.text = deadlineMessage
             if !User.shouldShowEarnings {
                 self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
             }
-            if let quizScore = quizScores.first {
-                self.champNameLabel.text = quizScore.user.fullName.capitalized
-                self.champPointsLabel.text = " " + String(quizScore.score) + " Points "
-                self.tableView.reloadData()
-            }
             
             // MARK: This code will update info in bottom view if user never attended quiz before... No entry in table for current user.
             self.nameLabel.text = User.current()?.fullName.capitalized
-            self.pointsLabel.text = " 0 Points "
+            self.pointsLabel.text = " 0 "
             self.numberLabel.text = String(quizScores.count + 1) + ". "
             self.tweetText = "Hey.. I have earned 0 Points and scored \(quizScores.count + 1)."
             

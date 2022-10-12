@@ -10,15 +10,34 @@ import Parse
 import SwiftyJSON
 
 class LeaderboardDataStore {
-    func getLeaderBoard(quizTopicID: String, completion: @escaping ([QuizScoreParse], String) -> Void) {
+    struct QuizScore {
+        let user: User
+        let total_time_str: String
+        let points: Int
+    }
+    
+    func getLeaderBoard(quizTopicID: String, completion: @escaping ([QuizScore], String) -> Void) {
         let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
         PFCloud.callFunction(inBackground: "getLeaderboard", withParameters: parameters) { (result, error) in
-            if let dict = result as? [String : Any] {
-                let json = JSON(dict)
+            if let result = result {
+                let json = JSON(result)
                 let deadlineMessage = json["deadlineMessage"].stringValue
-                var quizScores: [QuizScoreParse] = []
-                if let quizScoresParse = dict["quizScores"] as? [QuizScoreParse] {
-                    quizScores = quizScoresParse
+                let quizScoresJSON = json["quizScores"].arrayValue
+                let quizScores: [QuizScore] = quizScoresJSON.map { quizScoreJSON in
+                    let total_time_str = quizScoreJSON["total_time_str"].stringValue
+                    let points = quizScoreJSON["points"].intValue
+                    if let dict = quizScoreJSON.dictionaryObject, let user = dict["user"] as? User {
+                        let quizScore = QuizScore(user: user,
+                                                  total_time_str: total_time_str,
+                                                  points: points)
+                        return quizScore
+                    } else {
+                        //shouldn't reach here.
+                        let quizScore = QuizScore(user: User(),
+                                                  total_time_str: total_time_str,
+                                                  points: points)
+                        return quizScore
+                    }
                 }
                 completion(quizScores, deadlineMessage)
             } else if let error = error {

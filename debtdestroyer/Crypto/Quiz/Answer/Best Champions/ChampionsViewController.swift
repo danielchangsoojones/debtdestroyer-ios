@@ -10,7 +10,7 @@ import UIKit
 class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
     private let quizTopic: QuizTopicParse
-    private var quizScores: [QuizScoreParse] = []
+    private var quizScores: [LeaderboardDataStore.QuizScore] = []
     private var descriptionLabel: UILabel!
     private let dataStore = LeaderboardDataStore()
     private var messageHelper: MessageHelper?
@@ -158,9 +158,9 @@ class ChampionsViewController: UIViewController {
             for quizScore in quizScores {
                 if User.current()?.objectId == quizScore.user.objectId {
                     self.nameLabel.text = quizScore.user.fullName.capitalized
-                    self.pointsLabel.text = " " + String(quizScore.score) + " Points "
+                    self.pointsLabel.text = " " + String(quizScore.points) + " Points "
                     self.numberLabel.text = String(index) + ". "
-                    self.tweetText = "Hey.. I have earned \(quizScore.score) Points and scored \(index)."
+                    self.tweetText = "Hey.. I have earned \(quizScore.points) Points and scored \(index)."
 
                     return
                 }
@@ -181,7 +181,7 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         let quizScore = quizScores[indexPath.row + 1]
         cell.numberLabel.text = String(indexPath.row + 2) + ". "
         cell.nameLabel.text = quizScore.user.fullName.capitalized
-        cell.pointsLabel.text = String(quizScore.score) + " Points"
+        cell.pointsLabel.text = String(quizScore.points) + " Points"
         return cell
     }
     

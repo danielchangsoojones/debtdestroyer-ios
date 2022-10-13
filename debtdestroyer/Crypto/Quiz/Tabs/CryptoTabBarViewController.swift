@@ -35,6 +35,14 @@ class CryptoTabBarViewController: UITabBarController {
         
     }
     
+    open override var childForStatusBarStyle: UIViewController? {
+        return selectedViewController
+    }
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.selectedViewController?.preferredStatusBarStyle ?? .default
+    }
+    
     private func setTabs(){
         let vc1 = StartQuizViewController()
         let vc2 = ChampionsViewController(quizTopic: self.quizDatas.first!.quizTopic)

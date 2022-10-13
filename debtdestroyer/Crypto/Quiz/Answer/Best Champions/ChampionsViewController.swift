@@ -63,9 +63,9 @@ class ChampionsViewController: UIViewController {
 //        setNeedsStatusBarAppearanceUpdate()
     }
 
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }// code not working yet
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }// code not working yet
     
     override func viewDidAppear(_ animated: Bool) {
         self.bottomView.setGradientBackground()
@@ -147,10 +147,13 @@ class ChampionsViewController: UIViewController {
                 self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
             }
             
+            self.tableView.reloadData()
+            
             // MARK: This code will update info in bottom view if user never attended quiz before... No entry in table for current user.
             self.nameLabel.text = User.current()?.fullName.capitalized
             self.pointsLabel.text = " 0 "
             self.numberLabel.text = String(quizScores.count + 1) + ". "
+            self.timeLable.text = "NA"
             self.tweetText = "Hey.. I have earned 0 Points and scored \(quizScores.count + 1)."
             
             // MARK: this code will update info in bottom view if user attended quiz before
@@ -158,30 +161,31 @@ class ChampionsViewController: UIViewController {
             for quizScore in quizScores {
                 if User.current()?.objectId == quizScore.user.objectId {
                     self.nameLabel.text = quizScore.user.fullName.capitalized
-                    self.pointsLabel.text = " " + String(quizScore.points) + " Points "
+                    self.pointsLabel.text = " " + String(quizScore.points)
                     self.numberLabel.text = String(index) + ". "
+                    self.timeLable.text = String(quizScore.total_time_str)
                     self.tweetText = "Hey.. I have earned \(quizScore.points) Points and scored \(index)."
 
                     return
                 }
                 index += 1
             }
-
         }
     }
 }
 
 extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quizScores.count - 1
+        return quizScores.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
-        let quizScore = quizScores[indexPath.row + 1]
-        cell.numberLabel.text = String(indexPath.row + 2) + ". "
+        let quizScore = quizScores[indexPath.row]
+        cell.numberLabel.text = String(indexPath.row + 1) + ". "
         cell.nameLabel.text = quizScore.user.fullName.capitalized
-        cell.pointsLabel.text = String(quizScore.points) + " Points"
+        cell.pointsLabel.text = String(quizScore.points)
+        cell.timeLable.text = String(quizScore.total_time_str)
         return cell
     }
     
@@ -192,6 +196,24 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = LeaderboardTableCell()
+        headerView.backgroundColor = .systemGray6
+        headerView.numberLabel.text = ""
+        headerView.nameLabel.text = ""
+        headerView.pointsLabel.text = "Points"
+        headerView.pointsLabel.font = UIFont.MontserratSemiBold(size: 15)
+        headerView.timeLable.text = "Time"
+        headerView.timeLable.font = UIFont.MontserratSemiBold(size: 15)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50.5
+    
+    }
 }
 
 extension UIView {
@@ -200,5 +222,13 @@ extension UIView {
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         layer.mask = mask
+    }
+}
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return visibleViewController?.preferredStatusBarStyle ?? .default
+    }
+    open override var childForStatusBarStyle: UIViewController? {
+        return visibleViewController
     }
 }

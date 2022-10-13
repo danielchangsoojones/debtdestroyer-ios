@@ -120,7 +120,7 @@ class ChampionsView: UIView {
         pointsLabel.snp.makeConstraints { make in
             make.trailing.equalTo(timeLable.snp.leading).inset(10)
             make.centerY.equalTo(nameLabel)
-            make.width.equalTo(40)
+            make.width.equalTo(60)
             make.height.equalTo(30)
         }
         
@@ -146,7 +146,7 @@ class ChampionsView: UIView {
         timeLable.text = "2.23"
         timeLable.font = UIFont.systemFont(ofSize: 13, weight: .light)
         timeLable.textColor = .black
-        pointsLabel.textAlignment = .center
+        timeLable.textAlignment = .center
 
         bottomView.addSubview(timeLable)
     }

@@ -37,7 +37,7 @@ class ChampionsView: UIView {
     
     private func setTitleLabel() {
         titleLabel.text = "Current Leading Score"
-        titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
+        titleLabel.font = UIFont.MontserratBold(size: 30)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         titleLabel.backgroundColor = .clear
@@ -51,7 +51,7 @@ class ChampionsView: UIView {
     }
     
     private func setDescriptionLabel() {
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        descriptionLabel.font = UIFont.MontserratRegular(size: 14)
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .center
         descriptionLabel.backgroundColor = .clear
@@ -137,14 +137,14 @@ class ChampionsView: UIView {
     
     private func setNumLabel() {
         numberLabel.text = "23"
-        numberLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
+        numberLabel.font = UIFont.MontserratLight(size: 10)
         numberLabel.textColor = .black
         bottomView.addSubview(numberLabel)
     }
     
     private func setTimeLabel() {
         timeLable.text = "2.23"
-        timeLable.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        timeLable.font = UIFont.MontserratLight(size: 13)
         timeLable.textColor = .black
         timeLable.textAlignment = .center
 
@@ -153,14 +153,14 @@ class ChampionsView: UIView {
     
     private func setNameLabel() {
         nameLabel.text = "test"
-        nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        nameLabel.font = UIFont.MontserratMedium(size: 15)
         nameLabel.textColor = .black
         bottomView.addSubview(nameLabel)
     }
     
     private func setPointsLabel() {
         pointsLabel.text = "12"
-        pointsLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        pointsLabel.font = UIFont.MontserratLight(size: 13)
         pointsLabel.textColor = .black
         pointsLabel.textAlignment = .center
         bottomView.addSubview(pointsLabel)

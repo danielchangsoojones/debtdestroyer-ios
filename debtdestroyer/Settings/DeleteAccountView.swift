@@ -31,7 +31,7 @@ class DeleteAccountView: UIView {
         infoLabel.text = "Are you sure that you want to delete your account? Deleting your account takes up to 48 hours. THIS ACTION CAN NOT BE UNDONE. Our support team will manually delete your account and data. You may submit an account deletion request below, and our team will email you once your account has been officially deleted."
         infoLabel.textAlignment = .center
         infoLabel.textColor = color1
-        infoLabel.font = UIFont.systemFont(ofSize: 12)
+        infoLabel.font = UIFont.MontserratRegular(size: 12)
         infoLabel.numberOfLines = 0
         addSubview(infoLabel)
         infoLabel.snp.makeConstraints{ make in

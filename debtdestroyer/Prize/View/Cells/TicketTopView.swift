@@ -309,7 +309,7 @@ class TicketTopView: UITableViewCell, Reusable {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        label.font = UIFont.MontserratRegular(size: 10)
         return label
     }
     
@@ -325,7 +325,7 @@ class TicketTopView: UITableViewCell, Reusable {
         lblAmntPaidTo.text = "Amount Paid To Your Student Loans This Week"
         lblAmntPaidTo.textColor = .white
         lblAmntPaidTo.numberOfLines = 1
-        lblAmntPaidTo.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        lblAmntPaidTo.font = UIFont.MontserratSemiBold(size: 12)
         earnedTicketView.addSubview(lblAmntPaidTo)
         lblAmntPaidTo.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(15)
@@ -366,7 +366,7 @@ class TicketTopView: UITableViewCell, Reusable {
         lblAmntPaid.text = "$" + "20.22"
         lblAmntPaid.textColor = .white
         lblAmntPaid.numberOfLines = 0
-        lblAmntPaid.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        lblAmntPaid.font = UIFont.MontserratMedium(size: 18)
         let dimension: CGFloat = 30
         earnedTicketView.addSubview(lblAmntPaid)
         lblAmntPaid.snp.makeConstraints{ make in
@@ -391,7 +391,7 @@ class TicketTopView: UITableViewCell, Reusable {
         lblNoOfTickets.layer.cornerRadius = dimension / 2
         lblNoOfTickets.layer.masksToBounds = true
         lblNoOfTickets.numberOfLines = 0
-        lblNoOfTickets.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        lblNoOfTickets.font = UIFont.MontserratMedium(size: 18)
         earnedTicketView.addSubview(lblNoOfTickets)
         lblNoOfTickets.snp.makeConstraints{ make in
             make.top.equalTo(lblAmntPaidTo.snp.bottom).offset(10)
@@ -404,7 +404,7 @@ class TicketTopView: UITableViewCell, Reusable {
         lblAutomatically.text = "your tickets are automatically entered into the weekly prize pool"
         lblAutomatically.textColor = .white
         lblAutomatically.numberOfLines = 0
-        lblAutomatically.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
+        lblAutomatically.font = UIFont.MontserratSemiBold(size: 10)
         earnedTicketView.addSubview(lblAutomatically)
         lblAutomatically.snp.makeConstraints{ make in
             make.top.equalTo(ticketProgressBar.snp.bottom).offset(40)

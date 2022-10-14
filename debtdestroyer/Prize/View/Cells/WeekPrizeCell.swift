@@ -60,7 +60,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         weekPrizeLbl.numberOfLines = 1
         weekPrizeLbl.textColor = .white
         weekPrizeLbl.textAlignment = .left
-        weekPrizeLbl.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
+        weekPrizeLbl.font = UIFont.MontserratBold(size: 22)
         weekPrizeView.addSubview(weekPrizeLbl)
         weekPrizeLbl.snp.makeConstraints{ make in
             make.top.equalTo(weekPrizeBackgroundImgView.snp.top).offset(20)
@@ -102,7 +102,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         winLbl.numberOfLines = 3
         winLbl.textColor = UIColor.sunGlow
         winLbl.textAlignment = .left
-        winLbl.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        winLbl.font = UIFont.MontserratBold(size: 32)
         weekPrizeView.addSubview(winLbl)
         winLbl.snp.makeConstraints{ make in
             make.top.equalTo(weekPrizeLbl.snp.bottom).offset(15)
@@ -116,7 +116,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         announcementLbl.numberOfLines = 2
         announcementLbl.textColor = .white
         announcementLbl.textAlignment = .left
-        announcementLbl.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        announcementLbl.font = UIFont.MontserratBold(size: 15)
         weekPrizeView.addSubview(announcementLbl)
         announcementLbl.snp.makeConstraints{ make in
             make.top.equalTo(winLbl.snp.bottom).offset(25)

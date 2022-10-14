@@ -48,7 +48,7 @@ class SubscriptionDiamondView: UIView {
     
     func setPriceLbl() {
         priceLbl.text = "$5.99/month"
-        priceLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        priceLbl.font = UIFont.MontserratSemiBold(size: 16)
         priceLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         priceLbl.numberOfLines = 0
         priceLbl.textAlignment = .center
@@ -64,7 +64,7 @@ class SubscriptionDiamondView: UIView {
     func setLoanConnectionsLbl() {
         loanConnectionsLbl.text = "unlimited"
         loanConnectionsLbl.adjustsFontSizeToFitWidth = true
-        loanConnectionsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        loanConnectionsLbl.font = UIFont.MontserratSemiBold(size: 16)
         loanConnectionsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         loanConnectionsLbl.textAlignment = .center
         loanConnectionsLbl.backgroundColor = .clear
@@ -78,7 +78,7 @@ class SubscriptionDiamondView: UIView {
     
     func setEmailNewsLetterLbl() {
         emailNewsLetterLbl.text = ""
-        emailNewsLetterLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        emailNewsLetterLbl.font = UIFont.MontserratSemiBold(size: 16)
         emailNewsLetterLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         emailNewsLetterLbl.textAlignment = .center
         emailNewsLetterLbl.backgroundColor = .clear
@@ -107,7 +107,7 @@ class SubscriptionDiamondView: UIView {
     
     func setTicketsLbl() {
         ticketsLbl.text = "10x"
-        ticketsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        ticketsLbl.font = UIFont.MontserratSemiBold(size: 16)
         ticketsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         ticketsLbl.textAlignment = .center
         ticketsLbl.backgroundColor = .clear

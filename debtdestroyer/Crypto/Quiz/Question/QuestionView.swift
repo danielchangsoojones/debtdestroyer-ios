@@ -69,7 +69,7 @@ class QuestionView: UIView {
         timerLabel.numberOfLines = 0
         timerLabel.textAlignment = .center
         timerLabel.textColor = .black
-        timerLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        timerLabel.font = UIFont.MontserratBold(size: 16)
         contentView.addSubview(timerLabel)
         timerLabel.snp.makeConstraints { make in
             make.center.equalTo(circularView)
@@ -95,7 +95,7 @@ class QuestionView: UIView {
         favLabel.text = " ♥ 3 "
         favLabel.textColor = .black
         favLabel.isHidden = true
-        favLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        favLabel.font = UIFont.MontserratRegular(size: 15)
         favLabel.textAlignment = .center
         favLabel.layer.borderColor = UIColor.black.cgColor
         favLabel.layer.borderWidth = 1
@@ -123,7 +123,7 @@ class QuestionView: UIView {
     
     private func setQuestionNoLabel() {
         questionNoLabel.numberOfLines = 0
-        questionNoLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        questionNoLabel.font = UIFont.MontserratRegular(size: 15)
         questionNoLabel.textColor = .black
         contentView.addSubview(questionNoLabel)
         questionNoLabel.snp.makeConstraints { make in
@@ -136,7 +136,7 @@ class QuestionView: UIView {
     
     private func setQuestionLabel() {
         questionLabel.numberOfLines = 0
-        questionLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        questionLabel.font = UIFont.MontserratSemiBold(size: 20)
         questionLabel.textColor = .black
         contentView.addSubview(questionLabel)
         questionLabel.snp.makeConstraints { make in

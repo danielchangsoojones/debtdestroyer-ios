@@ -41,10 +41,10 @@ class AddressView: UIView {
     }
     
     private func setUpStackViewContent() {
-        addLabel = createLabel(title: "Enter Your Nano Address", font: UIFont.systemFont(ofSize: 15, weight: .light))
+        addLabel = createLabel(title: "Enter Your Nano Address", font: UIFont.MontserratLight(size: 15))
         addLabel.numberOfLines = 0
         addTextField = createTextField(placeHolder: "nano_sfjlsdfisdlfjsljfls")
-        descriptionLabel = createLabel(title: "This is the address where you would like to have your nano sent. It takes us up to 24 hours to send you your coin rewards since we currently have to manually send out the rewards.", font: UIFont.systemFont(ofSize: 12, weight: .thin))
+        descriptionLabel = createLabel(title: "This is the address where you would like to have your nano sent. It takes us up to 24 hours to send you your coin rewards since we currently have to manually send out the rewards.", font: UIFont.MontserratThin(size: 12))
     }
     
     private func setUpNextButton(){
@@ -81,7 +81,7 @@ class AddressView: UIView {
     
     private func createTextField(placeHolder: String) -> UITextField {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        textField.font = UIFont.MontserratRegular(size: 18)
         textField.layer.borderWidth = 0.3
         textField.layer.borderColor =  UIColor.systemGray2.cgColor
         textField.layer.cornerRadius = 8

@@ -55,7 +55,7 @@ class PowerUpsCell: UITableViewCell, Reusable {
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        titleLabel.font = UIFont.MontserratRegular(size: 12)
         titleLabel.textColor = .black
         titleLabel.numberOfLines = 0
         background.addSubview(titleLabel)
@@ -67,7 +67,7 @@ class PowerUpsCell: UITableViewCell, Reusable {
     }
     
     private func setBalanceLabel() {
-        balanceLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        balanceLabel.font = UIFont.MontserratRegular(size: 10)
         balanceLabel.textColor = .black
         balanceLabel.numberOfLines = 0
         background.addSubview(balanceLabel)

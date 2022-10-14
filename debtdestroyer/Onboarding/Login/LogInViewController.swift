@@ -11,7 +11,7 @@ class LogInViewController: RegisterViewController {
     private var messageHelper: MessageHelper?
     let forgotPasswordBtn  = UIButton()
     let buttonAttributes: [NSAttributedString.Key: Any] = [
-        .font: UIFont.systemFont(ofSize: 18, weight: .thin),
+        .font: UIFont.MontserratThin(size: 18),
         .foregroundColor: UIColor.black,
         .underlineStyle: NSUnderlineStyle.single.rawValue
     ]

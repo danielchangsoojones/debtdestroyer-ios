@@ -61,27 +61,27 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     }
     
     private func setNumLabel() {
-        numberLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
+        numberLabel.font = UIFont.MontserratLight(size: 10)
         numberLabel.textColor = .black
         contentView.addSubview(numberLabel)
     }
     
     private func setTimeLabel() {
         timeLable.text = "2.23"
-        timeLable.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        timeLable.font = UIFont.MontserratLight(size: 13)
         timeLable.textColor = .black
         timeLable.textAlignment = .center
         contentView.addSubview(timeLable)
     }
     
     private func setNameLabel() {
-        nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        nameLabel.font = UIFont.MontserratMedium(size: 15)
         nameLabel.textColor = .black
         contentView.addSubview(nameLabel)
     }
     
     private func setPointsLabel() {
-        pointsLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
+        pointsLabel.font = UIFont.MontserratLight(size: 13)
         pointsLabel.textColor = .black
         pointsLabel.textAlignment = .center
         contentView.addSubview(pointsLabel)

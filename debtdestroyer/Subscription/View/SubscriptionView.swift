@@ -85,7 +85,7 @@ class SubscriptionView: UIView {
     
     func setSuggestedLbl() {
         suggestedLbl.text = "Suggested"
-        suggestedLbl.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        suggestedLbl.font = UIFont.MontserratRegular(size: 12)
         suggestedLbl.textAlignment = .center
         suggestedLbl.backgroundColor = .clear
         contentView.addSubview(suggestedLbl)

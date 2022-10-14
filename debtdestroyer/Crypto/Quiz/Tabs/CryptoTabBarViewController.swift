@@ -35,12 +35,12 @@ class CryptoTabBarViewController: UITabBarController {
         
     }
     
-    open override var childForStatusBarStyle: UIViewController? {
-        return selectedViewController
-    }
+//    open override var childForStatusBarStyle: UIViewController? {
+//        return selectedViewController
+//    }
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.selectedViewController?.preferredStatusBarStyle ?? .default
+        return self.selectedViewController?.preferredStatusBarStyle ?? .lightContent
     }
     
     private func setTabs(){
@@ -49,7 +49,7 @@ class CryptoTabBarViewController: UITabBarController {
         let vc3 = CryptoSettingsViewController(quizDatas: self.quizDatas, currentIndex: 0)
 
         let controllers = [vc1,vc2,vc3]
-        self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
+        self.viewControllers = controllers.map { CustomNavigationViewController(rootViewController: $0)}
         
         let tabQuiz = tabBar.items![0]
         tabQuiz.image = UIImage(named: "houseBW")?.withRenderingMode(.alwaysOriginal)

@@ -60,7 +60,7 @@ class ChampionsViewController: UIViewController {
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
         loadLeaderboard()
-//        setNeedsStatusBarAppearanceUpdate()
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -222,13 +222,5 @@ extension UIView {
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         layer.mask = mask
-    }
-}
-extension UINavigationController {
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return visibleViewController?.preferredStatusBarStyle ?? .default
-    }
-    open override var childForStatusBarStyle: UIViewController? {
-        return visibleViewController
     }
 }

@@ -23,12 +23,12 @@ class ChampionsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
+        setTitleLabel()
+        setDescriptionLabel()
         setContainerView()
         setTableView()
         setBottomViewContainer()
         setBottomView()
-        setTitleLabel()
-        setDescriptionLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -72,7 +72,7 @@ class ChampionsView: UIView {
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(180)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
             make.bottom.equalToSuperview().offset(-95)
         }
     }

@@ -85,6 +85,7 @@
 		0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */; };
 		0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */; };
 		0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7635B028C9A6D600316FD4 /* SubscriptionDataStore.swift */; };
+		0A76B59228F98F6D0084A629 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76B59128F98F6D0084A629 /* NavigationControllerExtension.swift */; };
 		0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A49E028A386C6009EDE5E /* WelcomeViewController.swift */; };
 		0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A49E128A386C6009EDE5E /* WelcomeView.swift */; };
 		0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A49F228A38746009EDE5E /* MessageHelper.swift */; };
@@ -208,6 +209,7 @@
 		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
 		0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcsriptionBasicView.swift; sourceTree = "<group>"; };
 		0A7635B028C9A6D600316FD4 /* SubscriptionDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataStore.swift; sourceTree = "<group>"; };
+		0A76B59128F98F6D0084A629 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		0A7A13C928DD8F5F00275E7F /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		0A7A49E028A386C6009EDE5E /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		0A7A49E128A386C6009EDE5E /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */,
 				0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */,
 				0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */,
+				0A76B59128F98F6D0084A629 /* NavigationControllerExtension.swift */,
 				0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */,
 				0A1A637F28A6592200EFCC4D /* ViewExtension.swift */,
 				0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */,
@@ -956,6 +959,7 @@
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A47F89428F00E0600B11D5F /* NotificationPermissionView.swift in Sources */,
+				0A76B59228F98F6D0084A629 /* NavigationControllerExtension.swift in Sources */,
 				9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */,
 				0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,

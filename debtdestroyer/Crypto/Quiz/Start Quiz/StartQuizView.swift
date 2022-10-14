@@ -96,7 +96,6 @@ class StartQuizView: UIView {
     private func setNextButton() {
         nextButton.backgroundColor = .clear
         nextButton.setTitleColor(.white, for: .normal)
-        nextButton.titleLabel?.font = UIFont.MontserratSemiBold(size: 22)
         nextButton.setTitle("Start Trivia", for: .normal)
         let height: CGFloat = 55
         nextButton.layer.cornerRadius = height / 2

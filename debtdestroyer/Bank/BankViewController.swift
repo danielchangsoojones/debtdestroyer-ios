@@ -254,7 +254,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             headerLbl.numberOfLines = 0
             headerLbl.textColor = .black
             headerLbl.textAlignment = .left
-            headerLbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            headerLbl.font = UIFont.MontserratMedium(size: 20)
             headerView.addSubview(headerLbl)
             headerLbl.snp.makeConstraints{ make in
                 make.top.bottom.equalToSuperview()
@@ -269,7 +269,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
                 editBtn.layer.borderWidth = 1
                 editBtn.layer.borderColor = UIColor.black.cgColor
                 editBtn.setTitleColor(.black, for: .normal)
-                editBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+                editBtn.titleLabel?.font = UIFont.MontserratMedium(size: 15)
                 editBtn.addTarget(self,
                                   action: #selector(editConnectedAccountsBtnClicked),
                                   for: .touchUpInside)
@@ -293,7 +293,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             headerLbl.numberOfLines = 0
             headerLbl.textColor = .black
             headerLbl.textAlignment = .left
-            headerLbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            headerLbl.font = UIFont.MontserratMedium(size: 20)
             headerView.addSubview(headerLbl)
             headerLbl.snp.makeConstraints{ make in
                 make.top.bottom.equalToSuperview()
@@ -310,7 +310,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             headerLbl.numberOfLines = 0
             headerLbl.textColor = .black
             headerLbl.textAlignment = .left
-            headerLbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            headerLbl.font = UIFont.MontserratMedium(size: 20)
             headerView.addSubview(headerLbl)
             headerLbl.snp.makeConstraints{ make in
                 make.top.bottom.equalToSuperview()

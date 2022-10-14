@@ -52,7 +52,7 @@ class SubscriptionCurrentView: UIView {
 
     func setPriceLbl() {
         priceLbl.text = "Free"
-        priceLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        priceLbl.font = UIFont.MontserratSemiBold(size: 16)
         priceLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         priceLbl.textAlignment = .center
         priceLbl.backgroundColor = .clear
@@ -66,7 +66,7 @@ class SubscriptionCurrentView: UIView {
         
     func setLoanConnectionsLbl() {
         loanConnectionsLbl.text = "1"
-        loanConnectionsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        loanConnectionsLbl.font = UIFont.MontserratSemiBold(size: 16)
         loanConnectionsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         loanConnectionsLbl.textAlignment = .center
         loanConnectionsLbl.backgroundColor = .clear
@@ -80,7 +80,7 @@ class SubscriptionCurrentView: UIView {
     
     func setEmailNewsLetterLbl() {
         emailNewsLetterLbl.text = ""
-        emailNewsLetterLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        emailNewsLetterLbl.font = UIFont.MontserratSemiBold(size: 16)
         emailNewsLetterLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         emailNewsLetterLbl.textAlignment = .center
         emailNewsLetterLbl.backgroundColor = .clear
@@ -109,7 +109,7 @@ class SubscriptionCurrentView: UIView {
     
     func setTicketsLbl() {
         ticketsLbl.text = "1x"
-        ticketsLbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        ticketsLbl.font = UIFont.MontserratSemiBold(size: 16)
         ticketsLbl.textColor = hexStringToUIColor(hex: "8A8A8A")
         ticketsLbl.textAlignment = .center
         ticketsLbl.backgroundColor = .clear

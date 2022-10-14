@@ -42,7 +42,7 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        titleLabel.font = UIFont.MontserratMedium(size: 20)
         titleLabel.textColor = .jaguarBlack
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in

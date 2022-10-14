@@ -138,7 +138,7 @@ class SubcsriptionBasicView: UIView {
     
     func setPriceLbl() {
         priceLbl.text = "Price"
-        priceLbl.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        priceLbl.font = UIFont.MontserratSemiBold(size: 13)
         priceLbl.textColor = .jaguarBlack
         priceLbl.numberOfLines = 0
         priceLbl.textAlignment = .left
@@ -162,7 +162,7 @@ class SubcsriptionBasicView: UIView {
     
     func setLoanConnectionsLbl() {
         loanConnectionsLbl.text = "Loan Account Connections"
-        loanConnectionsLbl.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        loanConnectionsLbl.font = UIFont.MontserratSemiBold(size: 13)
         loanConnectionsLbl.adjustsFontSizeToFitWidth = true
         loanConnectionsLbl.textColor = .jaguarBlack
         loanConnectionsLbl.numberOfLines = 0
@@ -187,7 +187,7 @@ class SubcsriptionBasicView: UIView {
     
     func setEmailNewsLetterLbl() {
         emailNewsLetterLbl.text = "Email Newsletter"
-        emailNewsLetterLbl.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        emailNewsLetterLbl.font = UIFont.MontserratSemiBold(size: 13)
         emailNewsLetterLbl.textColor = .jaguarBlack
         emailNewsLetterLbl.numberOfLines = 0
         emailNewsLetterLbl.textAlignment = .left
@@ -223,7 +223,7 @@ class SubcsriptionBasicView: UIView {
     
     func setTicketsLbl() {
         ticketsLbl.text = "Tickets"
-        ticketsLbl.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        ticketsLbl.font = UIFont.MontserratSemiBold(size: 13)
         ticketsLbl.textColor = .jaguarBlack
         ticketsLbl.numberOfLines = 0
         ticketsLbl.textAlignment = .left

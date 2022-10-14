@@ -34,7 +34,7 @@ class LoanAccountCell: UITableViewCell, Reusable {
     
     private func setLoanAccountTagLabel() {
         loanAccountTagLabel.text = "  Loan Account  "
-        loanAccountTagLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        loanAccountTagLabel.font = UIFont.MontserratMedium(size: 12)
         loanAccountTagLabel.textColor = .white
         loanAccountTagLabel.backgroundColor = hexStringToUIColor(hex: "38C4F6")
         loanAccountTagLabel.numberOfLines = 0
@@ -91,7 +91,7 @@ class LoanAccountCell: UITableViewCell, Reusable {
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        titleLabel.font = UIFont.MontserratRegular(size: 14)
         titleLabel.textColor = .black
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byCharWrapping
@@ -104,7 +104,7 @@ class LoanAccountCell: UITableViewCell, Reusable {
     }
     
     private func setBalanceLabel() {
-        balanceLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        balanceLabel.font = UIFont.MontserratRegular(size: 12)
         balanceLabel.textColor = .black
         balanceLabel.numberOfLines = 0
         background.addSubview(balanceLabel)

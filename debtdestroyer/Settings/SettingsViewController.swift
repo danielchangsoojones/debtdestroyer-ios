@@ -129,7 +129,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         let titleLabel = UILabel(frame: CGRect(x:10,y: 10 ,width:footer.frame.width - 20,height:50))
         titleLabel.textColor = .systemGray2
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        titleLabel.font = UIFont.MontserratRegular(size: 15)
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         titleLabel.text  = "Version " + appVersion!
         footer.addSubview(titleLabel)

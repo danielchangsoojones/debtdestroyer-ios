@@ -55,7 +55,7 @@ class StartQuizView: UIView {
  
     private func setNameLabel() {
         nameLabel.text = "Debt Destroyed"
-        nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        nameLabel.font = UIFont.MontserratRegular(size: 14)
         nameLabel.textColor = .black
         nameLabel.backgroundColor = .clear
         nameLabel.numberOfLines = 0
@@ -68,7 +68,7 @@ class StartQuizView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        titleLabel.font = UIFont.MontserratBold(size: 20)
         titleLabel.textColor = .black
         titleLabel.backgroundColor = .clear
         titleLabel.numberOfLines = 0
@@ -81,7 +81,7 @@ class StartQuizView: UIView {
     }
     
     private func setDescriptionLabel() {
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        descriptionLabel.font = UIFont.MontserratRegular(size: 14)
         descriptionLabel.textColor = .black
         descriptionLabel.backgroundColor = .clear
         descriptionLabel.numberOfLines = 0
@@ -96,7 +96,6 @@ class StartQuizView: UIView {
     private func setNextButton() {
         nextButton.backgroundColor = .clear
         nextButton.setTitleColor(.white, for: .normal)
-        nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         nextButton.setTitle("Start Trivia", for: .normal)
         let height: CGFloat = 55
         nextButton.layer.cornerRadius = height / 2

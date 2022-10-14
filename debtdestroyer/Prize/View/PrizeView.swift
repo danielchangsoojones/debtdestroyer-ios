@@ -103,7 +103,7 @@ class PrizeView: UITableViewCell, Reusable {
         weekPrizeLbl.numberOfLines = 1
         weekPrizeLbl.textColor = .white
         weekPrizeLbl.textAlignment = .left
-        weekPrizeLbl.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
+        weekPrizeLbl.font = UIFont.MontserratBold(size: 22)
         weekPrizeView.addSubview(weekPrizeLbl)
         weekPrizeLbl.snp.makeConstraints{ make in
             make.top.equalTo(weekPrizeBackgroundImgView.snp.top).offset(20)
@@ -145,7 +145,7 @@ class PrizeView: UITableViewCell, Reusable {
         winLbl.numberOfLines = 3
         winLbl.textColor = UIColor.sunGlow
         winLbl.textAlignment = .left
-        winLbl.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        winLbl.font = UIFont.MontserratBold(size: 32)
         weekPrizeView.addSubview(winLbl)
         winLbl.snp.makeConstraints{ make in
             make.top.equalTo(weekPrizeLbl.snp.bottom).offset(15)
@@ -159,7 +159,7 @@ class PrizeView: UITableViewCell, Reusable {
         announcementLbl.numberOfLines = 2
         announcementLbl.textColor = .white
         announcementLbl.textAlignment = .left
-        announcementLbl.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        announcementLbl.font = UIFont.MontserratBold(size: 15)
         weekPrizeView.addSubview(announcementLbl)
         announcementLbl.snp.makeConstraints{ make in
             make.top.equalTo(winLbl.snp.bottom).offset(25)
@@ -173,7 +173,7 @@ class PrizeView: UITableViewCell, Reusable {
         pastWinnersLbl.numberOfLines = 0
         pastWinnersLbl.textColor = .white
         pastWinnersLbl.textAlignment = .left
-        pastWinnersLbl.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        pastWinnersLbl.font = UIFont.MontserratBold(size: 25)
         weekPrizeView.addSubview(pastWinnersLbl)
         pastWinnersLbl.snp.makeConstraints{ make in
             make.top.equalTo(announcementLbl.snp.bottom).offset(15)
@@ -247,7 +247,7 @@ extension PrizeView: UITableViewDataSource, UITableViewDelegate {
             cell.setTitleLabel()
             cell.titleLabel.text = "How to earn tickets?"
             cell.titleLabel.textColor = .white
-            cell.titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            cell.titleLabel.font = UIFont.MontserratMedium(size: 20)
             cell.setInfoBtn()
         } else if indexPath.row == 1 {
             cell.setLine()

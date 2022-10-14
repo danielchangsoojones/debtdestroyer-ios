@@ -71,7 +71,7 @@ class RegisterView: UIView {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.textColor = .jaguarBlack
-        label.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        label.font = UIFont.MontserratLight(size: 18)
         stackView.addArrangedSubview(label)
         label.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
@@ -84,7 +84,7 @@ class RegisterView: UIView {
     
     private func createTextField(placeHolder: String) -> UITextField {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        textField.font = UIFont.MontserratRegular(size: 18)
         textField.layer.borderWidth = 0.3
         textField.layer.borderColor =  UIColor.systemGray2.cgColor
         textField.layer.cornerRadius = 8

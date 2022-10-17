@@ -54,7 +54,7 @@ class StartQuizViewController: UIViewController {
                     self.descriptionLabel.text = quizTopic?.ticker ?? "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins $50 towards their student loan. Good Luck!"
                 } else {
                     self.titleLabel.text = "Play Daily Trivia"
-                    self.descriptionLabel.text = "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins $50 towards their student loan. Good Luck!"
+                    self.descriptionLabel.text = "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins. Good Luck!"
 //                    self.titleLabel.text = "Become the trivia champion"
 //                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
                 }

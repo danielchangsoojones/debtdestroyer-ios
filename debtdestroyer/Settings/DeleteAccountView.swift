@@ -41,14 +41,23 @@ class DeleteAccountView: UIView {
     }
     
     private func setDeleteAccountButton() {
-        deleteAccButton.setTitle("SEND DELETE ACCOUNT REQUEST", for: .normal)
+       
         deleteAccButton.backgroundColor = color1
-        deleteAccButton.setTitleColor(.white, for: .normal)
         deleteAccButton.layer.cornerRadius = 8
         deleteAccButton.titleLabel?.adjustsFontSizeToFitWidth = true
         let spacing: CGFloat = 8.0
         deleteAccButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
         let dimenssion = 50
+        
+        if #available(iOS 15.0, *) {
+            var configuration = UIButton.Configuration.plain()
+            configuration.attributedTitle = AttributedString("SEND DELETE ACCOUNT REQUEST", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            deleteAccButton.configuration = configuration
+        } else {
+            deleteAccButton.setTitle("SEND DELETE ACCOUNT REQUEST", for: .normal)
+            deleteAccButton.setTitleColor(.white, for: .normal)
+
+        }
         addSubview(deleteAccButton)
         deleteAccButton.snp.makeConstraints{ make in
             make.leading.trailing.equalToSuperview().inset(20)

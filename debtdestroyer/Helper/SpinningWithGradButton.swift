@@ -29,12 +29,22 @@ class SpinningWithGradButton: UIButton {
     
     private func set(edgeInsets: UIEdgeInsets) {
         if #available(iOS 15.0, *) {
-            var filled = UIButton.Configuration.plain()
-            filled.contentInsets = NSDirectionalEdgeInsets(top: edgeInsets.top,
-                                                           leading: edgeInsets.left,
-                                                           bottom: edgeInsets.bottom,
-                                                           trailing: edgeInsets.right)
-            configuration = filled
+            
+            if self.configuration == nil {
+                var filled = UIButton.Configuration.plain()
+                filled.contentInsets = NSDirectionalEdgeInsets(top: edgeInsets.top,
+                                                               leading: edgeInsets.left,
+                                                               bottom: edgeInsets.bottom,
+                                                               trailing: edgeInsets.right)
+                configuration = filled
+            } else {
+                self.configuration?.contentInsets = NSDirectionalEdgeInsets(top: edgeInsets.top,
+                                                               leading: edgeInsets.left,
+                                                               bottom: edgeInsets.bottom,
+                                                               trailing: edgeInsets.right)
+            }
+            
+           
         } else {
             contentEdgeInsets = edgeInsets
         }

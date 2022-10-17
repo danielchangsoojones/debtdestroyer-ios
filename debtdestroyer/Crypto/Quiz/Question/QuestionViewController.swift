@@ -158,7 +158,7 @@ class QuestionViewController: UIViewController {
         
         Timer.runThisAfterDelay(seconds: 1.7, after: {
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
-                if answerView.backgroundColor != .systemGray6 {
+                if answerView.tag == gesture.view?.tag {
                     return true
                 } else {
                     return false

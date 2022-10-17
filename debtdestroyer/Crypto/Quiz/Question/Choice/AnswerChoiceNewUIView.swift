@@ -25,10 +25,10 @@ class AnswerChoiceNewUIView: UIView {
     private func setConstraints() {
         
         gifImgView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(30)
             make.centerY.equalToSuperview()
-            make.height.equalTo(40)
-            make.width.equalTo(50)
+            make.height.equalTo(25)
+            make.width.equalTo(25)
         }
         
         answerLabel.snp.makeConstraints { make in
@@ -44,19 +44,19 @@ class AnswerChoiceNewUIView: UIView {
     
     private func setAnswerLabel() {
         answerLabel.numberOfLines = 0
-        answerLabel.font = .systemFont(ofSize: 18, weight: .heavy)
+        answerLabel.font = .MontserratBold(size: 18)
         answerLabel.textAlignment = .center
         deselect()
         addSubview(answerLabel)
     }
     
     func deselect() {
-        answerLabel.textColor = .coinbaseBlue
-        self.backgroundColor = .white
+        answerLabel.textColor = .black
+        self.backgroundColor = .systemGray6
     }
     
     func select() {
-        answerLabel.textColor = .white
+        answerLabel.textColor = .black
         self.backgroundColor = .green
     }
 }

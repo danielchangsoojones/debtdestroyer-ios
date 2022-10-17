@@ -12,7 +12,7 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     let numberLabel = UILabel()
     let nameLabel = UILabel()
     let pointsLabel = UILabel()
-    let imgView = UIImageView()
+    let timeLable = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,7 +20,7 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
         setNumLabel()
         setNameLabel()
         setPointsLabel()
-        setImgView()
+        setTimeLabel()
         setConstraints()
     }
     
@@ -31,59 +31,59 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     private func setConstraints() {
         numberLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
-            make.centerY.equalTo(imgView)
+            make.centerY.equalTo(nameLabel)
             make.width.equalTo(12)
         }
         
-        imgView.snp.makeConstraints { make in
-            make.height.width.equalTo(40)
-            make.bottom.equalToSuperview().inset(5)
-            make.leading.equalTo(numberLabel.snp.trailing).offset(5)
+        timeLable.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(10)
+            make.centerY.equalTo(nameLabel)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
         }
         
         pointsLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(10)
-            make.centerY.equalTo(imgView)
-            make.width.equalTo(80)
+            make.trailing.equalTo(timeLable.snp.leading).inset(10)
+            make.centerY.equalTo(nameLabel)
+            make.width.equalTo(60)
             make.height.equalTo(30)
         }
 
         nameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(imgView.snp.trailing).offset(5)
-            make.top.bottom.equalToSuperview().inset(10)
+            make.leading.equalTo(numberLabel.snp.trailing).offset(5)
+            make.bottom.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(20)
             make.trailing.equalTo(pointsLabel.snp.leading).offset(5)
             make.width.lessThanOrEqualToSuperview()
+            make.height.equalTo(40)
+            
         }
-        
-        
     }
     
     private func setNumLabel() {
-        numberLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
+        numberLabel.font = UIFont.MontserratLight(size: 10)
         numberLabel.textColor = .black
         contentView.addSubview(numberLabel)
     }
     
-    private func setImgView() {
-        imgView.backgroundColor = .coinbaseBlue
-        imgView.contentMode = .scaleAspectFill
-        imgView.layer.cornerRadius = 20
-        contentView.addSubview(imgView)
+    private func setTimeLabel() {
+        timeLable.text = "2.23"
+        timeLable.font = UIFont.MontserratLight(size: 13)
+        timeLable.textColor = .black
+        timeLable.textAlignment = .center
+        contentView.addSubview(timeLable)
     }
     
     private func setNameLabel() {
-        nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        nameLabel.font = UIFont.MontserratMedium(size: 15)
         nameLabel.textColor = .black
         contentView.addSubview(nameLabel)
     }
     
     private func setPointsLabel() {
-        pointsLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        pointsLabel.font = UIFont.MontserratLight(size: 13)
         pointsLabel.textColor = .black
         pointsLabel.textAlignment = .center
-        pointsLabel.layer.borderColor = UIColor.darkGray.cgColor
-        pointsLabel.layer.borderWidth = 0.5
-        pointsLabel.layer.cornerRadius = 15
         contentView.addSubview(pointsLabel)
     }
 }

@@ -28,7 +28,7 @@ class QuestionViewController: UIViewController {
     private let currentIndex: Int
     private var answerViews: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
-
+    private var bottomView = UIView()
     var backBtn = UIButton()
     let gifCheckMark = "https://media.giphy.com/media/QAUxbMqnNcMo9U0jt8/giphy.gif"
     let gifCrossMark = "https://media.giphy.com/media/VIz2F9yck4NhxmoC59/giphy.gif"
@@ -53,10 +53,9 @@ class QuestionViewController: UIViewController {
         super.loadView()
         let questionView = QuestionView(frame: self.view.frame)
         self.view = questionView
-        
         questionView.questionLabel.text = currentData.question
         addAnswers(to: questionView.answerStackView)
-        questionView.questionNoLabel.text = "question \(currentIndex + 1) of \(quizDatas.count)"
+        questionView.questionNoLabel.text = "Question \(currentIndex + 1) of \(quizDatas.count)"
         print("question \(currentIndex + 1) of \(quizDatas.count)")
         self.circularView = questionView.circularView
         self.backBtn = questionView.backBtn
@@ -78,7 +77,6 @@ class QuestionViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
-        self.view.setGradientBackground(color1: .topBlue, color2: .bottomBlue, radi: 0)
         appD.quizRunning = true
     }
     
@@ -106,13 +104,15 @@ class QuestionViewController: UIViewController {
         if let answers = currentData.answers {
             for (index, answer) in answers.enumerated() {
                 let answerView = AnswerChoiceNewUIView(answer: answer)
-                answerView.backgroundColor = .white
-                answerView.layer.cornerRadius = 12
+                answerView.backgroundColor = .systemGray6
+                answerView.layer.cornerRadius = 25
+                answerView.layer.borderColor = UIColor.systemGray4.cgColor
+                answerView.layer.borderWidth = 1
                 answerView.tag = index
                 answerView.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
 
                 answerViews.append(answerView)
-                answerView.answerLabel.text = answer
+                answerView.answerLabel.text = answer.capitalized
                 stackView.addArrangedSubview(answerView)
                 answerView.snp.makeConstraints { make in
                     make.leading.trailing.equalToSuperview()
@@ -130,26 +130,27 @@ class QuestionViewController: UIViewController {
                 answerView.select()
  
                 let isIncorrectAnswer = index != currentData.correct_answer_index
-                var gifURL : String!
                 if isIncorrectAnswer {
-                    gifURL = gifCrossMark
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 12)
-                } else {
-                    gifURL = gifCheckMark
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 12)
+                    answerView.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
+                    answerView.gifImgView.tintColor = .black
+                    answerView.gifImgView.alpha = 0
+                    UIImageView.animate(withDuration: 3, animations: {
+                        answerView.gifImgView.alpha = 1
 
-                }
-                
-                DispatchQueue.global().async {
-                    
-                    if let gifURL : String = gifURL {
-                        if let imagefromURL = UIImage.gifImageWithURL(gifURL) {
-                            DispatchQueue.main.async {
-                                answerView.gifImgView.image = imagefromURL
-                                
-                            }
-                        }
-                    }
+                    })
+
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                } else {
+                    answerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                    answerView.gifImgView.tintColor = .black
+                    answerView.gifImgView.alpha = 0.2
+                    UIImageView.animate(withDuration: 5, animations: {
+                        answerView.gifImgView.alpha = 1
+                        
+                    })
+
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
+
                 }
             }
             
@@ -157,7 +158,7 @@ class QuestionViewController: UIViewController {
         
         Timer.runThisAfterDelay(seconds: 1.7, after: {
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
-                if answerView.backgroundColor != .white {
+                if answerView.tag == gesture.view?.tag {
                     return true
                 } else {
                     return false

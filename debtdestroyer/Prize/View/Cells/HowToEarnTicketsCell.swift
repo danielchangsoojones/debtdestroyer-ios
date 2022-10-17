@@ -68,7 +68,7 @@ extension HowToEarnTicketsCell: UITableViewDataSource, UITableViewDelegate {
             cell.setTitleLabel()
             cell.titleLabel.text = "How to earn tickets?"
             cell.titleLabel.textColor = .white
-            cell.titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            cell.titleLabel.font = UIFont.MontserratMedium(size: 20)
             cell.setInfoBtn()
         } else if indexPath.row == 1 {
             cell.setLine()

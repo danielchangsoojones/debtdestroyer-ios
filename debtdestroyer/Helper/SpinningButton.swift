@@ -16,7 +16,6 @@ class SpinningButton: UIButton {
         setTitle("", for: .disabled)
         backgroundColor = .white
         setTitleColor(.babyPurple, for: .normal)
-//        titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         layer.cornerRadius = 20
         
         setOriginalInsets()

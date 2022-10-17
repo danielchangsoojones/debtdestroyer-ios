@@ -27,13 +27,13 @@ class CircularProgressCountdownTimerView: UIView {
         circleLayer.fillColor = UIColor.clear.cgColor
         circleLayer.lineCap = .round
         circleLayer.lineWidth = 5.0
-        circleLayer.strokeColor = hexStringToUIColor(hex: "3389FA").cgColor
+        circleLayer.strokeColor = UIColor.systemGray5.cgColor
         progressLayer.path = circularPath.cgPath
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineCap = .round
         progressLayer.lineWidth = 5.0
         progressLayer.strokeEnd = 0
-        progressLayer.strokeColor = UIColor.white.cgColor
+        progressLayer.strokeColor = UIColor.black.cgColor
         layer.addSublayer(circleLayer)
         layer.addSublayer(progressLayer)
     }

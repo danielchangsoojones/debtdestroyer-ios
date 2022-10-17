@@ -27,7 +27,7 @@ class EarnTicketCell: UITableViewCell, Reusable {
     }
     
     func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        titleLabel.font = UIFont.MontserratSemiBold(size: 16)
         titleLabel.textColor = .jaguarBlack
         let dimension: CGFloat = 40
         titleLabel.numberOfLines = 0

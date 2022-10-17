@@ -64,7 +64,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        titleLabel.font = UIFont.MontserratMedium(size: 20)
         titleLabel.textColor = .jaguarBlack
         background.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -75,7 +75,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     }
     
     private func setBalanceLabel() {
-        balanceLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        balanceLabel.font = UIFont.MontserratRegular(size: 18)
         balanceLabel.textColor = .jaguarBlack
         background.addSubview(balanceLabel)
         balanceLabel.snp.makeConstraints { make in

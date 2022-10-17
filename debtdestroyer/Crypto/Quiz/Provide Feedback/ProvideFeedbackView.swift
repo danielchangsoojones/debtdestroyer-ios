@@ -106,7 +106,7 @@ class ProvideFeedbackView: UIView {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.textColor = .jaguarBlack
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.MontserratMedium(size: 14)
         stackView.addArrangedSubview(label)
         label.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()

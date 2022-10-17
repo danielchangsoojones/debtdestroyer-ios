@@ -55,7 +55,7 @@ class RoundUpView: UIView {
     var imageViewRoundUp = UIImageView()
     let howItWorksButton = UIButton()
     let buttonAttributes: [NSAttributedString.Key: Any] = [
-        .font: UIFont.systemFont(ofSize: 18, weight: .thin),
+        .font: UIFont.MontserratThin(size: 18),
         .foregroundColor: UIColor.black,
         .underlineStyle: NSUnderlineStyle.single.rawValue
     ]
@@ -128,7 +128,7 @@ class RoundUpView: UIView {
         buyLabel.text = "You buy"
         buyLabel.textColor = .black
         buyLabel.textAlignment = .center
-        buyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        buyLabel.font = UIFont.MontserratMedium(size: 20)
         stackViewYouBuy.addArrangedSubview(buyLabel)
 
     }
@@ -137,7 +137,7 @@ class RoundUpView: UIView {
         buyAmountLabel.text = "$3.42"
         buyAmountLabel.textColor = .black
         buyAmountLabel.textAlignment = .center
-        buyAmountLabel.font = UIFont.systemFont(ofSize: 22, weight: .thin)
+        buyAmountLabel.font = UIFont.MontserratThin(size: 22)
         stackViewYouBuy.addArrangedSubview(buyAmountLabel)
         
     }
@@ -156,7 +156,7 @@ class RoundUpView: UIView {
         roundUpLabel.text = "Round-up"
         roundUpLabel.textColor = .black
         roundUpLabel.textAlignment = .center
-        roundUpLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        roundUpLabel.font = UIFont.MontserratMedium(size: 20)
         stackViewRoundup.addArrangedSubview(roundUpLabel)
         roundUpLabel.snp.makeConstraints{ make in
             make.width.equalTo(120)
@@ -169,7 +169,7 @@ class RoundUpView: UIView {
         roundUpAmountLabel.text = "+$0.58"
         roundUpAmountLabel.textColor = .pestalGreen
         roundUpAmountLabel.textAlignment = .center
-        roundUpAmountLabel.font = UIFont.systemFont(ofSize: 22, weight: .thin)
+        roundUpAmountLabel.font = UIFont.MontserratThin(size: 22)
         stackViewRoundup.addArrangedSubview(roundUpAmountLabel)
         
     }

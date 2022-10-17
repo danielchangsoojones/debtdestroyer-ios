@@ -109,7 +109,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         totalLabel.numberOfLines = 0
         totalLabel.textColor = .black
         totalLabel.textAlignment = .center
-        totalLabel.font = UIFont.systemFont(ofSize: 22, weight: .thin)
+        totalLabel.font = UIFont.MontserratThin(size: 22)
         backgroundCanvas1.addSubview(totalLabel)
         totalLabel.snp.makeConstraints{ make in
             make.top.equalTo(stackView.snp.bottom).offset(20)
@@ -170,7 +170,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         buyLabel.text = "You buy"
         buyLabel.textColor = .black
         buyLabel.textAlignment = .center
-        buyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        buyLabel.font = UIFont.MontserratMedium(size: 20)
         stackViewYouBuy.addArrangedSubview(buyLabel)
     }
     
@@ -178,7 +178,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         lbl.text = emoji + "$" + txt
         lbl.textColor = .black
         lbl.textAlignment = .center
-        lbl.font = UIFont.systemFont(ofSize: 22, weight: .thin)
+        lbl.font = UIFont.MontserratThin(size: 22)
         stackViewYouBuy.addArrangedSubview(lbl)
     }
     
@@ -186,7 +186,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         roundUpLabel.text = "Round-up"
         roundUpLabel.textColor = .black
         roundUpLabel.textAlignment = .left
-        roundUpLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        roundUpLabel.font = UIFont.MontserratMedium(size: 20)
         stackViewRoundup.addArrangedSubview(roundUpLabel)
     }
     
@@ -194,7 +194,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         lbl.text = "+$" + txt
         lbl.textColor = .pestalGreen
         lbl.textAlignment = .right
-        lbl.font = UIFont.systemFont(ofSize: 22, weight: .thin)
+        lbl.font = UIFont.MontserratThin(size: 22)
         stackViewRoundup.addArrangedSubview(lbl)
     }
     
@@ -228,7 +228,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .black
         titleLabel.textAlignment = .left
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        titleLabel.font = UIFont.MontserratMedium(size: 20)
         backgroundCanvas.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(10)

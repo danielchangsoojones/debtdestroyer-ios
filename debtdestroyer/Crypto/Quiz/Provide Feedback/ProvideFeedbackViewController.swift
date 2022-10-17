@@ -65,7 +65,7 @@ class ProvideFeedbackViewController: UIViewController {
         if User.shouldShowEarnings {
             let navTitle = UILabel.init(frame: CGRect(x: 0, y: 0, width: 120, height: 25))
             navTitle.text = "You’ve Earned 2 " + quizTopicDatas.name + "!"
-            navTitle.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
+            navTitle.font = UIFont.MontserratBold(size: 15)
             navTitle.textAlignment = .center
             let gradientLabel = feedbackView.getGradientLayer(bounds: navTitle.bounds)
             navTitle.textColor = feedbackView.gradientColor(bounds: navTitle.bounds, gradientLayer: gradientLabel)

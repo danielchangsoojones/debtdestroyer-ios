@@ -31,7 +31,7 @@ class DeleteAccountView: UIView {
         infoLabel.text = "Are you sure that you want to delete your account? Deleting your account takes up to 48 hours. THIS ACTION CAN NOT BE UNDONE. Our support team will manually delete your account and data. You may submit an account deletion request below, and our team will email you once your account has been officially deleted."
         infoLabel.textAlignment = .center
         infoLabel.textColor = color1
-        infoLabel.font = UIFont.systemFont(ofSize: 12)
+        infoLabel.font = UIFont.MontserratRegular(size: 12)
         infoLabel.numberOfLines = 0
         addSubview(infoLabel)
         infoLabel.snp.makeConstraints{ make in
@@ -41,14 +41,23 @@ class DeleteAccountView: UIView {
     }
     
     private func setDeleteAccountButton() {
-        deleteAccButton.setTitle("SEND DELETE ACCOUNT REQUEST", for: .normal)
+       
         deleteAccButton.backgroundColor = color1
-        deleteAccButton.setTitleColor(.white, for: .normal)
         deleteAccButton.layer.cornerRadius = 8
         deleteAccButton.titleLabel?.adjustsFontSizeToFitWidth = true
         let spacing: CGFloat = 8.0
         deleteAccButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
         let dimenssion = 50
+        
+        if #available(iOS 15.0, *) {
+            var configuration = UIButton.Configuration.plain()
+            configuration.attributedTitle = AttributedString("SEND DELETE ACCOUNT REQUEST", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            deleteAccButton.configuration = configuration
+        } else {
+            deleteAccButton.setTitle("SEND DELETE ACCOUNT REQUEST", for: .normal)
+            deleteAccButton.setTitleColor(.white, for: .normal)
+
+        }
         addSubview(deleteAccButton)
         deleteAccButton.snp.makeConstraints{ make in
             make.leading.trailing.equalToSuperview().inset(20)

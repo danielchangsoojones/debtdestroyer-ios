@@ -53,7 +53,7 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
     }
 
     private func setTitleLabel() {
-        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        titleLabel.font = UIFont.MontserratRegular(size: 12)
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .jaguarBlack
         background.addSubview(titleLabel)
@@ -64,7 +64,7 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
     }
     
     private func setamountPaidToLoanLabel() {
-        amountPaidToLoanLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        amountPaidToLoanLabel.font = UIFont.MontserratRegular(size: 12)
         amountPaidToLoanLabel.textColor = .jaguarBlack
         amountPaidToLoanLabel.textAlignment = .right
         background.addSubview(amountPaidToLoanLabel)
@@ -77,7 +77,7 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
     }
 
     private func setDateLabel() {
-        dateLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        dateLabel.font = UIFont.MontserratRegular(size: 10)
         dateLabel.textColor = .jaguarBlack
         background.addSubview(dateLabel)
         dateLabel.snp.makeConstraints { make in
@@ -97,7 +97,7 @@ class TransactionHistoryCell: UITableViewCell, Reusable {
         lblString.append(space)
         ticketsLabel.attributedText = lblString
         ticketsLabel.textColor = .black
-        ticketsLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        ticketsLabel.font = UIFont.MontserratRegular(size: 10)
         ticketsLabel.textAlignment = .right
         background.addSubview(ticketsLabel)
         ticketsLabel.snp.makeConstraints { make in

@@ -39,13 +39,13 @@ class CryptoSettingsViewController: UIViewController {
         super.viewDidLoad()
         loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
-        
-        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc"]
-        
-//        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
+//        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
 //
-//        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc", "deleteAcc"]
+//        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc"]
+        
+        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
+
+        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc", "deleteAcc"]
         
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
@@ -142,7 +142,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         let titleLabel = UILabel(frame: CGRect(x:10,y: 10 ,width:footer.frame.width - 20,height:50))
         titleLabel.textColor = .systemGray2
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        titleLabel.font = UIFont.MontserratRegular(size: 15)
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         titleLabel.text  = "Version " + appVersion!
         footer.addSubview(titleLabel)

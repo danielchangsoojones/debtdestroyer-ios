@@ -94,7 +94,7 @@ class WelcomeView: UIView {
         termsAndPolicyLabel.textColor = .black
         termsAndPolicyLabel.numberOfLines = 1
         termsAndPolicyLabel.textAlignment = .center
-        termsAndPolicyLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        termsAndPolicyLabel.font = UIFont.MontserratRegular(size: 10)
         termsAndPolicyLabel.adjustsFontSizeToFitWidth = true
         termsAndPolicyLabel.minimumScaleFactor = 0.5
         termsAndPolicyLabel.isUserInteractionEnabled = true
@@ -154,7 +154,7 @@ class WelcomeView: UIView {
         
         titleLabel.text = "Debt Destroyed"
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        titleLabel.font = UIFont.MontserratBold(size: 30)
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints{ make in
             make.leading.trailing.equalToSuperview().inset(30)

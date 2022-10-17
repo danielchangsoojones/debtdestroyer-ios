@@ -10,20 +10,18 @@ import UIKit
 class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
     private let quizTopic: QuizTopicParse
-    private var quizScores: [QuizScoreParse] = []
+    private var quizScores: [LeaderboardDataStore.QuizScore] = []
     private var descriptionLabel: UILabel!
     private let dataStore = LeaderboardDataStore()
     private var messageHelper: MessageHelper?
-    private var champImgView = UIImageView()
-    private var champNameLabel = UILabel()
-    private var champPointsLabel = UILabel()
     private var bottomView = UIView()
+    private var containerView = UIView()
     private var numberLabel = UILabel()
     private var nameLabel = UILabel()
     private var pointsLabel = UILabel()
-    private var imgView = UIImageView()
     private var tweetText = String()
-    
+    private var timeLable = UILabel()
+
     init(quizTopic: QuizTopicParse) {
         self.quizTopic = quizTopic
         super.init(nibName: nil, bundle: nil)
@@ -39,13 +37,11 @@ class ChampionsViewController: UIViewController {
         self.view = championsView
         self.tableView = championsView.leaderboardTableView
         self.descriptionLabel = championsView.descriptionLabel
-        self.champImgView = championsView.champImgView
-        self.champNameLabel = championsView.champNameLabel
-        self.champPointsLabel = championsView.champPointsLabel
         self.bottomView = championsView.bottomView
+        self.containerView = championsView.containerView
         self.numberLabel = championsView.numberLabel
         self.nameLabel = championsView.nameLabel
-        self.imgView = championsView.imgView
+        self.timeLable = championsView.timeLable
         self.pointsLabel = championsView.pointsLabel
     }
     
@@ -64,6 +60,15 @@ class ChampionsViewController: UIViewController {
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
         loadLeaderboard()
+        setNeedsStatusBarAppearanceUpdate()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }// code not working yet
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.bottomView.setGradientBackground()
     }
     
     private func setNavBarBtns() {
@@ -75,7 +80,7 @@ class ChampionsViewController: UIViewController {
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
         
-        let nextTrivia = UIBarButtonItem.init(title: "Start Naxt Trivia", style: .done, target: self, action: #selector(nextTriviaPressed))
+        let nextTrivia = UIBarButtonItem.init(title: "Start Next Trivia", style: .done, target: self, action: #selector(nextTriviaPressed))
         navigationItem.leftBarButtonItem = nextTrivia
     }
     
@@ -128,21 +133,27 @@ class ChampionsViewController: UIViewController {
     
     private func loadLeaderboard() {
         dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
+            
+//            if quizScores.isEmpty {
+//                self.containerView.backgroundColor = .clear
+//                self.tableView.backgroundColor = .clear
+//            } else {
+//                self.containerView.backgroundColor = .white
+//                self.tableView.backgroundColor = .white
+//            }
             self.quizScores = quizScores
             self.descriptionLabel.text = deadlineMessage
             if !User.shouldShowEarnings {
                 self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
             }
-            if let quizScore = quizScores.first {
-                self.champNameLabel.text = quizScore.user.fullName.capitalized
-                self.champPointsLabel.text = " " + String(quizScore.score) + " Points "
-                self.tableView.reloadData()
-            }
+            
+            self.tableView.reloadData()
             
             // MARK: This code will update info in bottom view if user never attended quiz before... No entry in table for current user.
             self.nameLabel.text = User.current()?.fullName.capitalized
-            self.pointsLabel.text = " 0 Points "
+            self.pointsLabel.text = " 0 "
             self.numberLabel.text = String(quizScores.count + 1) + ". "
+            self.timeLable.text = "NA"
             self.tweetText = "Hey.. I have earned 0 Points and scored \(quizScores.count + 1)."
             
             // MARK: this code will update info in bottom view if user attended quiz before
@@ -150,39 +161,58 @@ class ChampionsViewController: UIViewController {
             for quizScore in quizScores {
                 if User.current()?.objectId == quizScore.user.objectId {
                     self.nameLabel.text = quizScore.user.fullName.capitalized
-                    self.pointsLabel.text = " " + String(quizScore.score) + " Points "
+                    self.pointsLabel.text = " " + String(quizScore.points)
                     self.numberLabel.text = String(index) + ". "
-                    self.tweetText = "Hey.. I have earned \(quizScore.score) Points and scored \(index)."
+                    self.timeLable.text = String(quizScore.total_time_str)
+                    self.tweetText = "Hey.. I have earned \(quizScore.points) Points and scored \(index)."
 
                     return
                 }
                 index += 1
             }
-
         }
     }
 }
 
 extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quizScores.count - 1
+        return quizScores.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
-        let quizScore = quizScores[indexPath.row + 1]
-        cell.numberLabel.text = String(indexPath.row + 2) + ". "
+        let quizScore = quizScores[indexPath.row]
+        cell.numberLabel.text = String(indexPath.row + 1) + ". "
         cell.nameLabel.text = quizScore.user.fullName.capitalized
-        cell.pointsLabel.text = String(quizScore.score) + " Points"
+        cell.pointsLabel.text = String(quizScore.points)
+        cell.timeLable.text = String(quizScore.total_time_str)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.5
+        return 70
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = LeaderboardTableCell()
+        headerView.backgroundColor = .systemGray6
+        headerView.numberLabel.text = ""
+        headerView.nameLabel.text = ""
+        headerView.pointsLabel.text = "Points"
+        headerView.pointsLabel.font = UIFont.MontserratSemiBold(size: 15)
+        headerView.timeLable.text = "Time"
+        headerView.timeLable.font = UIFont.MontserratSemiBold(size: 15)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70
+    
     }
 }
 

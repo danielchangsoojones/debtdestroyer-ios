@@ -35,21 +35,29 @@ class CryptoTabBarViewController: UITabBarController {
         
     }
     
+//    open override var childForStatusBarStyle: UIViewController? {
+//        return selectedViewController
+//    }
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.selectedViewController?.preferredStatusBarStyle ?? .lightContent
+    }
+    
     private func setTabs(){
         let vc1 = StartQuizViewController()
         let vc2 = ChampionsViewController(quizTopic: self.quizDatas.first!.quizTopic)
         let vc3 = CryptoSettingsViewController(quizDatas: self.quizDatas, currentIndex: 0)
 
         let controllers = [vc1,vc2,vc3]
-        self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
+        self.viewControllers = controllers.map { CustomNavigationViewController(rootViewController: $0)}
         
         let tabQuiz = tabBar.items![0]
-        tabQuiz.image = UIImage(named: "quizB")?.withRenderingMode(.alwaysOriginal)
-        tabQuiz.selectedImage = UIImage(named: "quizC")?.withRenderingMode(.alwaysOriginal)
+        tabQuiz.image = UIImage(named: "houseBW")?.withRenderingMode(.alwaysOriginal)
+        tabQuiz.selectedImage = UIImage(named: "houseC")?.withRenderingMode(.alwaysOriginal)
      
         let tabLeadboard = tabBar.items![1]
-        tabLeadboard.image = UIImage(named: "Tickets")?.withRenderingMode(.alwaysOriginal)
-        tabLeadboard.selectedImage = UIImage(named: "Tickets")?.withRenderingMode(.alwaysOriginal)
+        tabLeadboard.image = UIImage(named: "ticketBW")?.withRenderingMode(.alwaysOriginal)
+        tabLeadboard.selectedImage = UIImage(named: "ticketC")?.withRenderingMode(.alwaysOriginal)
         
         let tabSettings = tabBar.items![2]
         tabSettings.image = UIImage(named: "settingsBW")?.withRenderingMode(.alwaysOriginal)

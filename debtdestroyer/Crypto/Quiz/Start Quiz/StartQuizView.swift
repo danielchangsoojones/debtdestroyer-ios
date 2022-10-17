@@ -95,11 +95,23 @@ class StartQuizView: UIView {
     
     private func setNextButton() {
         nextButton.backgroundColor = .clear
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.setTitle("Start Trivia", for: .normal)
         let height: CGFloat = 55
         nextButton.layer.cornerRadius = height / 2
         nextButton.layer.masksToBounds = true
+        if #available(iOS 15.0, *) {
+            if nextButton.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("Start Trivia", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                nextButton.configuration = configuration
+                
+            } else {
+                nextButton.configuration?.attributedTitle = AttributedString("Start Trivia", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+         
+        } else {
+            nextButton.setTitleColor(.white, for: .normal)
+            nextButton.setTitle("Start Trivia", for: .normal)
+        }
         addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)

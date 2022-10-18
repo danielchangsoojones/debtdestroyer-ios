@@ -11,8 +11,6 @@ class QuestionView: UIView {
     let answerStackView = UIStackView()
     let questionLabel = UILabel()
     let questionNoLabel = UILabel()
-    let submitBtn = UIButton()
-    
     let scrollView = UIScrollView()
     let contentView = UIView()
     let quesImgView = UIImageView()

@@ -81,6 +81,8 @@
 		0A5FD51B28F8475200B995C8 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50828F8475100B995C8 /* Montserrat-Black.otf */; };
 		0A5FD51C28F8475200B995C8 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */; };
 		0A5FD51E28F848DD00B995C8 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD51D28F848DD00B995C8 /* FontExtension.swift */; };
+		0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */; };
+		0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
 		0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */; };
 		0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */; };
@@ -205,6 +207,8 @@
 		0A5FD50828F8475100B995C8 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		0A5FD51D28F848DD00B995C8 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FontExtension.swift; path = debtdestroyer/Helper/FontExtension.swift; sourceTree = SOURCE_ROOT; };
+		0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnersViewController.swift; sourceTree = "<group>"; };
+		0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerTableCell.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
 		0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcsriptionBasicView.swift; sourceTree = "<group>"; };
@@ -461,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				0A59ACE128E183F4001B774A /* Tabs */,
+				0A6D54AD28FEA495000A8238 /* Winners */,
 				0A59ACE328E183F4001B774A /* Settings */,
 				0A59ACE828E183F4001B774A /* Answer */,
 				0A59ACEC28E183F4001B774A /* Question */,
@@ -576,6 +581,15 @@
 				0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */,
 			);
 			path = MontserratFont;
+			sourceTree = "<group>";
+		};
+		0A6D54AD28FEA495000A8238 /* Winners */ = {
+			isa = PBXGroup;
+			children = (
+				0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */,
+				0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */,
+			);
+			path = Winners;
 			sourceTree = "<group>";
 		};
 		0A74408C28BE405000AD0489 /* Subscription */ = {
@@ -941,6 +955,7 @@
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* AddressViewController.swift in Sources */,
+				0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
@@ -980,6 +995,7 @@
 				0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */,
 				0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */,
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
+				0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,

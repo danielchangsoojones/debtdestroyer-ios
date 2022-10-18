@@ -97,7 +97,21 @@ class SubscriptionView: UIView {
     }
     
     func setUpgradeBtn() {
-        upgradeBtn.setTitle("Upgrade to Diamond", for: .normal)
+        if #available(iOS 15.0, *) {
+            if upgradeBtn.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("Upgrade to Diamond", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                upgradeBtn.configuration = configuration
+                
+            } else {
+                upgradeBtn.configuration?.attributedTitle = AttributedString("Upgrade to Diamond", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+            
+        } else {
+            upgradeBtn.setTitleColor(.white, for: .normal)
+            upgradeBtn.setTitle("Upgrade to Diamond", for: .normal)
+
+        }
         upgradeBtn.layer.cornerRadius =  8
         upgradeBtn.clipsToBounds = true
         upgradeBtn.backgroundColor = .clear

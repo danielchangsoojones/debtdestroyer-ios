@@ -71,10 +71,23 @@ class NotificationPermissionView: UIView {
     }
     
     private func setAllowNotificationButton() {
+        if #available(iOS 15.0, *) {
+            if allowBtn.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("I WANT TO BE NOTIFIED", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                allowBtn.configuration = configuration
+                
+            } else {
+                allowBtn.configuration?.attributedTitle = AttributedString("I WANT TO BE NOTIFIED", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+            
+        } else {
+            allowBtn.setTitleColor(.white, for: .normal)
+            allowBtn.titleLabel?.font = UIFont.MontserratSemiBold(size: 22)
+            allowBtn.setTitle("I WANT TO BE NOTIFIED", for: .normal)
+        }
+        
         allowBtn.backgroundColor = .clear
-        allowBtn.setTitleColor(.white, for: .normal)
-        allowBtn.titleLabel?.font = UIFont.MontserratSemiBold(size: 22)
-        allowBtn.setTitle("I WANT TO BE NOTIFIED", for: .normal)
         let height: CGFloat = 55
         allowBtn.layer.cornerRadius = height / 2
         allowBtn.layer.masksToBounds = true

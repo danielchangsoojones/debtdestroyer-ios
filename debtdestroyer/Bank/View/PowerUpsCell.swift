@@ -12,7 +12,6 @@ class PowerUpsCell: UITableViewCell, Reusable {
     
     let titleLabel = UILabel()
     let balanceLabel = UILabel()
-    let removeButton = UIButton()
     private let background = UIView()
     var chevronImageView = UIImageView()
     

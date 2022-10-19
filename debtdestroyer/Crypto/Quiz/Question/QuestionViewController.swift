@@ -140,11 +140,25 @@ class QuestionViewController: UIViewController {
                     })
 
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                    
+                    // Correct Answer show
+                    
+                    let correctAnswerView = answerViews[currentData.correct_answer_index]
+                    correctAnswerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                    correctAnswerView.gifImgView.tintColor = .black
+                    correctAnswerView.gifImgView.alpha = 0.2
+                    UIImageView.animate(withDuration: 3, animations: {
+                        correctAnswerView.gifImgView.alpha = 1
+                        
+                    })
+                    
+                    correctAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
+                    
                 } else {
                     answerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
                     answerView.gifImgView.tintColor = .black
                     answerView.gifImgView.alpha = 0.2
-                    UIImageView.animate(withDuration: 5, animations: {
+                    UIImageView.animate(withDuration: 3, animations: {
                         answerView.gifImgView.alpha = 1
                         
                     })

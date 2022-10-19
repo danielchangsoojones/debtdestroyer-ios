@@ -81,6 +81,7 @@
 		0A5FD51B28F8475200B995C8 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50828F8475100B995C8 /* Montserrat-Black.otf */; };
 		0A5FD51C28F8475200B995C8 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */; };
 		0A5FD51E28F848DD00B995C8 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD51D28F848DD00B995C8 /* FontExtension.swift */; };
+		0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */; };
 		0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */; };
 		0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
@@ -207,6 +208,7 @@
 		0A5FD50828F8475100B995C8 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		0A5FD51D28F848DD00B995C8 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FontExtension.swift; path = debtdestroyer/Helper/FontExtension.swift; sourceTree = SOURCE_ROOT; };
+		0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnersViewController.swift; sourceTree = "<group>"; };
 		0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerTableCell.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 			children = (
 				0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */,
 				0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */,
+				0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */,
 			);
 			path = Winners;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
+				0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */,
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */,

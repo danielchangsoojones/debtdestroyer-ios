@@ -46,7 +46,7 @@ class CryptoTabBarViewController: UITabBarController {
     private func setTabs(){
         let vc1 = StartQuizViewController()
         let vc2 = ChampionsViewController(quizTopic: self.quizDatas.first!.quizTopic)
-        let vc3 = FullScreenVideoPlayerViewController()//WinnersViewController(quizDatas: self.quizDatas, currentIndex: 0)
+        let vc3 = WinnersViewController(quizDatas: self.quizDatas, currentIndex: 0)//FullScreenVideoPlayerViewController()
         let vc4 = CryptoSettingsViewController(quizDatas: self.quizDatas, currentIndex: 0)
 
         let controllers = [vc1,vc2,vc3,vc4]

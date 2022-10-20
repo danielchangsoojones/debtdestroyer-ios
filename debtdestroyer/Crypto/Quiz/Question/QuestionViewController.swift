@@ -10,7 +10,7 @@ import Foundation
 
 class QuestionViewController: UIViewController {
     struct Constants {
-        static let originalStartTime: TimeInterval = 15
+        static let originalStartTime: TimeInterval = 12
     }
     
     enum AnswerStatus: String {
@@ -196,8 +196,8 @@ class QuestionViewController: UIViewController {
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
             appD.quizRunning = false
-            let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
-            self.navigationController?.pushViewController(leaderboardVC, animated: true)
+            let vc = ScoreViewController(quizDatas: self.quizDatas, currentIndex: 0)
+            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)

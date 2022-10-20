@@ -22,6 +22,8 @@
 		0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */; };
 		0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73AE289D4260006E67F9 /* PrizeView.swift */; };
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
+		0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178A290115A200A414CA /* ScoreViewController.swift */; };
+		0A32178D290115BA00A414CA /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178C290115BA00A414CA /* ScoreView.swift */; };
 		0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A421C0528DB3AED008792B8 /* StoreKit.framework */; };
 		0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */; };
 		0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0928DB4A7B008792B8 /* IAPManager.swift */; };
@@ -149,6 +151,8 @@
 		0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		0A2E73AE289D4260006E67F9 /* PrizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeView.swift; sourceTree = "<group>"; };
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
+		0A32178A290115A200A414CA /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		0A32178C290115BA00A414CA /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		0A421C0528DB3AED008792B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
 		0A421C0928DB4A7B008792B8 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -422,6 +426,15 @@
 			path = Prize;
 			sourceTree = "<group>";
 		};
+		0A32178E290115C100A414CA /* Score */ = {
+			isa = PBXGroup;
+			children = (
+				0A32178A290115A200A414CA /* ScoreViewController.swift */,
+				0A32178C290115BA00A414CA /* ScoreView.swift */,
+			);
+			path = Score;
+			sourceTree = "<group>";
+		};
 		0A421C1128DC84EB008792B8 /* In-App Purchaes */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +482,7 @@
 				0A59ACE128E183F4001B774A /* Tabs */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0A59ACE328E183F4001B774A /* Settings */,
+				0A32178E290115C100A414CA /* Score */,
 				0A59ACE828E183F4001B774A /* Answer */,
 				0A59ACEC28E183F4001B774A /* Question */,
 				0A59ACF128E183F4001B774A /* Start Quiz */,
@@ -963,6 +977,7 @@
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
+				0A32178D290115BA00A414CA /* ScoreView.swift in Sources */,
 				0A59AD0A28E183F4001B774A /* AddressView.swift in Sources */,
 				0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */,
 				0A50659128C346D200207759 /* SubscriptionView.swift in Sources */,
@@ -978,6 +993,7 @@
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A47F89428F00E0600B11D5F /* NotificationPermissionView.swift in Sources */,
+				0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */,
 				9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */,
 				0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,

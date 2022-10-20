@@ -77,9 +77,28 @@ class ScoreViewController: UIViewController {
     }
 
     @objc private func shareButtonPressed() {
-     //app id 1729865264050976
-        //d6276fa55de8527c5a995d3e1425fa12 client
-        
+        if let storiesUrl = URL(string: "instagram-stories://share") {
+            if UIApplication.shared.canOpenURL(storiesUrl) {
+                guard let image = UIImage(named: "ticketB") else { return }
+                guard let imageData = image.pngData() else { return }
+                let pasteboardItems: [String: Any] = [
+                    "com.instagram.sharedSticker.stickerImage": imageData,
+                    "com.instagram.sharedSticker.backgroundTopColor": "#FF2474",
+                    "com.instagram.sharedSticker.backgroundBottomColor": "#FF7910"
+                ]
+                let pasteboardOptions = [
+                    UIPasteboard.OptionsKey.expirationDate:
+                        Date().addingTimeInterval(300)
+                ]
+                UIPasteboard.general.setItems([pasteboardItems], options:
+                                                pasteboardOptions)
+                UIApplication.shared.open(storiesUrl, options: [:],
+                                          completionHandler: nil)
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print("Sorry the application is not installed")
+            }
+        }
     }
     
     @objc private func SkipButtonPressed() {

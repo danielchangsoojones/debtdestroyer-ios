@@ -44,7 +44,7 @@ class ScoreView: UIView {
     }
     
     private func setPointsLabel() {
-        pointsLbl.text = "6 points!"
+        pointsLbl.text = " "
         pointsLbl.numberOfLines = 0
         pointsLbl.textAlignment = .center
         pointsLbl.textColor = .black

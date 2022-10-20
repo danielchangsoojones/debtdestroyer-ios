@@ -196,7 +196,7 @@ class QuestionViewController: UIViewController {
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
             appD.quizRunning = false
-            let vc = ScoreViewController(quizDatas: self.quizDatas, currentIndex: 0)
+            let vc = ScoreViewController(quizTopic: self.quizDatas.first!.quizTopic, quizDatas: self.quizDatas, currentIndex: 0)
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)

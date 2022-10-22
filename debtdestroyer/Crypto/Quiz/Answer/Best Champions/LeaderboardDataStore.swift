@@ -47,4 +47,20 @@ class LeaderboardDataStore {
             }
         }
     }
+
+    func didShareToInstagramStory(quizTopicID: String, completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
+        PFCloud.callFunction(inBackground: "didShareToInstagramStory", withParameters: parameters) { (result, error) in
+            if let result = result {
+                let json = JSON(result)
+                print(json)
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "didShareToInstagramStory")
+            }
+        }
+    }
+
 }

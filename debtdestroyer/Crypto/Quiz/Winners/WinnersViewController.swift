@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import WebKit
 
 class WinnersViewController: UIViewController {
     private let tableView = UITableView()
-
+    
     private var quizDatas: [QuizDataParse] = []
     private let currentIndex: Int
     private var currentData: QuizDataParse {
@@ -29,8 +30,26 @@ class WinnersViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
-        setTableView()
+        //        setTableView()
+        setWebView()
+    }
+    
+    private func setWebView() {
 
+        let webView = WKWebView ()
+        self.view.addSubview(webView)
+        webView.navigationDelegate = self
+        let url = URL (string: "https://www.instagram.com/debt_destroyed/?igshid=YmMyMTA2M2Y%3D")
+        let request = URLRequest(url: url! as URL)
+            webView.load(request)
+     //https://developer.apple.com/forums/thread/711426
+        webView.allowsBackForwardNavigationGestures = true
+
+        webView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(40)
+            make.bottom.equalToSuperview().offset(-tabbarHeight)
+        }
     }
     
     private func setTableView() {
@@ -98,4 +117,9 @@ extension WinnersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+}
+
+extension WinnersViewController : WKNavigationDelegate {
+
+    
 }

@@ -16,6 +16,12 @@ extension UIViewController {
         return navBarHeight
     }
     
+    var tabbarHeight: CGFloat {
+        
+        let tabBarHeight = (tabBarController?.tabBar.frame.height ?? 0.0)
+        return tabBarHeight
+    }
+    
     // added this func for hide keyboard
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))

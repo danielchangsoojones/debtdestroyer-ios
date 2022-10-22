@@ -92,7 +92,11 @@ class PlayerView: UIView {
     func pause() {
         player.pause()
     }
-    
+
+    func play() {
+        player.play()
+    }
+
     deinit {
         playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
         print("deinit of PlayerView")

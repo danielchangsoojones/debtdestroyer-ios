@@ -19,10 +19,13 @@ class ScoreViewController: UIViewController {
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
-    
-    init(quizDatas: [QuizDataParse], currentIndex: Int) {
+    private let quizTopic: QuizTopicParse
+    private let dataStore = LeaderboardDataStore()
+
+    init(quizTopic: QuizTopicParse, quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
+        self.quizTopic = quizTopic
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +45,7 @@ class ScoreViewController: UIViewController {
         color2 = scoreView.hexStringToUIColor(hex: "FF7910")
         self.shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
         self.skipButton.addTarget(self, action: #selector(SkipButtonPressed), for: .touchUpInside)
-        
+        loadLeaderboard()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,10 +79,45 @@ class ScoreViewController: UIViewController {
         
     }
 
+    private func loadLeaderboard() {
+        dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
+
+            // MARK: this code will update info in bottom view if user attended quiz before
+            var index = 1
+            for quizScore in quizScores {
+                if User.current()?.objectId == quizScore.user.objectId {
+                    self.pointsLbl.text = String(quizScore.points) + " Points!"
+                    return
+                }
+                index += 1
+            }
+        }
+    }
+
+    
     @objc private func shareButtonPressed() {
-     //app id 1729865264050976
-        //d6276fa55de8527c5a995d3e1425fa12 client
-        
+        if let storiesUrl = URL(string: "instagram-stories://share") {
+            if UIApplication.shared.canOpenURL(storiesUrl) {
+                guard let image = UIImage(named: "ticketB") else { return }
+                guard let imageData = image.pngData() else { return }
+                let pasteboardItems: [String: Any] = [
+                    "com.instagram.sharedSticker.stickerImage": imageData,
+                    "com.instagram.sharedSticker.backgroundTopColor": "#FF2474",
+                    "com.instagram.sharedSticker.backgroundBottomColor": "#FF7910"
+                ]
+                let pasteboardOptions = [
+                    UIPasteboard.OptionsKey.expirationDate:
+                        Date().addingTimeInterval(300)
+                ]
+                UIPasteboard.general.setItems([pasteboardItems], options:
+                                                pasteboardOptions)
+                UIApplication.shared.open(storiesUrl, options: [:],
+                                          completionHandler: nil)
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print("Sorry the application is not installed")
+            }
+        }
     }
     
     @objc private func SkipButtonPressed() {

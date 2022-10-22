@@ -829,6 +829,8 @@
 			dependencies = (
 			);
 			name = debtdestroyer;
+			packageProductDependencies = (
+			);
 			productName = debtdestroyer;
 			productReference = 92021FC9289B07A4007901A6 /* debtdestroyer.app */;
 			productType = "com.apple.product-type.application";
@@ -857,6 +859,8 @@
 				Base,
 			);
 			mainGroup = 92021FC0289B07A4007901A6;
+			packageReferences = (
+			);
 			productRefGroup = 92021FCA289B07A4007901A6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

@@ -27,7 +27,19 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         nextButton.startSpinning()
         if isComplete {
             if let firstName = emailTextField.text, let lastName = passwordTextField.text {
-                dataStore.save(firstName: firstName, lastName: lastName)
+                
+                let email = UserDefaults.standard.string(forKey: "email") ?? ""
+                let password = UserDefaults.standard.string(forKey: "password") ?? ""
+                let phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber") ?? ""
+                dataStore.register(email: email, password: password) {
+                    self.dataStore.save(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName){
+                        UserDefaults.standard.removeObject(forKey: "email")
+                        UserDefaults.standard.removeObject(forKey: "password")
+                        UserDefaults.standard.removeObject(forKey: "phoneNumber")
+                        UserDefaults.standard.synchronize()
+                    }
+                }
+              
             }
             nextButton.stopSpinning()
             segueIntoApp()

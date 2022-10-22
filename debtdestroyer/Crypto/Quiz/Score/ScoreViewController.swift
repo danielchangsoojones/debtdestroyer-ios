@@ -96,6 +96,9 @@ class ScoreViewController: UIViewController {
 
     
     @objc private func shareButtonPressed() {
+        dataStore.didShareToInstagramStory(quizTopicID: quizTopic.objectId ?? "") {
+            //success
+        }
         if let storiesUrl = URL(string: "instagram-stories://share") {
             if UIApplication.shared.canOpenURL(storiesUrl) {
                 guard let image = UIImage(named: "ticketB") else { return }

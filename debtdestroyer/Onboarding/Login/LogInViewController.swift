@@ -23,10 +23,6 @@ class LogInViewController: RegisterViewController {
         self.hideKeyboardWhenTappedAround()
     }
     
-    override func runServerAuthentication() {
-        dataStore.logIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
-    }
-    
     private func updateLabels() {
         let logo = UIImage(named: "Login-1")
         let imageView = UIImageView(image:logo)
@@ -55,8 +51,10 @@ class LogInViewController: RegisterViewController {
     }
     
     override func segueIntoApp() {
-        let vc = CryptoTabBarViewController()//HomeTabBarViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        dataStore.logIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") {
+            let vc = CryptoTabBarViewController()//HomeTabBarViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }

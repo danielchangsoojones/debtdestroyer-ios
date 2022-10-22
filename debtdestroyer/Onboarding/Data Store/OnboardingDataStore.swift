@@ -20,7 +20,7 @@ class OnboardingDataStore: NSObject {
         self.delegate = delegate
     }
     
-    func register(email: String, password: String) {
+    func register(email: String, password: String, completion: @escaping () -> Void) {
         let newUser = User()
         newUser.username = email.lowercased()
         newUser.password = password
@@ -32,7 +32,7 @@ class OnboardingDataStore: NSObject {
                 let installation = PFInstallation.current()
                 installation?["user"] = User.current()
                 installation?.saveInBackground()
-                self.delegate?.segueIntoApp()
+                completion()
             }
             else {
                 if let error = error, let code = PFErrorCode(rawValue: error._code) {
@@ -49,7 +49,7 @@ class OnboardingDataStore: NSObject {
         }
     }
     
-    func logIn(email: String, password: String) {
+    func logIn(email: String, password: String, completion: @escaping () -> Void) {
         var lowerCaseEmail = email.lowercased()
         lowerCaseEmail = lowerCaseEmail.removeWhitespaces()
         User.logInWithUsername(inBackground: lowerCaseEmail, password: password) { (user, error) -> Void in
@@ -63,7 +63,7 @@ class OnboardingDataStore: NSObject {
                     let installation = PFInstallation.current()
                     installation?["user"] = User.current()
                     installation?.saveEventually(nil)
-                    self.delegate?.segueIntoApp()
+                    completion()
                 }
             } else if let error = error, let code = PFErrorCode(rawValue: error._code) {
                 if code == .errorObjectNotFound {
@@ -98,12 +98,8 @@ class OnboardingDataStore: NSObject {
 //        }
 //    }
     
-    func save(phoneNumber: String) {
+    func save(phoneNumber: String, firstName: String, lastName: String, completion: @escaping () -> Void) {
         User.current()?.phoneNumber = phoneNumber
-        User.current()?.saveInBackground()
-    }
-    
-    func save(firstName: String, lastName: String) {
         User.current()?.firstName = firstName
         User.current()?.lastName = lastName
         User.current()?.saveInBackground()

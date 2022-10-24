@@ -67,6 +67,9 @@ class CryptoTabBarViewController: UITabBarController {
         let tabSettings = tabBar.items![3]
         tabSettings.image = UIImage(named: "settingsBW")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
+        
+        //hiding the winners tab for now.
+        viewControllers?.remove(at: 2)
     }
 }
 

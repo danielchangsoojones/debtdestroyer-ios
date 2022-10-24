@@ -101,7 +101,7 @@ class ScoreViewController: UIViewController {
         }
         if let storiesUrl = URL(string: "instagram-stories://share") {
             if UIApplication.shared.canOpenURL(storiesUrl) {
-                guard let image = UIImage(named: "ticketB") else { return }
+                guard let image = UIImage(named: "instagram-story-photo") else { return }
                 guard let imageData = image.pngData() else { return }
                 let pasteboardItems: [String: Any] = [
                     "com.instagram.sharedSticker.stickerImage": imageData,

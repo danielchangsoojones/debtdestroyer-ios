@@ -67,8 +67,20 @@ class ProvideFeedbackView: UIView {
     
     func setFeedbackButton() {
         feedbackButton = GradientBtn()
-        feedbackButton.setTitle("Provide Feedback", for: .normal)
-        
+        if #available(iOS 15.0, *) {
+            if feedbackButton.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("Provide Feedback", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                feedbackButton.configuration = configuration
+                
+            } else {
+                feedbackButton.configuration?.attributedTitle = AttributedString("Provide Feedback", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+            
+        } else {
+            feedbackButton.setTitleColor(.white, for: .normal)
+            feedbackButton.setTitle("Provide Feedback", for: .normal)
+        }
         feedbackButton.layer.cornerRadius =  8
         feedbackButton.clipsToBounds = true
         feedbackButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -83,9 +95,20 @@ class ProvideFeedbackView: UIView {
     }
     
     func setNextQuizButton(){
-        nextQuizButton = UIButton()
-        nextQuizButton.titleLabel?.textColor = .fuchsiaPink
-        nextQuizButton.setTitle("Start Next Quiz", for: .normal)
+        if #available(iOS 15.0, *) {
+            if nextQuizButton.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("Start Next Quiz", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.fuchsiaPink]))
+                nextQuizButton.configuration = configuration
+                
+            } else {
+                nextQuizButton.configuration?.attributedTitle = AttributedString("Start Next Quiz", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.fuchsiaPink]))
+            }
+            
+        } else {
+            nextQuizButton.titleLabel?.textColor = .fuchsiaPink
+            nextQuizButton.setTitle("Start Next Quiz", for: .normal)
+        }
         nextQuizButton.layer.cornerRadius =  8
         nextQuizButton.backgroundColor = .clear
         nextQuizButton.clipsToBounds = true

@@ -68,17 +68,16 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     @objc func nextBtnPressed() {
         nextButton.startSpinning()
         if validateEmail() && validatePassword() {
-            runServerAuthentication()
-            nextButton.stopSpinning()
+            UserDefaults.standard.set(emailTextField.text, forKey: "email")
+            UserDefaults.standard.set(passwordTextField.text, forKey: "password")
+            UserDefaults.standard.synchronize()
 
+            nextButton.stopSpinning()
+            
+            self.segueIntoApp()
         } else {
             nextButton.stopSpinning()
         }
-    }
-    
-    func runServerAuthentication() {
-        dataStore.register(email: emailTextField.text ?? "",
-                           password: passwordTextField.text ?? "")
     }
     
     func segueIntoApp() {

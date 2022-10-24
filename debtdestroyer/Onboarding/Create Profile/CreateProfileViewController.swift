@@ -30,14 +30,19 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         if isComplete {
             let bottomText = emailTextField?.text ?? "1111111111"
             let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly)?.doubleValue ?? 1111111111
-            dataStore.save(phoneNumber: String(phoneNumber))
-            let nameVC = NameViewController()
-            self.navigationController?.pushViewController(nameVC, animated: true)
             
+            UserDefaults.standard.set(phoneNumber, forKey: "phoneNumber")
+            UserDefaults.standard.synchronize()
+            nextVC()
             nextButton.stopSpinning()
         } else {
             nextButton.stopSpinning()
         }
+    }
+    
+    private func nextVC() {
+        let nameVC = NameViewController()
+        self.navigationController?.pushViewController(nameVC, animated: true)
     }
     
     var isComplete: Bool {

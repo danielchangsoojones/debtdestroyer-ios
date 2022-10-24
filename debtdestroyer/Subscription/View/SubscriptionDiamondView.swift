@@ -91,7 +91,20 @@ class SubscriptionDiamondView: UIView {
     }
     
     func setTopBtn() {
-        topBtn.setTitle("Diamond", for: .normal)
+        if #available(iOS 15.0, *) {
+            if topBtn.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("Diamond", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 12),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                topBtn.configuration = configuration
+                
+            } else {
+                topBtn.configuration?.attributedTitle = AttributedString("Diamond", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 12),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+            
+        } else {
+            topBtn.setTitleColor(.white, for: .normal)
+            topBtn.setTitle("Diamond", for: .normal)
+        }
         topBtn.layer.cornerRadius =  8
         topBtn.clipsToBounds = true
         topBtn.backgroundColor = .clear

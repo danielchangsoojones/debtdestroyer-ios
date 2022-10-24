@@ -39,13 +39,13 @@ class CryptoSettingsViewController: UIViewController {
         super.viewDidLoad()
         loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
-//        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
-//
-//        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc"]
-        
-        dataArr = ["Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
+        dataArr = ["Enter Winner Information", "Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
 
-        imgNameArr = ["contactUs", "feedback", "logout", "deleteAcc", "deleteAcc"]
+        imgNameArr = ["legal", "contactUs", "feedback", "logout", "deleteAcc"]
+        
+//        dataArr = ["Enter Winner Information", "Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
+//
+//        imgNameArr = ["legal", "contactUs", "feedback", "logout", "deleteAcc", "deleteAcc"]
         
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
@@ -102,11 +102,15 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       if indexPath.row == 0 || indexPath.row == 1 {
+        if indexPath.row == 0 {
+            // MARK: Enter Winner Information
+            let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
+            UIApplication.shared.open(url)
+        } else if indexPath.row == 1 || indexPath.row == 2 {
             // MARK: Contact Us
             // MARK: Leave Feedback
             messageHelper?.text("3176905323", body: "")
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 3 {
             // MARK: Logout
             User.logOutInBackground { error in
                 if let error = error {
@@ -119,7 +123,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.present(navController, animated: true)
                 }
             }
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)

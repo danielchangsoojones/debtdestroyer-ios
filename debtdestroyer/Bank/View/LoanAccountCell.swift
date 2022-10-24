@@ -13,7 +13,6 @@ class LoanAccountCell: UITableViewCell, Reusable {
     let logoImg = UIImageView()
     let titleLabel = UILabel()
     let balanceLabel = UILabel()
-    let removeButton = UIButton()
     private let background = UIView()
     var chevronImageView = UIImageView()
     let loanAccountTagLabel = UILabel()

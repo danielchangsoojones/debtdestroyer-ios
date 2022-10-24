@@ -80,7 +80,11 @@ class ChampionsViewController: UIViewController {
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
         
-        let nextTrivia = UIBarButtonItem.init(title: "Start Next Trivia", style: .done, target: self, action: #selector(nextTriviaPressed))
+        var leftTitle = "Start Next Trivia"
+        if self.tabBarController?.selectedIndex == 1 {
+            leftTitle = "Start New Trivia"
+        }
+        let nextTrivia = UIBarButtonItem.init(title: leftTitle, style: .done, target: self, action: #selector(nextTriviaPressed))
         navigationItem.leftBarButtonItem = nextTrivia
     }
     

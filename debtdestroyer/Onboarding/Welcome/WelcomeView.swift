@@ -57,8 +57,20 @@ class WelcomeView: UIView {
     
     func setSignupBtn() {
         signUpButton = GradientBtn()
-        signUpButton.setTitle("Sign Up", for: .normal)
-        
+        if #available(iOS 15.0, *) {
+            if signUpButton.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("Sign Up", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                signUpButton.configuration = configuration
+                
+            } else {
+                signUpButton.configuration?.attributedTitle = AttributedString("Sign Up", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+            
+        } else {
+            signUpButton.setTitleColor(.white, for: .normal)
+            signUpButton.setTitle("Sign Up", for: .normal)
+        }
         signUpButton.layer.cornerRadius =  8
         signUpButton.clipsToBounds = true
         let horizontalInset: CGFloat = 20
@@ -72,8 +84,20 @@ class WelcomeView: UIView {
     }
     
     func setLoginBtn(){
-        logInButton = UIButton()//(frame: CGRect(x: 0, y: 0, width: 90, height: 50))
-        logInButton.setTitle("Log In", for: .normal)
+        logInButton = UIButton()
+        if #available(iOS 15.0, *) {
+            if logInButton.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("Log In", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "FF2474")]))
+                logInButton.configuration = configuration
+                
+            } else {
+                logInButton.configuration?.attributedTitle = AttributedString("Log In", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "FF2474")]))
+            }
+            
+        } else {
+            logInButton.setTitle("Log In", for: .normal)
+        }
         logInButton.layer.cornerRadius =  8
         logInButton.backgroundColor = .clear
         logInButton.clipsToBounds = true

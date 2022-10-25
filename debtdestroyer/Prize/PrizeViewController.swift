@@ -30,7 +30,6 @@ class PrizeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(roundUpsClicked), name: NSNotification.Name(rawValue: "RoundUps"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(oneTimePaymentClicked), name: NSNotification.Name(rawValue: "OneTimePayment"), object: nil)
 
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

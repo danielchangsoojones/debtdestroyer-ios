@@ -69,7 +69,6 @@ class PrizeViewController: UIViewController {
         tableView.reloadData()
     }
 
-    
     private func setTableView() {
         tableView = UITableView()
         tableView.delegate = self
@@ -77,9 +76,7 @@ class PrizeViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-//        tableView.register(cellType: TicketTopView.self)
         tableView.register(cellType: WeekPrizeCell.self)
-//        tableView.register(cellType: PastWeeksPrizeCell.self)
         tableView.register(cellType: HowToEarnTicketsCell.self)
         tableView.reloadData()
         view.addSubview(tableView)

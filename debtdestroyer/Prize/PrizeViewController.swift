@@ -33,14 +33,14 @@ class PrizeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadSavingsInfo()
         loadSweepstakesInfo()
-        loadPastWinners()
-
+//        loadPastWinners()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        super.viewDidAppear(animated)
     }
     
     @objc func roundUpsClicked() {
@@ -77,9 +77,9 @@ class PrizeViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        tableView.register(cellType: TicketTopView.self)
+//        tableView.register(cellType: TicketTopView.self)
         tableView.register(cellType: WeekPrizeCell.self)
-        tableView.register(cellType: PastWeeksPrizeCell.self)
+//        tableView.register(cellType: PastWeeksPrizeCell.self)
         tableView.register(cellType: HowToEarnTicketsCell.self)
         tableView.reloadData()
         view.addSubview(tableView)
@@ -150,119 +150,29 @@ class PrizeViewController: UIViewController {
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            // MARK: Savings Info View
-                return 1
-        } else if section == 1 {
-            // MARK: Sweepstakes Info View
-                return 1
-        } else if section == 2 {
-            // MARK: Past Winners View
-            return self.pastWinnersData.count
-        } else {
-            // MARK: How to Earn View
-            return 1
-        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            // MARK: Savings Info View
-            
-//            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
-//            cell.lblAmntPaidTo.text = dataStore.savingsInfoJSON["progress_meter_title"].stringValue
-//            cell.lblAmntPaid.text = "$" + dataStore.savingsInfoJSON["totalAmountPaidToLoan"].stringValue
-//            cell.ticketCount = dataStore.savingsInfoJSON["ticketCount"].stringValue
-//            cell.setLblNoOfTickets()
-            
-            
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
-            cell.lblAmntPaidTo.text = UserDefaults.standard.string(forKey: "progress_meter_title")
-            cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
-            cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
-            cell.setLblNoOfTickets()
-            let progressValue = (Int(cell.ticketCount) ?? 0)
-            cell.ticketProgressBar.progress = Float(progressValue)/50
-            
-            if progressValue >= 40 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                cell.stepImgView20.image = UIImage.init(named: "stepC")
-                cell.stepImgView30.image = UIImage.init(named: "stepC")
-                cell.stepImgView40.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label30.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label40.textColor = hexStringToUIColor(hex: "FF385E")
-            } else if progressValue >= 30 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                cell.stepImgView20.image = UIImage.init(named: "stepC")
-                cell.stepImgView30.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label30.textColor = hexStringToUIColor(hex: "FF385E")
-            } else if progressValue >= 20 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                cell.stepImgView20.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
-            } else if progressValue >= 10 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-            }
+            // MARK: weekPrizeCell
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
+            cell.prizeDescriptionLabel.text = UserDefaults.standard.string(forKey: "deadlineTxt")
+            cell.prizeAmountLabel.text = UserDefaults.standard.string(forKey: "prizeAmountTxt")
+            let ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? "0"
+            cell.ticketsAmountLabel.text = "\(ticketCount) Tickets"
             return cell
         } else if indexPath.section == 1 {
-            // MARK: Sweepstakes Info View
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
-            
-//            cell.announcementLbl.text = dataStore.sweepstakesInfoJSON["deadlineTxt"].stringValue
-//            cell.winLbl.text = dataStore.sweepstakesInfoJSON["prizeAmountTxt"].stringValue
-//            cell.weekPrizeLbl.text = dataStore.sweepstakesInfoJSON["title"].stringValue
-
-            cell.announcementLbl.text = UserDefaults.standard.string(forKey: "deadlineTxt")
-            cell.winLbl.text = UserDefaults.standard.string(forKey: "prizeAmountTxt")
-            cell.weekPrizeLbl.text = UserDefaults.standard.string(forKey: "title")
-            return cell
-        } else if indexPath.section == 2 {
-            // MARK: Past Winners View
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWeeksPrizeCell.self)
-            let file = self.pastWinnersData[0].value(forKey: "video") as AnyObject
-            
-            if let parseFile = file as? PFFileObject {
-                let query = PFQuery(className: "Winner")
-               
-        // posted a question on stack overflow to retrive video data from PFFileObject. here is a link. https://stackoverflow.com/questions/73661168/how-to-get-video-data-or-url-from-pffileobject
-                
-                
-                
-//                query.getObjectInBackground(withId: parseFile ) { object, error in
-//                    if (error == nil && object != nil) {
-//                        let videoFile = object!["keyForVideoPFFile"] as! PFFileObject
-//                        self.videoURL = videoFile.url!
-//                    }
-//
-//                }
-                
-            }
-            
-        
-            
-           
-
-            
-            return cell
-        } else {
-            // MARK: How to Earn View
+            // MARK: How to earn tickets
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
             return cell
         }
+        
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

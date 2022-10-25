@@ -48,16 +48,6 @@ class QuizDataStore {
         }
     }
     
-    func shouldShowNextQuiz(completion: @escaping (Bool, Error?) -> Void) {
-        PFCloud.callFunction(inBackground: "checkNewQuiz", withParameters: [:]) { (result, error) in
-            if let shouldShowNewQuiz = result as? Bool {
-                completion(shouldShowNewQuiz, nil)
-            } else {
-                completion(false, error)
-            }
-        }
-    }
-    
     func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse, time_answered_seconds: Double) {
         let questionStatus = answerStatus.rawValue
         let quizDataID = quizData.objectId ?? ""

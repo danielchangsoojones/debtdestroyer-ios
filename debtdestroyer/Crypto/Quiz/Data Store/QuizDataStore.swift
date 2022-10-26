@@ -7,6 +7,7 @@
 
 import Foundation
 import Parse
+import SwiftyJSON
 
 class QuizDataStore {
     func getQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
@@ -85,6 +86,22 @@ class QuizDataStore {
         PFCloud.callFunction(inBackground: "exitedAppDuringTrivia", withParameters: parameters) { (result, error) in
             if result != nil {
                 print("the user has lost the quiz")
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
+            }
+        }
+    }
+    
+    func checkShowQuizPopUp(completion: @escaping (Bool, [QuizDataParse]) -> Void) {
+        PFCloud.callFunction(inBackground: "checkShowQuizPopUp", withParameters: [:]) { (result, error) in
+            if let result = result {
+                let json = JSON(result)
+                let showQuizPopUp = json["showQuizPopUp"].boolValue
+                let dict = json.dictionaryObject
+                let quizDatas: [QuizDataParse] = (dict?["quizDatas"] as? [QuizDataParse]) ?? []
+                completion(showQuizPopUp, quizDatas)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {

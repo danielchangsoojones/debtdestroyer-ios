@@ -29,7 +29,7 @@ class PrizeViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(roundUpsClicked), name: NSNotification.Name(rawValue: "RoundUps"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(oneTimePaymentClicked), name: NSNotification.Name(rawValue: "OneTimePayment"), object: nil)
-
+        setNavBarBtns()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +38,33 @@ class PrizeViewController: UIViewController {
         loadSweepstakesInfo()
 //        loadPastWinners()
     }
+    
+    private func setNavBarBtns() {
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.backgroundColor = .clear
+        navigationItem.hidesBackButton = true
+        
+        let navBtn = UIButton()
+        let attStr = NSMutableAttributedString(string: "help?", attributes:[
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 15)])
+        
+        attStr.append(NSMutableAttributedString(string: " Message us.", attributes:[
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 15),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor:UIColor.black]))
+        
+//        navLabel.attributedText = attStr
+        navBtn.setAttributedTitle(attStr, for: .normal)
+        navBtn.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
+        let helpButton = UIBarButtonItem(customView: navBtn)
+        navigationItem.rightBarButtonItem = helpButton
+    }
+    
+    @objc private func helpPressed() {
+        messageHelper?.text(MessageHelper.customerServiceNum)
+    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -124,16 +151,10 @@ class PrizeViewController: UIViewController {
         gradientLayer.mask = shadowLayer
         view.layer.insertSublayer(gradientLayer, below: earningTicketsBtn.layer)
 
-        
         let dimension: CGFloat = 70
         earningTicketsBtn.layer.cornerRadius = dimension / 2
         earningTicketsBtn.backgroundColor = .white
         view.addSubview(earningTicketsBtn)
-//        earningTicketsBtn.snp.makeConstraints{ make in
-//            make.height.equalTo(dimension)
-//            make.leading.trailing.equalToSuperview().inset(30)
-//            make.centerY.equalTo(footer)
-//        }
     }
     
     @objc private func earningTicketsBtnClicked() {

@@ -24,13 +24,22 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     let prizeDescriptionLabel = UILabel()
     let prizeAmountLabel = UILabel()
     private let containerView = UIView()
-    private let weekPrizeBackgroundImgView = UIImageView()
+    let weekPrizeBackgroundImgView = UIImageView()
     private let prizeAmountContainer = UIView()
     private let towardsLoansLabel = UILabel()
-    
+    let gradientLayer: CAGradientLayer = CAGradientLayer()
+    private let imgView = UIImageView()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setWeekPrizeView()
+        self.layoutSublayers(of: gradientLayer)
+    }
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: self.layer)
+        
+        containerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF2474"), color2: hexStringToUIColor(hex: "FF7910"),radi: 8)
     }
     
     required init?(coder: NSCoder) {
@@ -108,6 +117,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
 
     private func setWeekPrizeBackgroundImgView() {
         weekPrizeBackgroundImgView.image = UIImage.init(named: "backgroundGrad")
+        weekPrizeBackgroundImgView.backgroundColor = .clear
         weekPrizeBackgroundImgView.layer.cornerRadius = 8
         containerView.addSubview(weekPrizeBackgroundImgView)
         weekPrizeBackgroundImgView.snp.makeConstraints { make in
@@ -124,7 +134,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     }
     
     private func setConfettiBubble() {
-        let frame = CGRect(x: 50, y: 50, width: 100, height: 100)
+        let frame = CGRect(x: 50, y: 50, width: 120, height: 120)
         confettiView = SwiftConfettiView(frame: frame)
         confettiView.backgroundColor = .white
         confettiView.layer.cornerRadius = frame.height / 2
@@ -134,12 +144,29 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         containerView.addSubview(confettiView)
         confettiView.startConfetti()
         
-        ticketsAmountLabel.font = UIFont.MontserratSemiBold(size: 16)
-        ticketsAmountLabel.textColor = .black
-        confettiView.addSubview(ticketsAmountLabel)
-        ticketsAmountLabel.snp.makeConstraints { make in
+        let ticketsStackView = UIStackView()
+        ticketsStackView.axis = .horizontal
+        ticketsStackView.distribution = .fill
+        ticketsStackView.alignment = .leading
+        ticketsStackView.spacing = 5
+        confettiView.addSubview(ticketsStackView)
+        ticketsStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        
+        ticketsAmountLabel.font = UIFont.MontserratSemiBold(size: 16)
+        ticketsAmountLabel.textColor = .black
+        ticketsStackView.addArrangedSubview(ticketsAmountLabel)
+        ticketsAmountLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+        }
+        
+        imgView.image = UIImage.init(named: "ticketC")
+        ticketsStackView.addArrangedSubview(imgView)
+        imgView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+        }
+
     }
     
     private func setLine() {

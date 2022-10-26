@@ -84,6 +84,27 @@ extension UIView {
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
         return gradient
     }
+    
+    func addGradient(with layer: CAGradientLayer, gradientFrame: CGRect? = nil, locations: [Double], startEndPoints: (CGPoint, CGPoint)? = nil) {
+        layer.frame = gradientFrame ?? self.bounds
+        layer.frame.origin = .zero
+        let color1 = hexStringToUIColor(hex: "FF2474")
+        let color2 = hexStringToUIColor(hex: "FF7910")
+        let colorSet = [color1,color2]
+        let layerColorSet = colorSet.map { $0.cgColor }
+        let layerLocations = locations.map { $0 as NSNumber }
+        
+        layer.colors = layerColorSet
+        layer.locations = layerLocations
+        
+        if let startEndPoints = startEndPoints {
+            layer.startPoint = startEndPoints.0
+            layer.endPoint = startEndPoints.1
+        }
+        
+        self.layer.insertSublayer(layer, at: 0)
+    }
+
         
     func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
@@ -93,7 +114,7 @@ extension UIView {
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.locations = [0, 1]
-        gradientLayer.frame = bounds
+        gradientLayer.frame = self.bounds
         
         layer.insertSublayer(gradientLayer, at: 0)
     }

@@ -37,7 +37,7 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(WeekPrizeCell.Constants.horizontalContainerInset)
             make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview()
+//            make.bottom.equalToSuperview().offset(-10)
         }
     }
     
@@ -46,7 +46,8 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         titleLabel.text = "How To Earn Tickets"
         containerView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.top.equalToSuperview().offset(10)
         }
     }
@@ -55,23 +56,42 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         ticketsStackView.axis = .vertical
         ticketsStackView.distribution = .fill
         ticketsStackView.alignment = .leading
-        ticketsStackView.spacing = 15
+        ticketsStackView.spacing = 5
         contentView.addSubview(ticketsStackView)
         ticketsStackView.snp.makeConstraints { make in
-            make.leading.equalTo(titleLabel)
-            make.trailing.equalToSuperview().inset(5)
+            make.leading.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-10)
         }
         
         let studentLoanTicket = TicketsInfo(description: "For every $1 paid towards your student loans. Just pay your student loans like normal, and you earn tickets!",
                                             ticketCount: 1)
         let dailyTriviaTicket = TicketsInfo(description: "For every question you get correct in our daily trivia. Play now.",
                                             ticketCount: 1)
-        let ticketsInfos = [studentLoanTicket, dailyTriviaTicket]
-        for ticketsInfo in ticketsInfos {
-            let ticketCountsCell = createTicketsCountCell(ticketsInfo: ticketsInfo)
-            ticketsStackView.addArrangedSubview(ticketCountsCell)
+//        let ticketsInfos = [studentLoanTicket, dailyTriviaTicket]
+//        for ticketsInfo in ticketsInfos {
+//            let ticketCountsCell = createTicketsCountCell(ticketsInfo: ticketsInfo)
+//            ticketsStackView.addArrangedSubview(ticketCountsCell)
+//        }
+        let studentCell = createTicketsCountCell(ticketsInfo: studentLoanTicket)
+        ticketsStackView.addArrangedSubview(studentCell)
+        
+        lineView()
+        
+        let dailyTriviaCell = createTicketsCountCell(ticketsInfo: dailyTriviaTicket)
+        ticketsStackView.addArrangedSubview(dailyTriviaCell)
+        
+    }
+    
+    private func lineView() {
+        let line = UILabel()
+        line.backgroundColor =  UIColor.black.withAlphaComponent(0.2)
+        ticketsStackView.addArrangedSubview(line)
+
+        line.snp.makeConstraints { make in
+            make.height.equalTo(0.5)
+            make.leading.trailing.equalToSuperview()
         }
     }
     
@@ -84,8 +104,9 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         ticketCountsView.layer.borderWidth = 0.5
         elementView.addSubview(ticketCountsView)
         ticketCountsView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(5)
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(40)
         }
         
         let descriptionLabel = UILabel()
@@ -96,9 +117,10 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         elementView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(ticketCountsView.snp.trailing).offset(10)
-            make.trailing.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-5)
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
+            make.height.greaterThanOrEqualTo(40)
         }
         return elementView
     }

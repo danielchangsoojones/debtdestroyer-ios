@@ -29,7 +29,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         nextButton.startSpinning()
         if isComplete {
             let bottomText = emailTextField?.text ?? "1111111111"
-            let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly)?.doubleValue ?? 1111111111
+            let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly) ?? 1111111111
             
             UserDefaults.standard.set(phoneNumber, forKey: "phoneNumber")
             UserDefaults.standard.synchronize()

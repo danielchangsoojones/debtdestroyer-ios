@@ -55,6 +55,7 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         ticketsStackView.axis = .vertical
         ticketsStackView.distribution = .fill
         ticketsStackView.alignment = .leading
+        ticketsStackView.spacing = 15
         contentView.addSubview(ticketsStackView)
         ticketsStackView.snp.makeConstraints { make in
             make.leading.equalTo(titleLabel)
@@ -88,6 +89,7 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         }
         
         let descriptionLabel = UILabel()
+        descriptionLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         descriptionLabel.text = ticketsInfo.description
         descriptionLabel.font = UIFont.MontserratRegular(size: 14)
         descriptionLabel.numberOfLines = 0

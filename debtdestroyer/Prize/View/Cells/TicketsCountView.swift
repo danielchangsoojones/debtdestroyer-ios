@@ -12,6 +12,7 @@ class TicketsCountView: UIView {
     
     init(ticketsCount: Int) {
         super.init(frame: .zero)
+        setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         setLabel(ticketsCount: ticketsCount)
     }
     

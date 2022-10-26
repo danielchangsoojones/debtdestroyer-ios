@@ -11,6 +11,10 @@ import SCLAlertView
 import SwiftConfettiView
 
 class WeekPrizeCell: UITableViewCell, Reusable {
+    struct Constants {
+        static let horizontalContainerInset: CGFloat = 10
+    }
+    
     private let ticketsTitle = UILabel()
     let ticketsAmountLabel = UILabel()
     let ticketsImageView = UIImageView()
@@ -38,7 +42,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
         self.contentView.addSubview(containerView)
         containerView.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(20)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(Constants.horizontalContainerInset)
             make.bottom.equalToSuperview().offset(-20)
         }
         setWeekPrizeBackgroundImgView()

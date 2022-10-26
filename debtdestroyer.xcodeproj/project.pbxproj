@@ -130,6 +130,7 @@
 		9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */; };
 		9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */; };
 		9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */; };
+		9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228AF032908D8E200CF2F90 /* TicketsCountView.swift */; };
 		924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */; };
 		925BD26528A24D2E009303AF /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26428A24D2E009303AF /* Enviroment.swift */; };
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
@@ -263,6 +264,7 @@
 		9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizScoreParse.swift; sourceTree = "<group>"; };
 		9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableCell.swift; sourceTree = "<group>"; };
 		9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardDataStore.swift; sourceTree = "<group>"; };
+		9228AF032908D8E200CF2F90 /* TicketsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCountView.swift; sourceTree = "<group>"; };
 		924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		925BD26428A24D2E009303AF /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				0A4536E028B903E400F4A8CA /* PlayerView.swift */,
 				0A432FA528B3816600C551FA /* TicketTopView.swift */,
 				0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */,
+				9228AF032908D8E200CF2F90 /* TicketsCountView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -979,6 +982,7 @@
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* AddressViewController.swift in Sources */,
+				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
 				0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */,

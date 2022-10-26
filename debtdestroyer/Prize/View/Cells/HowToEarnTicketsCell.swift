@@ -42,7 +42,7 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
     }
     
     private func setTitleLabel() {
-        titleLabel.font = UIFont.MontserratSemiBold(size: 32)
+        titleLabel.font = UIFont.MontserratSemiBold(size: 28)
         titleLabel.text = "How To Earn Tickets"
         containerView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in

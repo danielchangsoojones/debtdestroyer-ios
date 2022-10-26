@@ -23,7 +23,7 @@ class TicketsCountView: UIView {
     private func setLabel(ticketsCount: Int) {
         label.text = "\(ticketsCount) Tickets"
         label.textColor = .black
-        label.font = UIFont.MontserratSemiBold(size: 20)
+        label.font = UIFont.MontserratSemiBold(size: 16)
         addSubview(label)
         label.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(10)

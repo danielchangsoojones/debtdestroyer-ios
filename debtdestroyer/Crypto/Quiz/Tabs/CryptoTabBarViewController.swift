@@ -36,8 +36,8 @@ class CryptoTabBarViewController: UITabBarController {
     
     private func setTabs(){
         let vc1 = PrizeViewController()
-        let vc2 = ChampionsViewController(quizTopic: self.quizDatas.first!.quizTopic)
-        let vc3 = WinnersViewController(quizDatas: self.quizDatas, currentIndex: 0)//FullScreenVideoPlayerViewController()
+        let vc2 = StartQuizViewController(showSkipButton: false, quizDatas: nil)
+        let vc3 = ChampionsViewController(quizTopic: self.quizDatas.first!.quizTopic)
         let vc4 = CryptoSettingsViewController(quizDatas: self.quizDatas, currentIndex: 0)
 
         let controllers = [vc1,vc2,vc3,vc4]
@@ -58,9 +58,6 @@ class CryptoTabBarViewController: UITabBarController {
         let tabSettings = tabBar.items![3]
         tabSettings.image = UIImage(named: "settingsBW")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
-        
-        //hiding the winners tab for now.
-        viewControllers?.remove(at: 2)
     }
 }
 

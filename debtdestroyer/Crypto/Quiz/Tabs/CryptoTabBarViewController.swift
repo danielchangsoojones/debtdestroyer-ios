@@ -35,10 +35,6 @@ class CryptoTabBarViewController: UITabBarController {
         
     }
     
-//    open override var childForStatusBarStyle: UIViewController? {
-//        return selectedViewController
-//    }
-    
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.selectedViewController?.preferredStatusBarStyle ?? .lightContent
     }

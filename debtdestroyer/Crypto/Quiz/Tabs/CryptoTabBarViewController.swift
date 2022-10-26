@@ -10,29 +10,24 @@ import UIKit
 class CryptoTabBarViewController: UITabBarController {
     private var dataStore = QuizDataStore()
     private var quizDatas: [QuizDataParse] = []
+    private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        handleAppDidBecomeActive()
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
         
         self.delegate = self
-        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
         
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
         activityIndicator.color = UIColor.black
         self.view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        
-        
-        
-        dataStore.getQuizData { quizData in
-            self.quizDatas = quizData
-
-            activityIndicator.stopAnimating()
-            self.setTabs()
-
-        }
-        
+        activityIndicator.startAnimating()        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -66,6 +61,23 @@ class CryptoTabBarViewController: UITabBarController {
         
         //hiding the winners tab for now.
         viewControllers?.remove(at: 2)
+    }
+}
+
+extension CryptoTabBarViewController {
+    private func handleAppDidBecomeActive() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enteredScreen),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
+    }
+    
+    @objc private func enteredScreen() {
+        dataStore.checkShowQuizPopUp { showQuizPopUp, quizDatas in
+            self.quizDatas = quizDatas
+            self.activityIndicator.stopAnimating()
+            self.setTabs()
+        }
     }
 }
 

@@ -16,6 +16,19 @@ class StartQuizViewController: UIViewController {
     private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     private let dataStore = QuizDataStore()
     private var quizDatas: [QuizDataParse] = []
+    let showSkipButton: Bool
+    
+    init(showSkipButton: Bool, quizDatas: [QuizDataParse]?) {
+        self.showSkipButton = showSkipButton
+        if let quizDatas = quizDatas {
+            self.quizDatas = quizDatas
+        }
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -40,6 +53,20 @@ class StartQuizViewController: UIViewController {
         activityIndicator.color = UIColor.black
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        setSkipButton()
+    }
+    
+    private func setSkipButton() {
+        if showSkipButton {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Skip",
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(skipPressed))
+        }
+    }
+    
+    @objc private func skipPressed() {
+        dismiss(animated: true)
     }
     
     private func loadData() {

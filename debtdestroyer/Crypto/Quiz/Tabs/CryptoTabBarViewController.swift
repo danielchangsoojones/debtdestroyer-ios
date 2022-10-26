@@ -79,13 +79,14 @@ extension CryptoTabBarViewController {
             self.setTabs()
             let isAlreadyShowingStartQuizVC = self.checkIfAlreadyShowingStartQuizVC()
             if showQuizPopUp && !isAlreadyShowingStartQuizVC {
-                self.presentStartQuizVC()
+                self.presentStartQuizVC(quizDatas: quizDatas)
             }
         }
     }
     
-    private func presentStartQuizVC() {
-        let startQuizVC = StartQuizViewController()
+    private func presentStartQuizVC(quizDatas: [QuizDataParse]) {
+        let startQuizVC = StartQuizViewController(showSkipButton: true,
+                                                  quizDatas: quizDatas)
         let navController = UINavigationController(rootViewController: startQuizVC)
         present(navController, animated: true)
     }

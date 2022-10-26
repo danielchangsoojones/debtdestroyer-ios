@@ -20,6 +20,7 @@ class StartQuizViewController: UIViewController {
     
     init(showSkipButton: Bool, quizDatas: [QuizDataParse]?) {
         self.showSkipButton = showSkipButton
+        //TODO: i'm not really doing anything with the quizDatas yet.
         if let quizDatas = quizDatas {
             self.quizDatas = quizDatas
         }

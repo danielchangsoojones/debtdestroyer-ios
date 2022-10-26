@@ -23,7 +23,7 @@ class CryptoTabBarViewController: UITabBarController {
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
         activityIndicator.color = UIColor.black
         self.view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()        
+        activityIndicator.startAnimating()
     }
     
     deinit {
@@ -77,7 +77,16 @@ extension CryptoTabBarViewController {
             self.quizDatas = quizDatas
             self.activityIndicator.stopAnimating()
             self.setTabs()
+            if showQuizPopUp {
+                self.presentStartQuizVC()
+            }
         }
+    }
+    
+    private func presentStartQuizVC() {
+        let startQuizVC = StartQuizViewController()
+        let navController = UINavigationController(rootViewController: startQuizVC)
+        present(navController, animated: true)
     }
 }
 

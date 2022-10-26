@@ -93,16 +93,8 @@ extension CryptoTabBarViewController {
     
     //we don't want to present the startQuizVC if it's already showing (i.e. they leave the app and come back twice).
     private func checkIfAlreadyShowingStartQuizVC() -> Bool {
-        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-
-        if var topController = keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            
-            if let navController = topController as? UINavigationController, navController.viewControllers.first is StartQuizViewController {
-                return true
-            }
+        if let topVC = Helpers.getTopViewController() as? UINavigationController, topVC.viewControllers.first is StartQuizViewController{
+            return true
         }
         
         return false

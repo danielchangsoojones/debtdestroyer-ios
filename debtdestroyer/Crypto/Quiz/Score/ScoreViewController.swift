@@ -44,7 +44,7 @@ class ScoreViewController: UIViewController {
         color1 = scoreView.hexStringToUIColor(hex: "FF2474")
         color2 = scoreView.hexStringToUIColor(hex: "FF7910")
         self.shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
-        self.skipButton.addTarget(self, action: #selector(SkipButtonPressed), for: .touchUpInside)
+        self.skipButton.addTarget(self, action: #selector(finished), for: .touchUpInside)
         loadLeaderboard()
     }
     
@@ -74,7 +74,7 @@ class ScoreViewController: UIViewController {
         pointsLbl.textColor = scoreView.gradientColor(bounds: pointsLbl.bounds, gradientLayer: gradientLabel)
         
         Timer.runThisAfterDelay(seconds: 120.0) {
-            self.SkipButtonPressed()
+            self.finished()
         }
         
     }
@@ -98,6 +98,7 @@ class ScoreViewController: UIViewController {
     @objc private func shareButtonPressed() {
         dataStore.didShareToInstagramStory(quizTopicID: quizTopic.objectId ?? "") {
             //success
+            self.finished()
         }
         if let storiesUrl = URL(string: "instagram-stories://share") {
             if UIApplication.shared.canOpenURL(storiesUrl) {
@@ -123,10 +124,15 @@ class ScoreViewController: UIViewController {
         }
     }
     
-    @objc private func SkipButtonPressed() {
-        let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
-        self.navigationController?.pushViewController(leaderboardVC, animated: true)
-        
+    @objc private func finished() {
+        if Helpers.getTopViewController() is UINavigationController {
+            //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+            let tabBarVC = presentingViewController as? UITabBarController
+            tabBarVC?.selectedIndex = 2
+            dismiss(animated: true)
+        } else {
+            let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
+            self.navigationController?.pushViewController(leaderboardVC, animated: true)
+        }
     }
-
 }

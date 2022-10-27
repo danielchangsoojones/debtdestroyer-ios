@@ -54,7 +54,6 @@ class PrizeViewController: UIViewController {
             NSAttributedString.Key.foregroundColor: UIColor.black,
             NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 15),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor:UIColor.black]))
         
-//        navLabel.attributedText = attStr
         navBtn.setAttributedTitle(attStr, for: .normal)
         navBtn.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
         let helpButton = UIBarButtonItem(customView: navBtn)

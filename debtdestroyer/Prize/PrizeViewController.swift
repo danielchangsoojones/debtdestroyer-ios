@@ -112,7 +112,8 @@ class PrizeViewController: UIViewController {
         tableView.reloadData()
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
-            make.edges.equalToSuperview()
+            make.topMargin.leftMargin.rightMargin.equalToSuperview()
+            make.bottomMargin.equalToSuperview().offset(-120)
         }
     }
     

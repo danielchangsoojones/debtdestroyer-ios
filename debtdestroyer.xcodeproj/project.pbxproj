@@ -20,10 +20,10 @@
 		0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */; };
 		0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */; };
 		0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */; };
-		0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73AE289D4260006E67F9 /* PrizeView.swift */; };
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
 		0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178A290115A200A414CA /* ScoreViewController.swift */; };
 		0A32178D290115BA00A414CA /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178C290115BA00A414CA /* ScoreView.swift */; };
+		0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */; };
 		0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A421C0528DB3AED008792B8 /* StoreKit.framework */; };
 		0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */; };
 		0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0928DB4A7B008792B8 /* IAPManager.swift */; };
@@ -150,10 +150,10 @@
 		0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
-		0A2E73AE289D4260006E67F9 /* PrizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeView.swift; sourceTree = "<group>"; };
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
 		0A32178A290115A200A414CA /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		0A32178C290115BA00A414CA /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsCell.swift; sourceTree = "<group>"; };
 		0A421C0528DB3AED008792B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
 		0A421C0928DB4A7B008792B8 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -350,7 +350,6 @@
 			isa = PBXGroup;
 			children = (
 				0A25F65628A3681B00D5D183 /* Cells */,
-				0A2E73AE289D4260006E67F9 /* PrizeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -366,6 +365,7 @@
 				0A432FA528B3816600C551FA /* TicketTopView.swift */,
 				0A4536DC28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift */,
 				9228AF032908D8E200CF2F90 /* TicketsCountView.swift */,
+				0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1000,6 +1000,7 @@
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
 				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
+				0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A47F89428F00E0600B11D5F /* NotificationPermissionView.swift in Sources */,
@@ -1044,7 +1045,6 @@
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,
-				0A2E73AF289D4260006E67F9 /* PrizeView.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
 				0A76B59428F996530084A629 /* CustomNavigationViewController.swift in Sources */,

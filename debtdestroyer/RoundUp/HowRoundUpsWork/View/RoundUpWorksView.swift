@@ -105,7 +105,7 @@ class RoundUpWorksView: UITableViewCell, Reusable {
     private func setTotalAmountLabel() {
         
         totalLabel.text = "Total +$2.15 added to your loans"
-        totalLabel.halfTextColorChange(fullText: totalLabel.text!, changeText: "+$2.15")
+        totalLabel.halfTextColorChange(fullText: totalLabel.text!, changeText: "+$2.15", expectedColor: .red)
         totalLabel.numberOfLines = 0
         totalLabel.textColor = .black
         totalLabel.textAlignment = .center
@@ -279,11 +279,11 @@ class RoundUpWorksView: UITableViewCell, Reusable {
 }
 
 extension UILabel {
-    func halfTextColorChange (fullText : String , changeText : String ) {
+    func halfTextColorChange (fullText : String , changeText : String, expectedColor: UIColor ) {
         let strNumber: NSString = fullText as NSString
         let range = (strNumber).range(of: changeText)
         let attribute = NSMutableAttributedString.init(string: fullText)
-        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: range)
+        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: expectedColor , range: range)
         self.attributedText = attribute
     }
 }

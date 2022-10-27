@@ -33,7 +33,6 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setWeekPrizeView()
-        self.layoutSublayers(of: gradientLayer)
     }
     
     override func layoutSublayers(of layer: CALayer) {
@@ -116,7 +115,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     }
 
     private func setWeekPrizeBackgroundImgView() {
-        weekPrizeBackgroundImgView.image = UIImage.init(named: "backgroundGrad")
+//        weekPrizeBackgroundImgView.image = UIImage.init(named: "backgroundGrad")
         weekPrizeBackgroundImgView.backgroundColor = .clear
         weekPrizeBackgroundImgView.layer.cornerRadius = 8
         containerView.addSubview(weekPrizeBackgroundImgView)

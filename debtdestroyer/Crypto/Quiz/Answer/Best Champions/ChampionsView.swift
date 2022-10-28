@@ -6,12 +6,11 @@
 //
 
 import UIKit
-import MASegmentedControl
 
 class ChampionsView: UIView {
    
-//    let descriptionLabel = UILabel()
-//    let titleLabel = UILabel()
+    let descriptionLabel = UILabel()
+    let titleLabel = UILabel()
     let containerView = UIView()
     let leaderboardTableView = UITableView()
     let numberLabel = UILabel()
@@ -20,12 +19,12 @@ class ChampionsView: UIView {
     let timeLable = UILabel()
     let bottomViewContainer = UIView()
     let bottomView = UIView()
-    let toggleSwitch = MASegmentedControl()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
-        settoggleSwitch()
+        setTitleLabel()
+        setDescriptionLabel()
         setContainerView()
         setTableView()
         setBottomViewContainer()
@@ -36,21 +35,33 @@ class ChampionsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func settoggleSwitch() {
-        //https://github.com/alokc83/MASegmentedControl
-        toggleSwitch.frame = .init(x: 30, y: 80, width: self.frame.width - 60, height: 40)
-        toggleSwitch.itemsWithText = true
-        toggleSwitch.fillEqually = true
-        toggleSwitch.roundedControl = true
-
-        toggleSwitch.setSegmentedWith(items: ["Leaderboard", "Past Winners"])
-        toggleSwitch.padding = 2
-        toggleSwitch.textColor = .black
-        toggleSwitch.selectedTextColor = .black
-        toggleSwitch.thumbViewColor = .white
-        toggleSwitch.segmentedBackGroundColor = .systemGray5
-        toggleSwitch.titlesFont = UIFont.MontserratSemiBold(size: 14)
-        addSubview(toggleSwitch)
+    private func setTitleLabel() {
+        titleLabel.text = "Current Leading Score"
+        titleLabel.font = UIFont.MontserratBold(size: 30)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.backgroundColor = .clear
+        titleLabel.numberOfLines = 0
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.topMargin.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+    }
+    
+    private func setDescriptionLabel() {
+        descriptionLabel.font = UIFont.MontserratRegular(size: 14)
+        descriptionLabel.textColor = .white
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.backgroundColor = .clear
+        descriptionLabel.numberOfLines = 0
+        addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
     }
 
     private func setContainerView() {
@@ -61,7 +72,7 @@ class ChampionsView: UIView {
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(toggleSwitch.snp.bottom).offset(5)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
             make.bottom.equalToSuperview().offset(-95)
         }
     }

@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import MASegmentedControl
 
 class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
     private let quizTopic: QuizTopicParse
     private var quizScores: [LeaderboardDataStore.QuizScore] = []
-    private var descriptionLabel: UILabel!
+//    private var descriptionLabel: UILabel!
     private let dataStore = LeaderboardDataStore()
     private var messageHelper: MessageHelper?
     private var bottomView = UIView()
@@ -21,6 +22,7 @@ class ChampionsViewController: UIViewController {
     private var pointsLabel = UILabel()
     private var tweetText = String()
     private var timeLable = UILabel()
+    private var toggleSwitch = MASegmentedControl()
 
     init(quizTopic: QuizTopicParse) {
         self.quizTopic = quizTopic
@@ -36,13 +38,14 @@ class ChampionsViewController: UIViewController {
         let championsView = ChampionsView(frame: self.view.frame)
         self.view = championsView
         self.tableView = championsView.leaderboardTableView
-        self.descriptionLabel = championsView.descriptionLabel
+//        self.descriptionLabel = championsView.descriptionLabel
         self.bottomView = championsView.bottomView
         self.containerView = championsView.containerView
         self.numberLabel = championsView.numberLabel
         self.nameLabel = championsView.nameLabel
         self.timeLable = championsView.timeLable
         self.pointsLabel = championsView.pointsLabel
+        self.toggleSwitch = championsView.toggleSwitch
     }
     
     override func viewDidLoad() {
@@ -146,10 +149,10 @@ class ChampionsViewController: UIViewController {
 //                self.tableView.backgroundColor = .white
 //            }
             self.quizScores = quizScores
-            self.descriptionLabel.text = deadlineMessage
-            if !User.shouldShowEarnings {
-                self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
-            }
+//            self.descriptionLabel.text = deadlineMessage
+//            if !User.shouldShowEarnings {
+//                self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
+//            }
             
             self.tableView.reloadData()
             

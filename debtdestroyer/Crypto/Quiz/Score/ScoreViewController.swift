@@ -45,7 +45,7 @@ class ScoreViewController: UIViewController {
         color2 = scoreView.hexStringToUIColor(hex: "FF7910")
         self.shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
         self.skipButton.addTarget(self, action: #selector(finished), for: .touchUpInside)
-        loadLeaderboard()
+        self.pointsLbl.text = "\(User.current()?.quizPointCounter ?? 0) Points!"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,30 +78,14 @@ class ScoreViewController: UIViewController {
         }
         
     }
-
-    private func loadLeaderboard() {
-        dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
-
-            // MARK: this code will update info in bottom view if user attended quiz before
-            var index = 1
-            for quizScore in quizScores {
-                if User.current()?.objectId == quizScore.user.objectId {
-                    self.pointsLbl.text = String(quizScore.points) + " Points!"
-                    return
-                }
-                index += 1
-            }
-        }
-    }
-
     
     @objc private func shareButtonPressed() {
-        dataStore.didShareToInstagramStory(quizTopicID: quizTopic.objectId ?? "") {
-            //success
-            self.finished()
-        }
         if let storiesUrl = URL(string: "instagram-stories://share") {
             if UIApplication.shared.canOpenURL(storiesUrl) {
+                dataStore.didShareToInstagramStory(quizTopicID: quizTopic.objectId ?? "") {
+                    //success
+                    self.finished()
+                }
                 guard let image = UIImage(named: "instagram-story-photo") else { return }
                 guard let imageData = image.pngData() else { return }
                 let pasteboardItems: [String: Any] = [

@@ -15,7 +15,8 @@ class User: PFUser {
     @NSManaged var lastName: String
     
     static var shouldShowEarnings = true
-    
+    var quizPointCounter = 0
+
     var fullName: String {
         return firstName + " " + lastName
     }

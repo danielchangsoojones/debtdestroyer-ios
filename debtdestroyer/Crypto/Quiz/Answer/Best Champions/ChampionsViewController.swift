@@ -89,7 +89,7 @@ class ChampionsViewController: UIViewController {
     }
     
     @objc private func nextTriviaPressed() {
-        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.selectedIndex = 1
         self.navigationController?.popToRootViewController(animated: true)
     }
     

@@ -37,7 +37,7 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(WeekPrizeCell.Constants.horizontalContainerInset)
             make.top.equalToSuperview().offset(10)
-//            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
     

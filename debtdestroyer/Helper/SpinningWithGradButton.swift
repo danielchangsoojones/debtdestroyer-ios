@@ -81,8 +81,8 @@ class SpinningWithGradButton: UIButton {
         //gradient
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.8)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.8)
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.frame = bounds
      
         layer.insertSublayer(gradientLayer, at: 0)

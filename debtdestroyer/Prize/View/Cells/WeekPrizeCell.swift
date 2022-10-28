@@ -24,7 +24,6 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     let prizeDescriptionLabel = UILabel()
     let prizeAmountLabel = UILabel()
     private let containerView = UIView()
-    let weekPrizeBackgroundImgView = UIImageView()
     private let prizeAmountContainer = UIView()
     private let towardsLoansLabel = UILabel()
     let gradientLayer: CAGradientLayer = CAGradientLayer()
@@ -33,7 +32,6 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setWeekPrizeView()
-        self.layoutSublayers(of: gradientLayer)
     }
     
     override func layoutSublayers(of layer: CALayer) {
@@ -54,7 +52,6 @@ class WeekPrizeCell: UITableViewCell, Reusable {
             make.leading.trailing.equalToSuperview().inset(Constants.horizontalContainerInset)
             make.bottom.equalToSuperview().offset(-20)
         }
-        setWeekPrizeBackgroundImgView()
         setTicketLabel()
         setConfettiBubble()
         setLine()
@@ -112,16 +109,6 @@ class WeekPrizeCell: UITableViewCell, Reusable {
             make.trailing.equalTo(line)
             make.top.equalTo(prizeDescriptionLabel.snp.bottom).offset(10)
             make.bottom.equalToSuperview().inset(10)
-        }
-    }
-
-    private func setWeekPrizeBackgroundImgView() {
-        weekPrizeBackgroundImgView.image = UIImage.init(named: "backgroundGrad")
-        weekPrizeBackgroundImgView.backgroundColor = .clear
-        weekPrizeBackgroundImgView.layer.cornerRadius = 8
-        containerView.addSubview(weekPrizeBackgroundImgView)
-        weekPrizeBackgroundImgView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
         }
     }
     

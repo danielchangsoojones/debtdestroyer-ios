@@ -16,6 +16,8 @@ class PrizeViewController: UIViewController {
     private var messageHelper: MessageHelper?
     var earningTicketsBtn : UIButton!
     private var pastWinnersData: [WinnerParse] = []
+    private var hasNoAccountsConnected = true
+    private var debtAccountsData: [DebtAccountsParse] = []
 
     override func loadView() {
         super.loadView()
@@ -23,6 +25,7 @@ class PrizeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         setTableView()
         setEarningTicketsBtn()
         ForceUpdate.checkIfForceUpdate()
@@ -54,7 +57,6 @@ class PrizeViewController: UIViewController {
             NSAttributedString.Key.foregroundColor: UIColor.black,
             NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 15),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor:UIColor.black]))
         
-//        navLabel.attributedText = attStr
         navBtn.setAttributedTitle(attStr, for: .normal)
         navBtn.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
         let helpButton = UIBarButtonItem(customView: navBtn)
@@ -68,6 +70,7 @@ class PrizeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     @objc func roundUpsClicked() {
@@ -104,11 +107,13 @@ class PrizeViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.register(cellType: WeekPrizeCell.self)
+        tableView.register(cellType: ConnectAccountsCell.self)
         tableView.register(cellType: HowToEarnTicketsCell.self)
         tableView.reloadData()
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
-            make.edges.equalToSuperview()
+            make.topMargin.leftMargin.rightMargin.equalToSuperview()
+            make.bottomMargin.equalToSuperview().offset(-120)
         }
     }
     
@@ -164,11 +169,18 @@ class PrizeViewController: UIViewController {
     @objc private func setUpBtnClicked() {
         print("setUpBtnClicked")
     }
+    
+    @objc private func connectAccBtnClicked() {
+        let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
+        self.navigationController?.pushViewController(vc.self, animated: true)    }
 }
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if hasNoAccountsConnected {
+            return 3
+        }
+            return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,12 +196,25 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
             let ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? "0"
             cell.ticketsAmountLabel.text = "\(ticketCount) Tickets"
             return cell
-        } else if indexPath.section == 1 {
-            // MARK: How to earn tickets
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
-            return cell
         }
-        
+        if hasNoAccountsConnected {
+            if indexPath.section == 1 {
+                // MARK: Connect Account
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConnectAccountsCell.self)
+                cell.connectAccBtn.addTarget(self, action: #selector(connectAccBtnClicked), for: .touchUpInside)
+                return cell
+            } else if indexPath.section == 2 {
+                // MARK: How to earn tickets
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
+                return cell
+            }
+        } else {
+             if indexPath.section == 1 {
+                // MARK: How to earn tickets
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
+                return cell
+            }
+        }
         return UITableViewCell()
     }
     

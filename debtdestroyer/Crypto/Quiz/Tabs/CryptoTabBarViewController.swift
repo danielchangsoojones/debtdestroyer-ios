@@ -44,19 +44,19 @@ class CryptoTabBarViewController: UITabBarController {
         self.viewControllers = controllers.map { CustomNavigationViewController(rootViewController: $0)}
         
         let tabQuiz = tabBar.items![0]
-        tabQuiz.image = UIImage(named: "houseBW")?.withRenderingMode(.alwaysOriginal)
-        tabQuiz.selectedImage = UIImage(named: "houseC")?.withRenderingMode(.alwaysOriginal)
+        tabQuiz.image = UIImage(named: "ticketG")?.withRenderingMode(.alwaysOriginal)
+        tabQuiz.selectedImage = UIImage(named: "ticketC")?.withRenderingMode(.alwaysOriginal)
      
         let tabLeadboard = tabBar.items![1]
-        tabLeadboard.image = UIImage(named: "ticketBW")?.withRenderingMode(.alwaysOriginal)
-        tabLeadboard.selectedImage = UIImage(named: "ticketC")?.withRenderingMode(.alwaysOriginal)
+        tabLeadboard.image = UIImage(named: "BulbG")?.withRenderingMode(.alwaysOriginal)
+        tabLeadboard.selectedImage = UIImage(named: "BulbC")?.withRenderingMode(.alwaysOriginal)
         
         let tabWinner = tabBar.items![2]
-        tabWinner.image = UIImage(named: "giftBW")?.withRenderingMode(.alwaysOriginal)
-        tabWinner.selectedImage = UIImage(named: "giftC")?.withRenderingMode(.alwaysOriginal)
+        tabWinner.image = UIImage(named: "GlobeG")?.withRenderingMode(.alwaysOriginal)
+        tabWinner.selectedImage = UIImage(named: "GlobeC")?.withRenderingMode(.alwaysOriginal)
         
         let tabSettings = tabBar.items![3]
-        tabSettings.image = UIImage(named: "settingsBW")?.withRenderingMode(.alwaysOriginal)
+        tabSettings.image = UIImage(named: "settingsG")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
     }
 }

@@ -18,7 +18,7 @@ class QuestionView: UIView {
     var timerLabel = UILabel()
     var circularView = CircularProgressCountdownTimerView()
     var backBtn = UIButton()
-    let favLabel = UILabel()
+    let pointsLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +27,7 @@ class QuestionView: UIView {
         setUpProgressView()
         setTimerLabel()
         setBackButtonView()
-        setFavLabel()
+        setPointsLabel()
 //        setQuestionImgView()
         setQuestionNoLabel()
         setQuestionLabel()
@@ -89,20 +89,19 @@ class QuestionView: UIView {
         }
     }
     
-    private func setFavLabel() {
-        favLabel.text = " ♥ 3 "
-        favLabel.textColor = .black
-        favLabel.isHidden = true
-        favLabel.font = UIFont.MontserratRegular(size: 15)
-        favLabel.textAlignment = .center
-        favLabel.layer.borderColor = UIColor.black.cgColor
-        favLabel.layer.borderWidth = 1
-        favLabel.layer.cornerRadius = 15
+    private func setPointsLabel() {
+        pointsLabel.text = " 0 Points "
+        pointsLabel.textColor = .black
+        pointsLabel.font = UIFont.MontserratRegular(size: 15)
+        pointsLabel.textAlignment = .center
+        pointsLabel.layer.borderColor = UIColor.black.cgColor
+        pointsLabel.layer.borderWidth = 1
+        pointsLabel.layer.cornerRadius = 15
         let dimenssion = 30
-        contentView.addSubview(favLabel)
-        favLabel.snp.makeConstraints { make in
+        contentView.addSubview(pointsLabel)
+        pointsLabel.snp.makeConstraints { make in
             make.height.equalTo(dimenssion)
-            make.width.equalTo(50)
+            make.width.equalTo(100)
             make.centerY.equalTo(circularView)
             make.trailing.equalToSuperview().inset(20)
         }

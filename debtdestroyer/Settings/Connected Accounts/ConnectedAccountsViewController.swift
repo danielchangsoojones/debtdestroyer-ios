@@ -32,7 +32,13 @@ class ConnectedAccountsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = true
         setNavBarBtns()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     private func setNavBarBtns() {
@@ -183,6 +189,7 @@ extension ConnectedAccountsViewController: WKNavigationDelegate {
                 if hasMethodElement && hasSuccess && hasAuth {
                     print("we got the success callback that they succesfully authorized")
                     decisionHandler(.cancel)
+                    self.navigationController?.popViewController(animated: true)
                     return
                 }
             }

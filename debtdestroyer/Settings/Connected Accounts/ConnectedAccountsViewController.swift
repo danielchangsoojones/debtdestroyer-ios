@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import WebKit
 
 class ConnectedAccountsViewController: UIViewController {
     private var messageHelper: MessageHelper?
     private var tableView: UITableView!
     private var debtAccountsData: [DebtAccountsParse] = []
+    private let webview = WKWebView()
+    private let dataStore = ConnectAccountsDataStore()
 
     init(debtAccounts: [DebtAccountsParse]) {
         self.debtAccountsData = debtAccounts
@@ -133,11 +136,57 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
         return footer
     }
     
-    @objc private func connectLoanAccountBtnPressed() {
-        print("connectLoanAccountBtnPressed")
-    }
-    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         return 90
+    }
+}
+
+extension ConnectedAccountsViewController: WKNavigationDelegate {
+    @objc private func connectLoanAccountBtnPressed() {
+        dataStore.createMethodEntityAndAuthToken { method_entity_id, method_auth_token, error in
+            //TODO: stop spinner
+            if let method_entity_id = method_entity_id, let method_auth_token = method_auth_token {
+                self.showMethodWebview(with: method_auth_token)
+                User.current()?.method_entity_id = method_entity_id
+            } else {
+                let errorMsg = error?.localizedDescription ?? "unknown error with the createMethodEntityAndAuthToken"
+                BannerAlert.show(title: "Error", subtitle: errorMsg, type: .error)
+                
+            }
+        }
+    }
+    
+    private func showMethodWebview(with elementToken: String) {
+        webview.navigationDelegate = self
+        self.view.addSubview(webview)
+        webview.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        let link = "https://elements.dev.methodfi.com" + "?token=" + elementToken
+        if let url = URL(string: link) {
+            let request = URLRequest(url: url)
+            let _ = webview.load(request)
+        } else {
+            BannerAlert.show(title: "Error", subtitle: "error creating a url for the method webview", type: .error)
+        }
+    }
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+        if(navigationAction.navigationType == .other) {
+            if let redirectedUrl = navigationAction.request.url  {
+                //we are trying to see if we got the redirect url from Method's auth
+                //https://docs.methodfi.com/guides/quick-start/retrieve-an-entitys-debts#2-create-an-auth-element-token
+                let hasSuccess = redirectedUrl.absoluteString.contains("op=success")
+                let hasAuth = redirectedUrl.absoluteString.contains("element_type=auth")
+                let hasMethodElement = redirectedUrl.absoluteString.contains("methodelements:")
+                if hasMethodElement && hasSuccess && hasAuth {
+                    print("we got the success callback that they succesfully authorized")
+                    decisionHandler(.cancel)
+                    return
+                }
+            }
+        }
+        decisionHandler(.allow)
     }
 }

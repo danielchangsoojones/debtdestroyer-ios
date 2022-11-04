@@ -15,8 +15,8 @@ class ConnectAccountsDataStore {
             if let result = result {
                 let json = JSON(result)
                 let entity_id = json["entity_id"].string
-                let method_auth_element_token = json["method_auth_element_token"].string
-                completion(entity_id, method_auth_element_token, nil)
+                let auth_element_url = json["auth_element_url"].string
+                completion(entity_id, auth_element_url, nil)
             } else {
                 completion(nil, nil, error)
             }

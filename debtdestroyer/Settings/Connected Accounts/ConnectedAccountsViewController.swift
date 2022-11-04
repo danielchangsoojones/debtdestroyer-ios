@@ -149,10 +149,10 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
 
 extension ConnectedAccountsViewController: WKNavigationDelegate {
     @objc private func connectLoanAccountBtnPressed() {
-        dataStore.createMethodEntityAndAuthToken { method_entity_id, method_auth_token, error in
+        dataStore.createMethodEntityAndAuthToken { method_entity_id, auth_element_url, error in
             //TODO: stop spinner
-            if let method_entity_id = method_entity_id, let method_auth_token = method_auth_token {
-                self.showMethodWebview(with: method_auth_token)
+            if let method_entity_id = method_entity_id, let auth_element_url = auth_element_url {
+                self.showMethodWebview(with: auth_element_url)
                 User.current()?.method_entity_id = method_entity_id
             } else {
                 let errorMsg = error?.localizedDescription ?? "unknown error with the createMethodEntityAndAuthToken"
@@ -162,15 +162,14 @@ extension ConnectedAccountsViewController: WKNavigationDelegate {
         }
     }
     
-    private func showMethodWebview(with elementToken: String) {
+    private func showMethodWebview(with auth_element_url: String) {
         webview.navigationDelegate = self
         self.view.addSubview(webview)
         webview.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        let link = "https://elements.dev.methodfi.com" + "?token=" + elementToken
-        if let url = URL(string: link) {
+
+        if let url = URL(string: auth_element_url) {
             let request = URLRequest(url: url)
             let _ = webview.load(request)
         } else {

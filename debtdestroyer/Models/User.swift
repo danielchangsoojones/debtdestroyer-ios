@@ -13,6 +13,7 @@ class User: PFUser {
     @NSManaged var deviceType: String?
     @NSManaged var firstName: String
     @NSManaged var lastName: String
+    @NSManaged var method_entity_id: String
     
     static var shouldShowEarnings = true
     var quizPointCounter = 0

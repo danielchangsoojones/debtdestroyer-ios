@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MASegmentedControl
 
 class ChampionsView: UIView {
    
@@ -20,12 +19,12 @@ class ChampionsView: UIView {
     let timeLable = UILabel()
     let bottomViewContainer = UIView()
     let bottomView = UIView()
-    let toggleSwitch = MASegmentedControl()
+    var toggleSegment = HBSegmentedControl()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
-        settoggleSwitch()
+        setSegmentedSwitch()
         setContainerView()
         setTableView()
         setBottomViewContainer()
@@ -36,21 +35,31 @@ class ChampionsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func settoggleSwitch() {
-        //https://github.com/alokc83/MASegmentedControl
-        toggleSwitch.frame = .init(x: 30, y: 80, width: self.frame.width - 60, height: 40)
-        toggleSwitch.itemsWithText = true
-        toggleSwitch.fillEqually = true
-        toggleSwitch.roundedControl = true
-
-        toggleSwitch.setSegmentedWith(items: ["Leaderboard", "Past Winners"])
-        toggleSwitch.padding = 2
-        toggleSwitch.textColor = .black
-        toggleSwitch.selectedTextColor = .black
-        toggleSwitch.thumbViewColor = .white
-        toggleSwitch.segmentedBackGroundColor = .systemGray5
-        toggleSwitch.titlesFont = UIFont.MontserratSemiBold(size: 14)
-        addSubview(toggleSwitch)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        toggleSegment.layer.cornerRadius = 20
+        toggleSegment.layer.masksToBounds = true
+        toggleSegment.clipsToBounds = true
+    }
+    
+    private func setSegmentedSwitch() {
+        let items = ["Leaderboard", "Past Winners"]
+        toggleSegment.items = items
+        toggleSegment.font = UIFont.MontserratSemiBold(size: 14)
+        toggleSegment.borderColor = UIColor(white: 1.0, alpha: 0.3)
+        toggleSegment.selectedIndex = 0
+        toggleSegment.padding = 1
+        toggleSegment.backgroundColor = .systemGray4
+        toggleSegment.selectedLabelColor = .black
+        toggleSegment.unselectedLabelColor = .black
+        
+        addSubview(toggleSegment)
+        toggleSegment.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(40)
+            make.top.equalToSuperview().offset(100)
+        }
+        
     }
 
     private func setContainerView() {
@@ -61,7 +70,7 @@ class ChampionsView: UIView {
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(toggleSwitch.snp.bottom).offset(5)
+            make.top.equalTo(toggleSegment.snp.bottom).offset(15)
             make.bottom.equalToSuperview().offset(-95)
         }
     }

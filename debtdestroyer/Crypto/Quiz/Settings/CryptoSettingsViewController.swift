@@ -39,9 +39,9 @@ class CryptoSettingsViewController: UIViewController {
         super.viewDidLoad()
         loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Enter Winner Information", "Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
+        dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
 
-        imgNameArr = ["legal", "contactUs", "feedback", "logout", "deleteAcc"]
+        imgNameArr = ["legal", "accounts", "contactUs", "feedback", "logout", "deleteAcc"]
         
 //        dataArr = ["Enter Winner Information", "Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
 //
@@ -106,11 +106,15 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             // MARK: Enter Winner Information
             let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
             UIApplication.shared.open(url)
-        } else if indexPath.row == 1 || indexPath.row == 2 {
+        } else if indexPath.row == 1 {
+            // MARK: Connected Accounts
+            let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
+            self.navigationController?.pushViewController(vc.self, animated: true)
+        } else if indexPath.row == 2 || indexPath.row == 3 {
             // MARK: Contact Us
             // MARK: Leave Feedback
             messageHelper?.text("3176905323", body: "")
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             // MARK: Logout
             User.logOutInBackground { error in
                 if let error = error {
@@ -123,7 +127,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.present(navController, animated: true)
                 }
             }
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 5 {
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)

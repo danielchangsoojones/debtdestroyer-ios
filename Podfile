@@ -14,5 +14,4 @@ target 'debtdestroyer' do
   pod 'SCLAlertView'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftConfettiView'
-  
 end

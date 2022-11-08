@@ -125,6 +125,8 @@
 		0AE126A9291A697D00E11003 /* ConnectDisclosureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */; };
 		0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */; };
 		0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */; };
+		0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */; };
+		0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */; };
 		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
@@ -261,6 +263,8 @@
 		0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureViewController.swift; sourceTree = "<group>"; };
 		0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureView.swift; sourceTree = "<group>"; };
 		0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
+		0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoView.swift; sourceTree = "<group>"; };
+		0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoViewController.swift; sourceTree = "<group>"; };
 		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -522,6 +526,8 @@
 			isa = PBXGroup;
 			children = (
 				0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */,
+				0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */,
+				0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -976,6 +982,7 @@
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
+				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
@@ -992,6 +999,7 @@
 				0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */,
 				0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
+				0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,

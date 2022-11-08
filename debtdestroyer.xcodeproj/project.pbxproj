@@ -45,7 +45,6 @@
 		0A47F89428F00E0600B11D5F /* NotificationPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A47F89328F00E0600B11D5F /* NotificationPermissionView.swift */; };
 		0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F809F28E6C6C6001B573E /* NameViewController.swift */; };
 		0A50659128C346D200207759 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659028C346D200207759 /* SubscriptionView.swift */; };
-		0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659228C7072F00207759 /* ScrollableViewController.swift */; };
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
@@ -123,6 +122,9 @@
 		0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2E28ACD422006301DE /* DeleteAccountViewController.swift */; };
 		0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D3028ACDDE7006301DE /* DeleteAccountView.swift */; };
 		0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */; };
+		0AE126A9291A697D00E11003 /* ConnectDisclosureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */; };
+		0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */; };
+		0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */; };
 		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
@@ -177,7 +179,6 @@
 		0A47F89328F00E0600B11D5F /* NotificationPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionView.swift; sourceTree = "<group>"; };
 		0A4F809F28E6C6C6001B573E /* NameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
 		0A50659028C346D200207759 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
-		0A50659228C7072F00207759 /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +258,9 @@
 		0AC23D2E28ACD422006301DE /* DeleteAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewController.swift; sourceTree = "<group>"; };
 		0AC23D3028ACDDE7006301DE /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataStore.swift; sourceTree = "<group>"; };
+		0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureViewController.swift; sourceTree = "<group>"; };
+		0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureView.swift; sourceTree = "<group>"; };
+		0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 				0A5FD4F628F8475100B995C8 /* MontserratFont */,
 				0A5FD51D28F848DD00B995C8 /* FontExtension.swift */,
 				0AB3960F2918E8EB00A5AF44 /* HBSegmentedControl.swift */,
+				0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */,
 				0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */,
 				0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */,
 				0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */,
@@ -430,7 +435,8 @@
 				0AAAB98E28B4ABD700D41A7B /* Data Store */,
 				0A25F65528A3680500D5D183 /* View */,
 				0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */,
-				0A50659228C7072F00207759 /* ScrollableViewController.swift */,
+				0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */,
+				0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */,
 			);
 			path = Prize;
 			sourceTree = "<group>";
@@ -964,14 +970,17 @@
 				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,
+				0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
+				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
+				0AE126A9291A697D00E11003 /* ConnectDisclosureViewController.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
 				0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */,
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
@@ -1006,7 +1015,6 @@
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
-				0A50659328C7072F00207759 /* ScrollableViewController.swift in Sources */,
 				0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,

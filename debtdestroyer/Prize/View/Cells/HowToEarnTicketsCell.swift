@@ -10,7 +10,7 @@ import Reusable
 
 class HowToEarnTicketsCell: UITableViewCell, Reusable {
     struct TicketsInfo {
-        let description: String//NSMutableAttributedString
+        let description: NSMutableAttributedString
         let ticketCount: Int
     }
     
@@ -64,25 +64,17 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.bottom.equalToSuperview().offset(-10)
         }
-        
-        let studentLoanTicket = TicketsInfo(description: "For every $1 paid towards your student loans. Just pay your student loans like normal, and you earn tickets!",
-                                            ticketCount: 1)
-        let dailyTriviaTicket = TicketsInfo(description: "For every question you get correct in our daily trivia. Play now.",
-                                            ticketCount: 1)
-        
-//        let studentLoanTicket = TicketsInfo(description: NSMutableAttributedString(string: "For every $1 paid towards your student loans. Just pay your student loans like normal, and you earn tickets!"), ticketCount: 1)
-//
-//
-//
-//        let attributedString = NSMutableAttributedString(string: "For every question you get correct in our daily trivia. Play now ➔")
-//        let text = "For every question you get correct in our daily trivia. Play now ➔"
-//        let str = NSString(string: text)
-//        let theRangeTerm = str.range(of: "Play now ➔")
-//
-//        attributedString.addAttribute(.underlineStyle, value: 1, range: theRangeTerm)
-//        attributedString.addAttribute(.foregroundColor, value: UIColor.gradPink, range: theRangeTerm)
-//        let dailyTriviaTicket = TicketsInfo(description: attributedString, ticketCount: 1)
-        
+
+        let studentLoanTicket = TicketsInfo(description: NSMutableAttributedString(string: "For every $1 paid towards your student loans. Just pay your student loans like normal, and you earn tickets!"), ticketCount: 1)
+
+        let attributedString = NSMutableAttributedString(string: "For every question you get correct in our daily trivia. Play now ➔")
+        let text = "For every question you get correct in our daily trivia. Play now ➔"
+        let str = NSString(string: text)
+        let theRangeTerm = str.range(of: "Play now ➔")
+
+        attributedString.addAttribute(.underlineStyle, value: 1, range: theRangeTerm)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.gradPink, range: theRangeTerm)
+        let dailyTriviaTicket = TicketsInfo(description: attributedString, ticketCount: 1)
 
         let studentCell = createTicketsCountCell(ticketsInfo: studentLoanTicket)
         ticketsStackView.addArrangedSubview(studentCell)
@@ -90,6 +82,8 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         lineView()
         
         let dailyTriviaCell = createTicketsCountCell(ticketsInfo: dailyTriviaTicket)
+        dailyTriviaCell.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
+
         ticketsStackView.addArrangedSubview(dailyTriviaCell)
         
     }
@@ -121,11 +115,9 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         
         let descriptionLabel = UILabel()
         descriptionLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        descriptionLabel.text = ticketsInfo.description
-   //     descriptionLabel.attributedText = ticketsInfo.description
+        descriptionLabel.attributedText = ticketsInfo.description
         descriptionLabel.font = UIFont.MontserratRegular(size: 14)
         descriptionLabel.numberOfLines = 0
-//        descriptionLabel.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
         elementView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(ticketCountsView.snp.trailing).offset(10)
@@ -136,19 +128,9 @@ class HowToEarnTicketsCell: UITableViewCell, Reusable {
         }
         return elementView
     }
-//
-//    @objc func tapLabel(gesture: UITapGestureRecognizer) {
-//        let text = "For every question you get correct in our daily trivia. Play now ➔"
-//        let str = NSString(string: text)
-//        let theRangeTerm = str.range(of: "Play now ➔")
-//
-//                if gesture.didTapAttributedTextInLabel(label: descriptionLabel, inRange: theRangeTerm) {
-////                    self.tabBarController?.selectedIndex = 1
-////                    self.navigationController?.popToRootViewController(animated: true)
-//
-//                }else {
-//                    print("Tapped none")
-//                }
-//    }
 
+    @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playNowClicked"), object: nil)
+    }
 }
+

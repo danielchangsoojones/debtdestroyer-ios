@@ -211,7 +211,7 @@ class PrizeViewController: UIViewController {
     }
     
     @objc private func connectAccBtnClicked() {
-        let vc = ConnectDisclosureViewController()
+        let vc = ConnectDisclosureViewController()//ConfirmInfoViewController()
         self.navigationController?.pushViewController(vc.self, animated: true)
         
     }

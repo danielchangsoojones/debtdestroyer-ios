@@ -76,8 +76,8 @@ class SpinningWithGradButton: UIButton {
     }
     
     func setGradient() {
-        color1 = hexStringToUIColor(hex: "FF2474")
-        color2 = hexStringToUIColor(hex: "FF7910")
+        color1 = hexStringToUIColor(hex: "FF7910")
+        color2 = hexStringToUIColor(hex: "FF2474")
         //gradient
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.colors = [color1.cgColor, color2.cgColor]

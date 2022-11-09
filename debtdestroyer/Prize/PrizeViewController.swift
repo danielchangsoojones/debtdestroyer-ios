@@ -18,10 +18,7 @@ class PrizeViewController: UIViewController {
     private var pastWinnersData: [WinnerParse] = []
     private var hasNoAccountsConnected = false
     private var debtAccountsData: [DebtAccountsParse] = []
-
-    override func loadView() {
-        super.loadView()
-    }
+    private var ticketCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +26,7 @@ class PrizeViewController: UIViewController {
         setTableView()
         setEarningTicketsBtn()
         ForceUpdate.checkIfForceUpdate()
+        checkIfAuthed()
         
         NotificationCenter.default.addObserver(self, selector: #selector(roundUpsClicked), name: NSNotification.Name(rawValue: "RoundUps"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(oneTimePaymentClicked), name: NSNotification.Name(rawValue: "OneTimePayment"), object: nil)
@@ -39,6 +37,7 @@ class PrizeViewController: UIViewController {
         super.viewWillAppear(animated)
         loadSavingsInfo()
         loadSweepstakesInfo()
+        loadTicketCount()
 //        loadPastWinners()
     }
     
@@ -85,6 +84,13 @@ class PrizeViewController: UIViewController {
     private func checkIfAuthed() {
         dataStore.checkIfMethodAuthed { isAuthed in
             self.hasNoAccountsConnected = !isAuthed
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func loadTicketCount() {
+        dataStore.getTickets { ticketAmount in
+            self.ticketCount = ticketAmount
             self.tableView.reloadData()
         }
     }
@@ -200,7 +206,6 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
             cell.prizeDescriptionLabel.text = UserDefaults.standard.string(forKey: "deadlineTxt")
             cell.prizeAmountLabel.text = UserDefaults.standard.string(forKey: "prizeAmountTxt")
-            let ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? "0"
             cell.ticketsAmountLabel.text = "\(ticketCount) Tickets"
             return cell
         }

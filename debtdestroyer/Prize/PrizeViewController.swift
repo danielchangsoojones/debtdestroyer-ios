@@ -16,7 +16,7 @@ class PrizeViewController: UIViewController {
     private var messageHelper: MessageHelper?
     var earningTicketsBtn : UIButton!
     private var pastWinnersData: [WinnerParse] = []
-    private var hasNoAccountsConnected = true
+    private var hasNoAccountsConnected = false
     private var debtAccountsData: [DebtAccountsParse] = []
 
     override func loadView() {
@@ -80,6 +80,13 @@ class PrizeViewController: UIViewController {
     
     @objc func oneTimePaymentClicked() {
         
+    }
+    
+    private func checkIfAuthed() {
+        dataStore.checkIfMethodAuthed { isAuthed in
+            self.hasNoAccountsConnected = !isAuthed
+            self.tableView.reloadData()
+        }
     }
     
     private func loadPastWinners() {

@@ -71,5 +71,17 @@ class PrizeDataStore {
         
         UserDefaults.standard.synchronize()
     }
+    
+    func checkIfMethodAuthed(completion: @escaping (Bool) -> Void) {
+        PFCloud.callFunction(inBackground: "checkIfMethodAuthed", withParameters: nil) { (result, error) in
+            if let isAuthed = result as? Bool {
+               completion(isAuthed)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "checkIfMethodAuthed")
+            }
+        }
+    }
 
 }

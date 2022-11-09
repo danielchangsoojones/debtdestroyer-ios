@@ -65,8 +65,15 @@ class CryptoTabBarViewController: UITabBarController {
     private func checkHideReview() {
         dataStore.shouldShowEarnings { shouldMakeEverythingVisible in
             if !shouldMakeEverythingVisible {
-                self.tabBarController?.tabBar.items?.remove(at: 0)
+                //hiding from apple review the home page for now.
+                self.removeTab(at: 0)
             }
+        }
+    }
+    
+    private func removeTab(at index: Int) {
+        if self.viewControllers?.count ?? 0 >= index {
+            self.viewControllers?.remove(at: index)
         }
     }
 }

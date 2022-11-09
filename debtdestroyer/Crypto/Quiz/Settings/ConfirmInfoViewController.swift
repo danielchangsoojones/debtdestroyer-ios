@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class ConfirmInfoViewController: UIViewController, OnboardingDataStoreDelegate {
   
@@ -134,23 +135,74 @@ class ConfirmInfoViewController: UIViewController, OnboardingDataStoreDelegate {
 
     @objc private func editButtonClicked(sender : UIButton) {
         if sender == firstNameEditBtn {
-            firstNameTxt.isUserInteractionEnabled = true
-            lastNameTxt.isUserInteractionEnabled = false
-            phNumberTxt.isUserInteractionEnabled = false
-            firstNameTxt.becomeFirstResponder()
+//            firstNameTxt.isUserInteractionEnabled = true
+//            lastNameTxt.isUserInteractionEnabled = false
+//            phNumberTxt.isUserInteractionEnabled = false
+//            firstNameTxt.becomeFirstResponder()
+            
+            let appearance = SCLAlertView.SCLAppearance(
+                kTextFieldHeight: 60,
+                showCloseButton: false
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            let txt = alert.addTextField("Enter first name")
+            _ = alert.addButton("Update") {
+                self.firstNameTxt.text = txt.text
+            }
+            
+            _ = alert.addButton("Cancel") {
+
+            }
+            
+            let kInfoTitle = "Info"
+            _ = alert.showEdit(kInfoTitle, subTitle:"")
             
         } else if sender == lastNameEditBtn {
-            firstNameTxt.isUserInteractionEnabled = false
-            lastNameTxt.isUserInteractionEnabled = true
-            phNumberTxt.isUserInteractionEnabled = false
-            lastNameTxt.becomeFirstResponder()
-
+//            firstNameTxt.isUserInteractionEnabled = false
+//            lastNameTxt.isUserInteractionEnabled = true
+//            phNumberTxt.isUserInteractionEnabled = false
+//            lastNameTxt.becomeFirstResponder()
+            
+            let appearance = SCLAlertView.SCLAppearance(
+                kTextFieldHeight: 60,
+                showCloseButton: false
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            let txt = alert.addTextField("Enter last name")
+            _ = alert.addButton("Update") {
+                self.lastNameTxt.text = txt.text
+            }
+            
+            _ = alert.addButton("Cancel") {
+                
+            }
+            
+            let kInfoTitle = "Info"
+            _ = alert.showEdit(kInfoTitle, subTitle:"")
+            
         } else {
-            firstNameTxt.isUserInteractionEnabled = false
-            lastNameTxt.isUserInteractionEnabled = false
-            phNumberTxt.isUserInteractionEnabled = true
-            phNumberTxt.becomeFirstResponder()
+//            firstNameTxt.isUserInteractionEnabled = false
+//            lastNameTxt.isUserInteractionEnabled = false
+//            phNumberTxt.isUserInteractionEnabled = true
+//            phNumberTxt.becomeFirstResponder()
 
+            let appearance = SCLAlertView.SCLAppearance(
+                kTextFieldHeight: 60,
+                showCloseButton: false
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            let txt = alert.addTextField("Enter phone number")
+            _ = alert.addButton("Update") {
+                self.phNumberTxt.text = txt.text
+            }
+            
+            _ = alert.addButton("Cancel") {
+                
+            }
+            
+            let kInfoTitle = "Info"
+            _ = alert.showEdit(kInfoTitle, subTitle:"")
+            
         }
         
     }

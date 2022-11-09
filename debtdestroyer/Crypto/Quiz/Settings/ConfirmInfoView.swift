@@ -9,10 +9,10 @@ import UIKit
 
 class ConfirmInfoView: UIView {
 
-    let titleLbl = UILabel()
-    let firstNameLbl = UILabel()
-    let lastNameLbl = UILabel()
-    let phNumberLbl = UILabel()
+    private let titleLbl = UILabel()
+    private let firstNameLbl = UILabel()
+    private let lastNameLbl = UILabel()
+    private let phNumberLbl = UILabel()
     let firstNameTxt = UITextField()
     let lastNameTxt = UITextField()
     let phNumberTxt = UITextField()
@@ -25,6 +25,15 @@ class ConfirmInfoView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         setTitleLabel()
+        setFirstNameLabel()
+        setFirstNameEditBtn()
+        setFirstNameTextField()
+        setLastNameLabel()
+        setLastNameEditBtn()
+        setLastNameTextField()
+        setPhoneNumberLabel()
+        setPhoneNumberEditBtn()
+        setPhoneNumberTextField()
         setNextBtn()
         
     }
@@ -54,7 +63,7 @@ class ConfirmInfoView: UIView {
         firstNameLbl.font = UIFont.MontserratSemiBold(size: 16)
         addSubview(firstNameLbl)
         firstNameLbl.snp.makeConstraints { make in
-            make.top.equalTo(titleLbl.snp.bottom).offset(20)
+            make.top.equalTo(titleLbl.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(20)
             
         }
@@ -68,20 +77,18 @@ class ConfirmInfoView: UIView {
             make.trailing.equalToSuperview().inset(20)
             make.height.width.equalTo(20)
         }
-
     }
         
     private func setFirstNameTextField() {
-        firstNameTxt.text = "rashmi"
         firstNameTxt.textAlignment = .right
         firstNameTxt.textColor = .black
-        firstNameTxt.font = UIFont.MontserratSemiBold(size: 16)
+        firstNameTxt.font = UIFont.MontserratRegular(size: 16)
+        firstNameTxt.isUserInteractionEnabled = false
         addSubview(firstNameTxt)
         firstNameTxt.snp.makeConstraints { make in
-            make.top.equalTo(titleLbl.snp.bottom).offset(20)
-            make.trailing.equalTo(firstNameEditBtn.snp.leading).offset(5)
+            make.centerY.equalTo(firstNameLbl)
+            make.trailing.equalTo(firstNameEditBtn.snp.leading).offset(-5)
             make.leading.equalTo(firstNameLbl.snp.trailing).offset(5)
-            
         }
     }
     
@@ -93,9 +100,31 @@ class ConfirmInfoView: UIView {
         lastNameLbl.font = UIFont.MontserratSemiBold(size: 16)
         addSubview(lastNameLbl)
         lastNameLbl.snp.makeConstraints { make in
-            make.top.equalTo(firstNameLbl.snp.bottom).offset(10)
+            make.top.equalTo(firstNameLbl.snp.bottom).offset(20)
             make.leading.equalToSuperview().inset(20)
-            
+        }
+    }
+    
+    private func setLastNameEditBtn() {
+        lastNameEditBtn.setImage(UIImage.init(named: "pencil"), for: .normal)
+        addSubview(lastNameEditBtn)
+        lastNameEditBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(lastNameLbl)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.width.equalTo(20)
+        }
+    }
+    
+    private func setLastNameTextField() {
+        lastNameTxt.textAlignment = .right
+        lastNameTxt.textColor = .black
+        lastNameTxt.font = UIFont.MontserratRegular(size: 16)
+        lastNameTxt.isUserInteractionEnabled = false
+        addSubview(lastNameTxt)
+        lastNameTxt.snp.makeConstraints { make in
+            make.centerY.equalTo(lastNameLbl)
+            make.trailing.equalTo(lastNameEditBtn.snp.leading).offset(-5)
+            make.leading.equalTo(lastNameLbl.snp.trailing).offset(5)
         }
     }
     
@@ -107,11 +136,35 @@ class ConfirmInfoView: UIView {
         phNumberLbl.font = UIFont.MontserratSemiBold(size: 16)
         addSubview(phNumberLbl)
         phNumberLbl.snp.makeConstraints { make in
-            make.top.equalTo(lastNameLbl.snp.bottom).offset(10)
+            make.top.equalTo(lastNameLbl.snp.bottom).offset(20)
             make.leading.equalToSuperview().inset(20)
             
         }
     }
+    
+    private func setPhoneNumberEditBtn() {
+        phNumberEditBtn.setImage(UIImage.init(named: "pencil"), for: .normal)
+        addSubview(phNumberEditBtn)
+        phNumberEditBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(phNumberLbl)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.width.equalTo(20)
+        }
+    }
+    
+    private func setPhoneNumberTextField() {
+        phNumberTxt.textAlignment = .right
+        phNumberTxt.textColor = .black
+        phNumberTxt.font = UIFont.MontserratRegular(size: 16)
+        phNumberTxt.isUserInteractionEnabled = false
+        addSubview(phNumberTxt)
+        phNumberTxt.snp.makeConstraints { make in
+            make.centerY.equalTo(phNumberLbl)
+            make.trailing.equalTo(phNumberEditBtn.snp.leading).offset(-5)
+            make.leading.equalTo(phNumberLbl.snp.trailing).offset(5)
+        }
+    }
+
 
     private func setNextBtn() {
         nextBtn.backgroundColor = .clear

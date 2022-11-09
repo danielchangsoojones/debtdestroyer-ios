@@ -11,6 +11,23 @@ import Parse
 
 class PrizeViewController: UIViewController {
     
+    private enum AccountsType {
+        case AccountsConnected
+        case NoAccountsConnected
+    }
+    
+    private enum Section {
+        case WeekPrize
+        case ConnectAccount
+        case HowToEarnTicket
+    }
+    
+    private struct SectionData {
+        var type: AccountsType
+        var items: [Section]
+    }
+ 
+    private var sections = [SectionData]()
     private var tableView: UITableView!
     private let dataStore = PrizeDataStore()
     private var messageHelper: MessageHelper?
@@ -23,8 +40,11 @@ class PrizeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        NotificationCenter.default.addObserver(self, selector: #selector(playNowClicked), name: NSNotification.Name(rawValue: "playNowClicked"), object: nil)
+
+        sections = [ SectionData(type: .AccountsConnected, items: [.WeekPrize, .ConnectAccount, .HowToEarnTicket]), SectionData(type: .NoAccountsConnected, items: [.WeekPrize, .HowToEarnTicket])]
         setTableView()
-        setEarningTicketsBtn()
+//        setEarningTicketsBtn()
         ForceUpdate.checkIfForceUpdate()
         checkIfAuthed()
         
@@ -38,7 +58,6 @@ class PrizeViewController: UIViewController {
         loadSavingsInfo()
         loadSweepstakesInfo()
         loadTicketCount()
-//        loadPastWinners()
     }
     
     private func setNavBarBtns() {
@@ -65,7 +84,6 @@ class PrizeViewController: UIViewController {
     @objc private func helpPressed() {
         messageHelper?.text(MessageHelper.customerServiceNum)
     }
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -73,8 +91,7 @@ class PrizeViewController: UIViewController {
     }
     
     @objc func roundUpsClicked() {
-        let vc = ScrollableViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+       
     }
     
     @objc func oneTimePaymentClicked() {
@@ -101,7 +118,7 @@ class PrizeViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-
+    
     private func loadSavingsInfo() {
         dataStore.savingsInfo()
         tableView.reloadData()
@@ -111,7 +128,7 @@ class PrizeViewController: UIViewController {
         dataStore.sweepstakesInfo()
         tableView.reloadData()
     }
-
+    
     private func setTableView() {
         tableView = UITableView()
         tableView.delegate = self
@@ -119,14 +136,19 @@ class PrizeViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        tableView.register(cellType: WeekPrizeCell.self)
-        tableView.register(cellType: ConnectAccountsCell.self)
-        tableView.register(cellType: HowToEarnTicketsCell.self)
+        //        tableView.register(cellType: WeekPrizeCell.self)
+        //        tableView.register(cellType: ConnectAccountsCell.self)
+        //        tableView.register(cellType: HowToEarnTicketsCell.self)
+        tableView.register(WeekPrizeCell.self, forCellReuseIdentifier: "WeekPrizeCell")
+        tableView.register(ConnectAccountsCell.self, forCellReuseIdentifier: "ConnectAccountsCell")
+        tableView.register(HowToEarnTicketsCell.self, forCellReuseIdentifier: "HowToEarnTicketsCell")
         tableView.reloadData()
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
-            make.topMargin.leftMargin.rightMargin.equalToSuperview()
-            make.bottomMargin.equalToSuperview().offset(-120)
+            make.edges.equalToSuperview()
+//            uncomment if setEarningTicketsBtn added
+//            make.topMargin.leftMargin.rightMargin.equalToSuperview()
+//            make.bottomMargin.equalToSuperview().offset(-120)
         }
     }
     
@@ -146,7 +168,7 @@ class PrizeViewController: UIViewController {
         let color1 = hexStringToUIColor(hex: "FF2474")
         let color2 = hexStringToUIColor(hex: "FF7910")
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
-
+        
         gradientLayer.frame = CGRect.init(
             x: earningTicketsBtn.frame.minX - 30,
             y: earningTicketsBtn.frame.minY - 30,
@@ -168,11 +190,16 @@ class PrizeViewController: UIViewController {
         
         gradientLayer.mask = shadowLayer
         view.layer.insertSublayer(gradientLayer, below: earningTicketsBtn.layer)
-
+        
         let dimension: CGFloat = 70
         earningTicketsBtn.layer.cornerRadius = dimension / 2
         earningTicketsBtn.backgroundColor = .white
         view.addSubview(earningTicketsBtn)
+    }
+    
+    @objc func playNowClicked() {
+        let startQuizVC = StartQuizViewController(showSkipButton: false, quizDatas: nil)
+        self.navigationController?.pushViewController(startQuizVC, animated: true)
     }
     
     @objc private func earningTicketsBtnClicked() {
@@ -184,8 +211,10 @@ class PrizeViewController: UIViewController {
     }
     
     @objc private func connectAccBtnClicked() {
-        let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
-        self.navigationController?.pushViewController(vc.self, animated: true)    }
+        let vc = ConnectDisclosureViewController()
+        self.navigationController?.pushViewController(vc.self, animated: true)
+        
+    }
 }
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {

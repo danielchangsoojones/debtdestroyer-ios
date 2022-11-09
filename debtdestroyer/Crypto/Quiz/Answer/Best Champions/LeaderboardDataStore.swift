@@ -47,6 +47,20 @@ class LeaderboardDataStore {
             }
         }
     }
+    
+    func loadPastWinners(completion: @escaping ([WinnerParse]) -> Void) {
+        PFCloud.callFunction(inBackground: "getPastWinners", withParameters: nil) { (result, error) in
+            if let winners = result  as? [WinnerParse]  {
+                completion(winners)
+            }
+            else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getPastWinners")
+            }
+        }
+    }
+
 
     func didShareToInstagramStory(quizTopicID: String, completion: @escaping () -> Void) {
         let parameters: [String : Any] = ["quizTopicID" : quizTopicID]

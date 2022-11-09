@@ -9,8 +9,8 @@ import UIKit
 
 class ChampionsView: UIView {
    
-    let descriptionLabel = UILabel()
-    let titleLabel = UILabel()
+//    let descriptionLabel = UILabel()
+//    let titleLabel = UILabel()
     let containerView = UIView()
     let leaderboardTableView = UITableView()
     let numberLabel = UILabel()
@@ -19,12 +19,12 @@ class ChampionsView: UIView {
     let timeLable = UILabel()
     let bottomViewContainer = UIView()
     let bottomView = UIView()
+    var toggleSegment = HBSegmentedControl()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setGradientBackground()
-        setTitleLabel()
-        setDescriptionLabel()
+        setSegmentedSwitch()
         setContainerView()
         setTableView()
         setBottomViewContainer()
@@ -35,33 +35,31 @@ class ChampionsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setTitleLabel() {
-        titleLabel.text = "Current Leading Score"
-        titleLabel.font = UIFont.MontserratBold(size: 30)
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
-        titleLabel.backgroundColor = .clear
-        titleLabel.numberOfLines = 0
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview().offset(15)
-            make.leading.equalToSuperview().inset(20)
-            make.trailing.equalToSuperview().inset(20)
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        toggleSegment.layer.cornerRadius = 20
+        toggleSegment.layer.masksToBounds = true
+        toggleSegment.clipsToBounds = true
     }
     
-    private func setDescriptionLabel() {
-        descriptionLabel.font = UIFont.MontserratRegular(size: 14)
-        descriptionLabel.textColor = .white
-        descriptionLabel.textAlignment = .center
-        descriptionLabel.backgroundColor = .clear
-        descriptionLabel.numberOfLines = 0
-        addSubview(descriptionLabel)
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.leading.equalToSuperview().inset(20)
-            make.trailing.equalToSuperview().inset(20)
+    private func setSegmentedSwitch() {
+        let items = ["Leaderboard", "Past Winners"]
+        toggleSegment.items = items
+        toggleSegment.font = UIFont.MontserratSemiBold(size: 14)
+        toggleSegment.borderColor = UIColor(white: 1.0, alpha: 0.3)
+        toggleSegment.selectedIndex = 0
+        toggleSegment.padding = 1
+        toggleSegment.backgroundColor = .systemGray4
+        toggleSegment.selectedLabelColor = .black
+        toggleSegment.unselectedLabelColor = .black
+        
+        addSubview(toggleSegment)
+        toggleSegment.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(40)
+            make.top.equalToSuperview().offset(100)
         }
+        
     }
 
     private func setContainerView() {
@@ -72,7 +70,7 @@ class ChampionsView: UIView {
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
+            make.top.equalTo(toggleSegment.snp.bottom).offset(15)
             make.bottom.equalToSuperview().offset(-95)
         }
     }

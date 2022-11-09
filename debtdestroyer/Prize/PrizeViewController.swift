@@ -46,8 +46,6 @@ class PrizeViewController: UIViewController {
         setTableView()
 //        setEarningTicketsBtn()
         ForceUpdate.checkIfForceUpdate()
-        checkIfAuthed()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(roundUpsClicked), name: NSNotification.Name(rawValue: "RoundUps"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(oneTimePaymentClicked), name: NSNotification.Name(rawValue: "OneTimePayment"), object: nil)
         setNavBarBtns()
@@ -55,6 +53,7 @@ class PrizeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkIfAuthed()
         loadSavingsInfo()
         loadSweepstakesInfo()
         loadTicketCount()

@@ -78,7 +78,6 @@ extension ConnectDisclosureViewController: WKNavigationDelegate {
             } else {
                 let errorMsg = error?.localizedDescription ?? "unknown error with the createMethodEntityAndAuthToken"
                 BannerAlert.show(title: "Error", subtitle: errorMsg, type: .error)
-                
             }
         }
     }

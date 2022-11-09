@@ -43,7 +43,7 @@ class LeaderboardDataStore {
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
-                BannerAlert.showUnknownError(functionName: "getQuizData")
+                BannerAlert.showUnknownError(functionName: "getLeaderboard")
             }
         }
     }

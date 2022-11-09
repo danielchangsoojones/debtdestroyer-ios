@@ -30,7 +30,6 @@ class PrizeDataStore {
    
     private func saveSavingsToUserDefaults(savings : JSON) {
         UserDefaults.standard.set(savings["progress_meter_title"].stringValue, forKey: "progress_meter_title")
-        UserDefaults.standard.set(savings["totalAmountPaidToLoan"].stringValue, forKey: "totalAmountPaidToLoan")
         UserDefaults.standard.synchronize()
     }
     

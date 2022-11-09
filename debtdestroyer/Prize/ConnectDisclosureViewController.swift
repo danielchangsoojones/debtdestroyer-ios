@@ -103,6 +103,13 @@ extension ConnectDisclosureViewController: WKNavigationDelegate {
                     self.navigationController?.popViewController(animated: true)
                     return
                 }
+                
+                let isExitOP = redirectedUrl.absoluteString.contains("op=exit")
+                if isExitOP {
+                    decisionHandler(.cancel)
+                    self.navigationController?.popViewController(animated: true)
+                    return
+                }
             }
         }
         decisionHandler(.allow)

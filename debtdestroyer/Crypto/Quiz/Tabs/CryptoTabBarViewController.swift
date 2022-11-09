@@ -58,6 +58,16 @@ class CryptoTabBarViewController: UITabBarController {
         let tabSettings = tabBar.items![3]
         tabSettings.image = UIImage(named: "settingsG")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
+        
+        checkHideReview()
+    }
+    
+    private func checkHideReview() {
+        dataStore.shouldShowEarnings { shouldMakeEverythingVisible in
+            if !shouldMakeEverythingVisible {
+                self.tabBar.items?.remove(at: 0)
+            }
+        }
     }
 }
 

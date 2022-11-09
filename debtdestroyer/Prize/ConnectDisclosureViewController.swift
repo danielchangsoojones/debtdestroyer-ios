@@ -32,11 +32,20 @@ class ConnectDisclosureViewController: UIViewController {
         setNavBarBtns()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     private func setNavBarBtns() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.backgroundColor = .white
-        navigationItem.hidesBackButton = true
         self.navigationController?.setStatusBar(backgroundColor: .white)
         let navBtn = UIButton()
         let attStr = NSMutableAttributedString(string: "Questions?", attributes:[

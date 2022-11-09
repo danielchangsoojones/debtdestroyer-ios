@@ -10,6 +10,15 @@ import UIKit
 class ConfirmInfoView: UIView {
 
     let titleLbl = UILabel()
+    let firstNameLbl = UILabel()
+    let lastNameLbl = UILabel()
+    let phNumberLbl = UILabel()
+    let firstNameTxt = UITextField()
+    let lastNameTxt = UITextField()
+    let phNumberTxt = UITextField()
+    let firstNameEditBtn = UIButton()
+    let lastNameEditBtn = UIButton()
+    let phNumberEditBtn = UIButton()
     let nextBtn = SpinningWithGradButton()
 
     override init(frame: CGRect) {
@@ -25,7 +34,7 @@ class ConfirmInfoView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLbl.text = "Connect your student loan accounts to start earning tickets!"
+        titleLbl.text = "Confirm your info"
         titleLbl.numberOfLines = 0
         titleLbl.textAlignment = .center
         titleLbl.textColor = .black
@@ -36,7 +45,74 @@ class ConfirmInfoView: UIView {
             make.leading.trailing.equalToSuperview().inset(20)
         }
     }
+
+    private func setFirstNameLabel() {
+        firstNameLbl.text = "First Name:"
+        firstNameLbl.numberOfLines = 0
+        firstNameLbl.textAlignment = .left
+        firstNameLbl.textColor = .black
+        firstNameLbl.font = UIFont.MontserratSemiBold(size: 16)
+        addSubview(firstNameLbl)
+        firstNameLbl.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp.bottom).offset(20)
+            make.leading.equalToSuperview().inset(20)
+            
+        }
+    }
+
+    private func setFirstNameEditBtn() {
+        firstNameEditBtn.setImage(UIImage.init(named: "pencil"), for: .normal)
+        addSubview(firstNameEditBtn)
+        firstNameEditBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(firstNameLbl)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.width.equalTo(20)
+        }
+
+    }
         
+    private func setFirstNameTextField() {
+        firstNameTxt.text = "rashmi"
+        firstNameTxt.textAlignment = .right
+        firstNameTxt.textColor = .black
+        firstNameTxt.font = UIFont.MontserratSemiBold(size: 16)
+        addSubview(firstNameTxt)
+        firstNameTxt.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp.bottom).offset(20)
+            make.trailing.equalTo(firstNameEditBtn.snp.leading).offset(5)
+            make.leading.equalTo(firstNameLbl.snp.trailing).offset(5)
+            
+        }
+    }
+    
+    private func setLastNameLabel() {
+        lastNameLbl.text = "Last Name:"
+        lastNameLbl.numberOfLines = 0
+        lastNameLbl.textAlignment = .left
+        lastNameLbl.textColor = .black
+        lastNameLbl.font = UIFont.MontserratSemiBold(size: 16)
+        addSubview(lastNameLbl)
+        lastNameLbl.snp.makeConstraints { make in
+            make.top.equalTo(firstNameLbl.snp.bottom).offset(10)
+            make.leading.equalToSuperview().inset(20)
+            
+        }
+    }
+    
+    private func setPhoneNumberLabel() {
+        phNumberLbl.text = "Phone Number:"
+        phNumberLbl.numberOfLines = 0
+        phNumberLbl.textAlignment = .left
+        phNumberLbl.textColor = .black
+        phNumberLbl.font = UIFont.MontserratSemiBold(size: 16)
+        addSubview(phNumberLbl)
+        phNumberLbl.snp.makeConstraints { make in
+            make.top.equalTo(lastNameLbl.snp.bottom).offset(10)
+            make.leading.equalToSuperview().inset(20)
+            
+        }
+    }
+
     private func setNextBtn() {
         nextBtn.backgroundColor = .clear
         if #available(iOS 15.0, *) {

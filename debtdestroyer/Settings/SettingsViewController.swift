@@ -23,7 +23,6 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
         dataArr = ["Connected Accounts", "Subscription", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
         
@@ -33,7 +32,9 @@ class SettingsViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .black
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        loadDebtAccounts()
+    }
     
     private func setTableView() {
         tableView = UITableView()

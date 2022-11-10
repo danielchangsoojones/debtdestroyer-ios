@@ -29,7 +29,6 @@ class BankViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         loadTransactions()
         loadDebtAccounts()
-        
     }
     
     private func setTableView() {

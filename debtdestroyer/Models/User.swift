@@ -16,6 +16,7 @@ class User: PFUser {
     @NSManaged var method_entity_id: String
     
     static var shouldShowEarnings = true
+    static var sendMassTextNotification = true
     var quizPointCounter = 0
 
     var fullName: String {

@@ -14,8 +14,9 @@ class CryptoSettingsViewController: UIViewController {
     var dataArr = [String]()
     var imgNameArr = [String]()
     private var debtAccountsData: [DebtAccountsParse] = []
-    private let dataStore = BankDataStore()
-    
+    private let bankdataStore = BankDataStore()
+    private let quizdataStore = QuizDataStore()
+
     private var quizDatas: [QuizDataParse] = []
     private let currentIndex: Int
     private var currentData: QuizDataParse {
@@ -37,23 +38,27 @@ class CryptoSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
         dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
 
         imgNameArr = ["legal", "accounts", "contactUs", "feedback", "logout", "deleteAcc"]
         
-//        dataArr = ["Enter Winner Information", "Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
-//
-//        imgNameArr = ["legal", "contactUs", "feedback", "logout", "deleteAcc", "deleteAcc"]
-        
+        if User.current()!.email == "messyjones@gmail.com" {
+            dataArr.append("Delete Quiz Scores")
+            imgNameArr.append("deleteAcc")
+            dataArr.append("Send Text Notification")
+            imgNameArr.append("contactUs")
+        }
+              
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isHidden = false
 
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        loadDebtAccounts()
+    }
     
     private func setTableView() {
         tableView = UITableView()
@@ -69,11 +74,21 @@ class CryptoSettingsViewController: UIViewController {
     }
     
     private func loadDebtAccounts() {
-        dataStore.loadDebtAccounts { debtAccounts in
+        bankdataStore.loadDebtAccounts { debtAccounts in
             self.debtAccountsData = debtAccounts
             self.tableView.reloadData()
         }
     }
+    
+    private func deleteQuizScores() {
+        quizdataStore.deleteQuizScores {
+            BannerAlert.show(title: "Quiz score deleted successfully!", subtitle: "", type: .success)
+        }
+    }
+    
+//    private func sendMassTextNotification() {
+//
+//    }
     
 }
 
@@ -90,6 +105,12 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SettingsTableViewCell.self)
         cell.titleLabel.text = dataArr[indexPath.row]
         cell.logoImg.image = UIImage.init(named: imgNameArr[indexPath.row])
+        if dataArr.count == 8 {
+            if User.sendMassTextNotification == false {
+                cell.isUserInteractionEnabled = false
+            }
+        }
+       
         return cell
     }
     
@@ -131,11 +152,18 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
+        } else if indexPath.row == 6 {
+            // MARK: Delete Quiz Scores
+           deleteQuizScores()
         } else {
-            // MARK: Notification Permission
-            let vc = NotificationPermissionViewController()
-            self.navigationController?.pushViewController(vc.self, animated: true)
-            
+            // MARK: Send Text Notification
+//            sendMassTextNotification()
+            quizdataStore.sendMassTextNotification {
+                print("success")
+                User.sendMassTextNotification = false
+                BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                self.tableView.reloadData()
+            }
         }
         
     }

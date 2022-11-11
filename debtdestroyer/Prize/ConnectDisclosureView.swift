@@ -62,16 +62,16 @@ class ConnectDisclosureView: UIView {
         if #available(iOS 15.0, *) {
             if connectAccBtn.configuration == nil {
                 var configuration = UIButton.Configuration.plain()
-                configuration.attributedTitle = AttributedString("Connect Accounts ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                configuration.attributedTitle = AttributedString("Verify Student Loans ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
                 connectAccBtn.configuration = configuration
                 
             } else {
-                connectAccBtn.configuration?.attributedTitle = AttributedString("Connect Accounts ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                connectAccBtn.configuration?.attributedTitle = AttributedString("Verify Student Loans ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
             }
             
         } else {
             connectAccBtn.setTitleColor(.white, for: .normal)
-            connectAccBtn.setTitle("Connect Accounts ➔", for: .normal)
+            connectAccBtn.setTitle("Verify Student Loans ➔", for: .normal)
         }
         let height: CGFloat = 55
         connectAccBtn.layer.cornerRadius = height/2

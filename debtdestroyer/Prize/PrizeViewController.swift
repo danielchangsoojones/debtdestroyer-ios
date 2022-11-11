@@ -234,6 +234,7 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
             cell.prizeDescriptionLabel.text = UserDefaults.standard.string(forKey: "deadlineTxt")
             cell.prizeAmountLabel.text = UserDefaults.standard.string(forKey: "prizeAmountTxt")
+            cell.prizeTitleLabel.text = UserDefaults.standard.string(forKey: "title")
             cell.ticketsAmountLabel.text = "\(ticketCount) Tickets"
             return cell
         }

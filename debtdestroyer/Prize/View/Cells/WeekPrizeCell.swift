@@ -20,7 +20,7 @@ class WeekPrizeCell: UITableViewCell, Reusable {
     let ticketsImageView = UIImageView()
     var confettiView: SwiftConfettiView!
     private let line = UIView()
-    private let prizeTitleLabel = UILabel()
+    let prizeTitleLabel = UILabel()
     let prizeDescriptionLabel = UILabel()
     let prizeAmountLabel = UILabel()
     private let containerView = UIView()

@@ -18,13 +18,8 @@ class StartQuizViewController: UIViewController {
     private var quizDatas: [QuizDataParse] = []
     let showSkipButton: Bool
     
-    init(showSkipButton: Bool, quizDatas: [QuizDataParse]?) {
+    init(showSkipButton: Bool) {
         self.showSkipButton = showSkipButton
-        //TODO: i'm not really doing anything with the quizDatas yet.
-        //but i should evenutally not make a double api call.
-        if let quizDatas = quizDatas {
-            self.quizDatas = quizDatas
-        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,6 +51,12 @@ class StartQuizViewController: UIViewController {
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         setSkipButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     private func setSkipButton() {
@@ -109,12 +110,6 @@ class StartQuizViewController: UIViewController {
     
     @objc func startQuizLoadData() {
         loadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadData()
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {

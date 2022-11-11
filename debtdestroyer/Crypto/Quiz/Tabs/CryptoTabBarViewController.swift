@@ -9,16 +9,15 @@ import UIKit
 
 class CryptoTabBarViewController: UITabBarController {
     private var dataStore = QuizDataStore()
-    private var quizDatas: [QuizDataParse] = []
     private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setTabs()
         handleAppDidBecomeActive()
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
-        
-        self.delegate = self
+        enteredScreen() // called here because after login func handleAppDidBecomeActive >> observer added with UIApplication.didBecomeActiveNotification was not getting called as its already called before login so tabs was not getting loaded.
         
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
         activityIndicator.color = UIColor.black
@@ -36,9 +35,9 @@ class CryptoTabBarViewController: UITabBarController {
     
     private func setTabs(){
         let vc1 = PrizeViewController()
-        let vc2 = StartQuizViewController(showSkipButton: false, quizDatas: nil)
-        let vc3 = ChampionsViewController(quizTopic: self.quizDatas.first!.quizTopic)
-        let vc4 = CryptoSettingsViewController(quizDatas: self.quizDatas, currentIndex: 0)
+        let vc2 = StartQuizViewController(showSkipButton: false)
+        let vc3 = ChampionsViewController()
+        let vc4 = CryptoSettingsViewController()
 
         let controllers = [vc1,vc2,vc3,vc4]
         self.viewControllers = controllers.map { CustomNavigationViewController(rootViewController: $0)}
@@ -87,20 +86,17 @@ extension CryptoTabBarViewController {
     }
     
     @objc private func enteredScreen() {
-        dataStore.checkShowQuizPopUp { showQuizPopUp, quizDatas in
-            self.quizDatas = quizDatas
+        dataStore.checkShowQuizPopUp { showQuizPopUp, _ in
             self.activityIndicator.stopAnimating()
-            self.setTabs()
             let isAlreadyShowingStartQuizVC = self.checkIfAlreadyShowingStartQuizVC()
             if showQuizPopUp && !isAlreadyShowingStartQuizVC {
-                self.presentStartQuizVC(quizDatas: quizDatas)
+                self.presentStartQuizVC()
             }
         }
     }
     
-    private func presentStartQuizVC(quizDatas: [QuizDataParse]) {
-        let startQuizVC = StartQuizViewController(showSkipButton: true,
-                                                  quizDatas: quizDatas)
+    private func presentStartQuizVC() {
+        let startQuizVC = StartQuizViewController(showSkipButton: true)
         let navController = UINavigationController(rootViewController: startQuizVC)
         present(navController, animated: true)
     }
@@ -112,11 +108,5 @@ extension CryptoTabBarViewController {
         }
         
         return false
-    }
-}
-
-extension CryptoTabBarViewController: UITabBarControllerDelegate {
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
     }
 }

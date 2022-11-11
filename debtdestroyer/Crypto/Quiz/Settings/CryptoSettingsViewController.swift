@@ -15,22 +15,8 @@ class CryptoSettingsViewController: UIViewController {
     var imgNameArr = [String]()
     private var debtAccountsData: [DebtAccountsParse] = []
     private let bankdataStore = BankDataStore()
-    private let quizdataStore = QuizDataStore()
-
-    private var quizDatas: [QuizDataParse] = []
-    private let currentIndex: Int
-    private var currentData: QuizDataParse {
-        return quizDatas[currentIndex]
-    }
+    private let quizDataStore = QuizDataStore()
     
-    init(quizDatas: [QuizDataParse], currentIndex: Int) {
-        self.quizDatas = quizDatas
-        self.currentIndex = currentIndex
-        super.init(nibName: nil, bundle: nil)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     override func loadView() {
         super.loadView()
         setTableView()
@@ -53,10 +39,10 @@ class CryptoSettingsViewController: UIViewController {
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isHidden = false
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadDebtAccounts()
     }
     
@@ -81,7 +67,7 @@ class CryptoSettingsViewController: UIViewController {
     }
     
     private func deleteQuizScores() {
-        quizdataStore.deleteQuizScores {
+        quizDataStore.deleteQuizScores {
             BannerAlert.show(title: "Quiz score deleted successfully!", subtitle: "", type: .success)
         }
     }
@@ -89,7 +75,6 @@ class CryptoSettingsViewController: UIViewController {
 //    private func sendMassTextNotification() {
 //
 //    }
-    
 }
 
 extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -158,7 +143,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         } else {
             // MARK: Send Text Notification
 //            sendMassTextNotification()
-            quizdataStore.sendMassTextNotification {
+            quizDataStore.sendMassTextNotification {
                 print("success")
                 User.sendMassTextNotification = false
                 BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)

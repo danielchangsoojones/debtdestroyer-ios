@@ -197,7 +197,7 @@ class PrizeViewController: UIViewController {
     }
     
     @objc func playNowClicked() {
-        let startQuizVC = StartQuizViewController(showSkipButton: false, quizDatas: nil)
+        let startQuizVC = StartQuizViewController(showSkipButton: false)
         self.navigationController?.pushViewController(startQuizVC, animated: true)
     }
     

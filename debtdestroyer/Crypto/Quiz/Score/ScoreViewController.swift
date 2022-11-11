@@ -119,7 +119,7 @@ class ScoreViewController: UIViewController {
             }
             dismiss(animated: true)
         } else {
-            let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
+            let leaderboardVC = ChampionsViewController()
             self.navigationController?.pushViewController(leaderboardVC, animated: true)
         }
     }

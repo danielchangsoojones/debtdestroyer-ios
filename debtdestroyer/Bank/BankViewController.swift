@@ -157,7 +157,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
             
             else {
                 cell.logoImg.image = UIImage.init(named: "Plus")
-                cell.titleLabel.text = "Connect Your Student Loan Account"
+                cell.titleLabel.text = "Verify your student loan accounts to start earning tickets!"
                 cell.balanceLabel.textColor = hexStringToUIColor(hex: "FF1A7E")
                 cell.balanceLabel.text = "to start earning tickets everytime you pay down your student loans"
             }

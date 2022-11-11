@@ -27,7 +27,7 @@ class ConnectDisclosureView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLbl.text = "Connect your student loan accounts to start earning tickets!"
+        titleLbl.text = "Verify your student loan accounts to start earning tickets!"
         titleLbl.numberOfLines = 0
         titleLbl.textAlignment = .center
         titleLbl.textColor = .black
@@ -40,22 +40,13 @@ class ConnectDisclosureView: UIView {
     }
     
     private func setDescriptionView() {
-        
-        descriptionTextView.text = """
-
-Everytime you make a payment towards one of your student loans, Debt Destroyed observes and awards you sweepstakes tickets. These sweepstake tickets are entered into our weekly raffle to win cash and prizes for your student loan.
-
-You get tickets, just by paying your student loans like you normally do!
-
-*Debt Destroyed never shares or sells your data. Connecting a student loan account merely allows Debt Destroyed to observe when you made a payment towards a student loan in order to award you tickets.
-
-"""
+        descriptionTextView.text = "Confirm your identity by answering some security questions. Once your identity is verified, your student loan accounts will start earning you tickets into our sweepstakes!\n\n*Debt Destroyed never shares or sells your data."
         descriptionTextView.contentInsetAdjustmentBehavior = .automatic
         descriptionTextView.center = self.center
-        descriptionTextView.textAlignment = NSTextAlignment.justified
+        descriptionTextView.textAlignment = NSTextAlignment.center
         descriptionTextView.textColor = .black
         descriptionTextView.backgroundColor = .clear
-        descriptionTextView.font = UIFont.MontserratSemiBold(size: 16)
+        descriptionTextView.font = UIFont.MontserratRegular(size: 14)
         descriptionTextView.isSelectable = false
         descriptionTextView.isEditable = false
         addSubview(descriptionTextView)

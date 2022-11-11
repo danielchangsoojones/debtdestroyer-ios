@@ -61,7 +61,7 @@ class ConnectAccountsCell: UITableViewCell, Reusable {
     
     private func setTitleLabel() {
         titleLabel.font = UIFont.MontserratSemiBold(size: 19)
-        let txt = "Connect your student loan balance to start earning tickets!"
+        let txt = "Verify your student loan accounts to start earning tickets!"
         titleLabel.halfTextColorChange(fullText: txt, changeText: "to start earning tickets!", expectedColor: color2)
         titleLabel.numberOfLines = 0
         titleLabel.textColor = color1
@@ -78,11 +78,11 @@ class ConnectAccountsCell: UITableViewCell, Reusable {
         if #available(iOS 15.0, *) {
             if connectAccBtn.configuration == nil {
                 var configuration = UIButton.Configuration.plain()
-                configuration.attributedTitle = AttributedString("Connect Accounts ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                configuration.attributedTitle = AttributedString("Verify Student Loans ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
                 connectAccBtn.configuration = configuration
                 
             } else {
-                connectAccBtn.configuration?.attributedTitle = AttributedString("Connect Accounts ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                connectAccBtn.configuration?.attributedTitle = AttributedString("Verify Student Loans ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
             }
             
         } else {

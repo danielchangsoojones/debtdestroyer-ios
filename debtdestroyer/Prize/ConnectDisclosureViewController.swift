@@ -60,6 +60,17 @@ class ConnectDisclosureViewController: UIViewController {
         navBtn.addTarget(self, action: #selector(questionsPressed), for: .touchUpInside)
         let helpButton = UIBarButtonItem(customView: navBtn)
         navigationItem.rightBarButtonItem = helpButton
+        
+        var backImg = UIImage.init(named: "arrow-left-alt")
+        backImg = backImg?.withRenderingMode(.alwaysOriginal)
+        let back = UIBarButtonItem(image: backImg , style: .plain, target: self, action: #selector(backPressed))
+        navigationItem.leftBarButtonItem = back
+        
+        navigationController?.navigationBar.backgroundColor = .clear
+    }
+    
+    @objc private func backPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func questionsPressed() {

@@ -14,10 +14,10 @@ class CryptoTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        handleAppDidBecomeActive()
+//        handleAppDidBecomeActive()
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
-        
+        enteredScreen() // called here because after login func handleAppDidBecomeActive >> observer added with UIApplication.didBecomeActiveNotification was not getting called as its already called before login so tabs was not getting loaded.
         self.delegate = self
         
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
@@ -79,14 +79,15 @@ class CryptoTabBarViewController: UITabBarController {
 }
 
 extension CryptoTabBarViewController {
-    private func handleAppDidBecomeActive() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(enteredScreen),
-                                               name: UIApplication.didBecomeActiveNotification,
-                                               object: nil)
-    }
+//    private func handleAppDidBecomeActive() {
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(enteredScreen),
+//                                               name: UIApplication.didBecomeActiveNotification,
+//                                               object: nil)
+//    }
     
-    @objc private func enteredScreen() {
+   // @objc
+    private func enteredScreen() {
         dataStore.checkShowQuizPopUp { showQuizPopUp, quizDatas in
             self.quizDatas = quizDatas
             self.activityIndicator.stopAnimating()

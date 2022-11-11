@@ -11,19 +11,9 @@ import WebKit
 class ConnectedAccountsViewController: UIViewController {
     private var messageHelper: MessageHelper?
     private var tableView: UITableView!
-    private var debtAccountsData: [DebtAccountsParse] = []
+    private var debtAccountsData: [ConnectAccountsDataStore.DebtAccount] = []
     private let webview = WKWebView()
     private let dataStore = ConnectAccountsDataStore()
-
-    init(debtAccounts: [DebtAccountsParse]) {
-        self.debtAccountsData = debtAccounts
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     
     override func loadView() {
         super.loadView()
@@ -34,11 +24,19 @@ class ConnectedAccountsViewController: UIViewController {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
         setNavBarBtns()
+        loadDebtAccounts()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func loadDebtAccounts() {
+        dataStore.loadDebtAccounts { debtAccounts in
+            self.debtAccountsData = debtAccounts
+            self.tableView.reloadData()
+        }
     }
     
     private func setNavBarBtns() {
@@ -84,24 +82,13 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
         let debtAccount = debtAccountsData[indexPath.row]
         cell.balanceLabel.textColor = .black
         
-        if let title = debtAccount.value(forKey: "title")
-        {
-            cell.titleLabel.text = title as? String
-        }else {
-            cell.titleLabel.text = "Loan Account"
-        }
+        cell.titleLabel.text = debtAccount.debtAccountParse.title
+        cell.balanceLabel.text = "Balance: " + debtAccount.debtAccountParse.remaining_balance_dollars
         
-        if let remaining_balance = debtAccount.value(forKey: "remaining_balance")
-        {
-            cell.balanceLabel.text = "Balance: $" + String(describing: remaining_balance)
-        }
-        
-        cell.logoImg.loadFromFile(debtAccount.logoImg)
-        if let recent_Payment = debtAccount.value(forKey: "remaining_balance")
-        {
-            cell.recentPaymentLabel.text = "Most Recent Payment: $" + String(describing: recent_Payment) + " = 2 "
-        }
-            cell.setChevron(imageName: "chevronGrey")
+//        cell.logoImg.loadFromFile(debtAccount.logoImg)
+        let recent_payment = debtAccount.debtAccountParse.last_payment_amount_dollars
+        cell.recentPaymentLabel.text = "Most Recent Payment: $" + recent_payment + " ="
+        cell.setChevron(imageName: "chevronGrey")
 
         return cell
     }

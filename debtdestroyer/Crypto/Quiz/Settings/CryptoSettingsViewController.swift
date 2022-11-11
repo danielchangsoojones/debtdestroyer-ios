@@ -13,8 +13,6 @@ class CryptoSettingsViewController: UIViewController {
     private var tableView: UITableView!
     var dataArr = [String]()
     var imgNameArr = [String]()
-    private var debtAccountsData: [DebtAccountsParse] = []
-    private let bankdataStore = BankDataStore()
     private let quizDataStore = QuizDataStore()
     
     override func loadView() {
@@ -41,11 +39,6 @@ class CryptoSettingsViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadDebtAccounts()
-    }
-    
     private func setTableView() {
         tableView = UITableView()
         tableView.delegate = self
@@ -56,13 +49,6 @@ class CryptoSettingsViewController: UIViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.left.right.top.bottom.equalToSuperview()
-        }
-    }
-    
-    private func loadDebtAccounts() {
-        bankdataStore.loadDebtAccounts { debtAccounts in
-            self.debtAccountsData = debtAccounts
-            self.tableView.reloadData()
         }
     }
     
@@ -110,7 +96,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             UIApplication.shared.open(url)
         } else if indexPath.row == 1 {
             // MARK: Connected Accounts
-            let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
+            let vc = ConnectedAccountsViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
         } else if indexPath.row == 2 || indexPath.row == 3 {
             // MARK: Contact Us

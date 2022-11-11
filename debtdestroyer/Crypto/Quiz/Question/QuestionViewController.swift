@@ -199,11 +199,34 @@ class QuestionViewController: UIViewController {
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
             appD.quizRunning = false
-            let vc = ScoreViewController(quizTopic: self.quizDatas.first!.quizTopic, quizDatas: self.quizDatas, currentIndex: 0)
-            self.navigationController?.pushViewController(vc, animated: true)
+            if let storiesUrl = URL(string: "instagram-stories://share") {
+                if UIApplication.shared.canOpenURL(storiesUrl) {
+                    let vc = ScoreViewController(quizTopic: self.quizDatas.first!.quizTopic, quizDatas: self.quizDatas, currentIndex: 0)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    print("Sorry the application is not installed")
+                    finished()
+                }
+            }
         } else {
             let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func finished() {
+        if Helpers.getTopViewController() is UINavigationController {
+            //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+            let tabBarVC = presentingViewController as? UITabBarController
+            if self.tabBarController?.viewControllers?.count == 4 {
+                tabBarVC?.selectedIndex = 2
+            } else {
+                tabBarVC?.selectedIndex = 1
+            }
+            dismiss(animated: true)
+        } else {
+            let leaderboardVC = ChampionsViewController()
+            self.navigationController?.pushViewController(leaderboardVC, animated: true)
         }
     }
 }

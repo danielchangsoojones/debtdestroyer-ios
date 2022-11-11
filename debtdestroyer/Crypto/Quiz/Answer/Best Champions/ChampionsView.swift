@@ -134,14 +134,12 @@ class ChampionsView: UIView {
     }
     
     private func setNumLabel() {
-        numberLabel.text = "23"
         numberLabel.font = UIFont.MontserratLight(size: 10)
         numberLabel.textColor = .black
         bottomView.addSubview(numberLabel)
     }
     
     private func setTimeLabel() {
-        timeLable.text = "2.23"
         timeLable.font = UIFont.MontserratLight(size: 13)
         timeLable.textColor = .black
         timeLable.textAlignment = .center
@@ -150,14 +148,12 @@ class ChampionsView: UIView {
     }
     
     private func setNameLabel() {
-        nameLabel.text = "test"
         nameLabel.font = UIFont.MontserratMedium(size: 15)
         nameLabel.textColor = .black
         bottomView.addSubview(nameLabel)
     }
     
     private func setPointsLabel() {
-        pointsLabel.text = "12"
         pointsLabel.font = UIFont.MontserratLight(size: 13)
         pointsLabel.textColor = .black
         pointsLabel.textAlignment = .center

@@ -71,10 +71,6 @@ class CryptoSettingsViewController: UIViewController {
             BannerAlert.show(title: "Quiz score deleted successfully!", subtitle: "", type: .success)
         }
     }
-    
-//    private func sendMassTextNotification() {
-//
-//    }
 }
 
 extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -142,7 +138,6 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
            deleteQuizScores()
         } else {
             // MARK: Send Text Notification
-//            sendMassTextNotification()
             quizDataStore.sendMassTextNotification {
                 print("success")
                 User.sendMassTextNotification = false

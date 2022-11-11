@@ -9,7 +9,7 @@ import UIKit
 
 class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
-    private let quizTopic: QuizTopicParse
+    private var quizTopic: QuizTopicParse?
     private var quizScores: [LeaderboardDataStore.QuizScore] = []
     private var pastWinnersData: [WinnerParse] = []
     private let dataStore = LeaderboardDataStore()
@@ -23,15 +23,6 @@ class ChampionsViewController: UIViewController {
     private var tweetText = String()
     private var timeLable = UILabel()
     private var toggleSegment = HBSegmentedControl()
-    
-    init(quizTopic: QuizTopicParse) {
-        self.quizTopic = quizTopic
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func loadView() {
         super.loadView()
@@ -64,7 +55,7 @@ class ChampionsViewController: UIViewController {
         super.viewWillAppear(animated)
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
-        loadLeaderboard()
+        loadQuizTopic()
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -74,6 +65,14 @@ class ChampionsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.bottomView.setGradientBackground()
+    }
+    
+    private func loadQuizTopic() {
+        let quizDataStore = QuizDataStore()
+        quizDataStore.getQuizData { quizDatas in
+            self.quizTopic = quizDatas.first?.quizTopic
+            self.loadLeaderboard()
+        }
     }
     
     private func setNavBarBtns() {
@@ -161,7 +160,7 @@ class ChampionsViewController: UIViewController {
     }
     
     private func loadLeaderboard() {
-        dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
+        dataStore.getLeaderBoard(quizTopicID: quizTopic?.objectId ?? "") { quizScores, deadlineMessage in
             
             //            if quizScores.isEmpty {
             //                self.containerView.backgroundColor = .clear

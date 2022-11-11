@@ -16,6 +16,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     private let loanAccountTagLabel = UILabel()
     let recentPaymentLabel = UILabel()
     private let imgView = UIImageView()
+    var chevronImageView = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -65,16 +66,17 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
         }
         
         setLogoImg()
+        setChevron(imageName: "xyz")
         setTitleLabel()
         setBalanceLabel()
         setRecentPaymentLabel()
-//        setTicketImage()
+        setTicketImage()
     }
     
     private func setLogoImg() {
         logoImg.contentMode = .scaleAspectFit
         logoImg.clipsToBounds = true
-        let dimension: CGFloat = 40
+        let dimension: CGFloat = 25
         logoImg.layer.cornerRadius = dimension * 0.2
         background.addSubview(logoImg)
         logoImg.snp.makeConstraints { make in
@@ -91,7 +93,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalTo(logoImg.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(15)
+            make.trailing.equalTo(chevronImageView.snp.leading)
         }
     }
     
@@ -102,39 +104,43 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
         balanceLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.leading.equalTo(logoImg.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(15)
+            make.trailing.equalTo(chevronImageView.snp.leading)
         }
     }
     
     private func setRecentPaymentLabel() {
-//        let attachment = NSTextAttachment()
-//        attachment.image = UIImage(named: "ticketC")
-//        let attachmentString = NSAttributedString(attachment: attachment)
-//        let lblString = NSMutableAttributedString(string: " Tickets ")
-//        lblString.append(attachmentString)
-//        let space = NSMutableAttributedString(string: " ")
-//        lblString.append(space)
-//        recentPaymentLabel.attributedText = lblString
         recentPaymentLabel.font = UIFont.MontserratSemiBold(size: 14)
         recentPaymentLabel.textColor = .jaguarBlack
+        recentPaymentLabel.adjustsFontSizeToFitWidth = true
+        recentPaymentLabel.numberOfLines = 0
         background.addSubview(recentPaymentLabel)
         recentPaymentLabel.snp.makeConstraints { make in
             make.top.equalTo(balanceLabel.snp.bottom).offset(10)
             make.leading.equalTo(logoImg.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-10)
         }
     }
     
-//    private func setTicketImage() {
-//        imgView.image = UIImage.init(named: "ticketC")
-//        addSubview(imgView)
-//        imgView.snp.makeConstraints { make in
-//            make.leading.equalTo(recentPaymentLabel.snp.trailing).offset(10)
-//            make.height.width.equalTo(15)
-//            make.centerY.equalTo(recentPaymentLabel)
-//        }
-//    }
+    private func setTicketImage() {
+        imgView.image = UIImage.init(named: "ticketC")
+        addSubview(imgView)
+        imgView.snp.makeConstraints { make in
+            make.leading.equalTo(recentPaymentLabel.snp.trailing)
+            make.height.width.equalTo(15)
+            make.centerY.equalTo(recentPaymentLabel)
+            make.trailing.equalTo(chevronImageView.snp.leading)
+        }
+    }
 
+    func setChevron(imageName: String) {
+        chevronImageView = UIImageView(image: UIImage(named: imageName))
+        chevronImageView.contentMode = .scaleAspectFit
+        background.addSubview(chevronImageView)
+        chevronImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(5)
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(15)
+        }
+    }
 }
 

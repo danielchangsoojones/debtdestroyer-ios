@@ -22,6 +22,7 @@ class ConnectedAccountsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Your Student Loan Accounts"
         tabBarController?.tabBar.isHidden = true
         setNavBarBtns()
         loadDebtAccounts()

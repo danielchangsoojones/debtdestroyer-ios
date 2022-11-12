@@ -119,7 +119,9 @@ extension ConnectDisclosureViewController: WKNavigationDelegate {
                 if hasMethodElement && hasSuccess && hasAuth {
                     print("we got the success callback that they succesfully authorized")
                     decisionHandler(.cancel)
-                    self.navigationController?.popViewController(animated: true)
+                    webview.navigationDelegate = nil
+                    let connectedAccountsVC = ConnectedAccountsViewController()
+                    self.navigationController?.pushViewController(connectedAccountsVC, animated: true)
                     return
                 }
                 

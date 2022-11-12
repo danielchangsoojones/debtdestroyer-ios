@@ -28,7 +28,7 @@ class ConnectAccountsDataStore {
         }
     }
     
-    func loadDebtAccounts(completion: @escaping ([DebtAccount]) -> Void) {
+    func loadDebtAccounts(completion: @escaping ([DebtAccount]?, Error?) -> Void) {
         PFCloud.callFunction(inBackground: "getDebtAccounts", withParameters: nil) { (results, error) in
             if let results = results {
                 let json = JSON(results)
@@ -41,11 +41,9 @@ class ConnectAccountsDataStore {
                                                   last_payment_ticket_amount: last_payment_ticket_amount)
                     return debtAccount
                 }
-                completion(debtAccounts)
-            } else if let error = error {
-                BannerAlert.show(with: error)
+                completion(debtAccounts, nil)
             } else {
-                BannerAlert.showUnknownError(functionName: "getDebtAccounts")
+                completion(nil, error)
             }
         }
     }

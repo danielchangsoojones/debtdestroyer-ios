@@ -26,7 +26,6 @@ class ConnectedAccountsViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         setNavBarBtns()
         startTimer()
-//        loadDebtAccounts()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,14 +70,26 @@ class ConnectedAccountsViewController: UIViewController {
     }
     
     private func loadDebtAccounts() {
-        dataStore.loadDebtAccounts { debtAccounts in
-            if !debtAccounts.isEmpty {
-                self.timer?.invalidate()
-                self.spinnerContainer.removeFromSuperview()
-                self.debtAccountsData = debtAccounts
-                self.tableView.reloadData()
+        dataStore.loadDebtAccounts { debtAccounts, error in
+            if let debtAccounts = debtAccounts {
+                if !debtAccounts.isEmpty {
+                    self.stopSpinner()
+                    self.debtAccountsData = debtAccounts
+                    self.tableView.reloadData()
+                }
+            } else if let error = error {
+                self.stopSpinner()
+                BannerAlert.show(with: error)
+            } else {
+                self.stopSpinner()
+                BannerAlert.showUnknownError(functionName: "loadDebtAccounts")
             }
         }
+    }
+    
+    private func stopSpinner() {
+        self.timer?.invalidate()
+        self.spinnerContainer.removeFromSuperview()
     }
     
     private func setNavBarBtns() {
@@ -92,7 +103,7 @@ class ConnectedAccountsViewController: UIViewController {
     }
 
     @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     private func setTableView() {

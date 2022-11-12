@@ -29,7 +29,7 @@ class DebtAccountsParse: SuperParseObject, PFSubclassing {
     
     private func convertToCentsToDollars(amount_in_cents: Int) -> String {
         let amount_in_dollars = Double(amount_in_cents) / 100
-        let amount_str_dollars = "$ \(amount_in_dollars)"
+        let amount_str_dollars = "$\(amount_in_dollars)"
         return amount_str_dollars
     }
 }

@@ -87,7 +87,8 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
         
 //        cell.logoImg.loadFromFile(debtAccount.logoImg)
         let recent_payment = debtAccount.debtAccountParse.last_payment_amount_dollars
-        cell.recentPaymentLabel.text = "Most Recent Payment: $" + recent_payment + " ="
+        let ticketAmount = String(debtAccount.last_payment_ticket_amount)
+        cell.recentPaymentLabel.text = "Most Recent Payment: " + recent_payment + " =\(ticketAmount) tickets"
         cell.setChevron(imageName: "chevronGrey")
 
         return cell

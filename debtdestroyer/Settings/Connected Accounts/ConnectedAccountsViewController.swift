@@ -12,6 +12,8 @@ class ConnectedAccountsViewController: UIViewController {
     private var tableView: UITableView!
     private var debtAccountsData: [ConnectAccountsDataStore.DebtAccount] = []
     private let dataStore = ConnectAccountsDataStore()
+    private var timer: Timer?
+    private let spinnerContainer = UIView()
     
     override func loadView() {
         super.loadView()
@@ -23,18 +25,59 @@ class ConnectedAccountsViewController: UIViewController {
         self.title = "Your Student Loan Accounts"
         tabBarController?.tabBar.isHidden = true
         setNavBarBtns()
-        loadDebtAccounts()
+        startTimer()
+//        loadDebtAccounts()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        timer?.invalidate()
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func startTimer() {
+        addSpinnerContainer()
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+            self.loadDebtAccounts()
+        }
+    }
+    
+    private func addSpinnerContainer() {
+        spinnerContainer.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        self.view.addSubview(spinnerContainer)
+        spinnerContainer.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        let disclosureLabel = UILabel()
+        disclosureLabel.text = "Verifying your accounts can take up to 1 minute. Please wait while we verify your student loan accounts."
+        disclosureLabel.textColor = .white
+        disclosureLabel.textAlignment = .center
+        disclosureLabel.numberOfLines = 0
+        spinnerContainer.addSubview(disclosureLabel)
+        disclosureLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
+        }
+        
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        activityIndicator.color = .white
+        spinnerContainer.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(disclosureLabel.snp.bottom).offset(10)
+        }
+        activityIndicator.startAnimating()
     }
     
     private func loadDebtAccounts() {
         dataStore.loadDebtAccounts { debtAccounts in
-            self.debtAccountsData = debtAccounts
-            self.tableView.reloadData()
+            if !debtAccounts.isEmpty {
+                self.timer?.invalidate()
+                self.spinnerContainer.removeFromSuperview()
+                self.debtAccountsData = debtAccounts
+                self.tableView.reloadData()
+            }
         }
     }
     

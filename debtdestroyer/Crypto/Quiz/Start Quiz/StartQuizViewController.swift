@@ -133,7 +133,7 @@ class StartQuizViewController: UIViewController {
                     if error.localizedDescription.contains(codeWord) {
                         self.showNeedMethodAuthAlert(with: error, codeWord: codeWord)
                     } else {
-                        BannerAlert.show(with: error)
+//                        BannerAlert.show(with: error)
                         let alertView = SCLAlertView()
                         let subtitle = error.localizedDescription
                         alertView.showInfo("Next Quiz", subTitle: subtitle, closeButtonTitle: "Okay")

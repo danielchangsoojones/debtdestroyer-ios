@@ -20,6 +20,7 @@ class ConfirmInfoView: UIView {
     let lastNameEditBtn = UIButton()
     let phNumberEditBtn = UIButton()
     let nextBtn = SpinningWithGradButton()
+    private let disclosureLbl = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +35,7 @@ class ConfirmInfoView: UIView {
         setPhoneNumberLabel()
         setPhoneNumberEditBtn()
         setPhoneNumberTextField()
+        setDisclosureLabel()
         setNextBtn()
         
     }
@@ -165,6 +167,19 @@ class ConfirmInfoView: UIView {
         }
     }
 
+    private func setDisclosureLabel() {
+        disclosureLbl.text = "In order to confirm your identity, please make sure your full legal name is correct. Do not use a nickname."
+        disclosureLbl.numberOfLines = 0
+        disclosureLbl.textAlignment = .center
+        disclosureLbl.textColor = .black
+        disclosureLbl.font = UIFont.MontserratRegular(size: 16)
+        addSubview(disclosureLbl)
+        disclosureLbl.snp.makeConstraints { make in
+            make.top.equalTo(phNumberLbl.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+    }
+
 
     private func setNextBtn() {
         nextBtn.backgroundColor = .clear
@@ -192,6 +207,4 @@ class ConfirmInfoView: UIView {
             make.height.equalTo(height)
         }
     }
-    
-    
 }

@@ -13,13 +13,14 @@ class ScoreView: UIView {
     private let descriptionLbl = UILabel()
     let shareButton = GradientBtn()
     var skipButton: UIButton!
+    private let containerViewForPointsLbl = UIView()
+    private let imgView = UIImageView()
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         setScoreLabel()
-        setPointsLabel()
+        setContainerViewForPointsLbl()
         setDescriptionLabel()
         setShareButton()
         setSkipButton()
@@ -43,19 +44,68 @@ class ScoreView: UIView {
         }
     }
     
-    private func setPointsLabel() {
+    private func setContainerViewForPointsLbl() {
+        addSubview(containerViewForPointsLbl)
+        containerViewForPointsLbl.snp.makeConstraints { make in
+            make.top.equalTo(yourScoreLbl.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(60)
+        }
+        
+        let ticketsStackView = UIStackView()
+        ticketsStackView.axis = .horizontal
+        ticketsStackView.distribution = .fill
+        ticketsStackView.alignment = .leading
+        ticketsStackView.spacing = 5
+        containerViewForPointsLbl.addSubview(ticketsStackView)
+        ticketsStackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
         pointsLbl.text = " "
         pointsLbl.numberOfLines = 0
         pointsLbl.textAlignment = .center
         pointsLbl.textColor = .black
         pointsLbl.font = UIFont.MontserratBold(size: 36)
-        addSubview(pointsLbl)
+        ticketsStackView.addArrangedSubview(pointsLbl)
         pointsLbl.snp.makeConstraints { make in
-            make.top.equalTo(yourScoreLbl.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
+        }
+        
+        imgView.image = UIImage.init(named: "ticketC")
+        ticketsStackView.addArrangedSubview(imgView)
+        imgView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(28)
         }
     }
-
+    
+//    private func setPointsLabel() {
+//    pointsLbl.text = " "
+//    pointsLbl.numberOfLines = 0
+//    pointsLbl.textAlignment = .center
+//    pointsLbl.textColor = .black
+//    pointsLbl.font = UIFont.MontserratBold(size: 36)
+//    ticketsStackView.addArrangedSubview(pointsLbl)
+//    pointsLbl.snp.makeConstraints { make in
+//        //            make.top.equalToSuperview()
+//        //            make.leading.equalToSuperview()
+//        //            make.centerY.equalToSuperview()
+//        make.centerY.equalToSuperview()
+//    }
+//    }
+//
+//
+//    private func setTicketImage() {
+//        imgView.image = UIImage.init(named: "ticketC")
+//        ticketsStackView.addArrangedSubview(imgView)
+//        imgView.snp.makeConstraints { make in
+//            make.height.width.equalTo(28)
+//            make.centerY.equalToSuperview()
+//            make.leading.equalTo(pointsLbl.snp.trailing)
+//            make.trailing.equalToSuperview()
+//        }
+//    }
     private func setDescriptionLabel() {
         descriptionLbl.text = "Earn an extra point by sharing your score on your Instagram Story"
         descriptionLbl.numberOfLines = 0
@@ -64,7 +114,7 @@ class ScoreView: UIView {
         descriptionLbl.font = UIFont.MontserratRegular(size: 14)
         addSubview(descriptionLbl)
         descriptionLbl.snp.makeConstraints { make in
-            make.top.equalTo(pointsLbl.snp.bottom).offset(30)
+            make.top.equalTo(containerViewForPointsLbl.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(30)
         }
     }
@@ -126,9 +176,5 @@ class ScoreView: UIView {
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().offset(-60)
         }
-        
-        
-        
     }
-
 }

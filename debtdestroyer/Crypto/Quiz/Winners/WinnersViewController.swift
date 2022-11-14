@@ -91,7 +91,7 @@ extension WinnersViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             cell.nameLabel.text = "Daniel"
-            cell.imgView.image = UIImage.init(named: "Winner")
+            cell.imgView.image = UIImage.init(named: "logo")
         } else if indexPath.row == 1 {
             cell.nameLabel.text = "Daniel"
             cell.imgView.image = UIImage.init(named: "")
@@ -100,7 +100,7 @@ extension WinnersViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             cell.nameLabel.text = ""
-            cell.imgView.image = UIImage.init(named: "Winner")
+            cell.imgView.image = UIImage.init(named: "logo")
         }
 
         return cell

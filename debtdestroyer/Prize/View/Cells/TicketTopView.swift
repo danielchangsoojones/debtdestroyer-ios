@@ -132,7 +132,7 @@ class TicketTopView: UITableViewCell, Reusable {
     }
     
     private func setProgressBar() {
-        ticketProgressBar.progressImage = UIImage.init(named: "backgroundGrad")
+        ticketProgressBar.progressImage = UIImage.init(named: "setUpBack")
         let dimension: CGFloat = 30
         ticketProgressBar.layer.cornerRadius = dimension / 2
         ticketProgressBar.clipsToBounds = true

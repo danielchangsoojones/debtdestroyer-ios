@@ -33,7 +33,7 @@ class ConnectAccountsDataStore {
             if let results = results {
                 let json = JSON(results)
                 let array = json.arrayValue
-                let debtAccounts = array.map { json in
+                let debtAccounts = array.map { json -> DebtAccount in
                     let last_payment_ticket_amount = json["last_payment_ticket_amount"].intValue
                     let dict = json.dictionaryObject
                     let debtAccountParse = (dict?["debtAccount"] as? DebtAccountsParse) ?? DebtAccountsParse()

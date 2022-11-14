@@ -95,7 +95,7 @@ extension LegalDisclosuresViewController: UITableViewDataSource, UITableViewDele
             UIApplication.shared.open(url)
         } else if indexPath.row == 2 {
             //Sweepstake Rules
-            let url = URL(string: "https://developer.apple.com")!
+            let url = URL(string: "https://www.lavadrop.io")!
             UIApplication.shared.open(url)
         } 
         

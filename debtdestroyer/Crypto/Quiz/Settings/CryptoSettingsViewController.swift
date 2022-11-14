@@ -23,9 +23,9 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
+        dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Log Out", "Delete Account"]
 
-        imgNameArr = ["legal", "accounts", "contactUs", "feedback", "logout", "deleteAcc"]
+        imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "logout", "deleteAcc"]
         
         if User.current()!.email == "messyjones@gmail.com" {
             dataArr.append("Delete Quiz Scores")
@@ -98,11 +98,15 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             // MARK: Connected Accounts
             let vc = ConnectedAccountsViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 2 || indexPath.row == 3 {
+        } else if indexPath.row == 2 || indexPath.row == 4 {
             // MARK: Contact Us
             // MARK: Leave Feedback
             messageHelper?.text("3176905323", body: "")
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 3 {
+            // MARK: Legal Disclosures
+            let vc = LegalDisclosuresViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+        }else if indexPath.row == 5 {
             // MARK: Logout
             User.logOutInBackground { error in
                 if let error = error {
@@ -115,11 +119,11 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.present(navController, animated: true)
                 }
             }
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 6 {
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 6 {
+        } else if indexPath.row == 7 {
             // MARK: Delete Quiz Scores
            deleteQuizScores()
         } else {

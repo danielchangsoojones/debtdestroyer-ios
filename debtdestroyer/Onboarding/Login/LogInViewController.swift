@@ -46,8 +46,8 @@ class LogInViewController: RegisterViewController {
     }
     
     @objc private func forgetBtnPressed() {
-        let msg = "please help me reset my password for debtdestroyer"
-        messageHelper?.text("3176905323", body: msg)
+        let vc = ResetPasswordViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func segueIntoApp() {

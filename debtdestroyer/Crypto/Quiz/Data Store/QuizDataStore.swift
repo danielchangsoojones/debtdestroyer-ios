@@ -125,7 +125,7 @@ class QuizDataStore {
     }
     
     func sendMassTextNotification(completion: @escaping ()-> Void) {
-        PFCloud.callFunction(inBackground: "sendMassTextNotification", withParameters: [:]) { (result, error) in
+        PFCloud.callFunction(inBackground: "sendMassText", withParameters: [:]) { (result, error) in
             if let result = result {
                 print(result)
                 completion()

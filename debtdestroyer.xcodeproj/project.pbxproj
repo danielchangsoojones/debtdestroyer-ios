@@ -46,6 +46,7 @@
 		0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F809F28E6C6C6001B573E /* NameViewController.swift */; };
 		0A50659128C346D200207759 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659028C346D200207759 /* SubscriptionView.swift */; };
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
+		0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501B292355B5001B028C /* ResetPasswordViewController.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
 		0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */; };
@@ -182,6 +183,7 @@
 		0A4F809F28E6C6C6001B573E /* NameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
 		0A50659028C346D200207759 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
+		0A51501B292355B5001B028C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
 		0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -207,7 +209,7 @@
 		0A5FD4FD28F8475100B995C8 /* Montserrat-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.otf"; sourceTree = "<group>"; };
 		0A5FD4FE28F8475100B995C8 /* Montserrat-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.otf"; sourceTree = "<group>"; };
 		0A5FD4FF28F8475100B995C8 /* Montserrat-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.otf"; sourceTree = "<group>"; };
-		0A5FD50028F8475100B995C8 /* Montserrat-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.otf"; sourceTree = "<group>"; };
+		0A5FD50028F8475100B995C8 /* Montserrat-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Montserrat-LightItalic.otf"; sourceTree = "<group>"; };
 		0A5FD50128F8475100B995C8 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.otf"; sourceTree = "<group>"; };
 		0A5FD50228F8475100B995C8 /* Montserrat-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.otf"; sourceTree = "<group>"; };
 		0A5FD50328F8475100B995C8 /* Montserrat-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
@@ -702,7 +704,6 @@
 			isa = PBXGroup;
 			children = (
 				0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */,
-				0A4F809F28E6C6C6001B573E /* NameViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -711,6 +712,8 @@
 			isa = PBXGroup;
 			children = (
 				0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */,
+				0A4F809F28E6C6C6001B573E /* NameViewController.swift */,
+				0A51501B292355B5001B028C /* ResetPasswordViewController.swift */,
 			);
 			path = "Create Profile";
 			sourceTree = "<group>";
@@ -981,6 +984,7 @@
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
+				0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,

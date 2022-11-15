@@ -75,7 +75,6 @@ class RegisterView: UIView {
         stackView.addArrangedSubview(label)
         label.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(30)
         }
         
         return label

@@ -72,12 +72,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SettingsTableViewCell.self)
         cell.titleLabel.text = dataArr[indexPath.row]
         cell.logoImg.image = UIImage.init(named: imgNameArr[indexPath.row])
-        if dataArr.count == 8 {
-            if User.sendMassTextNotification == false {
-                cell.isUserInteractionEnabled = false
-            }
-        }
-       
+        
         return cell
     }
     
@@ -128,11 +123,12 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
            deleteQuizScores()
         } else {
             // MARK: Send Text Notification
-            quizDataStore.sendMassTextNotification {
-                print("success")
-                User.sendMassTextNotification = false
-                BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
-                self.tableView.reloadData()
+            if User.sendMassTextNotification == true {
+                quizDataStore.sendMassTextNotification {
+                    print("success")
+                    User.sendMassTextNotification = false
+                    BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                }
             }
         }
         

@@ -140,7 +140,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        footer.backgroundColor = UIColor.clear
+        footer.backgroundColor = UIColor.white
         let titleLabel = UILabel(frame: CGRect(x:10,y: 10 ,width:footer.frame.width - 20,height:50))
         titleLabel.textColor = .systemGray2
         titleLabel.textAlignment = .center

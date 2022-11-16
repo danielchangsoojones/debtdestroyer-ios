@@ -75,9 +75,7 @@ class StartQuizViewController: UIViewController {
     private func loadData() {
         self.dataStore.getQuizData { quizDatas in
             self.quizDatas = quizDatas
-            self.dataStore.shouldShowEarnings { shouldShowEarnings in
-                User.shouldShowEarnings = shouldShowEarnings
-                if shouldShowEarnings {
+                if User.shouldShowEarnings {
                     let quizTopic = self.quizDatas.first?.quizTopic
                     
                     self.titleLabel.text = quizTopic?.name ?? "Play Daily Trivia"
@@ -88,7 +86,6 @@ class StartQuizViewController: UIViewController {
                     //                    self.titleLabel.text = "Become the trivia champion"
                     //                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
                 }
-            }
             self.activityIndicator.stopAnimating()
         }
     }

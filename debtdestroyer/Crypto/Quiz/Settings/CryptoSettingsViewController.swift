@@ -123,10 +123,10 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
            deleteQuizScores()
         } else {
             // MARK: Send Text Notification
-            if User.sendMassTextNotification == true {
+            if User.sendMassTextNotification == false {
                 quizDataStore.sendMassTextNotification {
                     print("success")
-                    User.sendMassTextNotification = false
+                    User.sendMassTextNotification = true
                     BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
                 }
             }

@@ -47,6 +47,8 @@
 		0A50659128C346D200207759 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659028C346D200207759 /* SubscriptionView.swift */; };
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501B292355B5001B028C /* ResetPasswordViewController.swift */; };
+		0A51501E292394C0001B028C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501D292394C0001B028C /* EditProfileViewController.swift */; };
+		0A51502C2923CB69001B028C /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51502B2923CB69001B028C /* EditProfileView.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
 		0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */; };
@@ -184,6 +186,8 @@
 		0A50659028C346D200207759 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A51501B292355B5001B028C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		0A51501D292394C0001B028C /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		0A51502B2923CB69001B028C /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
 		0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -489,6 +493,24 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		0A515021292394EB001B028C /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0A51501D292394C0001B028C /* EditProfileViewController.swift */,
+				0A51502B2923CB69001B028C /* EditProfileView.swift */,
+			);
+			path = "Edit Profile";
+			sourceTree = "<group>";
+		};
+		0A51502429239951001B028C /* Confirm Info */ = {
+			isa = PBXGroup;
+			children = (
+				0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */,
+				0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */,
+			);
+			path = "Confirm Info";
+			sourceTree = "<group>";
+		};
 		0A59ACDF28E183F4001B774A /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,6 +525,7 @@
 				0A59ACE128E183F4001B774A /* Tabs */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0A59ACE328E183F4001B774A /* Settings */,
+				0A51502429239951001B028C /* Confirm Info */,
 				0A32178E290115C100A414CA /* Score */,
 				0A59ACE828E183F4001B774A /* Answer */,
 				0A59ACEC28E183F4001B774A /* Question */,
@@ -528,8 +551,6 @@
 			isa = PBXGroup;
 			children = (
 				0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */,
-				0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */,
-				0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -666,6 +687,7 @@
 			isa = PBXGroup;
 			children = (
 				0A7A49FA28A3D262009EDE5E /* Data Store */,
+				0A515021292394EB001B028C /* Edit Profile */,
 				0A7A4A0F28A42109009EDE5E /* Create Profile */,
 				0A7A4A0C28A3E848009EDE5E /* Login */,
 				0A7A49FF28A3D384009EDE5E /* Register */,
@@ -1023,6 +1045,7 @@
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
+				0A51501E292394C0001B028C /* EditProfileViewController.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
@@ -1082,6 +1105,7 @@
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,
 				0A7A4A0328A3D384009EDE5E /* RegisterViewController.swift in Sources */,
 				0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */,
+				0A51502C2923CB69001B028C /* EditProfileView.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,

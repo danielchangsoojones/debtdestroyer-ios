@@ -14,20 +14,24 @@ class EditProfileView: UIView {
     let firstNameTxt = SkyFloatingLabelTextField()
     let lastNameTxt = SkyFloatingLabelTextField()
     let phNumberTxt = SkyFloatingLabelTextField()
+    let emailTxt = SkyFloatingLabelTextField()
+    let passwordTxt = SkyFloatingLabelTextField()
     let textFieldHeightConst = 50
     let scrollView = UIScrollView()
     let contentView = UIView()
-    
+    var chevronImageView = UIImageView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
-   
         backgroundColor = .systemGray6
         setScrollView()
         setProfileImg()
         setEditButtonView()
         setFirstNameTextField()
         setLastNameTextField()
+        setPhoneNumberTextField()
+        setEmailTextField()
+        setPasswordTextField()
     }
     
     required init?(coder: NSCoder) {
@@ -59,7 +63,6 @@ class EditProfileView: UIView {
         profileImg.layer.borderWidth = 1
         contentView.addSubview(profileImg)
         profileImg.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(15)
             make.height.width.equalTo(dimension)
             make.topMargin.equalToSuperview().inset(30)
@@ -67,7 +70,7 @@ class EditProfileView: UIView {
     }
     
     private func setEditButtonView() {
-        editBtn.setImage(UIImage.init(systemName: "camera.circle")?.withTintColor(.gray, renderingMode: .alwaysOriginal), for: .normal)
+        editBtn.setImage(UIImage.init(systemName: "camera.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
         editBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         editBtn.backgroundColor = .clear
         let dimension: CGFloat = 45
@@ -75,8 +78,8 @@ class EditProfileView: UIView {
         contentView.addSubview(editBtn)
         editBtn.snp.makeConstraints { make in
             make.height.width.equalTo(dimension)
-            make.bottom.equalTo(profileImg.snp.bottom).offset(-30)
-            make.leading.equalTo(110)
+            make.bottom.equalTo(profileImg.snp.bottom).offset(-20)
+            make.leading.equalTo(105)
         }
     }
 
@@ -84,7 +87,7 @@ class EditProfileView: UIView {
         firstNameTxt.textAlignment = .left
         firstNameTxt.placeholder = "First Name"
         firstNameTxt.textColor = .black
-        firstNameTxt.titleColor = .gray
+        firstNameTxt.selectedTitleColor = .gray
         firstNameTxt.font = UIFont.MontserratRegular(size: 16)
         contentView.addSubview(firstNameTxt)
         firstNameTxt.snp.makeConstraints { make in
@@ -98,15 +101,83 @@ class EditProfileView: UIView {
         lastNameTxt.textAlignment = .left
         lastNameTxt.placeholder = "Last Name"
         lastNameTxt.textColor = .black
-        lastNameTxt.titleColor = .gray
+        lastNameTxt.selectedTitleColor = .gray
         lastNameTxt.font = UIFont.MontserratRegular(size: 16)
         contentView.addSubview(lastNameTxt)
         lastNameTxt.snp.makeConstraints { make in
-            make.top.equalTo(firstNameTxt.snp.bottom).offset(50)
+            make.top.equalTo(firstNameTxt.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(textFieldHeightConst)
         }
     }
+    
+    private func setPhoneNumberTextField() {
+        phNumberTxt.textAlignment = .left
+        phNumberTxt.placeholder = "Phone Number"
+        phNumberTxt.textColor = .black
+        phNumberTxt.selectedTitleColor = .gray
+        phNumberTxt.font = UIFont.MontserratRegular(size: 16)
+        contentView.addSubview(phNumberTxt)
+        phNumberTxt.snp.makeConstraints { make in
+            make.top.equalTo(lastNameTxt.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(textFieldHeightConst)
+        }
+        
+        setChevron()
+        chevronImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(15)
+            make.centerY.equalTo(phNumberTxt)
+            make.height.width.equalTo(15)
+        }
+    }
 
+    private func setEmailTextField() {
+        emailTxt.textAlignment = .left
+        emailTxt.placeholder = "Email"
+        emailTxt.textColor = .black
+        emailTxt.selectedTitleColor = .gray
+        emailTxt.font = UIFont.MontserratRegular(size: 16)
+        contentView.addSubview(emailTxt)
+        emailTxt.snp.makeConstraints { make in
+            make.top.equalTo(phNumberTxt.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(textFieldHeightConst)
+        }
+        
+        setChevron()
+        chevronImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(15)
+            make.centerY.equalTo(emailTxt)
+            make.height.width.equalTo(15)
+        }
+    }
+
+    private func setPasswordTextField() {
+        passwordTxt.textAlignment = .left
+        passwordTxt.placeholder = "Password"
+        passwordTxt.textColor = .black
+        passwordTxt.selectedTitleColor = .gray
+        passwordTxt.font = UIFont.MontserratRegular(size: 16)
+        contentView.addSubview(passwordTxt)
+        passwordTxt.snp.makeConstraints { make in
+            make.top.equalTo(emailTxt.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(textFieldHeightConst)
+        }
+        
+        setChevron()
+        chevronImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(15)
+            make.centerY.equalTo(passwordTxt)
+            make.height.width.equalTo(15)
+        }
+    }
+    
+    func setChevron() {
+        chevronImageView = UIImageView(image: UIImage(named: "chevronGrey"))
+        chevronImageView.contentMode = .scaleAspectFit
+        contentView.addSubview(chevronImageView)
+    }
     
 }

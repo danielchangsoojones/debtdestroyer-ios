@@ -48,8 +48,6 @@
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501B292355B5001B028C /* ResetPasswordViewController.swift */; };
 		0A51501E292394C0001B028C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501D292394C0001B028C /* EditProfileViewController.swift */; };
-		0A51502329239767001B028C /* ProfileImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51502229239767001B028C /* ProfileImageTableViewCell.swift */; };
-		0A5150262923B5CD001B028C /* ProfileInfoEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5150252923B5CD001B028C /* ProfileInfoEditTableViewCell.swift */; };
 		0A51502C2923CB69001B028C /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51502B2923CB69001B028C /* EditProfileView.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
@@ -189,8 +187,6 @@
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A51501B292355B5001B028C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		0A51501D292394C0001B028C /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		0A51502229239767001B028C /* ProfileImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageTableViewCell.swift; sourceTree = "<group>"; };
-		0A5150252923B5CD001B028C /* ProfileInfoEditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoEditTableViewCell.swift; sourceTree = "<group>"; };
 		0A51502B2923CB69001B028C /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
@@ -501,8 +497,6 @@
 			isa = PBXGroup;
 			children = (
 				0A51501D292394C0001B028C /* EditProfileViewController.swift */,
-				0A51502229239767001B028C /* ProfileImageTableViewCell.swift */,
-				0A5150252923B5CD001B028C /* ProfileInfoEditTableViewCell.swift */,
 				0A51502B2923CB69001B028C /* EditProfileView.swift */,
 			);
 			path = "Edit Profile";
@@ -1025,7 +1019,6 @@
 				0A4536E128B903E400F4A8CA /* PlayerView.swift in Sources */,
 				928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
-				0A51502329239767001B028C /* ProfileImageTableViewCell.swift in Sources */,
 				0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
@@ -1110,7 +1103,6 @@
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,
 				0A7A49FE28A3D294009EDE5E /* StringExtension.swift in Sources */,
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,
-				0A5150262923B5CD001B028C /* ProfileInfoEditTableViewCell.swift in Sources */,
 				0A7A4A0328A3D384009EDE5E /* RegisterViewController.swift in Sources */,
 				0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */,
 				0A51502C2923CB69001B028C /* EditProfileView.swift in Sources */,

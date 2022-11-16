@@ -9,10 +9,11 @@ import UIKit
 
 class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
-    private let quizTopic: QuizTopicParse
+    private var quizTopic: QuizTopicParse?
     private var quizScores: [LeaderboardDataStore.QuizScore] = []
-    private var descriptionLabel: UILabel!
+    private var pastWinnersData: [WinnerParse] = []
     private let dataStore = LeaderboardDataStore()
+
     private var messageHelper: MessageHelper?
     private var bottomView = UIView()
     private var containerView = UIView()
@@ -21,28 +22,23 @@ class ChampionsViewController: UIViewController {
     private var pointsLabel = UILabel()
     private var tweetText = String()
     private var timeLable = UILabel()
-
-    init(quizTopic: QuizTopicParse) {
-        self.quizTopic = quizTopic
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private var toggleSegment = HBSegmentedControl()
     
     override func loadView() {
         super.loadView()
         let championsView = ChampionsView(frame: self.view.frame)
         self.view = championsView
         self.tableView = championsView.leaderboardTableView
-        self.descriptionLabel = championsView.descriptionLabel
+        //        self.descriptionLabel = championsView.descriptionLabel
         self.bottomView = championsView.bottomView
         self.containerView = championsView.containerView
         self.numberLabel = championsView.numberLabel
         self.nameLabel = championsView.nameLabel
         self.timeLable = championsView.timeLable
         self.pointsLabel = championsView.pointsLabel
+        self.toggleSegment = championsView.toggleSegment
+        toggleSegment.addTarget(self, action: #selector(segmentValueChanged(_:)), for: UIControl.Event.valueChanged)
+        
     }
     
     override func viewDidLoad() {
@@ -50,7 +46,7 @@ class ChampionsViewController: UIViewController {
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setLeaderboardTableView()
     }
-  
+    
     override func viewWillLayoutSubviews() {
         self.bottomView.addTopRoundedCornerToView(targetView: bottomView, desiredCurve: 10.0)
     }
@@ -59,10 +55,10 @@ class ChampionsViewController: UIViewController {
         super.viewWillAppear(animated)
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
-        loadLeaderboard()
+        loadQuizTopic()
         setNeedsStatusBarAppearanceUpdate()
     }
-
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }// code not working yet
@@ -71,48 +67,76 @@ class ChampionsViewController: UIViewController {
         self.bottomView.setGradientBackground()
     }
     
+    private func loadQuizTopic() {
+        let quizDataStore = QuizDataStore()
+        quizDataStore.getQuizData { quizDatas in
+            self.quizTopic = quizDatas.first?.quizTopic
+            self.loadLeaderboard()
+        }
+    }
+    
     private func setNavBarBtns() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.backgroundColor = .clear
         navigationItem.hidesBackButton = true
-
+        
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
         
         var leftTitle = "Start Next Trivia"
-        if self.tabBarController?.selectedIndex == 1 {
-            leftTitle = "Start New Trivia"
+        if self.tabBarController?.viewControllers?.count == 4 {
+            if self.tabBarController?.selectedIndex == 1 {
+                leftTitle = "Start New Trivia"
+            }
+        } else {
+            if self.tabBarController?.selectedIndex == 0 {
+                leftTitle = "Start New Trivia"
+            }
         }
         let nextTrivia = UIBarButtonItem.init(title: leftTitle, style: .done, target: self, action: #selector(nextTriviaPressed))
         navigationItem.leftBarButtonItem = nextTrivia
     }
     
+    @objc func segmentValueChanged(_ sender: AnyObject?){
+        
+        if toggleSegment.selectedIndex == 0 {
+            print("Leaderboard")
+        } else {
+            print("Past Winners")
+        }
+    }
+    
+    
     @objc private func nextTriviaPressed() {
-        self.tabBarController?.selectedIndex = 0
+        if self.tabBarController?.viewControllers?.count == 4 {
+            self.tabBarController?.selectedIndex = 1
+        } else {
+            self.tabBarController?.selectedIndex = 0
+        }
         self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func helpPressed() {
         messageHelper?.text(MessageHelper.customerServiceNum)
-//        shareOnTwitter()
+        //        shareOnTwitter()
     }
     
     private func shareOnTwitter() {
         
         let tweetUrl = "https://apps.apple.com/app/id1639968618"
-     
+        
         let appURL = "twitter://intent/tweet?text=\(self.tweetText)&url=\(tweetUrl)"
         let webURL = "https://twitter.com/intent/tweet?text=\(self.tweetText)&url=\(tweetUrl)"
         
         let appURLescapedShareString = appURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-
+        
         let webURLescapedShareString = webURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         
-                let urlapp = URL(string: appURLescapedShareString)!
-                let urlweb = URL(string: webURLescapedShareString)!
-
-
+        let urlapp = URL(string: appURLescapedShareString)!
+        let urlweb = URL(string: webURLescapedShareString)!
+        
+        
         if UIApplication.shared.canOpenURL(urlapp as URL) {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(urlapp)
@@ -136,20 +160,20 @@ class ChampionsViewController: UIViewController {
     }
     
     private func loadLeaderboard() {
-        dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
+        dataStore.getLeaderBoard(quizTopicID: quizTopic?.objectId ?? "") { quizScores, deadlineMessage in
             
-//            if quizScores.isEmpty {
-//                self.containerView.backgroundColor = .clear
-//                self.tableView.backgroundColor = .clear
-//            } else {
-//                self.containerView.backgroundColor = .white
-//                self.tableView.backgroundColor = .white
-//            }
+            //            if quizScores.isEmpty {
+            //                self.containerView.backgroundColor = .clear
+            //                self.tableView.backgroundColor = .clear
+            //            } else {
+            //                self.containerView.backgroundColor = .white
+            //                self.tableView.backgroundColor = .white
+            //            }
             self.quizScores = quizScores
-            self.descriptionLabel.text = deadlineMessage
-            if !User.shouldShowEarnings {
-                self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
-            }
+            //            self.descriptionLabel.text = deadlineMessage
+            //            if !User.shouldShowEarnings {
+            //                self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
+            //            }
             
             self.tableView.reloadData()
             
@@ -169,12 +193,17 @@ class ChampionsViewController: UIViewController {
                     self.numberLabel.text = String(index) + ". "
                     self.timeLable.text = String(quizScore.total_time_str)
                     self.tweetText = "Hey.. I have earned \(quizScore.points) Points and scored \(index)."
-
+                    
                     return
                 }
                 index += 1
             }
         }
+        
+            dataStore.loadPastWinners { pastWinners in
+                self.pastWinnersData = pastWinners
+                //            self.tableView.reloadData()
+            }
     }
 }
 
@@ -196,7 +225,7 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
-
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -216,7 +245,6 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 70
-    
     }
 }
 

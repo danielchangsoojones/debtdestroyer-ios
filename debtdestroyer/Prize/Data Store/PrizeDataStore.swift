@@ -29,12 +29,20 @@ class PrizeDataStore {
     }
    
     private func saveSavingsToUserDefaults(savings : JSON) {
-        
         UserDefaults.standard.set(savings["progress_meter_title"].stringValue, forKey: "progress_meter_title")
-        UserDefaults.standard.set(savings["ticketCount"].stringValue, forKey: "ticketCount")
-        UserDefaults.standard.set(savings["totalAmountPaidToLoan"].stringValue, forKey: "totalAmountPaidToLoan")
-        
         UserDefaults.standard.synchronize()
+    }
+    
+    func getTickets(completion: @escaping (Int) -> Void) {
+        PFCloud.callFunction(inBackground: "getTickets", withParameters: nil) { (result, error) in
+            if let ticketAmount = result as? Int {
+                completion(ticketAmount)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getTickets")
+            }
+        }
     }
     
     func loadPastWinners(completion: @escaping ([WinnerParse]) -> Void) {
@@ -70,6 +78,18 @@ class PrizeDataStore {
         UserDefaults.standard.set(info["title"].stringValue, forKey: "title")
         
         UserDefaults.standard.synchronize()
+    }
+    
+    func checkIfMethodAuthed(completion: @escaping (Bool) -> Void) {
+        PFCloud.callFunction(inBackground: "checkIfMethodAuthed", withParameters: nil) { (result, error) in
+            if let isAuthed = result as? Bool {
+               completion(isAuthed)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "checkIfMethodAuthed")
+            }
+        }
     }
 
 }

@@ -10,17 +10,10 @@ import UIKit
 class ConnectedAccountsViewController: UIViewController {
     private var messageHelper: MessageHelper?
     private var tableView: UITableView!
-    private var debtAccountsData: [DebtAccountsParse] = []
-
-    init(debtAccounts: [DebtAccountsParse]) {
-        self.debtAccountsData = debtAccounts
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    private var debtAccountsData: [ConnectAccountsDataStore.DebtAccount] = []
+    private let dataStore = ConnectAccountsDataStore()
+    private var timer: Timer?
+    private let spinnerContainer = UIView()
     
     override func loadView() {
         super.loadView()
@@ -29,7 +22,74 @@ class ConnectedAccountsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Your Student Loan Accounts"
+        tabBarController?.tabBar.isHidden = true
         setNavBarBtns()
+        startTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func startTimer() {
+        addSpinnerContainer()
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+            self.loadDebtAccounts()
+        }
+    }
+    
+    private func addSpinnerContainer() {
+        spinnerContainer.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        self.view.addSubview(spinnerContainer)
+        spinnerContainer.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        let disclosureLabel = UILabel()
+        disclosureLabel.text = "Verifying your accounts can take up to 1 minute. Please wait while we verify your student loan accounts."
+        disclosureLabel.textColor = .white
+        disclosureLabel.textAlignment = .center
+        disclosureLabel.numberOfLines = 0
+        spinnerContainer.addSubview(disclosureLabel)
+        disclosureLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
+        }
+        
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        activityIndicator.color = .white
+        spinnerContainer.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(disclosureLabel.snp.bottom).offset(10)
+        }
+        activityIndicator.startAnimating()
+    }
+    
+    private func loadDebtAccounts() {
+        dataStore.loadDebtAccounts { debtAccounts, error in
+            if let debtAccounts = debtAccounts {
+                if !debtAccounts.isEmpty {
+                    self.stopSpinner()
+                    self.debtAccountsData = debtAccounts
+                    self.tableView.reloadData()
+                }
+            } else if let error = error {
+                self.stopSpinner()
+                BannerAlert.show(with: error)
+            } else {
+                self.stopSpinner()
+                BannerAlert.showUnknownError(functionName: "loadDebtAccounts")
+            }
+        }
+    }
+    
+    private func stopSpinner() {
+        self.timer?.invalidate()
+        self.spinnerContainer.removeFromSuperview()
     }
     
     private func setNavBarBtns() {
@@ -43,7 +103,7 @@ class ConnectedAccountsViewController: UIViewController {
     }
 
     @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     private func setTableView() {
@@ -53,6 +113,7 @@ class ConnectedAccountsViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.register(cellType: ConnectedAccountsTableViewCell.self)
+        tableView.register(cellType: LoanAccountCell.self)
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.left.right.top.bottom.equalToSuperview()
@@ -71,29 +132,19 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConnectedAccountsTableViewCell.self)
         
-        
         let debtAccount = debtAccountsData[indexPath.row]
         cell.balanceLabel.textColor = .black
         
-        if let title = debtAccount.value(forKey: "title")
-        {
-            cell.titleLabel.text = title as? String
-        }else {
-            cell.titleLabel.text = "Loan Account"
-        }
+        cell.titleLabel.text = debtAccount.debtAccountParse.title
+        cell.balanceLabel.text = "Balance: " + debtAccount.debtAccountParse.remaining_balance_dollars
         
-        if let remaining_balance = debtAccount.value(forKey: "remaining_balance")
-        {
-            cell.balanceLabel.text = "Balance: $" + String(describing: remaining_balance)
-        }
-        
-        cell.logoImg.loadFromFile(debtAccount.logoImg)
-        cell.removeButton.addTarget(self, action: #selector(removeStudentLoanAccBtnPressed), for: .touchUpInside)
+//        cell.logoImg.loadFromFile(debtAccount.logoImg)
+        let recent_payment = debtAccount.debtAccountParse.last_payment_amount_dollars
+        let ticketAmount = String(debtAccount.last_payment_ticket_amount)
+        cell.recentPaymentLabel.text = "Most Recent Payment: " + recent_payment + " =\(ticketAmount) tickets"
+        cell.setChevron(imageName: "chevronGrey")
+
         return cell
-    }
-    
-    @objc private func removeStudentLoanAccBtnPressed() {
-     print("removeStudentLoanAccBtnPressed")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,43 +152,6 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70))
-        footer.backgroundColor = .white
-        let connectLoanAccountBtn = UIButton(frame: CGRect(x:15,y: 10 ,width:footer.frame.width - 30,height:70))
-        connectLoanAccountBtn.backgroundColor = .white
-        connectLoanAccountBtn.titleLabel?.textAlignment = .center
-        connectLoanAccountBtn.titleLabel?.numberOfLines = 0
-        connectLoanAccountBtn.layer.cornerRadius =  8
-        connectLoanAccountBtn.layer.masksToBounds = false
-        connectLoanAccountBtn.layer.shadowColor = UIColor.black.cgColor
-        connectLoanAccountBtn.layer.shadowOpacity = 0.23
-        connectLoanAccountBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
-        connectLoanAccountBtn.layer.shadowRadius = 5
-        connectLoanAccountBtn.layer.shouldRasterize = true
-        connectLoanAccountBtn.layer.rasterizationScale = UIScreen.main.scale
-        
-        connectLoanAccountBtn.addDashBorder()
-        connectLoanAccountBtn.setTitle("+ Connect Another Student Loan Account", for: .normal)
-        connectLoanAccountBtn.setTitleColor(.black, for: .normal)
-        connectLoanAccountBtn.addTarget(self, action: #selector(connectLoanAccountBtnPressed), for: .touchUpInside)
-        footer.addSubview(connectLoanAccountBtn)
-        return footer
-    }
-    
-    @objc private func connectLoanAccountBtnPressed() {
-        print("connectLoanAccountBtnPressed")
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-        return 90
+        return 300
     }
 }

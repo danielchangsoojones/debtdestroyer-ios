@@ -21,16 +21,4 @@ class BankDataStore {
             }
         }
     }
-    
-    func loadDebtAccounts(completion: @escaping ([DebtAccountsParse]) -> Void) {
-        PFCloud.callFunction(inBackground: "getDebtAccounts", withParameters: nil) { (result, error) in
-            if let acc = result  as? [DebtAccountsParse]  {
-                completion(acc)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "getDebtAccounts")
-            }
-        }
-    }
 }

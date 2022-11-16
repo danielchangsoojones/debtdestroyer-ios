@@ -27,15 +27,15 @@ class HomeTabBarViewController: UITabBarController {
         self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
         
         let tabTickets = tabBar.items![0]
-        tabTickets.image = UIImage(named: "ticketBW")?.withRenderingMode(.alwaysOriginal)
+        tabTickets.image = UIImage(named: "ticketG")?.withRenderingMode(.alwaysOriginal)
         tabTickets.selectedImage = UIImage(named: "ticketC")?.withRenderingMode(.alwaysOriginal)
         
         let tabBank = tabBar.items![1]
-        tabBank.image = UIImage(named: "bankBW")?.withRenderingMode(.alwaysOriginal)
+        tabBank.image = UIImage(named: "bankG")?.withRenderingMode(.alwaysOriginal)
         tabBank.selectedImage = UIImage(named: "bankC")?.withRenderingMode(.alwaysOriginal)
         
         let tabSettings = tabBar.items![2]
-        tabSettings.image = UIImage(named: "settingsBW")?.withRenderingMode(.alwaysOriginal)
+        tabSettings.image = UIImage(named: "settingsG")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
     }
 }

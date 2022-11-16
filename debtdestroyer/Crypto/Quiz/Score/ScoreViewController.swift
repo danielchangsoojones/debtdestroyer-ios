@@ -44,8 +44,8 @@ class ScoreViewController: UIViewController {
         color1 = scoreView.hexStringToUIColor(hex: "FF2474")
         color2 = scoreView.hexStringToUIColor(hex: "FF7910")
         self.shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
-        self.skipButton.addTarget(self, action: #selector(SkipButtonPressed), for: .touchUpInside)
-        loadLeaderboard()
+        self.skipButton.addTarget(self, action: #selector(finished), for: .touchUpInside)
+        self.pointsLbl.text = "\(User.current()?.quizPointCounter ?? 0) Points!"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,33 +74,18 @@ class ScoreViewController: UIViewController {
         pointsLbl.textColor = scoreView.gradientColor(bounds: pointsLbl.bounds, gradientLayer: gradientLabel)
         
         Timer.runThisAfterDelay(seconds: 120.0) {
-            self.SkipButtonPressed()
+            self.finished()
         }
         
     }
-
-    private func loadLeaderboard() {
-        dataStore.getLeaderBoard(quizTopicID: quizTopic.objectId ?? "") { quizScores, deadlineMessage in
-
-            // MARK: this code will update info in bottom view if user attended quiz before
-            var index = 1
-            for quizScore in quizScores {
-                if User.current()?.objectId == quizScore.user.objectId {
-                    self.pointsLbl.text = String(quizScore.points) + " Points!"
-                    return
-                }
-                index += 1
-            }
-        }
-    }
-
     
     @objc private func shareButtonPressed() {
-        dataStore.didShareToInstagramStory(quizTopicID: quizTopic.objectId ?? "") {
-            //success
-        }
         if let storiesUrl = URL(string: "instagram-stories://share") {
             if UIApplication.shared.canOpenURL(storiesUrl) {
+                dataStore.didShareToInstagramStory(quizTopicID: quizTopic.objectId ?? "") {
+                    //success
+                    self.finished()
+                }
                 guard let image = UIImage(named: "instagram-story-photo") else { return }
                 guard let imageData = image.pngData() else { return }
                 let pasteboardItems: [String: Any] = [
@@ -123,10 +108,19 @@ class ScoreViewController: UIViewController {
         }
     }
     
-    @objc private func SkipButtonPressed() {
-        let leaderboardVC = ChampionsViewController(quizTopic: currentData.quizTopic)
-        self.navigationController?.pushViewController(leaderboardVC, animated: true)
-        
+    @objc private func finished() {
+        if Helpers.getTopViewController() is UINavigationController {
+            //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+            let tabBarVC = presentingViewController as? UITabBarController
+            if self.tabBarController?.viewControllers?.count == 4 {
+                tabBarVC?.selectedIndex = 2
+            } else {
+                tabBarVC?.selectedIndex = 1
+            }
+            dismiss(animated: true)
+        } else {
+            let leaderboardVC = ChampionsViewController()
+            self.navigationController?.pushViewController(leaderboardVC, animated: true)
+        }
     }
-
 }

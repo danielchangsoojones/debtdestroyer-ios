@@ -30,8 +30,7 @@ class QuestionViewController: UIViewController {
     var answerStackView = UIStackView()
     private var bottomView = UIView()
     var backBtn = UIButton()
-    let gifCheckMark = "https://media.giphy.com/media/QAUxbMqnNcMo9U0jt8/giphy.gif"
-    let gifCrossMark = "https://media.giphy.com/media/VIz2F9yck4NhxmoC59/giphy.gif"
+    var pointsLabel = UILabel()
     private let dataStore = QuizDataStore()
     
     private var currentData: QuizDataParse {
@@ -59,6 +58,7 @@ class QuestionViewController: UIViewController {
         print("question \(currentIndex + 1) of \(quizDatas.count)")
         self.circularView = questionView.circularView
         self.backBtn = questionView.backBtn
+        self.pointsLabel = questionView.pointsLabel
         self.timeLabel = questionView.timerLabel
         self.answerStackView = questionView.answerStackView
         backBtn.addTarget(self,action: #selector(backPressed),for: .touchUpInside)
@@ -71,6 +71,7 @@ class QuestionViewController: UIViewController {
         circularView.progressAnimation(duration: timeLeft)
         endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,6 +156,8 @@ class QuestionViewController: UIViewController {
                     correctAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
                     
                 } else {
+                    User.current()?.quizPointCounter += 1
+                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                     answerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
                     answerView.gifImgView.tintColor = .black
                     answerView.gifImgView.alpha = 0.2
@@ -196,11 +199,34 @@ class QuestionViewController: UIViewController {
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
             appD.quizRunning = false
-            let vc = ScoreViewController(quizTopic: self.quizDatas.first!.quizTopic, quizDatas: self.quizDatas, currentIndex: 0)
-            self.navigationController?.pushViewController(vc, animated: true)
+            if let storiesUrl = URL(string: "instagram-stories://share") {
+                if UIApplication.shared.canOpenURL(storiesUrl) {
+                    let vc = ScoreViewController(quizTopic: self.quizDatas.first!.quizTopic, quizDatas: self.quizDatas, currentIndex: 0)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    print("Sorry the application is not installed")
+                    finished()
+                }
+            }
         } else {
             let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func finished() {
+        if Helpers.getTopViewController() is UINavigationController {
+            //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+            let tabBarVC = presentingViewController as? UITabBarController
+            if self.tabBarController?.viewControllers?.count == 4 {
+                tabBarVC?.selectedIndex = 2
+            } else {
+                tabBarVC?.selectedIndex = 1
+            }
+            dismiss(animated: true)
+        } else {
+            let leaderboardVC = ChampionsViewController()
+            self.navigationController?.pushViewController(leaderboardVC, animated: true)
         }
     }
 }

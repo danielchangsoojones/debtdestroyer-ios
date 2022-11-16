@@ -27,9 +27,8 @@ class BankViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadTransactions()
-        loadDebtAccounts()
-        
     }
     
     private func setTableView() {
@@ -52,13 +51,6 @@ class BankViewController: UIViewController {
     private func loadTransactions() {
         dataStore.loadTransactionHistory { transactionHistory in
             self.transactionHistory = transactionHistory
-            self.tableView.reloadData()
-        }
-    }
-    
-    private func loadDebtAccounts() {
-        dataStore.loadDebtAccounts { debtAccounts in
-            self.debtAccountsData = debtAccounts
             self.tableView.reloadData()
         }
     }
@@ -151,14 +143,14 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
                     cell.balanceLabel.text = "Balance: $" + String(describing: remaining_balance)
                 }
                 
-                cell.logoImg.loadFromFile(debtAccount.logoImg)
+//                cell.logoImg.loadFromFile(debtAccount.logoImg)
                // cell.setChevron(imageName: "chevronGrey")
                 
             }
             
             else {
                 cell.logoImg.image = UIImage.init(named: "Plus")
-                cell.titleLabel.text = "Connect Your Student Loan Account"
+                cell.titleLabel.text = "Verify your student loan accounts to start earning tickets!"
                 cell.balanceLabel.textColor = hexStringToUIColor(hex: "FF1A7E")
                 cell.balanceLabel.text = "to start earning tickets everytime you pay down your student loans"
             }
@@ -329,7 +321,7 @@ extension BankViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     @objc private func editConnectedAccountsBtnClicked() {
-        let vc = ConnectedAccountsViewController(debtAccounts: debtAccountsData)
+        let vc = ConnectedAccountsViewController()
         self.navigationController?.pushViewController(vc.self, animated: true)
     }
     

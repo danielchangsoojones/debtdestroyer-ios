@@ -11,46 +11,104 @@ import Parse
 
 class PrizeViewController: UIViewController {
     
+    private enum AccountsType {
+        case AccountsConnected
+        case NoAccountsConnected
+    }
+    
+    private enum Section {
+        case WeekPrize
+        case ConnectAccount
+        case HowToEarnTicket
+    }
+    
+    private struct SectionData {
+        var type: AccountsType
+        var items: [Section]
+    }
+ 
+    private var sections = [SectionData]()
     private var tableView: UITableView!
     private let dataStore = PrizeDataStore()
     private var messageHelper: MessageHelper?
     var earningTicketsBtn : UIButton!
     private var pastWinnersData: [WinnerParse] = []
-
-    override func loadView() {
-        super.loadView()
-    }
+    private var hasNoAccountsConnected = false
+    private var debtAccountsData: [DebtAccountsParse] = []
+    private var ticketCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        NotificationCenter.default.addObserver(self, selector: #selector(playNowClicked), name: NSNotification.Name(rawValue: "playNowClicked"), object: nil)
+
+        sections = [ SectionData(type: .AccountsConnected, items: [.WeekPrize, .ConnectAccount, .HowToEarnTicket]), SectionData(type: .NoAccountsConnected, items: [.WeekPrize, .HowToEarnTicket])]
         setTableView()
-        setEarningTicketsBtn()
+//        setEarningTicketsBtn()
         ForceUpdate.checkIfForceUpdate()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(roundUpsClicked), name: NSNotification.Name(rawValue: "RoundUps"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(oneTimePaymentClicked), name: NSNotification.Name(rawValue: "OneTimePayment"), object: nil)
-
-        
+        setNavBarBtns()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkIfAuthed()
         loadSavingsInfo()
         loadSweepstakesInfo()
-        loadPastWinners()
-
+        loadTicketCount()
+    }
+    
+    private func setNavBarBtns() {
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.backgroundColor = .clear
+        navigationItem.hidesBackButton = true
+        
+        let navBtn = UIButton()
+        let attStr = NSMutableAttributedString(string: "help?", attributes:[
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 15)])
+        
+        attStr.append(NSMutableAttributedString(string: " Message us.", attributes:[
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 15),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor:UIColor.black]))
+        
+        navBtn.setAttributedTitle(attStr, for: .normal)
+        navBtn.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
+        let helpButton = UIBarButtonItem(customView: navBtn)
+        navigationItem.rightBarButtonItem = helpButton
+    }
+    
+    @objc private func helpPressed() {
+        messageHelper?.text(MessageHelper.customerServiceNum)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     @objc func roundUpsClicked() {
-        let vc = ScrollableViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+       
     }
     
     @objc func oneTimePaymentClicked() {
         
+    }
+    
+    private func checkIfAuthed() {
+        dataStore.checkIfMethodAuthed { isAuthed in
+            self.hasNoAccountsConnected = !isAuthed
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func loadTicketCount() {
+        dataStore.getTickets { ticketAmount in
+            self.ticketCount = ticketAmount
+            self.tableView.reloadData()
+        }
     }
     
     private func loadPastWinners() {
@@ -59,7 +117,7 @@ class PrizeViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-
+    
     private func loadSavingsInfo() {
         dataStore.savingsInfo()
         tableView.reloadData()
@@ -69,7 +127,6 @@ class PrizeViewController: UIViewController {
         dataStore.sweepstakesInfo()
         tableView.reloadData()
     }
-
     
     private func setTableView() {
         tableView = UITableView()
@@ -78,14 +135,19 @@ class PrizeViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        tableView.register(cellType: TicketTopView.self)
-        tableView.register(cellType: WeekPrizeCell.self)
-        tableView.register(cellType: PastWeeksPrizeCell.self)
-        tableView.register(cellType: HowToEarnTicketsCell.self)
+        //        tableView.register(cellType: WeekPrizeCell.self)
+        //        tableView.register(cellType: ConnectAccountsCell.self)
+        //        tableView.register(cellType: HowToEarnTicketsCell.self)
+        tableView.register(WeekPrizeCell.self, forCellReuseIdentifier: "WeekPrizeCell")
+        tableView.register(ConnectAccountsCell.self, forCellReuseIdentifier: "ConnectAccountsCell")
+        tableView.register(HowToEarnTicketsCell.self, forCellReuseIdentifier: "HowToEarnTicketsCell")
         tableView.reloadData()
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.edges.equalToSuperview()
+//            uncomment if setEarningTicketsBtn added
+//            make.topMargin.leftMargin.rightMargin.equalToSuperview()
+//            make.bottomMargin.equalToSuperview().offset(-120)
         }
     }
     
@@ -105,7 +167,7 @@ class PrizeViewController: UIViewController {
         let color1 = hexStringToUIColor(hex: "FF2474")
         let color2 = hexStringToUIColor(hex: "FF7910")
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
-
+        
         gradientLayer.frame = CGRect.init(
             x: earningTicketsBtn.frame.minX - 30,
             y: earningTicketsBtn.frame.minY - 30,
@@ -127,17 +189,16 @@ class PrizeViewController: UIViewController {
         
         gradientLayer.mask = shadowLayer
         view.layer.insertSublayer(gradientLayer, below: earningTicketsBtn.layer)
-
         
         let dimension: CGFloat = 70
         earningTicketsBtn.layer.cornerRadius = dimension / 2
         earningTicketsBtn.backgroundColor = .white
         view.addSubview(earningTicketsBtn)
-//        earningTicketsBtn.snp.makeConstraints{ make in
-//            make.height.equalTo(dimension)
-//            make.leading.trailing.equalToSuperview().inset(30)
-//            make.centerY.equalTo(footer)
-//        }
+    }
+    
+    @objc func playNowClicked() {
+        let startQuizVC = StartQuizViewController(showSkipButton: false)
+        self.navigationController?.pushViewController(startQuizVC, animated: true)
     }
     
     @objc private func earningTicketsBtnClicked() {
@@ -147,123 +208,55 @@ class PrizeViewController: UIViewController {
     @objc private func setUpBtnClicked() {
         print("setUpBtnClicked")
     }
+    
+    @objc private func connectAccBtnClicked() {
+        let vc = ConnectDisclosureViewController()//ConfirmInfoViewController()
+        self.navigationController?.pushViewController(vc.self, animated: true)
+        
+    }
 }
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        if hasNoAccountsConnected {
+            return 3
+        }
+            return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            // MARK: Savings Info View
-                return 1
-        } else if section == 1 {
-            // MARK: Sweepstakes Info View
-                return 1
-        } else if section == 2 {
-            // MARK: Past Winners View
-            return self.pastWinnersData.count
-        } else {
-            // MARK: How to Earn View
-            return 1
-        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            // MARK: Savings Info View
-            
-//            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
-//            cell.lblAmntPaidTo.text = dataStore.savingsInfoJSON["progress_meter_title"].stringValue
-//            cell.lblAmntPaid.text = "$" + dataStore.savingsInfoJSON["totalAmountPaidToLoan"].stringValue
-//            cell.ticketCount = dataStore.savingsInfoJSON["ticketCount"].stringValue
-//            cell.setLblNoOfTickets()
-            
-            
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TicketTopView.self)
-            cell.lblAmntPaidTo.text = UserDefaults.standard.string(forKey: "progress_meter_title")
-            cell.lblAmntPaid.text = "$" + (UserDefaults.standard.string(forKey: "totalAmountPaidToLoan") ?? "")
-            cell.ticketCount = UserDefaults.standard.string(forKey: "ticketCount") ?? ""
-            cell.setLblNoOfTickets()
-            let progressValue = (Int(cell.ticketCount) ?? 0)
-            cell.ticketProgressBar.progress = Float(progressValue)/50
-            
-            if progressValue >= 40 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                cell.stepImgView20.image = UIImage.init(named: "stepC")
-                cell.stepImgView30.image = UIImage.init(named: "stepC")
-                cell.stepImgView40.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label30.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label40.textColor = hexStringToUIColor(hex: "FF385E")
-            } else if progressValue >= 30 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                cell.stepImgView20.image = UIImage.init(named: "stepC")
-                cell.stepImgView30.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label30.textColor = hexStringToUIColor(hex: "FF385E")
-            } else if progressValue >= 20 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                cell.stepImgView20.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-                cell.Label20.textColor = hexStringToUIColor(hex: "FF385E")
-            } else if progressValue >= 10 {
-                cell.stepImgView10.image = UIImage.init(named: "stepC")
-                
-                cell.Label10.textColor = hexStringToUIColor(hex: "FF385E")
-            }
-            return cell
-        } else if indexPath.section == 1 {
-            // MARK: Sweepstakes Info View
+            // MARK: weekPrizeCell
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: WeekPrizeCell.self)
-            
-//            cell.announcementLbl.text = dataStore.sweepstakesInfoJSON["deadlineTxt"].stringValue
-//            cell.winLbl.text = dataStore.sweepstakesInfoJSON["prizeAmountTxt"].stringValue
-//            cell.weekPrizeLbl.text = dataStore.sweepstakesInfoJSON["title"].stringValue
-
-            cell.announcementLbl.text = UserDefaults.standard.string(forKey: "deadlineTxt")
-            cell.winLbl.text = UserDefaults.standard.string(forKey: "prizeAmountTxt")
-            cell.weekPrizeLbl.text = UserDefaults.standard.string(forKey: "title")
-            return cell
-        } else if indexPath.section == 2 {
-            // MARK: Past Winners View
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWeeksPrizeCell.self)
-            let file = self.pastWinnersData[0].value(forKey: "video") as AnyObject
-            
-            if let parseFile = file as? PFFileObject {
-                let query = PFQuery(className: "Winner")
-               
-        // posted a question on stack overflow to retrive video data from PFFileObject. here is a link. https://stackoverflow.com/questions/73661168/how-to-get-video-data-or-url-from-pffileobject
-                
-                
-                
-//                query.getObjectInBackground(withId: parseFile ) { object, error in
-//                    if (error == nil && object != nil) {
-//                        let videoFile = object!["keyForVideoPFFile"] as! PFFileObject
-//                        self.videoURL = videoFile.url!
-//                    }
-//
-//                }
-                
-            }
-            
-        
-            
-           
-
-            
-            return cell
-        } else {
-            // MARK: How to Earn View
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
+            cell.prizeDescriptionLabel.text = UserDefaults.standard.string(forKey: "deadlineTxt")
+            cell.prizeAmountLabel.text = UserDefaults.standard.string(forKey: "prizeAmountTxt")
+            cell.prizeTitleLabel.text = UserDefaults.standard.string(forKey: "title")
+            cell.ticketsAmountLabel.text = "\(ticketCount) Tickets"
             return cell
         }
+        if hasNoAccountsConnected {
+            if indexPath.section == 1 {
+                // MARK: Connect Account
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConnectAccountsCell.self)
+                cell.connectAccBtn.addTarget(self, action: #selector(connectAccBtnClicked), for: .touchUpInside)
+                return cell
+            } else if indexPath.section == 2 {
+                // MARK: How to earn tickets
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
+                return cell
+            }
+        } else {
+             if indexPath.section == 1 {
+                // MARK: How to earn tickets
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HowToEarnTicketsCell.self)
+                return cell
+            }
+        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

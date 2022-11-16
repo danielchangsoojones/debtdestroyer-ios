@@ -14,6 +14,7 @@ PODS:
   - Reusable/View (4.1.2)
   - SCLAlertView (0.8)
   - SnapKit (5.0.1)
+  - SwiftConfettiView (0.1.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - Reusable
   - SCLAlertView
   - SnapKit (~> 5.0.0)
+  - SwiftConfettiView
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -33,6 +35,7 @@ SPEC REPOS:
     - Reusable
     - SCLAlertView
     - SnapKit
+    - SwiftConfettiView
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -42,8 +45,9 @@ SPEC CHECKSUMS:
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftConfettiView: 1bdbc2e6913b6b1c76d8070802b212508ad5c352
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 58b9946e4dd424e66d0a3419ecfb176d16ca736c
+PODFILE CHECKSUM: c575d03e4e589d33df376ec7b42e24efb0c8c002
 
 COCOAPODS: 1.11.3

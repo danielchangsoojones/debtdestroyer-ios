@@ -13,23 +13,8 @@ class CryptoSettingsViewController: UIViewController {
     private var tableView: UITableView!
     var dataArr = [String]()
     var imgNameArr = [String]()
-    private var debtAccountsData: [DebtAccountsParse] = []
-    private let dataStore = BankDataStore()
+    private let quizDataStore = QuizDataStore()
     
-    private var quizDatas: [QuizDataParse] = []
-    private let currentIndex: Int
-    private var currentData: QuizDataParse {
-        return quizDatas[currentIndex]
-    }
-    
-    init(quizDatas: [QuizDataParse], currentIndex: Int) {
-        self.quizDatas = quizDatas
-        self.currentIndex = currentIndex
-        super.init(nibName: nil, bundle: nil)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     override func loadView() {
         super.loadView()
         setTableView()
@@ -37,23 +22,22 @@ class CryptoSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDebtAccounts()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Enter Winner Information", "Contact Us", "Leave Feedback", "Log Out", "Delete Account"]
+        dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Log Out", "Delete Account"]
 
-        imgNameArr = ["legal", "contactUs", "feedback", "logout", "deleteAcc"]
+        imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "logout", "deleteAcc"]
         
-//        dataArr = ["Enter Winner Information", "Contact Us", "Leave Feedback", "Log Out", "Delete Account", "Notification"]
-//
-//        imgNameArr = ["legal", "contactUs", "feedback", "logout", "deleteAcc", "deleteAcc"]
-        
+        if User.current()!.email == "messyjones@gmail.com" {
+            dataArr.append("Delete Quiz Scores")
+            imgNameArr.append("deleteAcc")
+            dataArr.append("Send Text Notification")
+            imgNameArr.append("contactUs")
+        }
+              
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isHidden = false
-
     }
-    
-    
     
     private func setTableView() {
         tableView = UITableView()
@@ -68,13 +52,11 @@ class CryptoSettingsViewController: UIViewController {
         }
     }
     
-    private func loadDebtAccounts() {
-        dataStore.loadDebtAccounts { debtAccounts in
-            self.debtAccountsData = debtAccounts
-            self.tableView.reloadData()
+    private func deleteQuizScores() {
+        quizDataStore.deleteQuizScores {
+            BannerAlert.show(title: "Quiz score deleted successfully!", subtitle: "", type: .success)
         }
     }
-    
 }
 
 extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -90,6 +72,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SettingsTableViewCell.self)
         cell.titleLabel.text = dataArr[indexPath.row]
         cell.logoImg.image = UIImage.init(named: imgNameArr[indexPath.row])
+        
         return cell
     }
     
@@ -106,11 +89,19 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             // MARK: Enter Winner Information
             let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
             UIApplication.shared.open(url)
-        } else if indexPath.row == 1 || indexPath.row == 2 {
+        } else if indexPath.row == 1 {
+            // MARK: Connected Accounts
+            let vc = ConnectedAccountsViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+        } else if indexPath.row == 2 || indexPath.row == 4 {
             // MARK: Contact Us
             // MARK: Leave Feedback
             messageHelper?.text("3176905323", body: "")
         } else if indexPath.row == 3 {
+            // MARK: Legal Disclosures
+            let vc = LegalDisclosuresViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+        }else if indexPath.row == 5 {
             // MARK: Logout
             User.logOutInBackground { error in
                 if let error = error {
@@ -123,15 +114,22 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.present(navController, animated: true)
                 }
             }
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 6 {
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
+        } else if indexPath.row == 7 {
+            // MARK: Delete Quiz Scores
+           deleteQuizScores()
         } else {
-            // MARK: Notification Permission
-            let vc = NotificationPermissionViewController()
-            self.navigationController?.pushViewController(vc.self, animated: true)
-            
+            // MARK: Send Text Notification
+            if User.sendMassTextNotification == true {
+                quizDataStore.sendMassTextNotification {
+                    print("success")
+                    User.sendMassTextNotification = false
+                    BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                }
+            }
         }
         
     }

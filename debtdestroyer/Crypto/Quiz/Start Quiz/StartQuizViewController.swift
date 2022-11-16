@@ -16,6 +16,16 @@ class StartQuizViewController: UIViewController {
     private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     private let dataStore = QuizDataStore()
     private var quizDatas: [QuizDataParse] = []
+    let showSkipButton: Bool
+    
+    init(showSkipButton: Bool) {
+        self.showSkipButton = showSkipButton
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -40,6 +50,26 @@ class StartQuizViewController: UIViewController {
         activityIndicator.color = UIColor.black
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        setSkipButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func setSkipButton() {
+        if showSkipButton {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Skip",
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(skipPressed))
+        }
+    }
+    
+    @objc private func skipPressed() {
+        dismiss(animated: true)
     }
     
     private func loadData() {
@@ -55,22 +85,31 @@ class StartQuizViewController: UIViewController {
                 } else {
                     self.titleLabel.text = "Play Daily Trivia"
                     self.descriptionLabel.text = "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins. Good Luck!"
-//                    self.titleLabel.text = "Become the trivia champion"
-//                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
+                    //                    self.titleLabel.text = "Become the trivia champion"
+                    //                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
                 }
-                self.activityIndicator.stopAnimating()
+            }
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    private func showNeedMethodAuthAlert(with error: Error, codeWord: String) {
+        let subtitle = error.localizedDescription.replacingOccurrences(of: codeWord, with: "")
+        let alertView = SCLAlertView()
+        alertView.addButton("Connect Accounts") {
+            if self.showSkipButton {
+                //on the modal pop up
+                self.dismiss(animated: true)
+            } else {
+                //on the 2nd tab
+                self.tabBarController?.selectedIndex = 0
             }
         }
+        alertView.showNotice("Connect Student Loan Accounts", subTitle: subtitle)
     }
     
     @objc func startQuizLoadData() {
         loadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadData()
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -89,10 +128,18 @@ class StartQuizViewController: UIViewController {
                         self.navigationController?.pushViewController(questionVC,
                                                                       animated: true)
                     }
+                } else if let error = error {
+                    let codeWord = "method_failed_auth:"
+                    if error.localizedDescription.contains(codeWord) {
+                        self.showNeedMethodAuthAlert(with: error, codeWord: codeWord)
+                    } else {
+//                        BannerAlert.show(with: error)
+                        let alertView = SCLAlertView()
+                        let subtitle = error.localizedDescription
+                        alertView.showInfo("Next Quiz", subTitle: subtitle, closeButtonTitle: "Okay")
+                    }
                 } else {
-                    let alertView = SCLAlertView()
-                    let subtitle = error?.localizedDescription ?? "Please come into the app tommorow to see the next quiz."
-                    alertView.showInfo("Next Quiz", subTitle: subtitle, closeButtonTitle: "Okay")
+                    BannerAlert.showUnknownError(functionName: "checkIfAlreadyTakenQuiz")
                 }
             }
         } else {

@@ -42,7 +42,21 @@ class BannerAlert {
     }
 }
 
-struct Helpers {    
+struct Helpers {
+    static func getTopViewController() -> UIViewController? {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+
+        if var topController = keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            
+            return topController
+        }
+        
+        return nil
+    }
+    
     static func open(urlString: String) {
         guard let url = URL(string: urlString) else {
             BannerAlert.show(title: "Error", subtitle: "Could not open \(urlString)", type: .error)

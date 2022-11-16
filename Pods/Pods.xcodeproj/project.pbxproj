@@ -170,7 +170,7 @@
 		51E01EBD9A87F76D1EAFE52296ABC60A /* PFSignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EA19058B52DF24CD882319BFB16059 /* PFSignUpView.m */; };
 		52DD330B3BED8407E4EFED176F0B4DBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D1F89C8ABEED9FF38BF044BEE2D63C /* Foundation.framework */; };
 		533F06C629B5676D3E165946F1CAB400 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E994790F813B2F9F2E071DFBFADD1C98 /* UIKit.framework */; };
-		5348D5F091D5ADF504B110DFD11A672C /* SwiftConfettiView-SwiftConfettiView in Resources */ = {isa = PBXBuildFile; fileRef = 7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView-SwiftConfettiView */; };
+		5348D5F091D5ADF504B110DFD11A672C /* SwiftConfettiView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView.bundle */; };
 		53A0F0FFFCD1CA8AEDFAA3FE5BDBAAD5 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF2219C7E188BBE90D6F7F9EDF87F98 /* triangle.png */; };
 		53B76BEE72F8E02B5A6442FA43368667 /* PFGeoPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2F018C1A1F877864B25CC76000370 /* PFGeoPoint.m */; };
 		546CBF0886ADBB9ACE3FE8CC559D315C /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0EF47F08D30AE05426E2A3FD28558076 /* fr.lproj */; };
@@ -259,7 +259,7 @@
 		7AF32F298E9B93168D690D6676074DE5 /* PFFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9863557AC7B5EAD485F6C4A9EFD9427F /* PFFileManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7B133C3B8B079B4E4BE58EE69F20A5E8 /* ParseClientConfiguration_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A3C23706AFD1AD0E02741EAF281E88 /* ParseClientConfiguration_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7B4F2182E0AAC760686F93DF586F5735 /* PFPushUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 43CACF7035341E96602C9D5AC3B746EC /* PFPushUtilities.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7C3DAD59AF66DC44009B66F9375B74AE /* Parse-Parse in Resources */ = {isa = PBXBuildFile; fileRef = ED7ADA84A7005589821D254428CD2D26 /* Parse-Parse */; };
+		7C3DAD59AF66DC44009B66F9375B74AE /* Parse.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7ADA84A7005589821D254428CD2D26 /* Parse.bundle */; };
 		7C40315357B6F6C381DA8FCA1DDABEB6 /* PFMutableFileState.m in Sources */ = {isa = PBXBuildFile; fileRef = 357E2EB2F4E6CC57F9AD58717699AEF7 /* PFMutableFileState.m */; };
 		7C43C67328E3BACED686491C30FAFFCE /* PFURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 9353612EA0BD21C230419FE444F2ABD1 /* PFURLSession.m */; };
 		7CD31C7FC9E70721028072AF6570BBB3 /* PFLogInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD2F1FC9BA205AADE429ED9A4844B6F /* PFLogInView.m */; };
@@ -282,7 +282,7 @@
 		825062025906CE93C5D124E1FD9A811E /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C5504ECD61790B5AD9768D82F4F6A6 /* ConstraintMakerExtendable.swift */; };
 		82F4BBA35A8D3AE89B5106C20AAA58F2 /* PFFilePersistenceGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F3F04428C3664B3C79B9C2A507EDDE /* PFFilePersistenceGroup.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		83EE8B61D8C39C6056BB538C744BD1F6 /* PFPaymentTransactionObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 7903D236C14AD868A427E5ED2FBB2C3C /* PFPaymentTransactionObserver.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		83EEE81D155B2646A3E48ECE20F59DCD /* Parse-ParseUI in Resources */ = {isa = PBXBuildFile; fileRef = 040FB37DB755D3271E65935E0D248AE4 /* Parse-ParseUI */; };
+		83EEE81D155B2646A3E48ECE20F59DCD /* ParseUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 040FB37DB755D3271E65935E0D248AE4 /* ParseUI.bundle */; };
 		840D9889672445614F9610762C91F7B3 /* PFSQLiteDatabaseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A7FFF739E70573F75E9D8ED17D52D77D /* PFSQLiteDatabaseResult.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8449EB1DFD43E222D687D5A8D2088D2D /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A639EE7140ECA4C169B7BC16D1857BA /* ConstraintLayoutGuideDSL.swift */; };
 		84E4EB3F05A2ECEAD17E3CDA849A7188 /* PFConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EE609D5B8D6849E1277C291877D77354 /* PFConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -654,7 +654,7 @@
 		02B6C2CADF3C9302E3BA4A1CB847F738 /* PFAlertView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFAlertView.h; path = Parse/Parse/Internal/PFAlertView.h; sourceTree = "<group>"; };
 		02E6F103EF3D8C3A6B052DABA1536533 /* PFNetworkCommand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFNetworkCommand.h; path = Parse/Parse/Internal/PFNetworkCommand.h; sourceTree = "<group>"; };
 		033D00654480EFA0A98EBA24EF9CB0D0 /* PFCloudCodeController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFCloudCodeController.h; path = Parse/Parse/Internal/CloudCode/PFCloudCodeController.h; sourceTree = "<group>"; };
-		040FB37DB755D3271E65935E0D248AE4 /* Parse-ParseUI */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Parse-ParseUI"; path = ParseUI.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		040FB37DB755D3271E65935E0D248AE4 /* ParseUI.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParseUI.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		04139FD16E09C86EC791A5D861BB7673 /* PFInstallation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFInstallation.h; path = Parse/Parse/PFInstallation.h; sourceTree = "<group>"; };
 		0429B6475B666550DD2347176C148086 /* PFUserAuthenticationDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFUserAuthenticationDelegate.h; path = Parse/Parse/PFUserAuthenticationDelegate.h; sourceTree = "<group>"; };
 		0494E2D4A957A03E8A89B4FA97EF0E39 /* PFURLSessionCommandRunner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFURLSessionCommandRunner.h; path = Parse/Parse/Internal/Commands/CommandRunner/URLSession/PFURLSessionCommandRunner.h; sourceTree = "<group>"; };
@@ -675,7 +675,7 @@
 		074BE4A76A834580E6D22B7E1241CCAD /* PFSignUpViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFSignUpViewController.h; path = ParseUI/Classes/SignUpViewController/PFSignUpViewController.h; sourceTree = "<group>"; };
 		084A7FDCDD6151F71F4BCEA4B22598FA /* PFInstallationPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFInstallationPrivate.h; path = Parse/Parse/Internal/Installation/PFInstallationPrivate.h; sourceTree = "<group>"; };
 		08D07E4B362924BEB604E304E7DFEC01 /* PFActivityIndicatorCollectionReusableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFActivityIndicatorCollectionReusableView.h; path = ParseUI/Classes/Internal/Cells/PFActivityIndicatorCollectionReusableView.h; sourceTree = "<group>"; };
-		09DA49A7A3078A5E84811C76AC83E8D9 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = ParseUI/Resources/Localization/en.lproj; sourceTree = "<group>"; };
+		09DA49A7A3078A5E84811C76AC83E8D9 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = ParseUI/Resources/Localization/en.lproj; sourceTree = "<group>"; };
 		0B91F2338A54B398CA25FC9AFDC27DC8 /* PFAnonymousAuthenticationProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFAnonymousAuthenticationProvider.m; path = Parse/Parse/Internal/User/AuthenticationProviders/Providers/Anonymous/PFAnonymousAuthenticationProvider.m; sourceTree = "<group>"; };
 		0BCFBA0CA0EAE5EDB970693F94D5C7FB /* PFMutableUserState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFMutableUserState.h; path = Parse/Parse/Internal/User/State/PFMutableUserState.h; sourceTree = "<group>"; };
 		0C3A07E1BD318A0480A85025BBEEF731 /* PFConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFConstants.h; path = Parse/Parse/PFConstants.h; sourceTree = "<group>"; };
@@ -687,7 +687,7 @@
 		0EBD251338F31A7A558AD7BAA7E9C911 /* PFMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFMacros.h; path = Parse/Parse/Internal/PFMacros.h; sourceTree = "<group>"; };
 		0ED2E1CD19AC87C4C2E2490BBF90CA95 /* PFColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFColor.m; path = ParseUI/Classes/Internal/Extensions/PFColor.m; sourceTree = "<group>"; };
 		0ED86AB34AA4A062C5DBFF7DE3B99128 /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Source/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
-		0EF47F08D30AE05426E2A3FD28558076 /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = fr.lproj; path = ParseUI/Resources/Localization/fr.lproj; sourceTree = "<group>"; };
+		0EF47F08D30AE05426E2A3FD28558076 /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fr.lproj; path = ParseUI/Resources/Localization/fr.lproj; sourceTree = "<group>"; };
 		0FD5DB53CB4A5F8FD56534C390E83AA6 /* ParseUIConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ParseUIConstants.h; path = ParseUI/Other/ParseUIConstants.h; sourceTree = "<group>"; };
 		0FFBFA0D0F4F127700413D919BC47610 /* PFPropertyInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFPropertyInfo.m; path = Parse/Parse/Internal/PropertyInfo/PFPropertyInfo.m; sourceTree = "<group>"; };
 		108FAC876E608AB9B86DD22312F4848F /* PFUserState_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFUserState_Private.h; path = Parse/Parse/Internal/User/State/PFUserState_Private.h; sourceTree = "<group>"; };
@@ -810,7 +810,7 @@
 		44BA71672EED05542C90873965B0E252 /* PFObjectFilePersistenceController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFObjectFilePersistenceController.h; path = Parse/Parse/Internal/Object/FilePersistence/PFObjectFilePersistenceController.h; sourceTree = "<group>"; };
 		44CA7EA7AF030D64FD21979F65E25FFF /* PFPropertyInfo_Runtime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFPropertyInfo_Runtime.m; path = Parse/Parse/Internal/PropertyInfo/PFPropertyInfo_Runtime.m; sourceTree = "<group>"; };
 		44E606A1944A0F5264127F5112833868 /* BFCancellationTokenRegistration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFCancellationTokenRegistration.m; path = Bolts/Common/BFCancellationTokenRegistration.m; sourceTree = "<group>"; };
-		4545C118F67435E3257F1EF4402E6B1E /* pt-BR.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "pt-BR.lproj"; path = "ParseUI/Resources/Localization/pt-BR.lproj"; sourceTree = "<group>"; };
+		4545C118F67435E3257F1EF4402E6B1E /* pt-BR.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "pt-BR.lproj"; path = "ParseUI/Resources/Localization/pt-BR.lproj"; sourceTree = "<group>"; };
 		457E49E8D5529589A8FADD8D1FF5F02C /* PFRelationState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFRelationState.m; path = Parse/Parse/Internal/Relation/State/PFRelationState.m; sourceTree = "<group>"; };
 		45B911575828F3294D2C10C7F4601C98 /* Reusable-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Reusable-dummy.m"; sourceTree = "<group>"; };
 		45DDFAA09BA55D276B0802F44614D18D /* confetti.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = confetti.png; path = SwiftConfettiView/Assets/confetti.png; sourceTree = "<group>"; };
@@ -939,7 +939,7 @@
 		799DF931CBDA21C34E496D851EB4DF69 /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Source/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
 		79BCDA473902FB445DC77C4DC56E92F3 /* PFLocationManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFLocationManager.h; path = Parse/Parse/Internal/PFLocationManager.h; sourceTree = "<group>"; };
 		7A32418182409638875C75B5BBD4CED6 /* PFAnonymousUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFAnonymousUtils.h; path = Parse/Parse/PFAnonymousUtils.h; sourceTree = "<group>"; };
-		7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView-SwiftConfettiView */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "SwiftConfettiView-SwiftConfettiView"; path = SwiftConfettiView.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftConfettiView.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B7D5C2C6F86548BCADBBE01CD458383 /* PFCloud.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFCloud.m; path = Parse/Parse/PFCloud.m; sourceTree = "<group>"; };
 		7C017E3C9E13EA4C8D79744569D56E25 /* Pods-debtdestroyer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-debtdestroyer.modulemap"; sourceTree = "<group>"; };
 		7C5580A96AE469A627FF0AF3F7E53BAD /* PFThreadsafety.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFThreadsafety.h; path = Parse/Parse/Internal/ThreadSafety/PFThreadsafety.h; sourceTree = "<group>"; };
@@ -1019,7 +1019,7 @@
 		9CA1EBDD5CE66A2DFC97C9F443AEACCA /* PFPush.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFPush.h; path = Parse/Parse/PFPush.h; sourceTree = "<group>"; };
 		9CBAC8DC09572112103E8FFB19AB12CF /* BFCancellationTokenRegistration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFCancellationTokenRegistration.h; path = Bolts/Common/BFCancellationTokenRegistration.h; sourceTree = "<group>"; };
 		9CF830D6CE964F7BA11D818FBBC48BA4 /* PFDataProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFDataProvider.h; path = Parse/Parse/Internal/PFDataProvider.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E76A5B17A14CBAB733730F321D2C001 /* PFEventuallyPin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFEventuallyPin.m; path = Parse/Parse/Internal/PFEventuallyPin.m; sourceTree = "<group>"; };
 		9EC1BC0E22925C3724B13B0D8A40CA1A /* Reusable-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Reusable-Info.plist"; sourceTree = "<group>"; };
 		9F2A778E2DBFAFB86C390BCA3F274DFD /* Bolts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Bolts.debug.xcconfig; sourceTree = "<group>"; };
@@ -1048,7 +1048,7 @@
 		A75E4578D248FD15FD865791F4B238E0 /* PFAppleUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFAppleUtils.h; path = "ParseUI/Sign In With Apple/PFAppleUtils.h"; sourceTree = "<group>"; };
 		A78230E3296B1FD1F5EF04B2A3C116E8 /* PFLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFLogging.h; path = Parse/Parse/Internal/PFLogging.h; sourceTree = "<group>"; };
 		A7FFF739E70573F75E9D8ED17D52D77D /* PFSQLiteDatabaseResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFSQLiteDatabaseResult.h; path = Parse/Parse/Internal/LocalDataStore/SQLite/PFSQLiteDatabaseResult.h; sourceTree = "<group>"; };
-		A810AC8914AB0A47ECA986FC96F2DEAA /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = Parse/Parse/Resources/en.lproj; sourceTree = "<group>"; };
+		A810AC8914AB0A47ECA986FC96F2DEAA /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = Parse/Parse/Resources/en.lproj; sourceTree = "<group>"; };
 		A8829FA08C7844D1DA6BD7197728D550 /* PFUser+Synchronous.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PFUser+Synchronous.h"; path = "Parse/Parse/PFUser+Synchronous.h"; sourceTree = "<group>"; };
 		A894408BA02D6CD9A55DB6F92E0ADB67 /* Bolts.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Bolts.modulemap; sourceTree = "<group>"; };
 		A8A73252B33AE47879A3C27FAA0B871B /* SwiftConfettiView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftConfettiView.debug.xcconfig; sourceTree = "<group>"; };
@@ -1117,7 +1117,7 @@
 		C7B35A6B6D3CC5C7CE795A56085AD538 /* PFSQLiteStatement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFSQLiteStatement.m; path = Parse/Parse/Internal/LocalDataStore/SQLite/PFSQLiteStatement.m; sourceTree = "<group>"; };
 		C7C327CFDD7A44D36ECF29BB213C477A /* ResourceBundle-Parse-Parse-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-Parse-Parse-Info.plist"; sourceTree = "<group>"; };
 		C7EA871F153E65DFF1018C361F6004AD /* PFAnonymousUtils+Deprecated.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PFAnonymousUtils+Deprecated.h"; path = "Parse/Parse/PFAnonymousUtils+Deprecated.h"; sourceTree = "<group>"; };
-		C8EAF69ED65686C084230668CCC7A5B6 /* sv.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = sv.lproj; path = ParseUI/Resources/Localization/sv.lproj; sourceTree = "<group>"; };
+		C8EAF69ED65686C084230668CCC7A5B6 /* sv.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = sv.lproj; path = ParseUI/Resources/Localization/sv.lproj; sourceTree = "<group>"; };
 		CC159F79F897C2E521AE1E4E1DAB08D5 /* Bolts-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Bolts-prefix.pch"; sourceTree = "<group>"; };
 		CC2419315589B3F79AF64FD4C6BB97B6 /* PFURLSessionUploadTaskDelegate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFURLSessionUploadTaskDelegate.m; path = Parse/Parse/Internal/Commands/CommandRunner/URLSession/Session/TaskDelegate/PFURLSessionUploadTaskDelegate.m; sourceTree = "<group>"; };
 		CC2A7EA5763F204BFE5D160B9921683D /* PFObjectEstimatedData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFObjectEstimatedData.m; path = Parse/Parse/Internal/Object/EstimatedData/PFObjectEstimatedData.m; sourceTree = "<group>"; };
@@ -1163,7 +1163,7 @@
 		DCA186C219049303F76AA2BD6D3341DA /* PFAnalyticsController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFAnalyticsController.m; path = Parse/Parse/Internal/Analytics/Controller/PFAnalyticsController.m; sourceTree = "<group>"; };
 		DCFBC95D2C7C2F16C1ED06B1FE20B05F /* PFSession_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFSession_Private.h; path = Parse/Parse/Internal/Session/PFSession_Private.h; sourceTree = "<group>"; };
 		DD1E250C2C18D30562C7D335C39699CC /* PFCommandRunningConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFCommandRunningConstants.m; path = Parse/Parse/Internal/Commands/CommandRunner/PFCommandRunningConstants.m; sourceTree = "<group>"; };
-		DD69DB9EE2420DF71A5D4A65400B4DC4 /* he.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = he.lproj; path = ParseUI/Resources/Localization/he.lproj; sourceTree = "<group>"; };
+		DD69DB9EE2420DF71A5D4A65400B4DC4 /* he.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = he.lproj; path = ParseUI/Resources/Localization/he.lproj; sourceTree = "<group>"; };
 		DD84FC121A384B04F7A63936F6AC3140 /* PFInternalUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFInternalUtils.h; path = Parse/Parse/Internal/PFInternalUtils.h; sourceTree = "<group>"; };
 		DDCA9CA24009535022CDF6BCF4C095B0 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelatableTarget.swift; path = Source/ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
 		DE856881CD80A46AF5C2A552A729651D /* PFProduct+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PFProduct+Private.h"; path = "Parse/Parse/Internal/Product/PFProduct+Private.h"; sourceTree = "<group>"; };
@@ -1195,9 +1195,9 @@
 		EA75712A8180ADB493A2CA6B13E26161 /* PFDateFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFDateFormatter.m; path = Parse/Parse/Internal/PFDateFormatter.m; sourceTree = "<group>"; };
 		EA89ABA856EF62DCB5C5A6C99E526134 /* UICollectionView+Reusable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Reusable.swift"; path = "Sources/View/UICollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		ED6F67C41B65A7F721665566837748C4 /* PFMutableObjectState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFMutableObjectState.h; path = Parse/Parse/Internal/Object/State/PFMutableObjectState.h; sourceTree = "<group>"; };
-		ED7ADA84A7005589821D254428CD2D26 /* Parse-Parse */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Parse-Parse"; path = Parse.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7ADA84A7005589821D254428CD2D26 /* Parse.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Parse.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE20063AEA8CFF735C9ABAEBEFE7EEF6 /* PFPushState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFPushState.m; path = Parse/Parse/Internal/Push/State/PFPushState.m; sourceTree = "<group>"; };
-		EE3542A6054807DE0A93138609F5F67A /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = de.lproj; path = ParseUI/Resources/Localization/de.lproj; sourceTree = "<group>"; };
+		EE3542A6054807DE0A93138609F5F67A /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = de.lproj; path = ParseUI/Resources/Localization/de.lproj; sourceTree = "<group>"; };
 		EE410D779B8573C859775F22EDB4C440 /* PFSignUpViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFSignUpViewController.m; path = ParseUI/Classes/SignUpViewController/PFSignUpViewController.m; sourceTree = "<group>"; };
 		EE609D5B8D6849E1277C291877D77354 /* PFConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFConfig.h; path = Parse/Parse/PFConfig.h; sourceTree = "<group>"; };
 		EEE7D3D334D9CF74A4EBCC8092BB6ED9 /* PFQuery+Synchronous.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PFQuery+Synchronous.h"; path = "Parse/Parse/PFQuery+Synchronous.h"; sourceTree = "<group>"; };
@@ -1398,7 +1398,6 @@
 				A4E168D9D4C81C19C0DA4B958034D932 /* UILayoutSupport+Extensions.swift */,
 				78B3EAF1F99F2D81A2E62F3BDBF26FAA /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -1582,14 +1581,14 @@
 				F84B331B5D6AAF1548DD1BB004AE5C2A /* Bolts */,
 				41FD498512AB15F6641709060EFFAFBA /* BRYXBanner */,
 				0652F2476C7C87C6C0F6CB68072EA25F /* Parse */,
-				ED7ADA84A7005589821D254428CD2D26 /* Parse-Parse */,
-				040FB37DB755D3271E65935E0D248AE4 /* Parse-ParseUI */,
+				ED7ADA84A7005589821D254428CD2D26 /* Parse.bundle */,
+				040FB37DB755D3271E65935E0D248AE4 /* ParseUI.bundle */,
 				949F158A5D681DD142D0ED652ADD386B /* Pods-debtdestroyer */,
 				A0ABA07B4D48354ED3F51C2D6AF5426B /* Reusable */,
 				962A4B1F73A781D3BB906D0525BD2A8A /* SCLAlertView */,
 				979486118B3E90C08386079D57962701 /* SnapKit */,
 				4DC9A595BC276DD77E5080354EFFE74F /* SwiftConfettiView */,
-				7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView-SwiftConfettiView */,
+				7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView.bundle */,
 				E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON */,
 			);
 			name = Products;
@@ -1653,7 +1652,6 @@
 				058AD392B0109BC98479E58F288DE6F8 /* SwiftyJSON.swift */,
 				075F256E4EA5418742E7FE3CD67AF9A2 /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -1696,7 +1694,6 @@
 				B59309116F7DECEB1155B26CF48FD883 /* Resources */,
 				B8AC7B181450D1AE6E8D43B535537682 /* Support Files */,
 			);
-			name = SwiftConfettiView;
 			path = SwiftConfettiView;
 			sourceTree = "<group>";
 		};
@@ -1707,7 +1704,6 @@
 				9AA5F9A0BF133617F59C0798CB7C25B4 /* Support Files */,
 				FED7D2A89BA3E2CF2E5C945E1598C158 /* View */,
 			);
-			name = Reusable;
 			path = Reusable;
 			sourceTree = "<group>";
 		};
@@ -1717,7 +1713,6 @@
 				3B10AD2BB5694CF175B4125D87209C2C /* Support Files */,
 				62BB75612DD9B217B1CE24F2475F9E64 /* Tasks */,
 			);
-			name = Bolts;
 			path = Bolts;
 			sourceTree = "<group>";
 		};
@@ -1727,7 +1722,6 @@
 				525C6A44CDA59D9EACDB23BA8419C049 /* Banner.swift */,
 				28AA7B2426A1FCAD69614163FB8193A0 /* Support Files */,
 			);
-			name = BRYXBanner;
 			path = BRYXBanner;
 			sourceTree = "<group>";
 		};
@@ -2164,7 +2158,6 @@
 				75582F320735E4F31913C50BA320FA1B /* Support Files */,
 				2564C7323830CCC8050C8DB418C2D33F /* UI */,
 			);
-			name = Parse;
 			path = Parse;
 			sourceTree = "<group>";
 		};
@@ -2203,7 +2196,6 @@
 				348C57D6E6FF3C98887DE8753223D2A0 /* SCLExtensions.swift */,
 				1939A2814C92C1A515EA072C66E78ACD /* Support Files */,
 			);
-			name = SCLAlertView;
 			path = SCLAlertView;
 			sourceTree = "<group>";
 		};
@@ -2668,7 +2660,7 @@
 			);
 			name = "Parse-ParseUI";
 			productName = ParseUI;
-			productReference = 040FB37DB755D3271E65935E0D248AE4 /* Parse-ParseUI */;
+			productReference = 040FB37DB755D3271E65935E0D248AE4 /* ParseUI.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		7F3FE5658AEC4AF2B296EDA73A218182 /* Parse */ = {
@@ -2706,7 +2698,7 @@
 			);
 			name = "SwiftConfettiView-SwiftConfettiView";
 			productName = SwiftConfettiView;
-			productReference = 7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView-SwiftConfettiView */;
+			productReference = 7B5B6DA880ADA4130BCC09196858DDAD /* SwiftConfettiView.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */ = {
@@ -2759,7 +2751,7 @@
 			);
 			name = "Parse-Parse";
 			productName = Parse;
-			productReference = ED7ADA84A7005589821D254428CD2D26 /* Parse-Parse */;
+			productReference = ED7ADA84A7005589821D254428CD2D26 /* Parse.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		F22CCBE4FECBA8F92492577B4E52497C /* SwiftConfettiView */ = {
@@ -2836,7 +2828,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5348D5F091D5ADF504B110DFD11A672C /* SwiftConfettiView-SwiftConfettiView in Resources */,
+				5348D5F091D5ADF504B110DFD11A672C /* SwiftConfettiView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2851,8 +2843,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C3DAD59AF66DC44009B66F9375B74AE /* Parse-Parse in Resources */,
-				83EEE81D155B2646A3E48ECE20F59DCD /* Parse-ParseUI in Resources */,
+				7C3DAD59AF66DC44009B66F9375B74AE /* Parse.bundle in Resources */,
+				83EEE81D155B2646A3E48ECE20F59DCD /* ParseUI.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3340,6 +3332,7 @@
 			baseConfigurationReference = 4B92FCBAE127390716F95E4A06C2B040 /* Parse.release.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
+				DEVELOPMENT_TEAM = WGU25444T9;
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-ParseUI-Parse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3532,6 +3525,7 @@
 			baseConfigurationReference = A8A73252B33AE47879A3C27FAA0B871B /* SwiftConfettiView.debug.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftConfettiView";
+				DEVELOPMENT_TEAM = WGU25444T9;
 				IBSC_MODULE = SwiftConfettiView;
 				INFOPLIST_FILE = "Target Support Files/SwiftConfettiView/ResourceBundle-SwiftConfettiView-SwiftConfettiView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3548,6 +3542,7 @@
 			baseConfigurationReference = 434A84EF739AD67F3142321A5CBE3C59 /* Parse.debug.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
+				DEVELOPMENT_TEAM = WGU25444T9;
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-ParseUI-Parse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3670,6 +3665,7 @@
 			baseConfigurationReference = 40E6B193F8B675F2BF20ABC1C700DEE1 /* SwiftConfettiView.release.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftConfettiView";
+				DEVELOPMENT_TEAM = WGU25444T9;
 				IBSC_MODULE = SwiftConfettiView;
 				INFOPLIST_FILE = "Target Support Files/SwiftConfettiView/ResourceBundle-SwiftConfettiView-SwiftConfettiView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -4021,6 +4017,7 @@
 			baseConfigurationReference = 4B92FCBAE127390716F95E4A06C2B040 /* Parse.release.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
+				DEVELOPMENT_TEAM = WGU25444T9;
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-Parse-Parse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -4072,6 +4069,7 @@
 			baseConfigurationReference = 434A84EF739AD67F3142321A5CBE3C59 /* Parse.debug.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
+				DEVELOPMENT_TEAM = WGU25444T9;
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-Parse-Parse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

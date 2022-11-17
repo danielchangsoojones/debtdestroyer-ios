@@ -10,14 +10,14 @@ import UIKit
 class CryptoTabBarViewController: UITabBarController {
     private var dataStore = QuizDataStore()
     private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    var quizPopUpTimer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTabs()
-        handleAppDidBecomeActive()
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
-        enteredScreen() // called here because after login func handleAppDidBecomeActive >> observer added with UIApplication.didBecomeActiveNotification was not getting called as its already called before login so tabs was not getting loaded.
+        enteredScreen()
         
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
         activityIndicator.color = UIColor.black
@@ -78,24 +78,30 @@ class CryptoTabBarViewController: UITabBarController {
 }
 
 extension CryptoTabBarViewController {
-    private func handleAppDidBecomeActive() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(enteredScreen),
-                                               name: UIApplication.didBecomeActiveNotification,
-                                               object: nil)
-    }
-    
     @objc private func enteredScreen() {
         dataStore.checkShowQuizPopUp { showQuizPopUp, _ in
             self.activityIndicator.stopAnimating()
             let isAlreadyShowingStartQuizVC = self.checkIfAlreadyShowingStartQuizVC()
             if showQuizPopUp && !isAlreadyShowingStartQuizVC {
-                self.presentStartQuizVC()
+//                if !User.quizPopUpSkipd && !User.quizPopUpTimerRunning{
+                    self.presentStartQuizVC()
+//                }
             }
         }
     }
     
     private func presentStartQuizVC() {
+//        print("self.presentStartQuizVC()")
+//        print("timer started")
+//        User.quizPopUpTimerRunning = true
+//        self.quizPopUpTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false) { timer in
+//            User.quizPopUpTimerRunning = false
+//            User.quizPopUpSkipd = false
+//            print("timer complete")
+//            self.quizPopUpTimer.invalidate()
+//            self.enteredScreen()
+//        }
+        
         let startQuizVC = StartQuizViewController(showSkipButton: true)
         let navController = UINavigationController(rootViewController: startQuizVC)
         present(navController, animated: true)

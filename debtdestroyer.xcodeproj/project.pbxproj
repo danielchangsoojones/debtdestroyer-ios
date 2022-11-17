@@ -47,8 +47,6 @@
 		0A50659128C346D200207759 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659028C346D200207759 /* SubscriptionView.swift */; };
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501B292355B5001B028C /* ResetPasswordViewController.swift */; };
-		0A51501E292394C0001B028C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501D292394C0001B028C /* EditProfileViewController.swift */; };
-		0A51502C2923CB69001B028C /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51502B2923CB69001B028C /* EditProfileView.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
 		0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */; };
@@ -114,6 +112,8 @@
 		0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A628B6577200985179 /* TransactionParse.swift */; };
 		0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A828B6623100985179 /* LoanAccountCell.swift */; };
 		0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */; };
+		0AACBBA32924F54D00575AEF /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AACBBA12924F54D00575AEF /* EditProfileView.swift */; };
+		0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AACBBA22924F54D00575AEF /* EditProfileViewController.swift */; };
 		0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3960F2918E8EB00A5AF44 /* HBSegmentedControl.swift */; };
 		0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58428BCEC4E0081758C /* Helper.swift */; };
 		0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */; };
@@ -186,8 +186,6 @@
 		0A50659028C346D200207759 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A51501B292355B5001B028C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
-		0A51501D292394C0001B028C /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		0A51502B2923CB69001B028C /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
 		0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -208,7 +206,7 @@
 		0A5FD4F828F8475100B995C8 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		0A5FD4F928F8475100B995C8 /* Montserrat-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BlackItalic.otf"; sourceTree = "<group>"; };
 		0A5FD4FA28F8475100B995C8 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
-		0A5FD4FB28F8475100B995C8 /* Montserrat-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.otf"; sourceTree = "<group>"; };
+		0A5FD4FB28F8475100B995C8 /* Montserrat-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Montserrat-BoldItalic.otf"; sourceTree = "<group>"; };
 		0A5FD4FC28F8475100B995C8 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
 		0A5FD4FD28F8475100B995C8 /* Montserrat-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.otf"; sourceTree = "<group>"; };
 		0A5FD4FE28F8475100B995C8 /* Montserrat-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.otf"; sourceTree = "<group>"; };
@@ -255,6 +253,8 @@
 		0A9E94A628B6577200985179 /* TransactionParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionParse.swift; sourceTree = "<group>"; };
 		0A9E94A828B6623100985179 /* LoanAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanAccountCell.swift; sourceTree = "<group>"; };
 		0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDataStore.swift; sourceTree = "<group>"; };
+		0AACBBA12924F54D00575AEF /* EditProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		0AACBBA22924F54D00575AEF /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		0AB3960F2918E8EB00A5AF44 /* HBSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBSegmentedControl.swift; sourceTree = "<group>"; };
 		0AB3F58428BCEC4E0081758C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
@@ -496,8 +496,8 @@
 		0A515021292394EB001B028C /* Edit Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0A51501D292394C0001B028C /* EditProfileViewController.swift */,
-				0A51502B2923CB69001B028C /* EditProfileView.swift */,
+				0AACBBA12924F54D00575AEF /* EditProfileView.swift */,
+				0AACBBA22924F54D00575AEF /* EditProfileViewController.swift */,
 			);
 			path = "Edit Profile";
 			sourceTree = "<group>";
@@ -1030,6 +1030,7 @@
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
+				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* AddressViewController.swift in Sources */,
 				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
@@ -1045,7 +1046,6 @@
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
-				0A51501E292394C0001B028C /* EditProfileViewController.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
@@ -1105,7 +1105,7 @@
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,
 				0A7A4A0328A3D384009EDE5E /* RegisterViewController.swift in Sources */,
 				0AB3F58528BCEC4E0081758C /* Helper.swift in Sources */,
-				0A51502C2923CB69001B028C /* EditProfileView.swift in Sources */,
+				0AACBBA32924F54D00575AEF /* EditProfileView.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,

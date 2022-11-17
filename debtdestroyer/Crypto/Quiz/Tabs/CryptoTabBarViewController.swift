@@ -99,7 +99,8 @@ extension CryptoTabBarViewController {
 //            User.quizPopUpTimerRunning = false
 //            User.quizPopUpSkipd = false
 //            print("timer complete")
-//
+//            self.quizPopUpTimer.invalidate()
+//            self.enteredScreen()
 //        }
         
         let startQuizVC = StartQuizViewController(showSkipButton: true)

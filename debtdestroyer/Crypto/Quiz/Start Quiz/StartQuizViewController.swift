@@ -69,7 +69,7 @@ class StartQuizViewController: UIViewController {
     }
     
     @objc private func skipPressed() {
-//        User.quizPopUpSkipd = true
+        User.quizPopUpSkipd = true
         dismiss(animated: true)
     }
     

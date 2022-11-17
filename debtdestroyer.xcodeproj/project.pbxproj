@@ -86,6 +86,7 @@
 		0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */; };
 		0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */; };
 		0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */; };
+		0A6E4AEB292667C20034E181 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E4AEA292667C20034E181 /* RepeatingTimer.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
 		0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */; };
 		0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */; };
@@ -226,6 +227,7 @@
 		0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnersViewController.swift; sourceTree = "<group>"; };
 		0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerTableCell.swift; sourceTree = "<group>"; };
+		0A6E4AEA292667C20034E181 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
 		0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcsriptionBasicView.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 			isa = PBXGroup;
 			children = (
 				0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */,
+				0A6E4AEA292667C20034E181 /* RepeatingTimer.swift */,
 				0A76B59328F996530084A629 /* CustomNavigationViewController.swift */,
 			);
 			path = Tabs;
@@ -1094,6 +1097,7 @@
 				0A44EF9A28E5907B006305B8 /* StartQuizViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,
+				0A6E4AEB292667C20034E181 /* RepeatingTimer.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,

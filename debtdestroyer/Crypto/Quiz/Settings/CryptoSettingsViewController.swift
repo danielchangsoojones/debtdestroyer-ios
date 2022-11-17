@@ -124,11 +124,28 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         } else {
             // MARK: Send Text Notification
             if User.sendMassTextNotification == false {
-                quizDataStore.sendMassTextNotification {
-                    print("success")
-                    User.sendMassTextNotification = true
-                    BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alertView = SCLAlertView(appearance: appearance)
+                
+                alertView.addButton("Send") {
+                    
+                    self.quizDataStore.sendMassTextNotification {
+                        print("success")
+                        User.sendMassTextNotification = true
+                        BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                    }
+                    
                 }
+                
+                alertView.addButton("Cancel") {
+                    
+                }
+                alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
+                
+                
             }
         }
         

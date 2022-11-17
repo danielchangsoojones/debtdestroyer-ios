@@ -90,10 +90,22 @@ extension CryptoTabBarViewController {
         }
     }
     
+    // https://medium.com/over-engineering/a-background-repeating-timer-in-swift-412cecfd2ef9
     private func presentStartQuizVC() {
 //        print("self.presentStartQuizVC()")
 //        print("timer started")
 //        User.quizPopUpTimerRunning = true
+//
+//        let t = RepeatingTimer(timeInterval: 30)
+//        t.eventHandler = {
+//            print("Timer Fired")
+//            User.quizPopUpTimerRunning = false
+//            User.quizPopUpSkipd = false
+//            print("timer complete")
+//            self.enteredScreen()
+//        }
+//        t.resume()
+        
 //        self.quizPopUpTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false) { timer in
 //            User.quizPopUpTimerRunning = false
 //            User.quizPopUpSkipd = false

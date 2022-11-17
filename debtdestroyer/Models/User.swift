@@ -19,6 +19,8 @@ class User: PFUser {
     static var sendMassTextNotification = false
     static var quizPopUpSkipd = false
     static var quizPopUpTimerRunning = false
+    static var hasAccountsConnected = false
+
     var quizPointCounter = 0
 
     var fullName: String {

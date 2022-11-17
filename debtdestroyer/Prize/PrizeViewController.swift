@@ -33,7 +33,6 @@ class PrizeViewController: UIViewController {
     private var messageHelper: MessageHelper?
     var earningTicketsBtn : UIButton!
     private var pastWinnersData: [WinnerParse] = []
-    private var hasNoAccountsConnected = false
     private var debtAccountsData: [DebtAccountsParse] = []
     private var ticketCount = 0
     
@@ -100,7 +99,7 @@ class PrizeViewController: UIViewController {
     
     private func checkIfAuthed() {
         dataStore.checkIfMethodAuthed { isAuthed in
-            self.hasNoAccountsConnected = !isAuthed
+            User.hasAccountsConnected = !isAuthed
             self.tableView.reloadData()
         }
     }
@@ -198,8 +197,9 @@ class PrizeViewController: UIViewController {
     }
     
     @objc func playNowClicked() {
-        let startQuizVC = StartQuizViewController(showSkipButton: false)// EditProfileViewController()
-        self.navigationController?.pushViewController(startQuizVC, animated: true)
+//        let vc = EditProfileViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.tabBarController?.selectedIndex = 1
     }
     
     @objc private func earningTicketsBtnClicked() {
@@ -219,7 +219,7 @@ class PrizeViewController: UIViewController {
 
 extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if hasNoAccountsConnected {
+        if User.hasAccountsConnected {
             return 3
         }
             return 2
@@ -239,7 +239,7 @@ extension PrizeViewController: UITableViewDataSource, UITableViewDelegate {
             cell.ticketsAmountLabel.text = "\(ticketCount) Tickets"
             return cell
         }
-        if hasNoAccountsConnected {
+        if User.hasAccountsConnected {
             if indexPath.section == 1 {
                 // MARK: Connect Account
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConnectAccountsCell.self)

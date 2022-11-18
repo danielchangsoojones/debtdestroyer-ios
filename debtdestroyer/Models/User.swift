@@ -17,8 +17,6 @@ class User: PFUser {
     
     static var shouldShowEarnings = false
     static var sendMassTextNotification = false
-    static var quizPopUpSkipd = false
-    static var quizPopUpTimerRunning = false
     static var hasAccountsConnected = false
 
     var quizPointCounter = 0

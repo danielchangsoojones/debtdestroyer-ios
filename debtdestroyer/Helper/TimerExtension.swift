@@ -18,3 +18,32 @@ extension Timer {
     }
 }
 
+extension Date {
+    func today(format : String = "yyyy-MM-dd'T'HH:mm:ss.SSS") -> String {
+        let formatter = DateFormatter()
+        formatter.timeZone = .current
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+    
+    func withAddedMinutes(minutes: Double) -> Date {
+        addingTimeInterval(minutes * 60)
+    }
+    
+    func withAddedHours(hours: Double) -> Date {
+        withAddedMinutes(minutes: hours * 60)
+    }
+    
+    func toGlobalTime() -> Date {
+        let timezone = TimeZone.current
+        let seconds = -TimeInterval(timezone.secondsFromGMT(for: self))
+        return Date(timeInterval: seconds, since: self)
+    }
+    
+    // Convert UTC (or GMT) to local time
+    func toLocalTime() -> Date {
+        let timezone = TimeZone.current
+        let seconds = TimeInterval(timezone.secondsFromGMT(for: self))
+        return Date(timeInterval: seconds, since: self)
+    }
+} 

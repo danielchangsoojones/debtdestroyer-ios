@@ -16,6 +16,7 @@
 		0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A637F28A6592200EFCC4D /* ViewExtension.swift */; };
 		0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */; };
 		0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */; };
+		0A2DEE2D2927B0E800B61348 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0A2DEE2C292784A000B61348 /* video.mp4 */; };
 		0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739C289BD941006E67F9 /* BankViewController.swift */; };
 		0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */; };
 		0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */; };
@@ -155,6 +156,7 @@
 		0A1A637F28A6592200EFCC4D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnTicketCell.swift; sourceTree = "<group>"; };
 		0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWithGradButton.swift; sourceTree = "<group>"; };
+		0A2DEE2C292784A000B61348 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		0A2E739C289BD941006E67F9 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		0A2E739E289BD96A006E67F9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A2E73A4289C35D2006E67F9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -836,6 +838,7 @@
 				0A11C834289BC25E00AEF89D /* RoundUp */,
 				0A11C832289BC1B800AEF89D /* Helper */,
 				92021FD5289B07A6007901A6 /* Assets.xcassets */,
+				0A2DEE2C292784A000B61348 /* video.mp4 */,
 				92021FD7289B07A6007901A6 /* LaunchScreen.storyboard */,
 				92021FDA289B07A6007901A6 /* Info.plist */,
 			);
@@ -923,6 +926,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2DEE2D2927B0E800B61348 /* video.mp4 in Resources */,
 				0A5FD50D28F8475200B995C8 /* SIL Open Font License.txt in Resources */,
 				0A5FD50B28F8475200B995C8 /* Montserrat-Bold.otf in Resources */,
 				0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */,

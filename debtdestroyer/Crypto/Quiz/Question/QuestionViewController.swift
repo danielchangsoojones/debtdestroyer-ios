@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import AVFoundation
 
 class QuestionViewController: UIViewController {
     struct Constants {
@@ -66,6 +67,7 @@ class QuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        playVideo(from: "video.mp4")
 
         NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
         circularView.progressAnimation(duration: timeLeft)
@@ -73,6 +75,8 @@ class QuestionViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

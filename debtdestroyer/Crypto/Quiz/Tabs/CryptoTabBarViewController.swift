@@ -83,37 +83,22 @@ extension CryptoTabBarViewController {
             self.activityIndicator.stopAnimating()
             let isAlreadyShowingStartQuizVC = self.checkIfAlreadyShowingStartQuizVC()
             if showQuizPopUp && !isAlreadyShowingStartQuizVC {
-//                if !User.quizPopUpSkipd && !User.quizPopUpTimerRunning{
+                let popupSkipedTime  = UserDefaults.standard.string(forKey: "popupSkipedTime")
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd/MM/yy HH:mm:ss"
+                let last = formatter.date(from: popupSkipedTime ?? "01/11/21 11:11:11")
+                let lastPopup = last?.toLocalTime()
+                let currentDateStr = Date().today(format: "dd/MM/yy HH:mm:ss")
+                let currentDate = formatter.date(from: currentDateStr)
+
+                if lastPopup!.withAddedHours(hours: 2) <= currentDate!.toLocalTime() {
                     self.presentStartQuizVC()
-//                }
+                }
             }
         }
     }
     
-    // https://medium.com/over-engineering/a-background-repeating-timer-in-swift-412cecfd2ef9
-    private func presentStartQuizVC() {
-//        print("self.presentStartQuizVC()")
-//        print("timer started")
-//        User.quizPopUpTimerRunning = true
-//
-//        let t = RepeatingTimer(timeInterval: 30)
-//        t.eventHandler = {
-//            print("Timer Fired")
-//            User.quizPopUpTimerRunning = false
-//            User.quizPopUpSkipd = false
-//            print("timer complete")
-//            self.enteredScreen()
-//        }
-//        t.resume()
-        
-//        self.quizPopUpTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false) { timer in
-//            User.quizPopUpTimerRunning = false
-//            User.quizPopUpSkipd = false
-//            print("timer complete")
-//            self.quizPopUpTimer.invalidate()
-//            self.enteredScreen()
-//        }
-        
+    private func presentStartQuizVC() {        
         let startQuizVC = StartQuizViewController(showSkipButton: true)
         let navController = UINavigationController(rootViewController: startQuizVC)
         present(navController, animated: true)

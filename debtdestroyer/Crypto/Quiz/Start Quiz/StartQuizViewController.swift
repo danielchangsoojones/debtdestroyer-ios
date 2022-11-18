@@ -69,7 +69,9 @@ class StartQuizViewController: UIViewController {
     }
     
     @objc private func skipPressed() {
-        User.quizPopUpSkipd = true
+        let popupSkipedTime = Date().today(format: "dd/MM/yy HH:mm:ss")
+        UserDefaults.standard.set(popupSkipedTime, forKey: "popupSkipedTime")
+        UserDefaults.standard.synchronize()
         dismiss(animated: true)
     }
     

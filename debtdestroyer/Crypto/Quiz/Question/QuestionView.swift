@@ -53,8 +53,7 @@ class QuestionView: UIView {
             make.left.right.equalTo(self)
             make.height.greaterThanOrEqualTo(800)
         }
-                playVideo(from: "PexelsVideos.mp4")
-        //https://www.pexels.com/video/smoke-with-colors-2324293/
+//                playVideo(from: "PexelsVideos.mp4")
     }
     
     private func playVideo(from file:String) {

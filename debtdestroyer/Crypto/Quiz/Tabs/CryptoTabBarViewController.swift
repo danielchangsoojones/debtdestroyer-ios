@@ -10,7 +10,6 @@ import UIKit
 class CryptoTabBarViewController: UITabBarController {
     private var dataStore = QuizDataStore()
     private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
-    var quizPopUpTimer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()

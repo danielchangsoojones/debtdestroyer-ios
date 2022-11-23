@@ -175,7 +175,6 @@ class PrizeViewController: UIViewController {
             height: earningTicketsBtn.frame.height + 50)
         gradientLayer.masksToBounds = true
         
-        
         let shadowLayer = CALayer.init()
         shadowLayer.frame = gradientLayer.bounds
         shadowLayer.shadowColor = UIColor.black.cgColor

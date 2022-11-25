@@ -10,7 +10,6 @@ import UIKit
 class CryptoTabBarViewController: UITabBarController {
     private var dataStore = QuizDataStore()
     private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
-    var quizPopUpTimer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +34,7 @@ class CryptoTabBarViewController: UITabBarController {
     
     private func setTabs(){
         let vc1 = PrizeViewController()
-        let vc2 = StartQuizViewController(showSkipButton: false)
+        let vc2 = StartQuizViewController(showSkipButton: false)//NewStartQuizViewController()
         let vc3 = ChampionsViewController()
         let vc4 = CryptoSettingsViewController()
 

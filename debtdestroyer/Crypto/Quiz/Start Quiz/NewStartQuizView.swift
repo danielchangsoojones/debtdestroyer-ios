@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SwiftConfettiView
+import AVFoundation
 
 class NewStartQuizView: UIView {
     let topStackView = UIStackView()
@@ -25,7 +25,9 @@ class NewStartQuizView: UIView {
     var shareButton = UIButton()
     let scrollView = UIScrollView()
     let contentView = UIView()
-    
+    private let videoURLChallenge = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    private let videoURLTrivia = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -49,6 +51,13 @@ class NewStartQuizView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: self.layer)
+        playVideo(from: "notebook.mp4", on: dailyChallengeContainer)
+        playVideo(from: "sand.mp4", on: triviaContainer)
+
+    }
+    
     private func setScrollView() {
         addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
@@ -60,7 +69,7 @@ class NewStartQuizView: UIView {
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalTo(scrollView)
             make.left.right.equalTo(self)
-            make.height.greaterThanOrEqualTo(800)
+            make.height.greaterThanOrEqualTo(700)
         }
     }
     
@@ -74,9 +83,16 @@ class NewStartQuizView: UIView {
         topStackView.layer.borderColor = UIColor.darkGray.cgColor
         topStackView.layer.borderWidth = 1
         topStackView.layer.cornerRadius = 30
+        topStackView.layer.masksToBounds = false
+        topStackView.layer.shadowColor = UIColor.gray.cgColor
+        topStackView.layer.shadowOpacity = 1
+        topStackView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        topStackView.layer.shadowRadius = 20
+        topStackView.layer.shouldRasterize = true
+        topStackView.layer.rasterizationScale = UIScreen.main.scale
         contentView.addSubview(topStackView)
         topStackView.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview().offset(60)
+            make.topMargin.equalToSuperview().offset(20)
             make.left.right.equalToSuperview().inset(15)
             make.height.equalTo(60)
         }
@@ -140,24 +156,14 @@ class NewStartQuizView: UIView {
     }
     
     private func setContainerForDailyChallenge() {
-        
-//        let con = SwiftConfettiView(frame: self.bounds)
-//        
-//        con.backgroundColor = .blue
-//        con.type = .triangle
-//        con.intensity = 0.85
-//        con.clipsToBounds = true
-//        contentView.addSubview(con)
-//        con.startConfetti()
-        
         dailyChallengeContainer.backgroundColor = .yellow
         contentView.addSubview(dailyChallengeContainer)
         dailyChallengeContainer.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(90)
+            make.top.equalToSuperview().offset(50)
             make.left.right.equalToSuperview().inset(10)
-            make.height.equalTo(350)
+            make.height.equalTo(320)
         }
-        //        playVideo(from: "PexelsVideos.mp4", playerLayerOn: dailyChallengeContainer)
+
         setChallengeLbl()
         setContinueButton()
     }
@@ -171,7 +177,7 @@ class NewStartQuizView: UIView {
         dailyChallengeContainer.addSubview(dailyChallengeLbl)
         dailyChallengeLbl.snp.makeConstraints { make in
             make.width.equalTo(180)
-            make.top.equalToSuperview().offset(60)
+            make.top.equalToSuperview().offset(70)
             make.centerX.equalToSuperview()
         }
     }
@@ -206,15 +212,19 @@ class NewStartQuizView: UIView {
     private func setContainerForTrivia() {
         triviaContainer.backgroundColor = .pestalGreen
         triviaContainer.layer.cornerRadius = 15
+        triviaContainer.layer.masksToBounds = false
+        triviaContainer.layer.shadowColor = UIColor.gray.cgColor
+        triviaContainer.layer.shadowOpacity = 1
+        triviaContainer.layer.shadowOffset = CGSize(width: 0, height: 0)
+        triviaContainer.layer.shadowRadius = 20
+        triviaContainer.layer.shouldRasterize = true
+        triviaContainer.layer.rasterizationScale = UIScreen.main.scale
         contentView.addSubview(triviaContainer)
         triviaContainer.snp.makeConstraints { make in
             make.top.equalTo(dailyChallengeContainer.snp.bottom).offset(-30)
             make.left.right.equalToSuperview().inset(15)
-            make.height.equalTo(350)
+            make.bottom.equalToSuperview().offset(-40)
         }
-        
-        
-
     }
     
     private func setTriviaLbl(){
@@ -249,15 +259,13 @@ class NewStartQuizView: UIView {
         triviaBottomStackView.distribution = .fill
         triviaBottomStackView.alignment = .leading
         triviaBottomStackView.spacing = 5
-        triviaBottomStackView.backgroundColor = .red
+        triviaBottomStackView.backgroundColor = .white
         triviaContainer.addSubview(triviaBottomStackView)
         triviaBottomStackView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.left.right.equalToSuperview()
-            make.height.equalTo(40)
+            make.height.equalTo(70)
         }
-        
-       
     }
     
     func setShareButton(){
@@ -312,5 +320,25 @@ class NewStartQuizView: UIView {
             make.centerY.equalTo(triviaBottomStackView)
         }
     }
-    
+        
+    private func playVideo(from file:String , on view: UIView) {
+        let file = file.components(separatedBy: ".")
+        
+        guard let path = Bundle.main.path(forResource: file[0], ofType:file[1]) else {
+            debugPrint( "\(file.joined(separator: ".")) not found")
+            return
+        }
+        let player = AVPlayer(url: URL(fileURLWithPath: path))
+        let playerLayer = AVPlayerLayer(player: player)
+        //        let playerItem = AVPlayerItem(url: URL(fileURLWithPath: path))
+        //
+        //        let player = AVQueuePlayer(items: [playerItem])
+        //        let playerLayer = AVPlayerLayer(player: player)
+        //        let playerLooper = AVPlayerLooper(player: player , templateItem: playerItem)
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.frame = view.bounds
+        view.layer.insertSublayer(playerLayer, at: 0)
+        view.backgroundColor = .clear.withAlphaComponent(0.5)
+        player.play()
+    }
 }

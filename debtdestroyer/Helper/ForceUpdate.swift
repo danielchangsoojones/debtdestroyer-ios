@@ -37,6 +37,6 @@ class ForceUpdate {
             //TODO: a bitly link for now until we get the actual app link
             Helpers.open(urlString: "https://apps.apple.com/us/app/lavadrop/id1639968618")
         })
-        alertView.showSuccess("Update App", subTitle: "There is a new Pinscope version available. Please update your app!")
+        alertView.showSuccess("Update App", subTitle: "There is a new Debt Destroyed version available. Please update your app!")
     }
 }

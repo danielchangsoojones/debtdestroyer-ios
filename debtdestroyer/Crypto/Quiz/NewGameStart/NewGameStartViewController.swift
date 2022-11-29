@@ -78,7 +78,7 @@ class NewGameStartViewController: UIViewController {
             let quizTopic = quizData.quizTopic
             self.quizKickoffTime = quizTopic.start_time
             let now = Date()
-            if quizTopic.start_time >= now {
+            if quizTopic.start_time < now {
                 //time to start the game
                 checkStartTimer.invalidate()
                 let questionVC = QuestionViewController(quizDatas: quizDatas,

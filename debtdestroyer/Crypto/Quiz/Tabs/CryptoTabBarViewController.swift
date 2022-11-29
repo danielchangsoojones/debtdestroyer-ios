@@ -34,7 +34,7 @@ class CryptoTabBarViewController: UITabBarController {
     
     private func setTabs(){
         let vc1 = PrizeViewController()
-        let vc2 = StartQuizViewController(showSkipButton: false)//NewStartQuizViewController()
+        let vc2 = NewGameStartViewController()
         let vc3 = ChampionsViewController()
         let vc4 = CryptoSettingsViewController()
 

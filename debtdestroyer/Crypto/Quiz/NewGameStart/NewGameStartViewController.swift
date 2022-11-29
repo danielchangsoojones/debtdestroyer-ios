@@ -39,16 +39,21 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
-        callTimer()
         setData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        callTimer()
         let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
         ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer.invalidate()
     }
     
     private func callTimer() {

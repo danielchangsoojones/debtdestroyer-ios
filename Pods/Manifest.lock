@@ -12,6 +12,7 @@ PODS:
     - Reusable/View (= 4.1.2)
   - Reusable/Storyboard (4.1.2)
   - Reusable/View (4.1.2)
+  - Ripple (3.0)
   - SCLAlertView (0.8)
   - SkyFloatingLabelTextField (4.0.0)
   - SnapKit (5.0.1)
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - Parse
   - Parse/UI
   - Reusable
+  - Ripple
   - SCLAlertView
   - SkyFloatingLabelTextField
   - SnapKit (~> 5.0.0)
@@ -35,6 +37,7 @@ SPEC REPOS:
     - BRYXBanner
     - Parse
     - Reusable
+    - Ripple
     - SCLAlertView
     - SkyFloatingLabelTextField
     - SnapKit
@@ -46,12 +49,13 @@ SPEC CHECKSUMS:
   BRYXBanner: 4fbd266f96ce000e4c6cc9a0558c446bd88d9801
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
+  Ripple: 6be634e42a9d48f147a84b72cae82f9b0d08137d
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SkyFloatingLabelTextField: 79ddc40e4ad59707fedbb48d605417aee48bb78a
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftConfettiView: 1bdbc2e6913b6b1c76d8070802b212508ad5c352
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 88fed0455212840f2cd090730423cc5d4661c422
+PODFILE CHECKSUM: a026358321fa44d371c161357b1d9d4f87563ace
 
 COCOAPODS: 1.11.3

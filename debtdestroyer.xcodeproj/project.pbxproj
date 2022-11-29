@@ -130,6 +130,8 @@
 		0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2E28ACD422006301DE /* DeleteAccountViewController.swift */; };
 		0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D3028ACDDE7006301DE /* DeleteAccountView.swift */; };
 		0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */; };
+		0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */; };
+		0ACAE9262935F0A40054E0A3 /* NewGameStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */; };
 		0AE126A9291A697D00E11003 /* ConnectDisclosureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */; };
 		0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */; };
 		0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */; };
@@ -276,6 +278,8 @@
 		0AC23D2E28ACD422006301DE /* DeleteAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewController.swift; sourceTree = "<group>"; };
 		0AC23D3028ACDDE7006301DE /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataStore.swift; sourceTree = "<group>"; };
+		0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameStartView.swift; sourceTree = "<group>"; };
+		0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameStartViewController.swift; sourceTree = "<group>"; };
 		0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureViewController.swift; sourceTree = "<group>"; };
 		0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureView.swift; sourceTree = "<group>"; };
 		0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 			children = (
 				0A59ACE128E183F4001B774A /* Tabs */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
+				0ACAE9272935F0AD0054E0A3 /* NewGameStart */,
 				0A59ACE328E183F4001B774A /* Settings */,
 				0A51502429239951001B028C /* Confirm Info */,
 				0A32178E290115C100A414CA /* Score */,
@@ -804,6 +809,15 @@
 			path = "Data Store";
 			sourceTree = "<group>";
 		};
+		0ACAE9272935F0AD0054E0A3 /* NewGameStart */ = {
+			isa = PBXGroup;
+			children = (
+				0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */,
+				0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */,
+			);
+			path = NewGameStart;
+			sourceTree = "<group>";
+		};
 		18F686FBEE11973D8590571D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,6 +1039,7 @@
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */,
+				0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
@@ -1121,6 +1136,7 @@
 				0A76B59428F996530084A629 /* CustomNavigationViewController.swift in Sources */,
 				0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,
+				0ACAE9262935F0A40054E0A3 /* NewGameStartViewController.swift in Sources */,
 				0A7A49FE28A3D294009EDE5E /* StringExtension.swift in Sources */,
 				0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */,
 				0A7A4A0328A3D384009EDE5E /* RegisterViewController.swift in Sources */,

@@ -62,7 +62,7 @@ class NewGameStartView: UIView {
     }
     
     private func setStartLabel() {
-        startLbl.text = "NEXT GAME STARTING iN:"
+        startLbl.text = "NEXT GAME STARTING IN:"
         startLbl.numberOfLines = 0
         startLbl.textAlignment = .center
         startLbl.textColor = .white
@@ -102,6 +102,7 @@ class NewGameStartView: UIView {
 
     private func setHeadingLabel() {
         headingLbl.numberOfLines = 0
+        headingLbl.text = "Compete in our live trivia."
         headingLbl.textAlignment = .left
         headingLbl.textColor = .black
         headingLbl.font = UIFont.MontserratSemiBold(size: 22)
@@ -113,6 +114,7 @@ class NewGameStartView: UIView {
     }
     
     private func setDescriptionLabel() {
+        descriptionLbl.text = "Answer all 15 questions correctly to win towards your loans! If no one wins, the money rolls over to next week!"
         descriptionLbl.numberOfLines = 0
         descriptionLbl.textAlignment = .left
         descriptionLbl.textColor = .black
@@ -126,21 +128,6 @@ class NewGameStartView: UIView {
     }
     
     private func setPrizeButton() {
-        let titletxt = " $1,000 Prize "
-        if #available(iOS 15.0, *) {
-            if prizeBtn.configuration == nil {
-                var configuration = UIButton.Configuration.plain()
-                configuration.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
-                prizeBtn.configuration = configuration
-                
-            } else {
-                prizeBtn.configuration?.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
-            }
-            
-        } else {
-            prizeBtn.setTitleColor(.white, for: .normal)
-            prizeBtn.setTitle(titletxt, for: .normal)
-        }
         prizeBtn.layer.cornerRadius = 25
         prizeBtn.clipsToBounds = true
         prizeBtn.titleLabel?.adjustsFontSizeToFitWidth = true

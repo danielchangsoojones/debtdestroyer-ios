@@ -19,7 +19,6 @@ class NewGameStartViewController: UIViewController {
     private var timer = Timer()
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var dayDateLbl = UILabel()
-    var headingLbl = UILabel()
     var descriptionLbl = UILabel()
     var prizeBtn = GradientBtn()
     var rippleContainer = UIView()
@@ -27,13 +26,11 @@ class NewGameStartViewController: UIViewController {
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
     
-    var prizeAmount = "20000"
     override func loadView() {
         super.loadView()
         let newGameStartView = NewGameStartView(frame: self.view.frame)
         self.view = newGameStartView
         self.dayDateLbl = newGameStartView.dayDateLbl
-        self.headingLbl = newGameStartView.headingLbl
         self.timeLabel = newGameStartView.countDownTimerLbl
         self.descriptionLbl = newGameStartView.descriptionLbl
         self.prizeBtn = newGameStartView.prizeBtn
@@ -44,7 +41,6 @@ class NewGameStartViewController: UIViewController {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
-        setData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,6 +72,7 @@ class NewGameStartViewController: UIViewController {
         if let quizData = quizDatas.first {
             let quizTopic = quizData.quizTopic
             self.quizKickoffTime = quizTopic.start_time
+            setData(quizTopic: quizTopic)
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
@@ -87,7 +84,7 @@ class NewGameStartViewController: UIViewController {
         }
     }
     
-    private func setData() {
+    private func setData(quizTopic: QuizTopicParse) {
         
 //     refrence Url
 //    https://www.globalnerdy.com/2020/05/27/how-to-work-with-dates-and-times-in-swift-5-part-2-formatting-and-parsing-dates-and-times-with-dateformatter/
@@ -118,25 +115,31 @@ class NewGameStartViewController: UIViewController {
 //        formatter.timeZone = TimeZone(abbreviation: "PDT")
 //        let pd = formatter.string(from: local)
 //        print(pd)
+        let prizeAmount = Int(quizTopic.prize_amount / 100)
+        let prizeAmountStr = "$\(prizeAmount)"
+        let descriptionLblText = "Answer all 15 questions correctly to win " + prizeAmountStr + " towards your loans! If no one wins, the money rolls over to next week!"
+        if descriptionLblText != descriptionLbl.text {
+            descriptionLbl.text = descriptionLblText
+        }
         
         self.dayDateLbl.text = "Tuesday Dec. 5th @ 6pm PDT"
-        self.headingLbl.text = "Compete in our live trivia."
-        self.descriptionLbl.text = "Answer all 12 questions correctly to win $" + prizeAmount + " towards your loans! If no one wins, the money rolls over to next week!"
         
-        let titletxt = "$" + prizeAmount + " Prize"
-        if #available(iOS 15.0, *) {
-            if self.prizeBtn.configuration == nil {
-                var configuration = UIButton.Configuration.plain()
-                configuration.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
-                self.prizeBtn.configuration = configuration
+        let titletxt = prizeAmountStr + " Prize"
+        if titletxt != prizeBtn.titleLabel?.text {
+            if #available(iOS 15.0, *) {
+                if self.prizeBtn.configuration == nil {
+                    var configuration = UIButton.Configuration.plain()
+                    configuration.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                    self.prizeBtn.configuration = configuration
+                    
+                } else {
+                    self.prizeBtn.configuration?.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                }
                 
             } else {
-                self.prizeBtn.configuration?.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                self.prizeBtn.setTitleColor(.white, for: .normal)
+                self.prizeBtn.setTitle(titletxt, for: .normal)
             }
-            
-        } else {
-            self.prizeBtn.setTitleColor(.white, for: .normal)
-            self.prizeBtn.setTitle(titletxt, for: .normal)
         }
     }
     

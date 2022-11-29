@@ -89,7 +89,6 @@ class NewGameStartView: UIView {
     }
     
     private func setDayDateLabel() {
-        dayDateLbl.text = "Tuesday Dec. 5th @ 6pm PDT"
         dayDateLbl.numberOfLines = 0
         dayDateLbl.textAlignment = .center
         dayDateLbl.textColor = .white
@@ -102,7 +101,6 @@ class NewGameStartView: UIView {
     }
 
     private func setHeadingLabel() {
-        headingLbl.text = "Compete in our live trivia."
         headingLbl.numberOfLines = 0
         headingLbl.textAlignment = .left
         headingLbl.textColor = .black
@@ -115,7 +113,6 @@ class NewGameStartView: UIView {
     }
     
     private func setDescriptionLabel() {
-        descriptionLbl.text = "Answer all 12 questions correctly to win $1,000 towards your loans! If no one wins, the money rolls over to next week!"
         descriptionLbl.numberOfLines = 0
         descriptionLbl.textAlignment = .left
         descriptionLbl.textColor = .black

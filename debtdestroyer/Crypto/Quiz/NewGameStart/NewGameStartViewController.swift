@@ -23,7 +23,8 @@ class NewGameStartViewController: UIViewController {
     var descriptionLbl = UILabel()
     var prizeBtn = GradientBtn()
     var rippleContainer = UIView()
-
+    
+    var prizeAmount = "20000"
     override func loadView() {
         super.loadView()
         let newGameStartView = NewGameStartView(frame: self.view.frame)
@@ -35,25 +36,77 @@ class NewGameStartViewController: UIViewController {
         self.prizeBtn = newGameStartView.prizeBtn
         self.rippleContainer = newGameStartView.rippleContainer
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
-
         setNavBarBtns()
-
-        endTime = Date().addingTimeInterval(timeLeft)
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-
-        
-        
+        callTimer()
+        setData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
-        //        ripple(location, view: rippleContainer, times: 5)
         ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
+    }
+    
+    private func callTimer() {
+        endTime = Date().addingTimeInterval(timeLeft)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    
+    private func setData() {
+        
+//     refrence Url
+//    https://www.globalnerdy.com/2020/05/27/how-to-work-with-dates-and-times-in-swift-5-part-2-formatting-and-parsing-dates-and-times-with-dateformatter/
+//        
+//        let apiDateStr = "02/12/2022 11:11:11"
+//        let formatter = DateFormatter()
+//       
+//        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+//        let apiDate = formatter.date(from: apiDateStr)
+//        if #available(iOS 15.0, *) {
+//            let formatted = apiDate?.formatted(.dateTime.day().month(.abbreviated))
+//            print(formatted)
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//            //.formatted(
+////            .dateTime
+////                .day().month(.wide).year()
+////                .hour().minute()
+////        )
+////
+//        
+//        formatter.dateStyle = .full
+//        formatter.timeStyle = .long
+//        let dStr = formatter.string(from: apiDate!)
+//        let d = formatter.date(from: dStr )
+//        let local = (d?.toLocalTime())!
+//        formatter.timeZone = TimeZone(abbreviation: "PDT")
+//        let pd = formatter.string(from: local)
+//        print(pd)
+        
+        self.dayDateLbl.text = "Tuesday Dec. 5th @ 6pm PDT"
+        self.headingLbl.text = "Compete in our live trivia."
+        self.descriptionLbl.text = "Answer all 12 questions correctly to win $" + prizeAmount + " towards your loans! If no one wins, the money rolls over to next week!"
+        
+        let titletxt = "$" + prizeAmount + " Prize"
+        if #available(iOS 15.0, *) {
+            if self.prizeBtn.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                self.prizeBtn.configuration = configuration
+                
+            } else {
+                self.prizeBtn.configuration?.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+            
+        } else {
+            self.prizeBtn.setTitleColor(.white, for: .normal)
+            self.prizeBtn.setTitle(titletxt, for: .normal)
+        }
     }
     
     private func setNavBarBtns() {
@@ -64,7 +117,7 @@ class NewGameStartViewController: UIViewController {
         
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
-
+        
     }
     
     @objc private func helpPressed() {
@@ -72,15 +125,22 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc func updateTime() {
-        if timeLeft > 0 {
+        if timeLeft >= 3600 {
             timeLeft = endTime?.timeIntervalSinceNow ?? 0
-            timeLabel.text = timeLeft.timeMinHr
             timeLabel.text = timeString(time: TimeInterval(timeLeft))
-
+            
+        } else if timeLeft <= 3600 && timeLeft >= 60 {
+            timeLeft = endTime?.timeIntervalSinceNow ?? 0
+            timeLabel.text = timeStringMinSec(time: TimeInterval(timeLeft))
+            
+        } else if timeLeft <= 60 && timeLeft >= 0 {
+            timeLeft = endTime?.timeIntervalSinceNow ?? 0
+            timeLabel.text = timeStringSec(time: TimeInterval(timeLeft))
+            
         } else {
-            timeLabel.text = "00:00:00"
+            timeLabel.text = "00"
             timer.invalidate()
-// Time to start game
+            // Time to start game
             
         }
     }
@@ -91,4 +151,17 @@ class NewGameStartViewController: UIViewController {
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
     }
+    
+    func timeStringMinSec(time:TimeInterval) -> String {
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format: "%02i:%02i", minutes, seconds)
+    }
+    
+    func timeStringSec(time:TimeInterval) -> String {
+        let seconds = Int(time) % 60
+        return String(format: "%02i", seconds)
+    }
+    
+    
 }

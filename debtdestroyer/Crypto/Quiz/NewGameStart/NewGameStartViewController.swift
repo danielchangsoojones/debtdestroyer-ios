@@ -14,15 +14,18 @@ class NewGameStartViewController: UIViewController {
     }
     
     private var messageHelper: MessageHelper?
-    var endTime: Date?
+    var quizKickoffTime: Date?
     var timeLabel =  UILabel()
-    var timer = Timer()
+    private var timer = Timer()
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var dayDateLbl = UILabel()
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
     var prizeBtn = GradientBtn()
     var rippleContainer = UIView()
+    private var quizDatas: [QuizDataParse] = []
+    private let quizDataStore = QuizDataStore()
+    private var checkStartTimer = Timer()
     
     var prizeAmount = "20000"
     override func loadView() {
@@ -53,12 +56,36 @@ class NewGameStartViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        checkStartTimer.invalidate()
         timer.invalidate()
     }
     
     private func callTimer() {
-        endTime = Date().addingTimeInterval(timeLeft)
+//        quizKickoffTime = Date().addingTimeInterval(timeLeft)
+        checkStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getQuizDatas), userInfo: nil, repeats: true)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func getQuizDatas() {
+        quizDataStore.getQuizData { quizDatas in
+            self.quizDatas = quizDatas
+            self.checkIfStartQuiz()
+        }
+    }
+    
+    private func checkIfStartQuiz() {
+        if let quizData = quizDatas.first {
+            let quizTopic = quizData.quizTopic
+            self.quizKickoffTime = quizTopic.start_time
+            let now = Date()
+            if quizTopic.start_time >= now {
+                //time to start the game
+                checkStartTimer.invalidate()
+                let questionVC = QuestionViewController(quizDatas: quizDatas,
+                                                        currentIndex: 0)
+                present(questionVC, animated: true)
+            }
+        }
     }
     
     private func setData() {
@@ -131,15 +158,15 @@ class NewGameStartViewController: UIViewController {
     
     @objc func updateTime() {
         if timeLeft >= 3600 {
-            timeLeft = endTime?.timeIntervalSinceNow ?? 0
+            timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
             timeLabel.text = timeString(time: TimeInterval(timeLeft))
             
         } else if timeLeft <= 3600 && timeLeft >= 60 {
-            timeLeft = endTime?.timeIntervalSinceNow ?? 0
+            timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
             timeLabel.text = timeStringMinSec(time: TimeInterval(timeLeft))
             
         } else if timeLeft <= 60 && timeLeft >= 0 {
-            timeLeft = endTime?.timeIntervalSinceNow ?? 0
+            timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
             timeLabel.text = timeStringSec(time: TimeInterval(timeLeft))
             
         } else {

@@ -10,6 +10,23 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
+    func checkLiveQuizPosition(quizTopic: QuizTopicParse, completion: @escaping (String?, Date?, Bool) -> Void) {
+        let parameters: [String : Any] = ["quizTopicID" : quizTopic.objectId ?? ""]
+        PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
+            if let result = result {
+                let json = JSON(result)
+                let current_quiz_data_id = json["current_quiz_data_id"].string
+                let show_question_prompt_time = (json["show_question_prompt_time"].rawValue as? Date)
+                let should_reveal_answer = json["should_reveal_answer"].boolValue
+                completion(current_quiz_data_id, show_question_prompt_time, should_reveal_answer)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "checkLiveQuizPosition")
+            }
+        }
+    }
+    
     func getQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
         PFCloud.callFunction(inBackground: "getQuizData", withParameters: nil) { (result, error) in
             if let quizData = result as? [QuizDataParse] {

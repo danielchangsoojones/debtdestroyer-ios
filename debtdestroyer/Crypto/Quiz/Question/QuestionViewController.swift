@@ -34,6 +34,8 @@ class QuestionViewController: UIViewController {
     var pointsLabel = UILabel()
     private let dataStore = QuizDataStore()
     private var playerLayer: AVPlayerLayer!
+    private var quizStatusTimer = Timer()
+    private var show_question_prompt_time: Date?
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -73,7 +75,7 @@ class QuestionViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
         circularView.progressAnimation(duration: timeLeft)
         endTime = Date().addingTimeInterval(timeLeft)
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        quizStatusTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
     
@@ -89,6 +91,38 @@ class QuestionViewController: UIViewController {
             let player = AVPlayer(url: video_url)
             playerLayer.player = player
             player.play()
+        }
+    }
+    
+    @objc private func getLiveQuizStatus() {
+        dataStore.checkLiveQuizPosition(quizTopic: currentData.quizTopic) { current_quiz_data_id, show_question_prompt_time, should_reveal_answer in
+            if let current_quiz_data_id = current_quiz_data_id, current_quiz_data_id != self.currentData.objectId {
+                //the user is out of sync with liveness. Jump to the correct question
+                self.jump(to: current_quiz_data_id)
+            } else if should_reveal_answer {
+                //TODO: show the answer
+            } else if let show_question_prompt_time = show_question_prompt_time {
+                
+            }
+        }
+    }
+    
+    private func startQuestionPrompt(start_time: Date) {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    
+    private func jump(to quizDataID: String) {
+        let index = quizDatas.firstIndex { quizData in
+            return quizData.objectId == quizDataID
+        }
+        
+        if let index = index {
+            playerLayer.player?.pause()
+            playerLayer.player = nil
+            timer.invalidate()
+            quizStatusTimer.invalidate()
+            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: index)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

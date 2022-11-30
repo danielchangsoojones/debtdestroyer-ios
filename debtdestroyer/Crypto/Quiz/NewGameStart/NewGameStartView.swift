@@ -140,11 +140,4 @@ class NewGameStartView: UIView {
         }
     }
 
-    
-//    override func layoutSublayers(of layer: CALayer) {
-//        super.layoutSublayers(of: self.layer)
-//        let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
-//        //        ripple(location, view: rippleContainer, times: 5)
-//        ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
-//    }
 }

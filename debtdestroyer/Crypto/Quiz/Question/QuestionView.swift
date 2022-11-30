@@ -53,24 +53,6 @@ class QuestionView: UIView {
             make.left.right.equalTo(self)
             make.height.greaterThanOrEqualTo(800)
         }
-        playVideo(from: "PexelsVideos.mp4")
-    }
-    
-    private func playVideo(from file:String) {
-        let file = file.components(separatedBy: ".")
-        
-        guard let path = Bundle.main.path(forResource: file[0], ofType:file[1]) else {
-            debugPrint( "\(file.joined(separator: ".")) not found")
-            return
-        }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
-        
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = .resizeAspectFill
-        playerLayer.frame = self.bounds
-        contentView.layer.addSublayer(playerLayer)
-        contentView.backgroundColor = .clear.withAlphaComponent(0.5)
-        player.play()
     }
 
     private func setUpProgressView() {

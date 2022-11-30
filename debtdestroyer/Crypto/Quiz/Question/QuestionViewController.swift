@@ -67,13 +67,30 @@ class QuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        playVideo(from: "video.mp4")
+        
+        playVideo(from: "video.mp4")
 
         NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
         circularView.progressAnimation(duration: timeLeft)
         endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
+    }
+    
+    private func playVideo(from file:String) {
+        if let questionView = view as? QuestionView {
+            let video_url_string = currentData.quizTopic.intro_img.url ?? ""
+            let video_url = URL(string: video_url_string)
+            let player = AVPlayer(url: video_url!)
+            
+            let playerLayer = AVPlayerLayer(player: player)
+            playerLayer.videoGravity = .resizeAspectFill
+            playerLayer.frame = self.view.bounds
+            
+            questionView.contentView.layer.insertSublayer(playerLayer, at: 0)
+            questionView.contentView.backgroundColor = .clear.withAlphaComponent(0.5)
+            player.play()
+        }
     }
     
 

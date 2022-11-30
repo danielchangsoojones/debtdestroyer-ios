@@ -20,11 +20,13 @@ class QuestionView: UIView {
     var circularView = CircularProgressCountdownTimerView()
     var backBtn = UIButton()
     let pointsLabel = UILabel()
+    let playerLayer = AVPlayerLayer()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         setScrollView()
+        addVideoLayer()
         setUpProgressView()
         setTimerLabel()
         setBackButtonView()
@@ -37,6 +39,14 @@ class QuestionView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func addVideoLayer() {
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.frame = self.bounds
+        
+        contentView.layer.addSublayer(playerLayer)
+        contentView.backgroundColor = .clear.withAlphaComponent(0.5)
     }
     
     private func setScrollView() {

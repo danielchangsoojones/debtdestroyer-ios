@@ -33,6 +33,7 @@ class QuestionViewController: UIViewController {
     var backBtn = UIButton()
     var pointsLabel = UILabel()
     private let dataStore = QuizDataStore()
+    private var playerLayer: AVPlayerLayer!
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -53,6 +54,7 @@ class QuestionViewController: UIViewController {
         super.loadView()
         let questionView = QuestionView(frame: self.view.frame)
         self.view = questionView
+        self.playerLayer = questionView.playerLayer
         questionView.questionLabel.text = currentData.question
         addAnswers(to: questionView.answerStackView)
         questionView.questionNoLabel.text = "Question \(currentIndex + 1) of \(quizDatas.count)"
@@ -67,9 +69,7 @@ class QuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        playVideo(from: "video.mp4")
-
+        playVideo()
         NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
         circularView.progressAnimation(duration: timeLeft)
         endTime = Date().addingTimeInterval(timeLeft)
@@ -77,29 +77,19 @@ class QuestionViewController: UIViewController {
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
     
-    private func playVideo(from file:String) {
-        if let questionView = view as? QuestionView {
-            let video_url_string = currentData.quizTopic.intro_img.url ?? ""
-            let video_url = URL(string: video_url_string)
-            let player = AVPlayer(url: video_url!)
-            
-            let playerLayer = AVPlayerLayer(player: player)
-            playerLayer.videoGravity = .resizeAspectFill
-            playerLayer.frame = self.view.bounds
-            
-            questionView.contentView.layer.insertSublayer(playerLayer, at: 0)
-            questionView.contentView.backgroundColor = .clear.withAlphaComponent(0.5)
-            player.play()
-        }
-    }
-    
-
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
         appD.quizRunning = true
+    }
+    
+    private func playVideo() {
+        let video_url_string = currentData.quizTopic.intro_img.url ?? ""
+        let video_url = URL(string: video_url_string)
+        let player = AVPlayer(url: video_url!)
+        playerLayer.player = player
+        player.play()
     }
     
     @objc func updateTime() {

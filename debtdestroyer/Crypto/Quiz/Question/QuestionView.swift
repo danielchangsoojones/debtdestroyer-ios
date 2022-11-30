@@ -12,29 +12,25 @@ class QuestionView: UIView {
     let answerStackView = UIStackView()
     let questionLabel = UILabel()
     let questionNoLabel = UILabel()
-    let scrollView = UIScrollView()
     let contentView = UIView()
-    let quesImgView = UIImageView()
     private let leadingOffset: CGFloat = 20
     var timerLabel = UILabel()
     var circularView = CircularProgressCountdownTimerView()
     var backBtn = UIButton()
     let pointsLabel = UILabel()
     let playerLayer = AVPlayerLayer()
+    let bottomView = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        setScrollView()
         addVideoLayer()
         setUpProgressView()
         setTimerLabel()
         setBackButtonView()
         setPointsLabel()
-//        setQuestionImgView()
         setQuestionNoLabel()
-        setQuestionLabel()
-        setStackView()
+        setBottomView()
     }
     
     required init?(coder: NSCoder) {
@@ -42,27 +38,18 @@ class QuestionView: UIView {
     }
     
     private func addVideoLayer() {
+        contentView.backgroundColor = .clear
+        addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalTo(self)
+            make.height.greaterThanOrEqualTo(800)
+        }
         playerLayer.videoGravity = .resizeAspectFill
         playerLayer.frame = self.bounds
         
         contentView.layer.addSublayer(playerLayer)
         contentView.backgroundColor = .clear.withAlphaComponent(0.5)
-    }
-    
-    private func setScrollView() {
-        scrollView.backgroundColor = .clear
-        addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(self)
-        }
-        
-        contentView.backgroundColor = .clear
-        scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(scrollView)
-            make.left.right.equalTo(self)
-            make.height.greaterThanOrEqualTo(800)
-        }
     }
 
     private func setUpProgressView() {
@@ -117,17 +104,6 @@ class QuestionView: UIView {
             make.trailing.equalToSuperview().inset(20)
         }
     }
-
-    private func setQuestionImgView() {
-        quesImgView.image = UIImage.init(named: "coffee")
-        quesImgView.contentMode = .scaleAspectFit
-        contentView.addSubview(quesImgView)
-        quesImgView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.height.width.equalTo(120)
-            make.top.equalTo(circularView.snp.bottom).offset(50)
-        }
-    }
     
     private func setQuestionNoLabel() {
         questionNoLabel.numberOfLines = 0
@@ -142,14 +118,26 @@ class QuestionView: UIView {
         }
     }
     
+    private func setBottomView() {
+        bottomView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        contentView.addSubview(bottomView)
+        bottomView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        setQuestionLabel()
+        setStackView()
+    }
+    
     private func setQuestionLabel() {
         questionLabel.numberOfLines = 0
-        questionLabel.font = UIFont.MontserratSemiBold(size: 20)
-        questionLabel.textColor = .black
-        contentView.addSubview(questionLabel)
+        questionLabel.font = UIFont.MontserratSemiBold(size: 25)
+        questionLabel.textColor = .white
+        bottomView.addSubview(questionLabel)
         questionLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(questionNoLabel.snp.bottom).offset(10)
+            make.top.equalToSuperview().offset(10)
         }
     }
     
@@ -158,11 +146,12 @@ class QuestionView: UIView {
         answerStackView.alignment = .center
         answerStackView.distribution = .fillEqually
         answerStackView.spacing = 15
-        contentView.addSubview(answerStackView)
+        bottomView.addSubview(answerStackView)
         answerStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(questionLabel)
-            make.top.equalTo(questionLabel.snp.bottom).offset(30)
+            make.top.equalTo(questionLabel.snp.bottom).offset(15)
             make.height.equalTo(250)
+            make.bottomMargin.equalToSuperview()
         }
     }
 }

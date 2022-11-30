@@ -95,12 +95,9 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func getLiveQuizStatus() {
-        dataStore.checkLiveQuizPosition(quizTopic: currentData.quizTopic) { current_quiz_data_id, show_question_prompt_time, should_reveal_answer in
-            if let current_quiz_data_id = current_quiz_data_id, current_quiz_data_id != self.currentData.objectId {
-                //the user is out of sync with liveness. Jump to the correct question
-                self.jump(to: current_quiz_data_id)
-            } else if should_reveal_answer {
-                //TODO: show the answer
+        dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer in
+             if should_reveal_answer {
+                self.revealAnswer()
             } else if let show_question_prompt_time = show_question_prompt_time {
                 self.startQuestionPrompt(start_time: show_question_prompt_time)
             }
@@ -110,24 +107,28 @@ class QuestionViewController: UIViewController {
     private func startQuestionPrompt(start_time: Date) {
         if endTime == nil {
             self.endTime = start_time.addingTimeInterval(timeLeft)
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         }
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
-    private func jump(to quizDataID: String) {
-        let index = quizDatas.firstIndex { quizData in
-            return quizData.objectId == quizDataID
-        }
+    private func revealAnswer() {
         
-        if let index = index {
-            playerLayer.player?.pause()
-            playerLayer.player = nil
-            timer.invalidate()
-            quizStatusTimer.invalidate()
-            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: index)
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
     }
+    
+//    private func jump(to quizDataID: String) {
+//        let index = quizDatas.firstIndex { quizData in
+//            return quizData.objectId == quizDataID
+//        }
+//
+//        if let index = index {
+//            playerLayer.player?.pause()
+//            playerLayer.player = nil
+//            timer.invalidate()
+//            quizStatusTimer.invalidate()
+//            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: index)
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+//    }
     
     @objc func updateTime() {
         if timeLeft > 0 {

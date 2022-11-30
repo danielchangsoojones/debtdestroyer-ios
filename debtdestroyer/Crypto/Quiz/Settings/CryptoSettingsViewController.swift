@@ -32,6 +32,8 @@ class CryptoSettingsViewController: UIViewController {
             imgNameArr.append("deleteAcc")
             dataArr.append("Send Text Notification")
             imgNameArr.append("contactUs")
+            dataArr.append("Quiz Maneger")
+            imgNameArr.append("contactUs")
         }
               
         self.navigationItem.title = "Settings"
@@ -121,7 +123,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         } else if indexPath.row == 7 {
             // MARK: Delete Quiz Scores
            deleteQuizScores()
-        } else {
+        } else if indexPath.row == 8{
             // MARK: Send Text Notification
             if User.sendMassTextNotification == false {
                 
@@ -147,6 +149,10 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 
                 
             }
+        } else {
+            // MARK: Quiz Manager
+            let vc = QuizManagerViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
         }
         
     }

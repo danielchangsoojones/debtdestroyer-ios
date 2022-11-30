@@ -136,7 +136,7 @@ class QuestionViewController: UIViewController {
         } else {
             timeLabel.text = "00"
             timer.invalidate()
-//            submitAnswer(answerStatus: .time_ran_out)
+            submitAnswer(answerStatus: .time_ran_out)
         }
     }
   
@@ -237,11 +237,9 @@ class QuestionViewController: UIViewController {
     }
         
     func submitAnswer(answerStatus: AnswerStatus) {
-        let time_answered_seconds = Constants.originalStartTime - timeLeft
         dataStore.saveAnswer(for: currentData.quizTopic,
                              answerStatus: answerStatus,
-                             quizData: currentData,
-                             time_answered_seconds: time_answered_seconds)
+                             quizData: currentData)
         
         let nextIndex = currentIndex + 1
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)

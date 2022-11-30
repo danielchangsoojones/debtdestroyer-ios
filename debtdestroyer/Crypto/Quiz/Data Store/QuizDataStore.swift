@@ -67,15 +67,14 @@ class QuizDataStore {
         }
     }
     
-    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse, time_answered_seconds: Double) {
+    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse) {
         let questionStatus = answerStatus.rawValue
         let quizDataID = quizData.objectId ?? ""
         let quizTopicID = quizTopic.objectId ?? ""
         
         let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
                                           "questionStatus":questionStatus,
-                                          "quizDataID": quizDataID,
-                                          "time_answered_seconds": time_answered_seconds]
+                                          "quizDataID": quizDataID]
         PFCloud.callFunction(inBackground: "saveAnswer", withParameters: parameters) { (result, error) in
             if result != nil {
                 print("the answer was saved for the user")

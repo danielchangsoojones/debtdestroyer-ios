@@ -85,11 +85,11 @@ class QuestionViewController: UIViewController {
     }
     
     private func playVideo() {
-        let video_url_string = currentData.quizTopic.intro_img.url ?? ""
-        let video_url = URL(string: video_url_string)
-        let player = AVPlayer(url: video_url!)
-        playerLayer.player = player
-        player.play()
+        if let video_url = URL(string: currentData.video_url_string) {
+            let player = AVPlayer(url: video_url)
+            playerLayer.player = player
+            player.play()
+        }
     }
     
     @objc func updateTime() {

@@ -15,6 +15,7 @@ class QuizDataParse: SuperParseObject, PFSubclassing {
     @NSManaged var correct_answer_index: Int
     @NSManaged var learn_photo: PFFileObject?
     @NSManaged var order: Int
+    @NSManaged var video_url_string: String
 
     class func parseClassName() -> String {
         return "QuizData"

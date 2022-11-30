@@ -94,7 +94,8 @@ class NewGameStartViewController: UIViewController {
                 checkStartTimer.invalidate()
                 let questionVC = QuestionViewController(quizDatas: quizDatas,
                                                         currentIndex: 0)
-                present(questionVC, animated: true)
+                let navController = UINavigationController(rootViewController: questionVC)
+                present(navController, animated: true)
             }
         }
     }

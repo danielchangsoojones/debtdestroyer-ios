@@ -86,12 +86,27 @@ class QuestionViewController: UIViewController {
         appD.quizRunning = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func playVideo() {
         if let video_url = URL(string: currentData.video_url_string) {
             let player = AVPlayer(url: video_url)
             playerLayer.player = player
             player.play()
+            NotificationCenter.default
+                .addObserver(self,
+                selector: #selector(playerDidFinishPlaying),
+                name: .AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
         }
+    }
+    
+    @objc private func playerDidFinishPlaying(note: NSNotification) {
+        segueToNextVC()
     }
     
     @objc private func getLiveQuizStatus() {
@@ -241,7 +256,9 @@ class QuestionViewController: UIViewController {
         dataStore.saveAnswer(for: currentData.quizTopic,
                              answerStatus: answerStatus,
                              quizData: currentData)
-        
+    }
+    
+    private func segueToNextVC() {
         let nextIndex = currentIndex + 1
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
@@ -252,28 +269,13 @@ class QuestionViewController: UIViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else {
                     print("Sorry the application is not installed")
-                    finished()
+                    let leaderboardVC = ChampionsViewController()
+                    self.navigationController?.pushViewController(leaderboardVC, animated: true)
                 }
             }
         } else {
             let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    private func finished() {
-        if Helpers.getTopViewController() is UINavigationController {
-            //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
-            let tabBarVC = presentingViewController as? UITabBarController
-            if self.tabBarController?.viewControllers?.count == 4 {
-                tabBarVC?.selectedIndex = 2
-            } else {
-                tabBarVC?.selectedIndex = 1
-            }
-            dismiss(animated: true)
-        } else {
-            let leaderboardVC = ChampionsViewController()
-            self.navigationController?.pushViewController(leaderboardVC, animated: true)
         }
     }
 }

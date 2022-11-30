@@ -16,7 +16,6 @@ class QuestionView: UIView {
     private let leadingOffset: CGFloat = 20
     var timerLabel = UILabel()
     var circularView = CircularProgressCountdownTimerView()
-    var backBtn = UIButton()
     let pointsLabel = UILabel()
     let playerLayer = AVPlayerLayer()
     let bottomView = UIView()
@@ -27,7 +26,6 @@ class QuestionView: UIView {
         addVideoLayer()
         setUpProgressView()
         setTimerLabel()
-        setBackButtonView()
         setPointsLabel()
         setQuestionNoLabel()
         setBottomView()
@@ -72,27 +70,12 @@ class QuestionView: UIView {
         }
     }
     
-    private func setBackButtonView() {
-        backBtn.setTitle("ⓧ", for: .normal)
-        backBtn.isHidden = true
-        backBtn.setTitleColor(.black, for: .normal)
-        backBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        backBtn.backgroundColor = .clear
-        let dimenssion = 30
-        contentView.addSubview(backBtn)
-        backBtn.snp.makeConstraints { make in
-            make.height.width.equalTo(dimenssion)
-            make.centerY.equalTo(circularView)
-            make.leading.equalToSuperview().inset(20)
-        }
-    }
-    
     private func setPointsLabel() {
         pointsLabel.text = " 0 Points "
-        pointsLabel.textColor = .black
+        pointsLabel.textColor = .white
         pointsLabel.font = UIFont.MontserratRegular(size: 15)
         pointsLabel.textAlignment = .center
-        pointsLabel.layer.borderColor = UIColor.black.cgColor
+        pointsLabel.layer.borderColor = UIColor.white.cgColor
         pointsLabel.layer.borderWidth = 1
         pointsLabel.layer.cornerRadius = 15
         let dimenssion = 30
@@ -107,6 +90,7 @@ class QuestionView: UIView {
     
     private func setQuestionNoLabel() {
         questionNoLabel.numberOfLines = 0
+        questionNoLabel.isHidden = true
         questionNoLabel.font = UIFont.MontserratRegular(size: 15)
         questionNoLabel.textColor = .black
         contentView.addSubview(questionNoLabel)

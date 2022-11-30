@@ -30,7 +30,6 @@ class QuestionViewController: UIViewController {
     private var answerViews: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
     private var bottomView = UIView()
-    var backBtn = UIButton()
     var pointsLabel = UILabel()
     private let dataStore = QuizDataStore()
     private var playerLayer: AVPlayerLayer!
@@ -62,11 +61,9 @@ class QuestionViewController: UIViewController {
         questionView.questionNoLabel.text = "Question \(currentIndex + 1) of \(quizDatas.count)"
         print("question \(currentIndex + 1) of \(quizDatas.count)")
         self.circularView = questionView.circularView
-        self.backBtn = questionView.backBtn
         self.pointsLabel = questionView.pointsLabel
         self.timeLabel = questionView.timerLabel
         self.answerStackView = questionView.answerStackView
-        backBtn.addTarget(self,action: #selector(backPressed),for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -154,10 +151,6 @@ class QuestionViewController: UIViewController {
             timer.invalidate()
             submitAnswer(answerStatus: .time_ran_out)
         }
-    }
-  
-    @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func enteredAppBackground() {

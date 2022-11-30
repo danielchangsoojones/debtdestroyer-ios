@@ -56,7 +56,7 @@ class NewGameStartView: UIView {
         descContainer.clipsToBounds = true
         addSubview(descContainer)
         descContainer.snp.makeConstraints { make in
-            make.bottomMargin.equalToSuperview().offset(-10)
+            make.bottomMargin.equalToSuperview().offset(-8)
             make.left.right.equalToSuperview()
         }
     }
@@ -128,14 +128,14 @@ class NewGameStartView: UIView {
     }
     
     private func setPrizeButton() {
-        prizeBtn.layer.cornerRadius = 25
+        prizeBtn.layer.cornerRadius = 33
         prizeBtn.clipsToBounds = true
         prizeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
        
         descContainer.addSubview(prizeBtn)
         prizeBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(66)
             make.top.equalToSuperview().offset(30)
         }
     }

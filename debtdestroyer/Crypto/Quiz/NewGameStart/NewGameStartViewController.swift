@@ -25,6 +25,7 @@ class NewGameStartViewController: UIViewController {
     private var quizDatas: [QuizDataParse] = []
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
+    var rippleAdded = false
     
     override func loadView() {
         super.loadView()
@@ -46,10 +47,23 @@ class NewGameStartViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         callTimer()
-        let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
-        ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
+        
+        if !rippleAdded {
+            rippleAdded = true
+            let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
+            ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
+        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         checkStartTimer.invalidate()
@@ -62,6 +76,7 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc private func getQuizDatas() {
+        print("getQuizDatas called")
         quizDataStore.getQuizData { quizDatas in
             self.quizDatas = quizDatas
             self.checkIfStartQuiz()
@@ -124,16 +139,16 @@ class NewGameStartViewController: UIViewController {
         
         self.dayDateLbl.text = "Tuesday Dec. 5th @ 6pm PDT"
         
-        let titletxt = prizeAmountStr + " Prize"
+        let titletxt = "      " + prizeAmountStr + " Prize      "
         if titletxt != prizeBtn.titleLabel?.text {
             if #available(iOS 15.0, *) {
                 if self.prizeBtn.configuration == nil {
                     var configuration = UIButton.Configuration.plain()
-                    configuration.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                    configuration.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 25),NSAttributedString.Key.foregroundColor : UIColor.white]))
                     self.prizeBtn.configuration = configuration
                     
                 } else {
-                    self.prizeBtn.configuration?.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                    self.prizeBtn.configuration?.attributedTitle = AttributedString(titletxt, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 25),NSAttributedString.Key.foregroundColor : UIColor.white]))
                 }
                 
             } else {

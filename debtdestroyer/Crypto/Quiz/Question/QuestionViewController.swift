@@ -11,7 +11,7 @@ import AVFoundation
 
 class QuestionViewController: UIViewController {
     struct Constants {
-        static let originalStartTime: TimeInterval = 8
+        static let originalStartTime: TimeInterval = 12
     }
     
     enum AnswerStatus: String {
@@ -74,7 +74,7 @@ class QuestionViewController: UIViewController {
         playVideo()
         NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
         circularView.progressAnimation(duration: timeLeft)
-        endTime = Date().addingTimeInterval(timeLeft)
+        
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
@@ -102,12 +102,15 @@ class QuestionViewController: UIViewController {
             } else if should_reveal_answer {
                 //TODO: show the answer
             } else if let show_question_prompt_time = show_question_prompt_time {
-                
+                self.startQuestionPrompt(start_time: show_question_prompt_time)
             }
         }
     }
     
     private func startQuestionPrompt(start_time: Date) {
+        if endTime == nil {
+            self.endTime = start_time.addingTimeInterval(timeLeft)
+        }
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
@@ -133,7 +136,7 @@ class QuestionViewController: UIViewController {
         } else {
             timeLabel.text = "00"
             timer.invalidate()
-            submitAnswer(answerStatus: .time_ran_out)
+//            submitAnswer(answerStatus: .time_ran_out)
         }
     }
   

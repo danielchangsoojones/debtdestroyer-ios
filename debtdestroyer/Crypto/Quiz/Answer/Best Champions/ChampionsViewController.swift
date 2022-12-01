@@ -83,19 +83,7 @@ class ChampionsViewController: UIViewController {
         
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
-        
-        var leftTitle = "Start Next Trivia"
-        if self.tabBarController?.viewControllers?.count == 4 {
-            if self.tabBarController?.selectedIndex == 1 {
-                leftTitle = "Start New Trivia"
-            }
-        } else {
-            if self.tabBarController?.selectedIndex == 0 {
-                leftTitle = "Start New Trivia"
-            }
-        }
-        let nextTrivia = UIBarButtonItem.init(title: leftTitle, style: .done, target: self, action: #selector(nextTriviaPressed))
-        navigationItem.leftBarButtonItem = nextTrivia
+    
     }
     
     @objc func segmentValueChanged(_ sender: AnyObject?){
@@ -105,16 +93,6 @@ class ChampionsViewController: UIViewController {
         } else {
             print("Past Winners")
         }
-    }
-    
-    
-    @objc private func nextTriviaPressed() {
-        if self.tabBarController?.viewControllers?.count == 4 {
-            self.tabBarController?.selectedIndex = 1
-        } else {
-            self.tabBarController?.selectedIndex = 0
-        }
-        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func helpPressed() {

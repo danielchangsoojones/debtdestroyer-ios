@@ -41,11 +41,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        let appD = UIApplication.shared.delegate as! AppDelegate
-        if appD.quizRunning {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
-
-        }
         
     }
 

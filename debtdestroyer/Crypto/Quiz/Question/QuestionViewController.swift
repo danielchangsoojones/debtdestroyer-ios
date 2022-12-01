@@ -20,7 +20,6 @@ class QuestionViewController: UIViewController {
         case time_ran_out = "time_ran_out"
     }
     
-    var circularView = CircularProgressCountdownTimerView()
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
     var timeLabel =  UILabel()
@@ -36,7 +35,8 @@ class QuestionViewController: UIViewController {
     private var quizStatusTimer = Timer()
     private var show_question_prompt_time: Date?
     private var hasRevealedAnswerOnce = false
-    
+    var timerBar = UIProgressView()
+
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
@@ -61,7 +61,7 @@ class QuestionViewController: UIViewController {
         addAnswers(to: questionView.answerStackView)
         questionView.questionNoLabel.text = "Question \(currentIndex + 1) of \(quizDatas.count)"
         print("question \(currentIndex + 1) of \(quizDatas.count)")
-        self.circularView = questionView.circularView
+        self.timerBar = questionView.timerBar
         self.pointsLabel = questionView.pointsLabel
         self.timeLabel = questionView.timerLabel
         self.answerStackView = questionView.answerStackView
@@ -70,9 +70,7 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         playVideo()
-        NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
-        circularView.progressAnimation(duration: timeLeft)
-        
+        // TODO: UNCOMMENT THIS code, commented for testing
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
@@ -81,8 +79,14 @@ class QuestionViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
-        appD.quizRunning = true
     }
+    // TODO: Remove THIS func viewDidAppear.. added for testing
+
+//    override func viewDidAppear(_ animated: Bool) {
+//        endTime = Date().addingTimeInterval(timeLeft)
+//        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+//
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -192,19 +196,24 @@ class QuestionViewController: UIViewController {
 //    }
     
     @objc func updateTime() {
+    
+        
+        
         if timeLeft > 0 {
+          
+
             timeLeft = endTime?.timeIntervalSinceNow ?? 0
-            timeLabel.text = timeLeft.time
+            timerBar.setProgress(Float(timeLeft)/Float(Constants.originalStartTime), animated: false)
+            timeLabel.text = timeLeft.time + " Seconds"
         } else {
-            timeLabel.text = "00"
+            timeLabel.text = "Time Up!"
+            self.timeLabel.alpha = 1
+            UILabel.animate(withDuration: 1.5) {
+                self.timeLabel.alpha = 0
+            }
             timer.invalidate()
             submitAnswer(answerStatus: .time_ran_out)
         }
-    }
-    
-    @objc private func enteredAppBackground() {
-        dataStore.exitedAppDuringTrivia(for: currentData.quizTopic, quizData: currentData)
-        self.navigationController?.popToRootViewController(animated: false)
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -230,7 +239,7 @@ class QuestionViewController: UIViewController {
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
         timer.invalidate()
-        circularView.pause()
+        // TODO: Code here for progrss bar pause
         self.answerStackView.isUserInteractionEnabled = false // added this line so user can answer once only. if immediadely clicked can select more
         for (index, answerView) in answerViews.enumerated() {
             if index == gesture.view?.tag {
@@ -249,7 +258,6 @@ class QuestionViewController: UIViewController {
         let nextIndex = currentIndex + 1
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
-            appD.quizRunning = false
             if Helpers.getTopViewController() is UINavigationController {
                 //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
                 let tabBarVC = presentingViewController as? UITabBarController

@@ -25,8 +25,6 @@ class NewStartQuizView: UIView {
     var shareButton = UIButton()
     let scrollView = UIScrollView()
     let contentView = UIView()
-    private let videoURLChallenge = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-    private let videoURLTrivia = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,8 +51,8 @@ class NewStartQuizView: UIView {
     
     override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: self.layer)
-        playVideo(from: "notebook.mp4", on: dailyChallengeContainer)
-        playVideo(from: "sand.mp4", on: triviaContainer)
+//        playVideo(from: "notebook.mp4", on: dailyChallengeContainer)
+//        playVideo(from: "sand.mp4", on: triviaContainer)
 
     }
     

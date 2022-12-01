@@ -27,8 +27,6 @@
 		0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178A290115A200A414CA /* ScoreViewController.swift */; };
 		0A32178D290115BA00A414CA /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178C290115BA00A414CA /* ScoreView.swift */; };
 		0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */; };
-		0A3AF7FE2930C9D000556897 /* notebook.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0A3AF7FD2930C9AB00556897 /* notebook.mp4 */; };
-		0A3AF8002930D99600556897 /* sand.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0A3AF7FF2930D8EE00556897 /* sand.mp4 */; };
 		0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A421C0528DB3AED008792B8 /* StoreKit.framework */; };
 		0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */; };
 		0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A421C0928DB4A7B008792B8 /* IAPManager.swift */; };
@@ -111,7 +109,6 @@
 		0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */; };
 		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
 		0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */; };
-		0A9D01AC292B54F7002CA0C5 /* PexelsVideos.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0A9D01AB292B5473002CA0C5 /* PexelsVideos.mp4 */; };
 		0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */; };
 		0A9D01B0292B71AD002CA0C5 /* NewStartQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */; };
 		0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */; };
@@ -177,8 +174,6 @@
 		0A32178A290115A200A414CA /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		0A32178C290115BA00A414CA /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsCell.swift; sourceTree = "<group>"; };
-		0A3AF7FD2930C9AB00556897 /* notebook.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = notebook.mp4; sourceTree = "<group>"; };
-		0A3AF7FF2930D8EE00556897 /* sand.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sand.mp4; sourceTree = "<group>"; };
 		0A421C0528DB3AED008792B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
 		0A421C0928DB4A7B008792B8 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -263,7 +258,6 @@
 		0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerChoiceNewUIView.swift; sourceTree = "<group>"; };
-		0A9D01AB292B5473002CA0C5 /* PexelsVideos.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = PexelsVideos.mp4; sourceTree = "<group>"; };
 		0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizViewController.swift; sourceTree = "<group>"; };
 		0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizView.swift; sourceTree = "<group>"; };
 		0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerExtension.swift; sourceTree = "<group>"; };
@@ -882,9 +876,6 @@
 				0A11C834289BC25E00AEF89D /* RoundUp */,
 				0A11C832289BC1B800AEF89D /* Helper */,
 				92021FD5289B07A6007901A6 /* Assets.xcassets */,
-				0A3AF7FD2930C9AB00556897 /* notebook.mp4 */,
-				0A3AF7FF2930D8EE00556897 /* sand.mp4 */,
-				0A9D01AB292B5473002CA0C5 /* PexelsVideos.mp4 */,
 				92021FD7289B07A6007901A6 /* LaunchScreen.storyboard */,
 				92021FDA289B07A6007901A6 /* Info.plist */,
 			);
@@ -972,9 +963,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A3AF8002930D99600556897 /* sand.mp4 in Resources */,
-				0A3AF7FE2930C9D000556897 /* notebook.mp4 in Resources */,
-				0A9D01AC292B54F7002CA0C5 /* PexelsVideos.mp4 in Resources */,
 				0A5FD50D28F8475200B995C8 /* SIL Open Font License.txt in Resources */,
 				0A5FD50B28F8475200B995C8 /* Montserrat-Bold.otf in Resources */,
 				0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */,

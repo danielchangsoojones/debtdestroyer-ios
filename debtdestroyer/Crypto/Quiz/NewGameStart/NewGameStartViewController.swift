@@ -102,35 +102,6 @@ class NewGameStartViewController: UIViewController {
     
     private func setData(quizTopic: QuizTopicParse) {
         
-//     refrence Url
-//    https://www.globalnerdy.com/2020/05/27/how-to-work-with-dates-and-times-in-swift-5-part-2-formatting-and-parsing-dates-and-times-with-dateformatter/
-//        
-//        let apiDateStr = "02/12/2022 11:11:11"
-//        let formatter = DateFormatter()
-//       
-//        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-//        let apiDate = formatter.date(from: apiDateStr)
-//        if #available(iOS 15.0, *) {
-//            let formatted = apiDate?.formatted(.dateTime.day().month(.abbreviated))
-//            print(formatted)
-//        } else {
-//            // Fallback on earlier versions
-//        }
-//            //.formatted(
-////            .dateTime
-////                .day().month(.wide).year()
-////                .hour().minute()
-////        )
-////
-//        
-//        formatter.dateStyle = .full
-//        formatter.timeStyle = .long
-//        let dStr = formatter.string(from: apiDate!)
-//        let d = formatter.date(from: dStr )
-//        let local = (d?.toLocalTime())!
-//        formatter.timeZone = TimeZone(abbreviation: "PDT")
-//        let pd = formatter.string(from: local)
-//        print(pd)
         let prizeAmount = Int(quizTopic.prize_amount / 100)
         let prizeAmountStr = "$\(prizeAmount)"
         let descriptionLblText = "Answer all 15 questions correctly to win " + prizeAmountStr + " towards your loans! If no one wins, the money rolls over to next week!"

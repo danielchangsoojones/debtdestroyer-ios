@@ -136,6 +136,7 @@ class NewGameStartView: UIView {
         prizeBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.height.equalTo(66)
+            make.width.greaterThanOrEqualTo(66)
             make.top.equalToSuperview().offset(30)
         }
     }

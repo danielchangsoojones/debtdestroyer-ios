@@ -12,7 +12,7 @@ class QuestionView: UIView {
     let answerStackView = UIStackView()
     let questionLabel = UILabel()
     let questionNoLabel = UILabel()
-    let contentView = UIView()
+    let questionContentView = UIView()
     private let leadingOffset: CGFloat = 20
     var timerLabel = UILabel()
     let pointsLabel = UILabel()
@@ -29,6 +29,8 @@ class QuestionView: UIView {
         setQuestionNoLabel()
         setBottomView()
         setUpProgressBarContainer()
+        questionContentView.alpha = 0.0
+
     }
     
     required init?(coder: NSCoder) {
@@ -36,9 +38,9 @@ class QuestionView: UIView {
     }
     
     private func addVideoLayer() {
-        contentView.backgroundColor = .clear
-        addSubview(contentView)
-        contentView.snp.makeConstraints { make in
+        questionContentView.backgroundColor = .clear
+        addSubview(questionContentView)
+        questionContentView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.left.right.equalTo(self)
             make.height.greaterThanOrEqualTo(800)
@@ -46,8 +48,8 @@ class QuestionView: UIView {
         playerLayer.videoGravity = .resizeAspectFill
         playerLayer.frame = self.bounds
         
-        contentView.layer.addSublayer(playerLayer)
-        contentView.backgroundColor = .clear.withAlphaComponent(0.5)
+        self.layer.insertSublayer(playerLayer, at: 0)
+        self.backgroundColor = .clear.withAlphaComponent(0.5)
     }
     
     private func setTimerLabel() {
@@ -55,7 +57,7 @@ class QuestionView: UIView {
         timerLabel.textAlignment = .center
         timerLabel.textColor = .white
         timerLabel.font = UIFont.MontserratBold(size: 16)
-        contentView.addSubview(timerLabel)
+        questionContentView.addSubview(timerLabel)
         timerLabel.snp.makeConstraints { make in
             make.center.equalTo(timerBar)
         }
@@ -70,7 +72,7 @@ class QuestionView: UIView {
         pointsLabel.layer.borderWidth = 1
         pointsLabel.layer.cornerRadius = 15
         let dimenssion = 30
-        contentView.addSubview(pointsLabel)
+        questionContentView.addSubview(pointsLabel)
         pointsLabel.snp.makeConstraints { make in
             make.height.equalTo(dimenssion)
             make.width.equalTo(100)
@@ -84,7 +86,7 @@ class QuestionView: UIView {
         questionNoLabel.isHidden = true
         questionNoLabel.font = UIFont.MontserratRegular(size: 15)
         questionNoLabel.textColor = .black
-        contentView.addSubview(questionNoLabel)
+        questionContentView.addSubview(questionNoLabel)
         questionNoLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.topMargin.equalToSuperview().offset(80)
@@ -94,7 +96,7 @@ class QuestionView: UIView {
     
     private func setBottomView() {
         bottomView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        contentView.addSubview(bottomView)
+        questionContentView.addSubview(bottomView)
         bottomView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -117,7 +119,7 @@ class QuestionView: UIView {
     
     private func setUpProgressBarContainer() {
         progressBarContainer.backgroundColor = .clear
-        contentView.addSubview(progressBarContainer)
+        questionContentView.addSubview(progressBarContainer)
         progressBarContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(bottomView.snp.top)

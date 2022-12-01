@@ -36,12 +36,15 @@ class QuestionViewController: UIViewController {
     private var show_question_prompt_time: Date?
     private var hasRevealedAnswerOnce = false
     var timerBar = UIProgressView()
-
+    var questionContentView = UIView()
+    var questionView = QuestionView()
+    var player = AVPlayer()
+    
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
     let appD = UIApplication.shared.delegate as! AppDelegate
-
+    
     init(quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
@@ -54,7 +57,7 @@ class QuestionViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        let questionView = QuestionView(frame: self.view.frame)
+        questionView = QuestionView(frame: self.view.frame)
         self.view = questionView
         self.playerLayer = questionView.playerLayer
         questionView.questionLabel.text = currentData.question
@@ -65,13 +68,16 @@ class QuestionViewController: UIViewController {
         self.pointsLabel = questionView.pointsLabel
         self.timeLabel = questionView.timerLabel
         self.answerStackView = questionView.answerStackView
+        self.questionContentView = questionView.questionContentView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playVideo()
-        // TODO: UNCOMMENT THIS code, commented for testing
-//        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
+        //        questionContentView.isHidden = true // MARK: isHidden will manage to hide & show UI on top of video.
+        
+        //        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true) // TODO: UNCOMMENT THIS code, commented for testing
+
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
     
@@ -80,12 +86,12 @@ class QuestionViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
     }
-    // TODO: Remove THIS func viewDidAppear.. added for testing
-
+    
     override func viewDidAppear(_ animated: Bool) {
         endTime = Date().addingTimeInterval(timeLeft)
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)        // TODO: Remove THIS 2 lines.. added for testing timerProgress
 
+        self.questionPromptAnimate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -94,9 +100,16 @@ class QuestionViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    private func questionPromptAnimate() {
+        self.questionContentView.alpha = 0.0
+        UIView.animate(withDuration: 1.0) {
+            self.questionContentView.alpha = 1.0
+        }
+    }
+    
     private func playVideo() {
         if let video_url = URL(string: currentData.video_url_string) {
-            let player = AVPlayer(url: video_url)
+            player = AVPlayer(url: video_url)
             playerLayer.player = player
             player.play()
             NotificationCenter.default
@@ -197,12 +210,7 @@ class QuestionViewController: UIViewController {
 //    }
     
     @objc func updateTime() {
-    
-        
-        
         if timeLeft > 0 {
-          
-
             timeLeft = endTime?.timeIntervalSinceNow ?? 0
             timerBar.setProgress(Float(timeLeft)/Float(Constants.originalStartTime), animated: false)
             timeLabel.text = timeLeft.time + " Seconds"
@@ -237,11 +245,62 @@ class QuestionViewController: UIViewController {
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
         timer.invalidate()
-        // TODO: Code here for progrss bar pause
+        //        player.pause() // TODO: we can stop player if need by calling pause
         self.answerStackView.isUserInteractionEnabled = false // added this line so user can answer once only. if immediadely clicked can select more
         for (index, answerView) in answerViews.enumerated() {
             if index == gesture.view?.tag {
                 answerView.select()
+                
+                let isIncorrectAnswer = index != currentData.correct_answer_index
+                if isIncorrectAnswer {
+                    answerView.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
+                    answerView.gifImgView.tintColor = .black
+                    answerView.gifImgView.alpha = 0
+                    UIImageView.animate(withDuration: 3, animations: {
+                        answerView.gifImgView.alpha = 1
+                        
+                    })
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                    
+                    // Correct Answer show
+                    let correctAnswerView = answerViews[currentData.correct_answer_index]
+                    correctAnswerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                    correctAnswerView.gifImgView.tintColor = .black
+                    correctAnswerView.gifImgView.alpha = 0.2
+                    UIImageView.animate(withDuration: 3, animations: {
+                        correctAnswerView.gifImgView.alpha = 1
+                        
+                    })
+                    correctAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
+                    print("")
+                } else {
+                    User.current()?.quizPointCounter += 1
+                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
+                    answerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                    answerView.gifImgView.tintColor = .black
+                    answerView.gifImgView.alpha = 0.2
+                    UIImageView.animate(withDuration: 3, animations: {
+                        answerView.gifImgView.alpha = 1
+                        
+                    })
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
+                }
+            }
+        }
+        
+        // this code is hiding remaining options
+        for (_, answerView) in answerViews.enumerated() {
+
+            if answerView.tag == gesture.view?.tag {
+                answerView.alpha = 1.0
+            } else {
+                if answerView.tag == self.currentData.correct_answer_index {
+                    answerView.alpha = 1.0
+                }else {
+                    UIView.animate(withDuration: 1.0) {
+                        answerView.alpha = 0.0
+                    }
+                }
             }
         }
     }

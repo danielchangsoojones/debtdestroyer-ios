@@ -132,6 +132,7 @@
 		0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */; };
 		0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */; };
 		0ACAE9262935F0A40054E0A3 /* NewGameStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */; };
+		0ADECEDD2938AF0C00D5F5B2 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADECEDC2938AF0C00D5F5B2 /* UILabelExtension.swift */; };
 		0AE126A9291A697D00E11003 /* ConnectDisclosureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */; };
 		0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */; };
 		0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */; };
@@ -281,6 +282,7 @@
 		0AC23D3328ACE3B1006301DE /* SettingsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataStore.swift; sourceTree = "<group>"; };
 		0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameStartView.swift; sourceTree = "<group>"; };
 		0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameStartViewController.swift; sourceTree = "<group>"; };
+		0ADECEDC2938AF0C00D5F5B2 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		0AE126A8291A697D00E11003 /* ConnectDisclosureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureViewController.swift; sourceTree = "<group>"; };
 		0AE126AA291A699000E11003 /* ConnectDisclosureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDisclosureView.swift; sourceTree = "<group>"; };
 		0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */,
 				0A2E73A7289CD211006E67F9 /* ViewControllerExtension.swift */,
 				0A1A637F28A6592200EFCC4D /* ViewExtension.swift */,
+				0ADECEDC2938AF0C00D5F5B2 /* UILabelExtension.swift */,
 				0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */,
 				0A7A4A0428A3D5D5009EDE5E /* GardientButton.swift */,
 				0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */,
@@ -1067,6 +1070,7 @@
 				0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */,
+				0ADECEDD2938AF0C00D5F5B2 /* UILabelExtension.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
 				0A9D01B0292B71AD002CA0C5 /* NewStartQuizView.swift in Sources */,

@@ -15,20 +15,20 @@ class QuestionView: UIView {
     let contentView = UIView()
     private let leadingOffset: CGFloat = 20
     var timerLabel = UILabel()
-    var circularView = CircularProgressCountdownTimerView()
     let pointsLabel = UILabel()
     let playerLayer = AVPlayerLayer()
     let bottomView = UIView()
-
+    let progressBarContainer = UIView()
+    var timerBar = UIProgressView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         addVideoLayer()
-        setUpProgressView()
-        setTimerLabel()
         setPointsLabel()
         setQuestionNoLabel()
         setBottomView()
+        setUpProgressBarContainer()
     }
     
     required init?(coder: NSCoder) {
@@ -49,24 +49,15 @@ class QuestionView: UIView {
         contentView.layer.addSublayer(playerLayer)
         contentView.backgroundColor = .clear.withAlphaComponent(0.5)
     }
-
-    private func setUpProgressView() {
-        contentView.addSubview(circularView)
-        circularView.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview().offset(30)
-            make.centerX.equalToSuperview()
-        }
-    }
     
     private func setTimerLabel() {
-        timerLabel.text = "15"
         timerLabel.numberOfLines = 0
         timerLabel.textAlignment = .center
-        timerLabel.textColor = .black
+        timerLabel.textColor = .white
         timerLabel.font = UIFont.MontserratBold(size: 16)
         contentView.addSubview(timerLabel)
         timerLabel.snp.makeConstraints { make in
-            make.center.equalTo(circularView)
+            make.center.equalTo(timerBar)
         }
     }
     
@@ -83,7 +74,7 @@ class QuestionView: UIView {
         pointsLabel.snp.makeConstraints { make in
             make.height.equalTo(dimenssion)
             make.width.equalTo(100)
-            make.centerY.equalTo(circularView)
+            make.topMargin.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().inset(20)
         }
     }
@@ -96,8 +87,7 @@ class QuestionView: UIView {
         contentView.addSubview(questionNoLabel)
         questionNoLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-//            make.top.equalTo(quesImgView.snp.bottom).offset(30)
-            make.top.equalTo(circularView.snp.bottom).offset(50)
+            make.topMargin.equalToSuperview().offset(80)
 
         }
     }
@@ -122,6 +112,31 @@ class QuestionView: UIView {
         questionLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalToSuperview().offset(10)
+        }
+    }
+    
+    private func setUpProgressBarContainer() {
+        progressBarContainer.backgroundColor = .clear
+        contentView.addSubview(progressBarContainer)
+        progressBarContainer.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(bottomView.snp.top)
+            make.height.equalTo(50)
+        }
+        
+        setUpTimerBar()
+        setTimerLabel()
+
+    }
+    
+    private func setUpTimerBar() {
+        timerBar.trackTintColor = .clear
+        timerBar.progressTintColor = .purple
+        timerBar.progress = 0.0
+        progressBarContainer.addSubview(timerBar)
+        
+        timerBar.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
     }
     

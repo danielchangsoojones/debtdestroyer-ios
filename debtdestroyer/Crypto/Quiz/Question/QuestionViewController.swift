@@ -71,7 +71,7 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         playVideo()
         // TODO: UNCOMMENT THIS code, commented for testing
-        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
+//        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
     
@@ -82,14 +82,15 @@ class QuestionViewController: UIViewController {
     }
     // TODO: Remove THIS func viewDidAppear.. added for testing
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        endTime = Date().addingTimeInterval(timeLeft)
-//        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-//
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        endTime = Date().addingTimeInterval(timeLeft)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.timeLabel.stopBlink()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -207,10 +208,7 @@ class QuestionViewController: UIViewController {
             timeLabel.text = timeLeft.time + " Seconds"
         } else {
             timeLabel.text = "Time Up!"
-            self.timeLabel.alpha = 1
-            UILabel.animate(withDuration: 1.5) {
-                self.timeLabel.alpha = 0
-            }
+            self.timeLabel.startBlink()
             timer.invalidate()
             submitAnswer(answerStatus: .time_ran_out)
         }

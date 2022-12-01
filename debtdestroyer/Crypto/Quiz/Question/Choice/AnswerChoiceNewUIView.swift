@@ -60,6 +60,6 @@ class AnswerChoiceNewUIView: UIView {
     func select() {
         isChosen = true
         answerLabel.textColor = .black
-//        setGradientBackground(color1: hexStringToUIColor(hex: "BE62F6"), color2: hexStringToUIColor(hex: "A324EA"),radi: 25)
+        setGradientBackground(color1: hexStringToUIColor(hex: "BE62F6"), color2: hexStringToUIColor(hex: "A324EA"),radi: 25)
     }
 }

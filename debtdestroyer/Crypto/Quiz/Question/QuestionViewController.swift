@@ -11,7 +11,7 @@ import AVFoundation
 
 class QuestionViewController: UIViewController {
     struct Constants {
-        static let originalStartTime: TimeInterval = 12
+        static let originalStartTime: TimeInterval = 10
     }
     
     enum AnswerStatus: String {
@@ -139,32 +139,61 @@ class QuestionViewController: UIViewController {
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
             }
-
-            let isCorrectAnswer = selectedAnswerIndex == self.currentData.correct_answer_index
-            var answerStatus: AnswerStatus = isCorrectAnswer ? .correct : .incorrect
+            
+            var answerStatus: AnswerStatus = .incorrect
             if let selectedAnswerIndex = selectedAnswerIndex {
                 let answerView = answerViews[selectedAnswerIndex]
                 //we need to remove the purple gradient so the replacement gradient will show (red or green).
                 answerView.layer.sublayers?.removeAll(where: { layer in
                     return layer is CAGradientLayer
                 })
-                if isCorrectAnswer {
-                    User.current()?.quizPointCounter += 1
-                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
-                    markCorrect(answerView: answerView)
-                } else {
-                    //incorrect answer
-                    addAnswerMarkingGif(to: answerView, imageName: "xmark")
+                let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+                if isIncorrectAnswer {
+                    answerView.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
+                    answerView.gifImgView.tintColor = .black
+                    answerView.gifImgView.alpha = 0
+                    UIImageView.animate(withDuration: 3, animations: {
+                        answerView.gifImgView.alpha = 1
+                        
+                    })
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
                     
                     // Correct Answer show
                     let correctAnswerView = answerViews[currentData.correct_answer_index]
-                    markCorrect(answerView: correctAnswerView)
+                    correctAnswerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                    correctAnswerView.gifImgView.tintColor = .black
+                    correctAnswerView.gifImgView.alpha = 0.2
+                    UIImageView.animate(withDuration: 3, animations: {
+                        correctAnswerView.gifImgView.alpha = 1
+                        
+                    })
+                    correctAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
+                } else {
+                    answerStatus = .correct
+                    User.current()?.quizPointCounter += 1
+                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
+                    answerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                    answerView.gifImgView.tintColor = .black
+                    answerView.gifImgView.alpha = 0.2
+                    UIImageView.animate(withDuration: 3, animations: {
+                        answerView.gifImgView.alpha = 1
+                        
+                    })
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
                 }
             } else {
-                let correctAnswerView = answerViews[currentData.correct_answer_index]
-                markCorrect(answerView: correctAnswerView)
                 answerStatus = .time_ran_out
+            }
+            
+            // this code is hiding remaining options
+            for (_, answerView) in answerViews.enumerated() {
+                if answerView.tag == selectedAnswerIndex || answerView.tag == self.currentData.correct_answer_index {
+                    answerView.alpha = 1.0
+                } else {
+                    UIView.animate(withDuration: 1.0) {
+                        answerView.alpha = 0.0
+                    }
+                }
             }
             
             self.submitAnswer(answerStatus: answerStatus)
@@ -235,63 +264,10 @@ class QuestionViewController: UIViewController {
     }
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
-        timer.invalidate()
-        //        player.pause() // TODO: we can stop player if need by calling pause
         self.answerStackView.isUserInteractionEnabled = false // added this line so user can answer once only. if immediadely clicked can select more
         for (index, answerView) in answerViews.enumerated() {
             if index == gesture.view?.tag {
                 answerView.select()
-                
-                let isIncorrectAnswer = index != currentData.correct_answer_index
-                if isIncorrectAnswer {
-                    answerView.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
-                    answerView.gifImgView.tintColor = .black
-                    answerView.gifImgView.alpha = 0
-                    UIImageView.animate(withDuration: 3, animations: {
-                        answerView.gifImgView.alpha = 1
-                        
-                    })
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
-                    
-                    // Correct Answer show
-                    let correctAnswerView = answerViews[currentData.correct_answer_index]
-                    correctAnswerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
-                    correctAnswerView.gifImgView.tintColor = .black
-                    correctAnswerView.gifImgView.alpha = 0.2
-                    UIImageView.animate(withDuration: 3, animations: {
-                        correctAnswerView.gifImgView.alpha = 1
-                        
-                    })
-                    correctAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
-                    print("")
-                } else {
-                    User.current()?.quizPointCounter += 1
-                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
-                    answerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
-                    answerView.gifImgView.tintColor = .black
-                    answerView.gifImgView.alpha = 0.2
-                    UIImageView.animate(withDuration: 3, animations: {
-                        answerView.gifImgView.alpha = 1
-                        
-                    })
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
-                }
-            }
-        }
-        
-        // this code is hiding remaining options
-        for (_, answerView) in answerViews.enumerated() {
-
-            if answerView.tag == gesture.view?.tag {
-                answerView.alpha = 1.0
-            } else {
-                if answerView.tag == self.currentData.correct_answer_index {
-                    answerView.alpha = 1.0
-                }else {
-                    UIView.animate(withDuration: 1.0) {
-                        answerView.alpha = 0.0
-                    }
-                }
             }
         }
     }

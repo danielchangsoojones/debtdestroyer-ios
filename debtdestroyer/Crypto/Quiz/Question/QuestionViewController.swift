@@ -70,7 +70,6 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         playVideo()
-        NotificationCenter.default.addObserver(self, selector: #selector(enteredAppBackground), name: NSNotification.Name(rawValue: "quizLeft"), object: nil)
         // TODO: UNCOMMENT THIS code, commented for testing
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
@@ -80,7 +79,6 @@ class QuestionViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
-        appD.quizRunning = true
     }
     // TODO: Remove THIS func viewDidAppear.. added for testing
 
@@ -218,11 +216,6 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    @objc private func enteredAppBackground() {
-        dataStore.exitedAppDuringTrivia(for: currentData.quizTopic, quizData: currentData)
-        self.navigationController?.popToRootViewController(animated: false)
-    }
-    
     private func addAnswers(to stackView: UIStackView) {
         if let answers = currentData.answers {
             for (index, answer) in answers.enumerated() {
@@ -265,7 +258,6 @@ class QuestionViewController: UIViewController {
         let nextIndex = currentIndex + 1
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
-            appD.quizRunning = false
             if Helpers.getTopViewController() is UINavigationController {
                 //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
                 let tabBarVC = presentingViewController as? UITabBarController

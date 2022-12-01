@@ -35,6 +35,7 @@ class QuestionViewController: UIViewController {
     private var playerLayer: AVPlayerLayer!
     private var quizStatusTimer = Timer()
     private var show_question_prompt_time: Date?
+    private var hasRevealedAnswerOnce = false
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -124,7 +125,20 @@ class QuestionViewController: UIViewController {
     }
     
     private func revealAnswer() {
-        
+        if !hasRevealedAnswerOnce {
+            hasRevealedAnswerOnce = true
+            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+                return answerView.isChosen
+            }
+
+            let isCorrectAnswer = selectedAnswerIndex == self.currentData.correct_answer_index
+            var answerStatus: AnswerStatus = isCorrectAnswer ? .correct : .incorrect
+            if selectedAnswerIndex == nil {
+                answerStatus = .time_ran_out
+            }
+            
+            self.submitAnswer(answerStatus: answerStatus)
+        }
     }
     
 //    private func jump(to quizDataID: String) {
@@ -186,7 +200,6 @@ class QuestionViewController: UIViewController {
         for (index, answerView) in answerViews.enumerated() {
             if index == gesture.view?.tag {
                 answerView.select()
-                answerView.setGradientBackground(color1: hexStringToUIColor(hex: "BE62F6"), color2: hexStringToUIColor(hex: "A324EA"),radi: 25)
  
 //                let isIncorrectAnswer = index != currentData.correct_answer_index
 //                if isIncorrectAnswer {
@@ -229,20 +242,6 @@ class QuestionViewController: UIViewController {
             }
             
         }
-        
-//        Timer.runThisAfterDelay(seconds: 1.7, after: {
-//            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
-//                if answerView.tag == gesture.view?.tag {
-//                    return true
-//                } else {
-//                    return false
-//                }
-//            }
-//
-//            let isCorrectAnswer = selectedAnswerIndex == self.currentData.correct_answer_index
-//            let answerStatus: AnswerStatus = isCorrectAnswer ? .correct : .incorrect
-//            self.submitAnswer(answerStatus: answerStatus)
-//        })
     }
         
     func submitAnswer(answerStatus: AnswerStatus) {

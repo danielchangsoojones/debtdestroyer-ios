@@ -133,12 +133,47 @@ class QuestionViewController: UIViewController {
 
             let isCorrectAnswer = selectedAnswerIndex == self.currentData.correct_answer_index
             var answerStatus: AnswerStatus = isCorrectAnswer ? .correct : .incorrect
-            if selectedAnswerIndex == nil {
+            if let selectedAnswerIndex = selectedAnswerIndex {
+                let answerView = answerViews[selectedAnswerIndex]
+                //we need to remove the purple gradient so the replacement gradient will show (red or green).
+                answerView.layer.sublayers?.removeAll(where: { layer in
+                    return layer is CAGradientLayer
+                })
+                if isCorrectAnswer {
+                    User.current()?.quizPointCounter += 1
+                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
+                    markCorrect(answerView: answerView)
+                } else {
+                    //incorrect answer
+                    addAnswerMarkingGif(to: answerView, imageName: "xmark")
+                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                    
+                    // Correct Answer show
+                    let correctAnswerView = answerViews[currentData.correct_answer_index]
+                    markCorrect(answerView: correctAnswerView)
+                }
+            } else {
+                let correctAnswerView = answerViews[currentData.correct_answer_index]
+                markCorrect(answerView: correctAnswerView)
                 answerStatus = .time_ran_out
             }
             
             self.submitAnswer(answerStatus: answerStatus)
         }
+    }
+    
+    private func markCorrect(answerView: AnswerChoiceNewUIView) {
+        addAnswerMarkingGif(to: answerView, imageName: "checkmark")
+        answerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
+    }
+    
+    private func addAnswerMarkingGif(to answerView: AnswerChoiceNewUIView, imageName: String) {
+        answerView.gifImgView.image = UIImage.init(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
+        answerView.gifImgView.tintColor = .black
+        answerView.gifImgView.alpha = 0.2
+        UIImageView.animate(withDuration: 1, animations: {
+            answerView.gifImgView.alpha = 1
+        })
     }
     
 //    private func jump(to quizDataID: String) {

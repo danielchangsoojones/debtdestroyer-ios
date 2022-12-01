@@ -11,7 +11,7 @@ import AVFoundation
 
 class QuestionViewController: UIViewController {
     struct Constants {
-        static let originalStartTime: TimeInterval = 10
+        static let originalStartTime: TimeInterval = 12
     }
     
     enum AnswerStatus: String {
@@ -127,6 +127,7 @@ class QuestionViewController: UIViewController {
     
     private func startQuestionPrompt(start_time: Date) {
         if endTime == nil {
+            player.pause()
             self.endTime = start_time.addingTimeInterval(timeLeft)
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             self.questionPromptAnimate()
@@ -135,6 +136,7 @@ class QuestionViewController: UIViewController {
     
     private func revealAnswer() {
         if !hasRevealedAnswerOnce {
+            player.play()
             hasRevealedAnswerOnce = true
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
@@ -149,41 +151,17 @@ class QuestionViewController: UIViewController {
                 })
                 let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
                 if isIncorrectAnswer {
-                    answerView.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
-                    answerView.gifImgView.tintColor = .black
-                    answerView.gifImgView.alpha = 0
-                    UIImageView.animate(withDuration: 3, animations: {
-                        answerView.gifImgView.alpha = 1
-                        
-                    })
+                    addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
-                    
-                    // Correct Answer show
-                    let correctAnswerView = answerViews[currentData.correct_answer_index]
-                    correctAnswerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
-                    correctAnswerView.gifImgView.tintColor = .black
-                    correctAnswerView.gifImgView.alpha = 0.2
-                    UIImageView.animate(withDuration: 3, animations: {
-                        correctAnswerView.gifImgView.alpha = 1
-                        
-                    })
-                    correctAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
                 } else {
                     answerStatus = .correct
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
-                    answerView.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
-                    answerView.gifImgView.tintColor = .black
-                    answerView.gifImgView.alpha = 0.2
-                    UIImageView.animate(withDuration: 3, animations: {
-                        answerView.gifImgView.alpha = 1
-                        
-                    })
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "E9D845"), color2: hexStringToUIColor(hex: "B5C30F"), radi: 25)
                 }
             } else {
                 answerStatus = .time_ran_out
             }
+            markCorrectAnswerView()
             
             // this code is hiding remaining options
             for (_, answerView) in answerViews.enumerated() {
@@ -200,9 +178,10 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    private func markCorrect(answerView: AnswerChoiceNewUIView) {
-        addAnswerMarkingGif(to: answerView, imageName: "checkmark")
-        answerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
+    private func markCorrectAnswerView() {
+        let correctAnswerView = answerViews[currentData.correct_answer_index]
+        addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
+        correctAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
     }
     
     private func addAnswerMarkingGif(to answerView: AnswerChoiceNewUIView, imageName: String) {

@@ -74,10 +74,8 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         playVideo()
-        //        questionContentView.isHidden = true // MARK: isHidden will manage to hide & show UI on top of video.
-        
-        //        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true) // TODO: UNCOMMENT THIS code, commented for testing
-
+        self.questionContentView.alpha = 0.0
+        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
     }
     
@@ -87,13 +85,6 @@ class QuestionViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        endTime = Date().addingTimeInterval(timeLeft)
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)        // TODO: Remove THIS 2 lines.. added for testing timerProgress
-
-        self.questionPromptAnimate()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.timeLabel.stopBlink()
@@ -101,7 +92,6 @@ class QuestionViewController: UIViewController {
     }
     
     private func questionPromptAnimate() {
-        self.questionContentView.alpha = 0.0
         UIView.animate(withDuration: 1.0) {
             self.questionContentView.alpha = 1.0
         }
@@ -139,6 +129,7 @@ class QuestionViewController: UIViewController {
         if endTime == nil {
             self.endTime = start_time.addingTimeInterval(timeLeft)
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            self.questionPromptAnimate()
         }
     }
     
@@ -215,10 +206,10 @@ class QuestionViewController: UIViewController {
             timerBar.setProgress(Float(timeLeft)/Float(Constants.originalStartTime), animated: false)
             timeLabel.text = timeLeft.time + " Seconds"
         } else {
+            questionContentView.isUserInteractionEnabled = false
             timeLabel.text = "Time Up!"
             self.timeLabel.startBlink()
             timer.invalidate()
-            submitAnswer(answerStatus: .time_ran_out)
         }
     }
     

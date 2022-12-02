@@ -9,14 +9,11 @@ import UIKit
 
 class ChampionsView: UIView {
    
-//    let descriptionLabel = UILabel()
-//    let titleLabel = UILabel()
     let containerView = UIView()
     let leaderboardTableView = UITableView()
     let numberLabel = UILabel()
     let nameLabel = UILabel()
     let pointsLabel = UILabel()
-    let timeLable = UILabel()
     let bottomViewContainer = UIView()
     let bottomView = UIView()
     var toggleSegment = HBSegmentedControl()
@@ -97,7 +94,6 @@ class ChampionsView: UIView {
         setNumLabel()
         setNameLabel()
         setPointsLabel()
-        setTimeLabel()
         setConstraints()
     }
     
@@ -108,15 +104,8 @@ class ChampionsView: UIView {
             make.width.equalTo(15)
         }
         
-        timeLable.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(10)
-            make.centerY.equalTo(nameLabel)
-            make.width.equalTo(80)
-            make.height.equalTo(30)
-        }
-        
         pointsLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(timeLable.snp.leading).inset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(60)
             make.height.equalTo(30)
@@ -137,14 +126,6 @@ class ChampionsView: UIView {
         numberLabel.font = UIFont.MontserratLight(size: 10)
         numberLabel.textColor = .black
         bottomView.addSubview(numberLabel)
-    }
-    
-    private func setTimeLabel() {
-        timeLable.font = UIFont.MontserratLight(size: 13)
-        timeLable.textColor = .black
-        timeLable.textAlignment = .center
-
-        bottomView.addSubview(timeLable)
     }
     
     private func setNameLabel() {

@@ -12,7 +12,6 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     let numberLabel = UILabel()
     let nameLabel = UILabel()
     let pointsLabel = UILabel()
-    let timeLable = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,7 +19,6 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
         setNumLabel()
         setNameLabel()
         setPointsLabel()
-        setTimeLabel()
         setConstraints()
     }
     
@@ -35,15 +33,8 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
             make.width.equalTo(12)
         }
         
-        timeLable.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(10)
-            make.centerY.equalTo(nameLabel)
-            make.width.equalTo(80)
-            make.height.equalTo(30)
-        }
-        
         pointsLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(timeLable.snp.leading).inset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(60)
             make.height.equalTo(30)
@@ -64,14 +55,6 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
         numberLabel.font = UIFont.MontserratLight(size: 10)
         numberLabel.textColor = .black
         contentView.addSubview(numberLabel)
-    }
-    
-    private func setTimeLabel() {
-        timeLable.text = "2.23"
-        timeLable.font = UIFont.MontserratLight(size: 13)
-        timeLable.textColor = .black
-        timeLable.textAlignment = .center
-        contentView.addSubview(timeLable)
     }
     
     private func setNameLabel() {

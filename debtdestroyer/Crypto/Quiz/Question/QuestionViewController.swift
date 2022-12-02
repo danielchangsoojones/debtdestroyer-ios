@@ -40,7 +40,8 @@ class QuestionViewController: UIViewController {
     var questionView = QuestionView()
     var player = AVPlayer()
     private let shouldSeekToPosition: Bool
-    
+    var progressBarContainer = UIView()
+
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
@@ -71,6 +72,7 @@ class QuestionViewController: UIViewController {
         self.timeLabel = questionView.timerLabel
         self.answerStackView = questionView.answerStackView
         self.questionContentView = questionView.questionContentView
+        self.progressBarContainer = questionView.progressBarContainer
     }
     
     override func viewDidLoad() {
@@ -99,6 +101,7 @@ class QuestionViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.timeLabel.stopBlink()
+        self.progressBarContainer.stopBlink()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -247,6 +250,8 @@ class QuestionViewController: UIViewController {
         } else {
             questionContentView.isUserInteractionEnabled = false
             timeLabel.text = "Time Up!"
+            progressBarContainer.backgroundColor = .purple
+            self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
             timer.invalidate()
         }

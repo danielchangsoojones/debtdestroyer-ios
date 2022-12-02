@@ -19,8 +19,8 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
         backgroundColor = .clear
         selectionStyle = .none
         setLogoImg()
-        setTitleLabel()
         setChevron(imageName: "chevronGrey")
+        setTitleLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -44,10 +44,12 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
     private func setTitleLabel() {
         titleLabel.font = UIFont.MontserratMedium(size: 20)
         titleLabel.textColor = .jaguarBlack
+        titleLabel.numberOfLines = 0
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(logoImg.snp.trailing).offset(20)
+            make.leading.equalTo(logoImg.snp.trailing).offset(10)
+            make.trailing.equalTo(chevronImageView.snp.leading).inset(10)
         }
     }
     

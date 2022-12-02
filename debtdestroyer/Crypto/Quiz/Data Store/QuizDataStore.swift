@@ -10,6 +10,39 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
+    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Bool, Double) -> Void) {
+        let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? ""]
+        PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
+            if let result = result {
+                let json = JSON(result)
+                let dict = json.dictionaryObject
+                let show_question_prompt_time = dict?["show_question_prompt_time"] as? Date
+                let should_reveal_answer = json["should_reveal_answer"].boolValue
+                let current_time_seconds = json["current_time_seconds"].doubleValue
+                completion(show_question_prompt_time, should_reveal_answer, current_time_seconds)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "checkLiveQuizPosition")
+            }
+        }
+    }
+    
+    func saveQuizCurrentTime(current_time_seconds: Int) {
+        let parameters: [String : Any] = ["current_time_seconds" : current_time_seconds]
+        PFCloud.callFunction(inBackground: "saveQuizCurrentTime", withParameters: parameters) { (result, error) in
+            if let result = result as? String {
+                BannerAlert.show(title: "Success",
+                                 subtitle: result,
+                                 type: .success)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "checkLiveQuizPosition")
+            }
+        }
+    }
+    
     func getQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
         PFCloud.callFunction(inBackground: "getQuizData", withParameters: nil) { (result, error) in
             if let quizData = result as? [QuizDataParse] {
@@ -49,15 +82,14 @@ class QuizDataStore {
         }
     }
     
-    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse, time_answered_seconds: Double) {
+    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse) {
         let questionStatus = answerStatus.rawValue
         let quizDataID = quizData.objectId ?? ""
         let quizTopicID = quizTopic.objectId ?? ""
         
         let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
                                           "questionStatus":questionStatus,
-                                          "quizDataID": quizDataID,
-                                          "time_answered_seconds": time_answered_seconds]
+                                          "quizDataID": quizDataID]
         PFCloud.callFunction(inBackground: "saveAnswer", withParameters: parameters) { (result, error) in
             if result != nil {
                 print("the answer was saved for the user")
@@ -77,24 +109,7 @@ class QuizDataStore {
             completion(result, error)
         }
     }
-    
-    func exitedAppDuringTrivia(for quizTopic: QuizTopicParse, quizData: QuizDataParse) {
-        let quizTopicID = quizTopic.objectId ?? ""
-        let currentQuizIndex = quizData.order
         
-        let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
-                                          "quizDataIndex": currentQuizIndex]
-        PFCloud.callFunction(inBackground: "exitedAppDuringTrivia", withParameters: parameters) { (result, error) in
-            if result != nil {
-                print("the user has lost the quiz")
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
-            }
-        }
-    }
-    
     func checkShowQuizPopUp(completion: @escaping (Bool, [QuizDataParse]) -> Void) {
         PFCloud.callFunction(inBackground: "checkShowQuizPopUp", withParameters: [:]) { (result, error) in
             if let result = result {
@@ -127,7 +142,6 @@ class QuizDataStore {
     func sendMassTextNotification(completion: @escaping ()-> Void) {
         PFCloud.callFunction(inBackground: "sendMassText", withParameters: [:]) { (result, error) in
             if let result = result {
-                print(result)
                 completion()
             } else if let error = error {
                 BannerAlert.show(with: error)

@@ -11,4 +11,9 @@ class CustomNavigationViewController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return topViewController?.preferredStatusBarStyle ?? .default
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationBar.isTranslucent = true
+    }
 }

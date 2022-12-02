@@ -30,7 +30,8 @@ class ResetPasswordViewController: RegisterViewController, UINavigationControlle
     override func nextBtnPressed() {
         nextButton.startSpinning()
         if validateEmail() {
-          //emailTextField.text send to API
+            
+            User.requestPasswordResetForEmail(inBackground:emailTextField.text!)
             nextButton.stopSpinning()
             
             self.segueIntoApp()

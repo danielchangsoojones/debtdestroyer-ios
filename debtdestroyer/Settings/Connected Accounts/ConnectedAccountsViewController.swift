@@ -22,7 +22,6 @@ class ConnectedAccountsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Your Student Loan Accounts"
         tabBarController?.tabBar.isHidden = true
         setNavBarBtns()
         startTimer()
@@ -88,6 +87,18 @@ class ConnectedAccountsViewController: UIViewController {
     }
     
     private func stopSpinner() {
+        self.title = "Loan Accounts"
+        
+        let navBtn = UIButton()
+        let attStr = NSMutableAttributedString(string: "Having issues?", attributes:[
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 12)])
+        
+        navBtn.setAttributedTitle(attStr, for: .normal)
+        navBtn.addTarget(self, action: #selector(issuesPressed), for: .touchUpInside)
+        let helpButton = UIBarButtonItem(customView: navBtn)
+        navigationItem.rightBarButtonItem = helpButton
+        
         self.timer?.invalidate()
         self.spinnerContainer.removeFromSuperview()
     }
@@ -99,7 +110,21 @@ class ConnectedAccountsViewController: UIViewController {
         let back = UIBarButtonItem(image: backImg , style: .plain, target: self, action: #selector(backPressed))
         navigationItem.leftBarButtonItem = back
         
+        let navBtn = UIButton()
+        let attStr = NSMutableAttributedString(string: "Having issues?", attributes:[
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.MontserratSemiBold(size: 12)])
+     
+        navBtn.setAttributedTitle(attStr, for: .normal)
+        navBtn.addTarget(self, action: #selector(issuesPressed), for: .touchUpInside)
+        let helpButton = UIBarButtonItem(customView: navBtn)
+        navigationItem.rightBarButtonItem = helpButton
+        
         navigationController?.navigationBar.backgroundColor = .clear
+    }
+    
+    @objc private func issuesPressed() {
+        messageHelper?.text(MessageHelper.customerServiceNum)
     }
 
     @objc private func backPressed() {

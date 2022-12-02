@@ -40,6 +40,7 @@ class QuestionViewController: UIViewController {
     var questionView = QuestionView()
     var player = AVPlayer()
     var progressBarContainer = UIView()
+    private var alreadyPushingVC = false
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -172,11 +173,14 @@ class QuestionViewController: UIViewController {
             for (index, quizData) in quizDatas.enumerated() {
                 let upperBound = totalVideoLength + quizData.video_length_seconds
                 if Int(current_quiz_seconds) >= totalVideoLength && Int(current_quiz_seconds) <= upperBound {
-                    if quizData.objectId != currentData.objectId {
+                    if quizData.objectId != currentData.objectId && !alreadyPushingVC {
+                        alreadyPushingVC = true
                         //we need to jump to another quiz data
                         segueToNextVC(index: index)
                     } else {
-                        let timeIntoVideo = current_quiz_seconds - Double(previousQuizDataTimes)
+                        //added the half second buffer because if we do it exactly, it was having this weird.
+                        //double buffer. but just having a tiny bit buffer makes it smoother.
+                        let timeIntoVideo = current_quiz_seconds - Double(previousQuizDataTimes) - 0.5
                         let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
                         player.seek(to: time)
                     }

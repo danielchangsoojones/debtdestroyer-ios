@@ -34,7 +34,6 @@ class ChampionsViewController: UIViewController {
         self.containerView = championsView.containerView
         self.numberLabel = championsView.numberLabel
         self.nameLabel = championsView.nameLabel
-        self.timeLable = championsView.timeLable
         self.pointsLabel = championsView.pointsLabel
         self.toggleSegment = championsView.toggleSegment
         toggleSegment.addTarget(self, action: #selector(segmentValueChanged(_:)), for: UIControl.Event.valueChanged)
@@ -196,7 +195,6 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.numberLabel.text = String(indexPath.row + 1) + ". "
         cell.nameLabel.text = quizScore.user.fullName.capitalized
         cell.pointsLabel.text = String(quizScore.points)
-        cell.timeLable.text = String(quizScore.total_time_str)
         return cell
     }
     
@@ -215,8 +213,6 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         headerView.nameLabel.text = ""
         headerView.pointsLabel.text = "Points"
         headerView.pointsLabel.font = UIFont.MontserratSemiBold(size: 15)
-        headerView.timeLable.text = "Time"
-        headerView.timeLable.font = UIFont.MontserratSemiBold(size: 15)
         
         return headerView
     }

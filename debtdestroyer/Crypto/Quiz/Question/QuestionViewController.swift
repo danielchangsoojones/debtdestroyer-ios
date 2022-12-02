@@ -267,7 +267,7 @@ class QuestionViewController: UIViewController {
         } else {
             questionContentView.isUserInteractionEnabled = false
             timeLabel.text = "Time Up!"
-            progressBarContainer.backgroundColor = .purple
+            progressBarContainer.backgroundColor = hexStringToUIColor(hex: "A324EA")
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
             timer.invalidate()

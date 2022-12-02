@@ -109,7 +109,7 @@ class NewGameStartViewController: UIViewController {
         var strDate = formatter.string(from: apiDate)
 //        var strDate = formatter.string(from: apiDate.toLocalTime())
 
-        strDate = strDate.replacingOccurrences(of: "at", with: "@")
+        strDate = strDate.replacingOccurrences(of: " at ", with: " @ ")
         strDate = strDate.replacingOccurrences(of: ",", with: "")
         strDate = strDate.replacingOccurrences(of: ":", with: " ")
         var stringArr = strDate.components(separatedBy: " ")

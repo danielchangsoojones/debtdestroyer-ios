@@ -32,6 +32,12 @@
 		<string>Montserrat-Thin.otf</string>
 		<string>Montserrat-ThinItalic.otf</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Application requires user’s location to offer more personalized trivia questions</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Application requires user’s location to offer more personalized trivia questions</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Application requires user’s location to offer more personalized trivia questions</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -49,7 +55,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>UIBackgroundModes</key>
-	<array/>
 </dict>
 </plist>

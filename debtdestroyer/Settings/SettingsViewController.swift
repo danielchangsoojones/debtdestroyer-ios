@@ -22,9 +22,13 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Connected Accounts", "Subscription", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
+//        dataArr = ["Connected Accounts", "Subscription", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
+//
+//        imgNameArr = ["accounts","contactUs","contactUs","legal", "feedback","logout", "deleteAcc"]
         
-        imgNameArr = ["accounts","contactUs","contactUs","legal", "feedback","logout", "deleteAcc"]
+        dataArr = ["Subscription", "Contact Us", "Legal Disclosures", "Leave Feedback", "Logout", "Delete Account"]
+        
+        imgNameArr = ["contactUs", "contactUs","legal", "feedback","logout", "deleteAcc"]
         
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black

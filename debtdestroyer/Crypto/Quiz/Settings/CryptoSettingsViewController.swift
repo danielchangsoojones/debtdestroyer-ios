@@ -28,8 +28,6 @@ class CryptoSettingsViewController: UIViewController {
         imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "logout", "deleteAcc"]
         
         if User.current()!.email == "messyjones@gmail.com" {
-            dataArr.append("Delete Quiz Scores")
-            imgNameArr.append("deleteAcc")
             dataArr.append("Send Text Notification")
             imgNameArr.append("contactUs")
             dataArr.append("Quiz Maneger")
@@ -51,12 +49,6 @@ class CryptoSettingsViewController: UIViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.left.right.top.bottom.equalToSuperview()
-        }
-    }
-    
-    private func deleteQuizScores() {
-        quizDataStore.deleteQuizScores {
-            BannerAlert.show(title: "Quiz score deleted successfully!", subtitle: "", type: .success)
         }
     }
 }
@@ -120,10 +112,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 7 {
-            // MARK: Delete Quiz Scores
-           deleteQuizScores()
-        } else if indexPath.row == 8{
+        } else if indexPath.row == 7{
             // MARK: Send Text Notification
             if User.sendMassTextNotification == false {
                 

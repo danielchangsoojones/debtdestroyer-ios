@@ -125,20 +125,7 @@ class QuizDataStore {
             }
         }
     }
-    
-    func deleteQuizScores(completion: @escaping ()-> Void) {
-        PFCloud.callFunction(inBackground: "deleteQuizScores", withParameters: [:]) { (result, error) in
-            if let result = result {
-                print(result)
-               completion()
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "deleteQuizScores")
-            }
-        }
-    }
-    
+        
     func sendMassTextNotification(completion: @escaping ()-> Void) {
         PFCloud.callFunction(inBackground: "sendMassText", withParameters: [:]) { (result, error) in
             if let result = result {

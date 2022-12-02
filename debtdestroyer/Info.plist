@@ -51,7 +51,7 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>processing</string>
+		<string>fetch</string>
 	</array>
 </dict>
 </plist>

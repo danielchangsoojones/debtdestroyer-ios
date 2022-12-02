@@ -10,6 +10,7 @@ import UIKit
 class AnswerChoiceNewUIView: UIView {
     let gifImgView = UIImageView()
     let answerLabel = UILabel()
+    var isChosen = false
 
     init(answer: String) {
         super.init(frame: .zero)
@@ -51,12 +52,14 @@ class AnswerChoiceNewUIView: UIView {
     }
     
     func deselect() {
+        isChosen = false
         answerLabel.textColor = .black
         self.backgroundColor = .systemGray6
     }
     
     func select() {
+        isChosen = true
         answerLabel.textColor = .black
-        self.backgroundColor = .green
+        setGradientBackground(color1: hexStringToUIColor(hex: "BE62F6"), color2: hexStringToUIColor(hex: "A324EA"),radi: 25)
     }
 }

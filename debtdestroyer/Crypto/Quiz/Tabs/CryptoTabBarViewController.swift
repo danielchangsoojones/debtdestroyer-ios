@@ -14,10 +14,9 @@ class CryptoTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTabs()
-        handleAppDidBecomeActive()
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
-        enteredScreen() // called here because after login func handleAppDidBecomeActive >> observer added with UIApplication.didBecomeActiveNotification was not getting called as its already called before login so tabs was not getting loaded.
+        enteredScreen()
         
         activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
         activityIndicator.color = UIColor.black
@@ -34,8 +33,8 @@ class CryptoTabBarViewController: UITabBarController {
     }
     
     private func setTabs(){
-        let vc1 = PrizeViewController()
-        let vc2 = StartQuizViewController(showSkipButton: false)
+        let vc1 = NewGameStartViewController()
+        let vc2 = PrizeViewController()
         let vc3 = ChampionsViewController()
         let vc4 = CryptoSettingsViewController()
 
@@ -78,24 +77,27 @@ class CryptoTabBarViewController: UITabBarController {
 }
 
 extension CryptoTabBarViewController {
-    private func handleAppDidBecomeActive() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(enteredScreen),
-                                               name: UIApplication.didBecomeActiveNotification,
-                                               object: nil)
-    }
-    
     @objc private func enteredScreen() {
         dataStore.checkShowQuizPopUp { showQuizPopUp, _ in
             self.activityIndicator.stopAnimating()
             let isAlreadyShowingStartQuizVC = self.checkIfAlreadyShowingStartQuizVC()
             if showQuizPopUp && !isAlreadyShowingStartQuizVC {
-                self.presentStartQuizVC()
+                let popupSkipedTime  = UserDefaults.standard.string(forKey: "popupSkipedTime")
+                let formatter = DateFormatter()
+                formatter.dateFormat = "dd/MM/yy HH:mm:ss"
+                let last = formatter.date(from: popupSkipedTime ?? "01/11/21 11:11:11")
+                let lastPopup = last?.toLocalTime()
+                let currentDateStr = Date().today(format: "dd/MM/yy HH:mm:ss")
+                let currentDate = formatter.date(from: currentDateStr)
+
+                if lastPopup!.withAddedHours(hours: 2) <= currentDate!.toLocalTime() {
+                    self.presentStartQuizVC()
+                }
             }
         }
     }
     
-    private func presentStartQuizVC() {
+    private func presentStartQuizVC() {        
         let startQuizVC = StartQuizViewController(showSkipButton: true)
         let navController = UINavigationController(rootViewController: startQuizVC)
         present(navController, animated: true)

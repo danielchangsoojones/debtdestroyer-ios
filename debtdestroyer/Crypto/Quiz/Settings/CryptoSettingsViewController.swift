@@ -32,6 +32,8 @@ class CryptoSettingsViewController: UIViewController {
             imgNameArr.append("deleteAcc")
             dataArr.append("Send Text Notification")
             imgNameArr.append("contactUs")
+            dataArr.append("Quiz Maneger")
+            imgNameArr.append("contactUs")
         }
               
         self.navigationItem.title = "Settings"
@@ -121,15 +123,36 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         } else if indexPath.row == 7 {
             // MARK: Delete Quiz Scores
            deleteQuizScores()
-        } else {
+        } else if indexPath.row == 8{
             // MARK: Send Text Notification
-            if User.sendMassTextNotification == true {
-                quizDataStore.sendMassTextNotification {
-                    print("success")
-                    User.sendMassTextNotification = false
-                    BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+            if User.sendMassTextNotification == false {
+                
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alertView = SCLAlertView(appearance: appearance)
+                
+                alertView.addButton("Send") {
+                    
+                    self.quizDataStore.sendMassTextNotification {
+                        print("success")
+                        User.sendMassTextNotification = true
+                        BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                    }
+                    
                 }
+                
+                alertView.addButton("Cancel") {
+                    
+                }
+                alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
+                
+                
             }
+        } else {
+            // MARK: Quiz Manager
+            let vc = QuizManagerViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
         }
         
     }
@@ -140,7 +163,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        footer.backgroundColor = UIColor.clear
+        footer.backgroundColor = UIColor.white
         let titleLabel = UILabel(frame: CGRect(x:10,y: 10 ,width:footer.frame.width - 20,height:50))
         titleLabel.textColor = .systemGray2
         titleLabel.textAlignment = .center

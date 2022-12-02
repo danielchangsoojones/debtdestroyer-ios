@@ -69,15 +69,16 @@ class StartQuizViewController: UIViewController {
     }
     
     @objc private func skipPressed() {
+        let popupSkipedTime = Date().today(format: "dd/MM/yy HH:mm:ss")
+        UserDefaults.standard.set(popupSkipedTime, forKey: "popupSkipedTime")
+        UserDefaults.standard.synchronize()
         dismiss(animated: true)
     }
     
     private func loadData() {
         self.dataStore.getQuizData { quizDatas in
             self.quizDatas = quizDatas
-            self.dataStore.shouldShowEarnings { shouldShowEarnings in
-                User.shouldShowEarnings = shouldShowEarnings
-                if shouldShowEarnings {
+                if User.shouldShowEarnings {
                     let quizTopic = self.quizDatas.first?.quizTopic
                     
                     self.titleLabel.text = quizTopic?.name ?? "Play Daily Trivia"
@@ -88,7 +89,6 @@ class StartQuizViewController: UIViewController {
                     //                    self.titleLabel.text = "Become the trivia champion"
                     //                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
                 }
-            }
             self.activityIndicator.stopAnimating()
         }
     }
@@ -124,9 +124,9 @@ class StartQuizViewController: UIViewController {
                 self.nextButton.stopSpinning()
                 if let hasAlreadyTakenQuiz = result as? Bool {
                     if !hasAlreadyTakenQuiz {
-                        let questionVC = QuestionViewController(quizDatas: self.quizDatas, currentIndex: 0)
-                        self.navigationController?.pushViewController(questionVC,
-                                                                      animated: true)
+//                        let questionVC = QuestionViewController(quizDatas: self.quizDatas, currentIndex: 0)
+//                        self.navigationController?.pushViewController(questionVC,
+//                                                                      animated: true)
                     }
                 } else if let error = error {
                     let codeWord = "method_failed_auth:"

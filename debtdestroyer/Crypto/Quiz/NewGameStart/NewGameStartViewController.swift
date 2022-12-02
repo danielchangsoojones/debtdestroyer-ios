@@ -76,7 +76,6 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc private func getQuizDatas() {
-        print("getQuizDatas called")
         quizDataStore.getQuizData { quizDatas in
             self.quizDatas = quizDatas
             self.checkIfStartQuiz()

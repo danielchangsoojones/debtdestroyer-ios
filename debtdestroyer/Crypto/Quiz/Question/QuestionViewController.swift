@@ -107,6 +107,7 @@ class QuestionViewController: UIViewController {
         if hasRevealedAnswerOnce || isWaitingToShowQuestionPrompt  {
             player.play()
         }
+        jumpToCurrentVideoMoment()
     }
     
     private func questionPromptAnimate() {
@@ -211,7 +212,27 @@ class QuestionViewController: UIViewController {
         })
     }
     
-//    private func jump(to quizDataID: String) {
+    private func jumpToCurrentVideoMoment() {
+        let quizTopicStartDate = currentData.quizTopic.start_time
+        let now = Date()
+        let timeSinceStart = Int(now.timeIntervalSince(currentData.quizTopic.start_time))
+        
+        var totalVideoLength = 0
+        for (index, quizData) in quizDatas.enumerated() {
+            let upperBound = totalVideoLength + quizData.video_length_seconds
+            if timeSinceStart > totalVideoLength && timeSinceStart < upperBound {
+                if quizData.objectId != currentData.objectId {
+                    //we need to jump to another quiz data
+                } else {
+                    let timeIntoVideo = Double(timeSinceStart - totalVideoLength)
+                    let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
+                    player.seek(to: time)
+                    return
+                }
+            }
+            totalVideoLength = upperBound
+        }
+        
 //        let index = quizDatas.firstIndex { quizData in
 //            return quizData.objectId == quizDataID
 //        }
@@ -224,7 +245,7 @@ class QuestionViewController: UIViewController {
 //            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: index)
 //            self.navigationController?.pushViewController(vc, animated: true)
 //        }
-//    }
+    }
     
     @objc func updateTime() {
         if timeLeft > 0 {

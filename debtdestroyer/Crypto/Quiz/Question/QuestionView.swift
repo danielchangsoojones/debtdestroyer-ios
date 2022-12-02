@@ -72,7 +72,7 @@ class QuestionView: UIView {
         pointsLabel.layer.borderWidth = 1
         pointsLabel.layer.cornerRadius = 15
         let dimenssion = 30
-        questionContentView.addSubview(pointsLabel)
+        addSubview(pointsLabel)
         pointsLabel.snp.makeConstraints { make in
             make.height.equalTo(dimenssion)
             make.width.equalTo(100)

@@ -123,7 +123,7 @@ class QuestionView: UIView {
         progressBarContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(bottomView.snp.top)
-            make.height.equalTo(50)
+            make.height.equalTo(35)
         }
         
         setUpTimerBar()

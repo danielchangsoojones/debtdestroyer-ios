@@ -57,6 +57,8 @@ class CryptoTabBarViewController: UITabBarController {
         tabSettings.image = UIImage(named: "settingsG")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
         
+        self.removeTab(at: 1)
+        
         checkHideReview()
     }
     

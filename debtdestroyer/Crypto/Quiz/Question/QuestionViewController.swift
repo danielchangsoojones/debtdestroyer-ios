@@ -326,7 +326,7 @@ class QuestionViewController: UIViewController {
             if Helpers.getTopViewController() is UINavigationController {
                 //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
                 let tabBarVC = presentingViewController as? UITabBarController
-                tabBarVC?.selectedIndex = 2
+                tabBarVC?.selectedIndex = 1
                 dismiss(animated: true)
             } else {
                 let leaderboardVC = ChampionsViewController()

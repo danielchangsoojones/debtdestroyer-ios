@@ -93,7 +93,8 @@ class NewGameStartViewController: UIViewController {
                 //time to start the game
                 checkStartTimer.invalidate()
                 let questionVC = QuestionViewController(quizDatas: quizDatas,
-                                                        currentIndex: 0)
+                                                        currentIndex: 0,
+                                                        shouldSeekToPosition: false)
                 let navController = UINavigationController(rootViewController: questionVC)
                 navController.modalPresentationStyle = .fullScreen
                 present(navController, animated: true)

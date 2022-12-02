@@ -124,9 +124,9 @@ class StartQuizViewController: UIViewController {
                 self.nextButton.stopSpinning()
                 if let hasAlreadyTakenQuiz = result as? Bool {
                     if !hasAlreadyTakenQuiz {
-                        let questionVC = QuestionViewController(quizDatas: self.quizDatas, currentIndex: 0)
-                        self.navigationController?.pushViewController(questionVC,
-                                                                      animated: true)
+//                        let questionVC = QuestionViewController(quizDatas: self.quizDatas, currentIndex: 0)
+//                        self.navigationController?.pushViewController(questionVC,
+//                                                                      animated: true)
                     }
                 } else if let error = error {
                     let codeWord = "method_failed_auth:"

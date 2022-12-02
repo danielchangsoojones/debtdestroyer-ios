@@ -39,15 +39,17 @@ class QuestionViewController: UIViewController {
     var questionContentView = UIView()
     var questionView = QuestionView()
     var player = AVPlayer()
+    private let shouldSeekToPosition: Bool
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
     let appD = UIApplication.shared.delegate as! AppDelegate
     
-    init(quizDatas: [QuizDataParse], currentIndex: Int) {
+    init(quizDatas: [QuizDataParse], currentIndex: Int, shouldSeekToPosition: Bool) {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
+        self.shouldSeekToPosition = shouldSeekToPosition
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -121,6 +123,9 @@ class QuestionViewController: UIViewController {
             player = AVPlayer(url: video_url)
             playerLayer.player = player
             player.play()
+            if shouldSeekToPosition {
+                jumpToCurrentVideoMoment()
+            }
             NotificationCenter.default
                 .addObserver(self,
                 selector: #selector(playerDidFinishPlaying),
@@ -131,7 +136,7 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func playerDidFinishPlaying(note: NSNotification) {
-        segueToNextVC()
+        segueToNextVC(index: nil)
     }
     
     @objc private func getLiveQuizStatus() {
@@ -213,7 +218,6 @@ class QuestionViewController: UIViewController {
     }
     
     private func jumpToCurrentVideoMoment() {
-        let quizTopicStartDate = currentData.quizTopic.start_time
         let now = Date()
         let timeSinceStart = Int(now.timeIntervalSince(currentData.quizTopic.start_time))
         
@@ -223,28 +227,16 @@ class QuestionViewController: UIViewController {
             if timeSinceStart > totalVideoLength && timeSinceStart < upperBound {
                 if quizData.objectId != currentData.objectId {
                     //we need to jump to another quiz data
+                    segueToNextVC(index: index)
                 } else {
                     let timeIntoVideo = Double(timeSinceStart - totalVideoLength)
                     let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
                     player.seek(to: time)
-                    return
                 }
+                return
             }
             totalVideoLength = upperBound
         }
-        
-//        let index = quizDatas.firstIndex { quizData in
-//            return quizData.objectId == quizDataID
-//        }
-//
-//        if let index = index {
-//            playerLayer.player?.pause()
-//            playerLayer.player = nil
-//            timer.invalidate()
-//            quizStatusTimer.invalidate()
-//            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: index)
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
     }
     
     @objc func updateTime() {
@@ -296,10 +288,18 @@ class QuestionViewController: UIViewController {
                              quizData: currentData)
     }
     
-    private func segueToNextVC() {
-        let nextIndex = currentIndex + 1
-        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+    private func segueToNextVC(index: Int?) {
+        playerLayer.player?.pause()
+        playerLayer.player = nil
+        timer.invalidate()
+        quizStatusTimer.invalidate()
         NotificationCenter.default.removeObserver(self)
+        
+        var nextIndex = currentIndex + 1
+        if let index = index {
+            nextIndex = index
+        }
+        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
             if Helpers.getTopViewController() is UINavigationController {
                 //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
@@ -311,7 +311,10 @@ class QuestionViewController: UIViewController {
                 self.navigationController?.pushViewController(leaderboardVC, animated: true)
             }
         } else {
-            let vc = QuestionViewController(quizDatas: quizDatas, currentIndex: nextIndex)
+            let shouldSeekToPosition = index != nil
+            let vc = QuestionViewController(quizDatas: quizDatas,
+                                            currentIndex: nextIndex,
+                                            shouldSeekToPosition: shouldSeekToPosition)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

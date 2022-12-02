@@ -9,6 +9,19 @@ import UIKit
 import SCLAlertView
 
 class CryptoSettingsViewController: UIViewController {
+    
+    enum cell: Int {
+        case winnerInfo
+        case connectedAccounts
+        case contactUs
+        case legaDisclosure
+        case leaveFeedback
+        case logOut
+        case deleteAcc
+        case textNoti
+        case quizManager
+    }
+    
     private var messageHelper: MessageHelper?
     private var tableView: UITableView!
     var dataArr = [String]()
@@ -79,71 +92,76 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            // MARK: Enter Winner Information
-            let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
-            UIApplication.shared.open(url)
-        } else if indexPath.row == 1 {
-            // MARK: Connected Accounts
-            let vc = ConnectedAccountsViewController()
-            self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 2 || indexPath.row == 4 {
-            // MARK: Contact Us
-            // MARK: Leave Feedback
-            messageHelper?.text("3176905323", body: "")
-        } else if indexPath.row == 3 {
-            // MARK: Legal Disclosures
-            let vc = LegalDisclosuresViewController()
-            self.navigationController?.pushViewController(vc.self, animated: true)
-        }else if indexPath.row == 5 {
-            // MARK: Logout
-            User.logOutInBackground { error in
-                if let error = error {
-                    BannerAlert.show(with: error)
-                } else {
-                    //successfully logged out
-                    let welcomeVC = WelcomeViewController()
-                    let navController = UINavigationController(rootViewController: welcomeVC)
-                    navController.modalPresentationStyle = .fullScreen
-                    self.present(navController, animated: true)
+        
+        switch cell(rawValue: indexPath.row)! {
+            case .winnerInfo:
+                // MARK: Enter Winner Information
+                let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
+                UIApplication.shared.open(url)
+                
+            case .connectedAccounts:
+                // MARK: Connected Accounts
+                let vc = ConnectedAccountsViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
+            case .contactUs, .leaveFeedback:
+                // MARK: Contact Us
+                // MARK: Leave Feedback
+                messageHelper?.text("3176905323", body: "")
+                
+            case .legaDisclosure:
+                let vc = LegalDisclosuresViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
+            case .logOut:
+                // MARK: Logout
+                User.logOutInBackground { error in
+                    if let error = error {
+                        BannerAlert.show(with: error)
+                    } else {
+                        //successfully logged out
+                        let welcomeVC = WelcomeViewController()
+                        let navController = UINavigationController(rootViewController: welcomeVC)
+                        navController.modalPresentationStyle = .fullScreen
+                        self.present(navController, animated: true)
+                    }
                 }
-            }
-        } else if indexPath.row == 6 {
-            // MARK: Delete Account
-            let vc = DeleteAccountViewController()
-            self.navigationController?.pushViewController(vc.self, animated: true)
-        } else if indexPath.row == 7{
-            // MARK: Send Text Notification
-            if User.sendMassTextNotification == false {
                 
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                let alertView = SCLAlertView(appearance: appearance)
+            case .deleteAcc:
+                // MARK: Delete Account
+                let vc = DeleteAccountViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
                 
-                alertView.addButton("Send") {
+            case .textNoti:
+                // MARK: Send Text Notification
+                if User.sendMassTextNotification == false {
                     
-                    self.quizDataStore.sendMassTextNotification {
-                        print("success")
-                        User.sendMassTextNotification = true
-                        BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alertView = SCLAlertView(appearance: appearance)
+                    
+                    alertView.addButton("Send") {
+                        
+                        self.quizDataStore.sendMassTextNotification {
+                            print("success")
+                            User.sendMassTextNotification = true
+                            BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
+                        }
+                        
                     }
                     
-                }
+                    alertView.addButton("Cancel") {
+                        
+                    }
+                    alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
+]                }
                 
-                alertView.addButton("Cancel") {
-                    
-                }
-                alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
-                
-                
-            }
-        } else {
-            // MARK: Quiz Manager
-            let vc = QuizManagerViewController()
-            self.navigationController?.pushViewController(vc.self, animated: true)
+            case .quizManager:
+                // MARK: Quiz Manager
+                let vc = QuizManagerViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{

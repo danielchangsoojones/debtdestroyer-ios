@@ -103,6 +103,37 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func setData(quizTopic: QuizTopicParse) {
+        let apiDate = quizTopic.start_time
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .long
+        formatter.timeZone = .init(abbreviation: "PDT")
+        var strDate = formatter.string(from: apiDate)
+//        var strDate = formatter.string(from: apiDate.toLocalTime())
+
+        strDate = strDate.replacingOccurrences(of: "at", with: "@")
+        strDate = strDate.replacingOccurrences(of: ",", with: "")
+        strDate = strDate.replacingOccurrences(of: ":", with: " ")
+        var stringArr = strDate.components(separatedBy: " ")
+        stringArr.remove(at: 3)
+        let shortMonth : String = stringArr[1].prefix(3) + "."
+        stringArr.remove(at: 1)
+        stringArr.insert(shortMonth, at: 1)
+        if stringArr[2] == "1" {
+            stringArr[2] = "1st"
+        } else if stringArr[2] == "2" {
+            stringArr[2] = "2nd"
+        } else if stringArr[2] == "3" {
+            stringArr[2] = "3rd"
+        } else {
+            stringArr[2] = stringArr[2] + "th"
+        }
+        stringArr.remove(at: 6)
+        stringArr.remove(at: 5)
+
+ 
+        let finalDate = stringArr.joined(separator: " ")
+        self.dayDateLbl.text = finalDate
         
         let prizeAmount = Int(quizTopic.prize_amount / 100)
         let prizeAmountStr = "$\(prizeAmount)"
@@ -110,8 +141,6 @@ class NewGameStartViewController: UIViewController {
         if descriptionLblText != descriptionLbl.text {
             descriptionLbl.text = descriptionLblText
         }
-        
-        self.dayDateLbl.text = "Tuesday Dec. 5th @ 6pm PDT"
         
         let titletxt = "      " + prizeAmountStr + " Prize      "
         if titletxt != prizeBtn.titleLabel?.text {

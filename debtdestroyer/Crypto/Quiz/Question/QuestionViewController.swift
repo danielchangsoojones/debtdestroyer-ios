@@ -39,7 +39,6 @@ class QuestionViewController: UIViewController {
     var questionContentView = UIView()
     var questionView = QuestionView()
     var player = AVPlayer()
-    private let shouldSeekToPosition: Bool
     var progressBarContainer = UIView()
 
     private var currentData: QuizDataParse {
@@ -47,10 +46,9 @@ class QuestionViewController: UIViewController {
     }
     let appD = UIApplication.shared.delegate as! AppDelegate
     
-    init(quizDatas: [QuizDataParse], currentIndex: Int, shouldSeekToPosition: Bool) {
+    init(quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas
         self.currentIndex = currentIndex
-        self.shouldSeekToPosition = shouldSeekToPosition
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -112,7 +110,6 @@ class QuestionViewController: UIViewController {
         if hasRevealedAnswerOnce || isWaitingToShowQuestionPrompt  {
             player.play()
         }
-        jumpToCurrentVideoMoment()
     }
     
     private func questionPromptAnimate() {
@@ -126,9 +123,6 @@ class QuestionViewController: UIViewController {
             player = AVPlayer(url: video_url)
             playerLayer.player = player
             player.play()
-            if shouldSeekToPosition {
-                jumpToCurrentVideoMoment()
-            }
             NotificationCenter.default
                 .addObserver(self,
                 selector: #selector(playerDidFinishPlaying),
@@ -143,11 +137,52 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func getLiveQuizStatus() {
-        dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer in
-             if should_reveal_answer {
+        let isPlaying = player.timeControlStatus == .playing
+        if User.current()?.email == "messyjones@gmail.com" && isPlaying {
+            let current_time_seconds = previousQuizDataTimes + Int(player.currentTime().seconds)
+            dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
+        }
+        
+        dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds in
+            self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
+            
+            if should_reveal_answer {
                 self.revealAnswer()
             } else if let show_question_prompt_time = show_question_prompt_time {
                 self.startQuestionPrompt(start_time: show_question_prompt_time)
+            }
+        }
+    }
+    
+    var previousQuizDataTimes: Int {
+        var previousQuizDataTimes = 0
+        for (index, quizData) in quizDatas.enumerated() {
+            if (index < currentIndex) {
+                previousQuizDataTimes = previousQuizDataTimes + quizData.video_length_seconds
+            }
+        }
+        return previousQuizDataTimes
+    }
+    
+    private func jumpToCurrentVideoMoment(current_quiz_seconds: Double) {
+        let users_current_quiz_seconds = Double(previousQuizDataTimes) + player.currentTime().seconds
+        let timeDifference = abs(users_current_quiz_seconds - current_quiz_seconds)
+        if timeDifference > 2 && User.current()?.email != "messyjones@gmail.com" {
+            var totalVideoLength = 0
+            for (index, quizData) in quizDatas.enumerated() {
+                let upperBound = totalVideoLength + quizData.video_length_seconds
+                if Int(current_quiz_seconds) >= totalVideoLength && Int(current_quiz_seconds) <= upperBound {
+                    if quizData.objectId != currentData.objectId {
+                        //we need to jump to another quiz data
+                        segueToNextVC(index: index)
+                    } else {
+                        let timeIntoVideo = current_quiz_seconds - Double(previousQuizDataTimes)
+                        let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
+                        player.seek(to: time)
+                    }
+                    return
+                }
+                totalVideoLength = upperBound
             }
         }
     }
@@ -218,28 +253,6 @@ class QuestionViewController: UIViewController {
         UIImageView.animate(withDuration: 1, animations: {
             answerView.gifImgView.alpha = 1
         })
-    }
-    
-    private func jumpToCurrentVideoMoment() {
-        let now = Date()
-        let timeSinceStart = Int(now.timeIntervalSince(currentData.quizTopic.start_time))
-        
-        var totalVideoLength = 0
-        for (index, quizData) in quizDatas.enumerated() {
-            let upperBound = totalVideoLength + quizData.video_length_seconds
-            if timeSinceStart > totalVideoLength && timeSinceStart < upperBound {
-                if quizData.objectId != currentData.objectId {
-                    //we need to jump to another quiz data
-                    segueToNextVC(index: index)
-                } else {
-                    let timeIntoVideo = Double(timeSinceStart - totalVideoLength)
-                    let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
-                    player.seek(to: time)
-                }
-                return
-            }
-            totalVideoLength = upperBound
-        }
     }
     
     @objc func updateTime() {
@@ -316,10 +329,8 @@ class QuestionViewController: UIViewController {
                 self.navigationController?.pushViewController(leaderboardVC, animated: true)
             }
         } else {
-            let shouldSeekToPosition = index != nil
             let vc = QuestionViewController(quizDatas: quizDatas,
-                                            currentIndex: nextIndex,
-                                            shouldSeekToPosition: shouldSeekToPosition)
+                                            currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

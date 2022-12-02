@@ -95,6 +95,7 @@ class NewGameStartViewController: UIViewController {
                 let questionVC = QuestionViewController(quizDatas: quizDatas,
                                                         currentIndex: 0)
                 let navController = UINavigationController(rootViewController: questionVC)
+                navController.modalPresentationStyle = .fullScreen
                 present(navController, animated: true)
             }
         }

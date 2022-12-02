@@ -77,6 +77,15 @@ class QuestionViewController: UIViewController {
         self.questionContentView.alpha = 0.0
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
+        NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(applicationDidBecomeActive),
+                name: UIApplication.didBecomeActiveNotification,
+                object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +98,15 @@ class QuestionViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.timeLabel.stopBlink()
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func applicationDidBecomeActive() {
+        //whenever the user leaves the app, it pauses the video, so we have to play again.
+        //https://stackoverflow.com/questions/48473144/swift-ios-avplayer-video-freezes-pauses-when-app-comes-back-from-background
+        let isWaitingToShowQuestionPrompt = endTime == nil
+        if hasRevealedAnswerOnce || isWaitingToShowQuestionPrompt  {
+            player.play()
+        }
     }
     
     private func questionPromptAnimate() {
@@ -260,6 +278,7 @@ class QuestionViewController: UIViewController {
     private func segueToNextVC() {
         let nextIndex = currentIndex + 1
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+        NotificationCenter.default.removeObserver(self)
         if isLastQuestion {
             if Helpers.getTopViewController() is UINavigationController {
                 //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.

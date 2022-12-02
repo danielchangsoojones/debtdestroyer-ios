@@ -155,7 +155,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                         
                     }
                     alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
-]                }
+                }
                 
             case .quizManager:
                 // MARK: Quiz Manager

@@ -91,6 +91,8 @@ class NewGameStartViewController: UIViewController {
             if quizTopic.start_time < now {
                 //time to start the game
                 checkStartTimer.invalidate()
+//                let questionVC = QuestionWithVideoViewController(quizDatas: quizDatas,
+
                 let questionVC = QuestionViewController(quizDatas: quizDatas,
                                                         currentIndex: 0)
                 let navController = UINavigationController(rootViewController: questionVC)

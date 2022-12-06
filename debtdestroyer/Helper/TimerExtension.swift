@@ -47,3 +47,14 @@ extension Date {
         return Date(timeInterval: seconds, since: self)
     }
 } 
+
+extension TimeInterval {
+    var time: String {
+        return String(format:"%02d", Int(ceil(truncatingRemainder(dividingBy: 60))) )
+    }
+}
+extension Int {
+    var degreesToRadians : CGFloat {
+        return CGFloat(self) * .pi / 180
+    }
+}

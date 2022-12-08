@@ -27,7 +27,6 @@ class QuestionWithVideoViewController: UIViewController {
     var timer = Timer()
     private let quizDatas: [QuizDataParse]
     private let currentIndex: Int
-    //    private var answerView: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
     private var bottomView = UIView()
     var pointsLabel = UILabel()
@@ -36,6 +35,7 @@ class QuestionWithVideoViewController: UIViewController {
     private var quizStatusTimer = Timer()
     private var show_question_prompt_time: Date?
     private var hasRevealedAnswerOnce = false
+    private var hasRevealedByAPI = false
     var timerBar = UIProgressView()
     var questionContentView = UIView()
     var questionView = QuestionWithVideoView()
@@ -45,9 +45,11 @@ class QuestionWithVideoViewController: UIViewController {
     var answerView = UIView()
     var answerCollection:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-    var collectionHeight = 120
+    var collectionHeight = 96
     var selectedAnswerIndex : Int?
     var answerStatus: AnswerStatus!
+    var noOfOptions : Int!
+    var cellCountCheck = 0
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -78,6 +80,7 @@ class QuestionWithVideoViewController: UIViewController {
         self.timeLabel = questionView.timerLabel
         self.questionContentView = questionView.questionContentView
         self.progressBarContainer = questionView.progressBarContainer
+        self.bottomView = questionView.bottomView
     }
     
     override func viewDidLoad() {
@@ -107,7 +110,7 @@ class QuestionWithVideoViewController: UIViewController {
         answerCollection.register(cellType: AnswerCollectionViewCell.self)
         answerView.addSubview(answerCollection)
         answerCollection.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(5)
             make.height.equalTo(collectionHeight)
         }
     }
@@ -127,10 +130,10 @@ class QuestionWithVideoViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         // TODO: number of options mod 2 and add reminder * 120 for colloction height
-        let noOfOptions = currentData.answers!.count
+        noOfOptions = currentData.answers!.count
         let rows = noOfOptions / 2
         let reminder = noOfOptions % 2
-        collectionHeight = (rows+reminder)*124
+        collectionHeight = (rows+reminder)*96
         
         setAnswerCollectionView()
     }
@@ -179,8 +182,10 @@ class QuestionWithVideoViewController: UIViewController {
             self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
             
             if should_reveal_answer {
-                self.revealAnswer()
-            } else if let show_question_prompt_time = show_question_prompt_time {
+                self.hasRevealedByAPI = true
+                self.answerCollection.reloadData()
+            }
+            if let show_question_prompt_time = show_question_prompt_time {
                 self.startQuestionPrompt(start_time: show_question_prompt_time)
             }
         }
@@ -227,13 +232,11 @@ class QuestionWithVideoViewController: UIViewController {
             player.pause()
             self.endTime = start_time.addingTimeInterval(timeLeft)
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            print("endTime:",self.endTime)
             self.questionPromptAnimate()
         }
     }
     
     @objc func updateTime() {
-        //        print("timeLeft:",timeLeft)
         if timeLeft > 0 {
             timeLeft = endTime?.timeIntervalSinceNow ?? 0
             timerBar.setProgress(Float(timeLeft)/Float(Constants.originalStartTime), animated: false)
@@ -244,35 +247,16 @@ class QuestionWithVideoViewController: UIViewController {
             progressBarContainer.backgroundColor = hexStringToUIColor(hex: "A324EA")
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
-            if selectedAnswerIndex != currentData.correct_answer_index
-            {
-                answerStatus = .incorrect
-            } else if selectedAnswerIndex == currentData.correct_answer_index {
-                answerStatus = .correct
-            } else {
-                answerStatus = .time_ran_out
-            }
-            
-            submitAnswer(answerStatus: answerStatus)
+            answerStatus = .time_ran_out
             timer.invalidate()
         }
     }
-    
-    private func revealAnswer() {
-        
-        if !hasRevealedAnswerOnce {
-            player.play()
-        }
-    
-        self.answerCollection.reloadData()
-        
-    }
-    
-    
+  
     func submitAnswer(answerStatus: AnswerStatus) {
         dataStore.saveAnswerV(for: currentData.quizTopic,
                               answerStatus: answerStatus,
                               quizData: currentData)
+        print("================submitAnswer===================")
     }
     
     private func segueToNextVC(index: Int?) {
@@ -298,8 +282,7 @@ class QuestionWithVideoViewController: UIViewController {
                 self.navigationController?.pushViewController(leaderboardVC, animated: true)
             }
         } else {
-            let vc = QuestionViewController(quizDatas: quizDatas,
-                                            currentIndex: nextIndex)
+            let vc = QuestionWithVideoViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -313,65 +296,74 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType:AnswerCollectionViewCell.self)
         
         cell.ansLabel.text = currentData.answers![indexPath.row].capitalized
-        if selectedAnswerIndex != nil {
+                
+        if !hasRevealedAnswerOnce && hasRevealedByAPI && selectedAnswerIndex != nil{
+            player.play()
             
-            cell.contentView.backgroundColor = selectedAnswerIndex == indexPath.row ? hexStringToUIColor(hex: "A324EA") : UIColor.white
+            if indexPath.row == currentData.correct_answer_index {
+                print("================GREEN===================")
+                
+                cell.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                cell.gifImgView.tintColor = .black
+                cell.gifImgView.alpha = 0.2
+                UIImageView.animate(withDuration: 1, animations: {
+                    cell.gifImgView.alpha = 1
+                })
+                cell.contentView.backgroundColor = .clear
+                cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
+                
+            }
+            if indexPath.row != currentData.correct_answer_index {
+                
+                if indexPath.row == selectedAnswerIndex {
+                    print("================Red===================")
+
+                    cell.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
+                    cell.gifImgView.tintColor = .black
+                    cell.gifImgView.alpha = 0.2
+                    UIImageView.animate(withDuration: 1, animations: {
+                        cell.gifImgView.alpha = 1
+                    })
+                    cell.contentView.backgroundColor = .clear
+                    cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
+                } else {
+                    print("================Hide===================")
+
+                    UIView.animate(withDuration: 1.0) {
+                        cell.contentView.alpha = 0.0
+                    }
+                }
+            }
             
+            cellCountCheck += 1
+            if noOfOptions == cellCountCheck {
+                if selectedAnswerIndex != currentData.correct_answer_index
+                {
+                    answerStatus = .incorrect
+                } else if selectedAnswerIndex == currentData.correct_answer_index {
+                    User.current()?.quizPointCounter += 1
+                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
+                    answerStatus = .correct
+                } else {
+                    answerStatus = .time_ran_out
+                }
+                submitAnswer(answerStatus: answerStatus)
+                self.hasRevealedAnswerOnce = true
+                self.bottomView.backgroundColor = .clear
+                print("================self.hasRevealedAnswerOnce = true===================")
+            }
+        } else {
+            // code to colour selected cell to purple
+            if selectedAnswerIndex == indexPath.row && cell.contentView.backgroundColor == .white {
+                cell.contentView.backgroundColor = hexStringToUIColor(hex: "A324EA")
+            }
         }
-//        if !hasRevealedAnswerOnce {
-//            if let selectedAnswerIndex = selectedAnswerIndex {
-//
-//                hasRevealedAnswerOnce = true
-//
-//                if currentData.correct_answer_index != selectedAnswerIndex
-//                {
-////                    answerStatus = .incorrect
-//                    cell.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
-//                    cell.gifImgView.tintColor = .black
-//                    cell.gifImgView.alpha = 0.2
-//                    UIImageView.animate(withDuration: 1, animations: {
-//                        cell.gifImgView.alpha = 1
-//                    })
-//                    cell.contentView.backgroundColor = .clear
-//                    cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
-//                } else {
-////                    answerStatus = .correct
-//                    User.current()?.quizPointCounter += 1
-//                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
-//
-//                    cell.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
-//                    cell.gifImgView.tintColor = .black
-//                    cell.gifImgView.alpha = 0.2
-//                    UIImageView.animate(withDuration: 1, animations: {
-//                        cell.gifImgView.alpha = 1
-//                    })
-//                    cell.contentView.backgroundColor = .clear
-//                    cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
-//                }
-//            } else {
-//                answerStatus = .time_ran_out
-//            }
-//
-//            // this code is hiding remaining options
-//            if indexPath.row == selectedAnswerIndex || indexPath.row == self.currentData.correct_answer_index {
-//                    cell.alpha = 1.0
-//                } else {
-//                    UIView.animate(withDuration: 1.0) {
-//                        cell.alpha = 0.0
-//                    }
-//                }
-//
-//        }
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedAnswerIndex = indexPath.row
-      
-            
-            self.answerCollection.reloadData()
-        
+        self.answerCollection.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -379,6 +371,6 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (answerView.frame.width - 10) * 0.5, height: 120)
+        return CGSize(width: (answerView.frame.width - 22) * 0.5, height: 90)
     }
 }

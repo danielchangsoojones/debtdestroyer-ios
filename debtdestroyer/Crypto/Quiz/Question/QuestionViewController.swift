@@ -136,7 +136,9 @@ class QuestionViewController: UIViewController {
     }
     
     private func startVideoTimer() {
-        videoTimer = Timer(timeInterval: 0.1, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
+        videoTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            self.videoTimerFired()
+        }
     }
     
     @objc private func videoTimerFired() {

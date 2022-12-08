@@ -46,7 +46,7 @@ class NewGameStartViewController: UIViewController {
         
         quizDataStore.getDemoQuizData { quizDatas in
             self.quizDatas = quizDatas
-            setData(quizTopic: quizDatas.first!.quizTopic)
+            self.setData(quizTopic: quizDatas.first!.quizTopic)
         }
         
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)

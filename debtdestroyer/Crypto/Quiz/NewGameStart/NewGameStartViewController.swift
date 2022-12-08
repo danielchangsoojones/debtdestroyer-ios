@@ -36,6 +36,9 @@ class NewGameStartViewController: UIViewController {
         self.descriptionLbl = newGameStartView.descriptionLbl
         self.prizeBtn = newGameStartView.prizeBtn
         self.rippleContainer = newGameStartView.rippleContainer
+        prizeBtn.addTarget(self,
+                           action: #selector(startIpadDemoBtnPressed),
+                           for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -46,7 +49,7 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        callTimer()
+//        callTimer()
         
         if !rippleAdded {
             rippleAdded = true
@@ -68,6 +71,10 @@ class NewGameStartViewController: UIViewController {
         super.viewWillDisappear(animated)
         checkStartTimer.invalidate()
         timer.invalidate()
+    }
+    
+    @objc private func startIpadDemoBtnPressed() {
+        
     }
     
     private func callTimer() {

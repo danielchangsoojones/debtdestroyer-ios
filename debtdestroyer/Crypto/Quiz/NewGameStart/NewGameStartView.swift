@@ -17,6 +17,7 @@ class NewGameStartView: UIView {
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
     var prizeBtn = GradientBtn()
+    var startIpadBtn = UIButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,11 +32,19 @@ class NewGameStartView: UIView {
         setPrizeButton()
         setHeadingLabel()
         setDescriptionLabel()
-
+        
+        setIpadDemo()
     }
   
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setIpadDemo() {
+        rippleContainer.isHidden = true
+        countDownTimerLbl.isHidden = true
+        startLbl.isHidden = true
+        dayDateLbl.isHidden = true
     }
     
     private func setContainerForRipple() {

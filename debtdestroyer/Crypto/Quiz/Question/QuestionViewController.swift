@@ -78,13 +78,13 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         playVideo()
         self.questionContentView.alpha = 0.0
-        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
+//        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
-        NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(applicationDidBecomeActive),
-                name: UIApplication.didBecomeActiveNotification,
-                object: nil)
+//        NotificationCenter.default.addObserver(
+//                self,
+//                selector: #selector(applicationDidBecomeActive),
+//                name: UIApplication.didBecomeActiveNotification,
+//                object: nil)
     }
     
     deinit {

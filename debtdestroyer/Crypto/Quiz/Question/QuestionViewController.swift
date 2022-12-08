@@ -11,7 +11,7 @@ import AVFoundation
 
 class QuestionViewController: UIViewController {
     struct Constants {
-        static let originalStartTime: TimeInterval = 10
+        static let originalStartTime: TimeInterval = 8
     }
     
     enum AnswerStatus: String {

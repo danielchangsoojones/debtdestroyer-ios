@@ -285,6 +285,7 @@ class QuestionViewController: UIViewController {
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
             timer.invalidate()
+            self.revealAnswer()
         }
     }
     

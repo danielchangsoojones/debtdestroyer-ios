@@ -55,6 +55,18 @@ class QuizDataStore {
         }
     }
     
+    func getDemoQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
+        PFCloud.callFunction(inBackground: "getDemoQuizData", withParameters: nil) { (result, error) in
+            if let quizData = result as? [QuizDataParse] {
+                completion(quizData)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getDemoQuizData")
+            }
+        }
+    }
+    
     func saveCryptoAddress(crypto_address: String, quizTopicID: String , completion: @escaping (CryptoAddressParse) -> Void) {
         let parameters: [String : Any] = ["crypto_address_public_key" : crypto_address, "quizTopicID": quizTopicID]
         PFCloud.callFunction(inBackground: "saveCryptoAddress", withParameters: parameters) { (result, error) in

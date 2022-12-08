@@ -43,19 +43,25 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        quizDataStore.getDemoQuizData { quizDatas in
+            self.quizDatas = quizDatas
+            setData(quizTopic: quizDatas.first!.quizTopic)
+        }
+        
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        callTimer()
+        callTimer()
         
-        if !rippleAdded {
-            rippleAdded = true
-            let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
-            ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
-        }
+//        if !rippleAdded {
+//            rippleAdded = true
+//            let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
+//            ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +80,10 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc private func startIpadDemoBtnPressed() {
-        
+        quizDataStore.getDemoQuizData { quizDatas in
+            self.quizDatas = quizDatas
+            self.checkIfStartQuiz()
+        }
     }
     
     private func callTimer() {
@@ -94,8 +103,8 @@ class NewGameStartViewController: UIViewController {
             let quizTopic = quizData.quizTopic
             self.quizKickoffTime = quizTopic.start_time
             setData(quizTopic: quizTopic)
-            let now = Date()
-            if quizTopic.start_time < now {
+//            let now = Date()
+//            if quizTopic.start_time < now {
                 //time to start the game
                 checkStartTimer.invalidate()
                 let questionVC = QuestionViewController(quizDatas: quizDatas,
@@ -103,42 +112,42 @@ class NewGameStartViewController: UIViewController {
                 let navController = UINavigationController(rootViewController: questionVC)
                 navController.modalPresentationStyle = .fullScreen
                 present(navController, animated: true)
-            }
+//            }
         }
     }
     
     private func setData(quizTopic: QuizTopicParse) {
-        let apiDate = quizTopic.start_time
-        let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .long
-        formatter.timeZone = .init(abbreviation: "PDT")
-        var strDate = formatter.string(from: apiDate)
-//        var strDate = formatter.string(from: apiDate.toLocalTime())
-
-        strDate = strDate.replacingOccurrences(of: " at ", with: " @ ")
-        strDate = strDate.replacingOccurrences(of: ",", with: "")
-        strDate = strDate.replacingOccurrences(of: ":", with: " ")
-        var stringArr = strDate.components(separatedBy: " ")
-        stringArr.remove(at: 3)
-        let shortMonth : String = stringArr[1].prefix(3) + "."
-        stringArr.remove(at: 1)
-        stringArr.insert(shortMonth, at: 1)
-        if stringArr[2] == "1" {
-            stringArr[2] = "1st"
-        } else if stringArr[2] == "2" {
-            stringArr[2] = "2nd"
-        } else if stringArr[2] == "3" {
-            stringArr[2] = "3rd"
-        } else {
-            stringArr[2] = stringArr[2] + "th"
-        }
-        stringArr.remove(at: 6)
-        stringArr.remove(at: 5)
-
- 
-        let finalDate = stringArr.joined(separator: " ")
-        self.dayDateLbl.text = finalDate
+//        let apiDate = quizTopic.start_time
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .full
+//        formatter.timeStyle = .long
+//        formatter.timeZone = .init(abbreviation: "PDT")
+//        var strDate = formatter.string(from: apiDate)
+////        var strDate = formatter.string(from: apiDate.toLocalTime())
+//
+//        strDate = strDate.replacingOccurrences(of: " at ", with: " @ ")
+//        strDate = strDate.replacingOccurrences(of: ",", with: "")
+//        strDate = strDate.replacingOccurrences(of: ":", with: " ")
+//        var stringArr = strDate.components(separatedBy: " ")
+//        stringArr.remove(at: 3)
+//        let shortMonth : String = stringArr[1].prefix(3) + "."
+//        stringArr.remove(at: 1)
+//        stringArr.insert(shortMonth, at: 1)
+//        if stringArr[2] == "1" {
+//            stringArr[2] = "1st"
+//        } else if stringArr[2] == "2" {
+//            stringArr[2] = "2nd"
+//        } else if stringArr[2] == "3" {
+//            stringArr[2] = "3rd"
+//        } else {
+//            stringArr[2] = stringArr[2] + "th"
+//        }
+//        stringArr.remove(at: 6)
+//        stringArr.remove(at: 5)
+//
+//
+//        let finalDate = stringArr.joined(separator: " ")
+//        self.dayDateLbl.text = finalDate
         
         let prizeAmount = Int(quizTopic.prize_amount / 100)
         let prizeAmountStr = "$\(prizeAmount)"

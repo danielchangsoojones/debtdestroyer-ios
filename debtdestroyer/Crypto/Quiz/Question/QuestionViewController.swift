@@ -41,6 +41,7 @@ class QuestionViewController: UIViewController {
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
+    private let videoTimer = Timer()
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -130,6 +131,19 @@ class QuestionViewController: UIViewController {
                 name: .AVPlayerItemDidPlayToEndTime,
                 object: player.currentItem
             )
+            startVideoTimer()
+        }
+    }
+    
+    private func startVideoTimer() {
+        videoTimer = Timer(timeInterval: 0.1, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func videoTimerFired() {
+        if player.currentTime() >= currentData.start_question_prompt_seconds {
+            videoTimer.invalidate()
+            let now = new Date()
+            startQuestionPrompt(start_time: now)
         }
     }
     

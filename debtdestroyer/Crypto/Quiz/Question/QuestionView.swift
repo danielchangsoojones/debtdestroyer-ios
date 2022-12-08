@@ -108,7 +108,7 @@ class QuestionView: UIView {
     
     private func setQuestionLabel() {
         questionLabel.numberOfLines = 0
-        questionLabel.font = UIFont.MontserratSemiBold(size: 25)
+        questionLabel.font = UIFont.MontserratSemiBold(size: 50)
         questionLabel.textColor = .white
         bottomView.addSubview(questionLabel)
         questionLabel.snp.makeConstraints { make in
@@ -151,7 +151,7 @@ class QuestionView: UIView {
         answerStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(questionLabel)
             make.top.equalTo(questionLabel.snp.bottom).offset(15)
-            make.height.equalTo(250)
+            make.height.equalTo(500)
             make.bottomMargin.equalToSuperview()
         }
     }

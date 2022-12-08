@@ -45,7 +45,7 @@ class AnswerChoiceNewUIView: UIView {
     
     private func setAnswerLabel() {
         answerLabel.numberOfLines = 0
-        answerLabel.font = .MontserratBold(size: 18)
+        answerLabel.font = .MontserratBold(size: 50)
         answerLabel.textAlignment = .center
         deselect()
         addSubview(answerLabel)

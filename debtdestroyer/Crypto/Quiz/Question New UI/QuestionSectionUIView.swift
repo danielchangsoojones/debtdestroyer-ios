@@ -1,14 +1,14 @@
 //
-//  QuestionWithVideoView.swift
+//  QuestionSectionUIView.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 05/12/22.
+//  Created by Rashmi Aher on 09/12/22.
 //
 
 import UIKit
 import AVFoundation
 
-class QuestionWithVideoView: UIView {
+class QuestionSectionUIView: UIView {
     let answerView = UIView()
     let questionLabel = UILabel()
     let questionNoLabel = UILabel()
@@ -29,7 +29,7 @@ class QuestionWithVideoView: UIView {
         setQuestionNoLabel()
         setBottomView()
         setUpProgressBarContainer()
-//        questionContentView.alpha = 0.0
+        //        questionContentView.alpha = 0.0
         
     }
     
@@ -149,7 +149,7 @@ class QuestionWithVideoView: UIView {
         answerView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(questionLabel)
             make.top.equalTo(questionLabel.snp.bottom).offset(15)
-//            make.height.greaterThanOrEqualTo(120)
+            //            make.height.greaterThanOrEqualTo(120)
             make.bottomMargin.equalToSuperview()
         }
     }

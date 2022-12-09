@@ -1,8 +1,8 @@
 //
-//  QuestionWithVideoViewController.swift
+//  QuestionSectionUIViewController.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 05/12/22.
+//  Created by Rashmi Aher on 09/12/22.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import SnapKit
 
-class QuestionWithVideoViewController: UIViewController {
+class QuestionSectionUIViewController: UIViewController {
     struct Constants {
         static let originalStartTime: TimeInterval = 12
     }
@@ -38,7 +38,7 @@ class QuestionWithVideoViewController: UIViewController {
     private var hasRevealedByAPI = false
     var timerBar = UIProgressView()
     var questionContentView = UIView()
-    var questionView = QuestionWithVideoView()
+    var questionView = QuestionSectionUIView()
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
@@ -49,7 +49,7 @@ class QuestionWithVideoViewController: UIViewController {
     var selectedAnswerIndex : Int?
     var answerStatus: AnswerStatus!
     var noOfOptions : Int!
-    var cellCountCheck = 0
+    var reveledAnsArray : [String] = []
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -68,7 +68,7 @@ class QuestionWithVideoViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        questionView = QuestionWithVideoView(frame: self.view.frame)
+        questionView = QuestionSectionUIView(frame: self.view.frame)
         self.view = questionView
         self.playerLayer = questionView.playerLayer
         questionView.questionLabel.text = currentData.question
@@ -157,6 +157,13 @@ class QuestionWithVideoViewController: UIViewController {
         if let video_url = URL(string: currentData.video_url_string) {
             player = AVPlayer(url: video_url)
             playerLayer.player = player
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            }
+            catch {
+                print("Setting category to AVAudioSessionCategoryPlayback failed.")
+            }
+
             player.play()
             NotificationCenter.default
                 .addObserver(self,
@@ -183,7 +190,11 @@ class QuestionWithVideoViewController: UIViewController {
             
             if should_reveal_answer {
                 self.hasRevealedByAPI = true
-                self.answerCollection.reloadData()
+                if !self.hasRevealedAnswerOnce {
+                    DispatchQueue.main.async{
+                        self.answerCollection.reloadData()
+                    }
+                }
             }
             if let show_question_prompt_time = show_question_prompt_time {
                 self.startQuestionPrompt(start_time: show_question_prompt_time)
@@ -251,9 +262,9 @@ class QuestionWithVideoViewController: UIViewController {
             timer.invalidate()
         }
     }
-  
+    
     func submitAnswer(answerStatus: AnswerStatus) {
-        dataStore.saveAnswerV(for: currentData.quizTopic,
+        dataStore.saveAnswerS(for: currentData.quizTopic,
                               answerStatus: answerStatus,
                               quizData: currentData)
         print("================submitAnswer===================")
@@ -282,25 +293,44 @@ class QuestionWithVideoViewController: UIViewController {
                 self.navigationController?.pushViewController(leaderboardVC, animated: true)
             }
         } else {
-            let vc = QuestionWithVideoViewController(quizDatas: quizDatas, currentIndex: nextIndex)
+            let vc = QuestionSectionUIViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
-extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+extension QuestionSectionUIViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentData.answers!.count
+        if hasRevealedByAPI && !hasRevealedAnswerOnce && selectedAnswerIndex != nil {
+            return self.reveledAnsArray.count
+           
+        } else {
+            return currentData.answers!.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType:AnswerCollectionViewCell.self)
         
-        cell.ansLabel.text = currentData.answers![indexPath.row].capitalized
-                
-        if !hasRevealedAnswerOnce && hasRevealedByAPI && selectedAnswerIndex != nil{
+        
+        if hasRevealedByAPI && !hasRevealedAnswerOnce && selectedAnswerIndex != nil{
             player.play()
-            
-            if indexPath.row == currentData.correct_answer_index {
+            let correctIndex = currentData.correct_answer_index
+            cell.ansLabel.text = reveledAnsArray[indexPath.row].capitalized
+             if reveledAnsArray[indexPath.row] != currentData.answers![correctIndex] {
+                print("================Red===================")
+                
+                cell.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
+                cell.gifImgView.tintColor = .black
+                cell.gifImgView.alpha = 0.2
+                UIImageView.animate(withDuration: 1, animations: {
+                    cell.gifImgView.alpha = 1
+                })
+                cell.contentView.backgroundColor = .clear
+                cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
+            }
+            if reveledAnsArray[indexPath.row] == currentData.answers![correctIndex] {
                 print("================GREEN===================")
                 
                 cell.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
@@ -312,31 +342,13 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                 cell.contentView.backgroundColor = .clear
                 cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
                 
-            }
-            if indexPath.row != currentData.correct_answer_index {
                 
-                if indexPath.row == selectedAnswerIndex {
-                    print("================Red===================")
-
-                    cell.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
-                    cell.gifImgView.tintColor = .black
-                    cell.gifImgView.alpha = 0.2
-                    UIImageView.animate(withDuration: 1, animations: {
-                        cell.gifImgView.alpha = 1
-                    })
-                    cell.contentView.backgroundColor = .clear
-                    cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
-                } else {
-                    print("================Hide===================")
-
-                    UIView.animate(withDuration: 1.0) {
-                        cell.contentView.alpha = 0.0
-                    }
-                }
+                
+            
+                
             }
             
-            cellCountCheck += 1
-            if noOfOptions == cellCountCheck {
+            if reveledAnsArray.count == indexPath.row+1 {
                 if selectedAnswerIndex != currentData.correct_answer_index
                 {
                     answerStatus = .incorrect
@@ -350,20 +362,40 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                 submitAnswer(answerStatus: answerStatus)
                 self.hasRevealedAnswerOnce = true
                 self.bottomView.backgroundColor = .clear
-                print("================self.hasRevealedAnswerOnce = true===================")
+                selectedAnswerIndex = nil
             }
+
+           
         } else {
-            // code to colour selected cell to purple
+            
+            cell.ansLabel.text = currentData.answers![indexPath.row].capitalized
             if selectedAnswerIndex == indexPath.row && cell.contentView.backgroundColor == .white {
                 cell.contentView.backgroundColor = hexStringToUIColor(hex: "A324EA")
             }
+            
         }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedAnswerIndex = indexPath.row
-        self.answerCollection.reloadData()
+        self.answerCollection.isUserInteractionEnabled = false
+        for i in 0...currentData.answers!.count {
+            if i == selectedAnswerIndex || i == currentData.correct_answer_index
+            {
+                reveledAnsArray.append(currentData.answers![i])
+            }
+            
+        }
+        
+        DispatchQueue.main.async{
+            self.answerCollection.snp.makeConstraints { make in
+                make.edges.equalToSuperview().inset(5)
+                make.height.equalTo(95)
+            }
+            self.answerCollection.reloadData()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

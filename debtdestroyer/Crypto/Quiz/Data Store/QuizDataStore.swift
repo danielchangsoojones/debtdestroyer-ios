@@ -101,7 +101,7 @@ class QuizDataStore {
         }
     }
 
-    func saveAnswerV(for quizTopic: QuizTopicParse, answerStatus: QuestionWithVideoViewController.AnswerStatus, quizData: QuizDataParse) {
+    func saveAnswerS(for quizTopic: QuizTopicParse, answerStatus: QuestionSectionUIViewController.AnswerStatus, quizData: QuizDataParse) {
         let questionStatus = answerStatus.rawValue
         let quizDataID = quizData.objectId ?? ""
         let quizTopicID = quizTopic.objectId ?? ""

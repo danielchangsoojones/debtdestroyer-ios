@@ -119,7 +119,7 @@ class AddressViewController: UIViewController {
         }
         
         dataStore.saveCryptoAddress(crypto_address: self.addTextField.text ?? "", quizTopicID: quizTopicDatas.objectId!) { response in
-            let phoneVC = CreateProfileViewController()
+            let phoneVC = PhoneNumberViewController()
             self.navigationController?.pushViewController(phoneVC, animated: true)
         }
         

@@ -106,7 +106,7 @@
 		0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */; };
 		0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */; };
 		0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */; };
-		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
+		0A7A4A1128A42109009EDE5E /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* PhoneNumberViewController.swift */; };
 		0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */; };
 		0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */; };
 		0A9D01B0292B71AD002CA0C5 /* NewStartQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */; };
@@ -125,6 +125,7 @@
 		0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */; };
 		0ABB05F82942F41D00328E50 /* QuestionSectionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */; };
 		0ABB05FA2942F43D00328E50 /* QuestionSectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */; };
+		0ABB05FC29432B1700328E50 /* DOBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05FB29432B1700328E50 /* DOBViewController.swift */; };
 		0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */; };
 		0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */; };
 		0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */; };
@@ -257,7 +258,7 @@
 		0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningButton.swift; sourceTree = "<group>"; };
 		0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
 		0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0A7A4A1028A42109009EDE5E /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerChoiceNewUIView.swift; sourceTree = "<group>"; };
 		0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizViewController.swift; sourceTree = "<group>"; };
 		0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizView.swift; sourceTree = "<group>"; };
@@ -276,6 +277,7 @@
 		0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSectionUIViewController.swift; sourceTree = "<group>"; };
 		0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSectionUIView.swift; sourceTree = "<group>"; };
+		0ABB05FB29432B1700328E50 /* DOBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOBViewController.swift; sourceTree = "<group>"; };
 		0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDisclosuresViewController.swift; sourceTree = "<group>"; };
 		0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
 		0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsTableViewCell.swift; sourceTree = "<group>"; };
@@ -767,7 +769,8 @@
 		0A7A4A0F28A42109009EDE5E /* Create Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */,
+				0A7A4A1028A42109009EDE5E /* PhoneNumberViewController.swift */,
+				0ABB05FB29432B1700328E50 /* DOBViewController.swift */,
 				0A4F809F28E6C6C6001B573E /* NameViewController.swift */,
 				0A51501B292355B5001B028C /* ResetPasswordViewController.swift */,
 			);
@@ -1052,7 +1055,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */,
-				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
+				0A7A4A1128A42109009EDE5E /* PhoneNumberViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,
 				0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */,
@@ -1085,6 +1088,7 @@
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
 				0A9D01B0292B71AD002CA0C5 /* NewStartQuizView.swift in Sources */,
+				0ABB05FC29432B1700328E50 /* DOBViewController.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
 				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,

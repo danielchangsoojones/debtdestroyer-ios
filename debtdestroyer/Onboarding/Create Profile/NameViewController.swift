@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class NameViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class NameViewController: RegisterViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()

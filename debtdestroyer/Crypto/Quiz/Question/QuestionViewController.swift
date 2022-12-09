@@ -211,7 +211,7 @@ class QuestionViewController: UIViewController {
         if endTime == nil {
             player.pause()
             self.endTime = start_time.addingTimeInterval(timeLeft)
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+//            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             self.questionPromptAnimate()
         }
     }
@@ -287,7 +287,6 @@ class QuestionViewController: UIViewController {
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
             timer.invalidate()
-            self.revealAnswer()
         }
     }
     
@@ -319,6 +318,7 @@ class QuestionViewController: UIViewController {
                 answerView.select()
             }
         }
+        revealAnswer()
     }
         
     func submitAnswer(answerStatus: AnswerStatus) {

@@ -43,7 +43,7 @@ class QuestionSectionUIView: UIView {
         questionContentView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.left.right.equalTo(self)
-            make.height.greaterThanOrEqualTo(800)
+        //    make.height.greaterThanOrEqualTo(800)
         }
         playerLayer.videoGravity = .resizeAspectFill
         playerLayer.frame = self.bounds

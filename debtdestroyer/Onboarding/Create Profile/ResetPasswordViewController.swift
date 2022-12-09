@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ResetPasswordViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ResetPasswordViewController: RegisterViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()

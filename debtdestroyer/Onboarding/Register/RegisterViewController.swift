@@ -82,7 +82,7 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     
     func segueIntoApp() {
         nextButton.stopSpinning()
-        let profileVC = CreateProfileViewController()
+        let profileVC = PhoneNumberViewController()
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CreateProfileViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class PhoneNumberViewController: RegisterViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()
@@ -64,7 +64,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     }
 }
 
-extension CreateProfileViewController: UITextFieldDelegate {
+extension PhoneNumberViewController: UITextFieldDelegate {
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //
 //        guard let text = self.emailTextField.text else { return true }

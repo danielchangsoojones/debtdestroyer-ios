@@ -89,7 +89,6 @@
 		0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */; };
 		0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */; };
 		0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */; };
-		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
 		0A718C4128A0D9B00086B27C /* ImageExtension+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */; };
 		0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */; };
 		0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7635B028C9A6D600316FD4 /* SubscriptionDataStore.swift */; };
@@ -124,6 +123,8 @@
 		0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */; };
 		0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */; };
 		0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */; };
+		0ABB05F82942F41D00328E50 /* QuestionSectionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */; };
+		0ABB05FA2942F43D00328E50 /* QuestionSectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */; };
 		0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */; };
 		0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */; };
 		0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */; };
@@ -137,6 +138,7 @@
 		0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */; };
 		0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */; };
 		0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */; };
+		0AEE6485293E09CF002941C0 /* AnswerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE6484293E09CF002941C0 /* AnswerCollectionViewCell.swift */; };
 		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
@@ -237,7 +239,6 @@
 		0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnersViewController.swift; sourceTree = "<group>"; };
 		0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerTableCell.swift; sourceTree = "<group>"; };
-		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A718C4028A0D9B00086B27C /* ImageExtension+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageExtension+Gif.swift"; sourceTree = "<group>"; };
 		0A74408D28BE407E00AD0489 /* SubcsriptionBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcsriptionBasicView.swift; sourceTree = "<group>"; };
 		0A7635B028C9A6D600316FD4 /* SubscriptionDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataStore.swift; sourceTree = "<group>"; };
@@ -273,6 +274,8 @@
 		0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtAccountsParse.swift; sourceTree = "<group>"; };
 		0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
+		0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSectionUIViewController.swift; sourceTree = "<group>"; };
+		0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSectionUIView.swift; sourceTree = "<group>"; };
 		0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDisclosuresViewController.swift; sourceTree = "<group>"; };
 		0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
 		0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsTableViewCell.swift; sourceTree = "<group>"; };
@@ -286,6 +289,7 @@
 		0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoView.swift; sourceTree = "<group>"; };
 		0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoViewController.swift; sourceTree = "<group>"; };
+		0AEE6484293E09CF002941C0 /* AnswerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCollectionViewCell.swift; sourceTree = "<group>"; };
 		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -403,7 +407,6 @@
 		0A25F65628A3681B00D5D183 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */,
 				0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */,
 				0A4536DA28B8DA2000F4A8CA /* WeekPrizeCell.swift */,
 				0A4536DE28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift */,
@@ -556,6 +559,7 @@
 				0A32178E290115C100A414CA /* Score */,
 				0A59ACE828E183F4001B774A /* Answer */,
 				0A59ACEC28E183F4001B774A /* Question */,
+				0ABB05F62942F3C200328E50 /* Question New UI */,
 				0A59ACF128E183F4001B774A /* Start Quiz */,
 				0A59ACF428E183F4001B774A /* Provide Feedback */,
 				0A47F89228F00DD700B11D5F /* Notification */,
@@ -794,6 +798,16 @@
 				0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */,
 			);
 			path = "Data Store";
+			sourceTree = "<group>";
+		};
+		0ABB05F62942F3C200328E50 /* Question New UI */ = {
+			isa = PBXGroup;
+			children = (
+				0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */,
+				0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */,
+				0AEE6484293E09CF002941C0 /* AnswerCollectionViewCell.swift */,
+			);
+			path = "Question New UI";
 			sourceTree = "<group>";
 		};
 		0AC23D2C28AC6D31006301DE /* Connected Accounts */ = {
@@ -1048,9 +1062,10 @@
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */,
 				0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */,
-				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
+				0AEE6485293E09CF002941C0 /* AnswerCollectionViewCell.swift in Sources */,
 				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
+				0ABB05F82942F41D00328E50 /* QuestionSectionUIViewController.swift in Sources */,
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
@@ -1145,6 +1160,7 @@
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
+				0ABB05FA2942F43D00328E50 /* QuestionSectionUIView.swift in Sources */,
 				0A76B59428F996530084A629 /* CustomNavigationViewController.swift in Sources */,
 				0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,

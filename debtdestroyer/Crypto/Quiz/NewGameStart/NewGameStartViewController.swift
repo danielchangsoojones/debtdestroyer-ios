@@ -91,7 +91,9 @@ class NewGameStartViewController: UIViewController {
             if quizTopic.start_time < now {
                 //time to start the game
                 checkStartTimer.invalidate()
-                let questionVC = QuestionViewController(quizDatas: quizDatas,
+                let questionVC = QuestionSectionUIViewController(quizDatas: quizDatas,
+
+//                let questionVC = QuestionViewController(quizDatas: quizDatas,
                                                         currentIndex: 0)
                 let navController = UINavigationController(rootViewController: questionVC)
                 navController.modalPresentationStyle = .fullScreen

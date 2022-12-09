@@ -1,15 +1,16 @@
 //
-//  QuestionNewUIViewController.swift
+//  QuestionSectionUIViewController.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 26/09/22.
+//  Created by Rashmi Aher on 09/12/22.
 //
 
 import UIKit
 import Foundation
 import AVFoundation
+import SnapKit
 
-class QuestionViewController: UIViewController {
+class QuestionSectionUIViewController: UIViewController {
     struct Constants {
         static let originalStartTime: TimeInterval = 12
     }
@@ -26,7 +27,6 @@ class QuestionViewController: UIViewController {
     var timer = Timer()
     private let quizDatas: [QuizDataParse]
     private let currentIndex: Int
-    private var answerViews: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
     private var bottomView = UIView()
     var pointsLabel = UILabel()
@@ -35,12 +35,21 @@ class QuestionViewController: UIViewController {
     private var quizStatusTimer = Timer()
     private var show_question_prompt_time: Date?
     private var hasRevealedAnswerOnce = false
+    private var hasRevealedByAPI = false
     var timerBar = UIProgressView()
     var questionContentView = UIView()
-    var questionView = QuestionView()
+    var questionView = QuestionSectionUIView()
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
+    var answerView = UIView()
+    var answerCollection:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    var collectionHeight = 96
+    var selectedAnswerIndex : Int?
+    var answerStatus: AnswerStatus!
+    var noOfOptions : Int!
+    var reveledAnsArray : [String] = []
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -59,19 +68,19 @@ class QuestionViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        questionView = QuestionView(frame: self.view.frame)
+        questionView = QuestionSectionUIView(frame: self.view.frame)
         self.view = questionView
         self.playerLayer = questionView.playerLayer
         questionView.questionLabel.text = currentData.question
-        addAnswers(to: questionView.answerStackView)
         questionView.questionNoLabel.text = "Question \(currentIndex + 1) of \(quizDatas.count)"
         print("question \(currentIndex + 1) of \(quizDatas.count)")
         self.timerBar = questionView.timerBar
+        self.answerView = questionView.answerView
         self.pointsLabel = questionView.pointsLabel
         self.timeLabel = questionView.timerLabel
-        self.answerStackView = questionView.answerStackView
         self.questionContentView = questionView.questionContentView
         self.progressBarContainer = questionView.progressBarContainer
+        self.bottomView = questionView.bottomView
     }
     
     override func viewDidLoad() {
@@ -81,14 +90,29 @@ class QuestionViewController: UIViewController {
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
         NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(applicationDidBecomeActive),
-                name: UIApplication.didBecomeActiveNotification,
-                object: nil)
+            self,
+            selector: #selector(applicationDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func setAnswerCollectionView() {
+        layout.scrollDirection = .vertical
+        answerCollection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        answerCollection.delegate = self
+        answerCollection.dataSource = self
+        answerCollection.backgroundColor = .clear
+        answerCollection.isScrollEnabled = false
+        answerCollection.register(cellType: AnswerCollectionViewCell.self)
+        answerView.addSubview(answerCollection)
+        answerCollection.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(5)
+            make.height.equalTo(collectionHeight)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +126,16 @@ class QuestionViewController: UIViewController {
         self.timeLabel.stopBlink()
         self.progressBarContainer.stopBlink()
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // TODO: number of options mod 2 and add reminder * 120 for colloction height
+        noOfOptions = currentData.answers!.count
+        let rows = noOfOptions / 2
+        let reminder = noOfOptions % 2
+        collectionHeight = (rows+reminder)*96
+        
+        setAnswerCollectionView()
     }
     
     @objc private func applicationDidBecomeActive() {
@@ -123,13 +157,20 @@ class QuestionViewController: UIViewController {
         if let video_url = URL(string: currentData.video_url_string) {
             player = AVPlayer(url: video_url)
             playerLayer.player = player
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            }
+            catch {
+                print("Setting category to AVAudioSessionCategoryPlayback failed.")
+            }
+
             player.play()
             NotificationCenter.default
                 .addObserver(self,
-                selector: #selector(playerDidFinishPlaying),
-                name: .AVPlayerItemDidPlayToEndTime,
-                object: player.currentItem
-            )
+                             selector: #selector(playerDidFinishPlaying),
+                             name: .AVPlayerItemDidPlayToEndTime,
+                             object: player.currentItem
+                )
         }
     }
     
@@ -148,8 +189,14 @@ class QuestionViewController: UIViewController {
             self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
             
             if should_reveal_answer {
-                self.revealAnswer()
-            } else if let show_question_prompt_time = show_question_prompt_time {
+                self.hasRevealedByAPI = true
+                if !self.hasRevealedAnswerOnce {
+                    DispatchQueue.main.async{
+                        self.answerCollection.reloadData()
+                    }
+                }
+            }
+            if let show_question_prompt_time = show_question_prompt_time {
                 self.startQuestionPrompt(start_time: show_question_prompt_time)
             }
         }
@@ -200,65 +247,6 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    private func revealAnswer() {
-        if !hasRevealedAnswerOnce {
-            player.play()
-            hasRevealedAnswerOnce = true
-            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
-                return answerView.isChosen
-            }
-            
-            var answerStatus: AnswerStatus = .incorrect
-            if let selectedAnswerIndex = selectedAnswerIndex {
-                let answerView = answerViews[selectedAnswerIndex]
-                //we need to remove the purple gradient so the replacement gradient will show (red or green).
-                answerView.layer.sublayers?.removeAll(where: { layer in
-                    return layer is CAGradientLayer
-                })
-                let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
-                if isIncorrectAnswer {
-                    addAnswerMarkingGif(to: answerView, imageName: "xmark")
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
-                } else {
-                    answerStatus = .correct
-                    User.current()?.quizPointCounter += 1
-                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
-                }
-            } else {
-                answerStatus = .time_ran_out
-            }
-            markCorrectAnswerView()
-            
-            // this code is hiding remaining options
-            for (_, answerView) in answerViews.enumerated() {
-                if answerView.tag == selectedAnswerIndex || answerView.tag == self.currentData.correct_answer_index {
-                    answerView.alpha = 1.0
-                } else {
-                    UIView.animate(withDuration: 1.0) {
-                        answerView.alpha = 0.0
-                    }
-                }
-            }
-            
-            self.submitAnswer(answerStatus: answerStatus)
-        }
-    }
-    
-    private func markCorrectAnswerView() {
-        let correctAnswerView = answerViews[currentData.correct_answer_index]
-        addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
-        correctAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
-    }
-    
-    private func addAnswerMarkingGif(to answerView: AnswerChoiceNewUIView, imageName: String) {
-        answerView.gifImgView.image = UIImage.init(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
-        answerView.gifImgView.tintColor = .black
-        answerView.gifImgView.alpha = 0.2
-        UIImageView.animate(withDuration: 1, animations: {
-            answerView.gifImgView.alpha = 1
-        })
-    }
-    
     @objc func updateTime() {
         if timeLeft > 0 {
             timeLeft = endTime?.timeIntervalSinceNow ?? 0
@@ -270,44 +258,16 @@ class QuestionViewController: UIViewController {
             progressBarContainer.backgroundColor = hexStringToUIColor(hex: "A324EA")
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
+            answerStatus = .time_ran_out
             timer.invalidate()
         }
     }
     
-    private func addAnswers(to stackView: UIStackView) {
-        if let answers = currentData.answers {
-            for (index, answer) in answers.enumerated() {
-                let answerView = AnswerChoiceNewUIView(answer: answer)
-                answerView.backgroundColor = .systemGray6
-                answerView.layer.cornerRadius = 25
-                answerView.layer.borderColor = UIColor.systemGray4.cgColor
-                answerView.layer.borderWidth = 1
-                answerView.tag = index
-                answerView.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
-
-                answerViews.append(answerView)
-                answerView.answerLabel.text = answer.capitalized
-                stackView.addArrangedSubview(answerView)
-                answerView.snp.makeConstraints { make in
-                    make.leading.trailing.equalToSuperview()
-                }
-            }
-        }
-    }
-    
-    @objc func tapLabel(gesture: UITapGestureRecognizer) {
-        self.answerStackView.isUserInteractionEnabled = false // added this line so user can answer once only. if immediadely clicked can select more
-        for (index, answerView) in answerViews.enumerated() {
-            if index == gesture.view?.tag {
-                answerView.select()
-            }
-        }
-    }
-        
     func submitAnswer(answerStatus: AnswerStatus) {
-        dataStore.saveAnswer(for: currentData.quizTopic,
-                             answerStatus: answerStatus,
-                             quizData: currentData)
+        dataStore.saveAnswerS(for: currentData.quizTopic,
+                              answerStatus: answerStatus,
+                              quizData: currentData)
+        print("================submitAnswer===================")
     }
     
     private func segueToNextVC(index: Int?) {
@@ -333,9 +293,116 @@ class QuestionViewController: UIViewController {
                 self.navigationController?.pushViewController(leaderboardVC, animated: true)
             }
         } else {
-            let vc = QuestionViewController(quizDatas: quizDatas,
-                                            currentIndex: nextIndex)
+            let vc = QuestionSectionUIViewController(quizDatas: quizDatas, currentIndex: nextIndex)
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+}
+
+extension QuestionSectionUIViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if hasRevealedByAPI && !hasRevealedAnswerOnce && selectedAnswerIndex != nil {
+            return self.reveledAnsArray.count
+           
+        } else {
+            return currentData.answers!.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType:AnswerCollectionViewCell.self)
+        
+        
+        if hasRevealedByAPI && !hasRevealedAnswerOnce && selectedAnswerIndex != nil{
+            player.play()
+            let correctIndex = currentData.correct_answer_index
+            cell.ansLabel.text = reveledAnsArray[indexPath.row].capitalized
+             if reveledAnsArray[indexPath.row] != currentData.answers![correctIndex] {
+                print("================Red===================")
+                
+                cell.gifImgView.image = UIImage.init(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
+                cell.gifImgView.tintColor = .black
+                cell.gifImgView.alpha = 0.2
+                UIImageView.animate(withDuration: 1, animations: {
+                    cell.gifImgView.alpha = 1
+                })
+                cell.contentView.backgroundColor = .clear
+                cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
+            }
+            if reveledAnsArray[indexPath.row] == currentData.answers![correctIndex] {
+                print("================GREEN===================")
+                
+                cell.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
+                cell.gifImgView.tintColor = .black
+                cell.gifImgView.alpha = 0.2
+                UIImageView.animate(withDuration: 1, animations: {
+                    cell.gifImgView.alpha = 1
+                })
+                cell.contentView.backgroundColor = .clear
+                cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
+                
+                
+                
+            
+                
+            }
+            
+            if reveledAnsArray.count == indexPath.row+1 {
+                if selectedAnswerIndex != currentData.correct_answer_index
+                {
+                    answerStatus = .incorrect
+                } else if selectedAnswerIndex == currentData.correct_answer_index {
+                    User.current()?.quizPointCounter += 1
+                    pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
+                    answerStatus = .correct
+                } else {
+                    answerStatus = .time_ran_out
+                }
+                submitAnswer(answerStatus: answerStatus)
+                self.hasRevealedAnswerOnce = true
+                self.bottomView.backgroundColor = .clear
+                selectedAnswerIndex = nil
+            }
+
+           
+        } else {
+            
+            cell.ansLabel.text = currentData.answers![indexPath.row].capitalized
+            if selectedAnswerIndex == indexPath.row && cell.contentView.backgroundColor == .white {
+                cell.contentView.backgroundColor = hexStringToUIColor(hex: "A324EA")
+            }
+            
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedAnswerIndex = indexPath.row
+        self.answerCollection.isUserInteractionEnabled = false
+        for i in 0...currentData.answers!.count {
+            if i == selectedAnswerIndex || i == currentData.correct_answer_index
+            {
+                reveledAnsArray.append(currentData.answers![i])
+            }
+            
+        }
+        
+        DispatchQueue.main.async{
+            self.answerCollection.snp.makeConstraints { make in
+                make.edges.equalToSuperview().inset(5)
+                make.height.equalTo(95)
+            }
+            self.answerCollection.reloadData()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (answerView.frame.width - 22) * 0.5, height: 90)
     }
 }

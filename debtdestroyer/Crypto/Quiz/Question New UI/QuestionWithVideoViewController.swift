@@ -183,11 +183,11 @@ class QuestionWithVideoViewController: UIViewController {
             
             if should_reveal_answer {
                 self.hasRevealedByAPI = true
-                if !self.hasRevealedAnswerOnce {
-                    DispatchQueue.main.async{
-                        self.answerCollection.reloadData()
-                    }
-                }
+//                if !self.hasRevealedAnswerOnce {
+//                    DispatchQueue.main.async{
+//                        self.answerCollection.reloadData()
+//                    }
+//                }
             }
             if let show_question_prompt_time = show_question_prompt_time {
                 self.startQuestionPrompt(start_time: show_question_prompt_time)
@@ -302,6 +302,7 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                 
         if !hasRevealedAnswerOnce && hasRevealedByAPI && selectedAnswerIndex != nil{
             player.play()
+            cell.ansLabel.text = currentData.answers![indexPath.row].capitalized
             let correctIndex = currentData.correct_answer_index
 
             if currentData.answers![indexPath.row] == currentData.answers![correctIndex] {
@@ -314,8 +315,13 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                 UIImageView.animate(withDuration: 1, animations: {
                     cell.gifImgView.alpha = 1
                 })
-                cell.contentView.backgroundColor = .clear
-                cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
+//                cell.contentView.backgroundColor = .clear
+//                cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
+                let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
+                                                          colors: [self.hexStringToUIColor(hex: "E9D845").cgColor, self.hexStringToUIColor(hex: "B5C30F").cgColor], radius: 8,
+                                                          locations: nil)
+                cell.progressBar.progressImage = gradientImage
+                cell.progressBar.setProgress(0.5, animated: true)
                 
             } else { //            if indexPath.row != currentData.correct_answer_index {
 //                if currentData.answers![indexPath.row] != currentData.answers![correctIndex]
@@ -328,8 +334,13 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                     UIImageView.animate(withDuration: 1, animations: {
                         cell.gifImgView.alpha = 1
                     })
-                    cell.contentView.backgroundColor = .clear
-                    cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
+//                    cell.contentView.backgroundColor = .clear
+//                    cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
+                    let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
+                                                              colors: [self.hexStringToUIColor(hex: "FF7910").cgColor, self.hexStringToUIColor(hex: "EB5757").cgColor], radius: 8,
+                                                              locations: nil)
+                    cell.progressBar.progressImage = gradientImage
+                    cell.progressBar.setProgress(0.5, animated: true)
                 } else {
                     print("================Hide===================")
 
@@ -354,7 +365,6 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                 submitAnswer(answerStatus: answerStatus)
                 self.hasRevealedAnswerOnce = true
                 self.bottomView.backgroundColor = .clear
-                print("================self.hasRevealedAnswerOnce = true===================")
             }
         } else {
             cell.ansLabel.text = currentData.answers![indexPath.row].capitalized

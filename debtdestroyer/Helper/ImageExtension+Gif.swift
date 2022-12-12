@@ -23,6 +23,26 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 extension UIImage {
     
+    static func gradientImage(with bounds: CGRect,
+                              colors: [CGColor], radius: CGFloat,
+                              locations: [NSNumber]?) -> UIImage? {
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = colors
+        // This makes it horizontal
+        gradientLayer.startPoint = CGPoint(x: 0.0,
+                                           y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0,
+                                         y: 0.5)
+        gradientLayer.cornerRadius = radius
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
     public class func gifImageWithData(_ data: Data) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             print("image doesn't exist")

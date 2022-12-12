@@ -50,6 +50,8 @@
 		0A50659128C346D200207759 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659028C346D200207759 /* SubscriptionView.swift */; };
 		0A50659528C7496F00207759 /* WinnerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50659428C7496F00207759 /* WinnerParse.swift */; };
 		0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51501B292355B5001B028C /* ResetPasswordViewController.swift */; };
+		0A5994082946FE240037DF2F /* QuestionWithVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5994062946FE240037DF2F /* QuestionWithVideoView.swift */; };
+		0A5994092946FE240037DF2F /* QuestionWithVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5994072946FE240037DF2F /* QuestionWithVideoViewController.swift */; };
 		0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */; };
 		0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */; };
 		0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */; };
@@ -200,6 +202,8 @@
 		0A50659028C346D200207759 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		0A50659428C7496F00207759 /* WinnerParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerParse.swift; sourceTree = "<group>"; };
 		0A51501B292355B5001B028C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		0A5994062946FE240037DF2F /* QuestionWithVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionWithVideoView.swift; sourceTree = "<group>"; };
+		0A5994072946FE240037DF2F /* QuestionWithVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionWithVideoViewController.swift; sourceTree = "<group>"; };
 		0A59ACE228E183F4001B774A /* CryptoTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTabBarViewController.swift; sourceTree = "<group>"; };
 		0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoSettingsViewController.swift; sourceTree = "<group>"; };
 		0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -806,6 +810,8 @@
 		0ABB05F62942F3C200328E50 /* Question New UI */ = {
 			isa = PBXGroup;
 			children = (
+				0A5994062946FE240037DF2F /* QuestionWithVideoView.swift */,
+				0A5994072946FE240037DF2F /* QuestionWithVideoViewController.swift */,
 				0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */,
 				0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */,
 				0AEE6484293E09CF002941C0 /* AnswerCollectionViewCell.swift */,
@@ -1140,6 +1146,7 @@
 				0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */,
 				0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */,
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
+				0A5994082946FE240037DF2F /* QuestionWithVideoView.swift in Sources */,
 				0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
@@ -1177,6 +1184,7 @@
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,
+				0A5994092946FE240037DF2F /* QuestionWithVideoViewController.swift in Sources */,
 				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

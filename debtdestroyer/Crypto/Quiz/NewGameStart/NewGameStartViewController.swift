@@ -42,6 +42,7 @@ class NewGameStartViewController: UIViewController {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
+        getDemoQuizData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,10 +76,24 @@ class NewGameStartViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
+    private func getDemoQuizData() {
+        if (User.current()?.isAppleTester ?? false) {
+            quizDataStore.getDemoQuizData { quizDatas in
+                self.quizDatas = quizDatas
+                self.setData(quizTopic: quizDatas.first!.quizTopic)
+            }
+            Timer.runThisAfterDelay(seconds: 2.0) {
+                self.startQuiz()
+            }
+        }
+    }
+    
     @objc private func getQuizDatas() {
-        quizDataStore.getQuizData { quizDatas in
-            self.quizDatas = quizDatas
-            self.checkIfStartQuiz()
+        if !(User.current()?.isAppleTester ?? false) {
+            quizDataStore.getQuizData { quizDatas in
+                self.quizDatas = quizDatas
+                self.checkIfStartQuiz()
+            }
         }
     }
     
@@ -90,14 +105,18 @@ class NewGameStartViewController: UIViewController {
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
-                checkStartTimer.invalidate()
-                let questionVC = QuestionViewController(quizDatas: quizDatas,
-                                                        currentIndex: 0)
-                let navController = UINavigationController(rootViewController: questionVC)
-                navController.modalPresentationStyle = .fullScreen
-                present(navController, animated: true)
+                startQuiz()
             }
         }
+    }
+    
+    private func startQuiz() {
+        checkStartTimer.invalidate()
+        let questionVC = QuestionViewController(quizDatas: quizDatas,
+                                                currentIndex: 0)
+        let navController = UINavigationController(rootViewController: questionVC)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     private func setData(quizTopic: QuizTopicParse) {

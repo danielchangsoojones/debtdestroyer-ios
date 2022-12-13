@@ -24,4 +24,8 @@ class User: PFUser {
     var fullName: String {
         return firstName + " " + lastName
     }
+    
+    var isAppleTester: Bool {
+        return email == "appletester@gmail.com"
+    }
 }

@@ -54,6 +54,8 @@ class NewGameStartViewController: UIViewController {
             let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
             ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
         }
+        
+        addStartQuizBtn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +73,21 @@ class NewGameStartViewController: UIViewController {
         timer.invalidate()
     }
     
+    @objc private func addStartQuizBtn() {
+        if (User.current()?.isAppleTester ?? false) {
+            let btn = UIButton()
+            btn.setTitle("Start Quiz", for: .normal)
+            btn.backgroundColor = .blue
+            btn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
+            view.addSubview(btn)
+            btn.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(prizeBtn.snp.top).offset(-10)
+                make.width.height.equalTo(prizeBtn)
+            }
+        }
+    }
+    
     private func callTimer() {
         checkStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getQuizDatas), userInfo: nil, repeats: true)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -81,9 +98,6 @@ class NewGameStartViewController: UIViewController {
             quizDataStore.getDemoQuizData { quizDatas in
                 self.quizDatas = quizDatas
                 self.setData(quizTopic: quizDatas.first!.quizTopic)
-            }
-            Timer.runThisAfterDelay(seconds: 2.0) {
-                self.startQuiz()
             }
         }
     }
@@ -110,7 +124,7 @@ class NewGameStartViewController: UIViewController {
         }
     }
     
-    private func startQuiz() {
+    @objc private func startQuiz() {
         checkStartTimer.invalidate()
         let questionVC = QuestionViewController(quizDatas: quizDatas,
                                                 currentIndex: 0)

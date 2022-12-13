@@ -26,6 +26,7 @@ class NewGameStartViewController: UIViewController {
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
     var rippleAdded = false
+    var headingLbl: UILabel!
     
     override func loadView() {
         super.loadView()
@@ -36,6 +37,7 @@ class NewGameStartViewController: UIViewController {
         self.descriptionLbl = newGameStartView.descriptionLbl
         self.prizeBtn = newGameStartView.prizeBtn
         self.rippleContainer = newGameStartView.rippleContainer
+        self.headingLbl = newGameStartView.headingLbl
     }
     
     override func viewDidLoad() {
@@ -168,10 +170,12 @@ class NewGameStartViewController: UIViewController {
         
         let prizeAmount = Int(quizTopic.prize_amount / 100)
         let prizeAmountStr = "$\(prizeAmount)"
-        let descriptionLblText = "Answer all 15 questions correctly to win " + prizeAmountStr + " towards your loans! If no one wins, the money rolls over to next week!"
+        let descriptionLblText = quizTopic.ticker
         if descriptionLblText != descriptionLbl.text {
             descriptionLbl.text = descriptionLblText
         }
+        
+        headingLbl.text = quizTopic.name
         
         let titletxt = "      " + prizeAmountStr + " Prize      "
         if titletxt != prizeBtn.titleLabel?.text {

@@ -34,14 +34,11 @@ class QuestionWithVideoViewController: UIViewController {
     private var playerLayer: AVPlayerLayer!
     private var quizStatusTimer = Timer()
     private var show_question_prompt_time: Date?
-    private var hasRevealedAnswerOnce = false
-    private var hasRevealedByAPI = false
     var timerBar = UIProgressView()
     var questionContentView = UIView()
     var questionView = QuestionWithVideoView()
     var player = AVPlayer()
     var progressBarContainer = UIView()
-    private var alreadyPushingVC = false
     var answerView = UIView()
     var answerCollection:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
@@ -49,7 +46,11 @@ class QuestionWithVideoViewController: UIViewController {
     var selectedAnswerIndex : Int?
     var answerStatus: AnswerStatus!
     var noOfOptions : Int!
-
+    private var hasRevealedAnswerOnce = false
+    private var hasRevealedByAPI = false
+    private var alreadyPushingVC = false
+    private var showProgressOnAnswerOptions = false
+    
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }

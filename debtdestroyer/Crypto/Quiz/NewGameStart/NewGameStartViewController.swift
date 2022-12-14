@@ -26,6 +26,7 @@ class NewGameStartViewController: UIViewController {
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
     var rippleAdded = false
+    var headingLbl: UILabel!
     
     override func loadView() {
         super.loadView()
@@ -36,12 +37,14 @@ class NewGameStartViewController: UIViewController {
         self.descriptionLbl = newGameStartView.descriptionLbl
         self.prizeBtn = newGameStartView.prizeBtn
         self.rippleContainer = newGameStartView.rippleContainer
+        self.headingLbl = newGameStartView.headingLbl
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
+        getDemoQuizData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +56,8 @@ class NewGameStartViewController: UIViewController {
             let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
             ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
         }
+        
+        addStartQuizBtn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,15 +75,41 @@ class NewGameStartViewController: UIViewController {
         timer.invalidate()
     }
     
+    @objc private func addStartQuizBtn() {
+        if (User.current()?.isAppleTester ?? false) {
+            let btn = UIButton()
+            btn.setTitle("Start Quiz", for: .normal)
+            btn.backgroundColor = .blue
+            btn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
+            view.addSubview(btn)
+            btn.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(prizeBtn.snp.top).offset(-10)
+                make.width.height.equalTo(prizeBtn)
+            }
+        }
+    }
+    
     private func callTimer() {
         checkStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getQuizDatas), userInfo: nil, repeats: true)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
+    private func getDemoQuizData() {
+        if (User.current()?.isAppleTester ?? false) {
+            quizDataStore.getDemoQuizData { quizDatas in
+                self.quizDatas = quizDatas
+                self.setData(quizTopic: quizDatas.first!.quizTopic)
+            }
+        }
+    }
+    
     @objc private func getQuizDatas() {
-        quizDataStore.getQuizData { quizDatas in
-            self.quizDatas = quizDatas
-            self.checkIfStartQuiz()
+        if !(User.current()?.isAppleTester ?? false) {
+            quizDataStore.getQuizData { quizDatas in
+                self.quizDatas = quizDatas
+                self.checkIfStartQuiz()
+            }
         }
     }
     
@@ -90,15 +121,18 @@ class NewGameStartViewController: UIViewController {
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
-                checkStartTimer.invalidate()
-//                let questionVC =  QuestionSectionUIViewController(quizDatas: quizDatas, currentIndex: 0)
-
-                let questionVC = QuestionViewController(quizDatas: quizDatas, currentIndex: 0)
-                let navController = UINavigationController(rootViewController: questionVC)
-                navController.modalPresentationStyle = .fullScreen
-                present(navController, animated: true)
+                startQuiz()
             }
         }
+    }
+    
+    @objc private func startQuiz() {
+        checkStartTimer.invalidate()
+        let questionVC = QuestionViewController(quizDatas: quizDatas,
+                                                currentIndex: 0)
+        let navController = UINavigationController(rootViewController: questionVC)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     private func setData(quizTopic: QuizTopicParse) {
@@ -136,10 +170,12 @@ class NewGameStartViewController: UIViewController {
         
         let prizeAmount = Int(quizTopic.prize_amount / 100)
         let prizeAmountStr = "$\(prizeAmount)"
-        let descriptionLblText = "Answer all 15 questions correctly to win " + prizeAmountStr + " towards your loans! If no one wins, the money rolls over to next week!"
+        let descriptionLblText = quizTopic.ticker
         if descriptionLblText != descriptionLbl.text {
             descriptionLbl.text = descriptionLblText
         }
+        
+        headingLbl.text = quizTopic.name
         
         let titletxt = "      " + prizeAmountStr + " Prize      "
         if titletxt != prizeBtn.titleLabel?.text {

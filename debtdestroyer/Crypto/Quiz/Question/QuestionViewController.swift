@@ -41,6 +41,7 @@ class QuestionViewController: UIViewController {
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
+    private var videoTimer: Timer?
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -78,7 +79,11 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         playVideo()
         self.questionContentView.alpha = 0.0
-        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getLiveQuizStatus), userInfo: nil, repeats: true)
+        quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0,
+                                               target: self,
+                                               selector: #selector(getLiveQuizStatus),
+                                               userInfo: nil,
+                                               repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
         NotificationCenter.default.addObserver(
                 self,
@@ -130,6 +135,23 @@ class QuestionViewController: UIViewController {
                 name: .AVPlayerItemDidPlayToEndTime,
                 object: player.currentItem
             )
+            
+            if (User.current()?.isAppleTester ?? false) {
+                startVideoTimer()
+            }
+        }
+    }
+    
+    private func startVideoTimer() {
+        videoTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func videoTimerFired() {
+        let currentTime = player.currentTime().seconds
+        if currentTime >= currentData.start_question_prompt_seconds {
+            videoTimer?.invalidate()
+            let now = Date()
+            startQuestionPrompt(start_time: now)
         }
     }
     
@@ -138,19 +160,21 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func getLiveQuizStatus() {
-        let isPlaying = player.timeControlStatus == .playing
-        if User.current()?.email == "messyjones@gmail.com" && isPlaying {
-            let current_time_seconds = previousQuizDataTimes + Int(player.currentTime().seconds)
-            dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
-        }
-        
-        dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds in
-            self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
+        if !(User.current()?.isAppleTester ?? false) {
+            let isPlaying = player.timeControlStatus == .playing
+            if User.current()?.email == "messyjones@gmail.com" && isPlaying {
+                let current_time_seconds = previousQuizDataTimes + Int(player.currentTime().seconds)
+                dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
+            }
             
-            if should_reveal_answer {
-                self.revealAnswer()
-            } else if let show_question_prompt_time = show_question_prompt_time {
-                self.startQuestionPrompt(start_time: show_question_prompt_time)
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds in
+                self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
+                
+                if should_reveal_answer {
+                    self.revealAnswer()
+                } else if let show_question_prompt_time = show_question_prompt_time {
+                    self.startQuestionPrompt(start_time: show_question_prompt_time)
+                }
             }
         }
     }
@@ -271,6 +295,9 @@ class QuestionViewController: UIViewController {
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
             timer.invalidate()
+            if (User.current()?.isAppleTester ?? false) {
+                revealAnswer()
+            }
         }
     }
     

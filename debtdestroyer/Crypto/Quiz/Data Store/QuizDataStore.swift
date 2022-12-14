@@ -175,4 +175,17 @@ class QuizDataStore {
             }
         }
     }
+    
+    func getDemoQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
+        PFCloud.callFunction(inBackground: "getDemoQuizData", withParameters: nil) { (result, error) in
+            if let quizData = result as? [QuizDataParse] {
+                completion(quizData)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getDemoQuizData")
+            }
+        }
+    }
+
 }

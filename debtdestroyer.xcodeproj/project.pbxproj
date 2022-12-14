@@ -125,8 +125,6 @@
 		0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */; };
 		0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */; };
 		0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */; };
-		0ABB05F82942F41D00328E50 /* QuestionSectionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */; };
-		0ABB05FA2942F43D00328E50 /* QuestionSectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */; };
 		0ABB05FC29432B1700328E50 /* DOBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB05FB29432B1700328E50 /* DOBViewController.swift */; };
 		0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */; };
 		0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */; };
@@ -279,8 +277,6 @@
 		0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtAccountsParse.swift; sourceTree = "<group>"; };
 		0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
-		0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSectionUIViewController.swift; sourceTree = "<group>"; };
-		0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSectionUIView.swift; sourceTree = "<group>"; };
 		0ABB05FB29432B1700328E50 /* DOBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOBViewController.swift; sourceTree = "<group>"; };
 		0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDisclosuresViewController.swift; sourceTree = "<group>"; };
 		0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
@@ -812,8 +808,6 @@
 			children = (
 				0A5994062946FE240037DF2F /* QuestionWithVideoView.swift */,
 				0A5994072946FE240037DF2F /* QuestionWithVideoViewController.swift */,
-				0ABB05F72942F41D00328E50 /* QuestionSectionUIViewController.swift */,
-				0ABB05F92942F43D00328E50 /* QuestionSectionUIView.swift */,
 				0AEE6484293E09CF002941C0 /* AnswerCollectionViewCell.swift */,
 			);
 			path = "Question New UI";
@@ -1074,7 +1068,6 @@
 				0AEE6485293E09CF002941C0 /* AnswerCollectionViewCell.swift in Sources */,
 				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
-				0ABB05F82942F41D00328E50 /* QuestionSectionUIViewController.swift in Sources */,
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
@@ -1171,7 +1164,6 @@
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
-				0ABB05FA2942F43D00328E50 /* QuestionSectionUIView.swift in Sources */,
 				0A76B59428F996530084A629 /* CustomNavigationViewController.swift in Sources */,
 				0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,

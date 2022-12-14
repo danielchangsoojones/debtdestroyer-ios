@@ -48,7 +48,9 @@ class AnswerCollectionViewCell: UICollectionViewCell, Reusable{
     private func setUpProgressBar() {
         progressBar.trackTintColor = .clear
         progressBar.progress = 0.0
-        progressBar.layer.cornerRadius = 8
+        progressBar.layer.masksToBounds = true
+        progressBar.clipsToBounds = true
+
         addSubview(progressBar)
         
         progressBar.snp.makeConstraints { make in

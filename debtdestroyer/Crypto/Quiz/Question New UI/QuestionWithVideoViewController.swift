@@ -49,7 +49,7 @@ class QuestionWithVideoViewController: UIViewController {
     private var hasRevealedAnswerOnce = false
     private var hasRevealedByAPI = false
     private var alreadyPushingVC = false
-    private var showProgressOnAnswerOptions = false
+    private var showProgressOnAnswerOptions = true
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -307,7 +307,6 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
             let correctIndex = currentData.correct_answer_index
 
             if currentData.answers![indexPath.row] == currentData.answers![correctIndex] {
-//            if indexPath.row == currentData.correct_answer_index {
                 print("================GREEN===================")
                 
                 cell.gifImgView.image = UIImage.init(systemName: "checkmark")?.withRenderingMode(.alwaysTemplate)
@@ -316,16 +315,18 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                 UIImageView.animate(withDuration: 1, animations: {
                     cell.gifImgView.alpha = 1
                 })
-//                cell.contentView.backgroundColor = .clear
-//                cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
-                let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
-                                                          colors: [self.hexStringToUIColor(hex: "E9D845").cgColor, self.hexStringToUIColor(hex: "B5C30F").cgColor], radius: 8,
-                                                          locations: nil)
-                cell.progressBar.progressImage = gradientImage
-                cell.progressBar.setProgress(0.5, animated: true)
                 
-            } else { //            if indexPath.row != currentData.correct_answer_index {
-//                if currentData.answers![indexPath.row] != currentData.answers![correctIndex]
+                if showProgressOnAnswerOptions {
+                    let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
+                                                              colors: [self.hexStringToUIColor(hex: "E9D845").cgColor, self.hexStringToUIColor(hex: "B5C30F").cgColor], radius: 8,
+                                                              locations: nil)
+                    cell.progressBar.progressImage = gradientImage
+                    cell.progressBar.setProgress(0.5, animated: true)
+                } else {
+                    cell.contentView.backgroundColor = .clear
+                    cell.contentView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 8)
+                }
+            } else {
                 if indexPath.row == selectedAnswerIndex {
                     print("================Red===================")
 
@@ -335,18 +336,28 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                     UIImageView.animate(withDuration: 1, animations: {
                         cell.gifImgView.alpha = 1
                     })
-//                    cell.contentView.backgroundColor = .clear
-//                    cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
-                    let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
-                                                              colors: [self.hexStringToUIColor(hex: "FF7910").cgColor, self.hexStringToUIColor(hex: "EB5757").cgColor], radius: 8,
-                                                              locations: nil)
-                    cell.progressBar.progressImage = gradientImage
-                    cell.progressBar.setProgress(0.5, animated: true)
+                    
+                    if showProgressOnAnswerOptions {
+                        let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
+                                                                  colors: [self.hexStringToUIColor(hex: "FF7910").cgColor, self.hexStringToUIColor(hex: "EB5757").cgColor], radius: 8,
+                                                                  locations: nil)
+                        cell.progressBar.progressImage = gradientImage
+                        cell.progressBar.setProgress(0.5, animated: true)
+                    } else {
+                        cell.contentView.backgroundColor = .clear
+                        cell.contentView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 8)
+                    }
                 } else {
                     print("================Hide===================")
-
-                    UIView.animate(withDuration: 1.0) {
-                        cell.contentView.alpha = 0.0
+                    
+                    if showProgressOnAnswerOptions {
+                        cell.progressBar.progressTintColor = .systemGray4
+                        cell.progressBar.setProgress(0.5, animated: true)
+                    } else {
+                        UIView.animate(withDuration: 1.0) {
+                            cell.contentView.alpha = 0.0
+                            cell.ansLabel.alpha = 0.0
+                        }
                     }
                 }
             }

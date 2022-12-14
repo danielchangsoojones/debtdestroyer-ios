@@ -50,7 +50,8 @@ class QuestionWithVideoViewController: UIViewController {
     private var hasRevealedByAPI = false
     private var alreadyPushingVC = false
     private var showProgressOnAnswerOptions = true
-    
+    private var videoTimer: Timer?
+
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
@@ -165,6 +166,22 @@ class QuestionWithVideoViewController: UIViewController {
                              name: .AVPlayerItemDidPlayToEndTime,
                              object: player.currentItem
                 )
+            if (User.current()?.isAppleTester ?? false) {
+                startVideoTimer()
+            }
+        }
+    }
+    
+    private func startVideoTimer() {
+        videoTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func videoTimerFired() {
+        let currentTime = player.currentTime().seconds
+        if currentTime >= currentData.start_question_prompt_seconds {
+            videoTimer?.invalidate()
+            let now = Date()
+            startQuestionPrompt(start_time: now)
         }
     }
     
@@ -173,25 +190,22 @@ class QuestionWithVideoViewController: UIViewController {
     }
     
     @objc private func getLiveQuizStatus() {
-        let isPlaying = player.timeControlStatus == .playing
-        if User.current()?.email == "messyjones@gmail.com" && isPlaying {
-            let current_time_seconds = previousQuizDataTimes + Int(player.currentTime().seconds)
-            dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
-        }
-        
-        dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds in
-            self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
-            
-            if should_reveal_answer {
-                self.hasRevealedByAPI = true
-//                if !self.hasRevealedAnswerOnce {
-//                    DispatchQueue.main.async{
-//                        self.answerCollection.reloadData()
-//                    }
-//                }
+        if !(User.current()?.isAppleTester ?? false) {
+            let isPlaying = player.timeControlStatus == .playing
+            if User.current()?.email == "messyjones@gmail.com" && isPlaying {
+                let current_time_seconds = previousQuizDataTimes + Int(player.currentTime().seconds)
+                dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
             }
-            if let show_question_prompt_time = show_question_prompt_time {
-                self.startQuestionPrompt(start_time: show_question_prompt_time)
+                
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds in
+                self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
+                
+                if should_reveal_answer {
+                    self.hasRevealedByAPI = true
+                }
+                if let show_question_prompt_time = show_question_prompt_time {
+                    self.startQuestionPrompt(start_time: show_question_prompt_time)
+                }
             }
         }
     }
@@ -254,6 +268,12 @@ class QuestionWithVideoViewController: UIViewController {
             self.timeLabel.startBlink()
             answerStatus = .time_ran_out
             timer.invalidate()
+            if (User.current()?.isAppleTester ?? false) {
+                self.answerCollection.isUserInteractionEnabled = false
+                DispatchQueue.main.async{
+                    self.answerCollection.reloadData()
+                }
+            }
         }
     }
   
@@ -301,7 +321,7 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType:AnswerCollectionViewCell.self)
         
                 
-        if !hasRevealedAnswerOnce && hasRevealedByAPI && selectedAnswerIndex != nil{
+        if (!hasRevealedAnswerOnce && hasRevealedByAPI && selectedAnswerIndex != nil) || (User.current()?.isAppleTester ?? false){
             player.play()
             cell.ansLabel.text = currentData.answers![indexPath.row].capitalized
             let correctIndex = currentData.correct_answer_index
@@ -317,9 +337,7 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                 })
                 
                 if showProgressOnAnswerOptions {
-                    let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
-                                                              colors: [self.hexStringToUIColor(hex: "E9D845").cgColor, self.hexStringToUIColor(hex: "B5C30F").cgColor], radius: 8,
-                                                              locations: nil)
+                    let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame, colors: [self.hexStringToUIColor(hex: "E9D845").cgColor, self.hexStringToUIColor(hex: "B5C30F").cgColor], radius: 8, locations: nil)
                     cell.progressBar.progressImage = gradientImage
                     cell.progressBar.setProgress(0.5, animated: true)
                 } else {
@@ -338,9 +356,7 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                     })
                     
                     if showProgressOnAnswerOptions {
-                        let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,
-                                                                  colors: [self.hexStringToUIColor(hex: "FF7910").cgColor, self.hexStringToUIColor(hex: "EB5757").cgColor], radius: 8,
-                                                                  locations: nil)
+                        let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame,colors: [self.hexStringToUIColor(hex: "FF7910").cgColor, self.hexStringToUIColor(hex: "EB5757").cgColor], radius: 8, locations: nil)
                         cell.progressBar.progressImage = gradientImage
                         cell.progressBar.setProgress(0.5, animated: true)
                     } else {
@@ -351,7 +367,8 @@ extension QuestionWithVideoViewController: UICollectionViewDataSource, UICollect
                     print("================Hide===================")
                     
                     if showProgressOnAnswerOptions {
-                        cell.progressBar.progressTintColor = .systemGray4
+                        let gradientImage = UIImage.gradientImage(with: cell.progressBar.frame, colors: [self.hexStringToUIColor(hex: "E4E2E1").cgColor, self.hexStringToUIColor(hex: "E4E2E1").cgColor], radius: 8, locations: nil)
+                        cell.progressBar.progressImage = gradientImage
                         cell.progressBar.setProgress(0.5, animated: true)
                     } else {
                         UIView.animate(withDuration: 1.0) {

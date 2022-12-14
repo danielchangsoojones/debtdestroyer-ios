@@ -128,8 +128,8 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func startQuiz() {
         checkStartTimer.invalidate()
-        let questionVC = QuestionViewController(quizDatas: quizDatas,
-                                                currentIndex: 0)
+//        let questionVC = QuestionViewController(quizDatas: quizDatas,currentIndex: 0)
+        let questionVC = QuestionWithVideoViewController(quizDatas: quizDatas,currentIndex: 0)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)

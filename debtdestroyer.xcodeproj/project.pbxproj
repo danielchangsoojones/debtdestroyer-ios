@@ -137,6 +137,8 @@
 		0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */; };
 		0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */; };
 		0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */; };
+		0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */; };
+		0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */; };
 		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
@@ -286,6 +288,8 @@
 		0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoView.swift; sourceTree = "<group>"; };
 		0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoViewController.swift; sourceTree = "<group>"; };
+		0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipViewController.swift; sourceTree = "<group>"; };
+		0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipTableViewCell.swift; sourceTree = "<group>"; };
 		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -549,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				0A59ACE128E183F4001B774A /* Tabs */,
+				0AED895A294AEC8100D6576F /* Scholarship */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0ACAE9272935F0AD0054E0A3 /* NewGameStart */,
 				0A59ACE328E183F4001B774A /* Settings */,
@@ -832,6 +837,15 @@
 			path = NewGameStart;
 			sourceTree = "<group>";
 		};
+		0AED895A294AEC8100D6576F /* Scholarship */ = {
+			isa = PBXGroup;
+			children = (
+				0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */,
+				0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */,
+			);
+			path = Scholarship;
+			sourceTree = "<group>";
+		};
 		18F686FBEE11973D8590571D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1046,6 +1060,7 @@
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
+				0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */,
 				0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */,
 				0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
@@ -1128,6 +1143,7 @@
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
 				0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */,
+				0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */,
 				0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */,
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
 				0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */,

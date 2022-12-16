@@ -56,18 +56,18 @@ class NewGameStartViewController: UIViewController {
         
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
-        playVideo()
+        loopVideo()
     }
     
-    private func playVideo() {
-
-        
+    func loopVideo() {
         if let video_url = URL(string: "https://cdn.dribbble.com/users/720738/screenshots/14260851/media/fd35bc0dfd3c3f8e71960b39f26097b4.mp4") {
-            
-            
             let player = AVPlayer(url: video_url)
-            playerLayer.player = player
+            self.playerLayer.player = player
             player.play()
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { notification in
+                player.seek(to: CMTime.zero)
+                player.play()
+            }
         }
     }
     

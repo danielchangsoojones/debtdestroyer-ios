@@ -7,6 +7,7 @@
 
 import UIKit
 import Ripple
+import AVKit
 
 class NewGameStartView: UIView {
     var rippleContainer = UIView()
@@ -18,11 +19,12 @@ class NewGameStartView: UIView {
     var descriptionLbl = UILabel()
     var prizeBtn = GradientBtn()
     var startIpadBtn = UIButton()
+    let playerLayer = AVPlayerLayer()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
-        self.setGradientBackground()
+//        self.setGradientBackground()
         setContainerForRipple()
         setCountDownTimerLabel()
         setStartLabel()
@@ -33,6 +35,7 @@ class NewGameStartView: UIView {
         setHeadingLabel()
         setDescriptionLabel()
         
+        addVideoLayer()
         setIpadDemo()
     }
   
@@ -45,6 +48,13 @@ class NewGameStartView: UIView {
         countDownTimerLbl.isHidden = true
         startLbl.isHidden = true
         dayDateLbl.isHidden = true
+    }
+    
+    private func addVideoLayer() {
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.frame = self.bounds
+        
+        self.layer.insertSublayer(playerLayer, at: 0)
     }
     
     private func setContainerForRipple() {

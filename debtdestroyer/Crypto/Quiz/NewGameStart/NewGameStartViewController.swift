@@ -7,6 +7,7 @@
 
 import UIKit
 import Ripple
+import AVKit
 
 class NewGameStartViewController: UIViewController {
     struct Constants {
@@ -26,6 +27,9 @@ class NewGameStartViewController: UIViewController {
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
     var rippleAdded = false
+    private var playerLayer: AVPlayerLayer!
+    var playerLooper: AVPlayerLooper! // should be defined in class
+    var queuePlayer: AVQueuePlayer!
     
     override func loadView() {
         super.loadView()
@@ -36,6 +40,7 @@ class NewGameStartViewController: UIViewController {
         self.descriptionLbl = newGameStartView.descriptionLbl
         self.prizeBtn = newGameStartView.prizeBtn
         self.rippleContainer = newGameStartView.rippleContainer
+        self.playerLayer = newGameStartView.playerLayer
         prizeBtn.addTarget(self,
                            action: #selector(startIpadDemoBtnPressed),
                            for: .touchUpInside)
@@ -51,6 +56,19 @@ class NewGameStartViewController: UIViewController {
         
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         setNavBarBtns()
+        playVideo()
+    }
+    
+    private func playVideo() {
+
+        
+        if let video_url = URL(string: "https://cdn.dribbble.com/users/720738/screenshots/14260851/media/fd35bc0dfd3c3f8e71960b39f26097b4.mp4") {
+            
+            
+            let player = AVPlayer(url: video_url)
+            playerLayer.player = player
+            player.play()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

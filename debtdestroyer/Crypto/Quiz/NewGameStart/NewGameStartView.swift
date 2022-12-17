@@ -114,7 +114,7 @@ class NewGameStartView: UIView {
     }
     
     private func setDescriptionLabel() {
-        descriptionLbl.text = "Answer all 15 questions correctly to win towards your loans! If no one wins, the money rolls over to next week!"
+        descriptionLbl.text = "Answer all 15 of our questions to win!"
         descriptionLbl.numberOfLines = 0
         descriptionLbl.textAlignment = .left
         descriptionLbl.textColor = .black

@@ -150,7 +150,6 @@
 		925BD26528A24D2E009303AF /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26428A24D2E009303AF /* Enviroment.swift */; };
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
 		928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */; };
-		92F7FD322936CB3D0081A11B /* NewGameStartDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7FD312936CB3D0081A11B /* NewGameStartDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,7 +300,6 @@
 		925BD26428A24D2E009303AF /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsDataStore.swift; sourceTree = "<group>"; };
-		92F7FD312936CB3D0081A11B /* NewGameStartDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameStartDataStore.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -827,7 +825,6 @@
 			children = (
 				0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */,
 				0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */,
-				92F7FD312936CB3D0081A11B /* NewGameStartDataStore.swift */,
 			);
 			path = NewGameStart;
 			sourceTree = "<group>";
@@ -1082,7 +1079,6 @@
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A32178D290115BA00A414CA /* ScoreView.swift in Sources */,
 				0A59AD0A28E183F4001B774A /* AddressView.swift in Sources */,
-				92F7FD322936CB3D0081A11B /* NewGameStartDataStore.swift in Sources */,
 				0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */,
 				0A50659128C346D200207759 /* SubscriptionView.swift in Sources */,
 				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,

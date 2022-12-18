@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Ripple
 
 class NewGameStartView: UIView {
     var rippleContainer = UIView()
@@ -21,7 +20,6 @@ class NewGameStartView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
-        self.setGradientBackground()
         setContainerForRipple()
         setCountDownTimerLabel()
         setStartLabel()
@@ -43,7 +41,7 @@ class NewGameStartView: UIView {
         let w = self.frame.width
         addSubview(rippleContainer)
         rippleContainer.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.topMargin.equalToSuperview()
             make.width.height.equalTo(w)
             make.centerX.equalToSuperview()
         }

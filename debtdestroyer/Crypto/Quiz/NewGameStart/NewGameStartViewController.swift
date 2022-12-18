@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Ripple
+import AVKit
 
 class NewGameStartViewController: UIViewController {
     struct Constants {
@@ -25,8 +25,12 @@ class NewGameStartViewController: UIViewController {
     private var quizDatas: [QuizDataParse] = []
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
-    var rippleAdded = false
     var headingLbl: UILabel!
+    private var queuePlayer: AVQueuePlayer?
+    private var playerLayer: AVPlayerLayer?
+    private var playbackLooper: AVPlayerLooper?
+
+
     
     override func loadView() {
         super.loadView()
@@ -43,6 +47,7 @@ class NewGameStartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
+        loopVideo()
         setNavBarBtns()
         getDemoQuizData()
     }
@@ -50,13 +55,6 @@ class NewGameStartViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         callTimer()
-        
-        if !rippleAdded {
-            rippleAdded = true
-            let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
-            ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
-        }
-        
         addStartQuizBtn()
     }
     
@@ -73,6 +71,23 @@ class NewGameStartViewController: UIViewController {
         super.viewWillDisappear(animated)
         checkStartTimer.invalidate()
         timer.invalidate()
+    }
+    
+    func loopVideo() {
+        if let video_url = URL(string: "https://ik.imagekit.io/3fe3wzdkk/Spinning_Thing/spinn.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1671323583225") {
+            let playerItem = AVPlayerItem(url: video_url)
+                
+            self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
+            self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
+            guard let playerLayer = self.playerLayer else {return}
+            guard let queuePlayer = self.queuePlayer else {return}
+            self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
+                
+            playerLayer.videoGravity = .resizeAspectFill
+            playerLayer.frame = self.view.frame
+            self.view.layer.insertSublayer(playerLayer, at: 0)
+            playerLayer.player?.play()
+        }
     }
     
     @objc private func addStartQuizBtn() {

@@ -74,7 +74,7 @@ class NewGameStartViewController: UIViewController {
     }
     
     func loopVideo() {
-        if let video_url = URL(string: "https://ik.imagekit.io/3fe3wzdkk/Spinning_Thing/spinn.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1671323583225") {
+        if let video_url = URL(string: "https://ik.imagekit.io/3fe3wzdkk/Spinning_Thing/spin-smaller.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1671325188808") {
             let playerItem = AVPlayerItem(url: video_url)
                 
             self.queuePlayer = AVQueuePlayer(playerItem: playerItem)

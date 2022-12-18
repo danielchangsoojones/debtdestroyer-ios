@@ -48,10 +48,18 @@ class NewGameStartView: UIView {
     }
     
     private func setDescriptionContainer() {
-        descContainer.backgroundColor = .white
+        descContainer.backgroundColor = .black.withAlphaComponent(0.2)
         descContainer.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         descContainer.layer.cornerRadius = 15
         descContainer.clipsToBounds = true
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.5
+        blurEffectView.frame = descContainer.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        descContainer.addSubview(blurEffectView)
+        
         addSubview(descContainer)
         descContainer.snp.makeConstraints { make in
             make.bottomMargin.equalToSuperview().offset(-8)
@@ -102,7 +110,7 @@ class NewGameStartView: UIView {
         headingLbl.numberOfLines = 0
         headingLbl.text = "Compete in our live trivia."
         headingLbl.textAlignment = .left
-        headingLbl.textColor = .black
+        headingLbl.textColor = .white
         headingLbl.font = UIFont.MontserratSemiBold(size: 22)
         descContainer.addSubview(headingLbl)
         headingLbl.snp.makeConstraints { make in
@@ -115,7 +123,7 @@ class NewGameStartView: UIView {
         descriptionLbl.text = "Answer all 15 of our questions to win!"
         descriptionLbl.numberOfLines = 0
         descriptionLbl.textAlignment = .left
-        descriptionLbl.textColor = .black
+        descriptionLbl.textColor = .white
         descriptionLbl.font = UIFont.MontserratRegular(size: 18)
         descContainer.addSubview(descriptionLbl)
         descriptionLbl.snp.makeConstraints { make in

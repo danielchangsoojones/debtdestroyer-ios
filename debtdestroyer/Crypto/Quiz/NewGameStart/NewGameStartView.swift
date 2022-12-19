@@ -16,20 +16,38 @@ class NewGameStartView: UIView {
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
     var prizeBtn = GradientBtn()
+    var videoContainer = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
+        addSubview(videoContainer)
         setContainerForRipple()
         setCountDownTimerLabel()
         setStartLabel()
         setDayDateLabel()
+        addImgView()
         setDescriptionContainer()
       
         setPrizeButton()
         setHeadingLabel()
         setDescriptionLabel()
-
+        
+        videoContainer.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalTo(prizeBtn)
+        }
+    }
+    
+    private func addImgView() {
+//        let img = UIImage(named: "backgroundShadow")
+//        let imgView = UIImageView(image: img)
+//        imgView.contentMode = .scaleAspectFill
+//        self.addSubview(imgView)
+//        imgView.snp.makeConstraints { make in
+//            make.leading.trailing.bottomMargin.equalToSuperview()
+//            make.top.equalTo(650)
+//        }
     }
   
     required init?(coder: NSCoder) {
@@ -48,17 +66,17 @@ class NewGameStartView: UIView {
     }
     
     private func setDescriptionContainer() {
-        descContainer.backgroundColor = .black.withAlphaComponent(0.2)
+        descContainer.backgroundColor = .clear
         descContainer.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         descContainer.layer.cornerRadius = 15
         descContainer.clipsToBounds = true
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.alpha = 0.5
-        blurEffectView.frame = descContainer.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        descContainer.addSubview(blurEffectView)
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.alpha = 0.5
+//        blurEffectView.frame = descContainer.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        descContainer.addSubview(blurEffectView)
         
         addSubview(descContainer)
         descContainer.snp.makeConstraints { make in
@@ -110,7 +128,7 @@ class NewGameStartView: UIView {
         headingLbl.numberOfLines = 0
         headingLbl.text = "Compete in our live trivia."
         headingLbl.textAlignment = .left
-        headingLbl.textColor = .white
+        headingLbl.textColor = .black
         headingLbl.font = UIFont.MontserratSemiBold(size: 22)
         descContainer.addSubview(headingLbl)
         headingLbl.snp.makeConstraints { make in
@@ -123,7 +141,7 @@ class NewGameStartView: UIView {
         descriptionLbl.text = "Answer all 15 of our questions to win!"
         descriptionLbl.numberOfLines = 0
         descriptionLbl.textAlignment = .left
-        descriptionLbl.textColor = .white
+        descriptionLbl.textColor = .black
         descriptionLbl.font = UIFont.MontserratRegular(size: 18)
         descContainer.addSubview(descriptionLbl)
         descriptionLbl.snp.makeConstraints { make in

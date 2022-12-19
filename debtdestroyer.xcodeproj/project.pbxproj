@@ -87,6 +87,10 @@
 		0A5FD51C28F8475200B995C8 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */; };
 		0A5FD51E28F848DD00B995C8 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD51D28F848DD00B995C8 /* FontExtension.swift */; };
 		0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */; };
+		0A663DC1295057D500BE6B53 /* GameStartNewUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A663DC0295057D500BE6B53 /* GameStartNewUIViewController.swift */; };
+		0A663DC3295057ED00BE6B53 /* GameStartNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A663DC2295057ED00BE6B53 /* GameStartNewUIView.swift */; };
+		0A663DC52950718300BE6B53 /* silverCup.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0A663DC42950700C00BE6B53 /* silverCup.mp4 */; };
+		0A663DC729509F3000BE6B53 /* GradientBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */; };
 		0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */; };
 		0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
@@ -234,6 +238,10 @@
 		0A5FD51D28F848DD00B995C8 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FontExtension.swift; path = debtdestroyer/Helper/FontExtension.swift; sourceTree = SOURCE_ROOT; };
 		0A61EA3E2903C51A004E41A0 /* debtdestroyer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = debtdestroyer.entitlements; sourceTree = "<group>"; };
 		0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerViewController.swift; sourceTree = "<group>"; };
+		0A663DC0295057D500BE6B53 /* GameStartNewUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartNewUIViewController.swift; sourceTree = "<group>"; };
+		0A663DC2295057ED00BE6B53 /* GameStartNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartNewUIView.swift; sourceTree = "<group>"; };
+		0A663DC42950700C00BE6B53 /* silverCup.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = silverCup.mp4; sourceTree = "<group>"; };
+		0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBlueButton.swift; sourceTree = "<group>"; };
 		0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnersViewController.swift; sourceTree = "<group>"; };
 		0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerTableCell.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -340,6 +348,7 @@
 				0A1A637F28A6592200EFCC4D /* ViewExtension.swift */,
 				0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */,
 				0A7A4A0428A3D5D5009EDE5E /* GardientButton.swift */,
+				0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */,
 				0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */,
 				0A7A49FD28A3D294009EDE5E /* StringExtension.swift */,
 				0A7A49F228A38746009EDE5E /* MessageHelper.swift */,
@@ -825,6 +834,9 @@
 			children = (
 				0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */,
 				0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */,
+				0A663DC0295057D500BE6B53 /* GameStartNewUIViewController.swift */,
+				0A663DC2295057ED00BE6B53 /* GameStartNewUIView.swift */,
+				0A663DC42950700C00BE6B53 /* silverCup.mp4 */,
 			);
 			path = NewGameStart;
 			sourceTree = "<group>";
@@ -960,6 +972,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A663DC52950718300BE6B53 /* silverCup.mp4 in Resources */,
 				0A5FD50D28F8475200B995C8 /* SIL Open Font License.txt in Resources */,
 				0A5FD50B28F8475200B995C8 /* Montserrat-Bold.otf in Resources */,
 				0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */,
@@ -1102,6 +1115,7 @@
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
 				0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */,
 				0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */,
+				0A663DC729509F3000BE6B53 /* GradientBlueButton.swift in Sources */,
 				0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
@@ -1118,6 +1132,7 @@
 				0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */,
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
 				0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */,
+				0A663DC1295057D500BE6B53 /* GameStartNewUIViewController.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
@@ -1129,6 +1144,7 @@
 				0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
+				0A663DC3295057ED00BE6B53 /* GameStartNewUIView.swift in Sources */,
 				0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,

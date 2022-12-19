@@ -96,10 +96,14 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func getDemoQuizData() {
-        if (User.current()?.isAppleTester ?? false) {
-            quizDataStore.getDemoQuizData { quizDatas in
-                self.quizDatas = quizDatas
-                self.setData(quizTopic: quizDatas.first!.quizTopic)
+        //for apple review, I see if I should hide
+        quizDataStore.shouldShowEarnings { shouldMakeVisible in
+            User.shouldShowEarnings = shouldMakeVisible
+            if (User.current()?.isAppleTester ?? false) {
+                self.quizDataStore.getDemoQuizData { quizDatas in
+                    self.quizDatas = quizDatas
+                    self.setData(quizTopic: quizDatas.first!.quizTopic)
+                }
             }
         }
     }
@@ -193,6 +197,11 @@ class NewGameStartViewController: UIViewController {
                 self.prizeBtn.setTitleColor(.white, for: .normal)
                 self.prizeBtn.setTitle(titletxt, for: .normal)
             }
+        }
+        
+        if !User.shouldShowEarnings {
+            descriptionLbl.text = "Come play our trivia daily to see if you will win!"
+            self.prizeBtn.isHidden = true
         }
     }
     

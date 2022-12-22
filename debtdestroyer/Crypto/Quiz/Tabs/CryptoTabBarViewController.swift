@@ -36,9 +36,10 @@ class CryptoTabBarViewController: UITabBarController {
         let vc1 = NewGameStartViewController()
         let vc2 = PrizeViewController()
         let vc3 = ChampionsViewController()
-        let vc4 = CryptoSettingsViewController()
+        let vc4 = ScholarshipViewController()
+        let vc5 = CryptoSettingsViewController()
 
-        let controllers = [vc1,vc2,vc3,vc4]
+        let controllers = [vc1,vc2,vc3,vc4,vc5]
         self.viewControllers = controllers.map { CustomNavigationViewController(rootViewController: $0)}
         
         let tabQuiz = tabBar.items![0]
@@ -53,7 +54,11 @@ class CryptoTabBarViewController: UITabBarController {
         tabWinner.image = UIImage(named: "GlobeG")?.withRenderingMode(.alwaysOriginal)
         tabWinner.selectedImage = UIImage(named: "GlobeC")?.withRenderingMode(.alwaysOriginal)
         
-        let tabSettings = tabBar.items![3]
+        let tabScholarship = tabBar.items![3]
+        tabScholarship.image = UIImage(named: "scholarshipG")?.withRenderingMode(.alwaysOriginal)
+        tabScholarship.selectedImage = UIImage(named: "scholarshipC")?.withRenderingMode(.alwaysOriginal)
+        
+        let tabSettings = tabBar.items![4]
         tabSettings.image = UIImage(named: "settingsG")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
         

@@ -60,7 +60,7 @@ class NewGameStartViewController: UIViewController {
     }
     
     func loopVideo() {
-        if let video_url = URL(string: "https://ik.imagekit.io/3fe3wzdkk/Spinning_Thing/spinn.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1671323583225") {
+        if let video_url = URL(string: "https://ik.imagekit.io/3fe3wzdkk/Spinning_Thing/prize-vid.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1672635800861") {
             let player = AVPlayer(url: video_url)
             self.playerLayer.player = player
             player.play()

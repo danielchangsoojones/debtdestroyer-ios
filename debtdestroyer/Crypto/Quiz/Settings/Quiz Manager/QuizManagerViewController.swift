@@ -55,9 +55,9 @@ class QuizManagerViewController: UIViewController {
         let alertView = SCLAlertView(appearance: appearance)
         
         alertView.addButton("Reveal Answer"){
-            self.dataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true) { result in
-                
-            }
+//            self.dataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true, currentQuizData: ) { result in
+//
+//            }
             
         }
         
@@ -76,9 +76,9 @@ class QuizManagerViewController: UIViewController {
         let alertView = SCLAlertView(appearance: appearance)
         
         alertView.addButton("Show Question") {
-            self.dataStore.markQuizStatus(shouldStartQuestionPrompt: true, shouldRevealAnswer: false) { result in
-                print(result)
-            }
+//            self.dataStore.markQuizStatus(shouldStartQuestionPrompt: true, shouldRevealAnswer: false) { result in
+//                print(result)
+//            }
 
         }
         

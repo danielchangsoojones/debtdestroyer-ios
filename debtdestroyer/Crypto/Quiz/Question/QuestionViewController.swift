@@ -90,6 +90,7 @@ class QuestionViewController: UIViewController {
                 selector: #selector(applicationDidBecomeActive),
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil)
+        showControlBtns()
     }
     
     deinit {
@@ -116,6 +117,44 @@ class QuestionViewController: UIViewController {
         if hasRevealedAnswerOnce || isWaitingToShowQuestionPrompt  {
             player.play()
         }
+    }
+    
+    private func showControlBtns() {
+        if (User.current()?.isAdminUser ?? false) {
+            let questionPromptFrame = CGRect(x: 100, y: 100, width: 300, height: 100)
+            createBtn(title: "Start Question Prompt", selector: #selector(startQuestionPromptControl), backgroundColor: .purple, frame: questionPromptFrame)
+            
+            let revealAnswerFrame = CGRect(x: questionPromptFrame.minX,
+                                           y: 265,
+                                           width: questionPromptFrame.width,
+                                           height: questionPromptFrame.height)
+            createBtn(title: "Reveal Answer",
+                      selector: #selector(revealAnswerControl),
+                      backgroundColor: .red,
+                      frame: revealAnswerFrame)
+        }
+    }
+    
+    @objc private func startQuestionPromptControl() {
+        let quizManagerDataStore = QuizManagerDataStore()
+        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true, shouldRevealAnswer: false, currentQuizData: currentData) { _ in
+            
+        }
+    }
+    
+    @objc private func revealAnswerControl() {
+        let quizManagerDataStore = QuizManagerDataStore()
+        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true, currentQuizData: currentData) { _ in
+            
+        }
+    }
+    
+    private func createBtn(title: String, selector: Selector, backgroundColor: UIColor, frame: CGRect) {
+        let btn = UIButton(frame: frame)
+        btn.backgroundColor = backgroundColor
+        btn.setTitle(title, for: .normal)
+        btn.addTarget(self, action: selector, for: .touchUpInside)
+        self.view.addSubview(btn)
     }
     
     private func questionPromptAnimate() {

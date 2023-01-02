@@ -28,4 +28,8 @@ class User: PFUser {
     var isAppleTester: Bool {
         return email == "appletester@gmail.com"
     }
+    
+    var isAdminUser: Bool {
+        return email == "messyjones@gmail.com"
+    }
 }

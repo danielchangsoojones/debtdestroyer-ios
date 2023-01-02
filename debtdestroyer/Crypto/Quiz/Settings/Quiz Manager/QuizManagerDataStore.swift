@@ -10,8 +10,11 @@ import SwiftyJSON
 import Parse
 
 class QuizManagerDataStore {
-    func markQuizStatus(shouldStartQuestionPrompt: Bool, shouldRevealAnswer: Bool , completion: @escaping (Any?) -> Void) {
-        let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt, "shouldRevealAnswer" : shouldRevealAnswer]
+    func markQuizStatus(shouldStartQuestionPrompt: Bool, shouldRevealAnswer: Bool, currentQuizData: QuizDataParse, completion: @escaping (Any?) -> Void) {
+        let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
+                                          "shouldRevealAnswer" : shouldRevealAnswer,
+                                          "quizDataID": currentQuizData.objectId ?? ""
+        ]
         PFCloud.callFunction(inBackground: "markQuizStatus", withParameters: parameters) { (result, error) in
             if let result = result {
                 

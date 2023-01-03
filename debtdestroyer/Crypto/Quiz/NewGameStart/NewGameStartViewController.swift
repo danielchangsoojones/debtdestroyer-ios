@@ -46,6 +46,7 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ForceUpdate.checkIfForceUpdate()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         loopVideo()
         setNavBarBtns()

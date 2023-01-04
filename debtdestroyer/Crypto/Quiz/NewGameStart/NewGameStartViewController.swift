@@ -51,6 +51,9 @@ class NewGameStartViewController: UIViewController {
         loopVideo()
         setNavBarBtns()
         getDemoQuizData()
+        if (User.current()?.isAdminUser ?? false) {
+            prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

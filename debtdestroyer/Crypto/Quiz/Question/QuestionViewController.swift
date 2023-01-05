@@ -170,15 +170,15 @@ class QuestionViewController: UIViewController {
             playerLayer.player = player
             player.play()
             
+            //only apple review needs to finish right after
+            NotificationCenter.default
+                .addObserver(self,
+                selector: #selector(playerDidFinishPlaying),
+                name: .AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
+            
             if (User.current()?.isAppleTester ?? false) {
-                //only apple review needs to finish right after
-                NotificationCenter.default
-                    .addObserver(self,
-                    selector: #selector(playerDidFinishPlaying),
-                    name: .AVPlayerItemDidPlayToEndTime,
-                    object: player.currentItem
-                )
-                
                 startVideoTimer()
             }
         }
@@ -199,8 +199,12 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    @objc private func playerDidFinishPlaying(note: NSNotification) {
-        segueToNextVC(index: nil)
+    @objc private func playerDidFinishPlaying(notification: NSNotification) {
+        if hasRevealedAnswerOnce {
+            segueToNextVC(index: nil)
+        } else {
+            //TODO: this is where I could show the question image with a whole person cut out.
+        }
     }
     
     @objc private func getLiveQuizStatus() {
@@ -309,7 +313,6 @@ class QuestionViewController: UIViewController {
             }
             
             self.submitAnswer(answerStatus: answerStatus)
-            
         }
     }
     
@@ -318,6 +321,7 @@ class QuestionViewController: UIViewController {
             let asset = AVURLAsset(url: url)
             let playerItem = AVPlayerItem(asset: asset)
             player.replaceCurrentItem(with: playerItem)
+            player.play()
         }
     }
     

@@ -44,17 +44,11 @@ class QuizDataStore {
         }
     }
     
-    func getQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
+    func getQuizData(completion: @escaping (Any, Error?) -> Void) {
         let version_str = Helpers.getVersionStr()
-        let parameters = ["app_version" : version_str, "deviceType": "ios"]
-        PFCloud.callFunction(inBackground: "getQuizData", withParameters: nil) { (result, error) in
-            if let quizData = result as? [QuizDataParse] {
-                completion(quizData)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "getQuizData")
-            }
+        let parameters: [String: Any] = ["app_version" : version_str ?? "", "deviceType": "ios"]
+        PFCloud.callFunction(inBackground: "getQuizData", withParameters: parameters) { (result, error) in
+           completion(result, error)
         }
     }
     

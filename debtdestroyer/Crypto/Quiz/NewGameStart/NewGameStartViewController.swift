@@ -129,9 +129,19 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func getQuizDatas() {
         if !(User.current()?.isAppleTester ?? false) {
-            quizDataStore.getQuizData { quizDatas in
-                self.quizDatas = quizDatas
-                self.checkIfStartQuiz()
+            quizDataStore.getQuizData { result, error  in
+                if let quizDatas = result as? [QuizDataParse] {
+                    self.quizDatas = quizDatas
+                    self.checkIfStartQuiz()
+                } else if let error = error {
+                    if error.localizedDescription.contains("error-force-update") {
+                        ForceUpdate.showAlert()
+                    } else {
+                        BannerAlert.show(with: error)
+                    }
+                } else {
+                    BannerAlert.showUnknownError(functionName: "getQuizData")
+                }
             }
         }
     }

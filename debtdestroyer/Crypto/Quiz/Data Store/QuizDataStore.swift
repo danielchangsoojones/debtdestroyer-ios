@@ -45,6 +45,8 @@ class QuizDataStore {
     }
     
     func getQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
+        let version_str = Helpers.getVersionStr()
+        let parameters = ["app_version" : version_str, "deviceType": "ios"]
         PFCloud.callFunction(inBackground: "getQuizData", withParameters: nil) { (result, error) in
             if let quizData = result as? [QuizDataParse] {
                 completion(quizData)

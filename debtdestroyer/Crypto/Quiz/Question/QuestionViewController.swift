@@ -42,6 +42,7 @@ class QuestionViewController: UIViewController {
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
     private var videoTimer: Timer?
+    private var answer_video_url = ""
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -168,21 +169,25 @@ class QuestionViewController: UIViewController {
             player = AVPlayer(url: video_url)
             playerLayer.player = player
             player.play()
-            NotificationCenter.default
-                .addObserver(self,
-                selector: #selector(playerDidFinishPlaying),
-                name: .AVPlayerItemDidPlayToEndTime,
-                object: player.currentItem
-            )
             
             if (User.current()?.isAppleTester ?? false) {
+                //only apple review needs to finish right after
+                NotificationCenter.default
+                    .addObserver(self,
+                    selector: #selector(playerDidFinishPlaying),
+                    name: .AVPlayerItemDidPlayToEndTime,
+                    object: player.currentItem
+                )
+                
                 startVideoTimer()
             }
         }
     }
     
     private func startVideoTimer() {
-        videoTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
+        if videoTimer == nil {
+            videoTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
+        }
     }
     
     @objc private func videoTimerFired() {
@@ -206,8 +211,9 @@ class QuestionViewController: UIViewController {
                 dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds in
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds, answer_video_url  in
                 self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
+                self.answer_video_url = answer_video_url
                 
                 if should_reveal_answer {
                     self.revealAnswer()
@@ -256,7 +262,6 @@ class QuestionViewController: UIViewController {
     
     private func startQuestionPrompt(start_time: Date) {
         if endTime == nil {
-            player.pause()
             self.endTime = start_time.addingTimeInterval(timeLeft)
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             self.questionPromptAnimate()
@@ -265,7 +270,7 @@ class QuestionViewController: UIViewController {
     
     private func revealAnswer() {
         if !hasRevealedAnswerOnce {
-            player.play()
+            playVideoAnswer(from: answer_video_url)
             hasRevealedAnswerOnce = true
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
@@ -304,6 +309,15 @@ class QuestionViewController: UIViewController {
             }
             
             self.submitAnswer(answerStatus: answerStatus)
+            
+        }
+    }
+    
+    private func playVideoAnswer(from video_url: String) {
+        if let url = URL(string: video_url) {
+            let asset = AVURLAsset(url: url)
+            let playerItem = AVPlayerItem(asset: asset)
+            player.replaceCurrentItem(with: playerItem)
         }
     }
     

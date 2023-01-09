@@ -48,7 +48,6 @@ class QuestionViewController: UIViewController {
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
-    let appD = UIApplication.shared.delegate as! AppDelegate
     
     init(quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas

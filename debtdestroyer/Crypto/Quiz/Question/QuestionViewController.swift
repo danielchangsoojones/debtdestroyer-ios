@@ -220,12 +220,13 @@ class QuestionViewController: UIViewController {
         if !(User.current()?.isAppleTester ?? false) {
             let isPlaying = player.timeControlStatus == .playing
             if User.current()?.email == "messyjones@gmail.com" && isPlaying {
-                let current_time_seconds = previousQuizDataTimes + Int(player.currentTime().seconds)
-                dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
+                let current_time_seconds = player.currentTime().seconds
+                dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds,
+                                              currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds, answer_video_url  in
-                self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds, answer_video_url, current_quiz_data_id  in
+                self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 self.answer_video_url = answer_video_url
                 
                 if should_reveal_answer {
@@ -237,38 +238,24 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    var previousQuizDataTimes: Int {
-        var previousQuizDataTimes = 0
-        for (index, quizData) in quizDatas.enumerated() {
-            if (index < currentIndex) {
-                previousQuizDataTimes = previousQuizDataTimes + quizData.video_length_seconds
-            }
-        }
-        return previousQuizDataTimes
-    }
-    
-    private func jumpToCurrentVideoMoment(current_quiz_seconds: Double) {
-        let users_current_quiz_seconds = Double(previousQuizDataTimes) + player.currentTime().seconds
-        let timeDifference = abs(users_current_quiz_seconds - current_quiz_seconds)
+    private func jumpToCurrentVideoMoment(current_quiz_seconds: Double, current_quiz_data_id: String) {
+        let timeDifference = abs(player.currentTime().seconds - current_quiz_seconds)
         if timeDifference > 2 && User.current()?.email != "messyjones@gmail.com" {
-            var totalVideoLength = 0
-            for (index, quizData) in quizDatas.enumerated() {
-                let upperBound = totalVideoLength + quizData.video_length_seconds
-                if Int(current_quiz_seconds) >= totalVideoLength && Int(current_quiz_seconds) <= upperBound {
-                    if quizData.objectId != currentData.objectId && !alreadyPushingVC {
-                        alreadyPushingVC = true
-                        //we need to jump to another quiz data
-                        segueToNextVC(index: index)
-                    } else {
-                        //added the half second buffer because if we do it exactly, it was having this weird.
-                        //double buffer. but just having a tiny bit buffer makes it smoother.
-                        let timeIntoVideo = current_quiz_seconds - Double(previousQuizDataTimes) - 0.5
-                        let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
-                        player.seek(to: time)
-                    }
-                    return
+            if alreadyPushingVC {
+                return
+            } else if current_quiz_data_id != currentData.objectId {
+                alreadyPushingVC = true
+                //we need to jump to another quiz data
+                let index = quizDatas.firstIndex { quizData in
+                    return quizData.objectId == current_quiz_data_id
                 }
-                totalVideoLength = upperBound
+                segueToNextVC(index: index)
+            } else {
+                //added the half second buffer because if we do it exactly, it was having this weird.
+                //double buffer. but just having a tiny bit buffer makes it smoother.
+                let timeIntoVideo = current_quiz_seconds - 0.5
+                let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
+                player.seek(to: time)
             }
         }
     }

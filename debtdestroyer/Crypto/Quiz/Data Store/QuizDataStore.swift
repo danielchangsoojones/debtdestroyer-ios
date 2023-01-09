@@ -10,7 +10,7 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
-    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Bool, Double, String) -> Void) {
+    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Bool, Double, String, String) -> Void) {
         let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? ""]
         PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
             if let result = result {
@@ -19,8 +19,9 @@ class QuizDataStore {
                 let show_question_prompt_time = dict?["show_question_prompt_time"] as? Date
                 let should_reveal_answer = json["should_reveal_answer"].boolValue
                 let current_time_seconds = json["current_time_seconds"].doubleValue
+                let current_quiz_data_id = json["current_quiz_data_id"].stringValue
                 let video_answer_url = json["video_answer_url"].stringValue
-                completion(show_question_prompt_time, should_reveal_answer, current_time_seconds, video_answer_url)
+                completion(show_question_prompt_time, should_reveal_answer, current_time_seconds, video_answer_url, current_quiz_data_id)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
@@ -29,8 +30,11 @@ class QuizDataStore {
         }
     }
     
-    func saveQuizCurrentTime(current_time_seconds: Int) {
-        let parameters: [String : Any] = ["current_time_seconds" : current_time_seconds]
+    func saveQuizCurrentTime(current_time_seconds: Double, currentQuizDataID: String) {
+        let parameters: [String : Any] = ["current_time_seconds" : current_time_seconds,
+                                          "currentQuizDataID": currentQuizDataID
+        
+        ]
         PFCloud.callFunction(inBackground: "saveQuizCurrentTime", withParameters: parameters) { (result, error) in
             if let result = result as? String {
                 BannerAlert.show(title: "Success",

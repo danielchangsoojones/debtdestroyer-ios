@@ -180,13 +180,6 @@ class QuestionViewController: UIViewController {
             playerLayer.player = player
             player.play()
             
-            NotificationCenter.default
-                .addObserver(self,
-                selector: #selector(playerDidFinishPlaying),
-                name: .AVPlayerItemDidPlayToEndTime,
-                object: player.currentItem
-            )
-            
             if (User.current()?.isAppleTester ?? false) {
                 startVideoTimer()
             }
@@ -211,8 +204,6 @@ class QuestionViewController: UIViewController {
     @objc private func playerDidFinishPlaying(notification: NSNotification) {
         if hasRevealedAnswerOnce {
             segueToNextVC(index: nil)
-        } else {
-            //TODO: this is where I could show the question image with a whole person cut out.
         }
     }
     
@@ -318,6 +309,13 @@ class QuestionViewController: UIViewController {
             let playerItem = AVPlayerItem(asset: asset)
             player.replaceCurrentItem(with: playerItem)
             player.play()
+            
+            NotificationCenter.default
+                .addObserver(self,
+                selector: #selector(playerDidFinishPlaying),
+                name: .AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
         }
     }
     

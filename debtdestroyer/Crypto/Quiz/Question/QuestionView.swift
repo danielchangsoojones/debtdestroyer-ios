@@ -27,11 +27,10 @@ class QuestionView: UIView {
         backgroundColor = .white
         addVideoLayer()
         setPointsLabel()
-        addIntervieweeImageView()
         setQuestionNoLabel()
+        addIntervieweeImageView()
         setBottomView()
         setUpProgressBarContainer()
-        questionContentView.alpha = 0.0
     }
     
     required init?(coder: NSCoder) {
@@ -103,6 +102,7 @@ class QuestionView: UIView {
             make.bottom.equalToSuperview()
         }
         
+        bottomView.alpha = 0.0
         setQuestionLabel()
         setStackView()
     }
@@ -160,7 +160,7 @@ class QuestionView: UIView {
     private func addIntervieweeImageView() {
         intervieweeImageView.contentMode = .scaleAspectFit
         intervieweeImageView.alpha  = 0.0
-        addSubview(intervieweeImageView)
+        questionContentView.addSubview(intervieweeImageView)
         intervieweeImageView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.bottom.equalToSuperview().inset(50)

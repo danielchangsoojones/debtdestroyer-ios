@@ -28,7 +28,7 @@ class QuestionViewController: UIViewController {
     private let currentIndex: Int
     private var answerViews: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
-    private var bottomView = UIView()
+    private var bottomView: UIView!
     var pointsLabel = UILabel()
     private let dataStore = QuizDataStore()
     private var playerLayer: AVPlayerLayer!
@@ -76,12 +76,12 @@ class QuestionViewController: UIViewController {
         self.questionContentView = questionView.questionContentView
         self.progressBarContainer = questionView.progressBarContainer
         self.intervieweeImageView = questionView.intervieweeImageView
+        self.bottomView = questionView.bottomView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playVideo()
-        self.questionContentView.alpha = 0.0
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                                target: self,
                                                selector: #selector(getLiveQuizStatus),
@@ -163,7 +163,7 @@ class QuestionViewController: UIViewController {
     
     private func questionPromptAnimate() {
         UIView.animate(withDuration: 1.0) {
-            self.questionContentView.alpha = 1.0
+            self.bottomView.alpha = 1.0
         }
         
         showIntervieweePhoto(shouldShow: true)

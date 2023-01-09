@@ -43,6 +43,7 @@ class QuestionViewController: UIViewController {
     private var alreadyPushingVC = false
     private var videoTimer: Timer?
     private var answer_video_url = ""
+    private var intervieweeImageView: UIImageView!
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -74,6 +75,7 @@ class QuestionViewController: UIViewController {
         self.answerStackView = questionView.answerStackView
         self.questionContentView = questionView.questionContentView
         self.progressBarContainer = questionView.progressBarContainer
+        self.intervieweeImageView = questionView.intervieweeImageView
     }
     
     override func viewDidLoad() {
@@ -92,6 +94,7 @@ class QuestionViewController: UIViewController {
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil)
         showControlBtns()
+        intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
     }
     
     deinit {
@@ -162,6 +165,14 @@ class QuestionViewController: UIViewController {
         UIView.animate(withDuration: 1.0) {
             self.questionContentView.alpha = 1.0
         }
+        
+        showIntervieweePhoto(shouldShow: true)
+    }
+    
+    private func showIntervieweePhoto(shouldShow: Bool) {
+        UIView.animate(withDuration: 0.5) {
+            self.intervieweeImageView.alpha = shouldShow ? 1.0 : 0.0
+        }
     }
     
     private func playVideo() {
@@ -170,7 +181,6 @@ class QuestionViewController: UIViewController {
             playerLayer.player = player
             player.play()
             
-            //only apple review needs to finish right after
             NotificationCenter.default
                 .addObserver(self,
                 selector: #selector(playerDidFinishPlaying),
@@ -352,6 +362,7 @@ class QuestionViewController: UIViewController {
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
             timer.invalidate()
+            self.showIntervieweePhoto(shouldShow: false)
             if (User.current()?.isAppleTester ?? false) {
                 revealAnswer()
             }

@@ -20,17 +20,18 @@ class QuestionView: UIView {
     let bottomView = UIView()
     let progressBarContainer = UIView()
     var timerBar = UIProgressView()
+    let intervieweeImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         addVideoLayer()
         setPointsLabel()
+        addIntervieweeImageView()
         setQuestionNoLabel()
         setBottomView()
         setUpProgressBarContainer()
         questionContentView.alpha = 0.0
-
     }
     
     required init?(coder: NSCoder) {
@@ -153,6 +154,16 @@ class QuestionView: UIView {
             make.top.equalTo(questionLabel.snp.bottom).offset(15)
             make.height.equalTo(250)
             make.bottomMargin.equalToSuperview()
+        }
+    }
+    
+    private func addIntervieweeImageView() {
+        intervieweeImageView.contentMode = .scaleAspectFit
+        intervieweeImageView.alpha  = 0.0
+        addSubview(intervieweeImageView)
+        intervieweeImageView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalToSuperview().inset(50)
         }
     }
 }

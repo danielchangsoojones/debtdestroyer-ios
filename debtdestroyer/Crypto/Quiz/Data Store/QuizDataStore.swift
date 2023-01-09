@@ -150,5 +150,18 @@ class QuizDataStore {
             }
         }
     }
+    
+    func loadVideoAnswer(video_answer_id: String, completion: @escaping (VideoAnswerParse) -> Void) {
+        let parameters: [String : Any] = ["video_answer_id" : video_answer_id]
+        PFCloud.callFunction(inBackground: "loadVideoAnswer", withParameters: parameters) { (result, error) in
+            if let videoAnswer = result as? VideoAnswerParse {
+                completion(videoAnswer)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getDemoQuizData")
+            }
+        }
+    }
 
 }

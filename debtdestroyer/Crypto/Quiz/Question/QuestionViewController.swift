@@ -41,7 +41,6 @@ class QuestionViewController: UIViewController {
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
-    private var videoTimer: Timer?
     private var answer_video_url = ""
     private var intervieweeImageView: UIImageView!
 
@@ -181,29 +180,22 @@ class QuestionViewController: UIViewController {
             player.play()
             
             if (User.current()?.isAppleTester ?? false) {
-                startVideoTimer()
+                NotificationCenter.default
+                    .addObserver(self,
+                    selector: #selector(playerDidFinishPlaying),
+                    name: .AVPlayerItemDidPlayToEndTime,
+                    object: player.currentItem
+                )
             }
-        }
-    }
-    
-    private func startVideoTimer() {
-        if videoTimer == nil {
-            videoTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
-        }
-    }
-    
-    @objc private func videoTimerFired() {
-        let currentTime = player.currentTime().seconds
-        if currentTime >= currentData.start_question_prompt_seconds {
-            videoTimer?.invalidate()
-            let now = Date()
-            startQuestionPrompt(start_time: now)
         }
     }
     
     @objc private func playerDidFinishPlaying(notification: NSNotification) {
         if hasRevealedAnswerOnce {
             segueToNextVC(index: nil)
+        } else if (User.current()?.isAppleTester ?? false) {
+            let now = Date()
+            startQuestionPrompt(start_time: now)
         }
     }
     
@@ -261,13 +253,12 @@ class QuestionViewController: UIViewController {
     
     private func revealAnswer() {
         if !hasRevealedAnswerOnce {
-            playVideoAnswer(from: answer_video_url)
+            playVideoAnswer()
             hasRevealedAnswerOnce = true
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
             }
             
-            var answerStatus: AnswerStatus = .incorrect
             if let selectedAnswerIndex = selectedAnswerIndex {
                 let answerView = answerViews[selectedAnswerIndex]
                 //we need to remove the purple gradient so the replacement gradient will show (red or green).
@@ -279,12 +270,9 @@ class QuestionViewController: UIViewController {
                     addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
                 } else {
-                    answerStatus = .correct
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
-            } else {
-                answerStatus = .time_ran_out
             }
             markCorrectAnswerView()
             
@@ -298,17 +286,22 @@ class QuestionViewController: UIViewController {
                     }
                 }
             }
-            
-            self.submitAnswer(answerStatus: answerStatus)
         }
     }
     
-    private func playVideoAnswer(from video_url: String) {
-        if let url = URL(string: video_url) {
+    private func playVideoAnswer() {
+        if let url = URL(string: answer_video_url) {
             let asset = AVURLAsset(url: url)
             let playerItem = AVPlayerItem(asset: asset)
             player.replaceCurrentItem(with: playerItem)
             player.play()
+            
+            //removing the old notification right before we add it again.
+            //it's weird. The notification doesn't work after the 2nd time after adding
+            //it again.
+            NotificationCenter.default.removeObserver(self,
+                                                      name: .AVPlayerItemDidPlayToEndTime,
+                                                      object: nil)
             
             NotificationCenter.default
                 .addObserver(self,
@@ -347,10 +340,34 @@ class QuestionViewController: UIViewController {
             self.timeLabel.startBlink()
             timer.invalidate()
             self.showIntervieweePhoto(shouldShow: false)
-            if (User.current()?.isAppleTester ?? false) {
-                revealAnswer()
+            
+            if User.isAppleTester {
+                let video_answer_id = currentData.videoAnswer.objectId ?? ""
+                dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
+                    self.answer_video_url = videoAnswer.video_url_string
+                    self.revealAnswer()
+                    self.playVideoAnswer()
+                }
             }
         }
+    }
+    
+    private func submitSelectedAnswer() {
+        let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+            return answerView.isChosen
+        }
+        
+        var answerStatus: AnswerStatus = .incorrect
+        if let selectedAnswerIndex = selectedAnswerIndex {
+            let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+            if !isIncorrectAnswer {
+                answerStatus = .correct
+            }
+        } else {
+            answerStatus = .time_ran_out
+        }
+        
+        self.submitAnswer(answerStatus: answerStatus)
     }
     
     private func addAnswers(to stackView: UIStackView) {

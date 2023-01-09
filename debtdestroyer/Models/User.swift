@@ -32,4 +32,8 @@ class User: PFUser {
     var isAdminUser: Bool {
         return email == "messyjones@gmail.com"
     }
+    
+    static var isAppleTester: Bool {
+        return User.current()?.email == "appletester@gmail.com"
+    }
 }

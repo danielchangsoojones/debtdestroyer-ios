@@ -28,13 +28,13 @@ public enum Environment: String {
         case .production:
             return "https://debt-destroyer-production.herokuapp.com/parse"
         case .localHost:
-            return "https://55aedd81ee17.ngrok.io/"
+            return "https://debtdestroyer.ngrok.io/parse"
         }
     }
 }
 
 class Configuration {
     static var environment: Environment = {
-        return .localHost
+        return .development
     }()
 }

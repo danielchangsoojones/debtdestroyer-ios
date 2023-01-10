@@ -68,9 +68,19 @@ class ChampionsViewController: UIViewController {
     
     private func loadQuizTopic() {
         let quizDataStore = QuizDataStore()
-        quizDataStore.getQuizData { quizDatas in
-            self.quizTopic = quizDatas.first?.quizTopic
-            self.loadLeaderboard()
+        quizDataStore.getQuizData { results, error  in
+            if let quizDatas = results as? [QuizDataParse] {
+                self.quizTopic = quizDatas.first?.quizTopic
+                self.loadLeaderboard()
+            } else if let error = error {
+                if error.localizedDescription.contains("error-force-update") {
+                    ForceUpdate.showAlert()
+                } else {
+                    BannerAlert.show(with: error)
+                }
+            } else {
+                BannerAlert.showUnknownError(functionName: "getQuizData")
+            }
         }
     }
     

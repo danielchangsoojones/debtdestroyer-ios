@@ -28,7 +28,7 @@ class QuestionViewController: UIViewController {
     private let currentIndex: Int
     private var answerViews: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
-    private var bottomView = UIView()
+    private var bottomView: UIView!
     var pointsLabel = UILabel()
     private let dataStore = QuizDataStore()
     private var playerLayer: AVPlayerLayer!
@@ -41,12 +41,12 @@ class QuestionViewController: UIViewController {
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
-    private var videoTimer: Timer?
+    private var answer_video_url = ""
+    private var intervieweeImageView: UIImageView!
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
-    let appD = UIApplication.shared.delegate as! AppDelegate
     
     init(quizDatas: [QuizDataParse], currentIndex: Int) {
         self.quizDatas = quizDatas
@@ -73,12 +73,13 @@ class QuestionViewController: UIViewController {
         self.answerStackView = questionView.answerStackView
         self.questionContentView = questionView.questionContentView
         self.progressBarContainer = questionView.progressBarContainer
+        self.intervieweeImageView = questionView.intervieweeImageView
+        self.bottomView = questionView.bottomView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playVideo()
-        self.questionContentView.alpha = 0.0
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                                target: self,
                                                selector: #selector(getLiveQuizStatus),
@@ -91,6 +92,7 @@ class QuestionViewController: UIViewController {
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil)
         showControlBtns()
+        intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
     }
     
     deinit {
@@ -159,7 +161,15 @@ class QuestionViewController: UIViewController {
     
     private func questionPromptAnimate() {
         UIView.animate(withDuration: 1.0) {
-            self.questionContentView.alpha = 1.0
+            self.bottomView.alpha = 1.0
+        }
+        
+        showIntervieweePhoto(shouldShow: true)
+    }
+    
+    private func showIntervieweePhoto(shouldShow: Bool) {
+        UIView.animate(withDuration: 0.5) {
+            self.intervieweeImageView.alpha = shouldShow ? 1.0 : 0.0
         }
     }
     
@@ -168,46 +178,39 @@ class QuestionViewController: UIViewController {
             player = AVPlayer(url: video_url)
             playerLayer.player = player
             player.play()
-            NotificationCenter.default
-                .addObserver(self,
-                selector: #selector(playerDidFinishPlaying),
-                name: .AVPlayerItemDidPlayToEndTime,
-                object: player.currentItem
-            )
             
             if (User.current()?.isAppleTester ?? false) {
-                startVideoTimer()
+                NotificationCenter.default
+                    .addObserver(self,
+                    selector: #selector(playerDidFinishPlaying),
+                    name: .AVPlayerItemDidPlayToEndTime,
+                    object: player.currentItem
+                )
             }
         }
     }
     
-    private func startVideoTimer() {
-        videoTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(videoTimerFired), userInfo: nil, repeats: true)
-    }
-    
-    @objc private func videoTimerFired() {
-        let currentTime = player.currentTime().seconds
-        if currentTime >= currentData.start_question_prompt_seconds {
-            videoTimer?.invalidate()
+    @objc private func playerDidFinishPlaying(notification: NSNotification) {
+        if hasRevealedAnswerOnce {
+            segueToNextVC(index: nil)
+        } else if (User.current()?.isAppleTester ?? false) {
             let now = Date()
             startQuestionPrompt(start_time: now)
         }
-    }
-    
-    @objc private func playerDidFinishPlaying(note: NSNotification) {
-        segueToNextVC(index: nil)
     }
     
     @objc private func getLiveQuizStatus() {
         if !(User.current()?.isAppleTester ?? false) {
             let isPlaying = player.timeControlStatus == .playing
             if User.current()?.email == "messyjones@gmail.com" && isPlaying {
-                let current_time_seconds = previousQuizDataTimes + Int(player.currentTime().seconds)
-                dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds)
+                let current_time_seconds = player.currentTime().seconds
+                dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds,
+                                              currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds in
-                self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds)
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds, answer_video_url, current_quiz_data_id  in
+                self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
+                self.answer_video_url = answer_video_url
                 
                 if should_reveal_answer {
                     self.revealAnswer()
@@ -218,45 +221,30 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    var previousQuizDataTimes: Int {
-        var previousQuizDataTimes = 0
-        for (index, quizData) in quizDatas.enumerated() {
-            if (index < currentIndex) {
-                previousQuizDataTimes = previousQuizDataTimes + quizData.video_length_seconds
-            }
-        }
-        return previousQuizDataTimes
-    }
-    
-    private func jumpToCurrentVideoMoment(current_quiz_seconds: Double) {
-        let users_current_quiz_seconds = Double(previousQuizDataTimes) + player.currentTime().seconds
-        let timeDifference = abs(users_current_quiz_seconds - current_quiz_seconds)
+    private func jumpToCurrentVideoMoment(current_quiz_seconds: Double, current_quiz_data_id: String) {
+        let timeDifference = abs(player.currentTime().seconds - current_quiz_seconds)
         if timeDifference > 2 && User.current()?.email != "messyjones@gmail.com" {
-            var totalVideoLength = 0
-            for (index, quizData) in quizDatas.enumerated() {
-                let upperBound = totalVideoLength + quizData.video_length_seconds
-                if Int(current_quiz_seconds) >= totalVideoLength && Int(current_quiz_seconds) <= upperBound {
-                    if quizData.objectId != currentData.objectId && !alreadyPushingVC {
-                        alreadyPushingVC = true
-                        //we need to jump to another quiz data
-                        segueToNextVC(index: index)
-                    } else {
-                        //added the half second buffer because if we do it exactly, it was having this weird.
-                        //double buffer. but just having a tiny bit buffer makes it smoother.
-                        let timeIntoVideo = current_quiz_seconds - Double(previousQuizDataTimes) - 0.5
-                        let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
-                        player.seek(to: time)
-                    }
-                    return
+            if alreadyPushingVC {
+                return
+            } else if current_quiz_data_id != currentData.objectId {
+                alreadyPushingVC = true
+                //we need to jump to another quiz data
+                let index = quizDatas.firstIndex { quizData in
+                    return quizData.objectId == current_quiz_data_id
                 }
-                totalVideoLength = upperBound
+                segueToNextVC(index: index)
+            } else {
+                //added the half second buffer because if we do it exactly, it was having this weird.
+                //double buffer. but just having a tiny bit buffer makes it smoother.
+                let timeIntoVideo = current_quiz_seconds - 0.5
+                let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
+                player.seek(to: time)
             }
         }
     }
     
     private func startQuestionPrompt(start_time: Date) {
         if endTime == nil {
-            player.pause()
             self.endTime = start_time.addingTimeInterval(timeLeft)
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             self.questionPromptAnimate()
@@ -265,13 +253,12 @@ class QuestionViewController: UIViewController {
     
     private func revealAnswer() {
         if !hasRevealedAnswerOnce {
-            player.play()
+            playVideoAnswer()
             hasRevealedAnswerOnce = true
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
             }
             
-            var answerStatus: AnswerStatus = .incorrect
             if let selectedAnswerIndex = selectedAnswerIndex {
                 let answerView = answerViews[selectedAnswerIndex]
                 //we need to remove the purple gradient so the replacement gradient will show (red or green).
@@ -283,12 +270,9 @@ class QuestionViewController: UIViewController {
                     addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
                 } else {
-                    answerStatus = .correct
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
-            } else {
-                answerStatus = .time_ran_out
             }
             markCorrectAnswerView()
             
@@ -302,8 +286,29 @@ class QuestionViewController: UIViewController {
                     }
                 }
             }
+        }
+    }
+    
+    private func playVideoAnswer() {
+        if let url = URL(string: answer_video_url) {
+            let asset = AVURLAsset(url: url)
+            let playerItem = AVPlayerItem(asset: asset)
+            player.replaceCurrentItem(with: playerItem)
+            player.play()
             
-            self.submitAnswer(answerStatus: answerStatus)
+            //removing the old notification right before we add it again.
+            //it's weird. The notification doesn't work after the 2nd time after adding
+            //it again.
+            NotificationCenter.default.removeObserver(self,
+                                                      name: .AVPlayerItemDidPlayToEndTime,
+                                                      object: nil)
+            
+            NotificationCenter.default
+                .addObserver(self,
+                selector: #selector(playerDidFinishPlaying),
+                name: .AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
         }
     }
     
@@ -334,10 +339,35 @@ class QuestionViewController: UIViewController {
             self.progressBarContainer.startBlink()
             self.timeLabel.startBlink()
             timer.invalidate()
-            if (User.current()?.isAppleTester ?? false) {
-                revealAnswer()
+            self.showIntervieweePhoto(shouldShow: false)
+            
+            if User.isAppleTester {
+                let video_answer_id = currentData.videoAnswer.objectId ?? ""
+                dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
+                    self.answer_video_url = videoAnswer.video_url_string
+                    self.revealAnswer()
+                    self.playVideoAnswer()
+                }
             }
         }
+    }
+    
+    private func submitSelectedAnswer() {
+        let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+            return answerView.isChosen
+        }
+        
+        var answerStatus: AnswerStatus = .incorrect
+        if let selectedAnswerIndex = selectedAnswerIndex {
+            let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+            if !isIncorrectAnswer {
+                answerStatus = .correct
+            }
+        } else {
+            answerStatus = .time_ran_out
+        }
+        
+        self.submitAnswer(answerStatus: answerStatus)
     }
     
     private func addAnswers(to stackView: UIStackView) {

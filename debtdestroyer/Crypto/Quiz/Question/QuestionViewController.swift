@@ -340,6 +340,7 @@ class QuestionViewController: UIViewController {
             self.timeLabel.startBlink()
             timer.invalidate()
             self.showIntervieweePhoto(shouldShow: false)
+            submitSelectedAnswer()
             
             if User.isAppleTester || User.isIpadDemo {
                 let video_answer_id = currentData.videoAnswer.objectId ?? ""

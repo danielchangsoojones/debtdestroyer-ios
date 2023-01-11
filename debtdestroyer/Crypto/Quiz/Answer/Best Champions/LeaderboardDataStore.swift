@@ -16,9 +16,8 @@ class LeaderboardDataStore {
         let points: Int
     }
     
-    func getLeaderBoard(quizTopicID: String, completion: @escaping ([QuizScore], String) -> Void) {
-        let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
-        PFCloud.callFunction(inBackground: "getLeaderboard", withParameters: parameters) { (result, error) in
+    func getLeaderBoard(completion: @escaping ([QuizScore], String) -> Void) {
+        PFCloud.callFunction(inBackground: "getLeaderboard", withParameters: [:]) { (result, error) in
             if let result = result {
                 let json = JSON(result)
                 let deadlineMessage = json["deadlineMessage"].stringValue

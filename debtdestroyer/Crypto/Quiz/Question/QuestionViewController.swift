@@ -233,12 +233,6 @@ class QuestionViewController: UIViewController {
                     return quizData.objectId == current_quiz_data_id
                 }
                 segueToNextVC(index: index)
-            } else {
-                //added the half second buffer because if we do it exactly, it was having this weird.
-                //double buffer. but just having a tiny bit buffer makes it smoother.
-                let timeIntoVideo = current_quiz_seconds - 0.5
-                let time = CMTime(seconds: timeIntoVideo, preferredTimescale: .max)
-                player.seek(to: time)
             }
         }
     }

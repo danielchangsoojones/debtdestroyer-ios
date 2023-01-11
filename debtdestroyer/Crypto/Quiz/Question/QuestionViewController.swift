@@ -179,7 +179,7 @@ class QuestionViewController: UIViewController {
             playerLayer.player = player
             player.play()
             
-            if (User.current()?.isAppleTester ?? false) {
+            if User.isAppleTester || User.isIpadDemo {
                 NotificationCenter.default
                     .addObserver(self,
                     selector: #selector(playerDidFinishPlaying),
@@ -193,14 +193,14 @@ class QuestionViewController: UIViewController {
     @objc private func playerDidFinishPlaying(notification: NSNotification) {
         if hasRevealedAnswerOnce {
             segueToNextVC(index: nil)
-        } else if (User.current()?.isAppleTester ?? false) {
+        } else if User.isAppleTester || User.isIpadDemo {
             let now = Date()
             startQuestionPrompt(start_time: now)
         }
     }
     
     @objc private func getLiveQuizStatus() {
-        if !(User.current()?.isAppleTester ?? false) {
+        if !(User.isAppleTester || User.isIpadDemo) {
             let isPlaying = player.timeControlStatus == .playing
             if User.current()?.email == "messyjones@gmail.com" && isPlaying {
                 let current_time_seconds = player.currentTime().seconds
@@ -340,8 +340,9 @@ class QuestionViewController: UIViewController {
             self.timeLabel.startBlink()
             timer.invalidate()
             self.showIntervieweePhoto(shouldShow: false)
+            submitSelectedAnswer()
             
-            if User.isAppleTester {
+            if User.isAppleTester || User.isIpadDemo {
                 let video_answer_id = currentData.videoAnswer.objectId ?? ""
                 dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
                     self.answer_video_url = videoAnswer.video_url_string

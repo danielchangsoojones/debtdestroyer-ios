@@ -51,7 +51,7 @@ class NewGameStartViewController: UIViewController {
         loopVideo()
         setNavBarBtns()
         getDemoQuizData()
-        if (User.current()?.isAdminUser ?? false) {
+        if User.isAdminUser || User.isIpadDemo {
             prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
         }
     }
@@ -118,7 +118,7 @@ class NewGameStartViewController: UIViewController {
         //for apple review, I see if I should hide
         quizDataStore.shouldShowEarnings { shouldMakeVisible in
             User.shouldShowEarnings = shouldMakeVisible
-            if (User.current()?.isAppleTester ?? false) {
+            if User.isAppleTester || User.isIpadDemo {
                 self.quizDataStore.getDemoQuizData { quizDatas in
                     self.quizDatas = quizDatas
                     self.setData(quizTopic: quizDatas.first!.quizTopic)
@@ -128,7 +128,7 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc private func getQuizDatas() {
-        if !(User.current()?.isAppleTester ?? false) {
+        if !(User.isAppleTester || User.isIpadDemo) {
             quizDataStore.getQuizData { result, error  in
                 if let quizDatas = result as? [QuizDataParse] {
                     self.quizDatas = quizDatas

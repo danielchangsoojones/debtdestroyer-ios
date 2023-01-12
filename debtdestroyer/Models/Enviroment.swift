@@ -36,6 +36,6 @@ public enum Environment: String {
 
 class Configuration {
     static var environment: Environment = {
-        return .localHostProd
+        return .development
     }()
 }

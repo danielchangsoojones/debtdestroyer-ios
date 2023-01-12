@@ -10,22 +10,12 @@ import SCLAlertView
 
 class AddressViewController: UIViewController {
     private var messageHelper: MessageHelper?
-    private var dataStore = QuizDataStore()
     var addView = AddressView()
-    private let quizTopicDatas: QuizTopicParse
     var addTextField: UITextField!
     var addLabel: UILabel!
     var descriptionLabel: UILabel!
     var nextButton: SpinningWithGradButton!
-
-    init(quizTopicDatas: QuizTopicParse) {
-        self.quizTopicDatas = quizTopicDatas
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private var dataStore: OnboardingDataStore!
     
     override func loadView() {
         super.loadView()
@@ -36,10 +26,10 @@ class AddressViewController: UIViewController {
         self.addLabel = addView.addLabel
         self.descriptionLabel = addView.descriptionLabel
         self.nextButton = addView.nextButton
-
-        self.addLabel.text = "Enter Your " + quizTopicDatas.name + " Address"
-        self.addTextField.placeholder = quizTopicDatas.name + "_sfjlsdfisdlfjsljfls"
-        self.descriptionLabel.text = "This is the address where you would like to have your " + quizTopicDatas.name + " sent. It takes us up to 24 hours to send you your coin rewards since we currently have to manually send out the rewards."
+        
+        addTextField.addTarget(self,
+                               action: #selector(textViewChanged),
+                               for: .editingChanged)
         
         self.nextButton.addTarget(self,
                                        action: #selector(nextBtnPressed),
@@ -48,6 +38,7 @@ class AddressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataStore = OnboardingDataStore(delegate: self)
         self.hideKeyboardWhenTappedAround()
         messageHelper = MessageHelper(currentVC: self, delegate: nil)
         self.addTextField.becomeFirstResponder()
@@ -65,7 +56,7 @@ class AddressViewController: UIViewController {
     
     private func setGradientNavigationTitle() {
         let navTitle = UILabel.init(frame: CGRect(x: 0, y: 0, width: 120, height: 25))
-        navTitle.text = "You’ve Earned 2 " + quizTopicDatas.name + "!"
+        navTitle.text = "Promo Code"
         navTitle.font = UIFont.MontserratBold(size: 15)
         navTitle.textAlignment = .center
         let gradientLabel = addView.getGradientLayer(bounds: navTitle.bounds)
@@ -98,33 +89,46 @@ class AddressViewController: UIViewController {
         messageHelper?.text(MessageHelper.customerServiceNum)
     }
     
-    private func showAlert() {
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false
-        )
-        let alertView = SCLAlertView(appearance: appearance)
-        alertView.addButton("OK", action: {
-            self.addTextField.becomeFirstResponder()
-        })
-        alertView.showInfo("", subTitle: "Please enter your " + quizTopicDatas.name + " address!")
+    @objc private func nextBtnPressed() {
+        let promoCode = self.addTextField.text?.trimmingCharacters(in: .whitespaces).lowercased()
+        
+        nextButton.startSpinning()
+        let email = UserDefaults.standard.string(forKey: "email") ?? ""
+        let password = UserDefaults.standard.string(forKey: "password") ?? ""
+        let phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber") ?? ""
+        let firstName = UserDefaults.standard.string(forKey: OnboardingKeys.firstName) ?? ""
+        let lastName = UserDefaults.standard.string(forKey: OnboardingKeys.lastName) ?? ""
+        dataStore.register(email: email, password: password) {
+            self.dataStore.save(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, promoCode: promoCode) {
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "password")
+                UserDefaults.standard.removeObject(forKey: "phoneNumber")
+                UserDefaults.standard.removeObject(forKey: OnboardingKeys.firstName)
+                UserDefaults.standard.removeObject(forKey: OnboardingKeys.lastName)
+                UserDefaults.standard.synchronize()
+            }
+            self.nextButton.stopSpinning()
+        }
     }
     
-    @objc private func nextBtnPressed() {
-        let address = self.addTextField.text?.trimmingCharacters(in: .whitespaces)
-        
-        if address == "" {
-            showAlert()
-            self.addTextField.text = ""
-            return
-        }
-        
-        dataStore.saveCryptoAddress(crypto_address: self.addTextField.text ?? "", quizTopicID: quizTopicDatas.objectId!) { response in
-            let phoneVC = CreateProfileViewController()
-            self.navigationController?.pushViewController(phoneVC, animated: true)
-        }
-        
-        
-        
+    @objc func textViewChanged() {
+        addTextField.text = addTextField.text?.lowercased()
+    }
+}
+
+extension AddressViewController: OnboardingDataStoreDelegate {
+    func showError(title: String, subtitle: String) {
+        BannerAlert.show(title: title,
+                         subtitle: subtitle,
+                         type: .error)
+        nextButton.stopSpinning()
+    }
+    
+    func segueIntoApp() {
+        nextButton.stopSpinning()
+        let vc = CryptoTabBarViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }
 

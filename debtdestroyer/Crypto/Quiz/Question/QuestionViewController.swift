@@ -136,7 +136,7 @@ class QuestionViewController: UIViewController {
                       frame: revealAnswerFrame)
             
             let nextFrame = CGRect(x: 30,
-                                           y: 30,
+                                           y: 100,
                                            width: 60,
                                            height: 60)
             createBtn(title: "skip",

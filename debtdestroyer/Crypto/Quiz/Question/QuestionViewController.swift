@@ -134,6 +134,15 @@ class QuestionViewController: UIViewController {
                       selector: #selector(revealAnswerControl),
                       backgroundColor: .red,
                       frame: revealAnswerFrame)
+            
+            let nextFrame = CGRect(x: 30,
+                                           y: 30,
+                                           width: 60,
+                                           height: 60)
+            createBtn(title: "skip",
+                      selector: #selector(adminNextBtn),
+                      backgroundColor: .yellow,
+                      frame: nextFrame)
         }
     }
     
@@ -149,6 +158,10 @@ class QuestionViewController: UIViewController {
         quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true, currentQuizData: currentData) { _ in
             
         }
+    }
+    
+    @objc private func adminNextBtn() {
+        segueToNextVC(index: nil)
     }
     
     private func createBtn(title: String, selector: Selector, backgroundColor: UIColor, frame: CGRect) {

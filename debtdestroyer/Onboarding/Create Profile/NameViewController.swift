@@ -27,22 +27,16 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         nextButton.startSpinning()
         if isComplete {
             if let firstName = emailTextField.text, let lastName = passwordTextField.text {
-                
-                let email = UserDefaults.standard.string(forKey: "email") ?? ""
-                let password = UserDefaults.standard.string(forKey: "password") ?? ""
-                let phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber") ?? ""
-                dataStore.register(email: email, password: password) {
-                    self.dataStore.save(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName){
-                        UserDefaults.standard.removeObject(forKey: "email")
-                        UserDefaults.standard.removeObject(forKey: "password")
-                        UserDefaults.standard.removeObject(forKey: "phoneNumber")
-                        UserDefaults.standard.synchronize()
-                    }
-                }
-              
+                UserDefaults.standard.set(firstName, forKey: OnboardingKeys.firstName)
+                UserDefaults.standard.set(lastName, forKey: OnboardingKeys.lastName)
+                UserDefaults.standard.synchronize()
+            } else {
+                BannerAlert.show(title: "Enter a name",
+                                 subtitle: "Please enter in your first and last name",
+                                 type: .error)
             }
             nextButton.stopSpinning()
-            segueIntoApp()
+            nextVC()
         } else {
             nextButton.stopSpinning()
         }
@@ -69,9 +63,9 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         return true
     }
     
-    override func segueIntoApp() {
-        let vc = CryptoTabBarViewController()//HomeTabBarViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+    private func nextVC() {
+        let promoVC = AddressViewController()
+        self.navigationController?.pushViewController(promoVC,
+                                                      animated: true)
     }
 }

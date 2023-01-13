@@ -56,19 +56,6 @@ class QuizDataStore {
         }
     }
     
-    func saveCryptoAddress(crypto_address: String, quizTopicID: String , completion: @escaping (CryptoAddressParse) -> Void) {
-        let parameters: [String : Any] = ["crypto_address_public_key" : crypto_address, "quizTopicID": quizTopicID]
-        PFCloud.callFunction(inBackground: "saveCryptoAddress", withParameters: parameters) { (result, error) in
-            if let cryptoAddress = result as? CryptoAddressParse{
-                completion(cryptoAddress)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "saveCryptoAddress")
-            }
-        }
-    }
-    
     func shouldShowEarnings(completion: @escaping (Bool) -> Void) {
         let versionStr = Helpers.getVersionStr() ?? ""
         let parameters: [String : Any] = ["app_version" : versionStr, "deviceType": "ios"]

@@ -94,7 +94,7 @@ class ConfirmInfoViewController: UIViewController, OnboardingDataStoreDelegate {
             let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly) ?? 1111111111
             
 
-            self.dataStore.save(phoneNumber:  String(describing: phoneNumber), firstName: firstNameTxt.text ?? "", lastName: lastNameTxt.text ?? ""){
+            self.dataStore.save(phoneNumber:  String(describing: phoneNumber), firstName: firstNameTxt.text ?? "", lastName: lastNameTxt.text ?? "", promoCode: nil){
                     print("success")
                 }
             nextBtn.stopSpinning()

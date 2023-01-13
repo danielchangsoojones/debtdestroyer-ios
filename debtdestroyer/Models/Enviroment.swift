@@ -11,12 +11,13 @@ public enum Environment: String {
     case development = "Development"
     case production = "Production"
     case localHost = "LocalHost"
+    case localHostProd = "LocalHostProd"
     
     var appID: String {
         switch self {
         case .development, .localHost:
             return "debtDestroyerDevelopment13749495030"
-        case .production:
+        case .production, .localHostProd:
             return "debtDestroyerProduction58694069"
         }
     }
@@ -27,7 +28,7 @@ public enum Environment: String {
             return "https://debt-destroyer-development.herokuapp.com/parse"
         case .production:
             return "https://debt-destroyer-production.herokuapp.com/parse"
-        case .localHost:
+        case .localHost, .localHostProd:
             return "https://debtdestroyer.ngrok.io/parse"
         }
     }
@@ -35,6 +36,6 @@ public enum Environment: String {
 
 class Configuration {
     static var environment: Environment = {
-        return .production
+        return .development
     }()
 }

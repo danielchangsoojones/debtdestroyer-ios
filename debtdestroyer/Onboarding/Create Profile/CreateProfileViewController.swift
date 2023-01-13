@@ -8,6 +8,12 @@
 import UIKit
 import SnapKit
 
+class OnboardingKeys {
+    static let promoCode = "promoCode"
+    static let firstName = "firstName"
+    static let lastName = "lastName"
+}
+
 class CreateProfileViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -245,6 +245,11 @@ class QuestionViewController: UIViewController {
                 let index = quizDatas.firstIndex { quizData in
                     return quizData.objectId == current_quiz_data_id
                 }
+                
+                //If I don't kill the player, then it keeps playing it in the background.
+                //while the new player on another VC is playing.
+                player.pause()
+                player.replaceCurrentItem(with: nil)
                 segueToNextVC(index: index)
             }
         }

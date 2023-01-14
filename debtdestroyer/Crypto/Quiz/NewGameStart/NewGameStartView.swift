@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
-class NewGameStartView: UIView {
+class NewGameStartView: UIView, TTTAttributedLabelDelegate {
     var rippleContainer = UIView()
     var descContainer = UIView()
     var startLbl = UILabel()
@@ -15,7 +16,7 @@ class NewGameStartView: UIView {
     var dayDateLbl = UILabel()
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
-    var tiebreakerRuleLbl = UILabel()
+    var tiebreakerRuleLbl : TTTAttributedLabel!
     var prizeBtn = GradientBtn()
     var videoContainer = UIView()
 
@@ -154,40 +155,31 @@ class NewGameStartView: UIView {
     }
     
     private func setTiebreakerRuleLabel() {
-//        tiebreakerRuleLbl.text = "See tiebreaker rules."
+        tiebreakerRuleLbl = TTTAttributedLabel.init(frame: .zero)
         tiebreakerRuleLbl.numberOfLines = 0
         tiebreakerRuleLbl.textAlignment = .left
-        tiebreakerRuleLbl.textColor = .white
-        tiebreakerRuleLbl.font = UIFont.MontserratRegular(size: 18)
-        
         tiebreakerRuleLbl.isUserInteractionEnabled = true
-        
-        let attributedString = NSMutableAttributedString(string: "See tiebreaker rules.")
+
         let text = "See tiebreaker rules."
         let str = NSString(string: text)
         let theRange = str.range(of: "tiebreaker rules")
-        
+        let attributedString = NSMutableAttributedString(string:text, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.cgColor, NSAttributedString.Key.font:  UIFont.MontserratRegular(size: 18)])
         attributedString.addAttribute(.underlineStyle, value: 1, range: theRange)
+
+        let url = URL(string: "https://www.debtdestroyer.app/tie-breaker-rules")!
         
+        tiebreakerRuleLbl.addLink(to: url, with: theRange)
         tiebreakerRuleLbl.attributedText = attributedString
-        tiebreakerRuleLbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
-        
+        tiebreakerRuleLbl.delegate = self
         descContainer.addSubview(tiebreakerRuleLbl)
         tiebreakerRuleLbl.snp.makeConstraints { make in
-//            make.top.equalTo(descriptionLbl.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-15)
         }
     }
     
-    @objc func tapLabel(gesture: UITapGestureRecognizer) {
-        let text = "See tiebreaker rules."
-        let str = NSString(string: text)
-        let theRange = str.range(of: "tiebreaker rules")
-
-        let url = URL(string: "https://www.debtdestroyer.app/tie-breaker-rules")!
-        
-        if gesture.didTapAttributedTextInLabel(label: tiebreakerRuleLbl, inRange: theRange) {
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if url.absoluteString == "https://www.debtdestroyer.app/tie-breaker-rules" {
             UIApplication.shared.open(url)
         } else {
             print("Tapped none")

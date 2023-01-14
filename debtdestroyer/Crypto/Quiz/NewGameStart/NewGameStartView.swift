@@ -15,6 +15,7 @@ class NewGameStartView: UIView {
     var dayDateLbl = UILabel()
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
+    var tiebreakerRuleLbl = UILabel()
     var prizeBtn = GradientBtn()
     var videoContainer = UIView()
 
@@ -30,6 +31,7 @@ class NewGameStartView: UIView {
         setDescriptionContainer()
       
         setPrizeButton()
+        setTiebreakerRuleLabel()
         setHeadingLabel()
         setDescriptionLabel()
         
@@ -147,7 +149,48 @@ class NewGameStartView: UIView {
         descriptionLbl.snp.makeConstraints { make in
             make.top.equalTo(headingLbl.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(15)
+            make.bottom.equalTo(tiebreakerRuleLbl.snp.top).offset(-15)
+        }
+    }
+    
+    private func setTiebreakerRuleLabel() {
+//        tiebreakerRuleLbl.text = "See tiebreaker rules."
+        tiebreakerRuleLbl.numberOfLines = 0
+        tiebreakerRuleLbl.textAlignment = .left
+        tiebreakerRuleLbl.textColor = .white
+        tiebreakerRuleLbl.font = UIFont.MontserratRegular(size: 18)
+        
+        tiebreakerRuleLbl.isUserInteractionEnabled = true
+        
+        let attributedString = NSMutableAttributedString(string: "See tiebreaker rules.")
+        let text = "See tiebreaker rules."
+        let str = NSString(string: text)
+        let theRange = str.range(of: "tiebreaker rules")
+        
+        attributedString.addAttribute(.underlineStyle, value: 1, range: theRange)
+        
+        tiebreakerRuleLbl.attributedText = attributedString
+        tiebreakerRuleLbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
+        
+        descContainer.addSubview(tiebreakerRuleLbl)
+        tiebreakerRuleLbl.snp.makeConstraints { make in
+//            make.top.equalTo(descriptionLbl.snp.bottom).offset(15)
+            make.left.right.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-15)
+        }
+    }
+    
+    @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        let text = "See tiebreaker rules."
+        let str = NSString(string: text)
+        let theRange = str.range(of: "tiebreaker rules")
+
+        let url = URL(string: "https://www.debtdestroyer.app/tie-breaker-rules")!
+        
+        if gesture.didTapAttributedTextInLabel(label: tiebreakerRuleLbl, inRange: theRange) {
+            UIApplication.shared.open(url)
+        } else {
+            print("Tapped none")
         }
     }
     

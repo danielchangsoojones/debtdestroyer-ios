@@ -29,8 +29,6 @@ class NewGameStartViewController: UIViewController {
     private var queuePlayer: AVQueuePlayer?
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
-
-
     
     override func loadView() {
         super.loadView()
@@ -58,7 +56,7 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        callTimer()
+        checkWaitlist()
         addStartQuizBtn()
     }
     
@@ -75,6 +73,17 @@ class NewGameStartViewController: UIViewController {
         super.viewWillDisappear(animated)
         checkStartTimer.invalidate()
         timer.invalidate()
+    }
+    
+    private func checkWaitlist() {
+        quizDataStore.checkWaitlist { shouldWaitlist, headingTitle, subtitle in
+            if shouldWaitlist {
+                let waitlistVC = WaitlistViewController(headingTitle: headingTitle, subtitle: subtitle)
+                self.navigationController?.pushViewController(waitlistVC, animated: true)
+            } else {
+                self.callTimer()
+            }
+        }
     }
     
     func loopVideo() {

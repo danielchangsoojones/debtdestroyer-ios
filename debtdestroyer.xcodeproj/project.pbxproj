@@ -151,6 +151,8 @@
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
 		928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */; };
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
+		92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB72972322200ED029D /* WaitlistViewController.swift */; };
+		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -302,6 +304,8 @@
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsDataStore.swift; sourceTree = "<group>"; };
 		92C8498E296CBAE40091422E /* VideoAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnswer.swift; sourceTree = "<group>"; };
+		92FF0EB72972322200ED029D /* WaitlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistViewController.swift; sourceTree = "<group>"; };
+		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -548,6 +552,7 @@
 		0A59ACE028E183F4001B774A /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				92FF0EB52972320100ED029D /* New Group */,
 				0A59ACE128E183F4001B774A /* Tabs */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0ACAE9272935F0AD0054E0A3 /* NewGameStart */,
@@ -864,6 +869,7 @@
 			children = (
 				0A61EA3E2903C51A004E41A0 /* debtdestroyer.entitlements */,
 				0A59ACDF28E183F4001B774A /* Crypto */,
+				92FF0EB62972320F00ED029D /* Waitlist */,
 				92021FCC289B07A4007901A6 /* AppDelegate.swift */,
 				92021FCE289B07A4007901A6 /* SceneDelegate.swift */,
 				925BD26328A24CF1009303AF /* Models */,
@@ -905,6 +911,22 @@
 			children = (
 			);
 			path = Promo;
+			sourceTree = "<group>";
+		};
+		92FF0EB52972320100ED029D /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		92FF0EB62972320F00ED029D /* Waitlist */ = {
+			isa = PBXGroup;
+			children = (
+				92FF0EB72972322200ED029D /* WaitlistViewController.swift */,
+				92FF0EB92972323100ED029D /* WaitlistView.swift */,
+			);
+			path = Waitlist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1056,6 +1078,7 @@
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */,
 				0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */,
+				92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
@@ -1146,6 +1169,7 @@
 				0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */,
 				0A44EF9A28E5907B006305B8 /* StartQuizViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
+				92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */,
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,
 				92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,

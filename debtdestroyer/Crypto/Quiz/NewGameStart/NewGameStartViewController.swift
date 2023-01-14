@@ -44,7 +44,6 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkWaitlist()
         ForceUpdate.checkIfForceUpdate()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         loopVideo()
@@ -57,7 +56,7 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        callTimer()
+        checkWaitlist()
         addStartQuizBtn()
     }
     
@@ -78,8 +77,12 @@ class NewGameStartViewController: UIViewController {
     
     private func checkWaitlist() {
         quizDataStore.checkWaitlist { shouldWaitlist, headingTitle, subtitle in
-            let waitlistVC = WaitlistViewController(headingTitle: headingTitle, subtitle: subtitle)
-            self.navigationController?.pushViewController(waitlistVC, animated: true)
+            if shouldWaitlist {
+                let waitlistVC = WaitlistViewController(headingTitle: headingTitle, subtitle: subtitle)
+                self.navigationController?.pushViewController(waitlistVC, animated: true)
+            } else {
+                self.callTimer()
+            }
         }
     }
     

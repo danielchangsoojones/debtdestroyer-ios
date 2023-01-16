@@ -9,7 +9,6 @@ import UIKit
 import TTTAttributedLabel
 
 class NewGameStartView: UIView, TTTAttributedLabelDelegate {
-    var rippleContainer = UIView()
     var descContainer = UIView()
     var startLbl = UILabel()
     var countDownTimerLbl = UILabel()
@@ -23,23 +22,17 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
-        addSubview(videoContainer)
-        setContainerForRipple()
-        setCountDownTimerLabel()
+        setContainerForVideo()
         setStartLabel()
+        setCountDownTimerLabel()
         setDayDateLabel()
-        addImgView()
         setDescriptionContainer()
       
         setPrizeButton()
         setTiebreakerRuleLabel()
         setHeadingLabel()
         setDescriptionLabel()
-        
-        videoContainer.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.bottom.equalTo(prizeBtn)
-        }
+       
     }
     
     private func addImgView() {
@@ -57,14 +50,10 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setContainerForRipple() {
-        rippleContainer.backgroundColor = .clear
-        let w = self.frame.width
-        addSubview(rippleContainer)
-        rippleContainer.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview()
-            make.width.height.equalTo(w)
-            make.centerX.equalToSuperview()
+    private func setContainerForVideo() {
+        addSubview(videoContainer)
+        videoContainer.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
@@ -94,9 +83,9 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         startLbl.textAlignment = .center
         startLbl.textColor = .white
         startLbl.font = UIFont.MontserratSemiBold(size: 25)
-        rippleContainer.addSubview(startLbl)
+        videoContainer.addSubview(startLbl)
         startLbl.snp.makeConstraints { make in
-            make.bottom.equalTo(countDownTimerLbl.snp.top).offset(-20)
+            make.topMargin.equalToSuperview()
             make.left.right.equalToSuperview().inset(10)
         }
     }
@@ -107,11 +96,10 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         countDownTimerLbl.textAlignment = .center
         countDownTimerLbl.textColor = .white
         countDownTimerLbl.font = UIFont.MontserratBold(size: 35)
-        rippleContainer.addSubview(countDownTimerLbl)
+        videoContainer.addSubview(countDownTimerLbl)
         countDownTimerLbl.snp.makeConstraints { make in
-//            make.top.equalTo(startLbl.snp.bottom).offset(20)
-//            make.left.right.equalToSuperview().inset(20)
-            make.center.equalToSuperview()
+            make.top.equalTo(startLbl.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(20)
         }
     }
     
@@ -120,7 +108,7 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         dayDateLbl.textAlignment = .center
         dayDateLbl.textColor = .white
         dayDateLbl.font = UIFont.MontserratSemiBold(size: 16)
-        rippleContainer.addSubview(dayDateLbl)
+        videoContainer.addSubview(dayDateLbl)
         dayDateLbl.snp.makeConstraints { make in
             make.top.equalTo(countDownTimerLbl.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(10)

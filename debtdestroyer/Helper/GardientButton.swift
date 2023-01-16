@@ -26,8 +26,8 @@ class GradientBtn: UIButton {
     private func themeConfig() {
         layer.cornerRadius = frame.size.height / 2
         
-        color1 = hexStringToUIColor(hex: "FF2474")
-        color2 = hexStringToUIColor(hex: "FF7910")
+        color1 = hexStringToUIColor(hex: "4046D3")
+        color2 = hexStringToUIColor(hex: "C3E7FA")
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
         
         gradientLayer.frame = bounds

@@ -10,7 +10,7 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
-    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Bool, Double) -> Void) {
+    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Bool, Double, String, String) -> Void) {
         let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? ""]
         PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
             if let result = result {
@@ -19,7 +19,9 @@ class QuizDataStore {
                 let show_question_prompt_time = dict?["show_question_prompt_time"] as? Date
                 let should_reveal_answer = json["should_reveal_answer"].boolValue
                 let current_time_seconds = json["current_time_seconds"].doubleValue
-                completion(show_question_prompt_time, should_reveal_answer, current_time_seconds)
+                let current_quiz_data_id = json["current_quiz_data_id"].stringValue
+                let video_answer_url = json["video_answer_url"].stringValue
+                completion(show_question_prompt_time, should_reveal_answer, current_time_seconds, video_answer_url, current_quiz_data_id)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
@@ -28,8 +30,11 @@ class QuizDataStore {
         }
     }
     
-    func saveQuizCurrentTime(current_time_seconds: Int) {
-        let parameters: [String : Any] = ["current_time_seconds" : current_time_seconds]
+    func saveQuizCurrentTime(current_time_seconds: Double, currentQuizDataID: String) {
+        let parameters: [String : Any] = ["current_time_seconds" : current_time_seconds,
+                                          "currentQuizDataID": currentQuizDataID
+        
+        ]
         PFCloud.callFunction(inBackground: "saveQuizCurrentTime", withParameters: parameters) { (result, error) in
             if let result = result as? String {
                 BannerAlert.show(title: "Success",
@@ -43,28 +48,11 @@ class QuizDataStore {
         }
     }
     
-    func getQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
-        PFCloud.callFunction(inBackground: "getQuizData", withParameters: nil) { (result, error) in
-            if let quizData = result as? [QuizDataParse] {
-                completion(quizData)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "getQuizData")
-            }
-        }
-    }
-    
-    func saveCryptoAddress(crypto_address: String, quizTopicID: String , completion: @escaping (CryptoAddressParse) -> Void) {
-        let parameters: [String : Any] = ["crypto_address_public_key" : crypto_address, "quizTopicID": quizTopicID]
-        PFCloud.callFunction(inBackground: "saveCryptoAddress", withParameters: parameters) { (result, error) in
-            if let cryptoAddress = result as? CryptoAddressParse{
-                completion(cryptoAddress)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "saveCryptoAddress")
-            }
+    func getQuizData(completion: @escaping (Any, Error?) -> Void) {
+        let version_str = Helpers.getVersionStr()
+        let parameters: [String: Any] = ["app_version" : version_str ?? "", "deviceType": "ios"]
+        PFCloud.callFunction(inBackground: "getQuizData", withParameters: parameters) { (result, error) in
+           completion(result, error)
         }
     }
     
@@ -146,6 +134,35 @@ class QuizDataStore {
                 BannerAlert.show(with: error)
             } else {
                 BannerAlert.showUnknownError(functionName: "getDemoQuizData")
+            }
+        }
+    }
+    
+    func loadVideoAnswer(video_answer_id: String, completion: @escaping (VideoAnswerParse) -> Void) {
+        let parameters: [String : Any] = ["video_answer_id" : video_answer_id]
+        PFCloud.callFunction(inBackground: "loadVideoAnswer", withParameters: parameters) { (result, error) in
+            if let videoAnswer = result as? VideoAnswerParse {
+                completion(videoAnswer)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getDemoQuizData")
+            }
+        }
+    }
+    
+    func checkWaitlist(completion: @escaping (Bool, String, String) -> Void) {
+        PFCloud.callFunction(inBackground: "checkWaitlist", withParameters: [:]) { (result, error) in
+            if let result = result {
+                let json = JSON(result)
+                let title = json["title"].stringValue
+                let subtitle = json["subtitle"].stringValue
+                let isOnWaitlist = json["isOnWaitlist"].boolValue
+                completion(isOnWaitlist, title, subtitle)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "checkWaitlist")
             }
         }
     }

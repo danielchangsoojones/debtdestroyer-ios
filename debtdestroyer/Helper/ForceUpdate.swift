@@ -28,15 +28,14 @@ class ForceUpdate {
         }
     }
     
-    private static func showAlert() {
+    static func showAlert() {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
         )
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Update", action: {
-            //TODO: a bitly link for now until we get the actual app link
             Helpers.open(urlString: "https://apps.apple.com/us/app/lavadrop/id1639968618")
         })
-        alertView.showSuccess("Update App", subTitle: "There is a new Debt Destroyed version available. Please update your app!")
+        alertView.showSuccess("Update App", subTitle: "There is a new Debt Destroyed version available. Please update to the most recent version of the app before you can play our live game.")
     }
 }

@@ -41,10 +41,11 @@ class AddressView: UIView {
     }
     
     private func setUpStackViewContent() {
-        addLabel = createLabel(title: "Enter Your Nano Address", font: UIFont.MontserratLight(size: 15))
+        addLabel = createLabel(title: "Enter Your Promo Code (Optional)", font: UIFont.MontserratLight(size: 15))
         addLabel.numberOfLines = 0
-        addTextField = createTextField(placeHolder: "nano_sfjlsdfisdlfjsljfls")
-        descriptionLabel = createLabel(title: "This is the address where you would like to have your nano sent. It takes us up to 24 hours to send you your coin rewards since we currently have to manually send out the rewards.", font: UIFont.MontserratThin(size: 12))
+        addTextField = createTextField(placeHolder: "enter promo code...")
+        descriptionLabel = createLabel(title: "If you have one, enter your promo code to earn higher prizes and VIP status.",
+                                       font: UIFont.MontserratLight(size: 14))
     }
     
     private func setUpNextButton(){

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Ripple
+import AVKit
 
 class NewGameStartViewController: UIViewController {
     struct Constants {
@@ -25,8 +25,10 @@ class NewGameStartViewController: UIViewController {
     private var quizDatas: [QuizDataParse] = []
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
-    var rippleAdded = false
     var headingLbl: UILabel!
+    private var queuePlayer: AVQueuePlayer?
+    private var playerLayer: AVPlayerLayer?
+    private var playbackLooper: AVPlayerLooper?
     
     override func loadView() {
         super.loadView()
@@ -42,21 +44,24 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ForceUpdate.checkIfForceUpdate()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
+        loopVideo()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
         setNavBarBtns()
         getDemoQuizData()
+        if User.isAdminUser || User.isIpadDemo {
+            prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        callTimer()
-        
-        if !rippleAdded {
-            rippleAdded = true
-            let location = CGPoint.init(x: rippleContainer.frame.width/2, y: rippleContainer.frame.height/2)
-            ripple(location, view: rippleContainer, times: 4, duration: 2, size: 100, multiplier: 4, divider: 3, color: .white, border: 2)
-        }
-        
+        checkWaitlist()
         addStartQuizBtn()
     }
     
@@ -68,11 +73,44 @@ class NewGameStartViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    @objc private func applicationDidBecomeActive() {
+        playerLayer?.player?.play()
+    }
+
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         checkStartTimer.invalidate()
         timer.invalidate()
+    }
+    
+    private func checkWaitlist() {
+        quizDataStore.checkWaitlist { shouldWaitlist, headingTitle, subtitle in
+            if shouldWaitlist {
+                let waitlistVC = WaitlistViewController(headingTitle: headingTitle, subtitle: subtitle)
+                self.navigationController?.pushViewController(waitlistVC, animated: true)
+            } else {
+                self.callTimer()
+            }
+        }
+    }
+    
+    func loopVideo() {
+        if let video_url = URL(string: "https://ik.imagekit.io/3fe3wzdkk/Spinning_Thing/prize-vid.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1672635800861") {
+            let playerItem = AVPlayerItem(url: video_url)
+                
+            self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
+            self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
+            guard let playerLayer = self.playerLayer else {return}
+            guard let queuePlayer = self.queuePlayer else {return}
+            self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
+                
+            playerLayer.videoGravity = .resizeAspectFill
+            playerLayer.frame = self.view.frame
+            self.view.layer.insertSublayer(playerLayer, at: 0)
+            playerLayer.player?.play()
+        }
     }
     
     @objc private func addStartQuizBtn() {
@@ -99,7 +137,7 @@ class NewGameStartViewController: UIViewController {
         //for apple review, I see if I should hide
         quizDataStore.shouldShowEarnings { shouldMakeVisible in
             User.shouldShowEarnings = shouldMakeVisible
-            if (User.current()?.isAppleTester ?? false) {
+            if User.isAppleTester || User.isIpadDemo {
                 self.quizDataStore.getDemoQuizData { quizDatas in
                     self.quizDatas = quizDatas
                     self.setData(quizTopic: quizDatas.first!.quizTopic)
@@ -109,10 +147,20 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc private func getQuizDatas() {
-        if !(User.current()?.isAppleTester ?? false) {
-            quizDataStore.getQuizData { quizDatas in
-                self.quizDatas = quizDatas
-                self.checkIfStartQuiz()
+        if !(User.isAppleTester || User.isIpadDemo) {
+            quizDataStore.getQuizData { result, error  in
+                if let quizDatas = result as? [QuizDataParse] {
+                    self.quizDatas = quizDatas
+                    self.checkIfStartQuiz()
+                } else if let error = error {
+                    if error.localizedDescription.contains("error-force-update") {
+                        ForceUpdate.showAlert()
+                    } else {
+                        BannerAlert.show(with: error)
+                    }
+                } else {
+                    BannerAlert.showUnknownError(functionName: "getQuizData")
+                }
             }
         }
     }
@@ -125,7 +173,7 @@ class NewGameStartViewController: UIViewController {
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
-                startQuiz()
+               //startQuiz()
             }
         }
     }

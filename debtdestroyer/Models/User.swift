@@ -14,6 +14,7 @@ class User: PFUser {
     @NSManaged var firstName: String
     @NSManaged var lastName: String
     @NSManaged var method_entity_id: String
+    @NSManaged var promoCode: String?
     
     static var shouldShowEarnings = true
     static var sendMassTextNotification = false
@@ -27,5 +28,21 @@ class User: PFUser {
     
     var isAppleTester: Bool {
         return email == "appletester@gmail.com"
+    }
+    
+    var isAdminUser: Bool {
+        return email == "messyjones@gmail.com"
+    }
+    
+    static var isAppleTester: Bool {
+        return User.current()?.email == "appletester@gmail.com"
+    }
+    
+    static var isIpadDemo: Bool {
+        return User.current()?.email == "ipaddemo@gmail.com"
+    }
+    
+    static var isAdminUser: Bool {
+        return User.current()?.email == "messyjones@gmail.com"
     }
 }

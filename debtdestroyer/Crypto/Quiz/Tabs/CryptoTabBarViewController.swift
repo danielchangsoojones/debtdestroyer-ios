@@ -9,19 +9,12 @@ import UIKit
 
 class CryptoTabBarViewController: UITabBarController {
     private var dataStore = QuizDataStore()
-    private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTabs()
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
-        enteredScreen()
-        
-        activityIndicator.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
-        activityIndicator.color = UIColor.black
-        self.view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
     }
     
     deinit {
@@ -63,8 +56,6 @@ class CryptoTabBarViewController: UITabBarController {
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
         
         self.removeTab(at: 1)
-        
-        checkHideReview()
     }
     
     private func checkHideReview() {
@@ -80,42 +71,5 @@ class CryptoTabBarViewController: UITabBarController {
         if self.viewControllers?.count ?? 0 >= index {
             self.viewControllers?.remove(at: index)
         }
-    }
-}
-
-extension CryptoTabBarViewController {
-    @objc private func enteredScreen() {
-        dataStore.checkShowQuizPopUp { showQuizPopUp, _ in
-            self.activityIndicator.stopAnimating()
-            let isAlreadyShowingStartQuizVC = self.checkIfAlreadyShowingStartQuizVC()
-            if showQuizPopUp && !isAlreadyShowingStartQuizVC {
-                let popupSkipedTime  = UserDefaults.standard.string(forKey: "popupSkipedTime")
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd/MM/yy HH:mm:ss"
-                let last = formatter.date(from: popupSkipedTime ?? "01/11/21 11:11:11")
-                let lastPopup = last?.toLocalTime()
-                let currentDateStr = Date().today(format: "dd/MM/yy HH:mm:ss")
-                let currentDate = formatter.date(from: currentDateStr)
-
-                if lastPopup!.withAddedHours(hours: 2) <= currentDate!.toLocalTime() {
-                    self.presentStartQuizVC()
-                }
-            }
-        }
-    }
-    
-    private func presentStartQuizVC() {        
-        let startQuizVC = StartQuizViewController(showSkipButton: true)
-        let navController = UINavigationController(rootViewController: startQuizVC)
-        present(navController, animated: true)
-    }
-    
-    //we don't want to present the startQuizVC if it's already showing (i.e. they leave the app and come back twice).
-    private func checkIfAlreadyShowingStartQuizVC() -> Bool {
-        if let topVC = Helpers.getTopViewController() as? UINavigationController, topVC.viewControllers.first is StartQuizViewController{
-            return true
-        }
-        
-        return false
     }
 }

@@ -32,19 +32,19 @@ class OnboardingDataStore: NSObject {
                 let installation = PFInstallation.current()
                 installation?["user"] = User.current()
                 installation?.saveInBackground()
+                self.delegate?.segueIntoApp()
                 completion()
-            }
-            else {
-                if let error = error, let code = PFErrorCode(rawValue: error._code) {
-                    switch code {
-                    case .errorInvalidEmailAddress:
-                        self.delegate?.showError(title: "Invalid Email Address", subtitle: "Please enter a valid email address")
-                    case .errorUserEmailTaken:
-                        self.delegate?.showError(title: "Email Already Taken", subtitle: "Email already exists, please use a different one or log in.")
-                    default:
-                        self.delegate?.showError(title: "Sign Up Error", subtitle: error.localizedDescription)
-                    }
+            } else if let error = error, let code = PFErrorCode(rawValue: error._code) {
+                switch code {
+                case .errorInvalidEmailAddress:
+                    self.delegate?.showError(title: "Invalid Email Address", subtitle: "Please enter a valid email address")
+                case .errorUserEmailTaken, .errorUsernameTaken:
+                    self.delegate?.showError(title: "Email Already Taken", subtitle: "Email already exists, please use a different one or log in.")
+                default:
+                    self.delegate?.showError(title: "Sign Up Error", subtitle: error.localizedDescription)
                 }
+            } else {
+                self.delegate?.showError(title: "Unknown Sign Up Error", subtitle: "unknown error on sign up, please contact us at 317-690-5323")
             }
         }
     }
@@ -68,15 +68,23 @@ class OnboardingDataStore: NSObject {
             } else if let error = error, let code = PFErrorCode(rawValue: error._code) {
                 if code == .errorObjectNotFound {
                     self.delegate?.showError(title: "Login Failed", subtitle: error.localizedDescription)
+                } else {
+                    self.delegate?.showError(title: "Error", subtitle: error.localizedDescription)
                 }
+            } else {
+                self.delegate?.showError(title: "Unknown Login Error", subtitle: "Unknown login error, please contact us at 317-690-5323")
             }
         }
     }
         
-    func save(phoneNumber: String, firstName: String, lastName: String, completion: @escaping () -> Void) {
+    func save(phoneNumber: String, firstName: String, lastName: String, promoCode: String?, completion: @escaping () -> Void) {
         User.current()?.phoneNumber = phoneNumber
         User.current()?.firstName = firstName
         User.current()?.lastName = lastName
+        if let promoCode = promoCode, !promoCode.isEmpty {
+            User.current()?.promoCode = promoCode
+        }
+        
         User.current()?.saveInBackground()
     }
 }

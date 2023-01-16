@@ -76,21 +76,21 @@ class StartQuizViewController: UIViewController {
     }
     
     private func loadData() {
-        self.dataStore.getQuizData { quizDatas in
-            self.quizDatas = quizDatas
-                if User.shouldShowEarnings {
-                    let quizTopic = self.quizDatas.first?.quizTopic
-                    
-                    self.titleLabel.text = quizTopic?.name ?? "Play Daily Trivia"
-                    self.descriptionLabel.text = quizTopic?.ticker ?? "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins $50 towards their student loan. Good Luck!"
-                } else {
-                    self.titleLabel.text = "Play Daily Trivia"
-                    self.descriptionLabel.text = "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins. Good Luck!"
-                    //                    self.titleLabel.text = "Become the trivia champion"
-                    //                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
-                }
-            self.activityIndicator.stopAnimating()
-        }
+//        self.dataStore.getQuizData { quizDatas in
+//            self.quizDatas = quizDatas
+//                if User.shouldShowEarnings {
+//                    let quizTopic = self.quizDatas.first?.quizTopic
+//                    
+//                    self.titleLabel.text = quizTopic?.name ?? "Play Daily Trivia"
+//                    self.descriptionLabel.text = quizTopic?.ticker ?? "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins $50 towards their student loan. Good Luck!"
+//                } else {
+//                    self.titleLabel.text = "Play Daily Trivia"
+//                    self.descriptionLabel.text = "Compete once per day in a trivia challenge to correctly answer as many questions in a row as you can! Whoever has the longest streak that day, wins. Good Luck!"
+//                    //                    self.titleLabel.text = "Become the trivia champion"
+//                    //                    self.descriptionLabel.text = "Answer the most trivia questions correctly to become the trivia champion!"
+//                }
+//            self.activityIndicator.stopAnimating()
+//        }
     }
     
     private func showNeedMethodAuthAlert(with error: Error, codeWord: String) {

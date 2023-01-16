@@ -9,7 +9,7 @@ import UIKit
 
 class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
-    private var quizTopic: QuizTopicParse?
+//    private var quizTopic: QuizTopicParse?
     private var quizScores: [LeaderboardDataStore.QuizScore] = []
     private var pastWinnersData: [WinnerParse] = []
     private let dataStore = LeaderboardDataStore()
@@ -54,7 +54,7 @@ class ChampionsViewController: UIViewController {
         super.viewWillAppear(animated)
         setNavBarBtns()
         self.tabBarController?.tabBar.isHidden = false
-        loadQuizTopic()
+        loadLeaderboard()
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -64,14 +64,6 @@ class ChampionsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.bottomView.setGradientBackground()
-    }
-    
-    private func loadQuizTopic() {
-        let quizDataStore = QuizDataStore()
-        quizDataStore.getQuizData { quizDatas in
-            self.quizTopic = quizDatas.first?.quizTopic
-            self.loadLeaderboard()
-        }
     }
     
     private func setNavBarBtns() {
@@ -137,7 +129,7 @@ class ChampionsViewController: UIViewController {
     }
     
     private func loadLeaderboard() {
-        dataStore.getLeaderBoard(quizTopicID: quizTopic?.objectId ?? "") { quizScores, deadlineMessage in
+        dataStore.getLeaderBoard { quizScores, deadlineMessage in
             
             //            if quizScores.isEmpty {
             //                self.containerView.backgroundColor = .clear
@@ -147,10 +139,6 @@ class ChampionsViewController: UIViewController {
             //                self.tableView.backgroundColor = .white
             //            }
             self.quizScores = quizScores
-            //            self.descriptionLabel.text = deadlineMessage
-            //            if !User.shouldShowEarnings {
-            //                self.descriptionLabel.text = "Thanks for playing the daily trivia! Come back tommorow for more daily trivia."
-            //            }
             
             self.tableView.reloadData()
             
@@ -177,10 +165,10 @@ class ChampionsViewController: UIViewController {
             }
         }
         
-            dataStore.loadPastWinners { pastWinners in
-                self.pastWinnersData = pastWinners
-                //            self.tableView.reloadData()
-            }
+//            dataStore.loadPastWinners { pastWinners in
+//                self.pastWinnersData = pastWinners
+//                //            self.tableView.reloadData()
+//            }
     }
 }
 

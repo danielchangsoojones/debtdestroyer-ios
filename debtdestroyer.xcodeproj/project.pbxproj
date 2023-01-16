@@ -27,6 +27,7 @@
 		0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178A290115A200A414CA /* ScoreViewController.swift */; };
 		0A32178D290115BA00A414CA /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178C290115BA00A414CA /* ScoreView.swift */; };
 		0A363D822975C6CF0012468B /* silverCup.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0A363D812975C6C00012468B /* silverCup.mp4 */; };
+		0A363D842975C8E50012468B /* GradientBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A363D832975C8E50012468B /* GradientBlueButton.swift */; };
 		0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */; };
 		0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A421C0528DB3AED008792B8 /* StoreKit.framework */; };
 		0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */; };
@@ -177,6 +178,7 @@
 		0A32178A290115A200A414CA /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		0A32178C290115BA00A414CA /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		0A363D812975C6C00012468B /* silverCup.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = silverCup.mp4; sourceTree = "<group>"; };
+		0A363D832975C8E50012468B /* GradientBlueButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientBlueButton.swift; sourceTree = "<group>"; };
 		0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsCell.swift; sourceTree = "<group>"; };
 		0A421C0528DB3AED008792B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				0A1A637F28A6592200EFCC4D /* ViewExtension.swift */,
 				0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */,
 				0A7A4A0428A3D5D5009EDE5E /* GardientButton.swift */,
+				0A363D832975C8E50012468B /* GradientBlueButton.swift */,
 				0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */,
 				0A7A49FD28A3D294009EDE5E /* StringExtension.swift */,
 				0A7A49F228A38746009EDE5E /* MessageHelper.swift */,
@@ -1192,6 +1195,7 @@
 				0AACBBA32924F54D00575AEF /* EditProfileView.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
+				0A363D842975C8E50012468B /* GradientBlueButton.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,
 				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
 			);

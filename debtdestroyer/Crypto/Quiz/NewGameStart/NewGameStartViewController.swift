@@ -20,7 +20,7 @@ class NewGameStartViewController: UIViewController {
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var dayDateLbl = UILabel()
     var descriptionLbl = UILabel()
-    var prizeBtn = GradientBtn()
+    var prizeBtn = GradientBlueButton()
     var rippleContainer = UIView()
     private var quizDatas: [QuizDataParse] = []
     private let quizDataStore = QuizDataStore()

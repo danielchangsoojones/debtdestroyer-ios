@@ -16,7 +16,7 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
     var tiebreakerRuleLbl : TTTAttributedLabel!
-    var prizeBtn = GradientBtn()
+    var prizeBtn = GradientBlueButton()
     var videoContainer = UIView()
 
     override init(frame: CGRect) {

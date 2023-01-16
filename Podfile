@@ -15,5 +15,5 @@ target 'debtdestroyer' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftConfettiView'
   pod 'SkyFloatingLabelTextField'
-  pod 'Ripple'
+  pod 'TTTAttributedLabel'
 end

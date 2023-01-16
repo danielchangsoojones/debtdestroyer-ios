@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
-class NewGameStartView: UIView {
+class NewGameStartView: UIView, TTTAttributedLabelDelegate {
     var rippleContainer = UIView()
     var descContainer = UIView()
     var startLbl = UILabel()
@@ -15,6 +16,7 @@ class NewGameStartView: UIView {
     var dayDateLbl = UILabel()
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
+    var tiebreakerRuleLbl : TTTAttributedLabel!
     var prizeBtn = GradientBtn()
     var videoContainer = UIView()
 
@@ -30,6 +32,7 @@ class NewGameStartView: UIView {
         setDescriptionContainer()
       
         setPrizeButton()
+        setTiebreakerRuleLabel()
         setHeadingLabel()
         setDescriptionLabel()
         
@@ -147,7 +150,39 @@ class NewGameStartView: UIView {
         descriptionLbl.snp.makeConstraints { make in
             make.top.equalTo(headingLbl.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(15)
+            make.bottom.equalTo(tiebreakerRuleLbl.snp.top).offset(-15)
+        }
+    }
+    
+    private func setTiebreakerRuleLabel() {
+        tiebreakerRuleLbl = TTTAttributedLabel.init(frame: .zero)
+        tiebreakerRuleLbl.numberOfLines = 0
+        tiebreakerRuleLbl.textAlignment = .left
+        tiebreakerRuleLbl.isUserInteractionEnabled = true
+
+        let text = "See tiebreaker rules."
+        let str = NSString(string: text)
+        let theRange = str.range(of: "tiebreaker rules")
+        let attributedString = NSMutableAttributedString(string:text, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.cgColor, NSAttributedString.Key.font:  UIFont.MontserratRegular(size: 18)])
+        attributedString.addAttribute(.underlineStyle, value: 1, range: theRange)
+
+        let url = URL(string: "https://www.debtdestroyer.app/tie-breaker-rules")!
+        
+        tiebreakerRuleLbl.addLink(to: url, with: theRange)
+        tiebreakerRuleLbl.attributedText = attributedString
+        tiebreakerRuleLbl.delegate = self
+        descContainer.addSubview(tiebreakerRuleLbl)
+        tiebreakerRuleLbl.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-15)
+        }
+    }
+    
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if url.absoluteString == "https://www.debtdestroyer.app/tie-breaker-rules" {
+            UIApplication.shared.open(url)
+        } else {
+            print("Tapped none")
         }
     }
     

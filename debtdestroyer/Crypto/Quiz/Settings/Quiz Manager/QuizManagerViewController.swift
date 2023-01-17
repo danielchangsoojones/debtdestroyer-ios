@@ -13,7 +13,7 @@ class QuizManagerViewController: UIViewController {
     var questionLabel = UILabel()
     var questionPromptBtn = UIButton()
     var revealAnswerBtn = UIButton()
-    private let dataStore = QuizManagerDataStore()
+    private let dataStore = CryptoSettingsDataStore()
 
     override func loadView() {
         super.loadView()

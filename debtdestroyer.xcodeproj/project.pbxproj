@@ -15,7 +15,7 @@
 		0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C830289BC19500AEF89D /* ColorExtension.swift */; };
 		0A16A73A29371D4200B2647B /* QuizManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73929371D4200B2647B /* QuizManagerViewController.swift */; };
 		0A16A73C29371D5100B2647B /* QuizManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73B29371D5100B2647B /* QuizManagerView.swift */; };
-		0A16A73F2937506000B2647B /* QuizManagerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73E2937506000B2647B /* QuizManagerDataStore.swift */; };
+		0A16A73F2937506000B2647B /* CryptoSettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */; };
 		0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A637F28A6592200EFCC4D /* ViewExtension.swift */; };
 		0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */; };
 		0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */; };
@@ -167,7 +167,7 @@
 		0A11C830289BC19500AEF89D /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		0A16A73929371D4200B2647B /* QuizManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManagerViewController.swift; sourceTree = "<group>"; };
 		0A16A73B29371D5100B2647B /* QuizManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManagerView.swift; sourceTree = "<group>"; };
-		0A16A73E2937506000B2647B /* QuizManagerDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManagerDataStore.swift; sourceTree = "<group>"; };
+		0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSettingsDataStore.swift; sourceTree = "<group>"; };
 		0A1A637F28A6592200EFCC4D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnTicketCell.swift; sourceTree = "<group>"; };
 		0A25F66E28A369B000D5D183 /* SpinningWithGradButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWithGradButton.swift; sourceTree = "<group>"; };
@@ -390,7 +390,6 @@
 			children = (
 				0A16A73929371D4200B2647B /* QuizManagerViewController.swift */,
 				0A16A73B29371D5100B2647B /* QuizManagerView.swift */,
-				0A16A73E2937506000B2647B /* QuizManagerDataStore.swift */,
 			);
 			path = "Quiz Manager";
 			sourceTree = "<group>";
@@ -591,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */,
+				0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */,
 				0A16A73D29371D5600B2647B /* Quiz Manager */,
 			);
 			path = Settings;
@@ -1135,7 +1135,7 @@
 				0A50659128C346D200207759 /* SubscriptionView.swift in Sources */,
 				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
-				0A16A73F2937506000B2647B /* QuizManagerDataStore.swift in Sources */,
+				0A16A73F2937506000B2647B /* CryptoSettingsDataStore.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */,

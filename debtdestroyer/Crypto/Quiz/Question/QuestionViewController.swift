@@ -147,14 +147,14 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func startQuestionPromptControl() {
-        let quizManagerDataStore = QuizManagerDataStore()
+        let quizManagerDataStore = CryptoSettingsDataStore()
         quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true, shouldRevealAnswer: false, currentQuizData: currentData) { _ in
             
         }
     }
     
     @objc private func revealAnswerControl() {
-        let quizManagerDataStore = QuizManagerDataStore()
+        let quizManagerDataStore = CryptoSettingsDataStore()
         quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true, currentQuizData: currentData) { _ in
             
         }

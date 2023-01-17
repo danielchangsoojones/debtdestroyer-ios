@@ -99,8 +99,8 @@ class GameStartNewUIViewController: UIViewController {
     
     @objc private func getQuizDatas() {
         if !(User.current()?.isAppleTester ?? false) {
-            quizDataStore.getQuizData { quizDatas, error  in
-                self.quizDatas = quizDatas as! [QuizDataParse]
+            quizDataStore.getQuizData { quizDatas in
+                self.quizDatas = quizDatas
                 self.checkIfStartQuiz()
             }
         }

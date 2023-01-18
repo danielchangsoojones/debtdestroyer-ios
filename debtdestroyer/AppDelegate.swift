@@ -7,6 +7,7 @@
 
 import UIKit
 import Parse
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0.0
         }
+        
+        // MARK: Code snippet is for Question screen >> audio work in silent mode too.
+        var categoryError :NSError?
+        var success: Bool
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback, options: .duckOthers)
+            success = true
+        } catch let error as NSError {
+            categoryError = error
+            success = false
+        }
+        
+        if !success {
+            print("AppDelegate Debug - Error setting AVAudioSession category.  Because of this, there may be no sound. \(categoryError!)")
+        }
+        //
         return true
     }
     

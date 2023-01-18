@@ -1,13 +1,13 @@
 //
-//  GardientButton.swift
-//  nbawidget
+//  GradientBlueButton.swift
+//  debtdestroyer
 //
-//  Created by Rashmi Aher on 27/07/22.
+//  Created by Rashmi Aher on 19/12/22.
 //
 
 import UIKit
 
-class GradientBtn: UIButton {
+class GradientBlueButton: UIButton {
     let gradientLayer = CAGradientLayer()
     var color1 = UIColor()
     var color2 = UIColor()
@@ -26,8 +26,8 @@ class GradientBtn: UIButton {
     private func themeConfig() {
         layer.cornerRadius = frame.size.height / 2
         
-        color1 = hexStringToUIColor(hex: "FF2474")
-        color2 = hexStringToUIColor(hex: "FF7910")
+        color1 = hexStringToUIColor(hex: "4046D3")
+        color2 = hexStringToUIColor(hex: "C3E7FA")
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
         
         gradientLayer.frame = bounds

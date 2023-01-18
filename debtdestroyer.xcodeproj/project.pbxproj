@@ -26,6 +26,7 @@
 		0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */; };
 		0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178A290115A200A414CA /* ScoreViewController.swift */; };
 		0A32178D290115BA00A414CA /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32178C290115BA00A414CA /* ScoreView.swift */; };
+		0A363D822975C6CF0012468B /* silverCup.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0A363D812975C6C00012468B /* silverCup.mp4 */; };
 		0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */; };
 		0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A421C0528DB3AED008792B8 /* StoreKit.framework */; };
 		0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */; };
@@ -87,6 +88,7 @@
 		0A5FD51C28F8475200B995C8 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */; };
 		0A5FD51E28F848DD00B995C8 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD51D28F848DD00B995C8 /* FontExtension.swift */; };
 		0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */; };
+		0A663DC729509F3000BE6B53 /* GradientBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */; };
 		0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */; };
 		0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */; };
 		0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */; };
@@ -137,6 +139,8 @@
 		0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */; };
 		0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */; };
 		0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */; };
+		0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */; };
+		0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */; };
 		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
@@ -175,6 +179,7 @@
 		0A2E73B0289D427E006E67F9 /* PrizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeViewController.swift; sourceTree = "<group>"; };
 		0A32178A290115A200A414CA /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		0A32178C290115BA00A414CA /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		0A363D812975C6C00012468B /* silverCup.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = silverCup.mp4; sourceTree = "<group>"; };
 		0A3AA796290A63C900E94165 /* ConnectAccountsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsCell.swift; sourceTree = "<group>"; };
 		0A421C0528DB3AED008792B8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A421C0728DB497E008792B8 /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
@@ -237,6 +242,7 @@
 		0A5FD51D28F848DD00B995C8 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FontExtension.swift; path = debtdestroyer/Helper/FontExtension.swift; sourceTree = SOURCE_ROOT; };
 		0A61EA3E2903C51A004E41A0 /* debtdestroyer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = debtdestroyer.entitlements; sourceTree = "<group>"; };
 		0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerViewController.swift; sourceTree = "<group>"; };
+		0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBlueButton.swift; sourceTree = "<group>"; };
 		0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnersViewController.swift; sourceTree = "<group>"; };
 		0A6D54AE28FEA7ED000A8238 /* WinnerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerTableCell.swift; sourceTree = "<group>"; };
 		0A718C3E28A0D94D0086B27C /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -288,6 +294,8 @@
 		0AE126AE291AA39B00E11003 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		0AE126B0291AAA5700E11003 /* ConfirmInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoView.swift; sourceTree = "<group>"; };
 		0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoViewController.swift; sourceTree = "<group>"; };
+		0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipViewController.swift; sourceTree = "<group>"; };
+		0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipTableViewCell.swift; sourceTree = "<group>"; };
 		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -346,6 +354,7 @@
 				0A1A637F28A6592200EFCC4D /* ViewExtension.swift */,
 				0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */,
 				0A7A4A0428A3D5D5009EDE5E /* GardientButton.swift */,
+				0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */,
 				0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */,
 				0A7A49FD28A3D294009EDE5E /* StringExtension.swift */,
 				0A7A49F228A38746009EDE5E /* MessageHelper.swift */,
@@ -554,6 +563,7 @@
 			children = (
 				92FF0EB52972320100ED029D /* New Group */,
 				0A59ACE128E183F4001B774A /* Tabs */,
+				0AED895A294AEC8100D6576F /* Scholarship */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0ACAE9272935F0AD0054E0A3 /* NewGameStart */,
 				0A59ACE328E183F4001B774A /* Settings */,
@@ -833,8 +843,18 @@
 			children = (
 				0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */,
 				0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */,
+				0A363D812975C6C00012468B /* silverCup.mp4 */,
 			);
 			path = NewGameStart;
+			sourceTree = "<group>";
+		};
+		0AED895A294AEC8100D6576F /* Scholarship */ = {
+			isa = PBXGroup;
+			children = (
+				0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */,
+				0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */,
+			);
+			path = Scholarship;
 			sourceTree = "<group>";
 		};
 		18F686FBEE11973D8590571D /* Pods */ = {
@@ -993,6 +1013,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A363D822975C6CF0012468B /* silverCup.mp4 in Resources */,
 				0A5FD50D28F8475200B995C8 /* SIL Open Font License.txt in Resources */,
 				0A5FD50B28F8475200B995C8 /* Montserrat-Bold.otf in Resources */,
 				0A421C0828DB497E008792B8 /* IAP_ProductIDs.plist in Resources */,
@@ -1076,6 +1097,7 @@
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
+				0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */,
 				0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */,
 				0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */,
 				92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */,
@@ -1136,6 +1158,7 @@
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
 				0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */,
 				0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */,
+				0A663DC729509F3000BE6B53 /* GradientBlueButton.swift in Sources */,
 				0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
@@ -1158,6 +1181,7 @@
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
 				0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */,
+				0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */,
 				0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */,
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
 				0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */,
@@ -1347,7 +1371,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.28.0;
+				MARKETING_VERSION = 1.29.0;
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1382,7 +1406,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.28.0;
+				MARKETING_VERSION = 1.29.0;
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -20,7 +20,7 @@ class NewGameStartViewController: UIViewController {
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var dayDateLbl = UILabel()
     var descriptionLbl = UILabel()
-    var prizeBtn = GradientBtn()
+    var prizeBtn = GradientBlueButton()
     var rippleContainer = UIView()
     private var quizDatas: [QuizDataParse] = []
     private let quizDataStore = QuizDataStore()
@@ -38,7 +38,6 @@ class NewGameStartViewController: UIViewController {
         self.timeLabel = newGameStartView.countDownTimerLbl
         self.descriptionLbl = newGameStartView.descriptionLbl
         self.prizeBtn = newGameStartView.prizeBtn
-        self.rippleContainer = newGameStartView.rippleContainer
         self.headingLbl = newGameStartView.headingLbl
     }
     
@@ -87,20 +86,24 @@ class NewGameStartViewController: UIViewController {
     }
     
     func loopVideo() {
-        if let video_url = URL(string: "https://ik.imagekit.io/3fe3wzdkk/Spinning_Thing/prize-vid.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1672635800861") {
-            let playerItem = AVPlayerItem(url: video_url)
-                
-            self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
-            self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
-            guard let playerLayer = self.playerLayer else {return}
-            guard let queuePlayer = self.queuePlayer else {return}
-            self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
-                
-            playerLayer.videoGravity = .resizeAspectFill
-            playerLayer.frame = self.view.frame
-            self.view.layer.insertSublayer(playerLayer, at: 0)
-            playerLayer.player?.play()
+        let file = "silverCup.mp4".components(separatedBy: ".")
+        
+        guard let path = Bundle.main.path(forResource: file[0], ofType:file[1]) else {
+            debugPrint( "\(file.joined(separator: ".")) not found")
+            return
         }
+        let playerItem = AVPlayerItem(url: URL(fileURLWithPath: path))
+        self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
+        self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
+        guard let playerLayer = self.playerLayer else {return}
+        guard let queuePlayer = self.queuePlayer else {return}
+        self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
+        
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.frame = self.view.frame
+        self.view.layer.insertSublayer(playerLayer, at: 0)
+        playerLayer.player?.play()
+        
     }
     
     @objc private func addStartQuizBtn() {
@@ -163,7 +166,7 @@ class NewGameStartViewController: UIViewController {
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
-                startQuiz()
+              //  startQuiz()
             }
         }
     }

@@ -6,37 +6,33 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
-class NewGameStartView: UIView {
-    var rippleContainer = UIView()
+class NewGameStartView: UIView, TTTAttributedLabelDelegate {
     var descContainer = UIView()
     var startLbl = UILabel()
     var countDownTimerLbl = UILabel()
     var dayDateLbl = UILabel()
     var headingLbl = UILabel()
     var descriptionLbl = UILabel()
-    var prizeBtn = GradientBtn()
+    var tiebreakerRuleLbl : TTTAttributedLabel!
+    var prizeBtn = GradientBlueButton()
     var videoContainer = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
-        addSubview(videoContainer)
-        setContainerForRipple()
-        setCountDownTimerLabel()
+        setContainerForVideo()
         setStartLabel()
+        setCountDownTimerLabel()
         setDayDateLabel()
-        addImgView()
         setDescriptionContainer()
       
         setPrizeButton()
+        setTiebreakerRuleLabel()
         setHeadingLabel()
         setDescriptionLabel()
-        
-        videoContainer.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.bottom.equalTo(prizeBtn)
-        }
+       
     }
     
     private func addImgView() {
@@ -54,14 +50,10 @@ class NewGameStartView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setContainerForRipple() {
-        rippleContainer.backgroundColor = .clear
-        let w = self.frame.width
-        addSubview(rippleContainer)
-        rippleContainer.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview()
-            make.width.height.equalTo(w)
-            make.centerX.equalToSuperview()
+    private func setContainerForVideo() {
+        addSubview(videoContainer)
+        videoContainer.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
@@ -91,9 +83,9 @@ class NewGameStartView: UIView {
         startLbl.textAlignment = .center
         startLbl.textColor = .white
         startLbl.font = UIFont.MontserratSemiBold(size: 25)
-        rippleContainer.addSubview(startLbl)
+        videoContainer.addSubview(startLbl)
         startLbl.snp.makeConstraints { make in
-            make.bottom.equalTo(countDownTimerLbl.snp.top).offset(-20)
+            make.topMargin.equalToSuperview()
             make.left.right.equalToSuperview().inset(10)
         }
     }
@@ -104,11 +96,10 @@ class NewGameStartView: UIView {
         countDownTimerLbl.textAlignment = .center
         countDownTimerLbl.textColor = .white
         countDownTimerLbl.font = UIFont.MontserratBold(size: 35)
-        rippleContainer.addSubview(countDownTimerLbl)
+        videoContainer.addSubview(countDownTimerLbl)
         countDownTimerLbl.snp.makeConstraints { make in
-//            make.top.equalTo(startLbl.snp.bottom).offset(20)
-//            make.left.right.equalToSuperview().inset(20)
-            make.center.equalToSuperview()
+            make.top.equalTo(startLbl.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(20)
         }
     }
     
@@ -117,7 +108,7 @@ class NewGameStartView: UIView {
         dayDateLbl.textAlignment = .center
         dayDateLbl.textColor = .white
         dayDateLbl.font = UIFont.MontserratSemiBold(size: 16)
-        rippleContainer.addSubview(dayDateLbl)
+        videoContainer.addSubview(dayDateLbl)
         dayDateLbl.snp.makeConstraints { make in
             make.top.equalTo(countDownTimerLbl.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(10)
@@ -147,7 +138,39 @@ class NewGameStartView: UIView {
         descriptionLbl.snp.makeConstraints { make in
             make.top.equalTo(headingLbl.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(15)
+            make.bottom.equalTo(tiebreakerRuleLbl.snp.top).offset(-15)
+        }
+    }
+    
+    private func setTiebreakerRuleLabel() {
+        tiebreakerRuleLbl = TTTAttributedLabel.init(frame: .zero)
+        tiebreakerRuleLbl.numberOfLines = 0
+        tiebreakerRuleLbl.textAlignment = .left
+        tiebreakerRuleLbl.isUserInteractionEnabled = true
+
+        let text = "See tiebreaker rules."
+        let str = NSString(string: text)
+        let theRange = str.range(of: "tiebreaker rules")
+        let attributedString = NSMutableAttributedString(string:text, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.cgColor, NSAttributedString.Key.font:  UIFont.MontserratRegular(size: 18)])
+        attributedString.addAttribute(.underlineStyle, value: 1, range: theRange)
+
+        let url = URL(string: "https://www.debtdestroyer.app/tie-breaker-rules")!
+        
+        tiebreakerRuleLbl.addLink(to: url, with: theRange)
+        tiebreakerRuleLbl.attributedText = attributedString
+        tiebreakerRuleLbl.delegate = self
+        descContainer.addSubview(tiebreakerRuleLbl)
+        tiebreakerRuleLbl.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-15)
+        }
+    }
+    
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if url.absoluteString == "https://www.debtdestroyer.app/tie-breaker-rules" {
+            UIApplication.shared.open(url)
+        } else {
+            print("Tapped none")
         }
     }
     

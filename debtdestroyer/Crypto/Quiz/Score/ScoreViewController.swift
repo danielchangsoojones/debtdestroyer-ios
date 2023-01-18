@@ -112,7 +112,7 @@ class ScoreViewController: UIViewController {
         if Helpers.getTopViewController() is UINavigationController {
             //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
             let tabBarVC = presentingViewController as? UITabBarController
-            if self.tabBarController?.viewControllers?.count == 4 {
+            if self.tabBarController?.viewControllers?.count == 5 {
                 tabBarVC?.selectedIndex = 2
             } else {
                 tabBarVC?.selectedIndex = 1

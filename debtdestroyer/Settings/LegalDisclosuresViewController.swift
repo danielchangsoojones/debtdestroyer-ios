@@ -91,7 +91,7 @@ extension LegalDisclosuresViewController: UITableViewDataSource, UITableViewDele
             UIApplication.shared.open(url)
         } else if indexPath.row == 1 {
             //Terms of Service
-            let url = URL(string: "https://developer.apple.com")!
+            let url = URL(string: "https://www.debtdestroyer.app/terms-and-services")!
             UIApplication.shared.open(url)
         } else if indexPath.row == 2 {
             //Sweepstake Rules

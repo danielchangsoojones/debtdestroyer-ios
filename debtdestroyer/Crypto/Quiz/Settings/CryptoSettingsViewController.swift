@@ -20,6 +20,7 @@ class CryptoSettingsViewController: UIViewController {
         case deleteAcc
         case textNoti
         case quizManager
+        case quizFinished
     }
     
     private var messageHelper: MessageHelper?
@@ -27,7 +28,8 @@ class CryptoSettingsViewController: UIViewController {
     var dataArr = [String]()
     var imgNameArr = [String]()
     private let quizDataStore = QuizDataStore()
-    
+    private let cryptoSettingsDataStore = CryptoSettingsDataStore()
+
     override func loadView() {
         super.loadView()
         setTableView()
@@ -44,6 +46,8 @@ class CryptoSettingsViewController: UIViewController {
             dataArr.append("Send Text Notification")
             imgNameArr.append("contactUs")
             dataArr.append("Quiz Maneger")
+            imgNameArr.append("contactUs")
+            dataArr.append("Quiz Finished")
             imgNameArr.append("contactUs")
         }
               
@@ -161,6 +165,12 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 // MARK: Quiz Manager
                 let vc = QuizManagerViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
+                
+            case .quizFinished:
+                // MARK: Quiz Finished
+                cryptoSettingsDataStore.finishQuizTime { response in
+                    print(response)
+                }
         }
     }
     

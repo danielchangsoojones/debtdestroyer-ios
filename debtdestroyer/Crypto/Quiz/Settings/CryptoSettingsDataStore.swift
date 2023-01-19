@@ -9,7 +9,7 @@ import Foundation
 import SwiftyJSON
 import Parse
 
-class QuizManagerDataStore {
+class CryptoSettingsDataStore {
     func markQuizStatus(shouldStartQuestionPrompt: Bool, shouldRevealAnswer: Bool, currentQuizData: QuizDataParse, completion: @escaping (Any?) -> Void) {
         let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
                                           "shouldRevealAnswer" : shouldRevealAnswer,
@@ -27,6 +27,21 @@ class QuizManagerDataStore {
 
                 let json = JSON(result)
                 completion(result)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "markQuizStatus")
+            }
+        }
+    }
+    
+    func finishQuizTime(completion: @escaping (Any?) -> Void) {
+        
+        PFCloud.callFunction(inBackground: "finishQuizTime", withParameters: nil) { (result, error) in
+            if let result = result {
+                
+                BannerAlert.show(title: "", subtitle: "finish Quiz Time called Successfully!", type: .success)
+                
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {

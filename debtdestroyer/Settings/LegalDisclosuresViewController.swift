@@ -19,7 +19,7 @@ class LegalDisclosuresViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataArr = ["Privacy Policy", "Terms of Service", "Sweepstake Rules"]
+        dataArr = ["Privacy Policy", "Terms of Service", "Game Rules"]
         imgNameArr = ["legal", "legal","legal"]
         
         self.navigationItem.title = "Legal Disclosures"
@@ -94,8 +94,8 @@ extension LegalDisclosuresViewController: UITableViewDataSource, UITableViewDele
             let url = URL(string: "https://www.debtdestroyer.app/terms-and-services")!
             UIApplication.shared.open(url)
         } else if indexPath.row == 2 {
-            //Sweepstake Rules
-            let url = URL(string: "https://www.lavadrop.io")!
+            //Game Rules
+            let url = URL(string: "https://www.debtdestroyer.app/tie-breaker-rules")!
             UIApplication.shared.open(url)
         } 
         

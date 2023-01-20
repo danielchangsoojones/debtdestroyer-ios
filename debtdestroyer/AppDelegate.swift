@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITableView.appearance().sectionHeaderTopPadding = 0.0
         }
         
+        setUXCam()
+        
         // MARK: Code snippet is for Question screen >> audio work in silent mode too.
         var categoryError :NSError?
         var success: Bool

@@ -43,6 +43,9 @@ class QuestionViewController: UIViewController {
     private var alreadyPushingVC = false
     private var answer_video_url = ""
     private var intervieweeImageView: UIImageView!
+    let audioSession = AVAudioSession.sharedInstance()
+    var volume: Float?
+    var obs: NSKeyValueObservation?
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -187,6 +190,24 @@ class QuestionViewController: UIViewController {
     }
     
     private func playVideo() {
+        // this code is KVO to notify user if volume change or put on mute
+        self.obs = audioSession.observe( \.outputVolume ) { (av, change) in
+            if av.outputVolume == 0.0 {
+                BannerAlert.show(title: "System volume is off!", subtitle: "", type: .info)
+            }
+        }
+        
+        // this code is to notify user initially, if volume is off
+        do {
+            try audioSession.setActive(true)
+            volume = audioSession.outputVolume
+            if volume == 0.0 {
+                BannerAlert.show(title: "System volume is off!", subtitle: "", type: .info)
+            }
+        } catch {
+            print("Error Setting Up Audio Session")
+        }
+        
         if let video_url = URL(string: currentData.video_url_string) {
             player = AVPlayer(url: video_url)
             playerLayer.player = player

@@ -8,6 +8,7 @@
 import UIKit
 import Parse
 import AVFoundation
+import UXCam
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         //
         return true
+    }
+    
+    private func setUXCam() {
+        let configuration = UXCamConfiguration(appKey: "6q4yxoixlvoyww8")
+        UXCam.optIntoSchematicRecordings()
+        UXCam.start(with: configuration)
     }
     
     private func setupServer() {

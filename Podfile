@@ -16,4 +16,5 @@ target 'debtdestroyer' do
   pod 'SwiftConfettiView'
   pod 'SkyFloatingLabelTextField'
   pod 'TTTAttributedLabel'
+  pod 'UXCam', "~> 3.4.2"
 end

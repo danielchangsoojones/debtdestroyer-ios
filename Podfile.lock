@@ -18,6 +18,7 @@ PODS:
   - SwiftConfettiView (0.1.0)
   - SwiftyJSON (4.3.0)
   - TTTAttributedLabel (2.0.0)
+  - UXCam (3.4.5)
 
 DEPENDENCIES:
   - BRYXBanner
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - SwiftConfettiView
   - SwiftyJSON (~> 4.0)
   - TTTAttributedLabel
+  - UXCam (~> 3.4.2)
 
 SPEC REPOS:
   trunk:
@@ -43,6 +45,7 @@ SPEC REPOS:
     - SwiftConfettiView
     - SwiftyJSON
     - TTTAttributedLabel
+    - UXCam
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
@@ -55,7 +58,8 @@ SPEC CHECKSUMS:
   SwiftConfettiView: 1bdbc2e6913b6b1c76d8070802b212508ad5c352
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+  UXCam: c24a71093f9051c553380e647a0c55ee0c586091
 
-PODFILE CHECKSUM: 3f8fb7949b516388521b3fb07df4651b51b0032c
+PODFILE CHECKSUM: 4dc89a1605539f35897893d5a715d2e3adfaaef9
 
 COCOAPODS: 1.11.3

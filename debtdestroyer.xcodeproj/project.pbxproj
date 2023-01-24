@@ -110,6 +110,7 @@
 		0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */; };
 		0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */; };
 		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
+		0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */; };
 		0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */; };
 		0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */; };
 		0A9D01B0292B71AD002CA0C5 /* NewStartQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */; };
@@ -265,6 +266,7 @@
 		0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
 		0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerKeysViewController.swift; sourceTree = "<group>"; };
 		0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerChoiceNewUIView.swift; sourceTree = "<group>"; };
 		0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizViewController.swift; sourceTree = "<group>"; };
 		0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizView.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				0AED895A294AEC8100D6576F /* Scholarship */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0ACAE9272935F0AD0054E0A3 /* NewGameStart */,
+				0A892654297FB257002C71C1 /* Answer Keys */,
 				0A59ACE328E183F4001B774A /* Settings */,
 				0A51502429239951001B028C /* Confirm Info */,
 				0A32178E290115C100A414CA /* Score */,
@@ -784,6 +787,14 @@
 				0A51501B292355B5001B028C /* ResetPasswordViewController.swift */,
 			);
 			path = "Create Profile";
+			sourceTree = "<group>";
+		};
+		0A892654297FB257002C71C1 /* Answer Keys */ = {
+			isa = PBXGroup;
+			children = (
+				0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */,
+			);
+			path = "Answer Keys";
 			sourceTree = "<group>";
 		};
 		0A9E94A428B64B6E00985179 /* Data Store */ = {
@@ -1169,6 +1180,7 @@
 				0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */,
 				0A47F89128F00DD000B11D5F /* NotificationPermissionViewController.swift in Sources */,
 				0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */,
+				0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */,
 				0A7A4A0228A3D384009EDE5E /* RegisterView.swift in Sources */,
 				0A16A73C29371D5100B2647B /* QuizManagerView.swift in Sources */,
 				0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */,

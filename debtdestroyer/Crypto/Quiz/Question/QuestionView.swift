@@ -26,12 +26,15 @@ class QuestionView: UIView {
     var soundOffTextLabel = UILabel()
     let closePopupButton = UIButton()
     
+    let helpButton = UIButton()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         addVideoLayer()
         setPointsLabel()
         setUpSoundOffContainer()
+        setHelpButton()
         setQuestionNoLabel()
         addIntervieweeImageView()
         setBottomView()
@@ -85,6 +88,32 @@ class QuestionView: UIView {
             make.trailing.equalToSuperview().inset(20)
         }
     }
+    
+    private func setHelpButton() {
+        helpButton.backgroundColor = .clear
+        if #available(iOS 15.0, *) {
+            if helpButton.configuration == nil {
+                var configuration = UIButton.Configuration.plain()
+                configuration.attributedTitle = AttributedString("help?", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratRegular(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                helpButton.configuration = configuration
+                
+            } else {
+                helpButton.configuration?.attributedTitle = AttributedString("help?", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratRegular(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+            }
+            
+        } else {
+            helpButton.setTitleColor(.white, for: .normal)
+            helpButton.setTitle("help?", for: .normal)
+        }
+        addSubview(helpButton)
+        helpButton.snp.makeConstraints { make in
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+            make.topMargin.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().inset(15)
+        }
+    }
+
     
     private func setQuestionNoLabel() {
         questionNoLabel.numberOfLines = 0

@@ -20,6 +20,7 @@ class QuestionViewController: UIViewController {
         case time_ran_out = "time_ran_out"
     }
     
+    private var messageHelper: MessageHelper?
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
     var timeLabel =  UILabel()
@@ -49,6 +50,8 @@ class QuestionViewController: UIViewController {
     var soundOffContainer = UIView()
     var closePopupButton = UIButton()
     
+    private var helpButton = UIButton()
+
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
@@ -82,10 +85,12 @@ class QuestionViewController: UIViewController {
         self.bottomView = questionView.bottomView
         self.soundOffContainer = questionView.soundOffContainer
         self.closePopupButton = questionView.closePopupButton
+        self.helpButton = questionView.helpButton
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         playVideo()
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                                target: self,
@@ -101,6 +106,7 @@ class QuestionViewController: UIViewController {
         closePopupButton.addTarget(self,action: #selector(closeNoSoundPopup),for: .touchUpInside)
         showControlBtns()
         intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
+        helpButton.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
     }
     
     deinit {
@@ -133,6 +139,10 @@ class QuestionViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: "NoSoundBannerClosed")
         UserDefaults.standard.synchronize()
         self.soundOffContainer.isHidden = true
+    }
+    
+    @objc private func helpPressed() {
+        messageHelper?.text(MessageHelper.customerServiceNum)
     }
     
     private func showControlBtns() {

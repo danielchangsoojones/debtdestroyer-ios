@@ -37,13 +37,7 @@ class CryptoTabBarViewController: UITabBarController {
         let vc3 = ChampionsViewController()
         let vc4 = CryptoSettingsViewController()
         
-        var controllers = [vc1,vc2,vc3,vc4]
-        
-        if User.current()?.email == "messyjones@gmail.com"{
-            let vc5 = AnswerKeysViewController()
-            controllers = [vc1,vc2,vc3,vc4,vc5]
-        }
-        
+        let controllers = [vc1,vc2,vc3,vc4]
         self.viewControllers = controllers.map { CustomNavigationViewController(rootViewController: $0)}
         
         let tabQuiz = tabBar.items![0]
@@ -61,12 +55,6 @@ class CryptoTabBarViewController: UITabBarController {
         let tabSettings = tabBar.items![3]
         tabSettings.image = UIImage(named: "settingsG")?.withRenderingMode(.alwaysOriginal)
         tabSettings.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
-        
-        if User.current()?.email == "messyjones@gmail.com"{
-            let tabAnswerKeys = tabBar.items![4]
-            tabAnswerKeys.image = UIImage(named: "settingsG")?.withRenderingMode(.alwaysOriginal)
-            tabAnswerKeys.selectedImage = UIImage(named: "settingsC")?.withRenderingMode(.alwaysOriginal)
-        }
         
         self.removeTab(at: 1)
     }

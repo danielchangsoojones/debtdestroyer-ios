@@ -112,8 +112,6 @@
 		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
 		0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */; };
 		0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */; };
-		0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */; };
-		0A9D01B0292B71AD002CA0C5 /* NewStartQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */; };
 		0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */; };
 		0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A028B62F2A00985179 /* TransactionHistoryCell.swift */; };
 		0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E94A228B64B6200985179 /* BankDataStore.swift */; };
@@ -268,8 +266,6 @@
 		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerKeysViewController.swift; sourceTree = "<group>"; };
 		0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerChoiceNewUIView.swift; sourceTree = "<group>"; };
-		0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizViewController.swift; sourceTree = "<group>"; };
-		0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStartQuizView.swift; sourceTree = "<group>"; };
 		0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerExtension.swift; sourceTree = "<group>"; };
 		0A9E94A028B62F2A00985179 /* TransactionHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryCell.swift; sourceTree = "<group>"; };
 		0A9E94A228B64B6200985179 /* BankDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDataStore.swift; sourceTree = "<group>"; };
@@ -632,8 +628,6 @@
 			isa = PBXGroup;
 			children = (
 				0A44EF9928E5907B006305B8 /* StartQuizViewController.swift */,
-				0A9D01AD292B7197002CA0C5 /* NewStartQuizViewController.swift */,
-				0A9D01AF292B71AD002CA0C5 /* NewStartQuizView.swift */,
 				0A44EF9B28E59096006305B8 /* StartQuizView.swift */,
 			);
 			path = "Start Quiz";
@@ -1133,7 +1127,6 @@
 				0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,
-				0A9D01B0292B71AD002CA0C5 /* NewStartQuizView.swift in Sources */,
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
 				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,
@@ -1196,7 +1189,6 @@
 				0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */,
 				0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */,
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
-				0A9D01AE292B7197002CA0C5 /* NewStartQuizViewController.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
 				0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */,

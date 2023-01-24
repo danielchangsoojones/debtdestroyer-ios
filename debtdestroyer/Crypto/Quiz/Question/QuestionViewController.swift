@@ -20,6 +20,7 @@ class QuestionViewController: UIViewController {
         case time_ran_out = "time_ran_out"
     }
     
+    private var messageHelper: MessageHelper?
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
     var timeLabel =  UILabel()
@@ -46,6 +47,7 @@ class QuestionViewController: UIViewController {
     let audioSession = AVAudioSession.sharedInstance()
     var volume: Float?
     var obs: NSKeyValueObservation?
+    private var helpButton = UIButton()
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -78,10 +80,12 @@ class QuestionViewController: UIViewController {
         self.progressBarContainer = questionView.progressBarContainer
         self.intervieweeImageView = questionView.intervieweeImageView
         self.bottomView = questionView.bottomView
+        self.helpButton = questionView.helpButton
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         playVideo()
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                                target: self,
@@ -96,6 +100,7 @@ class QuestionViewController: UIViewController {
                 object: nil)
         showControlBtns()
         intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
+        helpButton.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
     }
     
     deinit {
@@ -122,6 +127,10 @@ class QuestionViewController: UIViewController {
         if hasRevealedAnswerOnce || isWaitingToShowQuestionPrompt  {
             player.play()
         }
+    }
+    
+    @objc private func helpPressed() {
+        messageHelper?.text(MessageHelper.customerServiceNum)
     }
     
     private func showControlBtns() {

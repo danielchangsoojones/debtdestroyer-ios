@@ -47,6 +47,8 @@ class NewGameStartViewController: UIViewController {
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         loopVideo()
         setNavBarBtns()
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification, object: nil)
         getDemoQuizData()
         if User.isAdminUser || User.isIpadDemo {
             prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
@@ -66,6 +68,10 @@ class NewGameStartViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    @objc private func applicationDidBecomeActive() {
+        playerLayer?.player?.play()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -166,7 +172,7 @@ class NewGameStartViewController: UIViewController {
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
-                startQuiz()
+              //  startQuiz()
             }
         }
     }

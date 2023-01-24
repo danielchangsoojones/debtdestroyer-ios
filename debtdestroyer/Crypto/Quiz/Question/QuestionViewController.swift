@@ -46,7 +46,9 @@ class QuestionViewController: UIViewController {
     let audioSession = AVAudioSession.sharedInstance()
     var volume: Float?
     var obs: NSKeyValueObservation?
-
+    var soundOffContainer = UIView()
+    var closePopupButton = UIButton()
+    
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
@@ -78,6 +80,8 @@ class QuestionViewController: UIViewController {
         self.progressBarContainer = questionView.progressBarContainer
         self.intervieweeImageView = questionView.intervieweeImageView
         self.bottomView = questionView.bottomView
+        self.soundOffContainer = questionView.soundOffContainer
+        self.closePopupButton = questionView.closePopupButton
     }
     
     override func viewDidLoad() {
@@ -94,6 +98,7 @@ class QuestionViewController: UIViewController {
                 selector: #selector(applicationDidBecomeActive),
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil)
+        closePopupButton.addTarget(self,action: #selector(closeNoSoundPopup),for: .touchUpInside)
         showControlBtns()
         intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
     }
@@ -122,6 +127,12 @@ class QuestionViewController: UIViewController {
         if hasRevealedAnswerOnce || isWaitingToShowQuestionPrompt  {
             player.play()
         }
+    }
+    
+    @objc private func closeNoSoundPopup() {
+        UserDefaults.standard.set(true, forKey: "NoSoundBannerClosed")
+        UserDefaults.standard.synchronize()
+        self.soundOffContainer.isHidden = true
     }
     
     private func showControlBtns() {
@@ -190,23 +201,30 @@ class QuestionViewController: UIViewController {
     }
     
     private func playVideo() {
-        // this code is KVO to notify user if volume change or put on mute
-        self.obs = audioSession.observe( \.outputVolume ) { (av, change) in
-            if av.outputVolume == 0.0 {
-                BannerAlert.show(title: "System volume is off!", subtitle: "", type: .info)
+        let bannerStatus = UserDefaults.standard.bool(forKey: "NoSoundBannerClosed")
+
+        if !bannerStatus {
+            
+            // this code is KVO to notify user if volume change or put on mute
+            self.obs = audioSession.observe( \.outputVolume ) { (av, change) in
+                if av.outputVolume == 0.0 {
+                    self.soundOffContainer.isHidden = false
+                }
+            }
+            
+            // this code is to notify user initially, if volume is off
+            do {
+                try audioSession.setActive(true)
+                volume = audioSession.outputVolume
+                if volume == 0.0 {
+                    self.soundOffContainer.isHidden = false
+                }
+            } catch {
+                print("Error Setting Up Audio Session")
             }
         }
         
-        // this code is to notify user initially, if volume is off
-        do {
-            try audioSession.setActive(true)
-            volume = audioSession.outputVolume
-            if volume == 0.0 {
-                BannerAlert.show(title: "System volume is off!", subtitle: "", type: .info)
-            }
-        } catch {
-            print("Error Setting Up Audio Session")
-        }
+       
         
         if let video_url = URL(string: currentData.video_url_string) {
             player = AVPlayer(url: video_url)
@@ -453,6 +471,8 @@ class QuestionViewController: UIViewController {
         }
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
+            UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
+            UserDefaults.standard.synchronize()
             if Helpers.getTopViewController() is UINavigationController {
                 //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
                 let tabBarVC = presentingViewController as? UITabBarController

@@ -21,12 +21,17 @@ class QuestionView: UIView {
     let progressBarContainer = UIView()
     var timerBar = UIProgressView()
     let intervieweeImageView = UIImageView()
+    let soundOffContainer = UIView()
+    let noSoundImageView = UIImageView()
+    var soundOffTextLabel = UILabel()
+    let closePopupButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         addVideoLayer()
         setPointsLabel()
+        setUpSoundOffContainer()
         setQuestionNoLabel()
         addIntervieweeImageView()
         setBottomView()
@@ -130,6 +135,62 @@ class QuestionView: UIView {
         setUpTimerBar()
         setTimerLabel()
 
+    }
+    
+    private func setUpSoundOffContainer() {
+        soundOffContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        soundOffContainer.isHidden = true
+        soundOffContainer.layer.cornerRadius = 20
+        questionContentView.addSubview(soundOffContainer)
+        soundOffContainer.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(15)
+            make.topMargin.equalToSuperview().inset(35)
+            make.height.equalTo(60)
+            make.width.equalTo(240)
+        }
+        
+        setSoundOffImage()
+        setButtonToClosePopup()
+        setSoundOffTextLabel()
+
+    }
+    
+    private func setSoundOffImage() {
+        noSoundImageView.image = UIImage(named: "no-sound")
+        noSoundImageView.contentMode = .scaleAspectFill
+        noSoundImageView.backgroundColor = .clear
+        soundOffContainer.addSubview(noSoundImageView)
+        noSoundImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(5)
+            make.height.width.equalTo(30)
+            make.centerY.equalToSuperview()
+        }
+    }
+    
+    private func setButtonToClosePopup() {
+        closePopupButton.setTitle("X", for: .normal)
+        closePopupButton.setTitleColor(.white, for: .normal)
+        soundOffContainer.addSubview(closePopupButton)
+        closePopupButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(5)
+            make.height.width.equalTo(20)
+            make.centerY.equalToSuperview()
+        }
+    }
+    
+    private func setSoundOffTextLabel() {
+        soundOffTextLabel.text = "Sound is off. Turn up your volume to hear."
+        soundOffTextLabel.numberOfLines = 0
+        soundOffTextLabel.textAlignment = .left
+        soundOffTextLabel.textColor = .white
+        soundOffTextLabel.font = UIFont.MontserratRegular(size: 14)
+        soundOffTextLabel.adjustsFontSizeToFitWidth = true
+        soundOffContainer.addSubview(soundOffTextLabel)
+        soundOffTextLabel.snp.makeConstraints { make in
+            make.leading.equalTo(noSoundImageView.snp.trailing).offset(10)
+            make.trailing.equalTo(closePopupButton.snp.leading).offset(-10)
+            make.top.bottom.equalToSuperview().inset(5)
+        }
     }
     
     private func setUpTimerBar() {

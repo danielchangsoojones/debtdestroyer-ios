@@ -175,7 +175,7 @@ class QuestionViewController: UIViewController {
     
     @objc private func revealAnswerControl() {
         let now = Date()
-        if currentData.quizTopic.start_time < now {
+        if currentData.quizTopic.start_time > now {
             //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
             self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
             self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
@@ -280,7 +280,6 @@ class QuestionViewController: UIViewController {
                 self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 self.answer_video_url = answer_video_url
                 
-                let shouldRevealAnswer = answer_video_url != nil
                 if let correct_answer_index = correct_answer_index {
                     self.revealAnswer(with: correct_answer_index)
                 } else if let show_question_prompt_time = show_question_prompt_time {

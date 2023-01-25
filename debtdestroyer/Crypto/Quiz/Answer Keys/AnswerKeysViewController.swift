@@ -8,10 +8,9 @@
 import UIKit
 
 class AnswerKeysViewController: UIViewController {
-    static let correct_indices = [0, 2, 4, 6]
-    static let answer_video_urls = ["butter"]
+    static let correct_indices = [3,1]
+    static let answer_video_urls = ["https://ik.imagekit.io/3fe3wzdkk/H5lhh5sx7F/why_beamer_2.mp4?ik-t=1675270862&ik-s=44d3b4372765465e574ea9baa0e08adc37ea44f5","https://ik.imagekit.io/3fe3wzdkk/H5lhh5sx7F/why_beamer_2.mp4?ik-t=1675270862&ik-s=44d3b4372765465e574ea9baa0e08adc37ea44f5"]
     
-
     private var tableView: UITableView!
     var dataArr = [String]()
     

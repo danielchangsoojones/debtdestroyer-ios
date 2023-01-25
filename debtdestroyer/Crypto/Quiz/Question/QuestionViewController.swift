@@ -407,7 +407,7 @@ class QuestionViewController: UIViewController {
                 dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
                     self.answer_video_url = videoAnswer.video_url_string
                     //TODO: this is wrong, we have to make it use the correct reveal answer index
-                    self.revealAnswer(with: 0)
+                    self.revealAnswer(with: self.currentData.correct_answer_index)
                     self.playVideoAnswer()
                 }
             }

@@ -168,7 +168,6 @@ class QuestionViewController: UIViewController {
         let quizManagerDataStore = CryptoSettingsDataStore()
         quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true,
                                             currentIndex: nil,
-                                            videoAnswerID: currentData.videoAnswer.objectId ?? "",
                                             currentQuizData: currentData) { _ in
             
         }
@@ -178,7 +177,6 @@ class QuestionViewController: UIViewController {
         let quizManagerDataStore = CryptoSettingsDataStore()
         quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
                                             currentIndex: currentIndex,
-                                            videoAnswerID: currentData.videoAnswer.objectId ?? "",
                                             currentQuizData: currentData) { _ in
             
         }

@@ -14,12 +14,6 @@ class QuestionViewController: UIViewController {
         static let originalStartTime: TimeInterval = 12
     }
     
-    enum AnswerStatus: String {
-        case incorrect = "incorrect"
-        case correct = "correct"
-        case time_ran_out = "time_ran_out"
-    }
-    
     private var messageHelper: MessageHelper?
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
@@ -42,7 +36,7 @@ class QuestionViewController: UIViewController {
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
-    private var answer_video_url = ""
+    private var answer_video_url: String?
     private var intervieweeImageView: UIImageView!
     let audioSession = AVAudioSession.sharedInstance()
     var volume: Float?
@@ -172,14 +166,22 @@ class QuestionViewController: UIViewController {
     
     @objc private func startQuestionPromptControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true, shouldRevealAnswer: false, currentQuizData: currentData) { _ in
+        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true,
+                                            shouldRevealAnswer: false,
+                                            currentIndex: currentIndex,
+                                            videoAnswerID: currentData.videoAnswer.objectId ?? "",
+                                            currentQuizData: currentData) { _ in
             
         }
     }
     
     @objc private func revealAnswerControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true, currentQuizData: currentData) { _ in
+        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
+                                            shouldRevealAnswer: true,
+                                            currentIndex: currentIndex,
+                                            videoAnswerID: currentData.videoAnswer.objectId ?? "",
+                                            currentQuizData: currentData) { _ in
             
         }
     }
@@ -270,12 +272,13 @@ class QuestionViewController: UIViewController {
                                               currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds, answer_video_url, current_quiz_data_id  in
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id  in
                 self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 self.answer_video_url = answer_video_url
                 
-                if should_reveal_answer {
-                    self.revealAnswer()
+                let shouldRevealAnswer = answer_video_url != nil
+                if let correct_answer_index = correct_answer_index {
+                    self.revealAnswer(with: correct_answer_index)
                 } else if let show_question_prompt_time = show_question_prompt_time {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
                 }
@@ -312,7 +315,7 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    private func revealAnswer() {
+    private func revealAnswer(with correct_answer_index: Int) {
         if !hasRevealedAnswerOnce {
             playVideoAnswer()
             hasRevealedAnswerOnce = true
@@ -326,7 +329,7 @@ class QuestionViewController: UIViewController {
                 answerView.layer.sublayers?.removeAll(where: { layer in
                     return layer is CAGradientLayer
                 })
-                let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+                let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
                     addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
@@ -335,11 +338,11 @@ class QuestionViewController: UIViewController {
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
             }
-            markCorrectAnswerView()
+            markCorrectAnswerView(correct_answer_index: correct_answer_index)
             
             // this code is hiding remaining options
             for (_, answerView) in answerViews.enumerated() {
-                if answerView.tag == selectedAnswerIndex || answerView.tag == self.currentData.correct_answer_index {
+                if answerView.tag == selectedAnswerIndex || answerView.tag == correct_answer_index {
                     answerView.alpha = 1.0
                 } else {
                     UIView.animate(withDuration: 1.0) {
@@ -351,7 +354,7 @@ class QuestionViewController: UIViewController {
     }
     
     private func playVideoAnswer() {
-        if let url = URL(string: answer_video_url) {
+        if let answer_video_url = answer_video_url, let url = URL(string: answer_video_url) {
             let asset = AVURLAsset(url: url)
             let playerItem = AVPlayerItem(asset: asset)
             player.replaceCurrentItem(with: playerItem)
@@ -373,8 +376,8 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    private func markCorrectAnswerView() {
-        let correctAnswerView = answerViews[currentData.correct_answer_index]
+    private func markCorrectAnswerView(correct_answer_index: Int) {
+        let correctAnswerView = answerViews[correct_answer_index]
         addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
         correctAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
     }
@@ -407,7 +410,8 @@ class QuestionViewController: UIViewController {
                 let video_answer_id = currentData.videoAnswer.objectId ?? ""
                 dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
                     self.answer_video_url = videoAnswer.video_url_string
-                    self.revealAnswer()
+                    //TODO: this is wrong, we have to make it use the correct reveal answer index
+                    self.revealAnswer(with: 0)
                     self.playVideoAnswer()
                 }
             }
@@ -415,21 +419,14 @@ class QuestionViewController: UIViewController {
     }
     
     private func submitSelectedAnswer() {
+        //if they didn't choose one, we mark at as -1 for time ran out.
         let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
             return answerView.isChosen
-        }
+        } ?? -1
         
-        var answerStatus: AnswerStatus = .incorrect
-        if let selectedAnswerIndex = selectedAnswerIndex {
-            let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
-            if !isIncorrectAnswer {
-                answerStatus = .correct
-            }
-        } else {
-            answerStatus = .time_ran_out
-        }
-        
-        self.submitAnswer(answerStatus: answerStatus)
+        dataStore.saveAnswer(for: currentData.quizTopic,
+                             chosen_answer_index: selectedAnswerIndex,
+                             quizData: currentData)
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -460,12 +457,6 @@ class QuestionViewController: UIViewController {
                 answerView.select()
             }
         }
-    }
-        
-    func submitAnswer(answerStatus: AnswerStatus) {
-        dataStore.saveAnswer(for: currentData.quizTopic,
-                             answerStatus: answerStatus,
-                             quizData: currentData)
     }
     
     private func segueToNextVC(index: Int?) {

@@ -10,18 +10,18 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
-    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Bool, Double, String, String) -> Void) {
+    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Int?, Double, String?, String) -> Void) {
         let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? ""]
         PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
             if let result = result {
                 let json = JSON(result)
                 let dict = json.dictionaryObject
                 let show_question_prompt_time = dict?["show_question_prompt_time"] as? Date
-                let should_reveal_answer = json["should_reveal_answer"].boolValue
+                let correct_answer_index = json["correct_answer_index"].int
                 let current_time_seconds = json["current_time_seconds"].doubleValue
                 let current_quiz_data_id = json["current_quiz_data_id"].stringValue
-                let video_answer_url = json["video_answer_url"].stringValue
-                completion(show_question_prompt_time, should_reveal_answer, current_time_seconds, video_answer_url, current_quiz_data_id)
+                let video_answer_url = json["video_answer_url"].string
+                completion(show_question_prompt_time, correct_answer_index, current_time_seconds, video_answer_url, current_quiz_data_id)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
@@ -70,13 +70,12 @@ class QuizDataStore {
         }
     }
     
-    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionViewController.AnswerStatus, quizData: QuizDataParse) {
-        let questionStatus = answerStatus.rawValue
+    func saveAnswer(for quizTopic: QuizTopicParse, chosen_answer_index: Int, quizData: QuizDataParse) {
         let quizDataID = quizData.objectId ?? ""
         let quizTopicID = quizTopic.objectId ?? ""
         
         let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
-                                          "questionStatus":questionStatus,
+                                          "chosen_answer_index": chosen_answer_index,
                                           "quizDataID": quizDataID]
         PFCloud.callFunction(inBackground: "saveAnswer", withParameters: parameters) { (result, error) in
             if result != nil {

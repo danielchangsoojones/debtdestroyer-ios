@@ -10,11 +10,13 @@ import SwiftyJSON
 import Parse
 
 class CryptoSettingsDataStore {
-    func markQuizStatus(shouldStartQuestionPrompt: Bool, shouldRevealAnswer: Bool, currentIndex: Int, videoAnswerID: String, currentQuizData: QuizDataParse, completion: @escaping (Any?) -> Void) {
+    func markQuizStatus(shouldStartQuestionPrompt: Bool, currentIndex: Int?, videoAnswerID: String, currentQuizData: QuizDataParse, completion: @escaping (Any?) -> Void) {
         var parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
                                           "quizDataID": currentQuizData.objectId ?? ""
         ]
-        if shouldRevealAnswer {
+        
+        //is revealing answer
+        if let currentIndex = currentIndex {
             parameters["correct_answer_index"] = AnswerKeysViewController.correct_index_array[currentIndex]
             parameters["video_answer_url"] = AnswerKeysViewController.answer_video_url[currentIndex]
             parameters["video_answer_id"] = videoAnswerID

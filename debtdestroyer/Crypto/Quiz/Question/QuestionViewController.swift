@@ -167,8 +167,7 @@ class QuestionViewController: UIViewController {
     @objc private func startQuestionPromptControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
         quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true,
-                                            shouldRevealAnswer: false,
-                                            currentIndex: currentIndex,
+                                            currentIndex: nil,
                                             videoAnswerID: currentData.videoAnswer.objectId ?? "",
                                             currentQuizData: currentData) { _ in
             
@@ -178,7 +177,6 @@ class QuestionViewController: UIViewController {
     @objc private func revealAnswerControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
         quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
-                                            shouldRevealAnswer: true,
                                             currentIndex: currentIndex,
                                             videoAnswerID: currentData.videoAnswer.objectId ?? "",
                                             currentQuizData: currentData) { _ in

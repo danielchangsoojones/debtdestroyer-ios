@@ -8,8 +8,8 @@
 import UIKit
 
 class AnswerKeysViewController: UIViewController {
-    static let correct_index_array = [0, 2, 4, 6]
-    static let answer_video_url = ["butter"]
+    static let correct_indices = [0, 2, 4, 6]
+    static let answer_video_urls = ["butter"]
     
 
     private var tableView: UITableView!
@@ -48,13 +48,13 @@ extension AnswerKeysViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AnswerKeysViewController.correct_index_array.count
+        return AnswerKeysViewController.correct_indices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        let correctAnswerIndexStr = String(AnswerKeysViewController.correct_index_array[indexPath.row])
-        cell.textLabel?.text = correctAnswerIndexStr + " & " + AnswerKeysViewController.answer_video_url[indexPath.row]
+        let correctAnswerIndexStr = String(AnswerKeysViewController.correct_indices[indexPath.row])
+        cell.textLabel?.text = correctAnswerIndexStr + " & " + AnswerKeysViewController.answer_video_urls[indexPath.row]
         return cell
     }
     

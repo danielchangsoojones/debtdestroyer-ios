@@ -174,11 +174,19 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func revealAnswerControl() {
-        let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
-                                            currentIndex: currentIndex,
-                                            currentQuizData: currentData) { _ in
-            
+        let now = Date()
+        if currentData.quizTopic.start_time < now {
+            //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
+            self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
+            self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
+            self.playVideoAnswer()
+        } else {
+            let quizManagerDataStore = CryptoSettingsDataStore()
+            quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
+                                                currentIndex: currentIndex,
+                                                currentQuizData: currentData) { _ in
+                
+            }
         }
     }
     
@@ -406,7 +414,6 @@ class QuestionViewController: UIViewController {
                 let video_answer_id = currentData.videoAnswer.objectId ?? ""
                 dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
                     self.answer_video_url = videoAnswer.video_url_string
-                    //TODO: this is wrong, we have to make it use the correct reveal answer index
                     self.revealAnswer(with: self.currentData.correct_answer_index)
                     self.playVideoAnswer()
                 }

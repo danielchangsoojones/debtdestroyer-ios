@@ -14,12 +14,7 @@ class QuestionViewController: UIViewController {
         static let originalStartTime: TimeInterval = 12
     }
     
-    enum AnswerStatus: String {
-        case incorrect = "incorrect"
-        case correct = "correct"
-        case time_ran_out = "time_ran_out"
-    }
-    
+    private var messageHelper: MessageHelper?
     private var timeLeft: TimeInterval = Constants.originalStartTime
     var endTime: Date?
     var timeLabel =  UILabel()
@@ -41,11 +36,15 @@ class QuestionViewController: UIViewController {
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
-    private var answer_video_url = ""
+    private var answer_video_url: String?
     private var intervieweeImageView: UIImageView!
     let audioSession = AVAudioSession.sharedInstance()
     var volume: Float?
     var obs: NSKeyValueObservation?
+    var soundOffContainer = UIView()
+    var closePopupButton = UIButton()
+    
+    private var helpButton = UIButton()
 
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -78,10 +77,14 @@ class QuestionViewController: UIViewController {
         self.progressBarContainer = questionView.progressBarContainer
         self.intervieweeImageView = questionView.intervieweeImageView
         self.bottomView = questionView.bottomView
+        self.soundOffContainer = questionView.soundOffContainer
+        self.closePopupButton = questionView.closePopupButton
+        self.helpButton = questionView.helpButton
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         playVideo()
         quizStatusTimer = Timer.scheduledTimer(timeInterval: 1.0,
                                                target: self,
@@ -94,8 +97,10 @@ class QuestionViewController: UIViewController {
                 selector: #selector(applicationDidBecomeActive),
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil)
+        closePopupButton.addTarget(self,action: #selector(closeNoSoundPopup),for: .touchUpInside)
         showControlBtns()
         intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
+        helpButton.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
     }
     
     deinit {
@@ -122,6 +127,16 @@ class QuestionViewController: UIViewController {
         if hasRevealedAnswerOnce || isWaitingToShowQuestionPrompt  {
             player.play()
         }
+    }
+    
+    @objc private func closeNoSoundPopup() {
+        UserDefaults.standard.set(true, forKey: "NoSoundBannerClosed")
+        UserDefaults.standard.synchronize()
+        self.soundOffContainer.isHidden = true
+    }
+    
+    @objc private func helpPressed() {
+        messageHelper?.text(MessageHelper.customerServiceNum)
     }
     
     private func showControlBtns() {
@@ -151,15 +166,27 @@ class QuestionViewController: UIViewController {
     
     @objc private func startQuestionPromptControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true, shouldRevealAnswer: false, currentQuizData: currentData) { _ in
+        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true,
+                                            currentIndex: nil,
+                                            currentQuizData: currentData) { _ in
             
         }
     }
     
     @objc private func revealAnswerControl() {
-        let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true, currentQuizData: currentData) { _ in
-            
+        let now = Date()
+        if currentData.quizTopic.start_time > now {
+            //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
+            self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
+            self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
+            self.playVideoAnswer()
+        } else {
+            let quizManagerDataStore = CryptoSettingsDataStore()
+            quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
+                                                currentIndex: currentIndex,
+                                                currentQuizData: currentData) { _ in
+                
+            }
         }
     }
     
@@ -190,23 +217,30 @@ class QuestionViewController: UIViewController {
     }
     
     private func playVideo() {
-        // this code is KVO to notify user if volume change or put on mute
-        self.obs = audioSession.observe( \.outputVolume ) { (av, change) in
-            if av.outputVolume == 0.0 {
-                BannerAlert.show(title: "System volume is off!", subtitle: "", type: .info)
+        let bannerStatus = UserDefaults.standard.bool(forKey: "NoSoundBannerClosed")
+
+        if !bannerStatus {
+            
+            // this code is KVO to notify user if volume change or put on mute
+            self.obs = audioSession.observe( \.outputVolume ) { (av, change) in
+                if av.outputVolume == 0.0 {
+                    self.soundOffContainer.isHidden = false
+                }
+            }
+            
+            // this code is to notify user initially, if volume is off
+            do {
+                try audioSession.setActive(true)
+                volume = audioSession.outputVolume
+                if volume == 0.0 {
+                    self.soundOffContainer.isHidden = false
+                }
+            } catch {
+                print("Error Setting Up Audio Session")
             }
         }
         
-        // this code is to notify user initially, if volume is off
-        do {
-            try audioSession.setActive(true)
-            volume = audioSession.outputVolume
-            if volume == 0.0 {
-                BannerAlert.show(title: "System volume is off!", subtitle: "", type: .info)
-            }
-        } catch {
-            print("Error Setting Up Audio Session")
-        }
+       
         
         if let video_url = URL(string: currentData.video_url_string) {
             player = AVPlayer(url: video_url)
@@ -242,12 +276,12 @@ class QuestionViewController: UIViewController {
                                               currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds, answer_video_url, current_quiz_data_id  in
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer  in
                 self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 self.answer_video_url = answer_video_url
                 
-                if should_reveal_answer {
-                    self.revealAnswer()
+                if shouldRevealAnswer, let correct_answer_index = correct_answer_index {
+                    self.revealAnswer(with: correct_answer_index)
                 } else if let show_question_prompt_time = show_question_prompt_time {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
                 }
@@ -284,7 +318,7 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    private func revealAnswer() {
+    private func revealAnswer(with correct_answer_index: Int) {
         if !hasRevealedAnswerOnce {
             playVideoAnswer()
             hasRevealedAnswerOnce = true
@@ -298,7 +332,7 @@ class QuestionViewController: UIViewController {
                 answerView.layer.sublayers?.removeAll(where: { layer in
                     return layer is CAGradientLayer
                 })
-                let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+                let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
                     addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
@@ -307,11 +341,11 @@ class QuestionViewController: UIViewController {
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
             }
-            markCorrectAnswerView()
+            markCorrectAnswerView(correct_answer_index: correct_answer_index)
             
             // this code is hiding remaining options
             for (_, answerView) in answerViews.enumerated() {
-                if answerView.tag == selectedAnswerIndex || answerView.tag == self.currentData.correct_answer_index {
+                if answerView.tag == selectedAnswerIndex || answerView.tag == correct_answer_index {
                     answerView.alpha = 1.0
                 } else {
                     UIView.animate(withDuration: 1.0) {
@@ -323,7 +357,7 @@ class QuestionViewController: UIViewController {
     }
     
     private func playVideoAnswer() {
-        if let url = URL(string: answer_video_url) {
+        if let answer_video_url = answer_video_url, let url = URL(string: answer_video_url) {
             let asset = AVURLAsset(url: url)
             let playerItem = AVPlayerItem(asset: asset)
             player.replaceCurrentItem(with: playerItem)
@@ -345,8 +379,8 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    private func markCorrectAnswerView() {
-        let correctAnswerView = answerViews[currentData.correct_answer_index]
+    private func markCorrectAnswerView(correct_answer_index: Int) {
+        let correctAnswerView = answerViews[correct_answer_index]
         addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
         correctAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
     }
@@ -379,7 +413,7 @@ class QuestionViewController: UIViewController {
                 let video_answer_id = currentData.videoAnswer.objectId ?? ""
                 dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
                     self.answer_video_url = videoAnswer.video_url_string
-                    self.revealAnswer()
+                    self.revealAnswer(with: self.currentData.correct_answer_index)
                     self.playVideoAnswer()
                 }
             }
@@ -387,21 +421,14 @@ class QuestionViewController: UIViewController {
     }
     
     private func submitSelectedAnswer() {
+        //if they didn't choose one, we mark at as -1 for time ran out.
         let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
             return answerView.isChosen
-        }
+        } ?? -1
         
-        var answerStatus: AnswerStatus = .incorrect
-        if let selectedAnswerIndex = selectedAnswerIndex {
-            let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
-            if !isIncorrectAnswer {
-                answerStatus = .correct
-            }
-        } else {
-            answerStatus = .time_ran_out
-        }
-        
-        self.submitAnswer(answerStatus: answerStatus)
+        dataStore.saveAnswer(for: currentData.quizTopic,
+                             chosen_answer_index: selectedAnswerIndex,
+                             quizData: currentData)
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -433,12 +460,6 @@ class QuestionViewController: UIViewController {
             }
         }
     }
-        
-    func submitAnswer(answerStatus: AnswerStatus) {
-        dataStore.saveAnswer(for: currentData.quizTopic,
-                             answerStatus: answerStatus,
-                             quizData: currentData)
-    }
     
     private func segueToNextVC(index: Int?) {
         playerLayer.player?.pause()
@@ -453,6 +474,8 @@ class QuestionViewController: UIViewController {
         }
         let isLastQuestion = !quizDatas.indices.contains(nextIndex)
         if isLastQuestion {
+            UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
+            UserDefaults.standard.synchronize()
             if Helpers.getTopViewController() is UINavigationController {
                 //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
                 let tabBarVC = presentingViewController as? UITabBarController

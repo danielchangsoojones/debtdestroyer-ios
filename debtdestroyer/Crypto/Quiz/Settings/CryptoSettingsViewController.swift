@@ -21,6 +21,7 @@ class CryptoSettingsViewController: UIViewController {
         case textNoti
         case quizManager
         case quizFinished
+        case answerKeys
     }
     
     private var messageHelper: MessageHelper?
@@ -48,6 +49,8 @@ class CryptoSettingsViewController: UIViewController {
             dataArr.append("Quiz Maneger")
             imgNameArr.append("contactUs")
             dataArr.append("Quiz Finished")
+            imgNameArr.append("contactUs")
+            dataArr.append("Answer Keys")
             imgNameArr.append("contactUs")
         }
               
@@ -171,6 +174,12 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 cryptoSettingsDataStore.finishQuizTime { response in
                     print(response)
                 }
+                
+            case .answerKeys:
+                // MARK: Answer Keys
+                let vc = AnswerKeysViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
         }
     }
     

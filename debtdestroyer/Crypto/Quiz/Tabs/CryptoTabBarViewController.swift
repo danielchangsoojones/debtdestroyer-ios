@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UXCam
 
 class CryptoTabBarViewController: UITabBarController {
     private var dataStore = QuizDataStore()
@@ -15,6 +16,11 @@ class CryptoTabBarViewController: UITabBarController {
         self.setTabs()
         tabBar.tintColor = .black
         tabBar.backgroundColor = .white
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UXCam.setUserIdentity(User.current()?.objectId ?? "")
     }
     
     deinit {

@@ -426,14 +426,16 @@ class QuestionViewController: UIViewController {
     }
     
     private func submitSelectedAnswer() {
-        //if they didn't choose one, we mark at as -1 for time ran out.
-        let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
-            return answerView.isChosen
-        } ?? -1
-        
-        dataStore.saveAnswer(for: currentData.quizTopic,
-                             chosen_answer_index: selectedAnswerIndex,
-                             quizData: currentData)
+        //don't submit answers for the quiz when admin doing quiz
+        if !User.isAdminUser {
+            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+                return answerView.isChosen
+            } ?? -1
+            
+            dataStore.saveAnswer(for: currentData.quizTopic,
+                                 chosen_answer_index: selectedAnswerIndex,
+                                 quizData: currentData)
+        }
     }
     
     private func addAnswers(to stackView: UIStackView) {

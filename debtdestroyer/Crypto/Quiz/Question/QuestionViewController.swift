@@ -301,11 +301,16 @@ class QuestionViewController: UIViewController {
                     return quizData.objectId == current_quiz_data_id
                 }
                 
-                //If I don't kill the player, then it keeps playing it in the background.
-                //while the new player on another VC is playing.
-                player.pause()
-                player.replaceCurrentItem(with: nil)
-                segueToNextVC(index: index)
+                if let index = index, index > currentIndex {
+                    //we had a glitch where it would jump backwards sometimes at the end of every player.
+                    //we want to make sure it only jumps forward
+                    
+                    //If I don't kill the player, then it keeps playing it in the background.
+                    //while the new player on another VC is playing.
+                    player.pause()
+                    player.replaceCurrentItem(with: nil)
+                    segueToNextVC(index: index)
+                }
             }
         }
     }

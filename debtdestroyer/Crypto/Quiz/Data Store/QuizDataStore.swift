@@ -171,5 +171,21 @@ class QuizDataStore {
             }
         }
     }
+    
+    func officiallyEndQuiz(for quizTopic: QuizTopicParse) {
+        let quizTopicID = quizTopic.objectId ?? ""
+        
+        let parameters: [String : Any] = ["quizTopicID" : quizTopicID]
+        PFCloud.callFunction(inBackground: "officiallyEndQuiz", withParameters: parameters) { (result, error) in
+            if result != nil {
+                print("Officially End Quiz called Successfully.")
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "officiallyEndQuiz")
+            }
+        }
+    }
+
 
 }

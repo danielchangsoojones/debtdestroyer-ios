@@ -170,16 +170,18 @@ class NewGameStartViewController: UIViewController {
             self.quizKickoffTime = quizTopic.start_time
             setData(quizTopic: quizTopic)
             let now = Date()
-            if quizTopic.start_time < now {
+//            if quizTopic.start_time < now {
                 //time to start the game
                 startQuiz()
-            }
+//            }
         }
     }
     
     @objc private func startQuiz() {
         checkStartTimer.invalidate()
-        let questionVC = QuestionViewController(quizDatas: quizDatas,
+//        let questionVC = QuestionViewController(quizDatas: quizDatas,
+//                                                currentIndex: 0)
+        let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                 currentIndex: 0)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen

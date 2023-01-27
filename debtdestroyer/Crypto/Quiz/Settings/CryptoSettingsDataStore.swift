@@ -10,11 +10,17 @@ import SwiftyJSON
 import Parse
 
 class CryptoSettingsDataStore {
-    func markQuizStatus(shouldStartQuestionPrompt: Bool, shouldRevealAnswer: Bool, currentQuizData: QuizDataParse, completion: @escaping (Any?) -> Void) {
-        let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
-                                          "shouldRevealAnswer" : shouldRevealAnswer,
+    func markQuizStatus(shouldStartQuestionPrompt: Bool, currentIndex: Int?, currentQuizData: QuizDataParse, completion: @escaping (Any?) -> Void) {
+        var parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
                                           "quizDataID": currentQuizData.objectId ?? ""
         ]
+        
+        //is revealing answer
+        if let currentIndex = currentIndex {
+            parameters["correct_answer_index"] = AnswerKeysViewController.correct_indices[currentIndex]
+            parameters["video_answer_url"] = AnswerKeysViewController.answer_video_urls[currentIndex]
+        }
+        
         PFCloud.callFunction(inBackground: "markQuizStatus", withParameters: parameters) { (result, error) in
             if let result = result {
                 

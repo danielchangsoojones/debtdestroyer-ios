@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import AVFoundation
+import SCLAlertView
 
 class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     struct Constants {
@@ -42,7 +43,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
-    private var answer_video_url = ""
+    private var answer_video_url: String?
     private var intervieweeImageView: UIImageView!
     let audioSession = AVAudioSession.sharedInstance()
     var volume: Float?
@@ -172,15 +173,47 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     @objc private func startQuestionPromptControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true, shouldRevealAnswer: false, currentQuizData: currentData) { _ in
+        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true,
+                                            currentIndex: nil,
+                                            currentQuizData: currentData) { _ in
             
         }
     }
-    
+
     @objc private func revealAnswerControl() {
-        let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false, shouldRevealAnswer: true, currentQuizData: currentData) { _ in
-            
+        
+        if (User.current()?.isAdminUser ?? false) {
+            if quizDatas.count == (currentIndex + 1) {
+                
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alertView = SCLAlertView(appearance: appearance)
+                
+                alertView.addButton("Officially End Quiz") {
+                    self.dataStore.officiallyEndQuiz(for: self.currentData.quizTopic)
+                }
+                
+                alertView.addButton("No") {
+                    
+                }
+                alertView.showNotice("", subTitle: "Would you like to officially end the quiz?")
+            }
+        }
+        
+        let now = Date()
+        if currentData.quizTopic.start_time > now {
+            //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
+            self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
+            self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
+            self.playVideoAnswer()
+        } else {
+            let quizManagerDataStore = CryptoSettingsDataStore()
+            quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
+                                                currentIndex: currentIndex,
+                                                currentQuizData: currentData) { _ in
+                
+            }
         }
     }
     
@@ -270,20 +303,19 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                               currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, should_reveal_answer, current_quiz_seconds, answer_video_url, current_quiz_data_id  in
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer  in
                 self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 self.answer_video_url = answer_video_url
                 
-                if should_reveal_answer {
-                    self.revealAnswer()
-                }
-                if let show_question_prompt_time = show_question_prompt_time {
+                if shouldRevealAnswer, let correct_answer_index = correct_answer_index {
+                    self.revealAnswer(with: correct_answer_index)
+                } else if let show_question_prompt_time = show_question_prompt_time {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
                 }
             }
         }
     }
-    
+
     private func jumpToCurrentVideoMoment(current_quiz_seconds: Double, current_quiz_data_id: String) {
         let timeDifference = abs(player.currentTime().seconds - current_quiz_seconds)
         if timeDifference > 2 && User.current()?.email != "messyjones@gmail.com" {
@@ -313,7 +345,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         }
     }
     
-    private func revealAnswer() {
+    private func revealAnswer(with correct_answer_index: Int) {
         if !hasRevealedAnswerOnce {
             playVideoAnswer()
             hasRevealedAnswerOnce = true
@@ -327,7 +359,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 answerView.layer.sublayers?.removeAll(where: { layer in
                     return layer is CAGradientLayer
                 })
-                let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
+                let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
                     addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
@@ -336,11 +368,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
             }
-            markCorrectAnswerView()
+            markCorrectAnswerView(correct_answer_index: correct_answer_index)
             
             // this code is hiding remaining options
             for (_, answerView) in answerViews.enumerated() {
-                if answerView.tag == selectedAnswerIndex || answerView.tag == self.currentData.correct_answer_index {
+                if answerView.tag == selectedAnswerIndex || answerView.tag == correct_answer_index {
                     answerView.alpha = 1.0
                 } else {
                     UIView.animate(withDuration: 1.0) {
@@ -350,9 +382,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             }
         }
     }
-    
+
     private func playVideoAnswer() {
-        if let url = URL(string: answer_video_url) {
+        if let answer_video_url = answer_video_url, let url = URL(string: answer_video_url) {
             let asset = AVURLAsset(url: url)
             let playerItem = AVPlayerItem(asset: asset)
             player.replaceCurrentItem(with: playerItem)
@@ -373,9 +405,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 )
         }
     }
-    
-    private func markCorrectAnswerView() {
-        let correctAnswerView = answerViews[currentData.correct_answer_index]
+
+    private func markCorrectAnswerView(correct_answer_index: Int) {
+        let correctAnswerView = answerViews[correct_answer_index]
         addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
         correctAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
     }

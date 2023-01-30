@@ -363,6 +363,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 if isIncorrectAnswer {
                     addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                    
+                    UIView.animate(withDuration: 1.0) {
+                        answerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+                    }
                 } else {
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"

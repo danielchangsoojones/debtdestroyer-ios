@@ -153,6 +153,7 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         let theRange = str.range(of: "tiebreaker rules")
         let attributedString = NSMutableAttributedString(string:text, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.cgColor, NSAttributedString.Key.font:  UIFont.MontserratRegular(size: 18)])
         attributedString.addAttribute(.underlineStyle, value: 1, range: theRange)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: theRange)
 
         let url = URL(string: "https://www.debtdestroyer.app/tie-breaker-rules")!
         

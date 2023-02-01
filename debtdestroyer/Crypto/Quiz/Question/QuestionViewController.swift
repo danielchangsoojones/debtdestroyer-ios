@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import AVFoundation
+import SCLAlertView
 
 class QuestionViewController: UIViewController {
     struct Constants {
@@ -174,6 +175,26 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func revealAnswerControl() {
+        
+        if (User.current()?.isAdminUser ?? false) {
+            if quizDatas.count == (currentIndex + 1) {
+                
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alertView = SCLAlertView(appearance: appearance)
+                
+                alertView.addButton("Officially End Quiz") {
+                    self.dataStore.officiallyEndQuiz(for: self.currentData.quizTopic)
+                }
+                
+                alertView.addButton("No") {
+                    
+                }
+                alertView.showNotice("", subTitle: "Would you like to officially end the quiz?")
+            }
+        }
+        
         let now = Date()
         if currentData.quizTopic.start_time > now {
             //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
@@ -426,14 +447,16 @@ class QuestionViewController: UIViewController {
     }
     
     private func submitSelectedAnswer() {
-        //if they didn't choose one, we mark at as -1 for time ran out.
-        let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
-            return answerView.isChosen
-        } ?? -1
-        
-        dataStore.saveAnswer(for: currentData.quizTopic,
-                             chosen_answer_index: selectedAnswerIndex,
-                             quizData: currentData)
+        //don't submit answers for the quiz when admin doing quiz
+        if !User.isAdminUser {
+            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+                return answerView.isChosen
+            } ?? -1
+            
+            dataStore.saveAnswer(for: currentData.quizTopic,
+                                 chosen_answer_index: selectedAnswerIndex,
+                                 quizData: currentData)
+        }
     }
     
     private func addAnswers(to stackView: UIStackView) {

@@ -174,17 +174,17 @@ class NewGameStartViewController: UIViewController {
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
-                startQuiz(quizTopic: quizTopic)
+                startQuiz()
             }
         }
     }
     
-    @objc private func startQuiz(quizTopic: QuizTopicParse) {
+    @objc private func startQuiz() {
         checkStartTimer.invalidate()
         
         var quizStartIndex = 0
         let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
-            return quizData.objectId == quizTopic.currentQuizDataID
+            return quizData.objectId == quizData.quizTopic.currentQuizDataID
         }
         //if we need to start them off in the middle of the quiz because they came late.
         if let currentQuizTopicIndex = currentQuizTopicIndex {

@@ -338,7 +338,7 @@ class QuestionViewController: UIViewController {
     private func startQuestionPrompt(start_time: Date) {
         if endTime == nil {
             self.endTime = start_time.addingTimeInterval(timeLeft)
-            timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             self.questionPromptAnimate()
         }
     }

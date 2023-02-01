@@ -1,11 +1,12 @@
 PODS:
   - Bolts/Tasks (1.9.1)
   - BRYXBanner (0.8.4)
-  - Parse (1.19.3):
-    - Parse/Core (= 1.19.3)
-  - Parse/Core (1.19.3):
+  - Frigade (0.1.1)
+  - Parse (1.19.4):
+    - Parse/Core (= 1.19.4)
+  - Parse/Core (1.19.4):
     - Bolts/Tasks (= 1.9.1)
-  - Parse/UI (1.19.3):
+  - Parse/UI (1.19.4):
     - Parse/Core
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
@@ -22,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - BRYXBanner
+  - Frigade
   - Parse
   - Parse/UI
   - Reusable
@@ -37,6 +39,7 @@ SPEC REPOS:
   trunk:
     - Bolts
     - BRYXBanner
+    - Frigade
     - Parse
     - Reusable
     - SCLAlertView
@@ -50,7 +53,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   BRYXBanner: 4fbd266f96ce000e4c6cc9a0558c446bd88d9801
-  Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
+  Frigade: 08eb40ca13aeb08d8a396cf11d4ee68f4c4a0983
+  Parse: 6d572042e2c171414c677acabcd9bab7bbf51264
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SkyFloatingLabelTextField: 79ddc40e4ad59707fedbb48d605417aee48bb78a
@@ -60,6 +64,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UXCam: c24a71093f9051c553380e647a0c55ee0c586091
 
-PODFILE CHECKSUM: 4dc89a1605539f35897893d5a715d2e3adfaaef9
+PODFILE CHECKSUM: 0e7157f7febbf78f644ed89ada31bd5ba7eb8fe9
 
 COCOAPODS: 1.11.3

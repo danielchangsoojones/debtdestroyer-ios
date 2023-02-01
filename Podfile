@@ -17,4 +17,5 @@ target 'debtdestroyer' do
   pod 'SkyFloatingLabelTextField'
   pod 'TTTAttributedLabel'
   pod 'UXCam', "~> 3.4.2"
+  pod 'Frigade'
 end

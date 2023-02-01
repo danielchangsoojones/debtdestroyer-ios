@@ -316,7 +316,6 @@ class QuestionViewController: UIViewController {
             if alreadyPushingVC {
                 return
             } else if current_quiz_data_id != currentData.objectId {
-                alreadyPushingVC = true
                 //we need to jump to another quiz data
                 let index = quizDatas.firstIndex { quizData in
                     return quizData.objectId == current_quiz_data_id
@@ -339,7 +338,7 @@ class QuestionViewController: UIViewController {
     private func startQuestionPrompt(start_time: Date) {
         if endTime == nil {
             self.endTime = start_time.addingTimeInterval(timeLeft)
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             self.questionPromptAnimate()
         }
     }
@@ -490,33 +489,36 @@ class QuestionViewController: UIViewController {
     }
     
     private func segueToNextVC(index: Int?) {
-        playerLayer.player?.pause()
-        playerLayer.player = nil
-        timer.invalidate()
-        quizStatusTimer.invalidate()
-        NotificationCenter.default.removeObserver(self)
-        
-        var nextIndex = currentIndex + 1
-        if let index = index {
-            nextIndex = index
-        }
-        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
-        if isLastQuestion {
-            UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
-            UserDefaults.standard.synchronize()
-            if Helpers.getTopViewController() is UINavigationController {
-                //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
-                let tabBarVC = presentingViewController as? UITabBarController
-                tabBarVC?.selectedIndex = 1
-                dismiss(animated: true)
-            } else {
-                let leaderboardVC = ChampionsViewController()
-                self.navigationController?.pushViewController(leaderboardVC, animated: true)
+        if !alreadyPushingVC {
+            alreadyPushingVC = true
+            playerLayer.player?.pause()
+            playerLayer.player = nil
+            timer.invalidate()
+            quizStatusTimer.invalidate()
+            NotificationCenter.default.removeObserver(self)
+            
+            var nextIndex = currentIndex + 1
+            if let index = index {
+                nextIndex = index
             }
-        } else {
-            let vc = QuestionViewController(quizDatas: quizDatas,
-                                            currentIndex: nextIndex)
-            self.navigationController?.pushViewController(vc, animated: true)
+            let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+            if isLastQuestion {
+                UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
+                UserDefaults.standard.synchronize()
+                if Helpers.getTopViewController() is UINavigationController {
+                    //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+                    let tabBarVC = presentingViewController as? UITabBarController
+                    tabBarVC?.selectedIndex = 1
+                    dismiss(animated: true)
+                } else {
+                    let leaderboardVC = ChampionsViewController()
+                    self.navigationController?.pushViewController(leaderboardVC, animated: true)
+                }
+            } else {
+                let vc = QuestionViewController(quizDatas: quizDatas,
+                                                currentIndex: nextIndex)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 }

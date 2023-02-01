@@ -174,15 +174,25 @@ class NewGameStartViewController: UIViewController {
             let now = Date()
             if quizTopic.start_time < now {
                 //time to start the game
-                startQuiz()
+                startQuiz(quizTopic: quizTopic)
             }
         }
     }
     
-    @objc private func startQuiz() {
+    @objc private func startQuiz(quizTopic: QuizTopicParse) {
         checkStartTimer.invalidate()
+        
+        var quizStartIndex = 0
+        let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
+            return quizData.objectId == quizTopic.currentQuizDataID
+        }
+        //if we need to start them off in the middle of the quiz because they came late.
+        if let currentQuizTopicIndex = currentQuizTopicIndex {
+            quizStartIndex = currentQuizTopicIndex
+        }
+        
         let questionVC = QuestionViewController(quizDatas: quizDatas,
-                                                currentIndex: 0)
+                                                currentIndex: quizStartIndex)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)

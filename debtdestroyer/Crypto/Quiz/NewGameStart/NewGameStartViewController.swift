@@ -29,6 +29,7 @@ class NewGameStartViewController: UIViewController {
     private var queuePlayer: AVQueuePlayer?
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
+    private var quizTopicID = ""
     
     override func loadView() {
         super.loadView()
@@ -199,6 +200,10 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func setData(quizTopic: QuizTopicParse) {
+        if quizTopicID != quizTopic.objectId{
+            quizTopicID = quizTopic.objectId ?? ""
+            User.current()?.quizPointCounter = 0 // To reset points for new topic
+        }
         let apiDate = quizTopic.start_time
         let formatter = DateFormatter()
         formatter.dateStyle = .full

@@ -80,8 +80,6 @@ class NewGameStartViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.backgroundColor = .white
         checkStartTimer.invalidate()
-        print("checkStartTimer.invalidate")
-        print("timer.invalidate")
         timer.invalidate()
     }
     
@@ -184,7 +182,6 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func startQuiz() {
         checkStartTimer.invalidate()
-        print("checkStartTimer.invalidate")
         var quizStartIndex = 0
         let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
             return quizData.objectId == quizData.quizTopic.currentQuizDataID
@@ -302,7 +299,6 @@ class NewGameStartViewController: UIViewController {
         } else {
             timeLabel.text = "00"
             timer.invalidate()
-            print("timer.invalidate")
             // Time to start game
             
         }

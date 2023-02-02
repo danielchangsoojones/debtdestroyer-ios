@@ -94,25 +94,6 @@ class QuizDataStore {
         }
     }
 
-    func saveAnswer(for quizTopic: QuizTopicParse, answerStatus: QuestionWithAnswerRevealGoTinyViewController.AnswerStatus, quizData: QuizDataParse) {
-        let questionStatus = answerStatus.rawValue
-        let quizDataID = quizData.objectId ?? ""
-        let quizTopicID = quizTopic.objectId ?? ""
-        
-        let parameters: [String : Any] = ["quizTopicID" : quizTopicID,
-                                          "questionStatus":questionStatus,
-                                          "quizDataID": quizDataID]
-        PFCloud.callFunction(inBackground: "saveAnswer", withParameters: parameters) { (result, error) in
-            if result != nil {
-                print("the answer was saved for the user")
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
-            }
-        }
-    }
-
     func checkIfAlreadyTakenQuiz(for quizTopic: QuizTopicParse, completion: @escaping (Any?, Error?) -> Void) {
         let quizTopicID = quizTopic.objectId ?? ""
         let ios_version = Helpers.getVersionStr() ?? ""

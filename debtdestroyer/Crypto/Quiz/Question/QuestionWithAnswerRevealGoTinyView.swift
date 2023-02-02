@@ -19,6 +19,13 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
     let playerLayer = AVPlayerLayer()
     let bottomView = UIView()
     let progressBarContainer = UIView()
+    let revealAnswerContainer = UIView()
+    let correctAnswerView = UIView()
+    let yourAnswerView = UIView()
+    let yourAnswerLabel = UILabel()
+    let correctAnswerLabel = UILabel()
+    let yourAnswerHeading = UILabel()
+    let correctAnswerHeading = UILabel()
     var timerBar = UIProgressView()
     let intervieweeImageView = UIImageView()
     let soundOffContainer = UIView()
@@ -39,6 +46,7 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
         addIntervieweeImageView()
         setBottomView()
         setUpProgressBarContainer()
+        setUpRevealAnswerContainer()
     }
     
     required init?(coder: NSCoder) {
@@ -254,6 +262,93 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
         intervieweeImageView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.bottom.equalToSuperview().inset(50)
+        }
+    }
+    
+    private func setUpRevealAnswerContainer() {
+        revealAnswerContainer.backgroundColor = .brown
+        questionContentView.addSubview(revealAnswerContainer)
+        revealAnswerContainer.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(300)
+        }
+      
+        setYourAnswerHeadingLabel()
+        setCorrectAnswerHeadingLabel()
+        setUpCorrectAnswerView()
+        setUpYourAnswerView()
+        setCorrectAnswerLabel()
+        setYourAnswerLabel()
+    }
+    
+    private func setYourAnswerHeadingLabel() {
+        yourAnswerHeading.text = "Your Answer:"
+        yourAnswerHeading.numberOfLines = 1
+        yourAnswerHeading.font = UIFont.MontserratSemiBold(size: 25)
+        yourAnswerHeading.textColor = .white
+        revealAnswerContainer.addSubview(yourAnswerHeading)
+        yourAnswerHeading.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview().inset(10)
+            make.width.equalTo(self.frame.size.width / 2)
+        }
+    }
+    
+    private func setCorrectAnswerHeadingLabel() {
+        correctAnswerHeading.text = "Correct Answer:"
+        correctAnswerHeading.numberOfLines = 1
+        correctAnswerHeading.font = UIFont.MontserratSemiBold(size: 25)
+        correctAnswerHeading.textColor = .white
+        revealAnswerContainer.addSubview(correctAnswerHeading)
+        correctAnswerHeading.snp.makeConstraints { make in
+            make.trailing.top.equalToSuperview().inset(10)
+            make.width.equalTo(self.frame.size.width / 2)
+        }
+    }
+    
+    private func setUpCorrectAnswerView() {
+        correctAnswerView.backgroundColor = .yellow
+        revealAnswerContainer.addSubview(correctAnswerView)
+        correctAnswerView.snp.makeConstraints { make in
+            make.trailing.bottom.equalToSuperview().offset(-20)
+            make.top.equalTo(correctAnswerHeading.snp.bottom).offset(15)
+            make.width.equalTo((self.frame.size.width / 2 ) - 40)
+        }
+    }
+    
+    private func setUpYourAnswerView() {
+        yourAnswerView.backgroundColor = .yellow
+        revealAnswerContainer.addSubview(yourAnswerView)
+        yourAnswerView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-20)
+
+            make.top.equalTo(yourAnswerHeading.snp.bottom).offset(15)
+            make.width.equalTo((self.frame.size.width / 2 ) - 40)
+        }
+    }
+    
+    private func setCorrectAnswerLabel() {
+        correctAnswerLabel.numberOfLines = 2
+        correctAnswerLabel.font = UIFont.MontserratSemiBold(size: 25)
+        correctAnswerLabel.textColor = .black
+        revealAnswerContainer.addSubview(correctAnswerLabel)
+        correctAnswerLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(10)
+            make.height.equalTo(70)
+
+        }
+    }
+    
+    private func setYourAnswerLabel() {
+        yourAnswerLabel.numberOfLines = 2
+        yourAnswerLabel.font = UIFont.MontserratSemiBold(size: 25)
+        yourAnswerLabel.textColor = .black
+        revealAnswerContainer.addSubview(yourAnswerLabel)
+        yourAnswerLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(10)
+            make.height.equalTo(70)
+
         }
     }
 }

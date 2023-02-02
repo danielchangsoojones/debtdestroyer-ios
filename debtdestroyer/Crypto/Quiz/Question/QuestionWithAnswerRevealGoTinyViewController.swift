@@ -12,13 +12,7 @@ import SCLAlertView
 
 class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     struct Constants {
-        static let originalStartTime: TimeInterval = 55
-    }
-    
-    enum AnswerStatus: String {
-        case incorrect = "incorrect"
-        case correct = "correct"
-        case time_ran_out = "time_ran_out"
+        static let originalStartTime: TimeInterval = 12
     }
     
     private var messageHelper: MessageHelper?
@@ -39,7 +33,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private var hasRevealedAnswerOnce = false
     var timerBar = UIProgressView()
     var questionContentView = UIView()
-    var questionView = QuestionView()
+    var questionView = QuestionWithAnswerRevealGoTinyView()
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
@@ -50,7 +44,13 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var obs: NSKeyValueObservation?
     var soundOffContainer = UIView()
     var closePopupButton = UIButton()
-    
+    var revealAnswerContainer = UIView()
+    var correctAnswerView = UIView()
+    var yourAnswerView = UIView()
+    var yourAnswerLabel = UILabel()
+    var correctAnswerLabel = UILabel()
+    var yourAnswerHeading = UILabel()
+    var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
     
     private var currentData: QuizDataParse {
@@ -69,7 +69,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        questionView = QuestionView(frame: self.view.frame)
+        questionView = QuestionWithAnswerRevealGoTinyView(frame: self.view.frame)
         self.view = questionView
         self.playerLayer = questionView.playerLayer
         questionView.questionLabel.text = currentData.question
@@ -87,6 +87,13 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         self.soundOffContainer = questionView.soundOffContainer
         self.closePopupButton = questionView.closePopupButton
         self.helpButton = questionView.helpButton
+        self.revealAnswerContainer = questionView.revealAnswerContainer
+        self.correctAnswerView = questionView.correctAnswerView
+        self.yourAnswerView = questionView.yourAnswerView
+        self.yourAnswerLabel = questionView.yourAnswerLabel
+        self.correctAnswerLabel = questionView.correctAnswerLabel
+        self.yourAnswerHeading = questionView.yourAnswerHeading
+        self.correctAnswerHeading = questionView.correctAnswerHeading
     }
     
     override func viewDidLoad() {
@@ -179,7 +186,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             
         }
     }
-
+    
     @objc private func revealAnswerControl() {
         
         if (User.current()?.isAdminUser ?? false) {
@@ -315,24 +322,28 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             }
         }
     }
-
+    
     private func jumpToCurrentVideoMoment(current_quiz_seconds: Double, current_quiz_data_id: String) {
         let timeDifference = abs(player.currentTime().seconds - current_quiz_seconds)
         if timeDifference > 2 && User.current()?.email != "messyjones@gmail.com" {
             if alreadyPushingVC {
                 return
             } else if current_quiz_data_id != currentData.objectId {
-                alreadyPushingVC = true
                 //we need to jump to another quiz data
                 let index = quizDatas.firstIndex { quizData in
                     return quizData.objectId == current_quiz_data_id
                 }
                 
-                //If I don't kill the player, then it keeps playing it in the background.
-                //while the new player on another VC is playing.
-                player.pause()
-                player.replaceCurrentItem(with: nil)
-                segueToNextVC(index: index)
+                if let index = index, index > currentIndex {
+                    //we had a glitch where it would jump backwards sometimes at the end of every player.
+                    //we want to make sure it only jumps forward
+                    
+                    //If I don't kill the player, then it keeps playing it in the background.
+                    //while the new player on another VC is playing.
+                    player.pause()
+                    player.replaceCurrentItem(with: nil)
+                    segueToNextVC(index: index)
+                }
             }
         }
     }
@@ -352,6 +363,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
             }
+            // hiding these to show reveal answer go tiny
+            bottomView.alpha = 0.0
+            progressBarContainer.alpha = 0.0
             
             if let selectedAnswerIndex = selectedAnswerIndex {
                 let answerView = answerViews[selectedAnswerIndex]
@@ -361,12 +375,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 })
                 let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
+                    
+                    
+                    
                     addAnswerMarkingGif(to: answerView, imageName: "xmark")
                     answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
-                    
-                    UIView.animate(withDuration: 1.0) {
-                        answerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-                    }
+//                    UIView.animate(withDuration: 1.0) {
+//                        answerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+//                    }
                 } else {
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
@@ -386,7 +402,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             }
         }
     }
-
+    
     private func playVideoAnswer() {
         if let answer_video_url = answer_video_url, let url = URL(string: answer_video_url) {
             let asset = AVURLAsset(url: url)
@@ -409,7 +425,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 )
         }
     }
-
+    
     private func markCorrectAnswerView(correct_answer_index: Int) {
         let correctAnswerView = answerViews[correct_answer_index]
         addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
@@ -426,47 +442,42 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc func updateTime() {
-//        if timeLeft > 0 {
+        if timeLeft > 0 {
             timeLeft = endTime?.timeIntervalSinceNow ?? 0
             timerBar.setProgress(Float(timeLeft)/Float(Constants.originalStartTime), animated: false)
             timeLabel.text = timeLeft.time + " Seconds"
-//        } else {
-//            questionContentView.isUserInteractionEnabled = false
-//            timeLabel.text = "Time Up!"
-//            progressBarContainer.backgroundColor = hexStringToUIColor(hex: "A324EA")
-//            self.progressBarContainer.startBlink()
-//            self.timeLabel.startBlink()
-//            timer.invalidate()
-//            self.showIntervieweePhoto(shouldShow: false)
-//            submitSelectedAnswer()
-//
-//            if User.isAppleTester || User.isIpadDemo {
-//                let video_answer_id = currentData.videoAnswer.objectId ?? ""
-//                dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
-//                    self.answer_video_url = videoAnswer.video_url_string
-//                    self.revealAnswer()
-//                    self.playVideoAnswer()
-//                }
-//            }
-//        }
+        } else {
+            questionContentView.isUserInteractionEnabled = false
+            timeLabel.text = "Time Up!"
+            progressBarContainer.backgroundColor = hexStringToUIColor(hex: "A324EA")
+            self.progressBarContainer.startBlink()
+            self.timeLabel.startBlink()
+            timer.invalidate()
+            self.showIntervieweePhoto(shouldShow: false)
+            submitSelectedAnswer()
+            
+            if User.isAppleTester || User.isIpadDemo {
+                let video_answer_id = currentData.videoAnswer.objectId ?? ""
+                dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
+                    self.answer_video_url = videoAnswer.video_url_string
+                    self.revealAnswer(with: self.currentData.correct_answer_index)
+                    self.playVideoAnswer()
+                }
+            }
+        }
     }
     
     private func submitSelectedAnswer() {
-        let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
-            return answerView.isChosen
+        //don't submit answers for the quiz when admin doing quiz
+        if !User.isAdminUser {
+            let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
+                return answerView.isChosen
+            } ?? -1
+            
+            dataStore.saveAnswer(for: currentData.quizTopic,
+                                 chosen_answer_index: selectedAnswerIndex,
+                                 quizData: currentData)
         }
-        
-        var answerStatus: AnswerStatus = .incorrect
-        if let selectedAnswerIndex = selectedAnswerIndex {
-            let isIncorrectAnswer = selectedAnswerIndex != currentData.correct_answer_index
-            if !isIncorrectAnswer {
-                answerStatus = .correct
-            }
-        } else {
-            answerStatus = .time_ran_out
-        }
-        
-        self.submitAnswer(answerStatus: answerStatus)
     }
     
     private func addAnswers(to stackView: UIStackView) {
@@ -499,40 +510,37 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         }
     }
     
-    func submitAnswer(answerStatus: AnswerStatus) {
-//        dataStore.saveAnswer(for: currentData.quizTopic,
-//                             answerStatus: answerStatus,
-//                             quizData: currentData)
-    }
-    
     private func segueToNextVC(index: Int?) {
-        playerLayer.player?.pause()
-        playerLayer.player = nil
-        timer.invalidate()
-        quizStatusTimer.invalidate()
-        NotificationCenter.default.removeObserver(self)
-        
-        var nextIndex = currentIndex + 1
-        if let index = index {
-            nextIndex = index
-        }
-        let isLastQuestion = !quizDatas.indices.contains(nextIndex)
-        if isLastQuestion {
-            UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
-            UserDefaults.standard.synchronize()
-            if Helpers.getTopViewController() is UINavigationController {
-                //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
-                let tabBarVC = presentingViewController as? UITabBarController
-                tabBarVC?.selectedIndex = 1
-                dismiss(animated: true)
-            } else {
-                let leaderboardVC = ChampionsViewController()
-                self.navigationController?.pushViewController(leaderboardVC, animated: true)
+        if !alreadyPushingVC {
+            alreadyPushingVC = true
+            playerLayer.player?.pause()
+            playerLayer.player = nil
+            timer.invalidate()
+            quizStatusTimer.invalidate()
+            NotificationCenter.default.removeObserver(self)
+            
+            var nextIndex = currentIndex + 1
+            if let index = index {
+                nextIndex = index
             }
-        } else {
-            let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
-                                            currentIndex: nextIndex)
-            self.navigationController?.pushViewController(vc, animated: true)
+            let isLastQuestion = !quizDatas.indices.contains(nextIndex)
+            if isLastQuestion {
+                UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
+                UserDefaults.standard.synchronize()
+                if Helpers.getTopViewController() is UINavigationController {
+                    //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+                    let tabBarVC = presentingViewController as? UITabBarController
+                    tabBarVC?.selectedIndex = 1
+                    dismiss(animated: true)
+                } else {
+                    let leaderboardVC = ChampionsViewController()
+                    self.navigationController?.pushViewController(leaderboardVC, animated: true)
+                }
+            } else {
+                let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
+                                                currentIndex: nextIndex)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 }

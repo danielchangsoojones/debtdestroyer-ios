@@ -181,10 +181,18 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func startQuiz() {
         checkStartTimer.invalidate()
-//        let questionVC = QuestionViewController(quizDatas: quizDatas,
-//                                                currentIndex: 0)
-        let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
-                                                currentIndex: 0)
+        
+        var quizStartIndex = 0
+        let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
+            return quizData.objectId == quizData.quizTopic.currentQuizDataID
+        }
+        //if we need to start them off in the middle of the quiz because they came late.
+        if let currentQuizTopicIndex = currentQuizTopicIndex {
+            quizStartIndex = currentQuizTopicIndex
+        }
+        
+        let questionVC = QuestionViewController(quizDatas: quizDatas,
+                                                currentIndex: quizStartIndex)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)

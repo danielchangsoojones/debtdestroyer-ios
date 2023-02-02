@@ -89,6 +89,8 @@
 		0A5FD51B28F8475200B995C8 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50828F8475100B995C8 /* Montserrat-Black.otf */; };
 		0A5FD51C28F8475200B995C8 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */; };
 		0A5FD51E28F848DD00B995C8 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5FD51D28F848DD00B995C8 /* FontExtension.swift */; };
+		0A6049F02988ECE8002CC0B4 /* QuizQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6049EF2988ECE8002CC0B4 /* QuizQuestionsViewController.swift */; };
+		0A6049F229890137002CC0B4 /* QuizQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6049F129890137002CC0B4 /* QuizQuestionTableViewCell.swift */; };
 		0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */; };
 		0A663DC729509F3000BE6B53 /* GradientBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */; };
 		0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D54AB28FEA48F000A8238 /* WinnersViewController.swift */; };
@@ -243,6 +245,8 @@
 		0A5FD50828F8475100B995C8 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		0A5FD51D28F848DD00B995C8 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FontExtension.swift; path = debtdestroyer/Helper/FontExtension.swift; sourceTree = SOURCE_ROOT; };
+		0A6049EF2988ECE8002CC0B4 /* QuizQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsViewController.swift; sourceTree = "<group>"; };
+		0A6049F129890137002CC0B4 /* QuizQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		0A61EA3E2903C51A004E41A0 /* debtdestroyer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = debtdestroyer.entitlements; sourceTree = "<group>"; };
 		0A62525828FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		0A663DC629509F3000BE6B53 /* GradientBlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBlueButton.swift; sourceTree = "<group>"; };
@@ -568,6 +572,7 @@
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0ACAE9272935F0AD0054E0A3 /* NewGameStart */,
 				0A892654297FB257002C71C1 /* Answer Keys */,
+				0A6049EE2988ECBC002CC0B4 /* Quiz Questions */,
 				0A59ACE328E183F4001B774A /* Settings */,
 				0A51502429239951001B028C /* Confirm Info */,
 				0A32178E290115C100A414CA /* Score */,
@@ -689,6 +694,15 @@
 				0A5FD50928F8475100B995C8 /* Montserrat-SemiBold.otf */,
 			);
 			path = MontserratFont;
+			sourceTree = "<group>";
+		};
+		0A6049EE2988ECBC002CC0B4 /* Quiz Questions */ = {
+			isa = PBXGroup;
+			children = (
+				0A6049EF2988ECE8002CC0B4 /* QuizQuestionsViewController.swift */,
+				0A6049F129890137002CC0B4 /* QuizQuestionTableViewCell.swift */,
+			);
+			path = "Quiz Questions";
 			sourceTree = "<group>";
 		};
 		0A6D54AD28FEA495000A8238 /* Winners */ = {
@@ -1189,6 +1203,7 @@
 				0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
+				0A6049F02988ECE8002CC0B4 /* QuizQuestionsViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
@@ -1209,6 +1224,7 @@
 				0A74408E28BE407E00AD0489 /* SubcsriptionBasicView.swift in Sources */,
 				92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,
+				0A6049F229890137002CC0B4 /* QuizQuestionTableViewCell.swift in Sources */,
 				0A16A73A29371D4200B2647B /* QuizManagerViewController.swift in Sources */,
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
@@ -1383,7 +1399,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.34.0;
+				MARKETING_VERSION = 1.35.0;
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1418,7 +1434,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.34.0;
+				MARKETING_VERSION = 1.35.0;
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

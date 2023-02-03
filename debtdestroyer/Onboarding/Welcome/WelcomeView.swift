@@ -176,7 +176,7 @@ class WelcomeView: UIView {
             }
         }
         
-        titleLabel.text = "Debt Destroyed"
+        titleLabel.text = Helpers.getAppDisplayNameStr()
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.MontserratBold(size: 30)
         addSubview(titleLabel)

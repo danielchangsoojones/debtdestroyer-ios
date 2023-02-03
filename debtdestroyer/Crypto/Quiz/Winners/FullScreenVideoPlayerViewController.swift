@@ -131,7 +131,7 @@ class FullScreenVideoPlayerViewController: UIViewController {
     }
     
     private func setNameLabel() {
-        nameLabel.text = "Debt Destroyed"
+        nameLabel.text = Helpers.getAppDisplayNameStr()
         nameLabel.font = UIFont.MontserratSemiBold(size: 18)
         nameLabel.textColor = .white
         nameLabel.backgroundColor = .clear

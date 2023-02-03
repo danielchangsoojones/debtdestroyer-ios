@@ -36,6 +36,6 @@ class ForceUpdate {
         alertView.addButton("Update", action: {
             Helpers.open(urlString: "https://apps.apple.com/us/app/lavadrop/id1639968618")
         })
-        alertView.showSuccess("Update App", subTitle: "There is a new Debt Destroyed version available. Please update to the most recent version of the app before you can play our live game.")
+        alertView.showSuccess("Update App", subTitle: "There is a new \(String(describing: Helpers.getAppDisplayNameStr())) version available. Please update to the most recent version of the app before you can play our live game.")
     }
 }

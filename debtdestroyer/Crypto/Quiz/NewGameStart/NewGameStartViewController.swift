@@ -44,7 +44,6 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ForceUpdate.checkIfForceUpdate()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         loopVideo()
         setNavBarBtns()
@@ -73,6 +72,7 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func applicationDidBecomeActive() {
         playerLayer?.player?.play()
+        viewDidAppear(true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -154,6 +154,7 @@ class NewGameStartViewController: UIViewController {
                     self.checkIfStartQuiz()
                 } else if let error = error {
                     if error.localizedDescription.contains("error-force-update") {
+                        self.checkStartTimer.invalidate()
                         ForceUpdate.showAlert()
                     } else {
                         BannerAlert.show(with: error)

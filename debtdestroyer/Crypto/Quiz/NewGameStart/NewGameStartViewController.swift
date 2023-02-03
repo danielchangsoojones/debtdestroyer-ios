@@ -65,7 +65,6 @@ class NewGameStartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
-        self.tabBarController?.tabBar.backgroundColor = .clear
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -78,7 +77,6 @@ class NewGameStartViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.backgroundColor = .white
         checkStartTimer.invalidate()
         timer.invalidate()
     }

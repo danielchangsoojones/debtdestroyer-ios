@@ -32,7 +32,8 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
     let noSoundImageView = UIImageView()
     var soundOffTextLabel = UILabel()
     let closePopupButton = UIButton()
-    
+    let gifImgViewCheckMark = UIImageView()
+    let gifImgViewXmark = UIImageView()
     let helpButton = UIButton()
     
     override init(frame: CGRect) {
@@ -266,38 +267,30 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
     }
     
     private func setUpRevealAnswerContainer() {
-        revealAnswerContainer.backgroundColor = .brown
+        revealAnswerContainer.alpha = 0.0
+        revealAnswerContainer.backgroundColor = .clear
         questionContentView.addSubview(revealAnswerContainer)
         revealAnswerContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.height.equalTo(300)
+            make.bottom.equalToSuperview().offset(-30)
+            make.height.equalTo(200)
         }
       
-        setYourAnswerHeadingLabel()
         setCorrectAnswerHeadingLabel()
+        setYourAnswerHeadingLabel()
         setUpCorrectAnswerView()
         setUpYourAnswerView()
         setCorrectAnswerLabel()
+        setGifImage(gifImgView: gifImgViewCheckMark, subviewTo: correctAnswerView, bottomTo: correctAnswerLabel, imageName: "checkmark")
         setYourAnswerLabel()
-    }
-    
-    private func setYourAnswerHeadingLabel() {
-        yourAnswerHeading.text = "Your Answer:"
-        yourAnswerHeading.numberOfLines = 1
-        yourAnswerHeading.font = UIFont.MontserratSemiBold(size: 25)
-        yourAnswerHeading.textColor = .white
-        revealAnswerContainer.addSubview(yourAnswerHeading)
-        yourAnswerHeading.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(10)
-            make.width.equalTo(self.frame.size.width / 2)
-        }
+        setGifImage(gifImgView: gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "xmark")
     }
     
     private func setCorrectAnswerHeadingLabel() {
         correctAnswerHeading.text = "Correct Answer:"
+        correctAnswerHeading.textAlignment = .center
         correctAnswerHeading.numberOfLines = 1
-        correctAnswerHeading.font = UIFont.MontserratSemiBold(size: 25)
+        correctAnswerHeading.font = UIFont.MontserratSemiBold(size: 21)
         correctAnswerHeading.textColor = .white
         revealAnswerContainer.addSubview(correctAnswerHeading)
         correctAnswerHeading.snp.makeConstraints { make in
@@ -306,8 +299,22 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
         }
     }
     
+    private func setYourAnswerHeadingLabel() {
+        yourAnswerHeading.text = "Your Answer:"
+        yourAnswerHeading.textAlignment = .center
+        yourAnswerHeading.numberOfLines = 1
+        yourAnswerHeading.font = UIFont.MontserratSemiBold(size: 21)
+        yourAnswerHeading.textColor = .white
+        revealAnswerContainer.addSubview(yourAnswerHeading)
+        yourAnswerHeading.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(10)
+            make.top.equalTo(correctAnswerHeading.snp.top)
+            make.width.equalTo(self.frame.size.width / 2)
+        }
+    }
+    
     private func setUpCorrectAnswerView() {
-        correctAnswerView.backgroundColor = .yellow
+        correctAnswerView.backgroundColor = .clear
         revealAnswerContainer.addSubview(correctAnswerView)
         correctAnswerView.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview().offset(-20)
@@ -317,38 +324,56 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
     }
     
     private func setUpYourAnswerView() {
-        yourAnswerView.backgroundColor = .yellow
+        yourAnswerView.alpha = 0.0
+        yourAnswerView.backgroundColor = .clear
         revealAnswerContainer.addSubview(yourAnswerView)
         yourAnswerView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.bottom.equalToSuperview().offset(-20)
-
-            make.top.equalTo(yourAnswerHeading.snp.bottom).offset(15)
             make.width.equalTo((self.frame.size.width / 2 ) - 40)
         }
     }
     
     private func setCorrectAnswerLabel() {
         correctAnswerLabel.numberOfLines = 2
-        correctAnswerLabel.font = UIFont.MontserratSemiBold(size: 25)
+        correctAnswerLabel.textAlignment = .center
+        correctAnswerLabel.font = UIFont.MontserratSemiBold(size: 21)
         correctAnswerLabel.textColor = .black
-        revealAnswerContainer.addSubview(correctAnswerLabel)
+        correctAnswerView.addSubview(correctAnswerLabel)
         correctAnswerLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
-            make.height.equalTo(70)
-
+            make.leading.trailing.bottom.equalToSuperview().inset(10)
+            make.height.equalTo(90)
         }
     }
     
     private func setYourAnswerLabel() {
         yourAnswerLabel.numberOfLines = 2
-        yourAnswerLabel.font = UIFont.MontserratSemiBold(size: 25)
+        yourAnswerLabel.textAlignment = .center
+        yourAnswerLabel.font = UIFont.MontserratSemiBold(size: 21)
         yourAnswerLabel.textColor = .black
-        revealAnswerContainer.addSubview(yourAnswerLabel)
+        yourAnswerView.addSubview(yourAnswerLabel)
         yourAnswerLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
-            make.height.equalTo(70)
-
+            make.leading.trailing.bottom.equalToSuperview().inset(10)
+            make.height.equalTo(90)
         }
     }
+    
+    private func setGifImage(gifImgView: UIImageView, subviewTo: UIView, bottomTo: UILabel, imageName: String) {
+        gifImgView.image = UIImage.init(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
+        gifImgView.tintColor = .black
+        gifImgView.alpha = 0.2
+        UIImageView.animate(withDuration: 1, animations: {
+            gifImgView.alpha = 1
+        })
+        gifImgView.backgroundColor = .clear
+        subviewTo.addSubview(gifImgView)
+        gifImgView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.bottom.equalTo(bottomTo.snp.top).offset(10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(25)
+            make.width.equalTo(25)
+        }
+    }
+    
 }

@@ -363,31 +363,35 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
             }
-            // hiding these to show reveal answer go tiny
-            bottomView.alpha = 0.0
-            progressBarContainer.alpha = 0.0
             
+            UIView.animate(withDuration: 1.0) {
+                // hiding these to show reveal answer go tiny
+                self.bottomView.alpha = 0.0
+                self.progressBarContainer.alpha = 0.0
+            }
+            // After hiding question & options it will show reveal answer with animation
+            UIView.animate(withDuration: 1.0) {
+                self.revealAnswerContainer.alpha = 1.0
+            }
+
             if let selectedAnswerIndex = selectedAnswerIndex {
                 let answerView = answerViews[selectedAnswerIndex]
-                //we need to remove the purple gradient so the replacement gradient will show (red or green).
-                answerView.layer.sublayers?.removeAll(where: { layer in
-                    return layer is CAGradientLayer
-                })
+               
                 let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
-                    
-                    
-                    
-                    addAnswerMarkingGif(to: answerView, imageName: "xmark")
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
-//                    UIView.animate(withDuration: 1.0) {
-//                        answerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-//                    }
+                    yourAnswerView.alpha = 1.0
+                    yourAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                   
+                    yourAnswerLabel.text = answerView.answerLabel.text
+                    UIView.animate(withDuration: 1.0) {
+                        self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+                    }
                 } else {
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
             }
+            
             markCorrectAnswerView(correct_answer_index: correct_answer_index)
             
             // this code is hiding remaining options
@@ -427,9 +431,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     private func markCorrectAnswerView(correct_answer_index: Int) {
-        let correctAnswerView = answerViews[correct_answer_index]
-        addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
         correctAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
+        correctAnswerLabel.text = answerViews[correct_answer_index].answerLabel.text
     }
     
     private func addAnswerMarkingGif(to answerView: AnswerChoiceNewUIView, imageName: String) {

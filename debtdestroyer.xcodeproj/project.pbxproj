@@ -13,6 +13,8 @@
 		0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C829289BBB9B00AEF89D /* RoundUpViewController.swift */; };
 		0A11C82F289BBB9B00AEF89D /* RoundUpWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */; };
 		0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C830289BC19500AEF89D /* ColorExtension.swift */; };
+		0A15CD7B2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */; };
+		0A15CD7D2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */; };
 		0A16A73A29371D4200B2647B /* QuizManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73929371D4200B2647B /* QuizManagerViewController.swift */; };
 		0A16A73C29371D5100B2647B /* QuizManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73B29371D5100B2647B /* QuizManagerView.swift */; };
 		0A16A73F2937506000B2647B /* CryptoSettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */; };
@@ -167,6 +169,8 @@
 		0A11C829289BBB9B00AEF89D /* RoundUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundUpViewController.swift; sourceTree = "<group>"; };
 		0A11C82A289BBB9B00AEF89D /* RoundUpWorksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundUpWorksView.swift; sourceTree = "<group>"; };
 		0A11C830289BC19500AEF89D /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionWithAnswerRevealGoTinyView.swift; sourceTree = "<group>"; };
+		0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionWithAnswerRevealGoTinyViewController.swift; sourceTree = "<group>"; };
 		0A16A73929371D4200B2647B /* QuizManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManagerViewController.swift; sourceTree = "<group>"; };
 		0A16A73B29371D5100B2647B /* QuizManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManagerView.swift; sourceTree = "<group>"; };
 		0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSettingsDataStore.swift; sourceTree = "<group>"; };
@@ -615,6 +619,8 @@
 			children = (
 				0A59AD1528E1B562001B774A /* QuestionView.swift */,
 				0A59AD1328E1B53E001B774A /* QuestionViewController.swift */,
+				0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */,
+				0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */,
 				0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */,
 				0A59ACEF28E183F4001B774A /* Choice */,
 			);
@@ -1168,6 +1174,7 @@
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,
 				0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */,
 				0A47F89428F00E0600B11D5F /* NotificationPermissionView.swift in Sources */,
+				0A15CD7D2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift in Sources */,
 				0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */,
 				9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */,
 				0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */,
@@ -1207,6 +1214,7 @@
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
 				0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */,
+				0A15CD7B2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
 				0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */,

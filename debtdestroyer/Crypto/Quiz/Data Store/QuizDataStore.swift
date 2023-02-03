@@ -93,7 +93,7 @@ class QuizDataStore {
             }
         }
     }
-    
+
     func checkIfAlreadyTakenQuiz(for quizTopic: QuizTopicParse, completion: @escaping (Any?, Error?) -> Void) {
         let quizTopicID = quizTopic.objectId ?? ""
         let ios_version = Helpers.getVersionStr() ?? ""

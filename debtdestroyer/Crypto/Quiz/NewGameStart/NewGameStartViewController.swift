@@ -173,10 +173,10 @@ class NewGameStartViewController: UIViewController {
             self.quizKickoffTime = quizTopic.start_time
             setData(quizTopic: quizTopic)
             let now = Date()
-//            if quizTopic.start_time < now {
+            if quizTopic.start_time < now {
                 //time to start the game
                 startQuiz()
-//            }
+            }
         }
     }
     

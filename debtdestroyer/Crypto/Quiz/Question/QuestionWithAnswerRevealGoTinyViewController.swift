@@ -387,6 +387,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
                     }
                 } else {
+                    yourAnswerHeading.text = ""
+                    correctAnswerHeading.text = "Your Answer:"
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }

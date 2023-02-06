@@ -190,7 +190,7 @@ class NewGameStartViewController: UIViewController {
             quizStartIndex = currentQuizTopicIndex
         }
         
-        let questionVC = QuestionViewController(quizDatas: quizDatas,
+        let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                 currentIndex: quizStartIndex)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen

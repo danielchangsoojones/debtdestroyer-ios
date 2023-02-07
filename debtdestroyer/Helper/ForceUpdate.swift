@@ -32,6 +32,9 @@ class ForceUpdate {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
         )
+        let forceUpdateShown = Date().today(format: "dd/MM/yy HH:mm:ss")
+        UserDefaults.standard.set(forceUpdateShown, forKey: "forceUpdateShown")
+        UserDefaults.standard.synchronize()
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Update", action: {
             Helpers.open(urlString: "https://apps.apple.com/us/app/lavadrop/id1639968618")

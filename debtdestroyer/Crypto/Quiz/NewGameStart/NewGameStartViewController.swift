@@ -72,7 +72,6 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func applicationDidBecomeActive() {
         playerLayer?.player?.play()
-        viewDidAppear(true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -154,8 +153,18 @@ class NewGameStartViewController: UIViewController {
                     self.checkIfStartQuiz()
                 } else if let error = error {
                     if error.localizedDescription.contains("error-force-update") {
-                        self.checkStartTimer.invalidate()
-                        ForceUpdate.showAlert()
+                        
+                        let forceUpdateShown  = UserDefaults.standard.string(forKey: "forceUpdateShown")
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "dd/MM/yy HH:mm:ss"
+                        let last = formatter.date(from: forceUpdateShown ?? "01/11/21 11:11:11")
+                        let lastPopup = last?.toLocalTime()
+                        let currentDateStr = Date().today(format: "dd/MM/yy HH:mm:ss")
+                        let currentDate = formatter.date(from: currentDateStr)
+                        
+                        if lastPopup!.withAddedMinutes(minutes: 2) <= currentDate!.toLocalTime() {
+                            ForceUpdate.showAlert()
+                        }
                     } else {
                         BannerAlert.show(with: error)
                     }

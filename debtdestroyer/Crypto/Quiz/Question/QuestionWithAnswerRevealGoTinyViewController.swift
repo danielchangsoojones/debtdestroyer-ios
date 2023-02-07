@@ -368,6 +368,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 // hiding these to show reveal answer go tiny
                 self.bottomView.alpha = 0.0
                 self.progressBarContainer.alpha = 0.0
+                self.timeLabel.alpha = 0.0
             }
             // After hiding question & options it will show reveal answer with animation
             UIView.animate(withDuration: 1.0) {
@@ -376,19 +377,13 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
 
             if let selectedAnswerIndex = selectedAnswerIndex {
                 let answerView = answerViews[selectedAnswerIndex]
-               
+                updateYourAnswerView(answerView: answerView)
                 let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
-                    yourAnswerView.alpha = 1.0
-                    yourAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
-                   
-                    yourAnswerLabel.text = answerView.answerLabel.text
-                    UIView.animate(withDuration: 1.0) {
-                        self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-                    }
+                    yourAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)                  
                 } else {
-                    yourAnswerHeading.text = ""
-                    correctAnswerHeading.text = "Your Answer:"
+                    self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
+                    yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
@@ -430,6 +425,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                              object: player.currentItem
                 )
         }
+    }
+    
+    private func updateYourAnswerView(answerView : AnswerChoiceNewUIView) {
+        yourAnswerView.alpha = 1.0
+        UIView.animate(withDuration: 1.0) {
+            self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        }
+        yourAnswerLabel.text = answerView.answerLabel.text
     }
     
     private func markCorrectAnswerView(correct_answer_index: Int) {

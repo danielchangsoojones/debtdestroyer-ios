@@ -15,8 +15,6 @@
 		0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C830289BC19500AEF89D /* ColorExtension.swift */; };
 		0A15CD7B2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */; };
 		0A15CD7D2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */; };
-		0A16A73A29371D4200B2647B /* QuizManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73929371D4200B2647B /* QuizManagerViewController.swift */; };
-		0A16A73C29371D5100B2647B /* QuizManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73B29371D5100B2647B /* QuizManagerView.swift */; };
 		0A16A73F2937506000B2647B /* CryptoSettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */; };
 		0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A637F28A6592200EFCC4D /* ViewExtension.swift */; };
 		0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */; };
@@ -171,8 +169,6 @@
 		0A11C830289BC19500AEF89D /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionWithAnswerRevealGoTinyView.swift; sourceTree = "<group>"; };
 		0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionWithAnswerRevealGoTinyViewController.swift; sourceTree = "<group>"; };
-		0A16A73929371D4200B2647B /* QuizManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManagerViewController.swift; sourceTree = "<group>"; };
-		0A16A73B29371D5100B2647B /* QuizManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManagerView.swift; sourceTree = "<group>"; };
 		0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSettingsDataStore.swift; sourceTree = "<group>"; };
 		0A1A637F28A6592200EFCC4D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		0A25F65228A28B7500D5D183 /* EarnTicketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnTicketCell.swift; sourceTree = "<group>"; };
@@ -393,15 +389,6 @@
 			path = RoundUp;
 			sourceTree = "<group>";
 		};
-		0A16A73D29371D5600B2647B /* Quiz Manager */ = {
-			isa = PBXGroup;
-			children = (
-				0A16A73929371D4200B2647B /* QuizManagerViewController.swift */,
-				0A16A73B29371D5100B2647B /* QuizManagerView.swift */,
-			);
-			path = "Quiz Manager";
-			sourceTree = "<group>";
-		};
 		0A25F65428A367D400D5D183 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,7 +588,6 @@
 			children = (
 				0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */,
 				0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */,
-				0A16A73D29371D5600B2647B /* Quiz Manager */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1196,7 +1182,6 @@
 				0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */,
 				0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */,
 				0A7A4A0228A3D384009EDE5E /* RegisterView.swift in Sources */,
-				0A16A73C29371D5100B2647B /* QuizManagerView.swift in Sources */,
 				0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */,
 				0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */,
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
@@ -1225,7 +1210,6 @@
 				92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,
 				0A6049F229890137002CC0B4 /* QuizQuestionTableViewCell.swift in Sources */,
-				0A16A73A29371D4200B2647B /* QuizManagerViewController.swift in Sources */,
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,

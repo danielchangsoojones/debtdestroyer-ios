@@ -366,9 +366,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             
             UIView.animate(withDuration: 1.0) {
                 // hiding these to show reveal answer go tiny
-                self.bottomView.alpha = 0.0
-                self.progressBarContainer.alpha = 0.0
-                self.timeLabel.alpha = 0.0
+                self.bottomView.isHidden = true
+                self.progressBarContainer.isHidden = true
+                self.timeLabel.isHidden = true
             }
             // After hiding question & options it will show reveal answer with animation
             UIView.animate(withDuration: 1.0) {

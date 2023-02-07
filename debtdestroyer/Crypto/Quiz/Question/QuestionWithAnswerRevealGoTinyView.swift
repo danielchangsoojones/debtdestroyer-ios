@@ -358,7 +358,7 @@ class QuestionWithAnswerRevealGoTinyView: UIView {
         }
     }
     
-    private func setGifImage(gifImgView: UIImageView, subviewTo: UIView, bottomTo: UILabel, imageName: String) {
+    func setGifImage(gifImgView: UIImageView, subviewTo: UIView, bottomTo: UILabel, imageName: String) {
         gifImgView.image = UIImage.init(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
         gifImgView.tintColor = .black
         gifImgView.alpha = 0.2

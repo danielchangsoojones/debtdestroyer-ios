@@ -154,15 +154,15 @@ class NewGameStartViewController: UIViewController {
                 } else if let error = error {
                     if error.localizedDescription.contains("error-force-update") {
                         
-                        let forceUpdateShown  = UserDefaults.standard.string(forKey: "forceUpdateShown")
+                        let forceUpdateShown  = ForceUpdate.forceUpdateShown
                         let formatter = DateFormatter()
                         formatter.dateFormat = "dd/MM/yy HH:mm:ss"
-                        let last = formatter.date(from: forceUpdateShown ?? "01/11/21 11:11:11")
+                        let last = formatter.date(from: forceUpdateShown )
                         let lastPopup = last?.toLocalTime()
                         let currentDateStr = Date().today(format: "dd/MM/yy HH:mm:ss")
                         let currentDate = formatter.date(from: currentDateStr)
                         
-                        if lastPopup!.withAddedMinutes(minutes: 2) <= currentDate!.toLocalTime() {
+                        if lastPopup == nil || lastPopup!.withAddedMinutes(minutes: 2) <= currentDate!.toLocalTime() {
                             ForceUpdate.showAlert()
                         }
                     } else {

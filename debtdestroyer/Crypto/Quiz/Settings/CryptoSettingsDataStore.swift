@@ -40,19 +40,4 @@ class CryptoSettingsDataStore {
             }
         }
     }
-    
-    func finishQuizTime(completion: @escaping (Any?) -> Void) {
-        
-        PFCloud.callFunction(inBackground: "finishQuizTime", withParameters: nil) { (result, error) in
-            if let result = result {
-                
-                BannerAlert.show(title: "", subtitle: "finish Quiz Time called Successfully!", type: .success)
-                
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "markQuizStatus")
-            }
-        }
-    }
 }

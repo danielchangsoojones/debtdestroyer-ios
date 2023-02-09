@@ -14,7 +14,7 @@ class AddressViewController: FrigadePage {
     var addTextField: UITextField!
     var addLabel: UILabel!
     var descriptionLabel: UILabel!
-    var nextButton: SpinningWithGradButton!
+    var nextButton: NextButton!
     private var dataStore: OnboardingDataStore!
     
     override func loadView() {

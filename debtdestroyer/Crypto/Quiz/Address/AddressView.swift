@@ -12,7 +12,7 @@ class AddressView: UIView {
     var addTextField: UITextField!
     var addLabel: UILabel!
     var descriptionLabel: UILabel!
-    var nextButton: SpinningWithGradButton!
+    var nextButton: NextButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,17 +49,13 @@ class AddressView: UIView {
     }
     
     private func setUpNextButton(){
-        nextButton = SpinningWithGradButton()
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.setTitle("→", for: .normal)
-        let dimenssion = 45
-        nextButton.layer.cornerRadius = CGFloat(dimenssion / 2)
+        nextButton = NextButton()
         nextButton.clipsToBounds = true
         addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(stackView.snp.bottom).offset(40)
-            make.trailing.equalToSuperview().inset(20)
-            make.height.width.equalTo(dimenssion)
+            make.bottom.equalToSuperview().offset(-40)
+            make.height.equalTo(50)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
     }
     

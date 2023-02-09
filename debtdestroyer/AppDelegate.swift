@@ -9,6 +9,7 @@ import UIKit
 import Parse
 import AVFoundation
 import UXCam
+import Frigade
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("AppDelegate Debug - Error setting AVAudioSession category.  Because of this, there may be no sound. \(categoryError!)")
         }
         //
+        
+        FrigadeProvider.setup(configuration: .init(apiKey: "api_public_FW3Q7ICCHWPDTCKQULIHXW4T0JRK20P93SLL2LUO75ZMBZQMG4HCOUDF99AJS7N6", userId: nil))
+        
         return true
     }
     

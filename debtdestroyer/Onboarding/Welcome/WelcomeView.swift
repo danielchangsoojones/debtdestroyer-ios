@@ -16,6 +16,7 @@ class WelcomeView: UIView {
     var termsAndPolicyLabel = UILabel()
     var loginBtn = UIButton()
     var titleLabel = UILabel()
+    var subtitleLabel = UILabel()
 
     var color1 = UIColor()
     var color2 = UIColor()
@@ -71,7 +72,7 @@ class WelcomeView: UIView {
             signUpButton.setTitleColor(.white, for: .normal)
             signUpButton.setTitle("Sign Up", for: .normal)
         }
-        signUpButton.layer.cornerRadius =  8
+        signUpButton.layer.cornerRadius = globalCornerRadius
         signUpButton.clipsToBounds = true
         let horizontalInset: CGFloat = 20
         let verticalInset: CGFloat = 20
@@ -98,7 +99,7 @@ class WelcomeView: UIView {
         } else {
             logInButton.setTitle("Log In", for: .normal)
         }
-        logInButton.layer.cornerRadius =  8
+        logInButton.layer.cornerRadius = globalCornerRadius
         logInButton.backgroundColor = .clear
         logInButton.clipsToBounds = true
         let horizontalInset: CGFloat = 20
@@ -138,7 +139,7 @@ class WelcomeView: UIView {
         logInView.addSubview(termsAndPolicyLabel)
         termsAndPolicyLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
-            make.bottom.equalTo(stackView.snp.top).offset(-10)
+            make.bottom.equalTo(stackView.snp.top).offset(-20)
         }
     }
     
@@ -170,19 +171,29 @@ class WelcomeView: UIView {
             logoImageView.contentMode = .scaleAspectFit
             addSubview(logoImageView)
             logoImageView.snp.makeConstraints { (make) in
-                make.centerY.equalToSuperview().inset(150)
+                make.centerY.equalToSuperview().offset(-100)
                 make.centerX.equalToSuperview()
                 make.width.height.equalTo(self.frame.width * 0.5)
             }
         }
         
         titleLabel.text = "Debt Destroyed"
+        titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.MontserratBold(size: 30)
+        titleLabel.font = UIFont.MontserratBold(size: 26)
+        
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.font = UIFont.MontserratRegular(size: 16)
+        subtitleLabel.textAlignment = .center
         addSubview(titleLabel)
+        addSubview(subtitleLabel)
         titleLabel.snp.makeConstraints{ make in
             make.leading.trailing.equalToSuperview().inset(30)
             make.top.equalTo(logoImageView.snp.bottom).offset(10)
+        }
+        subtitleLabel.snp.makeConstraints{ make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(16)
         }
     }
 }

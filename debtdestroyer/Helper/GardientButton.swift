@@ -40,3 +40,5 @@ class GradientBtn: UIButton {
         gradientLayer.frame = self.bounds
     }
 }
+
+let globalCornerRadius: CGFloat = 28

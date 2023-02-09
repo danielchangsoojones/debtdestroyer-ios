@@ -156,7 +156,7 @@
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
 		92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB72972322200ED029D /* WaitlistViewController.swift */; };
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
-		AA1BEEB82989CFC400666DCC /* Frigade.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1BEEB72989CFC400666DCC /* Frigade.swift */; };
+		AA043326299487EC00CCF94C /* FrigadePreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA043325299487EC00CCF94C /* FrigadePreloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -315,7 +315,7 @@
 		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
-		AA1BEEB72989CFC400666DCC /* Frigade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frigade.swift; sourceTree = "<group>"; };
+		AA043325299487EC00CCF94C /* FrigadePreloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrigadePreloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -960,7 +960,7 @@
 		AA1BEEB62989CFAA00666DCC /* Frigade */ = {
 			isa = PBXGroup;
 			children = (
-				AA1BEEB72989CFC400666DCC /* Frigade.swift */,
+				AA043325299487EC00CCF94C /* FrigadePreloader.swift */,
 			);
 			path = Frigade;
 			sourceTree = "<group>";
@@ -1143,6 +1143,7 @@
 				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* AddressViewController.swift in Sources */,
+				AA043326299487EC00CCF94C /* FrigadePreloader.swift in Sources */,
 				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
 				0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
@@ -1183,7 +1184,6 @@
 				0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */,
 				0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */,
 				0A47F89128F00DD000B11D5F /* NotificationPermissionViewController.swift in Sources */,
-				AA1BEEB82989CFC400666DCC /* Frigade.swift in Sources */,
 				0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */,
 				0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */,
 				0A7A4A0228A3D384009EDE5E /* RegisterView.swift in Sources */,

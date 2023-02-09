@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Frigade
 
 class WelcomeViewController: UIViewController {
     private var messageHelper: MessageHelper?
@@ -16,6 +17,7 @@ class WelcomeViewController: UIViewController {
     var color2 = UIColor()
     var welcomeView = WelcomeView()
     var titleLabel = UILabel()
+    var subtitleLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,15 +30,31 @@ class WelcomeViewController: UIViewController {
         color2 = welcomeView.hexStringToUIColor(hex: "FF7910")
         titleLabel = welcomeView.titleLabel
         termsAndPolicyLabel = welcomeView.termsAndPolicyLabel
+        subtitleLabel = welcomeView.subtitleLabel
         welcomeView.logInButton.addTarget(self, action: #selector(logInPressed), for: .touchUpInside)
         welcomeView.signUpButton.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
         setNavBarBtns()
-        
+        if let flow = FrigadePreloader.shared.welcomePage {
+            let flowData = flow.getData()
+            if !flowData.isEmpty {
+                let data = flowData[0]
+                if data.title != nil {
+                    titleLabel.text = data.title
+                }
+                if data.subtitle != nil {
+                    subtitleLabel.text = data.subtitle
+                }
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         //  Rashmi -> for applying gradientColor ot create image, method needs logInButton frame.bound so calling / applying grad border and text code in viewDidAppear. Even tried to call it in viewdidLayoutSubviews but didnt work.
-        logInButton.layer.cornerRadius =  8
+        logInButton.layer.cornerRadius = globalCornerRadius
         logInButton.clipsToBounds = true
         let gradientForText = welcomeView.getGradientLayer(bounds: logInButton.bounds)
         logInButton.setTitleColor(welcomeView.gradientColor(bounds: logInButton.bounds, gradientLayer: gradientForText), for: .normal)
@@ -44,10 +62,10 @@ class WelcomeViewController: UIViewController {
         let gradient = CAGradientLayer()
         gradient.frame =  CGRect(origin: .zero, size: logInButton.frame.size)
         gradient.colors = [color1.cgColor, color2.cgColor]
-        gradient.cornerRadius = 8
+        gradient.cornerRadius = globalCornerRadius
 
         let border = CAShapeLayer()
-        border.path = UIBezierPath(roundedRect:logInButton.bounds, cornerRadius:8).cgPath
+        border.path = UIBezierPath(roundedRect:logInButton.bounds, cornerRadius:globalCornerRadius).cgPath
         border.frame = logInButton.bounds
         border.fillColor = nil
         border.strokeColor = UIColor.purple.cgColor
@@ -92,4 +110,3 @@ class WelcomeViewController: UIViewController {
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
 }
-

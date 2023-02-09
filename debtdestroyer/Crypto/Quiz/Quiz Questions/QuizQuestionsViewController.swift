@@ -80,6 +80,9 @@ extension QuizQuestionsViewController: UITableViewDataSource, UITableViewDelegat
         cell.questionLabel.text = "Question \(indexPath.row) : " + self.quizDatas[indexPath.row].question
         let answersString = "\"[\"" + self.quizDatas[indexPath.row].answers!.joined(separator: "\",\"") + "\"]\""
         cell.answersLabel.text = "Answers: " + answersString
+        
+        cell.videoURL = self.quizDatas[indexPath.row].video_url_string
+        
 
         return cell
     }

@@ -12,7 +12,7 @@ class RegisterViewController: FrigadePage, OnboardingDataStoreDelegate {
     var titleLabel: UILabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
-    var nextButton: SpinningWithGradButton!
+    var nextButton: NextButton!
     var dataStore: OnboardingDataStore!
     var stackView: UIStackView!
     var emailLabel: UILabel!

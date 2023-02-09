@@ -159,6 +159,7 @@
 		AA043326299487EC00CCF94C /* FrigadeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA043325299487EC00CCF94C /* FrigadeHelper.swift */; };
 		AA04332E2994C66C00CCF94C /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04332D2994C66C00CCF94C /* SignUpCoordinator.swift */; };
 		AA0433302994CEF100CCF94C /* FrigadePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04332F2994CEF100CCF94C /* FrigadePage.swift */; };
+		AA0433362994DA0800CCF94C /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0433352994DA0800CCF94C /* NextButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -320,6 +321,7 @@
 		AA043325299487EC00CCF94C /* FrigadeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrigadeHelper.swift; sourceTree = "<group>"; };
 		AA04332D2994C66C00CCF94C /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		AA04332F2994CEF100CCF94C /* FrigadePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrigadePage.swift; sourceTree = "<group>"; };
+		AA0433352994DA0800CCF94C /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -734,6 +736,7 @@
 		0A7A49DE28A386C6009EDE5E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				AA0433342994D9FA00CCF94C /* Components */,
 				AA04332C2994C65000CCF94C /* SignUpCoordinator */,
 				92C849902970A4470091422E /* Promo */,
 				0A7A49FA28A3D262009EDE5E /* Data Store */,
@@ -969,6 +972,14 @@
 				AA04332F2994CEF100CCF94C /* FrigadePage.swift */,
 			);
 			path = SignUpCoordinator;
+			sourceTree = "<group>";
+		};
+		AA0433342994D9FA00CCF94C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AA0433352994DA0800CCF94C /* NextButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		AA1BEEB62989CFAA00666DCC /* Frigade */ = {
@@ -1235,6 +1246,7 @@
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
 				0A76B59428F996530084A629 /* CustomNavigationViewController.swift in Sources */,
 				0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */,
+				AA0433362994DA0800CCF94C /* NextButton.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,
 				0ACAE9262935F0A40054E0A3 /* NewGameStartViewController.swift in Sources */,
 				0A7A49FE28A3D294009EDE5E /* StringExtension.swift in Sources */,

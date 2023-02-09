@@ -29,6 +29,7 @@ class NewGameStartViewController: UIViewController {
     private var queuePlayer: AVQueuePlayer?
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
+    private var quizTopicID = ""
     
     override func loadView() {
         super.loadView()
@@ -181,14 +182,26 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func startQuiz() {
         checkStartTimer.invalidate()
-        let questionVC = QuestionViewController(quizDatas: quizDatas,
-                                                currentIndex: 0)
+        var quizStartIndex = 0
+        let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
+            return quizData.objectId == quizData.quizTopic.currentQuizDataID
+        }
+        //if we need to start them off in the middle of the quiz because they came late.
+        if let currentQuizTopicIndex = currentQuizTopicIndex {
+            quizStartIndex = currentQuizTopicIndex
+        }
+        
+        let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas, currentIndex: quizStartIndex)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }
     
     private func setData(quizTopic: QuizTopicParse) {
+        if quizTopicID != quizTopic.objectId{
+            quizTopicID = quizTopic.objectId ?? ""
+            User.current()?.quizPointCounter = 0 // To reset points for new topic
+        }
         let apiDate = quizTopic.start_time
         let formatter = DateFormatter()
         formatter.dateStyle = .full

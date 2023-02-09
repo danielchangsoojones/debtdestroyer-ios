@@ -19,9 +19,8 @@ class CryptoSettingsViewController: UIViewController {
         case logOut
         case deleteAcc
         case textNoti
-        case quizManager
-        case quizFinished
         case answerKeys
+        case quizQuestions
     }
     
     private var messageHelper: MessageHelper?
@@ -46,11 +45,12 @@ class CryptoSettingsViewController: UIViewController {
         if User.current()!.email == "messyjones@gmail.com" {
             dataArr.append("Send Text Notification")
             imgNameArr.append("contactUs")
-            dataArr.append("Quiz Maneger")
-            imgNameArr.append("contactUs")
-            dataArr.append("Quiz Finished")
-            imgNameArr.append("contactUs")
             dataArr.append("Answer Keys")
+            imgNameArr.append("contactUs")
+        }
+        
+        if (User.current()?.isAdminUser ?? false) {
+            dataArr.append("Quiz Questions")
             imgNameArr.append("contactUs")
         }
               
@@ -164,20 +164,14 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
                 }
                 
-            case .quizManager:
-                // MARK: Quiz Manager
-                let vc = QuizManagerViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
-            case .quizFinished:
-                // MARK: Quiz Finished
-                cryptoSettingsDataStore.finishQuizTime { response in
-                    print(response)
-                }
-                
             case .answerKeys:
                 // MARK: Answer Keys
                 let vc = AnswerKeysViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
+            case .quizQuestions:
+                // MARK: Answer Keys
+                let vc = QuizQuestionsViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
                 
         }

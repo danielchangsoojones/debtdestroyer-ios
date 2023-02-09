@@ -1,8 +1,8 @@
 //
-//  QuestionNewUIViewController.swift
+//  QuestionWithAnswerRevealGoTinyViewController.swift
 //  debtdestroyer
 //
-//  Created by Rashmi Aher on 26/09/22.
+//  Created by Rashmi Aher on 25/01/23.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import SCLAlertView
 
-class QuestionViewController: UIViewController {
+class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     struct Constants {
         static let originalStartTime: TimeInterval = 12
     }
@@ -33,7 +33,7 @@ class QuestionViewController: UIViewController {
     private var hasRevealedAnswerOnce = false
     var timerBar = UIProgressView()
     var questionContentView = UIView()
-    var questionView = QuestionView()
+    var questionView = QuestionWithAnswerRevealGoTinyView()
     var player = AVPlayer()
     var progressBarContainer = UIView()
     private var alreadyPushingVC = false
@@ -44,9 +44,15 @@ class QuestionViewController: UIViewController {
     var obs: NSKeyValueObservation?
     var soundOffContainer = UIView()
     var closePopupButton = UIButton()
-    
+    var revealAnswerContainer = UIView()
+    var correctAnswerView = UIView()
+    var yourAnswerView = UIView()
+    var yourAnswerLabel = UILabel()
+    var correctAnswerLabel = UILabel()
+    var yourAnswerHeading = UILabel()
+    var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
-
+    
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
@@ -63,7 +69,7 @@ class QuestionViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        questionView = QuestionView(frame: self.view.frame)
+        questionView = QuestionWithAnswerRevealGoTinyView(frame: self.view.frame)
         self.view = questionView
         self.playerLayer = questionView.playerLayer
         questionView.questionLabel.text = currentData.question
@@ -81,6 +87,13 @@ class QuestionViewController: UIViewController {
         self.soundOffContainer = questionView.soundOffContainer
         self.closePopupButton = questionView.closePopupButton
         self.helpButton = questionView.helpButton
+        self.revealAnswerContainer = questionView.revealAnswerContainer
+        self.correctAnswerView = questionView.correctAnswerView
+        self.yourAnswerView = questionView.yourAnswerView
+        self.yourAnswerLabel = questionView.yourAnswerLabel
+        self.correctAnswerLabel = questionView.correctAnswerLabel
+        self.yourAnswerHeading = questionView.yourAnswerHeading
+        self.correctAnswerHeading = questionView.correctAnswerHeading
     }
     
     override func viewDidLoad() {
@@ -94,10 +107,10 @@ class QuestionViewController: UIViewController {
                                                repeats: true)
         pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
         NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(applicationDidBecomeActive),
-                name: UIApplication.didBecomeActiveNotification,
-                object: nil)
+            self,
+            selector: #selector(applicationDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
         closePopupButton.addTarget(self,action: #selector(closeNoSoundPopup),for: .touchUpInside)
         showControlBtns()
         intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
@@ -155,9 +168,9 @@ class QuestionViewController: UIViewController {
                       frame: revealAnswerFrame)
             
             let nextFrame = CGRect(x: 30,
-                                           y: 100,
-                                           width: 60,
-                                           height: 60)
+                                   y: 100,
+                                   width: 60,
+                                   height: 60)
             createBtn(title: "skip",
                       selector: #selector(adminNextBtn),
                       backgroundColor: .yellow,
@@ -239,7 +252,7 @@ class QuestionViewController: UIViewController {
     
     private func playVideo() {
         let bannerStatus = UserDefaults.standard.bool(forKey: "NoSoundBannerClosed")
-
+        
         if !bannerStatus {
             
             // this code is KVO to notify user if volume change or put on mute
@@ -261,7 +274,7 @@ class QuestionViewController: UIViewController {
             }
         }
         
-       
+        
         
         if let video_url = URL(string: currentData.video_url_string) {
             player = AVPlayer(url: video_url)
@@ -271,10 +284,10 @@ class QuestionViewController: UIViewController {
             if User.isAppleTester || User.isIpadDemo {
                 NotificationCenter.default
                     .addObserver(self,
-                    selector: #selector(playerDidFinishPlaying),
-                    name: .AVPlayerItemDidPlayToEndTime,
-                    object: player.currentItem
-                )
+                                 selector: #selector(playerDidFinishPlaying),
+                                 name: .AVPlayerItemDidPlayToEndTime,
+                                 object: player.currentItem
+                    )
             }
         }
     }
@@ -351,21 +364,31 @@ class QuestionViewController: UIViewController {
                 return answerView.isChosen
             }
             
+            UIView.animate(withDuration: 1.0) {
+                // hiding these to show reveal answer go tiny
+                self.bottomView.isHidden = true
+                self.progressBarContainer.isHidden = true
+                self.timeLabel.isHidden = true
+            }
+            // After hiding question & options it will show reveal answer with animation
+            UIView.animate(withDuration: 1.0) {
+                self.revealAnswerContainer.alpha = 1.0
+            }
+
             if let selectedAnswerIndex = selectedAnswerIndex {
                 let answerView = answerViews[selectedAnswerIndex]
-                //we need to remove the purple gradient so the replacement gradient will show (red or green).
-                answerView.layer.sublayers?.removeAll(where: { layer in
-                    return layer is CAGradientLayer
-                })
+                updateYourAnswerView(answerView: answerView)
                 let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
-                    addAnswerMarkingGif(to: answerView, imageName: "xmark")
-                    answerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                    yourAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)                  
                 } else {
+                    self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
+                    yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
                     User.current()?.quizPointCounter += 1
                     pointsLabel.text = "\(User.current()?.quizPointCounter ?? 0) Points"
                 }
             }
+            
             markCorrectAnswerView(correct_answer_index: correct_answer_index)
             
             // this code is hiding remaining options
@@ -397,17 +420,24 @@ class QuestionViewController: UIViewController {
             
             NotificationCenter.default
                 .addObserver(self,
-                selector: #selector(playerDidFinishPlaying),
-                name: .AVPlayerItemDidPlayToEndTime,
-                object: player.currentItem
-            )
+                             selector: #selector(playerDidFinishPlaying),
+                             name: .AVPlayerItemDidPlayToEndTime,
+                             object: player.currentItem
+                )
         }
     }
     
+    private func updateYourAnswerView(answerView : AnswerChoiceNewUIView) {
+        yourAnswerView.alpha = 1.0
+        UIView.animate(withDuration: 1.0) {
+            self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        }
+        yourAnswerLabel.text = answerView.answerLabel.text
+    }
+    
     private func markCorrectAnswerView(correct_answer_index: Int) {
-        let correctAnswerView = answerViews[correct_answer_index]
-        addAnswerMarkingGif(to: correctAnswerView, imageName: "checkmark")
         correctAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
+        correctAnswerLabel.text = answerViews[correct_answer_index].answerLabel.text
     }
     
     private func addAnswerMarkingGif(to answerView: AnswerChoiceNewUIView, imageName: String) {
@@ -468,7 +498,7 @@ class QuestionViewController: UIViewController {
                 answerView.layer.borderWidth = 1
                 answerView.tag = index
                 answerView.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
-
+                
                 answerViews.append(answerView)
                 answerView.answerLabel.text = answer.capitalized
                 stackView.addArrangedSubview(answerView)
@@ -515,21 +545,10 @@ class QuestionViewController: UIViewController {
                     self.navigationController?.pushViewController(leaderboardVC, animated: true)
                 }
             } else {
-                let vc = QuestionViewController(quizDatas: quizDatas,
+                let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                 currentIndex: nextIndex)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-    }
-}
-
-extension TimeInterval {
-    var time: String {
-        return String(format:"%02d", Int(ceil(truncatingRemainder(dividingBy: 60))) )
-    }
-}
-extension Int {
-    var degreesToRadians : CGFloat {
-        return CGFloat(self) * .pi / 180
     }
 }

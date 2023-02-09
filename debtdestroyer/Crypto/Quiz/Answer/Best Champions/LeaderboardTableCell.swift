@@ -30,7 +30,7 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
         numberLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
             make.centerY.equalTo(nameLabel)
-            make.width.equalTo(12)
+            make.width.equalTo(25)
         }
         
         pointsLabel.snp.makeConstraints { make in
@@ -54,6 +54,7 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     private func setNumLabel() {
         numberLabel.font = UIFont.MontserratLight(size: 10)
         numberLabel.textColor = .black
+        numberLabel.textAlignment = .center
         contentView.addSubview(numberLabel)
     }
     

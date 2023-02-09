@@ -47,8 +47,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     }
     
     private func nextVC() {
-        let nameVC = NameViewController()
-        self.navigationController?.pushViewController(nameVC, animated: true)
+        self.next()
     }
     
     var isComplete: Bool {

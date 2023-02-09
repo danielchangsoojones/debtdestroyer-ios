@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
+class RegisterViewController: FrigadePage, OnboardingDataStoreDelegate {
     var titleLabel: UILabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
@@ -58,7 +58,7 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     }
     
     @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
+        self.back()
     }
     
     @objc private func helpPressed() {
@@ -82,8 +82,7 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     
     func segueIntoApp() {
         nextButton.stopSpinning()
-        let profileVC = CreateProfileViewController()
-        self.navigationController?.pushViewController(profileVC, animated: true)
+        self.next()
     }
 }
 

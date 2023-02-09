@@ -8,11 +8,11 @@
 import Foundation
 import Frigade
 
-class FrigadePreloader {
+class FrigadeHelper {
     var welcomePage: FrigadeFlow? = nil
     var signUpFlow: FrigadeFlow? = nil
     
-    static let shared = FrigadePreloader()
+    static let shared = FrigadeHelper()
 
     func preloadFlows(completionHandler: @escaping ()->Void) {
         FrigadeProvider.load(flowId: "flow_MrRLoskD7ZI4jWyg") { result in

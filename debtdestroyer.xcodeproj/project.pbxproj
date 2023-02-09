@@ -156,7 +156,9 @@
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
 		92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB72972322200ED029D /* WaitlistViewController.swift */; };
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
-		AA043326299487EC00CCF94C /* FrigadePreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA043325299487EC00CCF94C /* FrigadePreloader.swift */; };
+		AA043326299487EC00CCF94C /* FrigadeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA043325299487EC00CCF94C /* FrigadeHelper.swift */; };
+		AA04332E2994C66C00CCF94C /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04332D2994C66C00CCF94C /* SignUpCoordinator.swift */; };
+		AA0433302994CEF100CCF94C /* FrigadePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04332F2994CEF100CCF94C /* FrigadePage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -315,7 +317,9 @@
 		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
-		AA043325299487EC00CCF94C /* FrigadePreloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrigadePreloader.swift; sourceTree = "<group>"; };
+		AA043325299487EC00CCF94C /* FrigadeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrigadeHelper.swift; sourceTree = "<group>"; };
+		AA04332D2994C66C00CCF94C /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
+		AA04332F2994CEF100CCF94C /* FrigadePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrigadePage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -730,6 +734,7 @@
 		0A7A49DE28A386C6009EDE5E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				AA04332C2994C65000CCF94C /* SignUpCoordinator */,
 				92C849902970A4470091422E /* Promo */,
 				0A7A49FA28A3D262009EDE5E /* Data Store */,
 				0A515021292394EB001B028C /* Edit Profile */,
@@ -957,10 +962,19 @@
 			path = Waitlist;
 			sourceTree = "<group>";
 		};
+		AA04332C2994C65000CCF94C /* SignUpCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AA04332D2994C66C00CCF94C /* SignUpCoordinator.swift */,
+				AA04332F2994CEF100CCF94C /* FrigadePage.swift */,
+			);
+			path = SignUpCoordinator;
+			sourceTree = "<group>";
+		};
 		AA1BEEB62989CFAA00666DCC /* Frigade */ = {
 			isa = PBXGroup;
 			children = (
-				AA043325299487EC00CCF94C /* FrigadePreloader.swift */,
+				AA043325299487EC00CCF94C /* FrigadeHelper.swift */,
 			);
 			path = Frigade;
 			sourceTree = "<group>";
@@ -1131,6 +1145,7 @@
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
+				AA0433302994CEF100CCF94C /* FrigadePage.swift in Sources */,
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
 				0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */,
 				0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */,
@@ -1143,7 +1158,7 @@
 				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* AddressViewController.swift in Sources */,
-				AA043326299487EC00CCF94C /* FrigadePreloader.swift in Sources */,
+				AA043326299487EC00CCF94C /* FrigadeHelper.swift in Sources */,
 				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
 				0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
@@ -1207,6 +1222,7 @@
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
 				0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */,
+				AA04332E2994C66C00CCF94C /* SignUpCoordinator.swift in Sources */,
 				0A44EF9A28E5907B006305B8 /* StartQuizViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */,

@@ -8,7 +8,7 @@
 import UIKit
 import Frigade
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: FrigadePage {
     private var messageHelper: MessageHelper?
     private var logInButton = UIButton()
     private var signUpButton = UIButton()
@@ -34,7 +34,7 @@ class WelcomeViewController: UIViewController {
         welcomeView.logInButton.addTarget(self, action: #selector(logInPressed), for: .touchUpInside)
         welcomeView.signUpButton.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
         setNavBarBtns()
-        if let flow = FrigadePreloader.shared.welcomePage {
+        if let flow = FrigadeHelper.shared.welcomePage {
             let flowData = flow.getData()
             if !flowData.isEmpty {
                 let data = flowData[0]
@@ -106,7 +106,7 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc private func registerPressed() {
-        let registerVC = RegisterViewController()
-        self.navigationController?.pushViewController(registerVC, animated: true)
+        SignUpCoordinator.shared.reset()
+        SignUpCoordinator.shared.next(self)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import SCLAlertView
 
-class AddressViewController: UIViewController {
+class AddressViewController: FrigadePage {
     private var messageHelper: MessageHelper?
     var addView = AddressView()
     var addTextField: UITextField!
@@ -82,7 +82,7 @@ class AddressViewController: UIViewController {
     }
     
     @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
+        self.back()
     }
     
     @objc private func helpPressed() {
@@ -91,24 +91,8 @@ class AddressViewController: UIViewController {
     
     @objc private func nextBtnPressed() {
         let promoCode = self.addTextField.text?.trimmingCharacters(in: .whitespaces).lowercased()
-        
-        nextButton.startSpinning()
-        let email = UserDefaults.standard.string(forKey: "email") ?? ""
-        let password = UserDefaults.standard.string(forKey: "password") ?? ""
-        let phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber") ?? ""
-        let firstName = UserDefaults.standard.string(forKey: OnboardingKeys.firstName) ?? ""
-        let lastName = UserDefaults.standard.string(forKey: OnboardingKeys.lastName) ?? ""
-        dataStore.register(email: email, password: password) {
-            self.dataStore.save(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, promoCode: promoCode) {
-                UserDefaults.standard.removeObject(forKey: "email")
-                UserDefaults.standard.removeObject(forKey: "password")
-                UserDefaults.standard.removeObject(forKey: "phoneNumber")
-                UserDefaults.standard.removeObject(forKey: OnboardingKeys.firstName)
-                UserDefaults.standard.removeObject(forKey: OnboardingKeys.lastName)
-                UserDefaults.standard.synchronize()
-            }
-            self.nextButton.stopSpinning()
-        }
+        UserDefaults.standard.set(promoCode, forKey: OnboardingKeys.promoCode)
+        self.next()
     }
     
     @objc func textViewChanged() {
@@ -126,9 +110,6 @@ extension AddressViewController: OnboardingDataStoreDelegate {
     
     func segueIntoApp() {
         nextButton.stopSpinning()
-        let vc = CryptoTabBarViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
     }
 }
 

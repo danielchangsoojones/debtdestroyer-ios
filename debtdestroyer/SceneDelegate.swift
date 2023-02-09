@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func setStartingVC(windowScene: UIScene) {
         if User.current() == nil {
-            FrigadePreloader.shared.preloadFlows {
+            FrigadeHelper.shared.preloadFlows {
                 let welcomeVC = WelcomeViewController()
                 let navController = UINavigationController(rootViewController: welcomeVC)
                 self.set(windowScene: windowScene, startingVC: navController)

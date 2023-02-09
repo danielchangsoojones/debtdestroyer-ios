@@ -10,6 +10,7 @@ class SignUpCoordinator: NSObject, OnboardingDataStoreDelegate {
         "phoneNumber": CreateProfileViewController(),
         "name": NameViewController(),
         "signUpCode": AddressViewController(),
+        "notificationPermissions": NotificationPermViewController()
     ]
     
     func reset() {

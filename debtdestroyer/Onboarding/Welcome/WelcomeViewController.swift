@@ -18,6 +18,7 @@ class WelcomeViewController: FrigadePage {
     var welcomeView = WelcomeView()
     var titleLabel = UILabel()
     var subtitleLabel = UILabel()
+    var logoImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class WelcomeViewController: FrigadePage {
         titleLabel = welcomeView.titleLabel
         termsAndPolicyLabel = welcomeView.termsAndPolicyLabel
         subtitleLabel = welcomeView.subtitleLabel
+        logoImageView = welcomeView.logoImageView
+ 
         welcomeView.logInButton.addTarget(self, action: #selector(logInPressed), for: .touchUpInside)
         welcomeView.signUpButton.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
         setNavBarBtns()
@@ -44,21 +47,27 @@ class WelcomeViewController: FrigadePage {
                 if data.subtitle != nil {
                     subtitleLabel.text = data.subtitle
                 }
+                if let url = data.imageUri {
+                    logoImageView.kf.setImage(with: url)
+                    logoImageView.isHidden = false
+                } else {
+                    logoImageView.isHidden = true
+                }
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         //  Rashmi -> for applying gradientColor ot create image, method needs logInButton frame.bound so calling / applying grad border and text code in viewDidAppear. Even tried to call it in viewdidLayoutSubviews but didnt work.
         logInButton.layer.cornerRadius = globalCornerRadius
         logInButton.clipsToBounds = true
         let gradientForText = welcomeView.getGradientLayer(bounds: logInButton.bounds)
         logInButton.setTitleColor(welcomeView.gradientColor(bounds: logInButton.bounds, gradientLayer: gradientForText), for: .normal)
-        
+
         let gradient = CAGradientLayer()
         gradient.frame =  CGRect(origin: .zero, size: logInButton.frame.size)
         gradient.colors = [color1.cgColor, color2.cgColor]
@@ -73,38 +82,38 @@ class WelcomeViewController: FrigadePage {
         gradient.mask = border
 
         logInButton.layer.addSublayer(gradient)
-        
+
         let gradientLabel = welcomeView.getGradientLayer(bounds: titleLabel.bounds)
         titleLabel.textColor = welcomeView.gradientColor(bounds: titleLabel.bounds, gradientLayer: gradientLabel)
-        
-        
-        
+
+
+
     }
-    
-    
+
+
     private func setNavBarBtns() {
         var helpImg = UIImage.init(named: "Help")
         helpImg = helpImg?.withRenderingMode(.alwaysOriginal)
         let help = UIBarButtonItem(image: helpImg , style: .plain, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
-        
+
         navigationController?.navigationBar.backgroundColor = .white
     }
-    
+
     @objc private func helpPressed() {
         messageHelper?.text(MessageHelper.customerServiceNum)
     }
-   
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-   
-    
+
+
     @objc private func logInPressed() {
         let logInVC = LogInViewController()
         navigationController?.pushViewController(logInVC, animated: true)
     }
-    
+
     @objc private func registerPressed() {
         SignUpCoordinator.shared.reset()
         SignUpCoordinator.shared.next(self)

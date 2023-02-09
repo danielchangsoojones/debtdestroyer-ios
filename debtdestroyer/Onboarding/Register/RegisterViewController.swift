@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 class RegisterViewController: FrigadePage, OnboardingDataStoreDelegate {
-    var titleLabel: UILabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
     var nextButton: NextButton!
@@ -17,6 +16,9 @@ class RegisterViewController: FrigadePage, OnboardingDataStoreDelegate {
     var stackView: UIStackView!
     var emailLabel: UILabel!
     var passwordLabel: UILabel!
+    var imageView: UIImageView!
+    var titleLabel = UILabel()
+    var subtitleLabel = UILabel()
     private var messageHelper: MessageHelper?
 
     override func viewDidLoad() {
@@ -30,6 +32,9 @@ class RegisterViewController: FrigadePage, OnboardingDataStoreDelegate {
         stackView = registerView.stackView
         emailLabel = registerView.emailLabel
         passwordLabel = registerView.passwordLabel
+        imageView = registerView.imageView
+        titleLabel = registerView.titleLabel
+        subtitleLabel = registerView.subtitleLabel
         registerView.nextButton.addTarget(self, action: #selector(nextBtnPressed), for: .touchUpInside)
       
         dataStore = OnboardingDataStore(delegate: self)

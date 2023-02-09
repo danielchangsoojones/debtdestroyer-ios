@@ -17,24 +17,25 @@ class WelcomeView: UIView {
     var loginBtn = UIButton()
     var titleLabel = UILabel()
     var subtitleLabel = UILabel()
+    var logoImageView: UIImageView!
 
     var color1 = UIColor()
     var color2 = UIColor()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-       
+
         addLogInView()
         addButtons()
         setLabelForTermsPolicy()
         addLogo()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func addLogInView() {
         logInView = UIView()
         logInView.backgroundColor = .white
@@ -42,7 +43,7 @@ class WelcomeView: UIView {
         logInView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
+
         stackView = UIStackView()
         stackView.spacing = 9
         stackView.axis = .horizontal
@@ -55,7 +56,7 @@ class WelcomeView: UIView {
             make.top.equalTo(logInView.snp.top).inset(20)
         }
     }
-    
+
     func setSignupBtn() {
         signUpButton = GradientBtn()
         if #available(iOS 15.0, *) {
@@ -63,11 +64,11 @@ class WelcomeView: UIView {
                 var configuration = UIButton.Configuration.plain()
                 configuration.attributedTitle = AttributedString("Sign Up", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : UIColor.white]))
                 signUpButton.configuration = configuration
-                
+
             } else {
                 signUpButton.configuration?.attributedTitle = AttributedString("Sign Up", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : UIColor.white]))
             }
-            
+
         } else {
             signUpButton.setTitleColor(.white, for: .normal)
             signUpButton.setTitle("Sign Up", for: .normal)
@@ -77,13 +78,13 @@ class WelcomeView: UIView {
         let horizontalInset: CGFloat = 20
         let verticalInset: CGFloat = 20
         signUpButton.contentEdgeInsets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
-        
+
         stackView.addArrangedSubview(signUpButton)
         signUpButton.snp.makeConstraints{ make in
             make.height.equalTo(signUpButton.snp.width).multipliedBy(0.34)
         }
     }
-    
+
     func setLoginBtn(){
         logInButton = UIButton()
         if #available(iOS 15.0, *) {
@@ -91,11 +92,11 @@ class WelcomeView: UIView {
                 var configuration = UIButton.Configuration.plain()
                 configuration.attributedTitle = AttributedString("Log In", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "FF2474")]))
                 logInButton.configuration = configuration
-                
+
             } else {
                 logInButton.configuration?.attributedTitle = AttributedString("Log In", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 15),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "FF2474")]))
             }
-            
+
         } else {
             logInButton.setTitle("Log In", for: .normal)
         }
@@ -105,16 +106,16 @@ class WelcomeView: UIView {
         let horizontalInset: CGFloat = 20
         let verticalInset: CGFloat = 20
         logInButton.contentEdgeInsets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
-        
+
         stackView.addArrangedSubview(logInButton)
         logInButton.snp.makeConstraints{ make in
             make.height.equalTo(logInButton.snp.width).multipliedBy(0.34)
         }
-        
-      
-       
+
+
+
     }
- 
+
     private func setLabelForTermsPolicy() {
         termsAndPolicyLabel.textColor = .black
         termsAndPolicyLabel.numberOfLines = 1
@@ -123,26 +124,26 @@ class WelcomeView: UIView {
         termsAndPolicyLabel.adjustsFontSizeToFitWidth = true
         termsAndPolicyLabel.minimumScaleFactor = 0.5
         termsAndPolicyLabel.isUserInteractionEnabled = true
-        
+
         let attributedString = NSMutableAttributedString(string: "By signing up, you agree to our Terms of Service and Privacy Policy")
         let text = "By signing up, you agree to our Terms of Service and Privacy Policy"
         let str = NSString(string: text)
         let theRangeTerm = str.range(of: "Terms of Service")
         let theRangePolicy = str.range(of: "Privacy Policy")
-        
+
         attributedString.addAttribute(.underlineStyle, value: 1, range: theRangeTerm)
         attributedString.addAttribute(.underlineStyle, value: 1, range: theRangePolicy)
-        
+
         termsAndPolicyLabel.attributedText = attributedString
         termsAndPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
-        
+
         logInView.addSubview(termsAndPolicyLabel)
         termsAndPolicyLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
             make.bottom.equalTo(stackView.snp.top).offset(-20)
         }
     }
-    
+
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
         let text = "By signing up, you agree to our Terms of Service and Privacy Policy"
         let str = NSString(string: text)
@@ -158,30 +159,29 @@ class WelcomeView: UIView {
             print("Tapped none")
         }
     }
-    
+
     private func addButtons() {
         setLoginBtn()
         setSignupBtn()
     }
 
     private func addLogo() {
-        let logoImageView = UIImageView()
+        logoImageView = UIImageView()
         if let logoImage = UIImage(named: "logo") {
-            logoImageView.image = logoImage
             logoImageView.contentMode = .scaleAspectFit
             addSubview(logoImageView)
             logoImageView.snp.makeConstraints { (make) in
-                make.centerY.equalToSuperview().offset(-100)
+                make.centerY.equalToSuperview().offset(-150)
                 make.centerX.equalToSuperview()
-                make.width.height.equalTo(self.frame.width * 0.5)
+                make.width.height.equalTo(self.frame.width * 0.7)
             }
         }
-        
+
         titleLabel.text = "Debt Destroyed"
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.MontserratBold(size: 26)
-        
+
         subtitleLabel.numberOfLines = 0
         subtitleLabel.font = UIFont.MontserratRegular(size: 16)
         subtitleLabel.textAlignment = .center
@@ -189,7 +189,7 @@ class WelcomeView: UIView {
         addSubview(subtitleLabel)
         titleLabel.snp.makeConstraints{ make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.top.equalTo(logoImageView.snp.bottom).offset(10)
+            make.top.equalTo(logoImageView.snp.bottom).offset(36)
         }
         subtitleLabel.snp.makeConstraints{ make in
             make.leading.trailing.equalToSuperview().inset(30)

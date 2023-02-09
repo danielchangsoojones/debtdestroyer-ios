@@ -162,6 +162,7 @@
 		AA04332E2994C66C00CCF94C /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04332D2994C66C00CCF94C /* SignUpCoordinator.swift */; };
 		AA0433302994CEF100CCF94C /* FrigadePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04332F2994CEF100CCF94C /* FrigadePage.swift */; };
 		AA0433362994DA0800CCF94C /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0433352994DA0800CCF94C /* NextButton.swift */; };
+		AA0433392995A7E900CCF94C /* NotificationPermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0433382995A7E900CCF94C /* NotificationPermViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -326,6 +327,7 @@
 		AA04332D2994C66C00CCF94C /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		AA04332F2994CEF100CCF94C /* FrigadePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrigadePage.swift; sourceTree = "<group>"; };
 		AA0433352994DA0800CCF94C /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
+		AA0433382995A7E900CCF94C /* NotificationPermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -742,6 +744,7 @@
 		0A7A49DE28A386C6009EDE5E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				AA0433372995A78B00CCF94C /* NotificationPermission */,
 				AA0433342994D9FA00CCF94C /* Components */,
 				AA04332C2994C65000CCF94C /* SignUpCoordinator */,
 				92C849902970A4470091422E /* Promo */,
@@ -988,6 +991,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		AA0433372995A78B00CCF94C /* NotificationPermission */ = {
+			isa = PBXGroup;
+			children = (
+				AA0433382995A7E900CCF94C /* NotificationPermViewController.swift */,
+			);
+			path = NotificationPermission;
+			sourceTree = "<group>";
+		};
 		AA1BEEB62989CFAA00666DCC /* Frigade */ = {
 			isa = PBXGroup;
 			children = (
@@ -1183,6 +1194,7 @@
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
 				0A32178D290115BA00A414CA /* ScoreView.swift in Sources */,
 				0A59AD0A28E183F4001B774A /* AddressView.swift in Sources */,
+				AA0433392995A7E900CCF94C /* NotificationPermViewController.swift in Sources */,
 				0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */,
 				0A50659128C346D200207759 /* SubscriptionView.swift in Sources */,
 				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,

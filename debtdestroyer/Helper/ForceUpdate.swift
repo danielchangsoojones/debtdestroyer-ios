@@ -11,7 +11,7 @@ import SCLAlertView
 
 class ForceUpdate {
     
-    static var forceUpdateShown = ""
+    static var forceUpdateShown = Date()
     
     static func checkIfForceUpdate() {
         let version_str = Helpers.getVersionStr()
@@ -35,7 +35,7 @@ class ForceUpdate {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
         )
-        forceUpdateShown = Date().today(format: "dd/MM/yy HH:mm:ss")
+        forceUpdateShown = Date()
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Update", action: {
             Helpers.open(urlString: "https://apps.apple.com/us/app/lavadrop/id1639968618")

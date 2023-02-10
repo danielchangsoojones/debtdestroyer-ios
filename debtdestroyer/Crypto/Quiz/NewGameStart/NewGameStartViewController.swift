@@ -153,16 +153,10 @@ class NewGameStartViewController: UIViewController {
                     self.checkIfStartQuiz()
                 } else if let error = error {
                     if error.localizedDescription.contains("error-force-update") {
+                        let forceUpdateShown  = ForceUpdate.forceUpdateShown.toLocalTime().withAddedMinutes(minutes: 2)
                         
-                        let forceUpdateShown  = ForceUpdate.forceUpdateShown
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "dd/MM/yy HH:mm:ss"
-                        let last = formatter.date(from: forceUpdateShown )
-                        let lastPopup = last?.toLocalTime()
-                        let currentDateStr = Date().today(format: "dd/MM/yy HH:mm:ss")
-                        let currentDate = formatter.date(from: currentDateStr)
-                        
-                        if lastPopup == nil || lastPopup!.withAddedMinutes(minutes: 2) <= currentDate!.toLocalTime() {
+                        if !User.forceUpdatePopUpShownInitially || forceUpdateShown <= Date().toLocalTime() {
+                            User.forceUpdatePopUpShownInitially = true
                             ForceUpdate.showAlert()
                         }
                     } else {

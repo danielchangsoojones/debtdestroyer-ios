@@ -170,7 +170,7 @@ class NewGameStartViewController: UIViewController {
     private func checkIfStartQuiz() {
         if let quizData = quizDatas.first {
             let quizTopic = quizData.quizTopic
-            self.quizKickoffTime = quizTopic.start_time
+            self.quizKickoffTime = quizTopic.start_time.toLocalTime()
             setData(quizTopic: quizTopic)
             let now = Date()
             if quizTopic.start_time < now {
@@ -202,14 +202,14 @@ class NewGameStartViewController: UIViewController {
             quizTopicID = quizTopic.objectId ?? ""
             User.current()?.quizPointCounter = 0 // To reset points for new topic
         }
-        let apiDate = quizTopic.start_time
+        let apiDate = quizTopic.start_time.toLocalTime()
         let formatter = DateFormatter()
         formatter.dateStyle = .full
         formatter.timeStyle = .long
-        formatter.timeZone = .init(abbreviation: "PDT")
+//        formatter.timeZone = .init(abbreviation: "PDT")
         var strDate = formatter.string(from: apiDate)
 //        var strDate = formatter.string(from: apiDate.toLocalTime())
-
+//        strDate = strDate.replacingOccurrences(of: " GMT+5:30", with: "")
         strDate = strDate.replacingOccurrences(of: " at ", with: " @ ")
         strDate = strDate.replacingOccurrences(of: ",", with: "")
         strDate = strDate.replacingOccurrences(of: ":", with: " ")

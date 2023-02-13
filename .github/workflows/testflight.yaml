@@ -44,7 +44,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           wolfia-api-key-id: ${{ vars.WOLFIA_API_KEY_ID }}
           wolfia-api-key-secret: ${{ secrets.WOLFIA_API_KEY_SECRET }}
-          track-id: ${{ vars.TRACK_ID }}
           app-path: "./output/debtdestroyer.ipa"
           app-store-connect-api-key-id: ${{ vars.APP_CONNECT_API_KEY }}
           app-store-connect-api-issuer: ${{ vars.APP_CONNECT_API_ISSUER }}

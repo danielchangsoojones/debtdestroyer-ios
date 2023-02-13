@@ -11,7 +11,7 @@ import SCLAlertView
 
 class ForceUpdate {
     
-    static var forceUpdateShown = Date()
+    static var forceUpdateShown : Date? = nil
     
     static func checkIfForceUpdate() {
         let version_str = Helpers.getVersionStr()

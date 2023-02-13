@@ -35,7 +35,7 @@ jobs:
       - name: Show Xcode version
         run: xcode-select -p
       - name: Build archive
-        run: xcodebuild -project "./debtdestroyer.xcodeproj" -scheme "Debt Destroyer - Live Trivia" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
+        run: xcodebuild -project "./debtdestroyer.xcodeproj" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
       - name: Export archive and build IPA
         run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - name: Wolfia Deploy

@@ -44,7 +44,6 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ForceUpdate.checkIfForceUpdate()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         loopVideo()
         setNavBarBtns()
@@ -65,7 +64,6 @@ class NewGameStartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
-        self.tabBarController?.tabBar.backgroundColor = .clear
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -78,7 +76,6 @@ class NewGameStartViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.backgroundColor = .white
         checkStartTimer.invalidate()
         timer.invalidate()
     }
@@ -156,7 +153,11 @@ class NewGameStartViewController: UIViewController {
                     self.checkIfStartQuiz()
                 } else if let error = error {
                     if error.localizedDescription.contains("error-force-update") {
-                        ForceUpdate.showAlert()
+                        let forceUpdateShown  = ForceUpdate.forceUpdateShown?.withAddedMinutes(minutes: 2)
+                        
+                        if forceUpdateShown == nil || forceUpdateShown! <= Date() {
+                            ForceUpdate.showAlert()
+                        }
                     } else {
                         BannerAlert.show(with: error)
                     }
@@ -170,7 +171,7 @@ class NewGameStartViewController: UIViewController {
     private func checkIfStartQuiz() {
         if let quizData = quizDatas.first {
             let quizTopic = quizData.quizTopic
-            self.quizKickoffTime = quizTopic.start_time.toLocalTime()
+            self.quizKickoffTime = quizTopic.start_time
             setData(quizTopic: quizTopic)
             let now = Date()
             if quizTopic.start_time < now {
@@ -202,14 +203,12 @@ class NewGameStartViewController: UIViewController {
             quizTopicID = quizTopic.objectId ?? ""
             User.current()?.quizPointCounter = 0 // To reset points for new topic
         }
-        let apiDate = quizTopic.start_time.toLocalTime()
+        let apiDate = quizTopic.start_time
         let formatter = DateFormatter()
         formatter.dateStyle = .full
         formatter.timeStyle = .long
-//        formatter.timeZone = .init(abbreviation: "PDT")
-        var strDate = formatter.string(from: apiDate)
-//        var strDate = formatter.string(from: apiDate.toLocalTime())
-//        strDate = strDate.replacingOccurrences(of: " GMT+5:30", with: "")
+        formatter.timeZone = .init(abbreviation: "PDT")
+        var strDate = formatter.string(from: apiDate)        
         strDate = strDate.replacingOccurrences(of: " at ", with: " @ ")
         strDate = strDate.replacingOccurrences(of: ",", with: "")
         strDate = strDate.replacingOccurrences(of: ":", with: " ")

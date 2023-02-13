@@ -380,7 +380,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 updateYourAnswerView(answerView: answerView)
                 let isIncorrectAnswer = selectedAnswerIndex != correct_answer_index
                 if isIncorrectAnswer {
-                    yourAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)                  
+                    yourAnswerView.setGradientBackground(color1: hexStringToUIColor(hex: "FF7910"), color2: hexStringToUIColor(hex: "EB5757"),radi: 25)
+                    UIView.animate(withDuration: 1.0) {
+                        self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+                    }
                 } else {
                     self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
                     yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
@@ -429,9 +432,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     private func updateYourAnswerView(answerView : AnswerChoiceNewUIView) {
         yourAnswerView.alpha = 1.0
-        UIView.animate(withDuration: 1.0) {
-            self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-        }
+
         yourAnswerLabel.text = answerView.answerLabel.text
     }
     
@@ -545,6 +546,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     self.navigationController?.pushViewController(leaderboardVC, animated: true)
                 }
             } else {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                 let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                 currentIndex: nextIndex)
                 self.navigationController?.pushViewController(vc, animated: true)

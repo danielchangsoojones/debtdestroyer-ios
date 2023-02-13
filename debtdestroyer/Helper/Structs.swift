@@ -100,4 +100,9 @@ struct Helpers {
         let version_str = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
         return version_str
     }
+    
+    static func getAppDisplayNameStr() -> String? {
+        let appDisplayNameStr = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+        return appDisplayNameStr
+    }
 }

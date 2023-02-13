@@ -176,9 +176,8 @@ class WelcomeView: UIView {
                 make.width.height.equalTo(self.frame.width * 0.7)
             }
         }
-
-        titleLabel.text = "Debt Destroyed"
         titleLabel.numberOfLines = 0
+        titleLabel.text = Helpers.getAppDisplayNameStr()
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.MontserratBold(size: 26)
 

@@ -35,9 +35,9 @@ jobs:
       - name: Show Xcode version
         run: xcode-select -p
       - name: Build archive
-        run: xcodebuild -project "./debtdestroyer.xcodeproj" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
+        run: xcodebuild -allowProvisioningUpdates -project "./debtdestroyer.xcodeproj" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
       - name: Export archive and build IPA
-        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
+        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist - 
       - name: Wolfia Deploy
         uses: wolfia-app/wolfia-deploy@v0.0.4
         with:

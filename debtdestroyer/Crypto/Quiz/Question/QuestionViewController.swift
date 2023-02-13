@@ -515,6 +515,7 @@ class QuestionViewController: UIViewController {
                     self.navigationController?.pushViewController(leaderboardVC, animated: true)
                 }
             } else {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                 let vc = QuestionViewController(quizDatas: quizDatas,
                                                 currentIndex: nextIndex)
                 self.navigationController?.pushViewController(vc, animated: true)

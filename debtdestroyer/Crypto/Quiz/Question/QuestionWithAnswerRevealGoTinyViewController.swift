@@ -546,6 +546,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     self.navigationController?.pushViewController(leaderboardVC, animated: true)
                 }
             } else {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                 let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                 currentIndex: nextIndex)
                 self.navigationController?.pushViewController(vc, animated: true)

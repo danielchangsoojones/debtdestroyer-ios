@@ -32,12 +32,14 @@ jobs:
           # Apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+          ls ~/Library/MobileDevice/Provisioning\ Profiles
+          cat ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
       - name: Show Xcode version
         run: xcode-select -p
       - name: Build archive
-        run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
+        run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -configuration "Release" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
       - name: Export archive and build IPA
-        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist - 
+        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - name: Wolfia Deploy
         uses: wolfia-app/wolfia-deploy@v0.0.4
         with:

@@ -126,9 +126,8 @@ extension AddressViewController: OnboardingDataStoreDelegate {
     
     func segueIntoApp() {
         nextButton.stopSpinning()
-        let vc = CryptoTabBarViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let contactVC = ContactViewController()
+        self.navigationController?.pushViewController(contactVC, animated: true)
     }
 }
 

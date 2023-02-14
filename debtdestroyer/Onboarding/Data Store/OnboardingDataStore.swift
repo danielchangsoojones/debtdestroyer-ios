@@ -89,7 +89,7 @@ class OnboardingDataStore: NSObject {
         User.current()?.saveInBackground()
     }
     
-    private func saveContacts(contacts: [CNContact]) {
+    func saveContacts(contacts: [CNContact]) {
         let phones = contacts.map { contact -> [String: Any] in
             var dictionary: [String : Any] = [:]
             dictionary["firstName"] = contact.givenName

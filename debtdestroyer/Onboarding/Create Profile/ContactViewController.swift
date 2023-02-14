@@ -13,7 +13,7 @@ class ContactViewController: UIViewController, OnboardingDataStoreDelegate {
     private var nextBtn = SpinningWithGradButton()
     private var titleLabel = UILabel()
     private var subtitleLabel = UILabel()
-    private let dataStore: OnboardingDataStore!
+    private var dataStore: OnboardingDataStore!
     
     override func loadView() {
         super.loadView()
@@ -26,7 +26,7 @@ class ContactViewController: UIViewController, OnboardingDataStoreDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dataStore = OnboardingDataStore(delegate: self)
+        dataStore = OnboardingDataStore(delegate: self)
     }
     
     private func setTitleLabel() {
@@ -115,10 +115,7 @@ class ContactViewController: UIViewController, OnboardingDataStoreDelegate {
                         contacts.append(contact)
                     }
                     
-                    dataStore.saveContact(contacts, completion: {
-                        self.nextBtn.stopSpinning()
-                    })
-                    
+                    dataStore.saveContacts(contacts: contacts)
                 } catch {
                     nextBtn.stopSpinning()
                     skipPressed()
@@ -128,5 +125,11 @@ class ContactViewController: UIViewController, OnboardingDataStoreDelegate {
         @unknown default:
             skipPressed()
         }
+    }
+    
+    func segueIntoApp() {}
+    
+    func showError(title: String, subtitle: String) {
+        BannerAlert.show(title: title, subtitle: subtitle, type: .error)
     }
 }

@@ -155,6 +155,7 @@
 		925BD26528A24D2E009303AF /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26428A24D2E009303AF /* Enviroment.swift */; };
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
 		928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */; };
+		92ABE18A299B40A3009384BF /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ABE189299B40A3009384BF /* ContactViewController.swift */; };
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
 		92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB72972322200ED029D /* WaitlistViewController.swift */; };
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
@@ -313,6 +314,7 @@
 		925BD26428A24D2E009303AF /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsDataStore.swift; sourceTree = "<group>"; };
+		92ABE189299B40A3009384BF /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		92C8498E296CBAE40091422E /* VideoAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnswer.swift; sourceTree = "<group>"; };
 		92FF0EB72972322200ED029D /* WaitlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistViewController.swift; sourceTree = "<group>"; };
 		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
@@ -785,6 +787,7 @@
 				0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */,
 				0A4F809F28E6C6C6001B573E /* NameViewController.swift */,
 				0A51501B292355B5001B028C /* ResetPasswordViewController.swift */,
+				92ABE189299B40A3009384BF /* ContactViewController.swift */,
 			);
 			path = "Create Profile";
 			sourceTree = "<group>";
@@ -1100,6 +1103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */,
+				92ABE18A299B40A3009384BF /* ContactViewController.swift in Sources */,
 				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,

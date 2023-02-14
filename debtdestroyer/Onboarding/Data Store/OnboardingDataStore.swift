@@ -7,6 +7,7 @@
 
 import UIKit
 import Parse
+import ContactsUI
 
 protocol OnboardingDataStoreDelegate: NSObjectProtocol {
     func segueIntoApp()
@@ -86,5 +87,32 @@ class OnboardingDataStore: NSObject {
         }
         
         User.current()?.saveInBackground()
+    }
+    
+    func saveContacts(contacts: [CNContact]) {
+        let phones = contacts.map { contact -> [String: Any] in
+            var dictionary: [String : Any] = [:]
+            dictionary["firstName"] = contact.givenName
+            dictionary["lastName"] = contact.familyName
+            dictionary["phoneNums"] = contact.phoneNumbers.map({ label -> [String: Any] in
+                var innerDictionary: [String : Any] = [:]
+                innerDictionary["label"] = label.label
+                innerDictionary["value"] = label.value.stringValue
+                return innerDictionary
+            })
+            return dictionary
+        }
+        
+        let params: [String: Any] = ["contacts" : phones]
+        
+        PFCloud.callFunction(inBackground: "saveContacts", withParameters: params) { (result, error) in
+            if let result = result {
+                print(result)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.show(title: "Error", subtitle: "There was an error using the saveContacts function. Please contact Daniel Jones at (317)-690-5323 for help.", type: .error)
+            }
+        }
     }
 }

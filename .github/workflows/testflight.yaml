@@ -38,7 +38,7 @@ jobs:
       - name: Show Xcode version
         run: xcode-select -p
       - name: Build archive
-        run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
+        run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -configuration RELEASE -sdk iphoneos -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
       - uses: actions/upload-artifact@v3
         with:
           name: archive

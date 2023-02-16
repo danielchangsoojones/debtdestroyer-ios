@@ -44,7 +44,7 @@ jobs:
           name: archive
           path: ./archives/archive.xcarchive
       - name: Export archive and build IPA
-        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output/debtdestroyer.ipa" -exportOptionsPlist ./export.plist
+        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - uses: actions/upload-artifact@v3
         with:
           name: ipa

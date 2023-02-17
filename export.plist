@@ -8,11 +8,7 @@
       <key>danielchangsoojones.debtdestroyer</key>
       <string>debtdestroyerprovisioningprofile</string>
   </dict>
-	<key>teamID</key>
-	<string>WGU25444T9</string>
   <key>signingStyle</key>
   <string>manual</string>
-	<key>signingCertificate</key>
-	<string>Apple Distribution</string>
 </dict>  
 </plist> 

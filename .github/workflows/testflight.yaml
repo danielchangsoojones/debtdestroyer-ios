@@ -1,7 +1,7 @@
 name: Release to Test Flight 🚀
 on:
   push:
-    branches: [naren]
+    branches: [develop_production]
 jobs:
   macos:
     runs-on: macos-latest

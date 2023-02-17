@@ -17,4 +17,5 @@ target 'debtdestroyer' do
   pod 'SkyFloatingLabelTextField'
   pod 'TTTAttributedLabel'
   pod 'UXCam', "~> 3.4.2"
+  pod 'CustomSwitch', '~> 0.1'
 end

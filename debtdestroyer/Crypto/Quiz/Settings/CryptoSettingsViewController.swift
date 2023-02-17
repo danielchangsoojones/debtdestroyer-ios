@@ -16,6 +16,7 @@ class CryptoSettingsViewController: UIViewController {
         case contactUs
         case legaDisclosure
         case leaveFeedback
+        case notification
         case logOut
         case deleteAcc
         case textNoti
@@ -38,9 +39,9 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Log Out", "Delete Account"]
+        dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Notification Settings", "Log Out", "Delete Account"]
 
-        imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "logout", "deleteAcc"]
+        imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "contactUs", "logout", "deleteAcc"]
         
         if User.current()!.email == "messyjones@gmail.com" {
             dataArr.append("Send Text Notification")
@@ -119,6 +120,12 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             case .legaDisclosure:
                 let vc = LegalDisclosuresViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
+                
+            case .notification:
+                // MARK: Notification
+                let vc = NotificationViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
                 
             case .logOut:
                 // MARK: Logout

@@ -5,6 +5,7 @@ on:
 jobs:
   macos:
     runs-on: macos-latest
+    if: ${{ contains(github.event.head_commit.message, 'Bump version') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -35,7 +36,7 @@ jobs:
       - name: Show Xcode version
         run: xcode-select -p
       - name: Build archive
-        run: xcodebuild -project "./debtdestroyer.xcodeproj" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
+        run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
       - name: Export archive and build IPA
         run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - name: Wolfia Deploy

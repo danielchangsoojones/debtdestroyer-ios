@@ -128,6 +128,9 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func callTimer() {
+        //need to reset the kickoff time and the timeLeft to get the timer to restart well.
+        quizKickoffTime = nil
+        timeLeft = Constants.originalStartTime
         checkStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getQuizDatas), userInfo: nil, repeats: true)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
@@ -299,12 +302,10 @@ class NewGameStartViewController: UIViewController {
         } else if timeLeft <= 60 && timeLeft >= 0 {
             timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
             timeLabel.text = timeStringSec(time: TimeInterval(timeLeft))
-            
         } else {
-            timeLabel.text = "00"
-            timer.invalidate()
             // Time to start game
-            
+            timeLabel.text = "00"
+//            timer.invalidate()
         }
     }
     

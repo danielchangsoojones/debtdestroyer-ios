@@ -3653,6 +3653,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1603CB56B12DD76EA9F56A060812A0C7 /* SwiftConfettiView.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftConfettiView";
 				IBSC_MODULE = SwiftConfettiView;
 				INFOPLIST_FILE = "Target Support Files/SwiftConfettiView/ResourceBundle-SwiftConfettiView-SwiftConfettiView-Info.plist";
@@ -3669,6 +3670,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 492FEFD91E97AC1705452F8C5BE031E2 /* Parse.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-Parse-Parse-Info.plist";
@@ -3687,6 +3689,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -3722,6 +3725,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A84BD00A403A76AFB8FD8FD4A511383 /* SwiftyJSON.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -3760,6 +3764,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3774,6 +3779,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2F4884005AA16357466280F9E4130D1 /* Reusable.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -3811,6 +3817,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -3847,6 +3854,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E3E8BEF43B987D4637A7F140D403D1DC /* Parse.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-ParseUI-Parse-Info.plist";
@@ -3866,6 +3874,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3881,6 +3890,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA7BDDC47DE64C84BB0D87EF9CE5155E /* Reusable.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -3915,6 +3925,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E3E8BEF43B987D4637A7F140D403D1DC /* Parse.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-Parse-Parse-Info.plist";
@@ -3931,6 +3942,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2BED2048EA4BD13635966D444E993A7D /* TTTAttributedLabel.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -3966,6 +3978,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1CB7A8C3A4F406C6D2BBA0CB250BCE9E /* BRYXBanner.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4000,6 +4013,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E3E8BEF43B987D4637A7F140D403D1DC /* Parse.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4035,6 +4049,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 492FEFD91E97AC1705452F8C5BE031E2 /* Parse.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4069,6 +4084,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1603CB56B12DD76EA9F56A060812A0C7 /* SwiftConfettiView.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4231,6 +4247,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69E92BA8A7A2088BEE8943FA491F475D /* SCLAlertView.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4265,6 +4282,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FB3B2C2BF0BE67CF4546F953C3B0742 /* BRYXBanner.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4300,6 +4318,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F897A6D3C64D420FEF6577A18F324815 /* TTTAttributedLabel.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4334,6 +4353,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0289D663291C0D5ACB40A8E240F97C97 /* SwiftyJSON.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4368,6 +4388,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 492FEFD91E97AC1705452F8C5BE031E2 /* Parse.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Parse";
 				IBSC_MODULE = Parse;
 				INFOPLIST_FILE = "Target Support Files/Parse/ResourceBundle-ParseUI-Parse-Info.plist";
@@ -4384,6 +4405,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A4D02791C676864CD55803F986516C1 /* SkyFloatingLabelTextField.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4418,6 +4440,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 422729FFC3E356ACC0DF58F04F6AB89D /* SwiftConfettiView.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4453,6 +4476,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F7B3E0B4922DB1E40C7D7FC03F6E0A75 /* Bolts.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4489,6 +4513,7 @@
 			baseConfigurationReference = C75CAFA22F4960037B9D2AA30A677A17 /* SnapKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4523,6 +4548,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 672CE1E1DA42F54C8960265FB08153AC /* SCLAlertView.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4559,6 +4585,7 @@
 			baseConfigurationReference = 7C7B66303320C4F8E15B2E514520469A /* SnapKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4594,6 +4621,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 422729FFC3E356ACC0DF58F04F6AB89D /* SwiftConfettiView.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftConfettiView";
 				IBSC_MODULE = SwiftConfettiView;
 				INFOPLIST_FILE = "Target Support Files/SwiftConfettiView/ResourceBundle-SwiftConfettiView-SwiftConfettiView-Info.plist";
@@ -4610,6 +4638,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F8EDD3983E641C5FCB5CFEB3B84B481 /* Bolts.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -4644,6 +4673,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1462FEAFB6C49F7C86BA4E210E14A149 /* SkyFloatingLabelTextField.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";

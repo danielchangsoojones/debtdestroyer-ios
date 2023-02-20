@@ -1,6 +1,0 @@
-framework module CustomSwitch {
-  umbrella header "CustomSwitch-umbrella.h"
-
-  export *
-  module * { export * }
-}

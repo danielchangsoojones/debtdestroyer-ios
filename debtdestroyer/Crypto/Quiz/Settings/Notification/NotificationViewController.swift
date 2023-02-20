@@ -22,16 +22,16 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Notification"]
+        dataArr = ["Text Notification"]
         
         //        self.navigationItem.title = "Notification"
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isHidden = false
         setNavBarBtns()
-        NotificationCenter.default.addObserver(self, selector: #selector(toggleSwitch(_:)), name: NSNotification.Name(rawValue: "toggleSwitch"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleSegmentForNotification(_:)), name: NSNotification.Name(rawValue: "toggleSegmentForNotification"), object: nil)
     }
     
-    @objc func toggleSwitch(_ notification: Notification) {
+    @objc func toggleSegmentForNotification(_ notification: Notification) {
         print(notification.object!)
 
 //        cryptoSettingsDataStore.setNotificationStatus(value: notification.object!) {
@@ -91,7 +91,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return UITableView.automaticDimension
     }
     
     

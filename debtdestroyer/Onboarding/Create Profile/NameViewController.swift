@@ -64,8 +64,31 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
     }
     
     private func nextVC() {
-        let promoVC = AddressViewController()
-        self.navigationController?.pushViewController(promoVC,
-                                                      animated: true)
+         let promoCodeAndInviteShow = UserDefaults.standard.bool(forKey: "promoCodeAndInviteShow")
+        if promoCodeAndInviteShow {
+            let promoVC = AddressViewController()
+            self.navigationController?.pushViewController(promoVC, animated: true)
+        } else {
+            nextButton.startSpinning()
+            let email = UserDefaults.standard.string(forKey: "email") ?? ""
+            let password = UserDefaults.standard.string(forKey: "password") ?? ""
+            let phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber") ?? ""
+            let firstName = UserDefaults.standard.string(forKey: OnboardingKeys.firstName) ?? ""
+            let lastName = UserDefaults.standard.string(forKey: OnboardingKeys.lastName) ?? ""
+            dataStore.register(email: email, password: password) {
+                self.dataStore.save(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, promoCode: nil) {
+                    UserDefaults.standard.removeObject(forKey: "email")
+                    UserDefaults.standard.removeObject(forKey: "password")
+                    UserDefaults.standard.removeObject(forKey: "phoneNumber")
+                    UserDefaults.standard.removeObject(forKey: OnboardingKeys.firstName)
+                    UserDefaults.standard.removeObject(forKey: OnboardingKeys.lastName)
+                    UserDefaults.standard.synchronize()
+                }
+                self.nextButton.stopSpinning()
+                let vc = CryptoTabBarViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
     }
 }

@@ -43,7 +43,7 @@ class NotificationTableViewCell: UITableViewCell, Reusable {
         let items = ["ON", "OFF"]
         toggleSegment.items = items
         toggleSegment.font = UIFont.MontserratSemiBold(size: 14)
-        toggleSegment.borderColor = .white
+        toggleSegment.borderColor = .blue
         toggleSegment.selectedIndex = 0
         toggleSegment.padding = 1
         toggleSegment.backgroundColor = .blue

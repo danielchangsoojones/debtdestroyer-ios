@@ -236,7 +236,7 @@ class NewGameStartViewController: UIViewController {
         let finalDate = stringArr.joined(separator: " ")
         self.dayDateLbl.text = finalDate
         
-        let prizeAmount = Int(quizTopic.prize_amount / 100)
+        let prizeAmount = Int(quizTopic.prize_amount / 100).withCommas()
         let prizeAmountStr = "$\(prizeAmount)"
         let descriptionLblText = quizTopic.ticker
         if descriptionLblText != descriptionLbl.text {

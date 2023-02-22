@@ -186,6 +186,18 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if User.isAdminUser {
+            let quizScore = quizScores[indexPath.row]
+            let contactNumber = quizScore.user.phoneNumber
+            if contactNumber.removeWhitespaces() == ""  {
+                BannerAlert.show(title: "", subtitle: "Contact number not available!", type: .info)
+            } else {
+                messageHelper?.text(contactNumber)
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }

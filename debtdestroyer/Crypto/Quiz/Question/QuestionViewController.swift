@@ -533,4 +533,10 @@ extension Int {
     var degreesToRadians : CGFloat {
         return CGFloat(self) * .pi / 180
     }
+    
+    func withCommas() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value:self))!
+    }
 }

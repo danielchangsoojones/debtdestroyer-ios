@@ -112,6 +112,8 @@
 		0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */; };
 		0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */; };
 		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
+		0A86D111299B9FCE00C4A77E /* ReminderTextNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86D110299B9FCE00C4A77E /* ReminderTextNotificationView.swift */; };
+		0A86D113299B9FE100C4A77E /* ReminderTextNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86D112299B9FE100C4A77E /* ReminderTextNotificationViewController.swift */; };
 		0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */; };
 		0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */; };
 		0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */; };
@@ -127,6 +129,8 @@
 		0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */; };
 		0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */; };
 		0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */; };
+		0ABB56D2299F3DC70078051D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB56D1299F3DC70078051D /* NotificationViewController.swift */; };
+		0ABB56D4299F50CF0078051D /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB56D3299F50CF0078051D /* NotificationTableViewCell.swift */; };
 		0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */; };
 		0AC23D2928AC6BE6006301DE /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */; };
 		0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */; };
@@ -269,6 +273,8 @@
 		0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
 		0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0A86D110299B9FCE00C4A77E /* ReminderTextNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTextNotificationView.swift; sourceTree = "<group>"; };
+		0A86D112299B9FE100C4A77E /* ReminderTextNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTextNotificationViewController.swift; sourceTree = "<group>"; };
 		0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerKeysViewController.swift; sourceTree = "<group>"; };
 		0A92F1A428E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerChoiceNewUIView.swift; sourceTree = "<group>"; };
 		0A9E949E28B603A400985179 /* TapGestureRecognizerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerExtension.swift; sourceTree = "<group>"; };
@@ -284,6 +290,8 @@
 		0AB3F58628BCF9910081758C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		0AB50DCE28C08BA400F67857 /* DebtAccountsParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtAccountsParse.swift; sourceTree = "<group>"; };
 		0AB50DD028C0D17200F67857 /* ImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
+		0ABB56D1299F3DC70078051D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		0ABB56D3299F50CF0078051D /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		0AC23D2628ABB10F006301DE /* LegalDisclosuresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDisclosuresViewController.swift; sourceTree = "<group>"; };
 		0AC23D2828AC6BE6006301DE /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
 		0AC23D2A28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsTableViewCell.swift; sourceTree = "<group>"; };
@@ -560,8 +568,10 @@
 				0AED895A294AEC8100D6576F /* Scholarship */,
 				0A6D54AD28FEA495000A8238 /* Winners */,
 				0ACAE9272935F0AD0054E0A3 /* NewGameStart */,
+				0A86D114299B9FED00C4A77E /* Reminder Notification */,
 				0A892654297FB257002C71C1 /* Answer Keys */,
 				0A6049EE2988ECBC002CC0B4 /* Quiz Questions */,
+				0ABB56D5299F50D80078051D /* Notification */,
 				0A59ACE328E183F4001B774A /* Settings */,
 				0A51502429239951001B028C /* Confirm Info */,
 				0A32178E290115C100A414CA /* Score */,
@@ -792,6 +802,15 @@
 			path = "Create Profile";
 			sourceTree = "<group>";
 		};
+		0A86D114299B9FED00C4A77E /* Reminder Notification */ = {
+			isa = PBXGroup;
+			children = (
+				0A86D110299B9FCE00C4A77E /* ReminderTextNotificationView.swift */,
+				0A86D112299B9FE100C4A77E /* ReminderTextNotificationViewController.swift */,
+			);
+			path = "Reminder Notification";
+			sourceTree = "<group>";
+		};
 		0A892654297FB257002C71C1 /* Answer Keys */ = {
 			isa = PBXGroup;
 			children = (
@@ -824,6 +843,16 @@
 				0AAAB98C28B4ABCE00D41A7B /* PrizeDataStore.swift */,
 			);
 			path = "Data Store";
+			sourceTree = "<group>";
+		};
+		0ABB56D5299F50D80078051D /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				0ABB56D1299F3DC70078051D /* NotificationViewController.swift */,
+				0ABB56D3299F50CF0078051D /* NotificationTableViewCell.swift */,
+			);
+			name = Notification;
+			path = Settings/Notification;
 			sourceTree = "<group>";
 		};
 		0AC23D2C28AC6D31006301DE /* Connected Accounts */ = {
@@ -1107,6 +1136,7 @@
 				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,
+				0ABB56D2299F3DC70078051D /* NotificationViewController.swift in Sources */,
 				0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
@@ -1178,6 +1208,7 @@
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,
+				0A86D111299B9FCE00C4A77E /* ReminderTextNotificationView.swift in Sources */,
 				92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */,
 				0A5FD51E28F848DD00B995C8 /* FontExtension.swift in Sources */,
 				0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */,
@@ -1195,6 +1226,7 @@
 				0A6049F02988ECE8002CC0B4 /* QuizQuestionsViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
+				0A86D113299B9FE100C4A77E /* ReminderTextNotificationViewController.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
 				0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */,
 				0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */,
@@ -1207,6 +1239,7 @@
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
 				0A44EFA128E5B9E5006305B8 /* ChampionsViewController.swift in Sources */,
+				0ABB56D4299F50CF0078051D /* NotificationTableViewCell.swift in Sources */,
 				0A44EF9A28E5907B006305B8 /* StartQuizViewController.swift in Sources */,
 				0AC23D2B28AC6CBE006301DE /* ConnectedAccountsTableViewCell.swift in Sources */,
 				92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */,

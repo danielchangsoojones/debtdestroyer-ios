@@ -57,4 +57,17 @@ class CryptoSettingsDataStore {
         }
     }
 
+    func getPromoCodeRightAnswers(promoCode: String , completion: @escaping (Any?) -> Void) {
+        var parameters: [String : Any] = ["promoCode" : promoCode]
+       
+        PFCloud.callFunction(inBackground: "getPromoCodeRightAnswers", withParameters: parameters) { (result, error) in
+            if let result = result {
+                completion(result)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getPromoCodeRightAnswers")
+            }
+        }
+    }
 }

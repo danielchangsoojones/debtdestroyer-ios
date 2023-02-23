@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0707AD29A7366400684521 /* PromoCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0707AC29A7366400684521 /* PromoCodeViewController.swift */; };
+		0A0707AF29A7367C00684521 /* PromoCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0707AE29A7367C00684521 /* PromoCodeView.swift */; };
 		0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */; };
 		0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C827289BBB9B00AEF89D /* HomeTabBarViewController.swift */; };
 		0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C828289BBB9B00AEF89D /* RoundUpView.swift */; };
@@ -166,6 +168,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0707AC29A7366400684521 /* PromoCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeViewController.swift; sourceTree = "<group>"; };
+		0A0707AE29A7367C00684521 /* PromoCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeView.swift; sourceTree = "<group>"; };
 		0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowDoesRoundUpWorksViewController.swift; sourceTree = "<group>"; };
 		0A11C827289BBB9B00AEF89D /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		0A11C828289BBB9B00AEF89D /* RoundUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundUpView.swift; sourceTree = "<group>"; };
@@ -350,6 +354,15 @@
 				1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0A0707AB29A7362D00684521 /* Promo Code */ = {
+			isa = PBXGroup;
+			children = (
+				0A0707AC29A7366400684521 /* PromoCodeViewController.swift */,
+				0A0707AE29A7367C00684521 /* PromoCodeView.swift */,
+			);
+			path = "Promo Code";
 			sourceTree = "<group>";
 		};
 		0A11C832289BC1B800AEF89D /* Helper */ = {
@@ -571,6 +584,7 @@
 				0A86D114299B9FED00C4A77E /* Reminder Notification */,
 				0A892654297FB257002C71C1 /* Answer Keys */,
 				0A6049EE2988ECBC002CC0B4 /* Quiz Questions */,
+				0A0707AB29A7362D00684521 /* Promo Code */,
 				0ABB56D5299F50D80078051D /* Notification */,
 				0A59ACE328E183F4001B774A /* Settings */,
 				0A51502429239951001B028C /* Confirm Info */,
@@ -1140,6 +1154,7 @@
 				0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
+				0A0707AF29A7367C00684521 /* PromoCodeView.swift in Sources */,
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */,
@@ -1250,6 +1265,7 @@
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
+				0A0707AD29A7366400684521 /* PromoCodeViewController.swift in Sources */,
 				0A76B59428F996530084A629 /* CustomNavigationViewController.swift in Sources */,
 				0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,

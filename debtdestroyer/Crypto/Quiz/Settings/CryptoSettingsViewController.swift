@@ -13,6 +13,7 @@ class CryptoSettingsViewController: UIViewController {
     enum cell: Int {
         case winnerInfo
         case connectedAccounts
+        case promoCode
         case contactUs
         case legaDisclosure
         case leaveFeedback
@@ -42,6 +43,12 @@ class CryptoSettingsViewController: UIViewController {
         dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Notification Settings", "Log Out", "Delete Account"]
 
         imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "contactUs", "logout", "deleteAcc"]
+
+        //TODO: Not sure about the condition. has to work on it after logic gets clear
+//        if UserDefaults.bool("") {
+//            dataArr.insert("Promo Code", at: 2)
+//            imgNameArr.insert("legal", at: 2)
+//        }
         
         if User.current()!.email == "messyjones@gmail.com" {
             dataArr.append("Send Text Notification")
@@ -112,6 +119,10 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 let vc = ConnectedAccountsViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
                 
+            case .promoCode:
+                cryptoSettingsDataStore.getPromoCodeRightAnswers(promoCode: "") { result in
+                    print(result as Any)
+                }
             case .contactUs, .leaveFeedback:
                 // MARK: Contact Us
                 // MARK: Leave Feedback

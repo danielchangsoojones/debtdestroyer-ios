@@ -45,10 +45,11 @@ class CryptoSettingsViewController: UIViewController {
         imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "contactUs", "logout", "deleteAcc"]
 
         //TODO: Not sure about the condition. has to work on it after logic gets clear
-//        if UserDefaults.bool("") {
-//            dataArr.insert("Promo Code", at: 2)
-//            imgNameArr.insert("legal", at: 2)
-//        }
+        if UserDefaults.standard.bool(forKey: "promoCodeAndInviteShow")
+        {
+            dataArr.insert("Promo Code", at: 2)
+            imgNameArr.insert("legal", at: 2)
+        }
         
         if User.current()!.email == "messyjones@gmail.com" {
             dataArr.append("Send Text Notification")
@@ -120,9 +121,10 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 self.navigationController?.pushViewController(vc.self, animated: true)
                 
             case .promoCode:
-                cryptoSettingsDataStore.getPromoCodeRightAnswers(promoCode: "") { result in
-                    print(result as Any)
-                }
+                // MARK: Promo Code
+                let vc = PromoCodeViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
             case .contactUs, .leaveFeedback:
                 // MARK: Contact Us
                 // MARK: Leave Feedback
@@ -136,7 +138,6 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 // MARK: Notification
                 let vc = NotificationViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
-                
                 
             case .logOut:
                 // MARK: Logout

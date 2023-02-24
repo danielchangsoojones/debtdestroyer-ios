@@ -177,6 +177,12 @@ class NewGameStartViewController: UIViewController {
             self.quizKickoffTime = quizTopic.start_time
             setData(quizTopic: quizTopic)
             let now = Date()
+            
+//                let popupVC = ReminderTextNotificationViewController()
+//                popupVC.modalPresentationStyle = .overCurrentContext
+//                popupVC.modalTransitionStyle = .crossDissolve
+//                present(popupVC, animated: true, completion: nil)
+
             if quizTopic.start_time < now {
                 //time to start the game
                 startQuiz()
@@ -236,7 +242,7 @@ class NewGameStartViewController: UIViewController {
         let finalDate = stringArr.joined(separator: " ")
         self.dayDateLbl.text = finalDate
         
-        let prizeAmount = Int(quizTopic.prize_amount / 100)
+        let prizeAmount = Int(quizTopic.prize_amount / 100).withCommas()
         let prizeAmountStr = "$\(prizeAmount)"
         let descriptionLblText = quizTopic.ticker
         if descriptionLblText != descriptionLbl.text {

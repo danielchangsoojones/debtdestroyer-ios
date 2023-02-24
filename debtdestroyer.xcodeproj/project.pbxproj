@@ -1402,9 +1402,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = debtdestroyer/debtdestroyer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = WGU25444T9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WGU25444T9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
@@ -1426,6 +1428,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = debtdestroyerdevprovisioningprofile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1440,9 +1443,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = debtdestroyer/debtdestroyer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = WGU25444T9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WGU25444T9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
@@ -1464,6 +1469,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = debtdestroyerprovisioningprofile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

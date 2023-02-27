@@ -16,7 +16,6 @@ class LogInViewController: RegisterViewController {
         .underlineStyle: NSUnderlineStyle.single.rawValue
     ]
     override func viewDidLoad() {
-        messageHelper = MessageHelper(currentVC: self, delegate: nil)
         super.viewDidLoad()
         updateLabels()
         setUpforgotPasswordBtn()

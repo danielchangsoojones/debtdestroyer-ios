@@ -35,6 +35,7 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
         super.viewDidLoad()
         let registerView = RegisterView(frame: self.view.bounds)
         self.view = registerView
+        messageHelper = MessageHelper(currentVC: self)
         emailTextField = registerView.emailTextField
         passwordTextField = registerView.passwordTextField
         passwordTextField.isSecureTextEntry = true

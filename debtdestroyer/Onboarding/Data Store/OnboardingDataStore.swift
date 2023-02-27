@@ -21,7 +21,14 @@ class OnboardingDataStore: NSObject {
         self.delegate = delegate
     }
     
-    func register(email: String, password: String, completion: @escaping () -> Void) {
+    func register(shouldSegueIntoApp: Bool, completion: @escaping () -> Void) {
+        let email = UserDefaults.standard.string(forKey: OnboardingOrder.email) ?? ""
+        let password = UserDefaults.standard.string(forKey: OnboardingOrder.password) ?? ""
+        let phoneNumber = UserDefaults.standard.string(forKey: OnboardingOrder.phoneNumber) ?? ""
+        let firstName = UserDefaults.standard.string(forKey: OnboardingOrder.firstName) ?? ""
+        let lastName = UserDefaults.standard.string(forKey: OnboardingOrder.lastName) ?? ""
+        let promoCode = UserDefaults.standard.string(forKey: OnboardingOrder.promoCode) ?? ""
+        
         let newUser = User()
         newUser.username = email.lowercased()
         newUser.password = password
@@ -30,10 +37,21 @@ class OnboardingDataStore: NSObject {
         
         newUser.signUpInBackground { (success, error: Error?) -> Void in
             if success {
+                self.save(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, promoCode: promoCode) {
+                    UserDefaults.standard.removeObject(forKey: OnboardingOrder.email)
+                    UserDefaults.standard.removeObject(forKey: OnboardingOrder.password)
+                    UserDefaults.standard.removeObject(forKey: OnboardingOrder.phoneNumber)
+                    UserDefaults.standard.removeObject(forKey: OnboardingOrder.firstName)
+                    UserDefaults.standard.removeObject(forKey: OnboardingOrder.lastName)
+                    UserDefaults.standard.synchronize()
+                }
+                
                 let installation = PFInstallation.current()
                 installation?["user"] = User.current()
                 installation?.saveInBackground()
-                self.delegate?.segueIntoApp()
+                if shouldSegueIntoApp {
+                    self.delegate?.segueIntoApp()
+                }
                 completion()
             } else if let error = error, let code = PFErrorCode(rawValue: error._code) {
                 switch code {
@@ -112,6 +130,52 @@ class OnboardingDataStore: NSObject {
                 BannerAlert.show(with: error)
             } else {
                 BannerAlert.show(title: "Error", subtitle: "There was an error using the saveContacts function. Please contact Daniel Jones at (317)-690-5323 for help.", type: .error)
+            }
+        }
+    }
+    
+    func getConfig(completion: @escaping (ConfigurationParse) -> Void) {
+        PFCloud.callFunction(inBackground: "getConfig", withParameters: [:]) { (result, error) in
+            if let config = result as? ConfigurationParse {
+                completion(config)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getConfig")
+            }
+        }
+    }
+    
+    static func segueToNextVC(onboardingOrders: [OnboardingOrder], index: Int, currentVC: UIViewController, dataStore: OnboardingDataStore, nextBtn: SpinningWithGradButton?) {
+        let currentOnboardingOrder = onboardingOrders[index]
+        let nextIndex = index + 1
+        if let nextVC = OnboardingOrder.getCurrentVC(onboardingOrders: onboardingOrders, index: nextIndex) {
+            if currentOnboardingOrder == .contactInvite {
+                currentVC.navigationController?.pushViewController(nextVC, animated: true)
+            } else {
+                let isContactLastVC = onboardingOrders.last == .contactInvite
+                //we check which is the last input field to do a login.
+                let inputVCs = onboardingOrders.filter { onboardingOrd in
+                    return onboardingOrd != .contactInvite
+                }
+                
+                let isLastOnboardingVC = currentOnboardingOrder == inputVCs.last
+                if isContactLastVC && isLastOnboardingVC {
+                    dataStore.register(shouldSegueIntoApp: false) {
+                        nextBtn?.stopSpinning()
+                        currentVC.navigationController?.pushViewController(nextVC, animated: true)
+                    }
+                } else {
+                    nextBtn?.stopSpinning()
+                    currentVC.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }
+        } else {
+            //isLast view controller
+            if currentOnboardingOrder == .contactInvite {
+                Helpers.enterApplication(from: currentVC)
+            } else {
+                dataStore.register(shouldSegueIntoApp: true) {}
             }
         }
     }

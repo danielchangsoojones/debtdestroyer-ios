@@ -27,16 +27,22 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         nextButton.startSpinning()
         if isComplete {
             if let firstName = emailTextField.text, let lastName = passwordTextField.text {
-                UserDefaults.standard.set(firstName, forKey: OnboardingKeys.firstName)
-                UserDefaults.standard.set(lastName, forKey: OnboardingKeys.lastName)
+                UserDefaults.standard.set(firstName, forKey: OnboardingOrder.firstName)
+                UserDefaults.standard.set(lastName, forKey: OnboardingOrder.lastName)
                 UserDefaults.standard.synchronize()
+                
+                OnboardingDataStore.segueToNextVC(onboardingOrders: onboardingOrders,
+                                                  index: index,
+                                                  currentVC: self,
+                                                  dataStore: dataStore,
+                                                  nextBtn: nextButton)
             } else {
+                nextButton.stopSpinning()
                 BannerAlert.show(title: "Enter a name",
                                  subtitle: "Please enter in your first and last name",
                                  type: .error)
+                
             }
-            nextButton.stopSpinning()
-            nextVC()
         } else {
             nextButton.stopSpinning()
         }
@@ -61,11 +67,5 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         }
         
         return true
-    }
-    
-    private func nextVC() {
-        let promoVC = AddressViewController()
-        self.navigationController?.pushViewController(promoVC,
-                                                      animated: true)
     }
 }

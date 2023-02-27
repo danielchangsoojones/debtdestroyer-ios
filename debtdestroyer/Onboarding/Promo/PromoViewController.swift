@@ -8,7 +8,7 @@
 import UIKit
 import SCLAlertView
 
-class AddressViewController: UIViewController {
+class PromoViewController: UIViewController {
     private var messageHelper: MessageHelper?
     var addView = AddressView()
     var addTextField: UITextField!
@@ -16,6 +16,18 @@ class AddressViewController: UIViewController {
     var descriptionLabel: UILabel!
     var nextButton: SpinningWithGradButton!
     private var dataStore: OnboardingDataStore!
+    private let onboardingOrders: [OnboardingOrder]
+    private let index: Int
+    
+    required init(onboardingOrders: [OnboardingOrder], index: Int) {
+        self.onboardingOrders = onboardingOrders
+        self.index = index
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -91,24 +103,14 @@ class AddressViewController: UIViewController {
     
     @objc private func nextBtnPressed() {
         let promoCode = self.addTextField.text?.trimmingCharacters(in: .whitespaces).lowercased()
+        UserDefaults.standard.set(promoCode, forKey: OnboardingOrder.promoCode)
         
         nextButton.startSpinning()
-        let email = UserDefaults.standard.string(forKey: "email") ?? ""
-        let password = UserDefaults.standard.string(forKey: "password") ?? ""
-        let phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber") ?? ""
-        let firstName = UserDefaults.standard.string(forKey: OnboardingKeys.firstName) ?? ""
-        let lastName = UserDefaults.standard.string(forKey: OnboardingKeys.lastName) ?? ""
-        dataStore.register(email: email, password: password) {
-            self.dataStore.save(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, promoCode: promoCode) {
-                UserDefaults.standard.removeObject(forKey: "email")
-                UserDefaults.standard.removeObject(forKey: "password")
-                UserDefaults.standard.removeObject(forKey: "phoneNumber")
-                UserDefaults.standard.removeObject(forKey: OnboardingKeys.firstName)
-                UserDefaults.standard.removeObject(forKey: OnboardingKeys.lastName)
-                UserDefaults.standard.synchronize()
-            }
-            self.nextButton.stopSpinning()
-        }
+        OnboardingDataStore.segueToNextVC(onboardingOrders: onboardingOrders,
+                                          index: index,
+                                          currentVC: self,
+                                          dataStore: dataStore,
+                                          nextBtn: nextButton)
     }
     
     @objc func textViewChanged() {
@@ -116,7 +118,7 @@ class AddressViewController: UIViewController {
     }
 }
 
-extension AddressViewController: OnboardingDataStoreDelegate {
+extension PromoViewController: OnboardingDataStoreDelegate {
     func showError(title: String, subtitle: String) {
         BannerAlert.show(title: title,
                          subtitle: subtitle,
@@ -126,8 +128,7 @@ extension AddressViewController: OnboardingDataStoreDelegate {
     
     func segueIntoApp() {
         nextButton.stopSpinning()
-        let contactVC = ContactViewController()
-        self.navigationController?.pushViewController(contactVC, animated: true)
+        Helpers.enterApplication(from: self)
     }
 }
 

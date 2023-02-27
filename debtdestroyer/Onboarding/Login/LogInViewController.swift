@@ -46,7 +46,7 @@ class LogInViewController: RegisterViewController {
     }
     
     @objc private func forgetBtnPressed() {
-        let vc = ResetPasswordViewController()
+        let vc = ResetPasswordViewController(onboardingOrders: [], index: 0)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

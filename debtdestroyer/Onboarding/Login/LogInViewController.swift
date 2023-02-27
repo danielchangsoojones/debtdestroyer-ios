@@ -50,9 +50,11 @@ class LogInViewController: RegisterViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    override func segueIntoApp() {
+    override func nextBtnPressed() {
+        nextButton.startSpinning()
         dataStore.logIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") {
-            let vc = CryptoTabBarViewController()//HomeTabBarViewController()
+            self.nextButton?.stopSpinning()
+            let vc = CryptoTabBarViewController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }

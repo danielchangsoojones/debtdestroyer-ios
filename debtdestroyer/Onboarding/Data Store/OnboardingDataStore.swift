@@ -73,17 +73,10 @@ class OnboardingDataStore: NSObject {
         lowerCaseEmail = lowerCaseEmail.removeWhitespaces()
         User.logInWithUsername(inBackground: lowerCaseEmail, password: password) { (user, error) -> Void in
             if let currentUser = user, error == nil {
-                if ((currentUser as? User)?.isDeleted ?? false) {
-                    User.logOutInBackground()
-                    BannerAlert.show(title: "Account Deleted",
-                                     subtitle: "you can't login because your account has been deleted",
-                                     type: .error)
-                } else {
-                    let installation = PFInstallation.current()
-                    installation?["user"] = User.current()
-                    installation?.saveEventually(nil)
-                    completion()
-                }
+                let installation = PFInstallation.current()
+                installation?["user"] = User.current()
+                installation?.saveEventually(nil)
+                completion()
             } else if let error = error, let code = PFErrorCode(rawValue: error._code) {
                 if code == .errorObjectNotFound {
                     self.delegate?.showError(title: "Login Failed", subtitle: error.localizedDescription)

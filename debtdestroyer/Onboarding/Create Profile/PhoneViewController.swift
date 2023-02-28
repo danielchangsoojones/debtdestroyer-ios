@@ -8,13 +8,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingKeys {
-    static let promoCode = "promoCode"
-    static let firstName = "firstName"
-    static let lastName = "lastName"
-}
-
-class CreateProfileViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class PhoneViewController: RegisterViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels()
@@ -28,7 +22,6 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
         passwordTextField.isHidden = true
         emailTextField.keyboardType = .phonePad
         emailTextField.delegate = self
-        
     }
     
     override func nextBtnPressed() {
@@ -37,18 +30,21 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
             let bottomText = emailTextField?.text ?? "1111111111"
             let phoneNumber = NumberFormatter().number(from: bottomText.numbersOnly) ?? 1111111111
             
-            UserDefaults.standard.set(phoneNumber, forKey: "phoneNumber")
+            UserDefaults.standard.set(phoneNumber, forKey: OnboardingOrder.phoneNumber)
             UserDefaults.standard.synchronize()
             nextVC()
-            nextButton.stopSpinning()
         } else {
             nextButton.stopSpinning()
         }
     }
     
     private func nextVC() {
-        let nameVC = NameViewController()
-        self.navigationController?.pushViewController(nameVC, animated: true)
+        nextButton.stopSpinning()
+        OnboardingDataStore.segueToNextVC(onboardingOrders: onboardingOrders,
+                                          index: index,
+                                          currentVC: self,
+                                          dataStore: dataStore,
+                                          nextBtn: nextButton)
     }
     
     var isComplete: Bool {
@@ -70,7 +66,7 @@ class CreateProfileViewController: RegisterViewController, UINavigationControlle
     }
 }
 
-extension CreateProfileViewController: UITextFieldDelegate {
+extension PhoneViewController: UITextFieldDelegate {
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //
 //        guard let text = self.emailTextField.text else { return true }

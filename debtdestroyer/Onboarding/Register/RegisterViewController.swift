@@ -18,11 +18,24 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     var emailLabel: UILabel!
     var passwordLabel: UILabel!
     private var messageHelper: MessageHelper?
-
+    let onboardingOrders: [OnboardingOrder]
+    let index: Int
+    
+    required init(onboardingOrders: [OnboardingOrder], index: Int) {
+        self.onboardingOrders = onboardingOrders
+        self.index = index
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let registerView = RegisterView(frame: self.view.bounds)
         self.view = registerView
+        messageHelper = MessageHelper(currentVC: self)
         emailTextField = registerView.emailTextField
         passwordTextField = registerView.passwordTextField
         passwordTextField.isSecureTextEntry = true
@@ -68,13 +81,15 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     @objc func nextBtnPressed() {
         nextButton.startSpinning()
         if validateEmail() && validatePassword() {
-            UserDefaults.standard.set(emailTextField.text, forKey: "email")
-            UserDefaults.standard.set(passwordTextField.text, forKey: "password")
+            UserDefaults.standard.set(emailTextField.text, forKey: OnboardingOrder.email)
+            UserDefaults.standard.set(passwordTextField.text, forKey: OnboardingOrder.password)
             UserDefaults.standard.synchronize()
-
-            nextButton.stopSpinning()
             
-            self.segueIntoApp()
+            OnboardingDataStore.segueToNextVC(onboardingOrders: onboardingOrders,
+                                              index: index,
+                                              currentVC: self,
+                                              dataStore: dataStore,
+                                              nextBtn: nextButton)
         } else {
             nextButton.stopSpinning()
         }
@@ -82,8 +97,7 @@ class RegisterViewController: UIViewController, OnboardingDataStoreDelegate {
     
     func segueIntoApp() {
         nextButton.stopSpinning()
-        let profileVC = CreateProfileViewController()
-        self.navigationController?.pushViewController(profileVC, animated: true)
+        Helpers.enterApplication(from: self)
     }
 }
 
@@ -110,7 +124,7 @@ extension RegisterViewController {
     }
     
     func showError(title: String, subtitle: String) {
-     //   nextButton.stopSpinning()
+        nextButton.stopSpinning()
         BannerAlert.show(title: title, subtitle: subtitle, type: .error)
     }
 }

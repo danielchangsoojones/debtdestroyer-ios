@@ -10,7 +10,6 @@ import UIKit
 class PromoCodeViewController: UIViewController {
     var titleLbl = UILabel()
     var promoCodeUsedCountLbl = UILabel()
-    private let cryptoSettingsDataStore = CryptoSettingsDataStore()
     
     override func loadView() {
         super.loadView()
@@ -22,27 +21,6 @@ class PromoCodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoadData()
-        setNavBarBtns()
-    }
-    
-    private func setNavBarBtns() {
-        navigationItem.hidesBackButton = true
-        var backImg = UIImage.init(named: "arrow-left-alt")
-        backImg = backImg?.withRenderingMode(.alwaysOriginal)
-        let back = UIBarButtonItem(image: backImg , style: .plain, target: self, action: #selector(backPressed))
-        navigationItem.leftBarButtonItem = back
         
-        navigationController?.navigationBar.backgroundColor = .clear
-    }
-    
-    @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    private func LoadData() {
-        cryptoSettingsDataStore.getPromoCodeRightAnswers(promoCode: "") { result in
-            print(result as Any)
-        }
     }
 }

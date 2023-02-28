@@ -58,7 +58,7 @@
 		0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */; };
 		0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF628E183F4001B774A /* ProvideFeedbackView.swift */; };
 		0A59AD0A28E183F4001B774A /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF828E183F4001B774A /* AddressView.swift */; };
-		0A59AD0B28E183F4001B774A /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF928E183F4001B774A /* AddressViewController.swift */; };
+		0A59AD0B28E183F4001B774A /* PromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACF928E183F4001B774A /* PromoViewController.swift */; };
 		0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59ACFB28E183F4001B774A /* QuizDataStore.swift */; };
 		0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0D28E19727001B774A /* QuizDataParse.swift */; };
 		0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0E28E19727001B774A /* QuizTopicParse.swift */; };
@@ -113,7 +113,7 @@
 		0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */; };
 		0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */; };
 		0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */; };
-		0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */; };
+		0A7A4A1128A42109009EDE5E /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A4A1028A42109009EDE5E /* PhoneViewController.swift */; };
 		0A86D111299B9FCE00C4A77E /* ReminderTextNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86D110299B9FCE00C4A77E /* ReminderTextNotificationView.swift */; };
 		0A86D113299B9FE100C4A77E /* ReminderTextNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86D112299B9FE100C4A77E /* ReminderTextNotificationViewController.swift */; };
 		0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */; };
@@ -158,6 +158,7 @@
 		9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */; };
 		9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228AF032908D8E200CF2F90 /* TicketsCountView.swift */; };
 		924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */; };
+		9249DC7829ABE89500E66170 /* ConfigurationParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249DC7729ABE89500E66170 /* ConfigurationParse.swift */; };
 		925BD26528A24D2E009303AF /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26428A24D2E009303AF /* Enviroment.swift */; };
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
 		928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */; };
@@ -219,7 +220,7 @@
 		0A59ACF528E183F4001B774A /* ProvideFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackViewController.swift; sourceTree = "<group>"; };
 		0A59ACF628E183F4001B774A /* ProvideFeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvideFeedbackView.swift; sourceTree = "<group>"; };
 		0A59ACF828E183F4001B774A /* AddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
-		0A59ACF928E183F4001B774A /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		0A59ACF928E183F4001B774A /* PromoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoViewController.swift; sourceTree = "<group>"; };
 		0A59ACFB28E183F4001B774A /* QuizDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataStore.swift; sourceTree = "<group>"; };
 		0A59AD0D28E19727001B774A /* QuizDataParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataParse.swift; sourceTree = "<group>"; };
 		0A59AD0E28E19727001B774A /* QuizTopicParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTopicParse.swift; sourceTree = "<group>"; };
@@ -276,7 +277,7 @@
 		0A7A4A0628A3D5D5009EDE5E /* SpinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningButton.swift; sourceTree = "<group>"; };
 		0A7A4A0A28A3E2A2009EDE5E /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
 		0A7A4A0D28A3E848009EDE5E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0A7A4A1028A42109009EDE5E /* PhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
 		0A86D110299B9FCE00C4A77E /* ReminderTextNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTextNotificationView.swift; sourceTree = "<group>"; };
 		0A86D112299B9FE100C4A77E /* ReminderTextNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTextNotificationViewController.swift; sourceTree = "<group>"; };
 		0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerKeysViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 		9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardDataStore.swift; sourceTree = "<group>"; };
 		9228AF032908D8E200CF2F90 /* TicketsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCountView.swift; sourceTree = "<group>"; };
 		924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
+		9249DC7729ABE89500E66170 /* ConfigurationParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationParse.swift; sourceTree = "<group>"; };
 		925BD26428A24D2E009303AF /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsDataStore.swift; sourceTree = "<group>"; };
@@ -668,8 +670,6 @@
 		0A59ACF728E183F4001B774A /* Address */ = {
 			isa = PBXGroup;
 			children = (
-				0A59ACF828E183F4001B774A /* AddressView.swift */,
-				0A59ACF928E183F4001B774A /* AddressViewController.swift */,
 			);
 			path = Address;
 			sourceTree = "<group>";
@@ -808,7 +808,7 @@
 		0A7A4A0F28A42109009EDE5E /* Create Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0A7A4A1028A42109009EDE5E /* CreateProfileViewController.swift */,
+				0A7A4A1028A42109009EDE5E /* PhoneViewController.swift */,
 				0A4F809F28E6C6C6001B573E /* NameViewController.swift */,
 				0A51501B292355B5001B028C /* ResetPasswordViewController.swift */,
 				92ABE189299B40A3009384BF /* ContactViewController.swift */,
@@ -979,6 +979,7 @@
 				0A59AD0E28E19727001B774A /* QuizTopicParse.swift */,
 				9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */,
 				92C8498E296CBAE40091422E /* VideoAnswer.swift */,
+				9249DC7729ABE89500E66170 /* ConfigurationParse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -986,6 +987,8 @@
 		92C849902970A4470091422E /* Promo */ = {
 			isa = PBXGroup;
 			children = (
+				0A59ACF828E183F4001B774A /* AddressView.swift */,
+				0A59ACF928E183F4001B774A /* PromoViewController.swift */,
 			);
 			path = Promo;
 			sourceTree = "<group>";
@@ -1147,7 +1150,7 @@
 			files = (
 				0A421C0A28DB4A7B008792B8 /* IAPManager.swift in Sources */,
 				92ABE18A299B40A3009384BF /* ContactViewController.swift in Sources */,
-				0A7A4A1128A42109009EDE5E /* CreateProfileViewController.swift in Sources */,
+				0A7A4A1128A42109009EDE5E /* PhoneViewController.swift in Sources */,
 				0A25F67028A369B000D5D183 /* SpinningWithGradButton.swift in Sources */,
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,
 				0ABB56D2299F3DC70078051D /* NotificationViewController.swift in Sources */,
@@ -1186,7 +1189,7 @@
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
 				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
-				0A59AD0B28E183F4001B774A /* AddressViewController.swift in Sources */,
+				0A59AD0B28E183F4001B774A /* PromoViewController.swift in Sources */,
 				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
 				0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
@@ -1236,6 +1239,7 @@
 				0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */,
 				0A11C831289BC19500AEF89D /* ColorExtension.swift in Sources */,
 				0A6D54AF28FEA7ED000A8238 /* WinnerTableCell.swift in Sources */,
+				9249DC7829ABE89500E66170 /* ConfigurationParse.swift in Sources */,
 				0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */,
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
 				0A6049F02988ECE8002CC0B4 /* QuizQuestionsViewController.swift in Sources */,
@@ -1418,9 +1422,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = debtdestroyer/debtdestroyer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = WGU25444T9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WGU25444T9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
@@ -1442,6 +1448,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = debtdestroyerdevprovisioningprofile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1456,9 +1463,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = debtdestroyer/debtdestroyer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = WGU25444T9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = WGU25444T9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
@@ -1480,6 +1489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = danielchangsoojones.debtdestroyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = debtdestroyerprovisioningprofile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

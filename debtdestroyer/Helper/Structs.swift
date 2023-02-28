@@ -105,4 +105,10 @@ struct Helpers {
         let appDisplayNameStr = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
         return appDisplayNameStr
     }
+    
+    static func enterApplication(from currentVC: UIViewController) {
+        let tabBarVC = CryptoTabBarViewController()
+        tabBarVC.modalPresentationStyle = .fullScreen
+        currentVC.present(tabBarVC, animated: true, completion: nil)
+    }
 }

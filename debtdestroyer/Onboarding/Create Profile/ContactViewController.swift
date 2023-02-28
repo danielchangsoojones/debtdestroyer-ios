@@ -14,6 +14,18 @@ class ContactViewController: UIViewController, OnboardingDataStoreDelegate {
     private var titleLabel = UILabel()
     private var subtitleLabel = UILabel()
     private var dataStore: OnboardingDataStore!
+    private let onboardingOrders: [OnboardingOrder]
+    private let index: Int
+    
+    required init(onboardingOrders: [OnboardingOrder], index: Int) {
+        self.onboardingOrders = onboardingOrders
+        self.index = index
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -90,9 +102,11 @@ class ContactViewController: UIViewController, OnboardingDataStoreDelegate {
     
     
     @objc private func skipPressed() {
-        let vc = CryptoTabBarViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        OnboardingDataStore.segueToNextVC(onboardingOrders: onboardingOrders,
+                                          index: index,
+                                          currentVC: self,
+                                          dataStore: dataStore,
+                                          nextBtn: nil)
     }
     
     @objc private func contactsPressed() {

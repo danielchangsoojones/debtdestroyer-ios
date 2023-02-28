@@ -7,13 +7,13 @@
 
 import UIKit
 
-class PromoCodeViewController: UIViewController {
+class PromoCodeUsedViewController: UIViewController {
     var titleLbl = UILabel()
     var promoCodeUsedCountLbl = UILabel()
     
     override func loadView() {
         super.loadView()
-        let promoCodeView = PromoCodeView(frame: self.view.frame)
+        let promoCodeView = PromoCodeUsedView(frame: self.view.frame)
         self.view = promoCodeView
         self.titleLbl = promoCodeView.titleLbl
         self.promoCodeUsedCountLbl = promoCodeView.promoCodeUsedCountLbl

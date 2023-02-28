@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PromoCodeView: UIView {
+class PromoCodeUsedView: UIView {
 
     var titleLbl = UILabel()
     var promoCodeUsedCountLbl = UILabel()

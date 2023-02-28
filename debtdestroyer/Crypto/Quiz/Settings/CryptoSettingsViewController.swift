@@ -120,6 +120,10 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 self.navigationController?.pushViewController(vc.self, animated: true)
                 
             case .promoCode:
+                // MARK: Promo Code
+                let vc = PromoCodeUsedViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
                 cryptoSettingsDataStore.getPromoCodeRightAnswers(promoCode: "") { result in
                     print(result as Any)
                 }

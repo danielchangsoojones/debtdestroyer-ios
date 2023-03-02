@@ -1412,7 +1412,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Crypto King";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Enable contact permission to invite and play with friends";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
@@ -1453,7 +1453,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Crypto King";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Enable contact permission to invite and play with friends";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Application requires user’s location to offer more personalized trivia questions";

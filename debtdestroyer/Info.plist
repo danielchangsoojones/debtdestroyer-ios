@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>instagram-stories</string>
@@ -32,14 +34,6 @@
 		<string>Montserrat-Thin.otf</string>
 		<string>Montserrat-ThinItalic.otf</string>
 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Application requires user’s location to offer more personalized trivia questions</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Application requires user’s location to offer more personalized trivia questions</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Application requires user’s location to offer more personalized trivia questions</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Enable contact permission to invite and play with friends</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -57,7 +51,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 </dict>
 </plist>

@@ -68,10 +68,4 @@ class NameViewController: RegisterViewController, UINavigationControllerDelegate
         
         return true
     }
-    
-    private func nextVC() {
-        let promoVC = AddressViewController()
-        self.navigationController?.pushViewController(promoVC,
-                                                      animated: true)
-    }
 }

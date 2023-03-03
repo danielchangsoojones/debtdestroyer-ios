@@ -76,7 +76,6 @@ class WelcomeViewController: UIViewController {
     var color2 = UIColor()
     var welcomeView = WelcomeView()
     var titleLabel = UILabel()
-    private var promoCodeAndInviteShow : Bool = true
     private var dataStore: OnboardingDataStore?
     private var config: ConfigurationParse?
 
@@ -95,9 +94,6 @@ class WelcomeViewController: UIViewController {
         welcomeView.logInButton.addTarget(self, action: #selector(logInPressed), for: .touchUpInside)
         welcomeView.signUpButton.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
         setNavBarBtns()
-        // after API call get ready to intehrate, call it here and save the value to User defalts as User object is not yet created/ avilable.
-        UserDefaults.standard.set(true, forKey: "promoCodeAndInviteShow")
-        UserDefaults.standard.synchronize()
         getConfig()
     }
     

@@ -16,7 +16,7 @@ class PromoCodeUsedViewController: UIViewController {
         let promoCodeView = PromoCodeUsedView(frame: self.view.frame)
         self.view = promoCodeView
         self.titleLbl = promoCodeView.titleLbl
-        self.promoCodeUsedCountLbl = promoCodeView.promoInfoLabel
+        self.promoInfoLabel = promoCodeView.promoInfoLabel
     }
     
     override func viewDidLoad() {

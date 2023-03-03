@@ -8,15 +8,14 @@
 import UIKit
 
 class PromoCodeUsedView: UIView {
-
-    var titleLbl = UILabel()
-    var promoCodeUsedCountLbl = UILabel()
+    let titleLbl = UILabel()
+    let promoInfoLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         setTitleLabel()
-        setPromoCodeUsedCountLabel()
+        setPromoInfoLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -24,28 +23,26 @@ class PromoCodeUsedView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLbl.text = "Promo Code:"
-        titleLbl.numberOfLines = 0
+        titleLbl.numberOfLines = 1
         titleLbl.textAlignment = .center
-        titleLbl.textColor = .white
+        titleLbl.textColor = .black
         titleLbl.font = UIFont.MontserratSemiBold(size: 25)
         addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview().inset(100)
-            make.left.right.equalToSuperview().inset(10)
+            make.centerX.equalToSuperview()
+            make.topMargin.equalToSuperview().offset(10)
         }
     }
     
-    private func setPromoCodeUsedCountLabel() {
-        promoCodeUsedCountLbl.text = "0"
-        promoCodeUsedCountLbl.numberOfLines = 0
-        promoCodeUsedCountLbl.textAlignment = .center
-        promoCodeUsedCountLbl.textColor = .white
-        promoCodeUsedCountLbl.font = UIFont.MontserratBold(size: 35)
-        addSubview(promoCodeUsedCountLbl)
-        promoCodeUsedCountLbl.snp.makeConstraints { make in
-            make.top.equalTo(titleLbl.snp.bottom).offset(20)
-            make.left.right.equalToSuperview().inset(20)
+    private func setPromoInfoLabel() {
+        promoInfoLabel.numberOfLines = 0
+        promoInfoLabel.textAlignment = .center
+        promoInfoLabel.textColor = .black
+        promoInfoLabel.font = UIFont.MontserratLight(size: 14)
+        addSubview(promoInfoLabel)
+        promoInfoLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(10)
         }
     }
 }

@@ -13,6 +13,7 @@ class CryptoSettingsViewController: UIViewController {
     enum cell: Int {
         case winnerInfo
         case connectedAccounts
+        case promoCode
         case contactUs
         case legaDisclosure
         case leaveFeedback
@@ -112,6 +113,14 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 let vc = ConnectedAccountsViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
                 
+            case .promoCode:
+                // MARK: Promo Code
+                let vc = PromoCodeUsedViewController()
+                self.navigationController?.pushViewController(vc.self, animated: true)
+                
+                cryptoSettingsDataStore.getPromoCodeRightAnswers(promoCode: "") { result in
+                    print(result as Any)
+                }
             case .contactUs, .leaveFeedback:
                 // MARK: Contact Us
                 // MARK: Leave Feedback

@@ -87,7 +87,7 @@ extension LegalDisclosuresViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             //Privacy Policy
-            let url = URL(string: "https://developer.apple.com")!
+            let url = URL(string: "https://www.debtdestroyer.app/privacy-policy")!
             UIApplication.shared.open(url)
         } else if indexPath.row == 1 {
             //Terms of Service

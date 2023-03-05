@@ -147,7 +147,7 @@ class WelcomeView: UIView {
         let str = NSString(string: text)
         let theRangeTerm = str.range(of: "Terms of Service")
         let theRangePolicy = str.range(of: "Privacy Policy")
-        let url = URL(string: "https://developer.apple.com/tutorials/app-dev-training/creating-a-progress-view")!
+        let url = URL(string: "https://www.debtdestroyer.app/privacy-policy")!
         let urlTerm = URL(string: "https://www.debtdestroyer.app/terms-and-services")!
         if gesture.didTapAttributedTextInLabel(label: termsAndPolicyLabel, inRange: theRangeTerm) {
             UIApplication.shared.open(urlTerm)

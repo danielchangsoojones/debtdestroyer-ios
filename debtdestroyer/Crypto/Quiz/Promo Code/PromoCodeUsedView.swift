@@ -10,12 +10,16 @@ import UIKit
 class PromoCodeUsedView: UIView {
     let titleLbl = UILabel()
     let promoInfoLabel = UILabel()
+    let tableView = UITableView()
+    let faqBtn = UIButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         setTitleLabel()
         setPromoInfoLabel()
+        setFaqButton()
+        setTableView()
     }
     
     required init?(coder: NSCoder) {
@@ -43,6 +47,24 @@ class PromoCodeUsedView: UIView {
         promoInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLbl.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(10)
+        }
+    }
+    
+    private func setFaqButton() {
+        faqBtn.setTitle("See FAQ", for: .normal)
+        faqBtn.setTitleColor(.blue, for: .normal)
+        addSubview(faqBtn)
+        faqBtn.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(promoInfoLabel.snp.bottom).offset(5)
+        }
+    }
+    
+    private func setTableView() {
+        addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(faqBtn.snp.bottom).offset(10)
         }
     }
 }

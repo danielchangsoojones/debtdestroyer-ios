@@ -24,6 +24,11 @@ class PromoDataStore {
                     let promoUser = PromoCodeUsedViewController.PromoUser(user: user)
                     return promoUser
                 }
+                
+                if !personalPromo.isEmpty {
+                    User.current()?.personalPromo = personalPromo
+                }
+                
                 completion(promoUsers, personalPromo, promo_info_detail)
             } else if let error = error {
                 BannerAlert.show(with: error)

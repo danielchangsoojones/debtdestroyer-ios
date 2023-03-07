@@ -12,6 +12,8 @@ class PromoCodeUsedViewController: UIViewController {
     private var promoInfoLabel: UILabel!
     private var promoUsers: [PromoUser] = []
     private let dataStore = PromoDataStore()
+    private var tableView: UITableView!
+    private var faqBtn: UIButton!
     
     class PromoUser {
         let user: User
@@ -27,19 +29,23 @@ class PromoCodeUsedViewController: UIViewController {
         self.view = promoCodeView
         self.titleLbl = promoCodeView.titleLbl
         self.promoInfoLabel = promoCodeView.promoInfoLabel
+        self.tableView = promoCodeView.tableView
+        promoCodeView.faqBtn.addTarget(self, action: #selector(faqPressed), for: .touchUpInside)
+        promoCodeView.tableView.delegate = self
+        promoCodeView.tableView.dataSource = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Your Promo"
-        
-        
-        
+        loadData()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicStyle")
     }
     
     private func loadData() {
         dataStore.getPromoInfo { promoUsers, personalPromo, promo_info_str in
             self.promoUsers = promoUsers
+            self.tableView.reloadData()
             
             let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
             let underlineAttributedString = NSAttributedString(string: personalPromo, attributes: underlineAttribute)
@@ -47,6 +53,10 @@ class PromoCodeUsedViewController: UIViewController {
             
             self.promoInfoLabel.text = promo_info_str
         }
+    }
+    
+    @objc private func faqPressed() {
+        
     }
 }
 

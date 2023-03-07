@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ReminderTextNotificationViewController: UIViewController {
     
@@ -33,8 +34,10 @@ class ReminderTextNotificationViewController: UIViewController {
     }
     
     @objc private func enableReminderTextsPressed() {
-//        let vc =
-//        navigationController?.pushViewController(vc, animated: true)
+        // set the type as sound or badge
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound,.alert,.badge]) { (granted, error) in
+            // Enable or disable features based on authorization
+
+        }
     }
-        
 }

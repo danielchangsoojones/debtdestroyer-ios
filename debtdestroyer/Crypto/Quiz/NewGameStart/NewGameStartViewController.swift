@@ -59,6 +59,7 @@ class NewGameStartViewController: UIViewController {
         super.viewDidAppear(animated)
         checkWaitlist()
         addStartQuizBtn()
+        showGameReminderPopUp()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,16 +179,20 @@ class NewGameStartViewController: UIViewController {
             setData(quizTopic: quizTopic)
             let now = Date()
             
-//                let popupVC = ReminderTextNotificationViewController()
-//                popupVC.modalPresentationStyle = .overCurrentContext
-//                popupVC.modalTransitionStyle = .crossDissolve
-//                present(popupVC, animated: true, completion: nil)
+
 
             if quizTopic.start_time < now {
                 //time to start the game
                 startQuiz()
             }
         }
+    }
+    
+    private func showGameReminderPopUp() {
+        let popupVC = ReminderTextNotificationViewController()
+        popupVC.modalPresentationStyle = .overCurrentContext
+        popupVC.modalTransitionStyle = .crossDissolve
+        present(popupVC, animated: true, completion: nil)
     }
     
     @objc private func startQuiz() {

@@ -9,9 +9,10 @@ import UIKit
 import Parse
 import AVFoundation
 import UXCam
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0.0
         }
+        
+        let center  = UNUserNotificationCenter.current()
+        center.delegate = self
+        application.registerForRemoteNotifications()
         
         setUXCam()
         
@@ -86,6 +91,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         IAPManager.shared.stopObserving()
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let installation = PFInstallation.current()
+        installation?.setDeviceTokenFrom(deviceToken)
+        installation?.saveInBackground(block: { (succ, error) in
+            if error == nil {
+                print("DEVICE TOKEN REGISTERED!")
+            } else {
+                print("\(error!.localizedDescription)")
+            }
+        })
+    }
 
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        print("\(userInfo)")
+    }
+    
+    // This method will be called when app received push notifications in foreground
+    //otherwise when inside the app, you never get push notifications
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
 }
 

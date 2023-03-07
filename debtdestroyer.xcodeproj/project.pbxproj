@@ -161,6 +161,7 @@
 		9249DC7829ABE89500E66170 /* ConfigurationParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249DC7729ABE89500E66170 /* ConfigurationParse.swift */; };
 		925BD26528A24D2E009303AF /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26428A24D2E009303AF /* Enviroment.swift */; };
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
+		925E650A29B556F800BBF572 /* PromoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E650929B556F800BBF572 /* PromoDataStore.swift */; };
 		928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */; };
 		92ABE18A299B40A3009384BF /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ABE189299B40A3009384BF /* ContactViewController.swift */; };
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
@@ -327,6 +328,7 @@
 		9249DC7729ABE89500E66170 /* ConfigurationParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationParse.swift; sourceTree = "<group>"; };
 		925BD26428A24D2E009303AF /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		925E650929B556F800BBF572 /* PromoDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoDataStore.swift; sourceTree = "<group>"; };
 		928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsDataStore.swift; sourceTree = "<group>"; };
 		92ABE189299B40A3009384BF /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		92C8498E296CBAE40091422E /* VideoAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnswer.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			children = (
 				0A0707AC29A7366400684521 /* PromoCodeUsedViewController.swift */,
 				0A0707AE29A7367C00684521 /* PromoCodeUsedView.swift */,
+				925E650929B556F800BBF572 /* PromoDataStore.swift */,
 			);
 			path = "Promo Code";
 			sourceTree = "<group>";
@@ -1223,6 +1226,7 @@
 				0A92F1A528E41DAE0094C3E9 /* AnswerChoiceNewUIView.swift in Sources */,
 				0A663DC729509F3000BE6B53 /* GradientBlueButton.swift in Sources */,
 				0A421C0E28DB4E8A008792B8 /* Model.swift in Sources */,
+				925E650A29B556F800BBF572 /* PromoDataStore.swift in Sources */,
 				0A7A4A0728A3D5D5009EDE5E /* GardientButton.swift in Sources */,
 				0A7A49EB28A386C6009EDE5E /* WelcomeViewController.swift in Sources */,
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,

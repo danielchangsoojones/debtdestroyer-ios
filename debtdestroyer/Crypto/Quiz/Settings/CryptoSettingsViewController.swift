@@ -9,26 +9,42 @@ import UIKit
 import SCLAlertView
 
 class CryptoSettingsViewController: UIViewController {
-    
-    enum cell: Int {
-        case winnerInfo
-        case connectedAccounts
-        case promoCode
-        case contactUs
-        case legaDisclosure
-        case leaveFeedback
-        case notification
-        case logOut
-        case deleteAcc
-        case textNoti
-        case answerKeys
-        case quizQuestions
+    enum CellType: String {
+        case winnerInfo = "Enter Winner Information"
+        case connectedAccounts = "Connected Accounts"
+        case promoCode = "Promo Code"
+        case contactUs = "Contact Us or Leave Feedback"
+        case legaDisclosure = "Legal Disclosures"
+        case notification = "Notification Settings"
+        case logOut = "Log Out"
+        case deleteAcc = "Delete Account"
+        case textNoti = "Send Text Notification"
+        case answerKeys = "Answer Keys"
+        case quizQuestions = "Quiz Questions"
+        
+        var imageName: String {
+            switch self {
+            case .winnerInfo, .legaDisclosure, .answerKeys, .quizQuestions:
+                return "legal"
+            case .connectedAccounts:
+                return "accounts"
+            case .contactUs:
+                return "contactUs"
+            case .logOut:
+                return "logout"
+            case .deleteAcc:
+                return "deleteAcc"
+            case .notification, .textNoti:
+                return "bell"
+            case .promoCode:
+                return "invite"
+            }
+        }
     }
     
     private var messageHelper: MessageHelper?
     private var tableView: UITableView!
-    var dataArr = [String]()
-    var imgNameArr = [String]()
+    private var dataArr: [CellType] = []
     private let quizDataStore = QuizDataStore()
     private let cryptoSettingsDataStore = CryptoSettingsDataStore()
 
@@ -40,20 +56,12 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Enter Winner Information", "Connected Accounts", "Contact Us", "Legal Disclosures", "Leave Feedback", "Notification Settings", "Log Out", "Delete Account"]
+        dataArr = [.promoCode, .winnerInfo, .contactUs, .legaDisclosure, .notification, .logOut, .deleteAcc]
 
-        imgNameArr = ["legal", "accounts", "contactUs", "legal", "feedback", "contactUs", "logout", "deleteAcc"]
-        
-        if User.current()!.email == "messyjones@gmail.com" {
-            dataArr.append("Send Text Notification")
-            imgNameArr.append("contactUs")
-            dataArr.append("Answer Keys")
-            imgNameArr.append("contactUs")
-        }
-        
-        if (User.current()?.isAdminUser ?? false) {
-            dataArr.append("Quiz Questions")
-            imgNameArr.append("contactUs")
+        if User.isAdminUser {
+            dataArr.append(.textNoti)
+            dataArr.append(.answerKeys)
+            dataArr.append(.quizQuestions)
         }
               
         self.navigationItem.title = "Settings"
@@ -86,8 +94,8 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SettingsTableViewCell.self)
-        cell.titleLabel.text = dataArr[indexPath.row]
-        cell.logoImg.image = UIImage.init(named: imgNameArr[indexPath.row])
+        cell.titleLabel.text = dataArr[indexPath.row].rawValue
+        cell.logoImg.image = UIImage.init(named: dataArr[indexPath.row].imageName)
         
         return cell
     }
@@ -101,8 +109,8 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch cell(rawValue: indexPath.row)! {
+        let cellType = dataArr[indexPath.row]
+        switch cellType {
             case .winnerInfo:
                 // MARK: Enter Winner Information
                 let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
@@ -117,11 +125,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 // MARK: Promo Code
                 let vc = PromoCodeUsedViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
-                
-                cryptoSettingsDataStore.getPromoCodeRightAnswers(promoCode: "") { result in
-                    print(result as Any)
-                }
-            case .contactUs, .leaveFeedback:
+            case .contactUs:
                 // MARK: Contact Us
                 // MARK: Leave Feedback
                 messageHelper?.text("3176905323", body: "")

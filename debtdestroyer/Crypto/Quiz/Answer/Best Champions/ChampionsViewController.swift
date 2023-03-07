@@ -181,7 +181,13 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
         let quizScore = quizScores[indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1) + ". "
-        cell.nameLabel.text = quizScore.user.fullName.capitalized
+        var name = quizScore.user.fullName.capitalized
+        let isInvitedUser = quizScore.user.promoCode == User.current()?.personalPromo
+        if let personalPromo = User.current()?.personalPromo, isInvitedUser {
+            name += " (\(personalPromo))"
+        }
+        cell.nameLabel.text = name
+        
         cell.pointsLabel.text = String(quizScore.points)
         return cell
     }

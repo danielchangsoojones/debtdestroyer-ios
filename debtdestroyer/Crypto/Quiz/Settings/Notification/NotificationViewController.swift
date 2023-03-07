@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class NotificationViewController: UIViewController {
     
@@ -22,7 +23,12 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Text Notification"]
+        dataArr = ["Notification Status"]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound,.alert,.badge]) { (granted, error) in
+            // Enable or disable features based on authorization
+            DDNotification.saveNotificationStatus()
+        }
         
         //        self.navigationItem.title = "Notification"
         self.navigationController?.navigationBar.tintColor = .black
@@ -32,11 +38,15 @@ class NotificationViewController: UIViewController {
     }
     
     @objc func toggleSegmentForNotification(_ notification: Notification) {
-        print(notification.object!)
-
-//        cryptoSettingsDataStore.setNotificationStatus(value: notification.object!) {
-//
-//        }
+        if let nextIndex = notification.object as? Int {
+            if nextIndex == 1 {
+                //on
+                DDNotification.saveNotificationDesire(desire: "on")
+            } else {
+                //off
+                DDNotification.saveNotificationDesire(desire: "off")
+            }
+        }
     }
     
     private func setNavBarBtns() {

@@ -74,7 +74,7 @@ class NotificationTableViewCell: UITableViewCell, Reusable {
     }
     
     private func setDisclosureLabel() {
-        disclosureLbl.text = "Turn on your text notifications to get notified 15 minutes before a game is starting."
+        disclosureLbl.text = "Turn on your notifications to get notified 15 minutes before a game is starting."
         disclosureLbl.numberOfLines = 0
         disclosureLbl.textAlignment = .left
         disclosureLbl.textColor = .black

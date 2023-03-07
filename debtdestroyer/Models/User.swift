@@ -16,6 +16,8 @@ class User: PFUser {
     @NSManaged var method_entity_id: String
     @NSManaged var promoCode: String?
     @NSManaged var personalPromo: String?
+    @NSManaged var notificationStatus: String?
+    @NSManaged var notificationDesire: String?
     
     static var shouldShowEarnings = true
     static var sendMassTextNotification = false

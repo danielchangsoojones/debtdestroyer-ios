@@ -189,10 +189,12 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func showGameReminderPopUp() {
-        let popupVC = ReminderTextNotificationViewController()
-        popupVC.modalPresentationStyle = .overCurrentContext
-        popupVC.modalTransitionStyle = .crossDissolve
-        present(popupVC, animated: true, completion: nil)
+        if User.current()?.notificationStatus == nil || User.current()?.notificationStatus == "notDetermined" {
+            let popupVC = ReminderTextNotificationViewController()
+            popupVC.modalPresentationStyle = .overCurrentContext
+            popupVC.modalTransitionStyle = .crossDissolve
+            present(popupVC, animated: true, completion: nil)
+        }
     }
     
     @objc private func startQuiz() {

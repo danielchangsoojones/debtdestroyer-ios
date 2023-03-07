@@ -35,9 +35,10 @@ class ReminderTextNotificationViewController: UIViewController {
     
     @objc private func enableReminderTextsPressed() {
         // set the type as sound or badge
+        self.dismiss(animated: true)
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound,.alert,.badge]) { (granted, error) in
             // Enable or disable features based on authorization
-            self.dismiss(animated: true)
+            DDNotification.saveNotificationStatus()
         }
     }
 }

@@ -15,7 +15,7 @@ class CryptoSettingsViewController: UIViewController {
         case promoCode = "Promo Code"
         case contactUs = "Contact Us or Leave Feedback"
         case legaDisclosure = "Legal Disclosures"
-        case notification = "Notification Settings"
+        case notification = "Notifications"
         case logOut = "Log Out"
         case deleteAcc = "Delete Account"
         case textNoti = "Send Text Notification"

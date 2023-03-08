@@ -10,7 +10,7 @@ import Reusable
 
 class NotificationTableViewCell: UITableViewCell, Reusable {
     let titleLabel = UILabel()
-    private var toggleSegment = HBSegmentedControl()
+    var toggleSegment = HBSegmentedControl()
     private let disclosureLbl = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

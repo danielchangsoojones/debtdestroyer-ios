@@ -56,7 +56,7 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.promoCode, .winnerInfo, .contactUs, .legaDisclosure, .notification, .logOut, .deleteAcc]
+        dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
 
         if User.isAdminUser {
             dataArr.append(.textNoti)

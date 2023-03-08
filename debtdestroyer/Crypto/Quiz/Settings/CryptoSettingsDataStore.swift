@@ -40,22 +40,6 @@ class CryptoSettingsDataStore {
             }
         }
     }
-    
-    func setNotificationStatus(value: Bool, completion: @escaping () -> Void) {
-        var parameters: [String : Any] = ["value" : value]
-        
-        PFCloud.callFunction(inBackground: "setNotificationStatus", withParameters: parameters) { (result, error) in
-            if let result = result {
-                
-                let json = JSON(result)
-                completion()
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "setNotificationStatus")
-            }
-        }
-    }
 
     func getPromoCodeRightAnswers(promoCode: String , completion: @escaping (Any?) -> Void) {
         var parameters: [String : Any] = ["promoCode" : promoCode]

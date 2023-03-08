@@ -15,7 +15,7 @@ class CryptoSettingsViewController: UIViewController {
         case promoCode = "Promo Code"
         case contactUs = "Contact Us or Leave Feedback"
         case legaDisclosure = "Legal Disclosures"
-        case notification = "Notification Settings"
+        case notification = "Notifications"
         case logOut = "Log Out"
         case deleteAcc = "Delete Account"
         case textNoti = "Send Text Notification"
@@ -56,7 +56,7 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.promoCode, .winnerInfo, .contactUs, .legaDisclosure, .notification, .logOut, .deleteAcc]
+        dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
 
         if User.isAdminUser {
             dataArr.append(.textNoti)

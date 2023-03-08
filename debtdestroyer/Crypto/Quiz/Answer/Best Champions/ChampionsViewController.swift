@@ -183,9 +183,12 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.numberLabel.text = String(indexPath.row + 1) + ". "
         var name = quizScore.user.fullName.capitalized
         let isInvitedUser = quizScore.user.promoCode == User.current()?.personalPromo
-        if let personalPromo = User.current()?.personalPromo, isInvitedUser {
+        if User.isAdminUser {
+            name += " (\(quizScore.user.promoCode ?? "")))"
+        } else if let personalPromo = User.current()?.personalPromo, isInvitedUser {
             name += " (\(personalPromo))"
         }
+        
         cell.nameLabel.text = name
         
         cell.pointsLabel.text = String(quizScore.points)

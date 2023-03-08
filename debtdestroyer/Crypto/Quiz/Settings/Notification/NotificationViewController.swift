@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import UserNotifications
+import SCLAlertView
 
 class NotificationViewController: UIViewController {
     
@@ -22,7 +24,21 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = ["Text Notification"]
+        dataArr = ["Notification Status"]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound,.alert,.badge]) { (granted, error) in
+            // Enable or disable features based on authorization
+            DDNotification.saveNotificationStatus()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+              // your code here
+                if !granted {
+                    let alert = SCLAlertView()
+                    alert.showInfo("You denied notification access", subTitle: "You denied notification access to turn it on. Go into your iPhone settings -> notifications. And enable them for debt destroyer. Then, restart the app.")
+                }
+                self.tableView.reloadData()
+            }
+        }
         
         //        self.navigationItem.title = "Notification"
         self.navigationController?.navigationBar.tintColor = .black
@@ -32,11 +48,15 @@ class NotificationViewController: UIViewController {
     }
     
     @objc func toggleSegmentForNotification(_ notification: Notification) {
-        print(notification.object!)
-
-//        cryptoSettingsDataStore.setNotificationStatus(value: notification.object!) {
-//
-//        }
+        if let nextIndex = notification.object as? Int {
+            if nextIndex == 1 {
+                //on
+                DDNotification.saveNotificationDesire(desire: "on")
+            } else {
+                //off
+                DDNotification.saveNotificationDesire(desire: "off")
+            }
+        }
     }
     
     private func setNavBarBtns() {
@@ -80,6 +100,12 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: NotificationTableViewCell.self)
         cell.titleLabel.text = dataArr[indexPath.row]
         
+        let shouldBeOn = User.current()?.notificationDesire == "on" || User.current()?.notificationDesire == nil
+        if shouldBeOn && User.current()?.notificationStatus == "authorized" {
+            cell.toggleSegment.selectedIndex = 0
+        } else {
+            cell.toggleSegment.selectedIndex = 1
+        }
         
         return cell
     }

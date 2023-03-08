@@ -31,7 +31,7 @@ class ReminderTextNotificationView: UIView, TTTAttributedLabelDelegate  {
 
         setStartLabel()
         setImgView()
-        setDescriptionLabel()
+//        setDescriptionLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -68,11 +68,11 @@ class ReminderTextNotificationView: UIView, TTTAttributedLabelDelegate  {
     }
     
     private func setStartLabel() {
-        startLbl.text = "Reminder Texts Before Every Game"
+        startLbl.text = "Reminder Notifications Before Every Game"
         startLbl.numberOfLines = 0
         startLbl.textAlignment = .left
         startLbl.textColor = .black
-        startLbl.font = UIFont.MontserratSemiBold(size: 30)
+        startLbl.font = UIFont.MontserratSemiBold(size: 26)
         contentView.addSubview(startLbl)
         startLbl.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
@@ -89,7 +89,7 @@ class ReminderTextNotificationView: UIView, TTTAttributedLabelDelegate  {
             make.centerX.equalToSuperview()
             make.width.equalTo(322)
             make.height.equalTo(275)
-
+            make.bottom.equalToSuperview()
         }
     }
         
@@ -143,19 +143,20 @@ class ReminderTextNotificationView: UIView, TTTAttributedLabelDelegate  {
     
     func setEnableReminderTextBtn() {
         enableButton = GradientBtn()
+        let title = "Enable Reminders"
         if #available(iOS 15.0, *) {
             if enableButton.configuration == nil {
                 var configuration = UIButton.Configuration.plain()
-                configuration.attributedTitle = AttributedString("Enable Reminder Texts", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                configuration.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratLight(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
                 enableButton.configuration = configuration
                 
             } else {
-                enableButton.configuration?.attributedTitle = AttributedString("Enable Reminder Texts", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                enableButton.configuration?.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratLight(size: 22),NSAttributedString.Key.foregroundColor : UIColor.white]))
             }
             
         } else {
             enableButton.setTitleColor(.white, for: .normal)
-            enableButton.setTitle("Enable Reminder Texts", for: .normal)
+            enableButton.setTitle(title, for: .normal)
         }
         enableButton.layer.cornerRadius =  25
         enableButton.clipsToBounds = true
@@ -171,18 +172,19 @@ class ReminderTextNotificationView: UIView, TTTAttributedLabelDelegate  {
     
     func setNoThanksBtn(){
         noThanksButton = UIButton()
+        let title = "No Thanks"
         if #available(iOS 15.0, *) {
             if noThanksButton.configuration == nil {
                 var configuration = UIButton.Configuration.plain()
-                configuration.attributedTitle = AttributedString("No Thanks", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "EC595C")]))
+                configuration.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratLight(size: 22),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "EC595C")]))
                 noThanksButton.configuration = configuration
                 
             } else {
-                noThanksButton.configuration?.attributedTitle = AttributedString("No Thanks", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratBold(size: 22),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "EC595C")]))
+                noThanksButton.configuration?.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratLight(size: 22),NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "EC595C")]))
             }
             
         } else {
-            noThanksButton.setTitle("No Thanks", for: .normal)
+            noThanksButton.setTitle(title, for: .normal)
         }
         noThanksButton.layer.cornerRadius =  8
         noThanksButton.backgroundColor = .clear

@@ -27,7 +27,7 @@ class ConnectDisclosureView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLbl.text = "Verify your loan accounts and identity with Debt Destroyer."
+        titleLbl.text = "Verify your identity and loan accounts with Debt Destroyer."
         titleLbl.numberOfLines = 0
         titleLbl.textAlignment = .center
         titleLbl.textColor = .black
@@ -40,7 +40,7 @@ class ConnectDisclosureView: UIView {
     }
     
     private func setDescriptionView() {
-        descriptionTextView.text = "Confirm your identity by answering some security questions. By verifying your identity, Debt Destroyer will be able to pay your prize earnings directly into your debt accounts!\n\n*Debt Destroyed never shares or sells your data."
+        descriptionTextView.text = "It's important for users on Debt Destroyer to confirm their identity by answering security questions: \n\n1) To prevent bot 🤖 players. It's important to keep gameplay fair!\n\n2) By verifying your identity, Debt Destroyer will be able to pay your prize earnings directly into your debt accounts (student loans, mortgage, etc.)!\n\n*DEBT DESTROYER NEVER SHARES OR SELLS YOUR DATA"
         descriptionTextView.contentInsetAdjustmentBehavior = .automatic
         descriptionTextView.center = self.center
         descriptionTextView.textAlignment = NSTextAlignment.center

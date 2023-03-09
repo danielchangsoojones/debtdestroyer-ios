@@ -11,7 +11,7 @@ import SCLAlertView
 class CryptoSettingsViewController: UIViewController {
     enum CellType: String {
         case winnerInfo = "Enter Winner Information"
-        case connectedAccounts = "Connected Accounts"
+        case connectedAccounts = "Verify Identity"
         case promoCode = "Promo Code"
         case contactUs = "Contact Us or Leave Feedback"
         case legaDisclosure = "Legal Disclosures"

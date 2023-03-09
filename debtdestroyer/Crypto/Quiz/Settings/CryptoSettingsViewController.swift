@@ -57,6 +57,10 @@ class CryptoSettingsViewController: UIViewController {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
         dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        
+        if (User.current()?.showConnectAccount ?? false) {
+            dataArr.insert(.connectedAccounts, at: 2)
+        }
 
         if User.isAdminUser {
             dataArr.append(.textNoti)
@@ -118,9 +122,8 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 
             case .connectedAccounts:
                 // MARK: Connected Accounts
-                let vc = ConnectedAccountsViewController()
+                let vc = ConnectDisclosureViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
-                
             case .promoCode:
                 // MARK: Promo Code
                 let vc = PromoCodeUsedViewController()

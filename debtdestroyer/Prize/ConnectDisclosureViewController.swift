@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 
 class ConnectDisclosureViewController: UIViewController {
-    
     var connectDisclosureView = ConnectDisclosureView()
     var titleLbl = UILabel()
     var descriptionTextView = UITextView()
@@ -21,6 +20,7 @@ class ConnectDisclosureViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        messageHelper = MessageHelper(currentVC: self)
         connectDisclosureView = ConnectDisclosureView(frame: self.view.bounds)
         self.view = connectDisclosureView
         self.descriptionTextView = connectDisclosureView.descriptionTextView
@@ -35,6 +35,11 @@ class ConnectDisclosureViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     private func setNavBarBtns() {

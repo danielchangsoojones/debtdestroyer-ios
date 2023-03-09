@@ -27,7 +27,7 @@ class ConnectDisclosureView: UIView {
     }
     
     private func setTitleLabel() {
-        titleLbl.text = "Verify your student loan accounts to start earning tickets!"
+        titleLbl.text = "Verify your identity and loan accounts with Debt Destroyer."
         titleLbl.numberOfLines = 0
         titleLbl.textAlignment = .center
         titleLbl.textColor = .black
@@ -40,7 +40,7 @@ class ConnectDisclosureView: UIView {
     }
     
     private func setDescriptionView() {
-        descriptionTextView.text = "Confirm your identity by answering some security questions. Once your identity is verified, your student loan accounts will start earning you tickets into our sweepstakes!\n\n*Debt Destroyed never shares or sells your data."
+        descriptionTextView.text = "It's important for users on Debt Destroyer to confirm their identity by answering security questions: \n\n1) To prevent bot 🤖 players. It's important to keep gameplay fair!\n\n2) By verifying your identity, Debt Destroyer will be able to pay your prize earnings directly into your debt accounts (student loans, mortgage, etc.)!\n\n*DEBT DESTROYER NEVER SHARES OR SELLS YOUR DATA"
         descriptionTextView.contentInsetAdjustmentBehavior = .automatic
         descriptionTextView.center = self.center
         descriptionTextView.textAlignment = NSTextAlignment.center
@@ -59,19 +59,19 @@ class ConnectDisclosureView: UIView {
     
     private func setConnectAccBtn() {
         connectAccBtn.backgroundColor = .clear
+        let title = "Verify Identity ➔"
         if #available(iOS 15.0, *) {
             if connectAccBtn.configuration == nil {
                 var configuration = UIButton.Configuration.plain()
-                configuration.attributedTitle = AttributedString("Verify Student Loans ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                configuration.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
                 connectAccBtn.configuration = configuration
                 
             } else {
-                connectAccBtn.configuration?.attributedTitle = AttributedString("Verify Student Loans ➔", attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
+                connectAccBtn.configuration?.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.MontserratSemiBold(size: 18),NSAttributedString.Key.foregroundColor : UIColor.white]))
             }
-            
         } else {
             connectAccBtn.setTitleColor(.white, for: .normal)
-            connectAccBtn.setTitle("Verify Student Loans ➔", for: .normal)
+            connectAccBtn.setTitle(title, for: .normal)
         }
         let height: CGFloat = 55
         connectAccBtn.layer.cornerRadius = height/2

@@ -123,6 +123,7 @@ class ConnectedAccountsTableViewCell: UITableViewCell, Reusable {
     
     private func setTicketImage() {
         imgView.image = UIImage.init(named: "ticketC")
+        imgView.isHidden = true
         addSubview(imgView)
         imgView.snp.makeConstraints { make in
             make.leading.equalTo(recentPaymentLabel.snp.trailing)

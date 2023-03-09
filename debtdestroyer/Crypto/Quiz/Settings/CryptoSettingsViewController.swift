@@ -11,7 +11,7 @@ import SCLAlertView
 class CryptoSettingsViewController: UIViewController {
     enum CellType: String {
         case winnerInfo = "Enter Winner Information"
-        case connectedAccounts = "Connected Accounts"
+        case connectedAccounts = "Verify Identity"
         case promoCode = "Promo Code"
         case contactUs = "Contact Us or Leave Feedback"
         case legaDisclosure = "Legal Disclosures"
@@ -47,6 +47,7 @@ class CryptoSettingsViewController: UIViewController {
     private var dataArr: [CellType] = []
     private let quizDataStore = QuizDataStore()
     private let cryptoSettingsDataStore = CryptoSettingsDataStore()
+    private let prizeDataStore = PrizeDataStore()
 
     override func loadView() {
         super.loadView()
@@ -57,6 +58,10 @@ class CryptoSettingsViewController: UIViewController {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
         dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        
+        if (User.current()?.showConnectAccount ?? false) {
+            dataArr.insert(.connectedAccounts, at: 2)
+        }
 
         if User.isAdminUser {
             dataArr.append(.textNoti)
@@ -118,9 +123,15 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 
             case .connectedAccounts:
                 // MARK: Connected Accounts
-                let vc = ConnectedAccountsViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
+            prizeDataStore.checkIfMethodAuthed { isAuthed in
+                if isAuthed {
+                    let connectedAccountsVC = ConnectedAccountsViewController()
+                    self.navigationController?.pushViewController(connectedAccountsVC, animated: true)
+                } else {
+                    let vc = ConnectDisclosureViewController()
+                    self.navigationController?.pushViewController(vc.self, animated: true)
+                }
+            }
             case .promoCode:
                 // MARK: Promo Code
                 let vc = PromoCodeUsedViewController()

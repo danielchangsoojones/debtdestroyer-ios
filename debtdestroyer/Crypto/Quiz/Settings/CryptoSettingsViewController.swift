@@ -47,6 +47,7 @@ class CryptoSettingsViewController: UIViewController {
     private var dataArr: [CellType] = []
     private let quizDataStore = QuizDataStore()
     private let cryptoSettingsDataStore = CryptoSettingsDataStore()
+    private let prizeDataStore = PrizeDataStore()
 
     override func loadView() {
         super.loadView()
@@ -122,8 +123,15 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 
             case .connectedAccounts:
                 // MARK: Connected Accounts
-                let vc = ConnectDisclosureViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
+            prizeDataStore.checkIfMethodAuthed { isAuthed in
+                if isAuthed {
+                    let connectedAccountsVC = ConnectedAccountsViewController()
+                    self.navigationController?.pushViewController(connectedAccountsVC, animated: true)
+                } else {
+                    let vc = ConnectDisclosureViewController()
+                    self.navigationController?.pushViewController(vc.self, animated: true)
+                }
+            }
             case .promoCode:
                 // MARK: Promo Code
                 let vc = PromoCodeUsedViewController()

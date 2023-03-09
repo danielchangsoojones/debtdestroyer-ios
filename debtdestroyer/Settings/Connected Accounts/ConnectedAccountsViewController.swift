@@ -23,6 +23,7 @@ class ConnectedAccountsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
+        messageHelper = MessageHelper(currentVC: self)
         setNavBarBtns()
         startTimer()
     }
@@ -164,9 +165,8 @@ extension ConnectedAccountsViewController: UITableViewDataSource, UITableViewDel
         cell.balanceLabel.text = "Balance: " + debtAccount.debtAccountParse.remaining_balance_dollars
         
 //        cell.logoImg.loadFromFile(debtAccount.logoImg)
-        let recent_payment = debtAccount.debtAccountParse.last_payment_amount_dollars
-        let ticketAmount = String(debtAccount.last_payment_ticket_amount)
-        cell.recentPaymentLabel.text = "Most Recent Payment: " + recent_payment + " =\(ticketAmount) tickets"
+//        let recent_payment = debtAccount.debtAccountParse.last_payment_amount_dollars
+//        let ticketAmount = String(debtAccount.last_payment_ticket_amount)
         cell.setChevron(imageName: "chevronGrey")
 
         return cell

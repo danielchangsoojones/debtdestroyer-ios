@@ -118,18 +118,6 @@ class QuizDataStore {
             }
         }
     }
-        
-    func sendMassTextNotification(completion: @escaping ()-> Void) {
-        PFCloud.callFunction(inBackground: "sendMassText", withParameters: [:]) { (result, error) in
-            if let result = result {
-                completion()
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "sendMassTextNotification")
-            }
-        }
-    }
     
     func getDemoQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
         PFCloud.callFunction(inBackground: "getDemoQuizData", withParameters: nil) { (result, error) in

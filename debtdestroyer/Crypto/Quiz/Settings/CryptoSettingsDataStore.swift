@@ -54,4 +54,16 @@ class CryptoSettingsDataStore {
             }
         }
     }
+    
+    func sendMassNotification(completion: @escaping () -> Void) {
+        PFCloud.callFunction(inBackground: "sendNotification", withParameters: nil) { (result, error) in
+            if let msg = result as? String {
+                BannerAlert.show(title: "Sent", subtitle: msg, type: .success)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "markQuizStatus")
+            }
+        }
+    }
 }

@@ -180,13 +180,9 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     let alertView = SCLAlertView(appearance: appearance)
                     
                     alertView.addButton("Send") {
-                        
-                        self.quizDataStore.sendMassTextNotification {
-                            print("success")
+                        self.cryptoSettingsDataStore.sendMassNotification {
                             User.sendMassTextNotification = true
-                            BannerAlert.show(title: "Notification send successfully!", subtitle: "", type: .success)
                         }
-                        
                     }
                     
                     alertView.addButton("Cancel") {

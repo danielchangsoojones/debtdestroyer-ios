@@ -16,6 +16,19 @@ class LeaderboardDataStore {
         let points: Int
     }
     
+    func getFriendInvite(invitingPromo: String, completion: @escaping (User) -> Void) {
+        let parameters: [String : Any] = ["inviting_promo" : invitingPromo]
+        PFCloud.callFunction(inBackground: "getRecruitingFriend", withParameters: parameters) { (result, error) in
+            if let user = result as? User {
+                completion(user)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getFriendInvite")
+            }
+        }
+    }
+    
     func getLeaderBoard(completion: @escaping ([QuizScore], String) -> Void) {
         PFCloud.callFunction(inBackground: "getLeaderboard", withParameters: [:]) { (result, error) in
             if let result = result {

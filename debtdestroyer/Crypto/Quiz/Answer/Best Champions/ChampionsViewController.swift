@@ -5,6 +5,7 @@
 //  Created by Rashmi Aher on 29/09/22.
 //
 
+import SCLAlertView
 import UIKit
 
 class ChampionsViewController: UIViewController {
@@ -196,14 +197,38 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if User.isAdminUser {
+        if User.isAdminUser || User.isSemiAdmin {
             let quizScore = quizScores[indexPath.row]
-            let contactNumber = quizScore.user.phoneNumber
-            if contactNumber.removeWhitespaces() == ""  {
-                BannerAlert.show(title: "", subtitle: "Contact number not available!", type: .info)
+            let user = quizScore.user
+            let promoCode = user.promoCode
+            
+            if let promoCode = promoCode, !promoCode.isEmpty {
+                dataStore.getFriendInvite(invitingPromo: promoCode) { invitingUser in
+                    self.showPromoAlert(user: user, invitingUser: invitingUser)
+                }
             } else {
-                messageHelper?.text(contactNumber)
+                showPromoAlert(user: user, invitingUser: nil)
             }
+        }
+    }
+    
+    private func showPromoAlert(user: User, invitingUser: User?) {
+        let contactNumber = user.phoneNumber
+        if contactNumber.removeWhitespaces() == ""  {
+            BannerAlert.show(title: "", subtitle: "Contact number not available!", type: .info)
+        } else {
+            let alertView = SCLAlertView()
+            alertView.addButton("Text User") {
+                self.messageHelper?.text(contactNumber)
+            }
+            
+            if let invitingUser = invitingUser {
+                alertView.addButton("Text Inviting User") {
+                    self.messageHelper?.text(invitingUser.phoneNumber)
+                }
+            }
+            
+            alertView.showInfo("Text", subTitle: "Message Them")
         }
     }
     

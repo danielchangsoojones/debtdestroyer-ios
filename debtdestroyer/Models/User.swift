@@ -49,4 +49,8 @@ class User: PFUser {
     static var isAdminUser: Bool {
         return User.current()?.email == "messyjones@gmail.com"
     }
+    
+    static var isSemiAdmin: Bool {
+        return User.current()?.email == "tylerjpflowers@gmail.com"
+    }
 }

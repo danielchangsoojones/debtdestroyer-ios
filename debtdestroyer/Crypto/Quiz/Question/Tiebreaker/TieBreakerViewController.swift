@@ -12,6 +12,7 @@ class TieBreakerViewController: UIViewController {
     private let dataStore = TieBreakerDataStore()
     private var quizDatas: [QuizDataParse] = []
     private let competing_tie_users_count: Int
+    private var timer: Timer?
     
     init(competing_tie_users_count: Int) {
         self.competing_tie_users_count = competing_tie_users_count
@@ -35,14 +36,24 @@ class TieBreakerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        timer = Timer(timeInterval: 10, repeats: false) { timer in
+            self.timer?.invalidate()
+            self.segueIntoQuestionVC()
+        }
 //        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicStyle")
     }
     
     private func loadData() {
         dataStore.getTiebreakerQuestions { quizDatas in
             self.quizDatas = quizDatas
-            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_users_count) other people! Time to enter the tiebreaker round to decide the 5th place winner! The tiebreaker round will automatically start in 15 seconds. Get ready!"
+            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_users_count) other people! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 10 seconds. Get ready!"
+            
         }
+    }
+    
+    private func segueIntoQuestionVC() {
+        let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas, currentIndex: 0)
+        self.navigationController?.pushViewController(questionVC, animated: true)
     }
 }
 

@@ -544,9 +544,6 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     let tabBarVC = presentingViewController as? UITabBarController
                     tabBarVC?.selectedIndex = 1
                     dismiss(animated: true)
-                } else {
-                    let leaderboardVC = ChampionsViewController()
-                    self.navigationController?.pushViewController(leaderboardVC, animated: true)
                 }
             } else {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false

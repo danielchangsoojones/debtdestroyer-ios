@@ -63,8 +63,6 @@
 		0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0D28E19727001B774A /* QuizDataParse.swift */; };
 		0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0E28E19727001B774A /* QuizTopicParse.swift */; };
 		0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */; };
-		0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1328E1B53E001B774A /* QuestionViewController.swift */; };
-		0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1528E1B562001B774A /* QuestionView.swift */; };
 		0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */; };
 		0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */; };
 		0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */; };
@@ -227,8 +225,6 @@
 		0A59AD0D28E19727001B774A /* QuizDataParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataParse.swift; sourceTree = "<group>"; };
 		0A59AD0E28E19727001B774A /* QuizTopicParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTopicParse.swift; sourceTree = "<group>"; };
 		0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoAddressParse.swift; sourceTree = "<group>"; };
-		0A59AD1328E1B53E001B774A /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		0A59AD1528E1B562001B774A /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressCountdownTimerView.swift; sourceTree = "<group>"; };
 		0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCurrentView.swift; sourceTree = "<group>"; };
@@ -637,8 +633,6 @@
 		0A59ACEC28E183F4001B774A /* Question */ = {
 			isa = PBXGroup;
 			children = (
-				0A59AD1528E1B562001B774A /* QuestionView.swift */,
-				0A59AD1328E1B53E001B774A /* QuestionViewController.swift */,
 				0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */,
 				0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */,
 				0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */,
@@ -1186,7 +1180,6 @@
 				92BAA62229B7FDC5008B3990 /* Notification.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
-				0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */,
 				0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */,
@@ -1261,7 +1254,6 @@
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
-				0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */,
 				0A15CD7B2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,

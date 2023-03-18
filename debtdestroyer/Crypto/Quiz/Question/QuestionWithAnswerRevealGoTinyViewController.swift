@@ -53,13 +53,15 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
     private var competing_tie_users_count = 0
+    private let inTieMode: Bool
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
     
-    init(quizDatas: [QuizDataParse], currentIndex: Int) {
+    init(quizDatas: [QuizDataParse], currentIndex: Int, inTieMode: Bool) {
         self.quizDatas = quizDatas
+        self.inTieMode = inTieMode
         self.currentIndex = currentIndex
         super.init(nibName: nil, bundle: nil)
     }
@@ -190,8 +192,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc private func revealAnswerControl() {
-        
-        if (User.current()?.isAdminUser ?? false) {
+        if User.isAdminUser && !inTieMode {
             if quizDatas.count == (currentIndex + 1) {
                 
                 let appearance = SCLAlertView.SCLAppearance(
@@ -307,14 +308,18 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     @objc private func getLiveQuizStatus() {
         if !(User.isAppleTester || User.isIpadDemo) {
             let isPlaying = player.timeControlStatus == .playing
-            if User.current()?.email == "messyjones@gmail.com" && isPlaying {
+            //we aren't syncing the time when we are in tie mode. We probably could eventually
+            //it's just weird because the quiztopic is always changing.
+            if User.current()?.email == "messyjones@gmail.com" && isPlaying && !inTieMode {
                 let current_time_seconds = player.currentTime().seconds
                 dataStore.saveQuizCurrentTime(current_time_seconds: current_time_seconds,
                                               currentQuizDataID: currentData.objectId ?? "")
             }
             
             dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer  in
-                self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
+                if !self.inTieMode {
+                    self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
+                }
                 self.answer_video_url = answer_video_url
                 
                 if shouldRevealAnswer, let correct_answer_index = correct_answer_index {
@@ -541,7 +546,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 UserDefaults.standard.synchronize()
                 let shouldGoTieBreaker = competing_tie_users_count > 0
                 if shouldGoTieBreaker {
-                    let tiebreakerVC = TieBreakerViewController(
+                    let tiebreakerVC = TieBreakerViewController(competing_tie_users_count: competing_tie_users_count)
+                    self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
                     //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
                     let tabBarVC = presentingViewController as? UITabBarController

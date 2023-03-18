@@ -52,7 +52,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var yourAnswerHeading = UILabel()
     var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
-    private var shouldGoTieBreaker = false
+    private var competing_tie_users_count = 0
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -222,7 +222,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                 shouldStartQuestionPrompt: false,
                                                 currentIndex: currentIndex,
                                                 currentQuizData: currentData) { quizTopic in
-                self.shouldGoTieBreaker = quizTopic.competing_tie_user_ids.count > 0
+                self.competing_tie_users_count =  quizTopic.competing_tie_user_ids.count
             }
         }
     }
@@ -539,7 +539,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             if isLastQuestion {
                 UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
                 UserDefaults.standard.synchronize()
-                if Helpers.getTopViewController() is UINavigationController {
+                let shouldGoTieBreaker = competing_tie_users_count > 0
+                if shouldGoTieBreaker {
+                    let tiebreakerVC = TieBreakerViewController(
+                } else if Helpers.getTopViewController() is UINavigationController {
                     //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
                     let tabBarVC = presentingViewController as? UITabBarController
                     tabBarVC?.selectedIndex = 1

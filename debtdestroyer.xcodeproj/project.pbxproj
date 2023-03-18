@@ -161,6 +161,9 @@
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
 		925E650A29B556F800BBF572 /* PromoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E650929B556F800BBF572 /* PromoDataStore.swift */; };
 		928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */; };
+		92A4EA1329C591FD00A69995 /* TieBreakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4EA1229C591FD00A69995 /* TieBreakerViewController.swift */; };
+		92A4EA1529C5921000A69995 /* TieBreakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4EA1429C5921000A69995 /* TieBreakerView.swift */; };
+		92A4EA1729C5923500A69995 /* TieBreakerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4EA1629C5923500A69995 /* TieBreakerDataStore.swift */; };
 		92ABE18A299B40A3009384BF /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ABE189299B40A3009384BF /* ContactViewController.swift */; };
 		92BAA62229B7FDC5008B3990 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BAA62129B7FDC5008B3990 /* Notification.swift */; };
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
@@ -327,6 +330,9 @@
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		925E650929B556F800BBF572 /* PromoDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoDataStore.swift; sourceTree = "<group>"; };
 		928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsDataStore.swift; sourceTree = "<group>"; };
+		92A4EA1229C591FD00A69995 /* TieBreakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreakerViewController.swift; sourceTree = "<group>"; };
+		92A4EA1429C5921000A69995 /* TieBreakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreakerView.swift; sourceTree = "<group>"; };
+		92A4EA1629C5923500A69995 /* TieBreakerDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreakerDataStore.swift; sourceTree = "<group>"; };
 		92ABE189299B40A3009384BF /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		92BAA62129B7FDC5008B3990 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		92C8498E296CBAE40091422E /* VideoAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnswer.swift; sourceTree = "<group>"; };
@@ -633,6 +639,7 @@
 		0A59ACEC28E183F4001B774A /* Question */ = {
 			isa = PBXGroup;
 			children = (
+				92A4EA1129C591E700A69995 /* Tiebreaker */,
 				0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */,
 				0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */,
 				0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */,
@@ -984,6 +991,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		92A4EA1129C591E700A69995 /* Tiebreaker */ = {
+			isa = PBXGroup;
+			children = (
+				92A4EA1229C591FD00A69995 /* TieBreakerViewController.swift */,
+				92A4EA1429C5921000A69995 /* TieBreakerView.swift */,
+				92A4EA1629C5923500A69995 /* TieBreakerDataStore.swift */,
+			);
+			path = Tiebreaker;
+			sourceTree = "<group>";
+		};
 		92C849902970A4470091422E /* Promo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1170,6 +1187,7 @@
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
+				92A4EA1329C591FD00A69995 /* TieBreakerViewController.swift in Sources */,
 				0AE126A9291A697D00E11003 /* ConnectDisclosureViewController.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
 				0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */,
@@ -1188,6 +1206,7 @@
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
 				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,
+				92A4EA1529C5921000A69995 /* TieBreakerView.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* PromoViewController.swift in Sources */,
 				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
@@ -1281,6 +1300,7 @@
 				0AACBBA32924F54D00575AEF /* EditProfileView.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
+				92A4EA1729C5923500A69995 /* TieBreakerDataStore.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,
 				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
 			);

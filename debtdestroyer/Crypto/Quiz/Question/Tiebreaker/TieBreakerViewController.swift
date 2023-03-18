@@ -41,7 +41,7 @@ class TieBreakerViewController: UIViewController {
     private func loadData() {
         dataStore.getTiebreakerQuestions { quizDatas in
             self.quizDatas = quizDatas
-            self.descriptionLbl.text = "You tied for 5th place with \(competing_tie_users_count) other people! Time to enter the tiebreaker round to decide the 5th place winner! The tiebreaker round will automatically start in 15 seconds. Get ready!"
+            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_users_count) other people! Time to enter the tiebreaker round to decide the 5th place winner! The tiebreaker round will automatically start in 15 seconds. Get ready!"
         }
     }
 }

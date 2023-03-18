@@ -14,6 +14,7 @@ class QuizTopicParse: SuperParseObject, PFSubclassing {
     @NSManaged var prize_amount: Double
     @NSManaged var start_time: Date
     @NSManaged var currentQuizDataID: String
+    @NSManaged var competing_tie_user_ids: [String]
 
     class func parseClassName() -> String {
         return "QuizTopic"

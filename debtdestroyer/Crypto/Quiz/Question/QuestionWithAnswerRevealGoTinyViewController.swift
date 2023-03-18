@@ -52,6 +52,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var yourAnswerHeading = UILabel()
     var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
+    private var shouldGoTieBreaker = false
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -180,10 +181,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     @objc private func startQuestionPromptControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true,
+        quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
+                                            shouldStartQuestionPrompt: true,
                                             currentIndex: nil,
                                             currentQuizData: currentData) { _ in
-            
+            //for the question prompt, we won't get to this completion.
         }
     }
     
@@ -216,10 +218,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             self.playVideoAnswer()
         } else {
             let quizManagerDataStore = CryptoSettingsDataStore()
-            quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
+            quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
+                                                shouldStartQuestionPrompt: false,
                                                 currentIndex: currentIndex,
-                                                currentQuizData: currentData) { _ in
-                
+                                                currentQuizData: currentData) { quizTopic in
+                self.shouldGoTieBreaker = quizTopic.competing_tie_user_ids.count > 0
             }
         }
     }

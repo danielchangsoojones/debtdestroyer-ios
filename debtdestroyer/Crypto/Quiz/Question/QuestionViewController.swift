@@ -167,7 +167,7 @@ class QuestionViewController: UIViewController {
     
     @objc private func startQuestionPromptControl() {
         let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: true,
+        quizManagerDataStore.markQuizStatus(quizDatas: quizDatas, shouldStartQuestionPrompt: true,
                                             currentIndex: nil,
                                             currentQuizData: currentData) { _ in
             
@@ -203,7 +203,7 @@ class QuestionViewController: UIViewController {
             self.playVideoAnswer()
         } else {
             let quizManagerDataStore = CryptoSettingsDataStore()
-            quizManagerDataStore.markQuizStatus(shouldStartQuestionPrompt: false,
+            quizManagerDataStore.markQuizStatus(quizDatas: quizDatas, shouldStartQuestionPrompt: false,
                                                 currentIndex: currentIndex,
                                                 currentQuizData: currentData) { _ in
                 

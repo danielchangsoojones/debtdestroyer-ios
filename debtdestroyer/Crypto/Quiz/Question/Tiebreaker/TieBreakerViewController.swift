@@ -51,7 +51,7 @@ class TieBreakerViewController: UIViewController {
     }
     
     private func segueIntoQuestionVC() {
-        let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas, currentIndex: 0)
+        let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas, currentIndex: 0, inTieMode: true)
         self.navigationController?.pushViewController(questionVC, animated: true)
     }
 }

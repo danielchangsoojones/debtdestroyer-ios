@@ -52,16 +52,20 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var yourAnswerHeading = UILabel()
     var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
-    private var competing_tie_users_count = 0
-    private let inTieMode: Bool
+    private var competing_tie_users_count: Int?
+    private var inTieMode = false
+    private var final_remaining_tie_spots = -1
+    private var won_users: [User] = []
+    private var lost_users: [User] = []
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
     
-    init(quizDatas: [QuizDataParse], currentIndex: Int, inTieMode: Bool) {
+    init(quizDatas: [QuizDataParse], currentIndex: Int, competing_tie_users_count: Int?, inTieMode: Bool) {
         self.quizDatas = quizDatas
         self.inTieMode = inTieMode
+        self.competing_tie_users_count = competing_tie_users_count
         self.currentIndex = currentIndex
         super.init(nibName: nil, bundle: nil)
     }
@@ -182,16 +186,71 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc private func startQuestionPromptControl() {
-        let quizManagerDataStore = CryptoSettingsDataStore()
-        quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
-                                            shouldStartQuestionPrompt: true,
-                                            currentIndex: nil,
-                                            currentQuizData: currentData) { _ in
-            //for the question prompt, we won't get to this completion.
+        if inTieMode {
+            dataStore.markQuizTieStatus(quizDatas: quizDatas,
+                                        shouldStartQuestionPrompt: true,
+                                        total_tie_slots: competing_tie_users_count ?? 0,
+                                        currentQuizData: currentData) { quizData, final_remaining_tie_spots, won_users, lost_users   in
+                //do nothing
+            }
+        } else {
+            let quizManagerDataStore = CryptoSettingsDataStore()
+            quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
+                                                shouldStartQuestionPrompt: true,
+                                                currentIndex: nil,
+                                                currentQuizData: currentData) { _ in
+                //for the question prompt, we won't get to this completion.
+            }
         }
     }
     
     @objc private func revealAnswerControl() {
+        if inTieMode {
+            dataStore.markQuizTieStatus(quizDatas: quizDatas,
+                                        shouldStartQuestionPrompt: false,
+                                        total_tie_slots: competing_tie_users_count ?? 0,
+                                        currentQuizData: currentData) { quizData, final_remaining_tie_spots, won_users, lost_users  in
+                self.final_remaining_tie_spots = final_remaining_tie_spots
+                self.lost_users = lost_users
+                self.won_users = won_users
+            }
+        } else {
+            if User.isAdminUser && !inTieMode {
+                if quizDatas.count == (currentIndex + 1) {
+                    
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alertView = SCLAlertView(appearance: appearance)
+                    
+                    alertView.addButton("Officially End Quiz") {
+                        self.dataStore.officiallyEndQuiz(for: self.currentData.quizTopic)
+                    }
+                    
+                    alertView.addButton("No") {
+                        
+                    }
+                    alertView.showNotice("", subTitle: "Would you like to officially end the quiz?")
+                }
+            }
+            
+            let now = Date()
+            if currentData.quizTopic.start_time > now {
+                //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
+                self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
+                self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
+                self.playVideoAnswer()
+            } else {
+                let quizManagerDataStore = CryptoSettingsDataStore()
+                quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
+                                                    shouldStartQuestionPrompt: false,
+                                                    currentIndex: currentIndex,
+                                                    currentQuizData: currentData) { quizTopic in
+                    self.competing_tie_users_count =  quizTopic.competing_tie_user_ids.count
+                }
+            }
+        }
+        
         if User.isAdminUser && !inTieMode {
             if quizDatas.count == (currentIndex + 1) {
                 
@@ -491,9 +550,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 return answerView.isChosen
             } ?? -1
             
-            dataStore.saveAnswer(for: currentData.quizTopic,
-                                 chosen_answer_index: selectedAnswerIndex,
-                                 quizData: currentData)
+            if inTieMode {
+                dataStore.saveTieAnswer(chosen_answer_index: selectedAnswerIndex,
+                                        quizData: currentData)
+            } else {
+                dataStore.saveAnswer(for: currentData.quizTopic,
+                                     chosen_answer_index: selectedAnswerIndex,
+                                     quizData: currentData)
+            }
         }
     }
     
@@ -541,26 +605,51 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 nextIndex = index
             }
             let isLastQuestion = !quizDatas.indices.contains(nextIndex)
-            if isLastQuestion {
+            
+            if inTieMode {
+                let hasWon = won_users.contains { user in
+                    return user.objectId == User.current()?.objectId
+                }
+                let hasLost = lost_users.contains { user in
+                    return user.objectId == User.current()?.objectId
+                }
+                if final_remaining_tie_spots == 0 || hasWon || hasLost {
+                    //the tiebreaker is over
+                    //or the users who won or lost go to the leaderboard
+                    self.popBackToLeaderboard()
+                } else  {
+                    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+                    let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
+                                                                          currentIndex: nextIndex,
+                                                                          competing_tie_users_count: competing_tie_users_count,
+                                                                          inTieMode: inTieMode)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            } else if isLastQuestion {
                 UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
                 UserDefaults.standard.synchronize()
-                let shouldGoTieBreaker = competing_tie_users_count > 0
+                let shouldGoTieBreaker = (competing_tie_users_count ?? 0) > 0
                 if shouldGoTieBreaker {
-                    let tiebreakerVC = TieBreakerViewController(competing_tie_users_count: competing_tie_users_count)
+                    let tiebreakerVC = TieBreakerViewController(competing_tie_users_count: competing_tie_users_count ?? 0)
                     self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
-                    //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
-                    let tabBarVC = presentingViewController as? UITabBarController
-                    tabBarVC?.selectedIndex = 1
-                    dismiss(animated: true)
+                    self.popBackToLeaderboard()
                 }
             } else {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                 let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                       currentIndex: nextIndex,
+                                                                      competing_tie_users_count: nil,
                                                                       inTieMode: inTieMode)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
+    }
+    
+    private func popBackToLeaderboard() {
+        //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+        let tabBarVC = presentingViewController as? UITabBarController
+        tabBarVC?.selectedIndex = 1
+        dismiss(animated: true)
     }
 }

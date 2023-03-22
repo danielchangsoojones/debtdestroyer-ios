@@ -174,6 +174,68 @@ class QuizDataStore {
             }
         }
     }
+    
+    func getTieQuizDatas(completion: @escaping ([QuizDataParse]) -> Void) {
+        let version_str = Helpers.getVersionStr()
+        let parameters: [String: Any] = ["app_version" : version_str ?? "", "deviceType": "ios"]
+        PFCloud.callFunction(inBackground: "getTieBreakerQuestions", withParameters: parameters) { (result, error) in
+            if let quizDatas = result as? [QuizDataParse] {
+                completion(quizDatas)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getTieQuizDatas")
+            }
+        }
+    }
+    
+    func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse, completion: @escaping (QuizDataParse, Int, [User], [User]) -> Void) {
+        let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
+                                          "quizDataID": currentQuizData.objectId ?? "",
+                                          "total_tie_slots": quizDatas.count
+        ]
+        
+        PFCloud.callFunction(inBackground: "markTieQuizStatus", withParameters: parameters) { (result, error) in
+            if let result = result, let dict = result as? Dictionary<String, Any> {
+                if shouldStartQuestionPrompt == true {
+                    BannerAlert.show(title: "", subtitle: "Question Prompt Shown Successfully!", type: .success)
+
+                } else {
+                    BannerAlert.show(title: "", subtitle: "Answer Reveled Successfully!", type: .success)
+                }
+                
+                if let quizData = dict["quizData"] as? QuizDataParse, let won_users = dict["won_users"] as? [User], let lost_users = dict["lost_users"] as? [User] {
+                    let json = JSON(result)
+                    let final_remaining_tie_spots = json["final_remaining_tie_spots"].intValue
+                    completion(quizData, final_remaining_tie_spots, won_users, lost_users)
+                } else {
+                    BannerAlert.show(title: "Error",
+                                     subtitle: "Could not find a quizData for the tiebreak",
+                                     type: .error)
+                }
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "markQuizStatus")
+            }
+        }
+    }
+    
+    func saveTieAnswer(chosen_answer_index: Int, quizData: QuizDataParse) {
+        let quizDataID = quizData.objectId ?? ""
+        
+        let parameters: [String : Any] = ["chosen_answer_index": chosen_answer_index,
+                                          "quizDataID": quizDataID]
+        PFCloud.callFunction(inBackground: "saveTieAnswer", withParameters: parameters) { (result, error) in
+            if result != nil {
+                print("the answer was saved for the user")
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
+            }
+        }
+    }
 
 
 }

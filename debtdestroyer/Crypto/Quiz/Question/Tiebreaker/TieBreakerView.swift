@@ -40,7 +40,7 @@ class TieBreakerView: UIView {
         descriptionLbl.numberOfLines = 0
         descriptionLbl.textAlignment = .center
         descriptionLbl.textColor = .black
-        descriptionLbl.font = UIFont.MontserratLight(size: 14)
+        descriptionLbl.font = UIFont.MontserratLight(size: 18)
         addSubview(descriptionLbl)
         descriptionLbl.snp.makeConstraints { make in
             make.top.equalTo(titleLbl.snp.bottom).offset(10)

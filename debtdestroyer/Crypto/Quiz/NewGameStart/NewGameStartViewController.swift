@@ -210,7 +210,7 @@ class NewGameStartViewController: UIViewController {
         
         let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                       currentIndex: quizStartIndex,
-                                                                      competing_tie_users_count: nil,
+                                                                      competing_tie_user_ids: [],
                                                                       inTieMode: false)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen

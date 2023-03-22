@@ -52,20 +52,20 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var yourAnswerHeading = UILabel()
     var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
-    private var competing_tie_users_count: Int?
     private var inTieMode = false
     private var final_remaining_tie_spots = -1
     private var won_users: [User] = []
     private var lost_users: [User] = []
+    private var competing_tie_user_ids: [String] = []
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
     
-    init(quizDatas: [QuizDataParse], currentIndex: Int, competing_tie_users_count: Int?, inTieMode: Bool) {
+    init(quizDatas: [QuizDataParse], currentIndex: Int, competing_tie_user_ids: [String], inTieMode: Bool) {
         self.quizDatas = quizDatas
         self.inTieMode = inTieMode
-        self.competing_tie_users_count = competing_tie_users_count
+        self.competing_tie_user_ids = competing_tie_user_ids
         self.currentIndex = currentIndex
         super.init(nibName: nil, bundle: nil)
     }
@@ -189,7 +189,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         if inTieMode {
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: true,
-                                        total_tie_slots: competing_tie_users_count ?? 0,
+                                        total_tie_slots: competing_tie_user_ids.count,
                                         currentQuizData: currentData) { quizData, final_remaining_tie_spots, won_users, lost_users   in
                 //do nothing
             }
@@ -208,7 +208,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         if inTieMode {
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: false,
-                                        total_tie_slots: competing_tie_users_count ?? 0,
+                                        total_tie_slots: competing_tie_user_ids.count,
                                         currentQuizData: currentData) { quizData, final_remaining_tie_spots, won_users, lost_users  in
                 self.final_remaining_tie_spots = final_remaining_tie_spots
                 self.lost_users = lost_users
@@ -246,7 +246,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                     shouldStartQuestionPrompt: false,
                                                     currentIndex: currentIndex,
                                                     currentQuizData: currentData) { quizTopic in
-                    self.competing_tie_users_count =  quizTopic.competing_tie_user_ids.count
+                    self.competing_tie_user_ids =  quizTopic.competing_tie_user_ids
                 }
             }
         }
@@ -340,13 +340,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                               currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer  in
+            dataStore.checkLiveQuizPosition(quizData: currentData) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer, competing_tie_user_ids   in
                 if !self.inTieMode {
                     self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 }
                 self.answer_video_url = answer_video_url
                 
                 if shouldRevealAnswer, let correct_answer_index = correct_answer_index {
+                    self.competing_tie_user_ids = competing_tie_user_ids
                     self.revealAnswer(with: correct_answer_index)
                 } else if let show_question_prompt_time = show_question_prompt_time {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
@@ -582,20 +583,20 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     //the tiebreaker is over
                     //or the users who won or lost go to the leaderboard
                     self.popBackToLeaderboard()
-                } else  {
+                } else {
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                     let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                           currentIndex: nextIndex,
-                                                                          competing_tie_users_count: competing_tie_users_count,
+                                                                          competing_tie_user_ids: competing_tie_user_ids,
                                                                           inTieMode: inTieMode)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             } else if isLastQuestion {
                 UserDefaults.standard.removeObject(forKey: "NoSoundBannerClosed")
                 UserDefaults.standard.synchronize()
-                let shouldGoTieBreaker = (competing_tie_users_count ?? 0) > 0
-                if shouldGoTieBreaker {
-                    let tiebreakerVC = TieBreakerViewController(competing_tie_users_count: competing_tie_users_count ?? 0)
+                let shouldGoTieBreaker = competing_tie_user_ids.contains(User.current()?.objectId ?? "")
+                if shouldGoTieBreaker || (User.isAdminUser && !competing_tie_user_ids.isEmpty){
+                    let tiebreakerVC = TieBreakerViewController(competing_tie_user_ids: competing_tie_user_ids)
                     self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
                     self.popBackToLeaderboard()
@@ -604,7 +605,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                 let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                       currentIndex: nextIndex,
-                                                                      competing_tie_users_count: nil,
+                                                                      competing_tie_user_ids: competing_tie_user_ids,
                                                                       inTieMode: inTieMode)
                 self.navigationController?.pushViewController(vc, animated: true)
             }

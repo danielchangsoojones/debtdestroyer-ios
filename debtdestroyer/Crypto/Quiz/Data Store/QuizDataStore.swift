@@ -10,7 +10,7 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
-    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Int?, Double, String?, String, Bool) -> Void) {
+    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Int?, Double, String?, String, Bool, [String]) -> Void) {
         let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? ""]
         PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
             if let result = result {
@@ -22,12 +22,16 @@ class QuizDataStore {
                 let current_quiz_data_id = json["current_quiz_data_id"].stringValue
                 let video_answer_url = json["video_answer_url"].string
                 let shouldRevealAnswer = json["should_reveal_answer"].boolValue
+                let competing_tie_user_ids: [String] = json["competing_tie_user_ids"].arrayValue.map { json in
+                    return json.stringValue
+                }
                 completion(show_question_prompt_time,
                            correct_answer_index,
                            current_time_seconds,
                            video_answer_url,
                            current_quiz_data_id,
-                           shouldRevealAnswer)
+                           shouldRevealAnswer,
+                           competing_tie_user_ids)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {

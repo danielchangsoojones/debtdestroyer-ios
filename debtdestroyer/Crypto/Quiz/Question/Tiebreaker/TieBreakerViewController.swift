@@ -11,11 +11,11 @@ class TieBreakerViewController: UIViewController {
     private var descriptionLbl: UILabel!
     private let dataStore = TieBreakerDataStore()
     private var quizDatas: [QuizDataParse] = []
-    private let competing_tie_users_count: Int
+    private let competing_tie_user_ids: [String]
     private var timer: Timer?
     
-    init(competing_tie_users_count: Int) {
-        self.competing_tie_users_count = competing_tie_users_count
+    init(competing_tie_user_ids: [String]) {
+        self.competing_tie_user_ids = competing_tie_user_ids
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,14 +48,14 @@ class TieBreakerViewController: UIViewController {
     private func loadData() {
         dataStore.getTieQuizDatas { quizDatas in
             self.quizDatas = quizDatas
-            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_users_count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 8 seconds. Get ready!"
+            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_user_ids.count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 8 seconds. Get ready!"
         }
     }
     
     private func segueIntoQuestionVC() {
         let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                       currentIndex: 0,
-                                                                      competing_tie_users_count: competing_tie_users_count,
+                                                                      competing_tie_user_ids: competing_tie_user_ids,
                                                                       inTieMode: true)
         self.navigationController?.pushViewController(questionVC, animated: true)
     }

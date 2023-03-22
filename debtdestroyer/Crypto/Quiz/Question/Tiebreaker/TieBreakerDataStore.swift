@@ -9,14 +9,14 @@ import Foundation
 import Parse
 
 class TieBreakerDataStore {
-    func getTiebreakerQuestions(completion: @escaping ([QuizDataParse]) -> Void) {
-        PFCloud.callFunction(inBackground: "getTiebreakerQuestions", withParameters: nil) { (results, error) in
-            if let quizDatas = results as? [QuizDataParse] {
+    func getTieQuizDatas(completion: @escaping ([QuizDataParse]) -> Void) {
+        PFCloud.callFunction(inBackground: "getTieBreakerQuestions", withParameters: [:]) { (result, error) in
+            if let quizDatas = result as? [QuizDataParse] {
                 completion(quizDatas)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
-                BannerAlert.showUnknownError(functionName: "getTiebreakerQuestions")
+                BannerAlert.showUnknownError(functionName: "getTieQuizDatas")
             }
         }
     }

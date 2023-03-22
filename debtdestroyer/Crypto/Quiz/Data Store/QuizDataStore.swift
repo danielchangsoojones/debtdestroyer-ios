@@ -175,20 +175,6 @@ class QuizDataStore {
         }
     }
     
-    func getTieQuizDatas(completion: @escaping ([QuizDataParse]) -> Void) {
-        let version_str = Helpers.getVersionStr()
-        let parameters: [String: Any] = ["app_version" : version_str ?? "", "deviceType": "ios"]
-        PFCloud.callFunction(inBackground: "getTieBreakerQuestions", withParameters: parameters) { (result, error) in
-            if let quizDatas = result as? [QuizDataParse] {
-                completion(quizDatas)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "getTieQuizDatas")
-            }
-        }
-    }
-    
     func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse, completion: @escaping (QuizDataParse, Int, [User], [User]) -> Void) {
         let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
                                           "quizDataID": currentQuizData.objectId ?? "",

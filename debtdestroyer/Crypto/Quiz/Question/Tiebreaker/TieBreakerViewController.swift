@@ -36,7 +36,7 @@ class TieBreakerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        timer = Timer(timeInterval: 10, repeats: false) { timer in
+        timer = Timer(timeInterval: 8, repeats: false) { timer in
             self.timer?.invalidate()
             self.segueIntoQuestionVC()
         }
@@ -44,9 +44,9 @@ class TieBreakerViewController: UIViewController {
     }
     
     private func loadData() {
-        dataStore.getTiebreakerQuestions { quizDatas in
+        dataStore.getTieQuizDatas { quizDatas in
             self.quizDatas = quizDatas
-            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_users_count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 10 seconds. Get ready!"
+            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_users_count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 8 seconds. Get ready!"
         }
     }
     

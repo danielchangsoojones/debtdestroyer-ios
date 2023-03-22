@@ -215,7 +215,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 self.won_users = won_users
             }
         } else {
-            if User.isAdminUser && !inTieMode {
+            if User.isAdminUser {
                 if quizDatas.count == (currentIndex + 1) {
                     
                     let appearance = SCLAlertView.SCLAppearance(
@@ -248,41 +248,6 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                     currentQuizData: currentData) { quizTopic in
                     self.competing_tie_users_count =  quizTopic.competing_tie_user_ids.count
                 }
-            }
-        }
-        
-        if User.isAdminUser && !inTieMode {
-            if quizDatas.count == (currentIndex + 1) {
-                
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                let alertView = SCLAlertView(appearance: appearance)
-                
-                alertView.addButton("Officially End Quiz") {
-                    self.dataStore.officiallyEndQuiz(for: self.currentData.quizTopic)
-                }
-                
-                alertView.addButton("No") {
-                    
-                }
-                alertView.showNotice("", subTitle: "Would you like to officially end the quiz?")
-            }
-        }
-        
-        let now = Date()
-        if currentData.quizTopic.start_time > now {
-            //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
-            self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
-            self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
-            self.playVideoAnswer()
-        } else {
-            let quizManagerDataStore = CryptoSettingsDataStore()
-            quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
-                                                shouldStartQuestionPrompt: false,
-                                                currentIndex: currentIndex,
-                                                currentQuizData: currentData) { quizTopic in
-                self.competing_tie_users_count =  quizTopic.competing_tie_user_ids.count
             }
         }
     }

@@ -578,7 +578,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 let hasLost = lost_users.contains { user in
                     return user.objectId == User.current()?.objectId
                 }
-                if final_remaining_tie_spots == 0 || hasWon || hasLost {
+                if final_remaining_tie_spots == 0 || hasWon || hasLost || isLastQuestion {
                     //the tiebreaker is over
                     //or the users who won or lost go to the leaderboard
                     self.popBackToLeaderboard()

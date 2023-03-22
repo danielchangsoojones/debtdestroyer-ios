@@ -36,11 +36,13 @@ class TieBreakerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        timer = Timer(timeInterval: 8, repeats: false) { timer in
-            self.timer?.invalidate()
-            self.segueIntoQuestionVC()
-        }
+        timer = Timer.scheduledTimer(timeInterval: 8.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
 //        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicStyle")
+    }
+    
+    @objc private func fireTimer() {
+        self.timer?.invalidate()
+        self.segueIntoQuestionVC()
     }
     
     private func loadData() {

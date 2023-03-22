@@ -190,7 +190,9 @@ class QuizDataStore {
                     BannerAlert.show(title: "", subtitle: "Answer Reveled Successfully!", type: .success)
                 }
                 
-                if let quizData = dict["quizData"] as? QuizDataParse, let won_users = dict["won_users"] as? [User], let lost_users = dict["lost_users"] as? [User] {
+                if let quizData = dict["quizData"] as? QuizDataParse {
+                    let won_users: [User] = (dict["won_users"] as? [User]) ?? []
+                    let lost_users: [User] = (dict["lost_users"] as? [User]) ?? []
                     let json = JSON(result)
                     let final_remaining_tie_spots = json["final_remaining_tie_spots"].intValue
                     completion(quizData, final_remaining_tie_spots, won_users, lost_users)

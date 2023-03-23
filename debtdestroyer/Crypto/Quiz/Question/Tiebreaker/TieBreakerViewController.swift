@@ -36,12 +36,15 @@ class TieBreakerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if User.isAdminUser {
+            loadData()
+        }
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
 //        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicStyle")
     }
     
     @objc private func fireTimer() {
-        if (count == 0 && User.isAdminUser) || count == 3 {
+        if count == 3 && !User.isAdminUser {
             loadData()
         } else if count == 7 {
             self.timer?.invalidate()

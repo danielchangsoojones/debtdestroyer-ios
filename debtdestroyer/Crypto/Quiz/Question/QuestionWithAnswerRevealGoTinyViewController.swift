@@ -53,7 +53,6 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var correctAnswerHeading = UILabel()
     private var helpButton = UIButton()
     private var inTieMode = false
-    private var final_remaining_tie_spots = -1
     private var won_user_ids: [String] = []
     private var lost_user_ids: [String] = []
     private var competing_tie_user_ids: [String] = []
@@ -191,17 +190,15 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: true,
                                         total_tie_slots: total_tie_spots ?? 0,
-                                        currentQuizData: currentData) { quizData, final_remaining_tie_spots   in
-                //do nothing
-            }
+                                        currentQuizData: currentData)
         } else {
             let quizManagerDataStore = CryptoSettingsDataStore()
             quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
                                                 shouldStartQuestionPrompt: true,
                                                 currentIndex: nil,
-                                                currentQuizData: currentData) { _ in
-                //for the question prompt, we won't get to this completion.
-            }
+                                                currentQuizData: currentData, completion: { _ in
+                
+            })
         }
     }
     
@@ -211,9 +208,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: false,
                                         total_tie_slots: total_tie_spots ?? 0,
-                                        currentQuizData: currentData) { quizData, final_remaining_tie_spots  in
-                self.final_remaining_tie_spots = final_remaining_tie_spots
-            }
+                                        currentQuizData: currentData)
         } else {
             if User.isAdminUser {
                 if quizDatas.count == (currentIndex + 1) {
@@ -579,7 +574,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             if inTieMode {
                 let hasWon = won_user_ids.contains(User.current()?.objectId ?? "")
                 let hasLost = lost_user_ids.contains(User.current()?.objectId ?? "")
-                if final_remaining_tie_spots == 0 || hasWon || hasLost || isLastQuestion {
+                
+                let hasOfficiallyEnded = won_user_ids.count == currentData.quizTopic.winner_tie_spots
+                if hasOfficiallyEnded || hasWon || hasLost || isLastQuestion {
                     //the tiebreaker is over
                     //or the users who won or lost go to the leaderboard
                     self.popBackToLeaderboard()

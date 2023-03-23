@@ -188,29 +188,18 @@ class QuizDataStore {
         }
     }
     
-    func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse, completion: @escaping (QuizDataParse, Int) -> Void) {
+    func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse) {
         let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
                                           "quizDataID": currentQuizData.objectId ?? "",
                                           "total_tie_slots": total_tie_slots
         ]
         
         PFCloud.callFunction(inBackground: "markTieQuizStatus", withParameters: parameters) { (result, error) in
-            if let result = result, let dict = result as? Dictionary<String, Any> {
+            if let _ = result {
                 if shouldStartQuestionPrompt == true {
                     BannerAlert.show(title: "", subtitle: "Question Prompt Shown Successfully!", type: .success)
-
                 } else {
                     BannerAlert.show(title: "", subtitle: "Answer Reveled Successfully!", type: .success)
-                }
-                
-                if let quizData = dict["quizData"] as? QuizDataParse {
-                    let json = JSON(result)
-                    let final_remaining_tie_spots = json["final_remaining_tie_spots"].intValue
-                    completion(quizData, final_remaining_tie_spots)
-                } else {
-                    BannerAlert.show(title: "Error",
-                                     subtitle: "Could not find a quizData for the tiebreak",
-                                     type: .error)
                 }
             } else if let error = error {
                 BannerAlert.show(with: error)

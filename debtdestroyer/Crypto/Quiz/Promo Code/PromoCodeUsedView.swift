@@ -62,6 +62,7 @@ class PromoCodeUsedView: UIView {
     
     private func setTableView() {
         addSubview(tableView)
+        tableView.separatorStyle = .none
         tableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(faqBtn.snp.bottom).offset(10)

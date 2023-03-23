@@ -37,7 +37,7 @@ class PromoCodeUsedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Your Promo"
+        self.title = "Invite Friends"
         loadData()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicStyle")
     }
@@ -80,16 +80,15 @@ extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegat
         return 50
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        
-        let label = UILabel()
-        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.text = "Your Invited Friends"
-        label.font = .systemFont(ofSize: 16)
-        label.textColor = .black
-        headerView.addSubview(label)
-        
-        return headerView
-    }
+//    Don't need a header
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+//        let label = UILabel()
+//        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
+//        label.text = "Your Invited Friends"
+//        label.font = .systemFont(ofSize: 16)
+//        label.textColor = .black
+//        headerView.addSubview(label)
+//        return headerView
+//    }
 }

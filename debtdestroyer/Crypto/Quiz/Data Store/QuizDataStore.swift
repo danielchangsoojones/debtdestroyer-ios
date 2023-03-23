@@ -10,8 +10,8 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
-    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Int?, Double, String?, String, Bool, [String]) -> Void) {
-        let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? ""]
+    func checkLiveQuizPosition(quizData: QuizDataParse, inTieMode: Bool, completion: @escaping (Date?, Int?, Double, String?, String, Bool, [String], [String], [String]) -> Void) {
+        let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? "", "isInTieMode": inTieMode]
         PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
             if let result = result {
                 let json = JSON(result)
@@ -25,13 +25,22 @@ class QuizDataStore {
                 let competing_tie_user_ids: [String] = json["competing_tie_user_ids"].arrayValue.map { json in
                     return json.stringValue
                 }
+                let won_array: [String] = json["won_tie_array"].arrayValue.map { json in
+                    return json.stringValue
+                }
+                let lost_array: [String] = json["lost_tie_array"].arrayValue.map { json in
+                    return json.stringValue
+                }
                 completion(show_question_prompt_time,
                            correct_answer_index,
                            current_time_seconds,
                            video_answer_url,
                            current_quiz_data_id,
                            shouldRevealAnswer,
-                           competing_tie_user_ids)
+                           competing_tie_user_ids,
+                           won_array,
+                           lost_array
+                )
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
@@ -179,7 +188,7 @@ class QuizDataStore {
         }
     }
     
-    func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse, completion: @escaping (QuizDataParse, Int, [User], [User]) -> Void) {
+    func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse, completion: @escaping (QuizDataParse, Int) -> Void) {
         let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
                                           "quizDataID": currentQuizData.objectId ?? "",
                                           "total_tie_slots": total_tie_slots
@@ -195,11 +204,9 @@ class QuizDataStore {
                 }
                 
                 if let quizData = dict["quizData"] as? QuizDataParse {
-                    let won_users: [User] = (dict["won_users"] as? [User]) ?? []
-                    let lost_users: [User] = (dict["lost_users"] as? [User]) ?? []
                     let json = JSON(result)
                     let final_remaining_tie_spots = json["final_remaining_tie_spots"].intValue
-                    completion(quizData, final_remaining_tie_spots, won_users, lost_users)
+                    completion(quizData, final_remaining_tie_spots)
                 } else {
                     BannerAlert.show(title: "Error",
                                      subtitle: "Could not find a quizData for the tiebreak",

@@ -169,6 +169,7 @@
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
 		92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB72972322200ED029D /* WaitlistViewController.swift */; };
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
+		C07369F229CD0B8800858D2E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F129CD0B8800858D2E /* Haptics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -340,6 +341,7 @@
 		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
+		C07369F129CD0B8800858D2E /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +402,7 @@
 				0AB3F58428BCEC4E0081758C /* Helper.swift */,
 				924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */,
 				92BAA62129B7FDC5008B3990 /* Notification.swift */,
+				C07369F129CD0B8800858D2E /* Haptics.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1222,6 +1225,7 @@
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				0A16A73F2937506000B2647B /* CryptoSettingsDataStore.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
+				C07369F229CD0B8800858D2E /* Haptics.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,

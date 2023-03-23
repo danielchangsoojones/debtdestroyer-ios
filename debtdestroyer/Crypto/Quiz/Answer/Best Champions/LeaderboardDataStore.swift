@@ -14,7 +14,7 @@ class LeaderboardDataStore {
         let user: User
         let total_time_str: String
         let points: Int
-        let tiePoints: Int?
+        let tieScore: Int?
     }
     
     func getFriendInvite(invitingPromo: String, completion: @escaping (User) -> Void) {
@@ -44,14 +44,14 @@ class LeaderboardDataStore {
                         let quizScore = QuizScore(user: user,
                                                   total_time_str: total_time_str,
                                                   points: points,
-                                                  tiePoints: tiePoints)
+                                                  tieScore: tiePoints)
                         return quizScore
                     } else {
                         //shouldn't reach here.
                         let quizScore = QuizScore(user: User(),
                                                   total_time_str: total_time_str,
                                                   points: points,
-                                                  tiePoints: 0)
+                                                  tieScore: 0)
                         return quizScore
                     }
                 }

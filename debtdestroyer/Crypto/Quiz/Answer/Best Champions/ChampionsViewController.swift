@@ -193,8 +193,8 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = name
         
         var points = String(quizScore.points)
-        if let tiePoints = quizScore.tiePoints {
-            points = points + "(tie: \(tiePoints)"
+        if let tieScore = quizScore.tieScore {
+            points = points + "(tie: \(tieScore))"
         }
         
         cell.pointsLabel.text = points

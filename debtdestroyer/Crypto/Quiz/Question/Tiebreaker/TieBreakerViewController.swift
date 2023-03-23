@@ -36,6 +36,7 @@ class TieBreakerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_user_ids.count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 8 seconds. Get ready!"
         if User.isAdminUser {
             loadData()
         }

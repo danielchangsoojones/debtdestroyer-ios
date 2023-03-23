@@ -171,6 +171,7 @@
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
 		C07369F229CD0B8800858D2E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F129CD0B8800858D2E /* Haptics.swift */; };
 		C07369F429CD0C0E00858D2E /* FriendContactParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F329CD0C0E00858D2E /* FriendContactParse.swift */; };
+		C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F629CD0E6700858D2E /* InviteContactCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -344,6 +345,7 @@
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
 		C07369F129CD0B8800858D2E /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		C07369F329CD0C0E00858D2E /* FriendContactParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendContactParse.swift; sourceTree = "<group>"; };
+		C07369F629CD0E6700858D2E /* InviteContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteContactCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +373,7 @@
 		0A0707AB29A7362D00684521 /* Promo Code */ = {
 			isa = PBXGroup;
 			children = (
+				C07369F529CD0E4900858D2E /* Cell */,
 				0A0707AC29A7366400684521 /* PromoCodeUsedViewController.swift */,
 				0A0707AE29A7367C00684521 /* PromoCodeUsedView.swift */,
 				925E650929B556F800BBF572 /* PromoDataStore.swift */,
@@ -1032,6 +1035,14 @@
 			path = Waitlist;
 			sourceTree = "<group>";
 		};
+		C07369F529CD0E4900858D2E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C07369F629CD0E6700858D2E /* InviteContactCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1232,6 +1243,7 @@
 				C07369F229CD0B8800858D2E /* Haptics.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */,
+				C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,

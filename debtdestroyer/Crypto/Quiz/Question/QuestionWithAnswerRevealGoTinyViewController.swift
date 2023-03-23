@@ -187,9 +187,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     @objc private func startQuestionPromptControl() {
         if inTieMode {
+            let total_tie_spots = quizDatas.first?.quizTopic.winner_tie_spots
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: true,
-                                        total_tie_slots: competing_tie_user_ids.count,
+                                        total_tie_slots: total_tie_spots ?? 0,
                                         currentQuizData: currentData) { quizData, final_remaining_tie_spots, won_users, lost_users   in
                 //do nothing
             }
@@ -206,9 +207,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     @objc private func revealAnswerControl() {
         if inTieMode {
+            let total_tie_spots = quizDatas.first?.quizTopic.winner_tie_spots
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: false,
-                                        total_tie_slots: competing_tie_user_ids.count,
+                                        total_tie_slots: total_tie_spots ?? 0,
                                         currentQuizData: currentData) { quizData, final_remaining_tie_spots, won_users, lost_users  in
                 self.final_remaining_tie_spots = final_remaining_tie_spots
                 self.lost_users = lost_users

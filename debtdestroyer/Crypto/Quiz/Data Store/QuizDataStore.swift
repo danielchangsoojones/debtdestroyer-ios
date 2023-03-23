@@ -182,7 +182,7 @@ class QuizDataStore {
     func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse, completion: @escaping (QuizDataParse, Int, [User], [User]) -> Void) {
         let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
                                           "quizDataID": currentQuizData.objectId ?? "",
-                                          "total_tie_slots": quizDatas.count
+                                          "total_tie_slots": total_tie_slots
         ]
         
         PFCloud.callFunction(inBackground: "markTieQuizStatus", withParameters: parameters) { (result, error) in

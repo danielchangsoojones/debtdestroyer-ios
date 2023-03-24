@@ -417,10 +417,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
                     }
                 } else {
-                    //stacking doesn't seem to do that much.
-                    Haptics.shared.play(.heavy)
-                    Haptics.shared.play(.medium)
-                    Haptics.shared.play(.heavy)
+                    doCorrectAnswerHaptic()
                     self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
                     yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
                     User.current()?.quizPointCounter += 1
@@ -439,6 +436,16 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         answerView.alpha = 0.0
                     }
                 }
+            }
+        }
+    }
+    
+    private func doCorrectAnswerHaptic() {
+        let hapticGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        let delays: [TimeInterval] = [0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.30]
+        for delay in delays {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                hapticGenerator.impactOccurred()
             }
         }
     }

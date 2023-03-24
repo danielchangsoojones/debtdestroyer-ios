@@ -141,9 +141,7 @@ class PromoCodeUsedViewController: UIViewController {
                     }
                 }
             } else {
-                print("Contacts access denied")
                 self.hasAccessPermission = false
-                self.theSpinnerContainer.isHidden = true
                 self.loadContacts()
                 if (self.retrievedContacts.count == 0) {
                     let alert = UIAlertController(title: "Contact Access Needed", message: "To invite friends, please update the contact access permissions in the Settings!", preferredStyle: .alert)

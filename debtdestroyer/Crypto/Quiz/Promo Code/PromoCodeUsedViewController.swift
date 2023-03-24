@@ -276,13 +276,6 @@ extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegat
             refreshControl.beginRefreshing()
             refreshData(refreshControl)
         }
-        
-        //hide & show nav bar accordingly
-//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-//            navigationController?.setNavigationBarHidden(true, animated: true)
-//        } else {
-//            navigationController?.setNavigationBarHidden(false, animated: true)
-//        }
     }
 }
 

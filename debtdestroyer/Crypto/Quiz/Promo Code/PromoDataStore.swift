@@ -62,15 +62,11 @@ class PromoDataStore {
             let firstName = contact.givenName
             let lastName = contact.familyName
             let phoneNumbers = contact.phoneNumbers.map { $0.value.stringValue }
-            let imageData = contact.thumbnailImageData
             
             var contactDict: [String: Any] = [:]
             contactDict["firstName"] = firstName
             contactDict["lastName"] = lastName
             contactDict["phoneNumbers"] = phoneNumbers
-            if let imageData = imageData {
-                contactDict["imageData"] = imageData.base64EncodedString()
-            }
             return contactDict
         }
         

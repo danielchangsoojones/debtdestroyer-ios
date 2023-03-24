@@ -124,7 +124,7 @@ class PromoCodeUsedViewController: UIViewController {
             if granted {
                 self.hasAccessPermission = granted
                 DispatchQueue.global(qos: .background).async {
-                    let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey, CNContactThumbnailImageDataKey]
+                    let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
                     let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
                     do {
                         try self.contactStore.enumerateContacts(with: request) { (contact, stop) in

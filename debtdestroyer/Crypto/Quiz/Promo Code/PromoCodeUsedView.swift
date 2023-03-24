@@ -12,6 +12,7 @@ class PromoCodeUsedView: UIView {
     let promoInfoLabel = UILabel()
     let tableView = UITableView()
     let faqBtn = UIButton()
+    var theSpinnerContainer: UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +21,7 @@ class PromoCodeUsedView: UIView {
         setPromoInfoLabel()
         setFaqButton()
         setTableView()
+        setLoadingSpinner()
     }
     
     required init?(coder: NSCoder) {
@@ -51,8 +53,9 @@ class PromoCodeUsedView: UIView {
     }
     
     private func setFaqButton() {
-        faqBtn.setTitle("See FAQ", for: .normal)
-        faqBtn.setTitleColor(.blue, for: .normal)
+        //TODO: What do we want the FAQ to do? Link to a Notion page? 
+//        faqBtn.setTitle("See FAQ", for: .normal)
+        faqBtn.setTitleColor(UIColor(red: 99/255, green: 180/255, blue: 239/255, alpha: 1), for: .normal)
         addSubview(faqBtn)
         faqBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -64,8 +67,16 @@ class PromoCodeUsedView: UIView {
         addSubview(tableView)
         tableView.separatorStyle = .none
         tableView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(faqBtn.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setLoadingSpinner() {
+        theSpinnerContainer = Helpers.showActivityIndicatory(in: tableView)
+        theSpinnerContainer.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 }

@@ -39,7 +39,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Application requires user’s location to offer more personalized trivia questions</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Enable contact permission to invite and play with friends</string>
+	<string>Enable contact permission to invite friends &amp; increase your chances of winning! </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

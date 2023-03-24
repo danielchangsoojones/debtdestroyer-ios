@@ -14,6 +14,7 @@ class LeaderboardDataStore {
         let user: User
         let total_time_str: String
         let points: Int
+        let tieScore: Int?
     }
     
     func getFriendInvite(invitingPromo: String, completion: @escaping (User) -> Void) {
@@ -38,16 +39,19 @@ class LeaderboardDataStore {
                 let quizScores: [QuizScore] = quizScoresJSON.map { quizScoreJSON in
                     let total_time_str = quizScoreJSON["total_time_str"].stringValue
                     let points = quizScoreJSON["points"].intValue
+                    let tiePoints = quizScoreJSON["tiePoints"].int
                     if let dict = quizScoreJSON.dictionaryObject, let user = dict["user"] as? User {
                         let quizScore = QuizScore(user: user,
                                                   total_time_str: total_time_str,
-                                                  points: points)
+                                                  points: points,
+                                                  tieScore: tiePoints)
                         return quizScore
                     } else {
                         //shouldn't reach here.
                         let quizScore = QuizScore(user: User(),
                                                   total_time_str: total_time_str,
-                                                  points: points)
+                                                  points: points,
+                                                  tieScore: 0)
                         return quizScore
                     }
                 }

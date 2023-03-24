@@ -63,8 +63,6 @@
 		0A59AD1028E19727001B774A /* QuizDataParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0D28E19727001B774A /* QuizDataParse.swift */; };
 		0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0E28E19727001B774A /* QuizTopicParse.swift */; };
 		0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */; };
-		0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1328E1B53E001B774A /* QuestionViewController.swift */; };
-		0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1528E1B562001B774A /* QuestionView.swift */; };
 		0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */; };
 		0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */; };
 		0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */; };
@@ -163,6 +161,9 @@
 		925BD26728A24E5F009303AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BD26628A24E5F009303AF /* User.swift */; };
 		925E650A29B556F800BBF572 /* PromoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E650929B556F800BBF572 /* PromoDataStore.swift */; };
 		928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */; };
+		92A4EA1329C591FD00A69995 /* TieBreakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4EA1229C591FD00A69995 /* TieBreakerViewController.swift */; };
+		92A4EA1529C5921000A69995 /* TieBreakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4EA1429C5921000A69995 /* TieBreakerView.swift */; };
+		92A4EA1729C5923500A69995 /* TieBreakerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4EA1629C5923500A69995 /* TieBreakerDataStore.swift */; };
 		92ABE18A299B40A3009384BF /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ABE189299B40A3009384BF /* ContactViewController.swift */; };
 		92BAA62229B7FDC5008B3990 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BAA62129B7FDC5008B3990 /* Notification.swift */; };
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
@@ -227,8 +228,6 @@
 		0A59AD0D28E19727001B774A /* QuizDataParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataParse.swift; sourceTree = "<group>"; };
 		0A59AD0E28E19727001B774A /* QuizTopicParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTopicParse.swift; sourceTree = "<group>"; };
 		0A59AD0F28E19727001B774A /* CryptoAddressParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoAddressParse.swift; sourceTree = "<group>"; };
-		0A59AD1328E1B53E001B774A /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		0A59AD1528E1B562001B774A /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressCountdownTimerView.swift; sourceTree = "<group>"; };
 		0A5B58F928A579B6001EFBB2 /* ForceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		0A5F2E5E28C228DE00F7D70D /* SubscriptionCurrentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCurrentView.swift; sourceTree = "<group>"; };
@@ -331,6 +330,9 @@
 		925BD26628A24E5F009303AF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		925E650929B556F800BBF572 /* PromoDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoDataStore.swift; sourceTree = "<group>"; };
 		928ADB4D2914CBA700E9390E /* ConnectAccountsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountsDataStore.swift; sourceTree = "<group>"; };
+		92A4EA1229C591FD00A69995 /* TieBreakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreakerViewController.swift; sourceTree = "<group>"; };
+		92A4EA1429C5921000A69995 /* TieBreakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreakerView.swift; sourceTree = "<group>"; };
+		92A4EA1629C5923500A69995 /* TieBreakerDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreakerDataStore.swift; sourceTree = "<group>"; };
 		92ABE189299B40A3009384BF /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		92BAA62129B7FDC5008B3990 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		92C8498E296CBAE40091422E /* VideoAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnswer.swift; sourceTree = "<group>"; };
@@ -637,8 +639,7 @@
 		0A59ACEC28E183F4001B774A /* Question */ = {
 			isa = PBXGroup;
 			children = (
-				0A59AD1528E1B562001B774A /* QuestionView.swift */,
-				0A59AD1328E1B53E001B774A /* QuestionViewController.swift */,
+				92A4EA1129C591E700A69995 /* Tiebreaker */,
 				0A15CD7A2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift */,
 				0A15CD7C2980F62300A7BCCE /* QuestionWithAnswerRevealGoTinyViewController.swift */,
 				0A59AD1728E1D575001B774A /* CircularProgressCountdownTimerView.swift */,
@@ -990,6 +991,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		92A4EA1129C591E700A69995 /* Tiebreaker */ = {
+			isa = PBXGroup;
+			children = (
+				92A4EA1229C591FD00A69995 /* TieBreakerViewController.swift */,
+				92A4EA1429C5921000A69995 /* TieBreakerView.swift */,
+				92A4EA1629C5923500A69995 /* TieBreakerDataStore.swift */,
+			);
+			path = Tiebreaker;
+			sourceTree = "<group>";
+		};
 		92C849902970A4470091422E /* Promo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1176,6 +1187,7 @@
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
 				0A11C82E289BBB9B00AEF89D /* RoundUpViewController.swift in Sources */,
+				92A4EA1329C591FD00A69995 /* TieBreakerViewController.swift in Sources */,
 				0AE126A9291A697D00E11003 /* ConnectDisclosureViewController.swift in Sources */,
 				925BD26528A24D2E009303AF /* Enviroment.swift in Sources */,
 				0A62525928FFF11A000F2EFD /* FullScreenVideoPlayerViewController.swift in Sources */,
@@ -1186,7 +1198,6 @@
 				92BAA62229B7FDC5008B3990 /* Notification.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
-				0A59AD1628E1B562001B774A /* QuestionView.swift in Sources */,
 				0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
 				0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */,
@@ -1195,6 +1206,7 @@
 				0A2E739F289BD96A006E67F9 /* SettingsViewController.swift in Sources */,
 				9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */,
 				0AACBBA42924F54D00575AEF /* EditProfileViewController.swift in Sources */,
+				92A4EA1529C5921000A69995 /* TieBreakerView.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* PromoViewController.swift in Sources */,
 				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
@@ -1261,7 +1273,6 @@
 				0A7A49FC28A3D262009EDE5E /* OnboardingDataStore.swift in Sources */,
 				0A7A49F728A388AD009EDE5E /* Structs.swift in Sources */,
 				0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */,
-				0A59AD1428E1B53E001B774A /* QuestionViewController.swift in Sources */,
 				0A15CD7B2980F60F00A7BCCE /* QuestionWithAnswerRevealGoTinyView.swift in Sources */,
 				0A4536DB28B8DA2000F4A8CA /* WeekPrizeCell.swift in Sources */,
 				0A59ACFD28E183F4001B774A /* CryptoSettingsViewController.swift in Sources */,
@@ -1289,6 +1300,7 @@
 				0AACBBA32924F54D00575AEF /* EditProfileView.swift in Sources */,
 				0A7A49EC28A386C6009EDE5E /* WelcomeView.swift in Sources */,
 				0A7A49F328A38746009EDE5E /* MessageHelper.swift in Sources */,
+				92A4EA1729C5923500A69995 /* TieBreakerDataStore.swift in Sources */,
 				0A7635B128C9A6D600316FD4 /* SubscriptionDataStore.swift in Sources */,
 				0AB50DCF28C08BA400F67857 /* DebtAccountsParse.swift in Sources */,
 			);
@@ -1439,13 +1451,14 @@
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We ask for location access to provide you with relevant rewards to your account";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Enable contact permission to invite and play with friends";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1479,13 +1492,14 @@
 				INFOPLIST_FILE = debtdestroyer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Debt Destroyer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We ask for location access to provide you with relevant rewards to your account";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Enable contact permission to invite and play with friends";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Application requires user’s location to offer more personalized trivia questions";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

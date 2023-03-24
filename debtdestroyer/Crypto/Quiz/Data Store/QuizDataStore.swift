@@ -10,8 +10,8 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
-    func checkLiveQuizPosition(quizData: QuizDataParse, completion: @escaping (Date?, Int?, Double, String?, String, Bool) -> Void) {
-        let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? ""]
+    func checkLiveQuizPosition(quizData: QuizDataParse, inTieMode: Bool, completion: @escaping (Date?, Int?, Double, String?, String, Bool, [String], [String], [String]) -> Void) {
+        let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? "", "isInTieMode": inTieMode]
         PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
             if let result = result {
                 let json = JSON(result)
@@ -22,12 +22,25 @@ class QuizDataStore {
                 let current_quiz_data_id = json["current_quiz_data_id"].stringValue
                 let video_answer_url = json["video_answer_url"].string
                 let shouldRevealAnswer = json["should_reveal_answer"].boolValue
+                let competing_tie_user_ids: [String] = json["competing_tie_user_ids"].arrayValue.map { json in
+                    return json.stringValue
+                }
+                let won_array: [String] = json["won_tie_array"].arrayValue.map { json in
+                    return json.stringValue
+                }
+                let lost_array: [String] = json["lost_tie_array"].arrayValue.map { json in
+                    return json.stringValue
+                }
                 completion(show_question_prompt_time,
                            correct_answer_index,
                            current_time_seconds,
                            video_answer_url,
                            current_quiz_data_id,
-                           shouldRevealAnswer)
+                           shouldRevealAnswer,
+                           competing_tie_user_ids,
+                           won_array,
+                           lost_array
+                )
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
@@ -171,6 +184,43 @@ class QuizDataStore {
                 BannerAlert.show(with: error)
             } else {
                 BannerAlert.showUnknownError(functionName: "officiallyEndQuiz")
+            }
+        }
+    }
+    
+    func markQuizTieStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, total_tie_slots: Int, currentQuizData: QuizDataParse) {
+        let parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
+                                          "quizDataID": currentQuizData.objectId ?? "",
+                                          "total_tie_slots": total_tie_slots
+        ]
+        
+        PFCloud.callFunction(inBackground: "markTieQuizStatus", withParameters: parameters) { (result, error) in
+            if let _ = result {
+                if shouldStartQuestionPrompt == true {
+                    BannerAlert.show(title: "", subtitle: "Question Prompt Shown Successfully!", type: .success)
+                } else {
+                    BannerAlert.show(title: "", subtitle: "Answer Reveled Successfully!", type: .success)
+                }
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "markQuizStatus")
+            }
+        }
+    }
+    
+    func saveTieAnswer(chosen_answer_index: Int, quizData: QuizDataParse) {
+        let quizDataID = quizData.objectId ?? ""
+        
+        let parameters: [String : Any] = ["chosen_answer_index": chosen_answer_index,
+                                          "quizDataID": quizDataID]
+        PFCloud.callFunction(inBackground: "saveTieAnswer", withParameters: parameters) { (result, error) in
+            if result != nil {
+                print("the answer was saved for the user")
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "shouldShowEarnings")
             }
         }
     }

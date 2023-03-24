@@ -10,9 +10,10 @@ import SwiftyJSON
 import Parse
 
 class CryptoSettingsDataStore {
-    func markQuizStatus(shouldStartQuestionPrompt: Bool, currentIndex: Int?, currentQuizData: QuizDataParse, completion: @escaping (Any?) -> Void) {
+    func markQuizStatus(quizDatas: [QuizDataParse], shouldStartQuestionPrompt: Bool, currentIndex: Int?, currentQuizData: QuizDataParse, completion: @escaping (QuizTopicParse) -> Void) {
         var parameters: [String : Any] = ["shouldStartQuestionPrompt" : shouldStartQuestionPrompt,
-                                          "quizDataID": currentQuizData.objectId ?? ""
+                                          "quizDataID": currentQuizData.objectId ?? "",
+                                          "quizDatas_length": quizDatas.count
         ]
         
         //is revealing answer
@@ -23,16 +24,16 @@ class CryptoSettingsDataStore {
         
         PFCloud.callFunction(inBackground: "markQuizStatus", withParameters: parameters) { (result, error) in
             if let result = result {
-                
                 if shouldStartQuestionPrompt == true {
                     BannerAlert.show(title: "", subtitle: "Question Prompt Shown Successfully!", type: .success)
 
                 } else {
                     BannerAlert.show(title: "", subtitle: "Answer Reveled Successfully!", type: .success)
                 }
-
-                let json = JSON(result)
-                completion(result)
+                
+                if let quizTopic = result as? QuizTopicParse {
+                    completion(quizTopic)
+                }
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {

@@ -103,6 +103,19 @@ class PromoCodeUsedViewController: UIViewController {
     }
     
     private func loadContacts() {
+        if (!hasAccessPermission && self.retrievedContacts.count == 0) {
+            let alert = UIAlertController(title: "Contact Access Needed", message: "To invite friends, please update the contact access permissions in the Settings!", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+                if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(settingsUrl)
+                }
+            }))
+
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         dataStore.loadFriendContacts(contacts: self.contacts) { promoUsers, personalPromo, promo_info_str, retrievedContacts in
             self.theSpinnerContainer.isHidden = true
             
@@ -130,7 +143,6 @@ class PromoCodeUsedViewController: UIViewController {
                         try self.contactStore.enumerateContacts(with: request) { (contact, stop) in
                             self.contacts.append(contact)
                         }
-                        // Handle the fetched contacts
                         DispatchQueue.main.async {
                             self.loadContacts()
                         }
@@ -142,18 +154,8 @@ class PromoCodeUsedViewController: UIViewController {
                 }
             } else {
                 self.hasAccessPermission = false
-                self.loadContacts()
-                if (self.retrievedContacts.count == 0) {
-                    let alert = UIAlertController(title: "Contact Access Needed", message: "To invite friends, please update the contact access permissions in the Settings!", preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-                        if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(settingsUrl)
-                        }
-                    }))
-                    
-                    self.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.loadContacts()
                 }
             }
         }

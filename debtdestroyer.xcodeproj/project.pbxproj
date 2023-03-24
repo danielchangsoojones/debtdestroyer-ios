@@ -169,6 +169,11 @@
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
 		92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB72972322200ED029D /* WaitlistViewController.swift */; };
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
+		C07369F229CD0B8800858D2E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F129CD0B8800858D2E /* Haptics.swift */; };
+		C07369F429CD0C0E00858D2E /* FriendContactParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F329CD0C0E00858D2E /* FriendContactParse.swift */; };
+		C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F629CD0E6700858D2E /* InviteContactCell.swift */; };
+		C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F829CD802400858D2E /* InviteHeaderCell.swift */; };
+		C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -340,6 +345,11 @@
 		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
+		C07369F129CD0B8800858D2E /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		C07369F329CD0C0E00858D2E /* FriendContactParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendContactParse.swift; sourceTree = "<group>"; };
+		C07369F629CD0E6700858D2E /* InviteContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteContactCell.swift; sourceTree = "<group>"; };
+		C07369F829CD802400858D2E /* InviteHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteHeaderCell.swift; sourceTree = "<group>"; };
+		C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteJoinedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +377,7 @@
 		0A0707AB29A7362D00684521 /* Promo Code */ = {
 			isa = PBXGroup;
 			children = (
+				C07369F529CD0E4900858D2E /* Cell */,
 				0A0707AC29A7366400684521 /* PromoCodeUsedViewController.swift */,
 				0A0707AE29A7367C00684521 /* PromoCodeUsedView.swift */,
 				925E650929B556F800BBF572 /* PromoDataStore.swift */,
@@ -400,6 +411,7 @@
 				0AB3F58428BCEC4E0081758C /* Helper.swift */,
 				924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */,
 				92BAA62129B7FDC5008B3990 /* Notification.swift */,
+				C07369F129CD0B8800858D2E /* Haptics.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -987,6 +999,7 @@
 				9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */,
 				92C8498E296CBAE40091422E /* VideoAnswer.swift */,
 				9249DC7729ABE89500E66170 /* ConfigurationParse.swift */,
+				C07369F329CD0C0E00858D2E /* FriendContactParse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1024,6 +1037,16 @@
 				92FF0EB92972323100ED029D /* WaitlistView.swift */,
 			);
 			path = Waitlist;
+			sourceTree = "<group>";
+		};
+		C07369F529CD0E4900858D2E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C07369F629CD0E6700858D2E /* InviteContactCell.swift */,
+				C07369F829CD802400858D2E /* InviteHeaderCell.swift */,
+				C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1175,6 +1198,7 @@
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
 				0A0707AF29A7367C00684521 /* PromoCodeUsedView.swift in Sources */,
+				C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */,
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */,
@@ -1195,6 +1219,7 @@
 				928ADB4E2914CBA700E9390E /* ConnectAccountsDataStore.swift in Sources */,
 				0A7A4A0928A3D5D5009EDE5E /* SpinningButton.swift in Sources */,
 				0A59AD0828E183F4001B774A /* ProvideFeedbackViewController.swift in Sources */,
+				C07369F429CD0C0E00858D2E /* FriendContactParse.swift in Sources */,
 				92BAA62229B7FDC5008B3990 /* Notification.swift in Sources */,
 				0AC23D3428ACE3B1006301DE /* SettingsDataStore.swift in Sources */,
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
@@ -1222,8 +1247,10 @@
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				0A16A73F2937506000B2647B /* CryptoSettingsDataStore.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
+				C07369F229CD0B8800858D2E /* Haptics.swift in Sources */,
 				925BD26728A24E5F009303AF /* User.swift in Sources */,
 				0A44EF9C28E59096006305B8 /* StartQuizView.swift in Sources */,
+				C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
@@ -1267,6 +1294,7 @@
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0A86D113299B9FE100C4A77E /* ReminderTextNotificationViewController.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
+				C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */,
 				0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */,
 				0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */,
 				0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */,

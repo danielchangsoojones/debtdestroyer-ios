@@ -417,6 +417,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
                     }
                 } else {
+                    doCorrectAnswerHaptic()
                     self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
                     yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
                     User.current()?.quizPointCounter += 1
@@ -435,6 +436,16 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         answerView.alpha = 0.0
                     }
                 }
+            }
+        }
+    }
+    
+    private func doCorrectAnswerHaptic() {
+        let hapticGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        let delays: [TimeInterval] = [0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.30]
+        for delay in delays {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                hapticGenerator.impactOccurred()
             }
         }
     }
@@ -548,6 +559,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        Haptics.shared.play(.heavy)
         self.answerStackView.isUserInteractionEnabled = false // added this line so user can answer once only. if immediadely clicked can select more
         for (index, answerView) in answerViews.enumerated() {
             if index == gesture.view?.tag {
@@ -597,6 +609,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
                     self.popBackToLeaderboard()
+                    //TODO: uncomment the following lines --> at the last question, land the user on the PromoCodeUsed. The user will be able to click on the skip button to land on the leaderboard
+//                    let promoVC = PromoCodeUsedViewController(shouldShowSkipBtn: true)
+//                    self.navigationController?.pushViewController(promoVC, animated: true)
                 }
             } else {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false

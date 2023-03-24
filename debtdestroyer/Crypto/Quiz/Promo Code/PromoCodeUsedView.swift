@@ -26,7 +26,7 @@ class PromoCodeUsedView: UIView {
         addSubview(tableView)
         tableView.separatorStyle = .none
         tableView.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview()
+            make.top.equalTo(self.snp.topMargin)
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
         }

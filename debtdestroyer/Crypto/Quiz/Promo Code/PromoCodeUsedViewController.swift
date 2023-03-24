@@ -96,8 +96,10 @@ class PromoCodeUsedViewController: UIViewController {
     
     @objc func skipPressed(_ sender: UIRefreshControl) {
         Haptics.shared.play(.light)
-        let championsVC = ChampionsViewController()
-        self.navigationController?.pushViewController(championsVC.self, animated: true)
+        //TODO: Will need to test if the screen will properly pop to show the leaderboard screen (we show this screen after the last question + offer a skip button)
+        let tabBarVC = presentingViewController as? UITabBarController
+        tabBarVC?.selectedIndex = 1
+        dismiss(animated: true)
     }
     
     private func loadContacts() {

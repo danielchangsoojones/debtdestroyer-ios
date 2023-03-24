@@ -600,6 +600,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
                     self.popBackToLeaderboard()
+                    //TODO: uncomment the following lines --> at the last question, land the user on the PromoCodeUsed. The user will be able to click on the skip button to land on the leaderboard
+//                    let promoVC = PromoCodeUsedViewController(shouldShowSkipBtn: true)
+//                    self.navigationController?.pushViewController(promoVC, animated: true)
                 }
             } else {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false

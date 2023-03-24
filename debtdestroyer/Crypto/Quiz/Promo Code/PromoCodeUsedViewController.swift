@@ -25,6 +25,7 @@ class PromoCodeUsedViewController: UIViewController {
     private var hasAccessPermission: Bool = false
     private var selectedContact: FriendContactParse? = nil
     private var theSpinnerContainer: UIView!
+    private var shouldShowSkipBtn: Bool!
     
     class PromoUser {
         let user: User
@@ -32,6 +33,15 @@ class PromoCodeUsedViewController: UIViewController {
         init(user: User) {
             self.user = user
         }
+    }
+    
+    init(shouldShowSkipBtn: Bool) {
+        self.shouldShowSkipBtn = shouldShowSkipBtn
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func loadView() {
@@ -56,15 +66,18 @@ class PromoCodeUsedViewController: UIViewController {
         messageHelper = MessageHelper(currentVC: self)
         messageHelper?.messageDelegate = self
         getContactAccess()
+        setSkipBtn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .black
         tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.tintColor = .white
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -72,6 +85,19 @@ class PromoCodeUsedViewController: UIViewController {
         loadContacts()
         Haptics.shared.play(.heavy)
         sender.endRefreshing()
+    }
+    
+    private func setSkipBtn() {
+        if shouldShowSkipBtn {
+            let skipBtn = UIBarButtonItem.init(title: "Skip", style: .done, target: self, action: #selector(skipPressed))
+            navigationItem.rightBarButtonItem = skipBtn
+        }
+    }
+    
+    @objc func skipPressed(_ sender: UIRefreshControl) {
+        Haptics.shared.play(.light)
+        let championsVC = ChampionsViewController()
+        self.navigationController?.pushViewController(championsVC.self, animated: true)
     }
     
     private func loadContacts() {

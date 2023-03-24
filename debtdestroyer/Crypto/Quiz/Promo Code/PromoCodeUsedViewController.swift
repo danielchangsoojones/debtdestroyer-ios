@@ -26,12 +26,27 @@ class PromoCodeUsedViewController: UIViewController {
     private var selectedContact: FriendContactParse? = nil
     private var theSpinnerContainer: UIView!
     private var shouldShowSkipBtn: Bool!
+    private var infoSections = [InfoSection]()
     
     class PromoUser {
         let user: User
         
         init(user: User) {
             self.user = user
+        }
+    }
+    
+    class InfoSection {
+        let title: String
+        let options: [String]
+        var isOpened: Bool = true
+        
+        init(title: String,
+             options: [String],
+             isOpened: Bool = true) {
+            self.title = title
+            self.options = options
+            self.isOpened = isOpened
         }
     }
     
@@ -57,7 +72,9 @@ class PromoCodeUsedViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(cellType: InviteHeaderCell.self)
         tableView.register(cellType: InviteContactCell.self)
+        tableView.register(cellType: InviteJoinedCell.self)
     }
     
     override func viewDidLoad() {
@@ -128,6 +145,12 @@ class PromoCodeUsedViewController: UIViewController {
             if self.hasAccessPermission {
                 self.retrievedContacts = retrievedContacts
             }
+            
+            self.infoSections = [
+                InfoSection(title: "Referred (\(promoUsers.count))", options: self.promoUsers.compactMap({ return "Cell \($0)" })),
+                InfoSection(title: "Invite Friends (\(retrievedContacts.count))", options: self.retrievedContacts.compactMap({ return "Cell \($0)" }))
+            ]
+            
             self.tableView.reloadData()
         }
     }
@@ -166,27 +189,55 @@ class PromoCodeUsedViewController: UIViewController {
 
 extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return infoSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return retrievedContacts.count
-//        return promoUsers.count
+        let infoSection = infoSections[section]
+        if infoSection.isOpened {
+            return infoSection.options.count + 1
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: InviteContactCell.self)
-        let rectrievedContact = retrievedContacts[indexPath.row]
-        let contact = rectrievedContact.contact
-        let overlapCount = rectrievedContact.count
-        cell.startTextAction = {
-            let contact = rectrievedContact.contact
-            self.selectedContact = contact
-            self.messageHelper?.text(contact.phoneNumber, body: self.inviteMsg)
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: InviteHeaderCell.self)
+            cell.set(label: infoSections[indexPath.section].title, isOpened: infoSections[indexPath.section].isOpened)
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            if indexPath.section == 0 {
+                //Showing joined friends
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: InviteJoinedCell.self)
+                let promoUser = promoUsers[indexPath.row - 1]
+                cell.set(name: promoUser.user.firstName + " " + promoUser.user.lastName, friendCount: 0)
+                cell.selectionStyle = .none
+                return cell
+            } else {
+                //Showing friends to invite
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: InviteContactCell.self)
+                let rectrievedContact = retrievedContacts[indexPath.row - 1]
+                let contact = rectrievedContact.contact
+                let overlapCount = rectrievedContact.count
+                cell.startTextAction = {
+                    let contact = rectrievedContact.contact
+                    self.selectedContact = contact
+                    self.messageHelper?.text(contact.phoneNumber, body: self.inviteMsg)
+                }
+                cell.set(name: contact.firstName + " " + contact.lastName, friendCount: overlapCount)
+                cell.selectionStyle = .none
+                return cell
+            }
         }
-        cell.set(name: contact.firstName + " " + contact.lastName, friendCount: overlapCount)
-        cell.selectionStyle = .none
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            infoSections[indexPath.section].isOpened = !infoSections[indexPath.section].isOpened
+            tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

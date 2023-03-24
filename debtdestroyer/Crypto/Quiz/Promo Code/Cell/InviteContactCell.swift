@@ -9,9 +9,9 @@ import UIKit
 import Reusable
 
 class InviteContactCell: UITableViewCell, Reusable {
-    private var titleLabel: UILabel!
-    private var subtitleLabel: UILabel!
-    private var textButton: UIButton!
+    var titleLabel: UILabel!
+    var subtitleLabel: UILabel!
+    var textButton: UIButton!
     var startTextAction: (() -> Void)? = nil
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -71,7 +71,7 @@ class InviteContactCell: UITableViewCell, Reusable {
         textButton.imageView?.contentMode = .scaleAspectFit
         textButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview()
         }
     }
     

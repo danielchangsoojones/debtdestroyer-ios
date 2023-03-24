@@ -172,6 +172,8 @@
 		C07369F229CD0B8800858D2E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F129CD0B8800858D2E /* Haptics.swift */; };
 		C07369F429CD0C0E00858D2E /* FriendContactParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F329CD0C0E00858D2E /* FriendContactParse.swift */; };
 		C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F629CD0E6700858D2E /* InviteContactCell.swift */; };
+		C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F829CD802400858D2E /* InviteHeaderCell.swift */; };
+		C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -346,6 +348,8 @@
 		C07369F129CD0B8800858D2E /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		C07369F329CD0C0E00858D2E /* FriendContactParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendContactParse.swift; sourceTree = "<group>"; };
 		C07369F629CD0E6700858D2E /* InviteContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteContactCell.swift; sourceTree = "<group>"; };
+		C07369F829CD802400858D2E /* InviteHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteHeaderCell.swift; sourceTree = "<group>"; };
+		C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteJoinedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1039,6 +1043,8 @@
 			isa = PBXGroup;
 			children = (
 				C07369F629CD0E6700858D2E /* InviteContactCell.swift */,
+				C07369F829CD802400858D2E /* InviteHeaderCell.swift */,
+				C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1192,6 +1198,7 @@
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
 				0A0707AF29A7367C00684521 /* PromoCodeUsedView.swift in Sources */,
+				C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */,
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
 				0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */,
@@ -1287,6 +1294,7 @@
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0A86D113299B9FE100C4A77E /* ReminderTextNotificationViewController.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,
+				C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */,
 				0A9E94A728B6577200985179 /* TransactionParse.swift in Sources */,
 				0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */,
 				0A432FA628B3816600C551FA /* TicketTopView.swift in Sources */,

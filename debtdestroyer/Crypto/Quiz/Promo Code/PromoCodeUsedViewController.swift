@@ -82,6 +82,7 @@ class PromoCodeUsedViewController: UIViewController {
         messageHelper?.messageDelegate = self
         getContactAccess()
         setSkipBtn()
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -286,6 +287,7 @@ extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegat
 
 extension PromoCodeUsedViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        infoSections[1].isOpened = searchText.isEmpty
         filteredRetrievedContacts = searchText.isEmpty ? retrievedContacts : retrievedContacts.filter({ (retrievedContact: RetrievedContact) -> Bool in
             let contactName = retrievedContact.contact.firstName + retrievedContact.contact.lastName
             return contactName.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil

@@ -32,7 +32,7 @@ class InviteContactCell: UITableViewCell, Reusable {
     private func setUpTitleLabel() {
         titleLabel = UILabel()
         titleLabel.font = .systemFont(ofSize: 20, weight: .regular)
-        titleLabel.textColor = .white
+        titleLabel.textColor = .black
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()

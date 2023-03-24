@@ -75,7 +75,9 @@ class ChampionsViewController: UIViewController {
         
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
-    
+        
+        let inviteBtn = UIBarButtonItem.init(title: "Invite", style: .done, target: self, action: #selector(invitePressed))
+        navigationItem.leftBarButtonItem = inviteBtn
     }
     
     @objc func segmentValueChanged(_ sender: AnyObject?){
@@ -90,6 +92,12 @@ class ChampionsViewController: UIViewController {
     @objc private func helpPressed() {
         messageHelper?.text(MessageHelper.customerServiceNum)
         //        shareOnTwitter()
+    }
+    
+    @objc private func invitePressed() {
+        Haptics.shared.play(.heavy)
+        let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
+        self.navigationController?.pushViewController(vc.self, animated: true)
     }
     
     private func shareOnTwitter() {

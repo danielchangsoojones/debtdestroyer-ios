@@ -13,6 +13,7 @@ class TieBreakerViewController: UIViewController {
     private var quizDatas: [QuizDataParse] = []
     private let competing_tie_user_ids: [String]
     private var timer: Timer?
+    private var count = 0
     
     init(competing_tie_user_ids: [String]) {
         self.competing_tie_user_ids = competing_tie_user_ids
@@ -35,20 +36,29 @@ class TieBreakerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
-        timer = Timer.scheduledTimer(timeInterval: 8.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
+        descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_user_ids.count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 8 seconds. Get ready!"
+        if User.isAdminUser {
+            loadData()
+        }
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
 //        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicStyle")
     }
     
     @objc private func fireTimer() {
-        self.timer?.invalidate()
-        self.segueIntoQuestionVC()
+        if count == 3 && !User.isAdminUser {
+            loadData()
+        } else if count == 7 {
+            self.timer?.invalidate()
+            self.segueIntoQuestionVC()
+        }
+        count = count + 1
     }
     
     private func loadData() {
         dataStore.getTieQuizDatas { quizDatas in
             self.quizDatas = quizDatas
-            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_user_ids.count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in 8 seconds. Get ready!"
+            let timerCount = 8 - self.count
+            self.descriptionLbl.text = "You tied for 5th place with \(self.competing_tie_user_ids.count) other people to win $10! Time to enter the tiebreaker round to decide the 5th place winner! Don't leave this screen - the tiebreaker round will automatically start in \(timerCount) seconds. Get ready!"
         }
     }
     

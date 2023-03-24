@@ -417,6 +417,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
                     }
                 } else {
+                    //stacking doesn't seem to do that much.
+                    Haptics.shared.play(.heavy)
+                    Haptics.shared.play(.medium)
+                    Haptics.shared.play(.heavy)
                     self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
                     yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)
                     User.current()?.quizPointCounter += 1
@@ -548,6 +552,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        Haptics.shared.play(.heavy)
         self.answerStackView.isUserInteractionEnabled = false // added this line so user can answer once only. if immediadely clicked can select more
         for (index, answerView) in answerViews.enumerated() {
             if index == gesture.view?.tag {

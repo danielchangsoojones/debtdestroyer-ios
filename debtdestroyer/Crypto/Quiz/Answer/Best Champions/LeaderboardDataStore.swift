@@ -9,6 +9,11 @@ import Foundation
 import Parse
 import SwiftyJSON
 
+struct WinnerInfo {
+    let user: User
+    let prizeWon: Double
+}
+
 class LeaderboardDataStore {
     struct QuizScore {
         let user: User
@@ -60,12 +65,20 @@ class LeaderboardDataStore {
         }
     }
     
-    func loadPastWinners(completion: @escaping ([WinnerParse]) -> Void) {
+    func loadPastWinners(completion: @escaping ([WinnerInfo], Double) -> Void) {
         PFCloud.callFunction(inBackground: "getPastWinners", withParameters: nil) { (result, error) in
-            if let winners = result  as? [WinnerParse]  {
-                completion(winners)
-            }
-            else if let error = error {
+            if let winnersDict = result as? [String: Any],
+               let winnersData = winnersDict["winners"] as? [[String: Any]],
+               let totalAmountWon = winnersDict["totalAmountWon"] as? Double
+            {
+                let winners = winnersData.compactMap { dict -> WinnerInfo? in
+                    guard let user = dict["user"] as? User, let amountWon = dict["amountWon"] as? Double else {
+                        return nil
+                    }
+                    return WinnerInfo(user: user, prizeWon: amountWon)
+                }
+                completion(winners, totalAmountWon)
+            } else if let error = error {
                 BannerAlert.show(with: error)
             } else {
                 BannerAlert.showUnknownError(functionName: "getPastWinners")

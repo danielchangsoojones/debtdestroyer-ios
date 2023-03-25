@@ -216,7 +216,12 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.nameLabel.text = name
             
-            cell.pointsLabel.text = String(quizScore.points)
+            var points = String(quizScore.points)
+            if let tieScore = quizScore.tieScore {
+                points = points + "(tie: \(tieScore))"
+            }
+            
+            cell.pointsLabel.text = points
             return cell
         } else {
             //past winners

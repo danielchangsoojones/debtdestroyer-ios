@@ -12,7 +12,7 @@ class ChampionsViewController: UIViewController {
     private var tableView: UITableView!
 //    private var quizTopic: QuizTopicParse?
     private var quizScores: [LeaderboardDataStore.QuizScore] = []
-    private var pastWinnersData: [WinnerParse] = []
+    private var pastWinnersData: [WinnerInfo] = []
     private let dataStore = LeaderboardDataStore()
 
     private var messageHelper: MessageHelper?
@@ -21,6 +21,7 @@ class ChampionsViewController: UIViewController {
     private var numberLabel = UILabel()
     private var nameLabel = UILabel()
     private var pointsLabel = UILabel()
+    private var totalAmountWon: Double = 0
     private var tweetText = String()
     private var timeLable = UILabel()
     private var toggleSegment = HBSegmentedControl()
@@ -75,21 +76,33 @@ class ChampionsViewController: UIViewController {
         
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
-    
+        
+        let inviteBtn = UIBarButtonItem.init(title: "Invite", style: .done, target: self, action: #selector(invitePressed))
+        navigationItem.leftBarButtonItem = inviteBtn
     }
     
     @objc func segmentValueChanged(_ sender: AnyObject?){
-        
+        Haptics.shared.play(.light)
         if toggleSegment.selectedIndex == 0 {
-            print("Leaderboard")
+            //shows leaderboard for the day
+            loadLeaderboard()
+            bottomView.isHidden = false
         } else {
-            print("Past Winners")
+            //shows past winners
+            loadWinnerLeaderboard()
+            bottomView.isHidden = true
         }
     }
     
     @objc private func helpPressed() {
         messageHelper?.text(MessageHelper.customerServiceNum)
         //        shareOnTwitter()
+    }
+    
+    @objc private func invitePressed() {
+        Haptics.shared.play(.heavy)
+        let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
+        self.navigationController?.pushViewController(vc.self, animated: true)
     }
     
     private func shareOnTwitter() {
@@ -165,55 +178,81 @@ class ChampionsViewController: UIViewController {
                 index += 1
             }
         }
-        
-//            dataStore.loadPastWinners { pastWinners in
-//                self.pastWinnersData = pastWinners
-//                //            self.tableView.reloadData()
-//            }
+    }
+    
+    private func loadWinnerLeaderboard() {
+        dataStore.loadPastWinners { pastWinners, totalAmountWon in
+            self.pastWinnersData = pastWinners
+            self.totalAmountWon = totalAmountWon
+            self.tableView.reloadData()
+        }
     }
 }
 
 extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quizScores.count
+        if toggleSegment.selectedIndex == 0 {
+            //leaderboard
+            return quizScores.count
+        } else {
+            //past winners
+            return pastWinnersData.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
-        let quizScore = quizScores[indexPath.row]
-        cell.numberLabel.text = String(indexPath.row + 1) + ". "
-        var name = quizScore.user.fullName.capitalized
-        let isInvitedUser = quizScore.user.promoCode == User.current()?.personalPromo
-        if User.isAdminUser {
-            name += " (\(quizScore.user.promoCode ?? "")))"
-        } else if let personalPromo = User.current()?.personalPromo, isInvitedUser {
-            name += " (\(personalPromo))"
+        if toggleSegment.selectedIndex == 0 {
+            //leaderboard
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
+            let quizScore = quizScores[indexPath.row]
+            cell.numberLabel.text = String(indexPath.row + 1) + ". "
+            var name = quizScore.user.fullName.capitalized
+            let isInvitedUser = quizScore.user.promoCode == User.current()?.personalPromo
+            if User.isAdminUser {
+                name += " (\(quizScore.user.promoCode ?? "")))"
+            } else if let personalPromo = User.current()?.personalPromo, isInvitedUser {
+                name += " (\(personalPromo))"
+            }
+            
+            cell.nameLabel.text = name
+            
+            var points = String(quizScore.points)
+            if let tieScore = quizScore.tieScore {
+                points = points + "(tie: \(tieScore))"
+            }
+            
+            cell.pointsLabel.text = points
+            return cell
+        } else {
+            //past winners
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LeaderboardTableCell.self)
+            let pastWinner = pastWinnersData[indexPath.row]
+            let name = pastWinner.user.fullName.capitalized
+            cell.numberLabel.text = String(indexPath.row + 1) + ". "
+            cell.nameLabel.text = name
+            cell.pointsLabel.text = numberToDollar(amount: pastWinner.prizeWon) 
+            return cell
         }
-        
-        cell.nameLabel.text = name
-        
-        var points = String(quizScore.points)
-        if let tieScore = quizScore.tieScore {
-            points = points + "(tie: \(tieScore))"
-        }
-        
-        cell.pointsLabel.text = points
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if User.isAdminUser || User.isSemiAdmin {
-            let quizScore = quizScores[indexPath.row]
-            let user = quizScore.user
-            let promoCode = user.promoCode
-            
-            if let promoCode = promoCode, !promoCode.isEmpty {
-                dataStore.getFriendInvite(invitingPromo: promoCode) { invitingUser in
-                    self.showPromoAlert(user: user, invitingUser: invitingUser)
+        if toggleSegment.selectedIndex == 0 {
+            //leaderboard
+            if User.isAdminUser || User.isSemiAdmin {
+                let quizScore = quizScores[indexPath.row]
+                let user = quizScore.user
+                let promoCode = user.promoCode
+                
+                if let promoCode = promoCode, !promoCode.isEmpty {
+                    dataStore.getFriendInvite(invitingPromo: promoCode) { invitingUser in
+                        self.showPromoAlert(user: user, invitingUser: invitingUser)
+                    }
+                } else {
+                    showPromoAlert(user: user, invitingUser: nil)
                 }
-            } else {
-                showPromoAlert(user: user, invitingUser: nil)
             }
+        } else {
+            //past winners -- no action 
         }
     }
     
@@ -249,15 +288,27 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         let headerView = LeaderboardTableCell()
         headerView.backgroundColor = .systemGray6
         headerView.numberLabel.text = ""
-        headerView.nameLabel.text = ""
-        headerView.pointsLabel.text = "Points"
+        headerView.nameLabel.text = toggleSegment.selectedIndex == 0 ? "" : numberToDollar(amount: totalAmountWon) + "\nTotal Debt Destroyed"
+        headerView.pointsLabel.text = toggleSegment.selectedIndex == 0 ? "Points" : ""
+        headerView.nameLabel.font = UIFont.MontserratSemiBold(size: 20)
+        headerView.nameLabel.textAlignment = .center
+        headerView.nameLabel.numberOfLines = 2
         headerView.pointsLabel.font = UIFont.MontserratSemiBold(size: 15)
-        
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
+        let height = toggleSegment.selectedIndex == 0 ? 70 : 100
+        return CGFloat(height)
+    }
+    
+    func numberToDollar(amount: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        let formattedAmount = formatter.string(from: NSNumber(value: amount)) ?? "$\(Int(amount))"
+        return formattedAmount
     }
 }
 

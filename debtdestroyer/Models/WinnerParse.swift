@@ -10,10 +10,9 @@ import Parse
 
 class WinnerParse: SuperParseObject, PFSubclassing {
     @NSManaged var user: User
-    @NSManaged var winning_date: String?
-    @NSManaged var amount_won_dollars: String?
-    @NSManaged var video: PFFileObject?
-    
+    @NSManaged var amountWon: Double
+    @NSManaged var quizTopic: QuizTopicParse
+
     class func parseClassName() -> String {
         return "Winner"
     }

@@ -139,7 +139,8 @@ class PromoCodeUsedViewController: UIViewController {
 //            let underlineAttributedString = NSAttributedString(string: personalPromo, attributes: underlineAttribute)
 //            self.promoAttributedText = underlineAttributedString
             self.promoInfoLabelText = promo_info_str
-            self.inviteMsg = "Yo, get this app & use my promo code '\(personalPromo)'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(User.current()?.firstName ?? "")&code=\(personalPromo)"
+            let currentUserName = (User.current()?.firstName ?? "").replacingOccurrences(of: " ", with: "")
+            self.inviteMsg = "Yo, get this app & use my promo code '\(personalPromo)'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(currentUserName)&code=\(personalPromo)"
             self.promoUsers = promoUsers
             if self.hasAccessPermission {
                 self.retrievedContacts = retrievedContacts
@@ -217,8 +218,9 @@ extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegat
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: InviteInfoCell.self)
             cell.startShareAction = {
                 Haptics.shared.play(.medium)
+                let currentUserName = (User.current()?.firstName ?? "").replacingOccurrences(of: " ", with: "")
                 let activityViewController = UIActivityViewController(
-                    activityItems: ["Yo, get this app & use my promo code '\(User.current()?.personalPromo ?? "")'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(User.current()?.firstName ?? "")&code=\(User.current()?.personalPromo ?? "")"],
+                    activityItems: ["Yo, get this app & use my promo code '\(User.current()?.personalPromo ?? "")'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(currentUserName)&code=\(User.current()?.personalPromo ?? "")"],
                     applicationActivities: nil
                 )
                   

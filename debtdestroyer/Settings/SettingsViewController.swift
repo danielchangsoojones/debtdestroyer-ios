@@ -84,7 +84,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.row == 2 || indexPath.row == 4 {
             // MARK: Contact Us
             // MARK: Leave Feedback
-            messageHelper?.text("3176905323", body: "")
+            messageHelper?.text(MessageHelper.customerServiceNum, body: "")
         } else if indexPath.row == 3 {
             // MARK: Legal Disclosures
             let vc = LegalDisclosuresViewController()

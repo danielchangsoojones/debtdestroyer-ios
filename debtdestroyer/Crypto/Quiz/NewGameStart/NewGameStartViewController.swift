@@ -53,6 +53,7 @@ class NewGameStartViewController: UIViewController {
         if User.isAdminUser || User.isIpadDemo {
             prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
         }
+        runAssignWebReferralCheck()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,6 +80,15 @@ class NewGameStartViewController: UIViewController {
         super.viewWillDisappear(animated)
         checkStartTimer.invalidate()
         timer.invalidate()
+    }
+    
+    private func runAssignWebReferralCheck() {
+        if User.current()?.promoCode == nil || User.current()?.promoCode == "" {
+            //for users who don't enter a promo code, we're checking if they signed up on another user's referral website but forgot to enter in their promo code in the onboarding flow
+            quizDataStore.assignWebReferral {
+                print("successfully ran assignWebReferral")
+            }
+        }
     }
     
     private func checkWaitlist() {

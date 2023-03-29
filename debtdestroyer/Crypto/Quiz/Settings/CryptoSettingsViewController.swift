@@ -140,7 +140,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             case .contactUs:
                 // MARK: Contact Us
                 // MARK: Leave Feedback
-                messageHelper?.text("3176905323", body: "")
+            messageHelper?.text(MessageHelper.customerServiceNum, body: "")
                 
             case .legaDisclosure:
                 let vc = LegalDisclosuresViewController()

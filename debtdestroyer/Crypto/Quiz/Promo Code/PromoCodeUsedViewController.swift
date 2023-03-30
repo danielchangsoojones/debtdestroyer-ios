@@ -26,6 +26,7 @@ class PromoCodeUsedViewController: UIViewController {
     private var selectedContact: FriendContactParse? = nil
     private var theSpinnerContainer: UIView!
     private var shouldShowSkipBtn: Bool!
+    private var shareButton: UIButton!
     private var infoSections = [InfoSection]()
     
     class PromoUser {
@@ -66,6 +67,8 @@ class PromoCodeUsedViewController: UIViewController {
         self.theSpinnerContainer = promoCodeView.theSpinnerContainer
         self.tableView = promoCodeView.tableView
         self.tableView.addSubview(refreshControl)
+        self.shareButton = promoCodeView.shareButton
+        shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         tableView.delegate = self
         tableView.dataSource = self
@@ -78,6 +81,7 @@ class PromoCodeUsedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Invite Friends"
+        navigationController?.navigationBar.topItem?.title = ""
         messageHelper = MessageHelper(currentVC: self)
         messageHelper?.messageDelegate = self
         getContactAccess()
@@ -102,6 +106,23 @@ class PromoCodeUsedViewController: UIViewController {
 //        loadContacts()
         Haptics.shared.play(.heavy)
         sender.endRefreshing()
+    }
+    
+    @objc private func shareButtonPressed() {
+        Haptics.shared.play(.medium)
+        let currentUserName = (User.current()?.firstName ?? "").replacingOccurrences(of: " ", with: "")
+        let activityViewController = UIActivityViewController(
+            activityItems: ["Yo, get this app & use my promo code '\(User.current()?.personalPromo ?? "")'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(currentUserName)&code=\(User.current()?.personalPromo ?? "")"],
+            applicationActivities: nil
+        )
+        
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = self.shareButton
+            popoverController.sourceRect = self.shareButton.bounds
+            popoverController.permittedArrowDirections = .any
+        }
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     private func setSkipBtn() {
@@ -214,24 +235,8 @@ extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            //Showing user's promo code
+            //Showing promo info (how it works) + search bar
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: InviteInfoCell.self)
-            cell.startShareAction = {
-                Haptics.shared.play(.medium)
-                let currentUserName = (User.current()?.firstName ?? "").replacingOccurrences(of: " ", with: "")
-                let activityViewController = UIActivityViewController(
-                    activityItems: ["Yo, get this app & use my promo code '\(User.current()?.personalPromo ?? "")'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(currentUserName)&code=\(User.current()?.personalPromo ?? "")"],
-                    applicationActivities: nil
-                )
-                  
-                  if let popoverController = activityViewController.popoverPresentationController {
-                      popoverController.sourceView = cell.shareButton
-                      popoverController.sourceRect = cell.shareButton.bounds
-                      popoverController.permittedArrowDirections = .any
-                  }
-                  
-                self.present(activityViewController, animated: true, completion: nil)
-            }
             cell.set(subtitle: promoInfoLabelText)
             cell.searchBar.delegate = self
             cell.selectionStyle = .none

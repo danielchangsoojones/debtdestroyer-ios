@@ -12,6 +12,7 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
     let numberLabel = UILabel()
     let nameLabel = UILabel()
     let pointsLabel = UILabel()
+    let winnerPhoto = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,11 +20,37 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
         setNumLabel()
         setNameLabel()
         setPointsLabel()
+        setPhoto()
         setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        winnerPhoto.isHidden = true
+//        winnerPhoto.snp.removeConstraints()
+//        winnerPhoto.removeFromSuperview()
+    }
+    
+    func addImg() {
+        nameLabel.snp.remakeConstraints { make in
+            make.leading.equalTo(numberLabel.snp.trailing).offset(5)
+            make.top.equalToSuperview().inset(20)
+            make.trailing.equalTo(pointsLabel.snp.leading).offset(5)
+            make.width.lessThanOrEqualToSuperview()
+            make.height.equalTo(40)
+        }
+        
+        winnerPhoto.isHidden = false
+        winnerPhoto.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(10)
+            make.height.equalTo(300)
+            make.top.equalTo(nameLabel.snp.bottom).offset(10)
+        }
     }
     
     private func setConstraints() {
@@ -69,5 +96,10 @@ class LeaderboardTableCell: UITableViewCell, Reusable {
         pointsLabel.textColor = .black
         pointsLabel.textAlignment = .center
         contentView.addSubview(pointsLabel)
+    }
+    
+    private func setPhoto() {
+        winnerPhoto.contentMode = .scaleAspectFit
+        contentView.addSubview(winnerPhoto)
     }
 }

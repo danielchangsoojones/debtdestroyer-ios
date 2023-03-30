@@ -230,7 +230,11 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
             let name = pastWinner.user.fullName.capitalized
             cell.numberLabel.text = String(indexPath.row + 1) + ". "
             cell.nameLabel.text = name
-            cell.pointsLabel.text = numberToDollar(amount: pastWinner.prizeWon) 
+            cell.pointsLabel.text = numberToDollar(amount: pastWinner.prizeWon)
+            if pastWinner.user.objectId == "KlcsxyBBZb" {
+                cell.winnerPhoto.image = UIImage(named: "winner_img")
+                cell.addImg()
+            }
             return cell
         }
     }
@@ -277,7 +281,7 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -101,7 +101,7 @@ class ChampionsView: UIView {
         numberLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
             make.centerY.equalTo(nameLabel)
-            make.width.equalTo(15)
+            make.width.equalTo(20)
         }
         
         pointsLabel.snp.makeConstraints { make in

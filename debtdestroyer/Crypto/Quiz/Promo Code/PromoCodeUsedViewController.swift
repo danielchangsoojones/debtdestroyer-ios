@@ -11,7 +11,7 @@ import MessageUI
 
 class PromoCodeUsedViewController: UIViewController {
     private let dataStore = PromoDataStore()
-    private var promoAttributedText: NSAttributedString!
+//    private var promoAttributedText: NSAttributedString!
     private var promoInfoLabelText: String!
     private var promoUsers: [PromoUser] = []
     private var tableView: UITableView!
@@ -135,11 +135,12 @@ class PromoCodeUsedViewController: UIViewController {
         
         dataStore.loadFriendContacts(contacts: self.contacts) { promoUsers, personalPromo, promo_info_str, retrievedContacts in
             self.theSpinnerContainer.isHidden = true
-            let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-            let underlineAttributedString = NSAttributedString(string: personalPromo, attributes: underlineAttribute)
-            self.promoAttributedText = underlineAttributedString
+//            let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+//            let underlineAttributedString = NSAttributedString(string: personalPromo, attributes: underlineAttribute)
+//            self.promoAttributedText = underlineAttributedString
             self.promoInfoLabelText = promo_info_str
-            self.inviteMsg = "Yo, get this app & use my promo code \(personalPromo)! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://apps.apple.com/us/app/debt-destroyed-live-trivia/id1639968618"
+            let currentUserName = (User.current()?.firstName ?? "").replacingOccurrences(of: " ", with: "")
+            self.inviteMsg = "Yo, get this app & use my promo code '\(personalPromo)'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(currentUserName)&code=\(personalPromo)"
             self.promoUsers = promoUsers
             if self.hasAccessPermission {
                 self.retrievedContacts = retrievedContacts
@@ -215,7 +216,23 @@ extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegat
         if indexPath.section == 0 {
             //Showing user's promo code
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: InviteInfoCell.self)
-            cell.set(title: promoAttributedText, subtitle: promoInfoLabelText)
+            cell.startShareAction = {
+                Haptics.shared.play(.medium)
+                let currentUserName = (User.current()?.firstName ?? "").replacingOccurrences(of: " ", with: "")
+                let activityViewController = UIActivityViewController(
+                    activityItems: ["Yo, get this app & use my promo code '\(User.current()?.personalPromo ?? "")'! There’s a 15 question trivia every day at 6PM Pacific Time and if you get all questions correct, you win $15,000!\n\nhttps://debt-destroyer-production.herokuapp.com/referral?name=\(currentUserName)&code=\(User.current()?.personalPromo ?? "")"],
+                    applicationActivities: nil
+                )
+                  
+                  if let popoverController = activityViewController.popoverPresentationController {
+                      popoverController.sourceView = cell.shareButton
+                      popoverController.sourceRect = cell.shareButton.bounds
+                      popoverController.permittedArrowDirections = .any
+                  }
+                  
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            cell.set(subtitle: promoInfoLabelText)
             cell.searchBar.delegate = self
             cell.selectionStyle = .none
             return cell

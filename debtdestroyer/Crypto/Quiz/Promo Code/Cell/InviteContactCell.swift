@@ -43,7 +43,7 @@ class InviteContactCell: UITableViewCell, Reusable {
     private func setUpSubtitleLabel() {
         subtitleLabel = UILabel()
         subtitleLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        subtitleLabel.textColor = UIColor(red: 99/255, green: 180/255, blue: 239/255, alpha: 1)
+        subtitleLabel.textColor = UIColor(red: 236/255, green: 91/255, blue: 46/255, alpha: 1)
         contentView.addSubview(subtitleLabel)
         subtitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(titleLabel)
@@ -64,7 +64,7 @@ class InviteContactCell: UITableViewCell, Reusable {
         textButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         textButton.layer.cornerRadius = 8
         textButton.setTitleColor(.white, for: .normal)
-        textButton.backgroundColor = UIColor(red: 99/255, green: 180/255, blue: 239/255, alpha: 1)
+        textButton.backgroundColor = UIColor(red: 236/255, green: 91/255, blue: 46/255, alpha: 1)
         textButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         textButton.addTarget(self, action: #selector(textButtonPressed), for: .touchUpInside)
         contentView.addSubview(textButton)

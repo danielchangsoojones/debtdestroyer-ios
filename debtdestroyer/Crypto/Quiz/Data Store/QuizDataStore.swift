@@ -225,5 +225,16 @@ class QuizDataStore {
         }
     }
 
-
+    
+    func assignWebReferral(completion: @escaping () -> Void) {
+        PFCloud.callFunction(inBackground: "assignWebReferral", withParameters: [:]) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "assignWebReferral")
+            }
+        }
+    }
 }

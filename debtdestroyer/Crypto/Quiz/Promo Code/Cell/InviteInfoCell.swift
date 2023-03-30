@@ -11,6 +11,7 @@ import Reusable
 class InviteInfoCell: UITableViewCell, Reusable {
     private var titleLabel: UILabel!
     private var promoInfoLabel: UILabel!
+    var shareButton: UIButton!
     var searchBar: UISearchBar!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,33 +29,33 @@ class InviteInfoCell: UITableViewCell, Reusable {
         super.prepareForReuse()
     }
     
-    func set(title: NSAttributedString, subtitle: String) {
-        titleLabel.attributedText = title
+    func set(subtitle: String) {
         promoInfoLabel.text = subtitle
     }
     
     private func setTitleLabel() {
         titleLabel = UILabel()
+        titleLabel.text = "How do referrals work?"
         titleLabel.numberOfLines = 1
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = .left
         titleLabel.textColor = .black
         titleLabel.font = UIFont.MontserratSemiBold(size: 25)
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(15)
         }
     }
     
     private func setPromoInfoLabel() {
         promoInfoLabel = UILabel()
         promoInfoLabel.numberOfLines = 0
-        promoInfoLabel.textAlignment = .center
+        promoInfoLabel.textAlignment = .left
         promoInfoLabel.textColor = .black
-        promoInfoLabel.font = UIFont.MontserratLight(size: 14)
+        promoInfoLabel.font = UIFont.MontserratMedium(size: 16)
         contentView.addSubview(promoInfoLabel)
         promoInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.trailing.equalTo(titleLabel)
         }
     }
@@ -65,8 +66,8 @@ class InviteInfoCell: UITableViewCell, Reusable {
         searchBar.placeholder = "Search friends"
         searchBar.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(promoInfoLabel.snp.bottom).offset(10)
-            make.bottom.equalToSuperview().inset(10)
+            make.top.equalTo(promoInfoLabel.snp.bottom).offset(20)
+            make.bottom.equalToSuperview().inset(15)
         }
     }
 }

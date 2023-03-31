@@ -66,8 +66,48 @@ class NewGameStartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
+        if InstagramStory.checkIfAppOnPhone() {
+            //TODO: add in time parameters. Should show once a day, and shouldnt' show if the user's clicked on share or dismiss. Shouldn't show when nearing game time.
+            showDailyBoostPopUp()
+        } else {
+            print("ig is not on phone")
+        }
     }
     
+    private func showDailyBoostPopUp() {
+        let dailyBoostVC = DailyBoostViewController()
+        dailyBoostVC.modalPresentationStyle = .custom
+        present(dailyBoostVC, animated: true, completion: {
+            dailyBoostVC.saveModalDismissed = {
+                print("share dismissed")
+            }
+            dailyBoostVC.saveSharePressed = {
+                self.shareOnIGStory()
+            }
+        })
+    }
+    
+    private func shareOnIGStory() {
+        Haptics.shared.play(.heavy)
+        if let imageFile = User.current()?.personalPromoImg {
+            imageFile.getDataInBackground { (data, error) in
+                if let imageData = data, let image = UIImage(data: imageData) {
+                    // Use the `image` object to share on Instagram
+                    if let data = image.pngData() {
+                        InstagramStory.sharePhoto(data: data) { bool, string in
+                            if (bool) {
+                                self.quizDataStore.saveSpecialReferral(socialType: "Instagram") {
+                                    print("successfully shared")
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print("Failed to get user's promo image for Daily Boost. Please take a screenshot and text it to 317-690-5323: \(error?.localizedDescription ?? "unknown error")")
+                }
+            }
+        }
+    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

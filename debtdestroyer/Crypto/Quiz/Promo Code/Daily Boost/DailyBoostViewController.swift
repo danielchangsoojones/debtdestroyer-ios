@@ -18,7 +18,7 @@ class DailyBoostViewController: UIViewController {
     private var valuePropStackView: UIStackView!
     private var titleLabel: UILabel!
     private var subtitleLabel: UILabel!
-    var saveDeclinedRide: (() -> Void)?
+    var saveModalDismissed: (() -> Void)?
     var saveSharePressed: (() -> Void)?
     
     override func viewDidLoad() {
@@ -204,7 +204,7 @@ class DailyBoostViewController: UIViewController {
     
     @objc func declineButtonPressed() {
         dismiss(animated: true, completion: nil)
-        saveDeclinedRide?()
+        saveModalDismissed?()
     }
     
     @objc func shareButtonPressed() {

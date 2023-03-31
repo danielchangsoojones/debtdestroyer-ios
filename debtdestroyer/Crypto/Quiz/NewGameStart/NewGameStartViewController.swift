@@ -30,6 +30,7 @@ class NewGameStartViewController: UIViewController {
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
     private var quizTopicID = ""
+    private var mux_playback_id: String?
     
     override func loadView() {
         super.loadView()
@@ -120,7 +121,6 @@ class NewGameStartViewController: UIViewController {
         playerLayer.frame = self.view.frame
         self.view.layer.insertSublayer(playerLayer, at: 0)
         playerLayer.player?.play()
-        
     }
     
     @objc private func addStartQuizBtn() {
@@ -164,6 +164,7 @@ class NewGameStartViewController: UIViewController {
             quizDataStore.getQuizData { result, error  in
                 if let quizDatas = result as? [QuizDataParse] {
                     self.quizDatas = quizDatas
+                    self.startPlayingGameHost(quizDatas: quizDatas)
                     self.checkIfStartQuiz()
                 } else if let error = error {
                     if error.localizedDescription.contains("error-force-update") {
@@ -180,6 +181,21 @@ class NewGameStartViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
+        if self.mux_playback_id != quizDatas.first?.quizTopic.mux_playback_id {
+            //hasn't set the playback id or it has changed on the backend
+            //or we have switched quizDatas
+            if let mux_playback_id = quizDatas.first?.quizTopic.mux_playback_id {
+                self.mux_playback_id = mux_playback_id
+                let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8")!
+                let playerItem = AVPlayerItem(url: url)
+                self.queuePlayer?.replaceCurrentItem(with: playerItem)
+            }
+        }
+        
+        
     }
     
     private func checkIfStartQuiz() {

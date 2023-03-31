@@ -20,6 +20,19 @@ class DailyBoostViewController: UIViewController {
     private var subtitleLabel: UILabel!
     var saveModalDismissed: (() -> Void)?
     var saveSharePressed: (() -> Void)?
+    private var titleLabelText: String
+    private var valuePropsText: [String]
+    
+    init(titleLabelText: String, valuePropsText: [String]) {
+        self.titleLabelText = titleLabelText
+        self.valuePropsText = valuePropsText
+        super.init(nibName: nil, bundle: nil)
+        transitioningDelegate = self
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +87,7 @@ class DailyBoostViewController: UIViewController {
     private func setupShareButton() {
         if let image = UIImage(named: "instagram_icon") {
             shareButton = UIButton()
-            shareButton.setTitle("Share for 2X Boost", for: .normal)
+            shareButton.setTitle("Share for Boost", for: .normal)
             shareButton.setTitleColor(UIColor(red: 223/255, green: 0/255, blue: 181/255, alpha: 1), for: .normal)
             shareButton.backgroundColor = .white
             shareButton.layer.cornerRadius = 30
@@ -106,15 +119,23 @@ class DailyBoostViewController: UIViewController {
             make.leading.trailing.equalTo(shareButton)
             make.bottom.equalTo(shareButton.snp.top).offset(-20)
         }
-        setupStackContent()
+        setupStackContent(valuePropsText: valuePropsText)
     }
     
-    private func setupStackContent() {
-        let valuePropOneView = createValueProp(number: "1", value: "Share your promo code to 2X your Top 5 Prize to $20 today! 🎉")
-        let valuePropTwoView = createValueProp(number: "2", value: "Your referred friends also get a 2X boost in today’s Top 5 prize! 🤑")
-        valuePropStackView.addArrangedSubview(valuePropOneView)
-        valuePropStackView.addArrangedSubview(valuePropTwoView)
+//    private func setupStackContent() {
+//        let valuePropOneView = createValueProp(number: "1", value: "Share your promo code to 2X your Top 5 Prize to $20 today! 🎉")
+//        let valuePropTwoView = createValueProp(number: "2", value: "Your referred friends also get a 2X boost in today’s Top 5 prize! 🤑")
+//        valuePropStackView.addArrangedSubview(valuePropOneView)
+//        valuePropStackView.addArrangedSubview(valuePropTwoView)
+//    }
+    
+    private func setupStackContent(valuePropsText: [String]) {
+        for (index, value) in valuePropsText.enumerated() {
+            let valuePropView = createValueProp(number: "\(index + 1)", value: value)
+            valuePropStackView.addArrangedSubview(valuePropView)
+        }
     }
+
     
     private func createValueProp(number: String, value: String) -> UIView {
         let valuePropView = UIView()
@@ -144,19 +165,19 @@ class DailyBoostViewController: UIViewController {
             make.leading.equalTo(numberButton.snp.trailing).offset(15)
             make.bottom.equalToSuperview()
         }
-        
-        let blueColor = UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1)
-        if number == "1" {
-            let attributedString = NSMutableAttributedString(string: value)
-            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: blueColor, range: NSRange(location: 24, length: 34))
-            valueLabel.attributedText = attributedString
-        } else if number == "2" {
-            let attributedString = NSMutableAttributedString(string: value)
-            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: blueColor, range: NSRange(location: 33, length: 32))
-            valueLabel.attributedText = attributedString
-        } else {
-            valueLabel.text = value
-        }
+        valueLabel.text = value
+//        let blueColor = UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1)
+//        if number == "1" {
+//            let attributedString = NSMutableAttributedString(string: value)
+//            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: blueColor, range: NSRange(location: 24, length: 34))
+//            valueLabel.attributedText = attributedString
+//        } else if number == "2" {
+//            let attributedString = NSMutableAttributedString(string: value)
+//            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: blueColor, range: NSRange(location: 33, length: 32))
+//            valueLabel.attributedText = attributedString
+//        } else {
+//            valueLabel.text = value
+//        }
         
         return valuePropView
     }
@@ -175,12 +196,13 @@ class DailyBoostViewController: UIViewController {
         }
     
         titleLabel = UILabel()
-        titleLabel.text = "2X Top 5 Prize"
+        titleLabel.text = titleLabelText
+        titleLabel.textColor = .white
         titleLabel.numberOfLines = 1
         titleLabel.font = .systemFont(ofSize: 30, weight: .semibold)
-        let attributedString = NSMutableAttributedString(string: "2X ", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .semibold)])
-        attributedString.append(NSAttributedString(string: "Top 5 Prize", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .semibold)]))
-        titleLabel.attributedText = attributedString
+//        let attributedString = NSMutableAttributedString(string: "2X ", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .semibold)])
+//        attributedString.append(NSAttributedString(string: "Top 5 Prize", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .semibold)]))
+//        titleLabel.attributedText = attributedString
         titleLabel.textAlignment = .center
         boostView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in

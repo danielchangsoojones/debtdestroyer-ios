@@ -68,14 +68,14 @@ class NewGameStartViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
         if InstagramStory.checkIfAppOnPhone() {
             //TODO: add in time parameters. Should show once a day, and shouldnt' show if the user's clicked on share or dismiss. Shouldn't show when nearing game time.
-            showDailyBoostPopUp()
-        } else {
-            print("ig is not on phone")
+            self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
+                self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+            }
         }
     }
     
-    private func showDailyBoostPopUp() {
-        let dailyBoostVC = DailyBoostViewController()
+    private func showDailyBoostPopUp(titleLabelText: String, valuePropsText: [String]) {
+        let dailyBoostVC = DailyBoostViewController(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
         dailyBoostVC.modalPresentationStyle = .custom
         present(dailyBoostVC, animated: true, completion: {
             dailyBoostVC.saveModalDismissed = {
@@ -83,6 +83,9 @@ class NewGameStartViewController: UIViewController {
             }
             dailyBoostVC.saveSharePressed = {
                 self.shareOnIGStory()
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram") {
+                    print("successfully shared")
+                }
             }
         })
     }
@@ -95,11 +98,7 @@ class NewGameStartViewController: UIViewController {
                     // Use the `image` object to share on Instagram
                     if let data = image.pngData() {
                         InstagramStory.sharePhoto(data: data) { bool, string in
-                            if (bool) {
-                                self.quizDataStore.saveSpecialReferral(socialType: "Instagram") {
-                                    print("successfully shared")
-                                }
-                            }
+                            //user clicked share, but we really don't have a way to check unless we tell the user to tag us or we check it ourselves
                         }
                     }
                 } else {

@@ -169,6 +169,8 @@
 		92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8498E296CBAE40091422E /* VideoAnswer.swift */; };
 		92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB72972322200ED029D /* WaitlistViewController.swift */; };
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
+		C008877E29D5580C00FDF7E0 /* InstagramStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008877D29D5580C00FDF7E0 /* InstagramStory.swift */; };
+		C008878129D67A7D00FDF7E0 /* DailyBoostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008878029D67A7D00FDF7E0 /* DailyBoostViewController.swift */; };
 		C0374BCD29CE5C4200D40E78 /* InviteInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0374BCC29CE5C4200D40E78 /* InviteInfoCell.swift */; };
 		C07369F229CD0B8800858D2E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F129CD0B8800858D2E /* Haptics.swift */; };
 		C07369F429CD0C0E00858D2E /* FriendContactParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F329CD0C0E00858D2E /* FriendContactParse.swift */; };
@@ -346,6 +348,8 @@
 		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
 		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
 		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
+		C008877D29D5580C00FDF7E0 /* InstagramStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramStory.swift; sourceTree = "<group>"; };
+		C008878029D67A7D00FDF7E0 /* DailyBoostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoostViewController.swift; sourceTree = "<group>"; };
 		C0374BCC29CE5C4200D40E78 /* InviteInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteInfoCell.swift; sourceTree = "<group>"; };
 		C07369F129CD0B8800858D2E /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		C07369F329CD0C0E00858D2E /* FriendContactParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendContactParse.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 		0A0707AB29A7362D00684521 /* Promo Code */ = {
 			isa = PBXGroup;
 			children = (
+				C008877F29D679B800FDF7E0 /* Daily Boost */,
+				C008877C29D557FA00FDF7E0 /* Share on Social */,
 				C07369F529CD0E4900858D2E /* Cell */,
 				0A0707AC29A7366400684521 /* PromoCodeUsedViewController.swift */,
 				0A0707AE29A7367C00684521 /* PromoCodeUsedView.swift */,
@@ -1041,6 +1047,22 @@
 			path = Waitlist;
 			sourceTree = "<group>";
 		};
+		C008877C29D557FA00FDF7E0 /* Share on Social */ = {
+			isa = PBXGroup;
+			children = (
+				C008877D29D5580C00FDF7E0 /* InstagramStory.swift */,
+			);
+			path = "Share on Social";
+			sourceTree = "<group>";
+		};
+		C008877F29D679B800FDF7E0 /* Daily Boost */ = {
+			isa = PBXGroup;
+			children = (
+				C008878029D67A7D00FDF7E0 /* DailyBoostViewController.swift */,
+			);
+			path = "Daily Boost";
+			sourceTree = "<group>";
+		};
 		C07369F529CD0E4900858D2E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1237,6 +1259,7 @@
 				92A4EA1529C5921000A69995 /* TieBreakerView.swift in Sources */,
 				0A1A638028A6592200EFCC4D /* ViewExtension.swift in Sources */,
 				0A59AD0B28E183F4001B774A /* PromoViewController.swift in Sources */,
+				C008878129D67A7D00FDF7E0 /* DailyBoostViewController.swift in Sources */,
 				9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */,
 				0A6D54AC28FEA48F000A8238 /* WinnersViewController.swift in Sources */,
 				0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */,
@@ -1256,6 +1279,7 @@
 				C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
+				C008877E29D5580C00FDF7E0 /* InstagramStory.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
 				0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */,
 				0A4536DD28B8DC6E00F4A8CA /* HowToEarnTicketsCell.swift in Sources */,

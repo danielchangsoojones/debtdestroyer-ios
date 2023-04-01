@@ -57,7 +57,7 @@ class NewGameStartViewController: UIViewController {
             prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
         }
         runAssignWebReferralCheck()
-        cleanupDailyBoostShownOnDates()
+        cleanupDailyBoostUserDefaults()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,40 +65,36 @@ class NewGameStartViewController: UIViewController {
         checkWaitlist()
         addStartQuizBtn()
         showGameReminderPopUp()
-        runDailyBoostCheck()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
-        
+        if (quizTopicID != "") {
+            runDailyBoostCheck()
+        }
     }
 
     private func runDailyBoostCheck() {
+        //we only want to show this pop up for users who have IG on their phone, hasn't shared for upcoming quiz yet, and if it's more than 2 min or less than 23 hrs before the start of the next game
         let hasUserAlreadySeenBoost = getDailyBoostVisibility()
-        if InstagramStory.checkIfAppOnPhone() && hasUserAlreadySeenBoost {
-            //TODO: add in time parameters. Should show once a day, and shouldnt' show if the user's clicked on share or dismiss. Shouldn't show when nearing game time.
+        if InstagramStory.checkIfAppOnPhone() && hasUserAlreadySeenBoost && timeLeft > 120 && timeLeft < 72000 {
             self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
                 self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
             }
         }
     }
     
-    func cleanupDailyBoostShownOnDates() {
-        let calendar = Calendar.current
-        var components = DateComponents()
-        components.day = -maxStoredDays
-        let maxStoredDate = calendar.date(byAdding: components, to: Date())!
-        var shownOnDates = UserDefaults.standard.array(forKey: dailyBoostKey) as? [Date] ?? []
-        shownOnDates = shownOnDates.filter { $0 >= maxStoredDate }
-        UserDefaults.standard.set(shownOnDates, forKey: dailyBoostKey)
+    func cleanupDailyBoostUserDefaults() {
+        var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
+        shownOnQuizTopics = shownOnQuizTopics.suffix(2)
+        UserDefaults.standard.set(shownOnQuizTopics, forKey: dailyBoostKey)
     }
     
     private func getDailyBoostVisibility() -> Bool {
         // Check UserDefaults to see if the DailyBoostViewController should be shown
-        let shownOnDates = UserDefaults.standard.array(forKey: dailyBoostKey) as? [Date] ?? []
-        let currentDate = Date()
-        if let lastShownDate = shownOnDates.last, Calendar.current.isDate(lastShownDate, inSameDayAs: currentDate) {
+        let shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
+        if shownOnQuizTopics.contains(quizTopicID) {
             // Do not show the DailyBoostViewController
             return false
         } else {
@@ -108,20 +104,19 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func showDailyBoostPopUp(titleLabelText: String, valuePropsText: [String]) {
-        var shownOnDates = UserDefaults.standard.array(forKey: dailyBoostKey) as? [Date] ?? []
-        let currentDate = Date()
+        var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
         let dailyBoostVC = DailyBoostViewController(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
         dailyBoostVC.modalPresentationStyle = .custom
         present(dailyBoostVC, animated: true, completion: {
             dailyBoostVC.saveModalDismissed = {
-                shownOnDates.append(currentDate)
-                UserDefaults.standard.set(shownOnDates, forKey: self.dailyBoostKey)
+                shownOnQuizTopics.append(self.quizTopicID)
+                UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
             }
             dailyBoostVC.saveSharePressed = {
                 self.shareOnIGStory()
                 self.quizDataStore.saveSpecialReferral(socialType: "Instagram") {
-                    shownOnDates.append(currentDate)
-                    UserDefaults.standard.set(shownOnDates, forKey: self.dailyBoostKey)
+                    shownOnQuizTopics.append(self.quizTopicID)
+                    UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
                 }
             }
         })

@@ -30,6 +30,10 @@ class NewGameStartViewController: UIViewController {
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
     private var quizTopicID = ""
+    //visibility conditions for daily boost VC
+    private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
+    private let dailyBoostKey = "dailyBoostShownOn" // UserDefaults key for storing dates
+    private var shouldCheckForDailyBoost = true
     
     override func loadView() {
         super.loadView()
@@ -54,6 +58,7 @@ class NewGameStartViewController: UIViewController {
             prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
         }
         runAssignWebReferralCheck()
+        updateDailyBoostUserDefaults()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,7 +72,75 @@ class NewGameStartViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
     }
+
+    func updateDailyBoostUserDefaults() {
+        var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
+        shownOnQuizTopics = shownOnQuizTopics.suffix(2)
+//        shownOnQuizTopics = []
+        UserDefaults.standard.set(shownOnQuizTopics, forKey: dailyBoostKey)
+    }
     
+    private func showDailyBoostPopUpIfVisible() {
+        //we only want to show this pop up for users who have IG on their phone, hasn't shared for upcoming quiz yet, and if it's more than 2 min or less than 23 hrs before the start of the next game
+        let hasUserAlreadySeenBoost = checkIfUserSawBoost()
+        if InstagramStory.checkIfAppOnPhone() && hasUserAlreadySeenBoost {
+            self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
+                //i have to add the time check constraint here b/c if I do this in the line where we check for IG app being on the user's phone, the timeLeft gets fetched as 0.
+                if self.timeLeft > 120 && self.timeLeft < 72000 {
+                    self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+                }
+            }
+        }
+    }
+    
+    private func checkIfUserSawBoost() -> Bool {
+        // Check UserDefaults to see if the DailyBoostViewController should be shown
+        let shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
+        if shownOnQuizTopics.contains(quizTopicID) {
+            // Do not show the DailyBoostViewController
+            return false
+        } else {
+            // Show the DailyBoostViewController
+            return true
+        }
+    }
+    
+    private func showDailyBoostPopUp(titleLabelText: String, valuePropsText: [String]) {
+        var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
+        let dailyBoostVC = DailyBoostViewController(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+        dailyBoostVC.modalPresentationStyle = .custom
+        present(dailyBoostVC, animated: true, completion: {
+            dailyBoostVC.saveModalDismissed = {
+                shownOnQuizTopics.append(self.quizTopicID)
+                UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
+            }
+            dailyBoostVC.saveSharePressed = {
+                self.shareOnIGStory()
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram") {
+                    shownOnQuizTopics.append(self.quizTopicID)
+                    UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
+                }
+            }
+        })
+    }
+    
+    private func shareOnIGStory() {
+        Haptics.shared.play(.heavy)
+        if let imageFile = User.current()?.personalPromoImg {
+            imageFile.getDataInBackground { (data, error) in
+                if let imageData = data, let image = UIImage(data: imageData) {
+                    // Use the `image` object to share on Instagram
+                    if let data = image.pngData() {
+                        InstagramStory.sharePhoto(data: data) { bool, string in
+                            //user clicked share, but we really don't have a way to check unless we tell the user to tag us or we check it ourselves
+                        }
+                    }
+                } else {
+                    print("Failed to get user's promo image for Daily Boost. Please take a screenshot and text it to 317-690-5323: \(error?.localizedDescription ?? "unknown error")")
+                }
+            }
+        }
+    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -194,6 +267,11 @@ class NewGameStartViewController: UIViewController {
             if quizTopic.start_time < now {
                 //time to start the game
                 startQuiz()
+            }
+            //adding in shouldCheckForDailyBoost so that we don't run the cloud call within showDailyBoostPopUpIfVisible every second
+            if shouldCheckForDailyBoost{
+                showDailyBoostPopUpIfVisible()
+                shouldCheckForDailyBoost = false
             }
         }
     }

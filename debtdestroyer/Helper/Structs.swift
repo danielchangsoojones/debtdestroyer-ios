@@ -43,6 +43,32 @@ class BannerAlert {
 }
 
 struct Helpers {
+    //make sure that the app is in LSApplicationQueriesSchemes in your info.plist file
+    static func checkIfAppOnPhone(appName: String) -> Bool {
+        let appScheme = "\(appName)://"
+        if let appUrl = URL(string: appScheme) {
+            return UIApplication.shared.canOpenURL(appUrl)
+        }
+        
+        return false
+    }
+    
+    static func loadDataFromURL(string: String, completion: @escaping (Data?, String?) -> Void) {
+        if let url = URL(string: string) {
+            //must run on the background thread or else it clogs the UI
+            DispatchQueue.global().async {
+                do {
+                    let videoData = try Data(contentsOf: url)
+                    completion(videoData, nil)
+                } catch {
+                    completion(nil, error.localizedDescription)
+                }
+            }
+        } else {
+            completion(nil, "the URL is invalid")
+        }
+    }
+    
     static func getTopViewController() -> UIViewController? {
         let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 

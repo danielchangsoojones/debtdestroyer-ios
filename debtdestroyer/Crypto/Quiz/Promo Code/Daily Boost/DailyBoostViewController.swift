@@ -141,28 +141,29 @@ class DailyBoostViewController: UIViewController {
         let valuePropView = UIView()
         valuePropView.backgroundColor = .black
         
-        let numberButton = UIButton()
-        numberButton.setTitle(number, for: .normal)
-        numberButton.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 39/255)
-        numberButton.layer.cornerRadius = 15
-        numberButton.layer.borderWidth = 2
-        numberButton.layer.borderColor = UIColor.white.cgColor
-        valuePropView.addSubview(numberButton)
-        numberButton.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview()
-            make.height.width.equalTo(30)
-        }
+//        let numberButton = UIButton()
+//        numberButton.setTitle(number, for: .normal)
+//        numberButton.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 39/255)
+//        numberButton.layer.cornerRadius = 15
+//        numberButton.layer.borderWidth = 2
+//        numberButton.layer.borderColor = UIColor.white.cgColor
+//        valuePropView.addSubview(numberButton)
+//        numberButton.snp.makeConstraints { make in
+//            make.leading.top.equalToSuperview()
+//            make.height.width.equalTo(30)
+//        }
         
         let valueLabel = UILabel()
         valueLabel.numberOfLines = 0
         valueLabel.textColor = .white
-        valueLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        valueLabel.font = .systemFont(ofSize: 15, weight: .regular)
         valueLabel.textAlignment = .left
         valuePropView.addSubview(valueLabel)
         valueLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(numberButton)
+//            make.top.equalTo(numberButton)
             make.trailing.equalToSuperview()
-            make.leading.equalTo(numberButton.snp.trailing).offset(15)
+//            make.leading.equalTo(numberButton.snp.trailing).offset(15)
+            make.leading.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         valueLabel.text = value

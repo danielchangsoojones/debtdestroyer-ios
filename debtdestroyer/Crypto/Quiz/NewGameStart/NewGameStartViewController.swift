@@ -33,6 +33,7 @@ class NewGameStartViewController: UIViewController {
     //visibility conditions for daily boost VC
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
     private let dailyBoostKey = "dailyBoostShownOn" // UserDefaults key for storing dates
+    private var shouldCheckForDailyBoost = true
     
     override func loadView() {
         super.loadView()
@@ -75,15 +76,19 @@ class NewGameStartViewController: UIViewController {
     func updateDailyBoostUserDefaults() {
         var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
         shownOnQuizTopics = shownOnQuizTopics.suffix(2)
+//        shownOnQuizTopics = []
         UserDefaults.standard.set(shownOnQuizTopics, forKey: dailyBoostKey)
     }
     
     private func showDailyBoostPopUpIfVisible() {
         //we only want to show this pop up for users who have IG on their phone, hasn't shared for upcoming quiz yet, and if it's more than 2 min or less than 23 hrs before the start of the next game
         let hasUserAlreadySeenBoost = checkIfUserSawBoost()
-        if InstagramStory.checkIfAppOnPhone() && hasUserAlreadySeenBoost && timeLeft > 120 && timeLeft < 72000 {
+        if InstagramStory.checkIfAppOnPhone() && hasUserAlreadySeenBoost {
             self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
-                self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+                //i have to add the time check constraint here b/c if I do this in the line where we check for IG app being on the user's phone, the timeLeft gets fetched as 0.
+                if self.timeLeft > 120 && self.timeLeft < 72000 {
+                    self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+                }
             }
         }
     }
@@ -263,8 +268,11 @@ class NewGameStartViewController: UIViewController {
                 //time to start the game
                 startQuiz()
             }
-            
-            showDailyBoostPopUpIfVisible()
+            //adding in shouldCheckForDailyBoost so that we don't run the cloud call within showDailyBoostPopUpIfVisible every second
+            if shouldCheckForDailyBoost{
+                showDailyBoostPopUpIfVisible()
+            }
+            shouldCheckForDailyBoost = false
         }
     }
     

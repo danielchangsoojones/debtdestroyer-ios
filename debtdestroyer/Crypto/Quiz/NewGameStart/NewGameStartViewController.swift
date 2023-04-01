@@ -57,7 +57,7 @@ class NewGameStartViewController: UIViewController {
             prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
         }
         runAssignWebReferralCheck()
-        cleanupDailyBoostUserDefaults()
+        updateDailyBoostUserDefaults()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,13 +71,19 @@ class NewGameStartViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         if (quizTopicID != "") {
-            runDailyBoostCheck()
+            showDailyBoostPopUpIfVisible()
         }
     }
 
-    private func runDailyBoostCheck() {
+    func updateDailyBoostUserDefaults() {
+        var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
+        shownOnQuizTopics = shownOnQuizTopics.suffix(2)
+        UserDefaults.standard.set(shownOnQuizTopics, forKey: dailyBoostKey)
+    }
+    
+    private func showDailyBoostPopUpIfVisible() {
         //we only want to show this pop up for users who have IG on their phone, hasn't shared for upcoming quiz yet, and if it's more than 2 min or less than 23 hrs before the start of the next game
-        let hasUserAlreadySeenBoost = getDailyBoostVisibility()
+        let hasUserAlreadySeenBoost = checkIfUserSawBoost()
         if InstagramStory.checkIfAppOnPhone() && hasUserAlreadySeenBoost && timeLeft > 120 && timeLeft < 72000 {
             self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
                 self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
@@ -85,13 +91,7 @@ class NewGameStartViewController: UIViewController {
         }
     }
     
-    func cleanupDailyBoostUserDefaults() {
-        var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
-        shownOnQuizTopics = shownOnQuizTopics.suffix(2)
-        UserDefaults.standard.set(shownOnQuizTopics, forKey: dailyBoostKey)
-    }
-    
-    private func getDailyBoostVisibility() -> Bool {
+    private func checkIfUserSawBoost() -> Bool {
         // Check UserDefaults to see if the DailyBoostViewController should be shown
         let shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
         if shownOnQuizTopics.contains(quizTopicID) {

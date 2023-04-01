@@ -40,7 +40,7 @@ jobs:
       - name: Export archive and build IPA
         run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - name: Wolfia Deploy
-        uses: wolfia-app/wolfia-deploy@v0.0.4
+        uses: wolfia-app/wolfia-deploy@v0.0.10
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           wolfia-api-key-id: ${{ vars.WOLFIA_API_KEY_ID }}

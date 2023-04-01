@@ -237,4 +237,33 @@ class QuizDataStore {
             }
         }
     }
+    
+    
+    func getSpecialReferralInfo(completion: @escaping (String, [String]) -> Void) {
+        PFCloud.callFunction(inBackground: "getSpecialReferralInfo", withParameters: [:]) { (result, error) in
+            if let resultDict = result as? [String: Any],
+               let title = resultDict["title"] as? String,
+               let valueProps = resultDict["valueProps"] as? [String] {
+                completion(title, valueProps)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getSpecialReferralInfo")
+            }
+        }
+    }
+
+    
+    func saveSpecialReferral(socialType: String, completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["socialType": socialType]
+        PFCloud.callFunction(inBackground: "saveSpecialReferral", withParameters: parameters) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "saveSpecialReferral")
+            }
+        }
+    }
 }

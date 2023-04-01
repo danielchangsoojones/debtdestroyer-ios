@@ -271,8 +271,8 @@ class NewGameStartViewController: UIViewController {
             //adding in shouldCheckForDailyBoost so that we don't run the cloud call within showDailyBoostPopUpIfVisible every second
             if shouldCheckForDailyBoost{
                 showDailyBoostPopUpIfVisible()
+                shouldCheckForDailyBoost = false
             }
-            shouldCheckForDailyBoost = false
         }
     }
     

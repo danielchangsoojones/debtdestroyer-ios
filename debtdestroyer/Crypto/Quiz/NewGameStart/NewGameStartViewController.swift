@@ -70,9 +70,6 @@ class NewGameStartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
-        if (quizTopicID != "") {
-            showDailyBoostPopUpIfVisible()
-        }
     }
 
     func updateDailyBoostUserDefaults() {
@@ -266,6 +263,8 @@ class NewGameStartViewController: UIViewController {
                 //time to start the game
                 startQuiz()
             }
+            
+            showDailyBoostPopUpIfVisible()
         }
     }
     

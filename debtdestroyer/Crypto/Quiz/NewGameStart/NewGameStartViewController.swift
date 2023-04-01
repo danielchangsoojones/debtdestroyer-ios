@@ -83,7 +83,7 @@ class NewGameStartViewController: UIViewController {
     private func showDailyBoostPopUpIfVisible() {
         //we only want to show this pop up for users who have IG on their phone, hasn't shared for upcoming quiz yet, and if it's more than 2 min or less than 23 hrs before the start of the next game
         let hasUserAlreadySeenBoost = checkIfUserSawBoost()
-        if InstagramStory.checkIfAppOnPhone() && hasUserAlreadySeenBoost {
+        if InstagramStory.checkIfAppOnPhone() && !hasUserAlreadySeenBoost && User.current()?.personalPromoImg != nil && !(User.isAppleTester || User.isIpadDemo) {
             self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
                 //i have to add the time check constraint here b/c if I do this in the line where we check for IG app being on the user's phone, the timeLeft gets fetched as 0.
                 if self.timeLeft > 120 && self.timeLeft < 72000 {
@@ -96,13 +96,7 @@ class NewGameStartViewController: UIViewController {
     private func checkIfUserSawBoost() -> Bool {
         // Check UserDefaults to see if the DailyBoostViewController should be shown
         let shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
-        if shownOnQuizTopics.contains(quizTopicID) {
-            // Do not show the DailyBoostViewController
-            return false
-        } else {
-            // Show the DailyBoostViewController
-            return true
-        }
+        return shownOnQuizTopics.contains(quizTopicID)
     }
     
     private func showDailyBoostPopUp(titleLabelText: String, valuePropsText: [String]) {

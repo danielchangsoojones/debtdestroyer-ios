@@ -30,6 +30,7 @@ class NewGameStartViewController: UIViewController {
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
     private var quizTopicID = ""
+    private var mux_playback_id: String?
     //visibility conditions for daily boost VC
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
     private let dailyBoostKey = "dailyBoostShownOn" // UserDefaults key for storing dates
@@ -170,24 +171,28 @@ class NewGameStartViewController: UIViewController {
     }
     
     func loopVideo() {
-        let file = "silverCup.mp4".components(separatedBy: ".")
-        
-        guard let path = Bundle.main.path(forResource: file[0], ofType:file[1]) else {
-            debugPrint( "\(file.joined(separator: ".")) not found")
-            return
+        if let playerItem = getTrophyPlayerItem() {
+            self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
+            self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
+            guard let playerLayer = self.playerLayer else {return}
+            guard let queuePlayer = self.queuePlayer else {return}
+            self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
+
+            playerLayer.videoGravity = .resizeAspectFill
+            playerLayer.frame = self.view.frame
+            self.view.layer.insertSublayer(playerLayer, at: 0)
+            playerLayer.player?.play()
         }
-        let playerItem = AVPlayerItem(url: URL(fileURLWithPath: path))
-        self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
-        self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
-        guard let playerLayer = self.playerLayer else {return}
-        guard let queuePlayer = self.queuePlayer else {return}
-        self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
+    }
+    
+    private func getTrophyPlayerItem() -> AVPlayerItem? {
+        let file = "silverCup.mp4".components(separatedBy: ".")
+        if let path = Bundle.main.path(forResource: file[0], ofType:file[1]) {
+            let playerItem = AVPlayerItem(url: URL(fileURLWithPath: path))
+            return playerItem
+        }
         
-        playerLayer.videoGravity = .resizeAspectFill
-        playerLayer.frame = self.view.frame
-        self.view.layer.insertSublayer(playerLayer, at: 0)
-        playerLayer.player?.play()
-        
+        return nil
     }
     
     @objc private func addStartQuizBtn() {
@@ -231,6 +236,7 @@ class NewGameStartViewController: UIViewController {
             quizDataStore.getQuizData { result, error  in
                 if let quizDatas = result as? [QuizDataParse] {
                     self.quizDatas = quizDatas
+                    self.startPlayingGameHost(quizDatas: quizDatas)
                     self.checkIfStartQuiz()
                 } else if let error = error {
                     if error.localizedDescription.contains("error-force-update") {
@@ -247,6 +253,28 @@ class NewGameStartViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
+        if self.mux_playback_id != quizDatas.first?.quizTopic.mux_playback_id {
+            //hasn't set the playback id or it has changed on the backend
+            //or we have switched quizDatas
+            self.mux_playback_id = quizDatas.first?.quizTopic.mux_playback_id
+            if let mux_playback_id = quizDatas.first?.quizTopic.mux_playback_id {
+                if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
+                    let playerItem = AVPlayerItem(url: url)
+                    self.queuePlayer?.replaceCurrentItem(with: playerItem)
+                }
+            } else if let playerItem = getTrophyPlayerItem() {
+               //the next quiz has switched, so quiztopic is empty
+                self.queuePlayer?.replaceCurrentItem(with: playerItem)
+                self.queuePlayer?.play()
+            } else {
+                BannerAlert.show(title: "Error", subtitle: "could not load the trophy background", type: .error)
+            }
+        }
+        
+        
     }
     
     private func checkIfStartQuiz() {
@@ -281,6 +309,7 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func startQuiz() {
         checkStartTimer.invalidate()
+        playerLayer?.player?.pause()
         var quizStartIndex = 0
         let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
             return quizData.objectId == quizData.quizTopic.currentQuizDataID

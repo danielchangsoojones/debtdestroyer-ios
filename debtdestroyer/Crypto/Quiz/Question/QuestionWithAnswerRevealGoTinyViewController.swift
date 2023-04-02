@@ -193,8 +193,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             
             let easierFrame = CGRect(x: questionPromptFrame.minX,
                                    y: 300,
-                                   width: 80,
-                                   height: 60)
+                                   width: 60,
+                                   height: 40)
             createBtn(title: "easier",
                       selector: #selector(makeEasierPressed),
                       backgroundColor: .fuchsiaPink,

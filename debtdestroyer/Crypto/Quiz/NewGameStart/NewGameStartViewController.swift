@@ -105,12 +105,14 @@ class NewGameStartViewController: UIViewController {
         dailyBoostVC.modalPresentationStyle = .custom
         present(dailyBoostVC, animated: true, completion: {
             dailyBoostVC.saveModalDismissed = {
-                shownOnQuizTopics.append(self.quizTopicID)
-                UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "dismissed") {
+                    shownOnQuizTopics.append(self.quizTopicID)
+                    UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
+                }
             }
             dailyBoostVC.saveSharePressed = {
                 self.shareOnIGStory()
-                self.quizDataStore.saveSpecialReferral(socialType: "Instagram") {
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "shared") {
                     shownOnQuizTopics.append(self.quizTopicID)
                     UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
                 }

@@ -254,8 +254,8 @@ class QuizDataStore {
     }
 
     
-    func saveSpecialReferral(socialType: String, completion: @escaping () -> Void) {
-        let parameters: [String : Any] = ["socialType": socialType]
+    func saveSpecialReferral(socialType: String, actionType: String, completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["socialType": socialType, "actionType": actionType]
         PFCloud.callFunction(inBackground: "saveSpecialReferral", withParameters: parameters) { (result, error) in
             if result != nil {
                 completion()

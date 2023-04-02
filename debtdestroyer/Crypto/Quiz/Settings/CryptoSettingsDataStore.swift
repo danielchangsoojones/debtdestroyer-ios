@@ -17,9 +17,11 @@ class CryptoSettingsDataStore {
         ]
         
         //is revealing answer
-        if let currentIndex = currentIndex {
-            parameters["correct_answer_index"] = AnswerKeysViewController.correct_indices[currentIndex]
-            parameters["video_answer_url"] = AnswerKeysViewController.answer_video_urls[currentIndex]
+        if let currentQuizID = currentQuizData.objectId, !shouldStartQuestionPrompt {
+            if let item = AnswerKeysViewController.getItem(withId: currentQuizID) {
+                parameters["correct_answer_index"] = item.correct_answer_index
+                parameters["video_answer_url"] = item.answer_url
+            }
         }
         
         PFCloud.callFunction(inBackground: "markQuizStatus", withParameters: parameters) { (result, error) in

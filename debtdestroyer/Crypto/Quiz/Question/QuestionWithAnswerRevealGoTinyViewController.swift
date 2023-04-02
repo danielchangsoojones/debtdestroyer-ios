@@ -269,9 +269,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             let now = Date()
             if currentData.quizTopic.start_time > now {
                 //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
-                self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
-                self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
-                self.playVideoAnswer()
+                if let item = AnswerKeysViewController.getItem(withId: currentData.objectId ?? "") {
+                    self.answer_video_url = item.answer_url
+                    self.revealAnswer(with: item.correct_answer_index)
+                    self.playVideoAnswer()
+                }
             } else {
                 let quizManagerDataStore = CryptoSettingsDataStore()
                 quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,

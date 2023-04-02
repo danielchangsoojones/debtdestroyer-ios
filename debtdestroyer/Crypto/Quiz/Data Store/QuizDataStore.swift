@@ -279,4 +279,20 @@ class QuizDataStore {
             }
         }
     }
+    
+    func updateMidQuiz(current_order: Int, quizDatas_length: Int, difficulty: String, completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["current_order": current_order,
+                                          "quizDatas_length": quizDatas_length,
+                                          "difficulty": difficulty
+        ]
+        PFCloud.callFunction(inBackground: "updateMidQuiz", withParameters: parameters) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "logUserSocials")
+            }
+        }
+    }
 }

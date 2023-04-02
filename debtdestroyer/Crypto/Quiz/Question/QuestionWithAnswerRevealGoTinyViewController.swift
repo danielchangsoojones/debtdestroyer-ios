@@ -161,11 +161,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     private func showControlBtns() {
         if (User.current()?.isAdminUser ?? false) {
-            let questionPromptFrame = CGRect(x: 100, y: 100, width: 300, height: 100)
+            let questionPromptFrame = CGRect(x: 150, y: 100, width: 200, height: 65)
             createBtn(title: "Start Question Prompt", selector: #selector(startQuestionPromptControl), backgroundColor: .purple, frame: questionPromptFrame)
             
             let revealAnswerFrame = CGRect(x: questionPromptFrame.minX,
-                                           y: 265,
+                                           y: 200,
                                            width: questionPromptFrame.width,
                                            height: questionPromptFrame.height)
             createBtn(title: "Reveal Answer",
@@ -179,9 +179,46 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                    height: 60)
             createBtn(title: "skip",
                       selector: #selector(adminNextBtn),
-                      backgroundColor: .yellow,
+                      backgroundColor: .systemYellow,
                       frame: nextFrame)
+            
+            let harderFrame = CGRect(x: 30,
+                                   y: 300,
+                                   width: 80,
+                                   height: 60)
+            createBtn(title: "make harder",
+                      selector: #selector(makeHarderPressed),
+                      backgroundColor: .gradOrange,
+                      frame: harderFrame)
+            
+            let easierFrame = CGRect(x: questionPromptFrame.minX,
+                                   y: 300,
+                                   width: 80,
+                                   height: 60)
+            createBtn(title: "easier",
+                      selector: #selector(makeEasierPressed),
+                      backgroundColor: .fuchsiaPink,
+                      frame: easierFrame)
         }
+    }
+    
+    @objc private func makeHarderPressed() {
+        dataStore.updateMidQuiz(current_order: currentIndex,
+                                quizDatas_length: quizDatas.count, difficulty: "hard") {
+            BannerAlert.show(title: "Success", subtitle: "Increased quiz difficulty", type: .success)
+        }
+    }
+    
+    @objc private func makeEasierPressed() {
+        let alertView = SCLAlertView()
+        alertView.addButton("Make Easier") {
+            self.dataStore.updateMidQuiz(current_order: self.currentIndex,
+                                         quizDatas_length: self.quizDatas.count, difficulty: "hard") {
+                BannerAlert.show(title: "Success", subtitle: "Increased quiz difficulty", type: .success)
+            }
+        }
+        
+        alertView.showWait("Make Easier?", subTitle: "Are you sure that you want to make the quiz easier?")
     }
     
     @objc private func startQuestionPromptControl() {
@@ -274,6 +311,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         btn.backgroundColor = backgroundColor
         btn.setTitle(title, for: .normal)
         btn.addTarget(self, action: selector, for: .touchUpInside)
+        btn.titleLabel?.numberOfLines = 2
         self.view.addSubview(btn)
     }
     

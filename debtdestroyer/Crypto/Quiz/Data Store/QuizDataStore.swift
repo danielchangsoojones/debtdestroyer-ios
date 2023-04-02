@@ -254,8 +254,8 @@ class QuizDataStore {
     }
 
     
-    func saveSpecialReferral(socialType: String, completion: @escaping () -> Void) {
-        let parameters: [String : Any] = ["socialType": socialType]
+    func saveSpecialReferral(socialType: String, actionType: String, completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["socialType": socialType, "actionType": actionType]
         PFCloud.callFunction(inBackground: "saveSpecialReferral", withParameters: parameters) { (result, error) in
             if result != nil {
                 completion()
@@ -263,6 +263,19 @@ class QuizDataStore {
                 BannerAlert.show(with: error)
             } else {
                 BannerAlert.showUnknownError(functionName: "saveSpecialReferral")
+            }
+        }
+    }
+    
+    func logUserSocials(socials: [String], completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["userSocials": socials]
+        PFCloud.callFunction(inBackground: "logUserSocials", withParameters: parameters) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "logUserSocials")
             }
         }
     }

@@ -60,6 +60,7 @@ class NewGameStartViewController: UIViewController {
         }
         runAssignWebReferralCheck()
         updateDailyBoostUserDefaults()
+        logUserSocials()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +75,19 @@ class NewGameStartViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
 
+    private func logUserSocials() {
+        var userSocials:[String] = []
+        let socialApps = [("instagram-stories", "Instagram"), ("snapchat", "Snapchat"), ("twitter", "Twitter"), ("fb", "Facebook"), ("whatsapp", "Whatsapp")]
+        for app in socialApps {
+            if Helpers.checkIfAppOnPhone(appName: app.0) {
+                userSocials.append(app.1)
+            }
+        }
+        quizDataStore.logUserSocials(socials: userSocials) {
+            print("logged user socials")
+        }
+    }
+    
     func updateDailyBoostUserDefaults() {
         var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
         shownOnQuizTopics = shownOnQuizTopics.suffix(2)
@@ -87,7 +101,7 @@ class NewGameStartViewController: UIViewController {
         if InstagramStory.checkIfAppOnPhone() && !hasUserAlreadySeenBoost && User.current()?.personalPromoImg != nil && !(User.isAppleTester || User.isIpadDemo) {
             self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
                 //i have to add the time check constraint here b/c if I do this in the line where we check for IG app being on the user's phone, the timeLeft gets fetched as 0.
-                if self.timeLeft > 120 && self.timeLeft < 72000 {
+                if self.timeLeft > 30 && self.timeLeft < 72000 {
                     self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
                 }
             }
@@ -106,12 +120,14 @@ class NewGameStartViewController: UIViewController {
         dailyBoostVC.modalPresentationStyle = .custom
         present(dailyBoostVC, animated: true, completion: {
             dailyBoostVC.saveModalDismissed = {
-                shownOnQuizTopics.append(self.quizTopicID)
-                UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "dismissed") {
+                    shownOnQuizTopics.append(self.quizTopicID)
+                    UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
+                }
             }
             dailyBoostVC.saveSharePressed = {
                 self.shareOnIGStory()
-                self.quizDataStore.saveSpecialReferral(socialType: "Instagram") {
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "shared") {
                     shownOnQuizTopics.append(self.quizTopicID)
                     UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
                 }

@@ -85,6 +85,12 @@ class NewGameStartViewController: UIViewController {
         if Helpers.checkIfAppOnPhone(appName: "twitter") {
             userSocials.append("Twitter")
         }
+        if Helpers.checkIfAppOnPhone(appName: "fb") {
+            userSocials.append("Facebook")
+        }
+        if Helpers.checkIfAppOnPhone(appName: "whatsapp") {
+            userSocials.append("Whatsapp")
+        }
         //TODO: twitter & snapchat check
         quizDataStore.logUserSocials(socials: userSocials) {
             print("logged user socials")

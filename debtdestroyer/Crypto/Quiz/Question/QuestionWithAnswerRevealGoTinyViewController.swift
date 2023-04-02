@@ -20,7 +20,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var endTime: Date?
     var timeLabel =  UILabel()
     var timer = Timer()
-    private let quizDatas: [QuizDataParse]
+    private var quizDatas: [QuizDataParse]
     private let currentIndex: Int
     private var answerViews: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
@@ -197,7 +197,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                 shouldStartQuestionPrompt: true,
                                                 currentIndex: nil,
                                                 currentQuizData: currentData, completion: { _ in
-                
+                self.checkIfQuizDatasUpdated()
             })
         }
     }
@@ -242,7 +242,25 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                     currentIndex: currentIndex,
                                                     currentQuizData: currentData) { quizTopic in
                     self.competing_tie_user_ids =  quizTopic.competing_tie_user_ids
+                    self.checkIfQuizDatasUpdated()
                 }
+            }
+        }
+    }
+    
+    //we update the quizdatas because sometimes can be updated mid quiz
+    private func checkIfQuizDatasUpdated() {
+        dataStore.getQuizData { result, error in
+            if let quizDatas = result as? [QuizDataParse] {
+                self.quizDatas = quizDatas
+            } else if let error = error {
+                if error.localizedDescription.contains("error-force-update") {
+                    ForceUpdate.showAlert()
+                } else {
+                    BannerAlert.show(with: error)
+                }
+            } else {
+                BannerAlert.showUnknownError(functionName: "getQuizData")
             }
         }
     }

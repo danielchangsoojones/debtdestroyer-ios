@@ -6,6 +6,8 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>snapchat</string>
+		<string>twitter</string>
 		<string>instagram-stories</string>
 	</array>
 	<key>NSAppTransportSecurity</key>

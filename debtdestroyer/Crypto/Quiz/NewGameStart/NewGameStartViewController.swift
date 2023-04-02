@@ -76,22 +76,12 @@ class NewGameStartViewController: UIViewController {
 
     private func logUserSocials() {
         var userSocials:[String] = []
-        if InstagramStory.checkIfAppOnPhone() {
-            userSocials.append("Instagram")
+        let socialApps = [("instagram-stories", "Instagram"), ("snapchat", "Snapchat"), ("twitter", "Twitter"), ("fb", "Facebook"), ("whatsapp", "Whatsapp")]
+        for app in socialApps {
+            if Helpers.checkIfAppOnPhone(appName: app.0) {
+                userSocials.append(app.1)
+            }
         }
-        if Helpers.checkIfAppOnPhone(appName: "snapchat") {
-            userSocials.append("Snapchat")
-        }
-        if Helpers.checkIfAppOnPhone(appName: "twitter") {
-            userSocials.append("Twitter")
-        }
-        if Helpers.checkIfAppOnPhone(appName: "fb") {
-            userSocials.append("Facebook")
-        }
-        if Helpers.checkIfAppOnPhone(appName: "whatsapp") {
-            userSocials.append("Whatsapp")
-        }
-        //TODO: twitter & snapchat check
         quizDataStore.logUserSocials(socials: userSocials) {
             print("logged user socials")
         }

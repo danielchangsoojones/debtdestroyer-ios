@@ -86,7 +86,7 @@ class NewGameStartViewController: UIViewController {
         if InstagramStory.checkIfAppOnPhone() && !hasUserAlreadySeenBoost && User.current()?.personalPromoImg != nil && !(User.isAppleTester || User.isIpadDemo) {
             self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
                 //i have to add the time check constraint here b/c if I do this in the line where we check for IG app being on the user's phone, the timeLeft gets fetched as 0.
-                if self.timeLeft > 120 && self.timeLeft < 72000 {
+                if self.timeLeft > 60 && self.timeLeft < 72000 {
                     self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
                 }
             }

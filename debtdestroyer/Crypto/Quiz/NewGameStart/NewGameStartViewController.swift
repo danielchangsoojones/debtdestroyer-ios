@@ -59,6 +59,7 @@ class NewGameStartViewController: UIViewController {
         }
         runAssignWebReferralCheck()
         updateDailyBoostUserDefaults()
+        logUserSocials()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,6 +74,17 @@ class NewGameStartViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
 
+    private func logUserSocials() {
+        var userSocials:[String] = []
+        if InstagramStory.checkIfAppOnPhone() {
+            userSocials.append("Instagram")
+        }
+        //TODO: twitter & snapchat check
+        quizDataStore.logUserSocials(socials: userSocials) {
+            print("logged user socials")
+        }
+    }
+    
     func updateDailyBoostUserDefaults() {
         var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
         shownOnQuizTopics = shownOnQuizTopics.suffix(2)

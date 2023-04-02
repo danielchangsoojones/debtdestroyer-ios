@@ -266,4 +266,17 @@ class QuizDataStore {
             }
         }
     }
+    
+    func logUserSocials(socials: [String], completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["userSocials": socials]
+        PFCloud.callFunction(inBackground: "logUserSocials", withParameters: parameters) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "logUserSocials")
+            }
+        }
+    }
 }

@@ -64,6 +64,7 @@ class NewGameStartViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        User.current()?.fetchInBackground()
         checkWaitlist()
         addStartQuizBtn()
         showGameReminderPopUp()

@@ -13,6 +13,7 @@ class CryptoSettingsViewController: UIViewController {
         case winnerInfo = "Enter Winner Information"
         case connectedAccounts = "Verify Identity"
         case promoCode = "Promo Code"
+        case prizeBoost = "Prize Boost"
         case contactUs = "Contact Us or Leave Feedback"
         case legaDisclosure = "Legal Disclosures"
         case notification = "Notifications"
@@ -36,7 +37,7 @@ class CryptoSettingsViewController: UIViewController {
                 return "deleteAcc"
             case .notification, .textNoti:
                 return "bell"
-            case .promoCode:
+            case .promoCode, .prizeBoost:
                 return "invite"
             }
         }
@@ -57,7 +58,7 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        dataArr = [.promoCode, .prizeBoost, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
         
         if (User.current()?.showConnectAccount ?? false) {
             dataArr.insert(.connectedAccounts, at: 2)
@@ -137,7 +138,14 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
                 Haptics.shared.play(.heavy)
                 self.navigationController?.pushViewController(vc.self, animated: true)
-            case .contactUs:
+        case .prizeBoost:
+            if (User.current()?.personalPromoImg != nil) {
+                let quizDataStore = QuizDataStore()
+                self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
+                    self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+                }
+            }
+        case .contactUs:
                 // MARK: Contact Us
                 // MARK: Leave Feedback
             messageHelper?.text(MessageHelper.customerServiceNum, body: "")
@@ -225,5 +233,39 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         return 70
+    }
+}
+
+extension CryptoSettingsViewController {
+    private func showDailyBoostPopUp(titleLabelText: String, valuePropsText: [String]) {
+        let dailyBoostVC = DailyBoostViewController(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+        dailyBoostVC.modalPresentationStyle = .custom
+        present(dailyBoostVC, animated: true, completion: {
+            dailyBoostVC.saveModalDismissed = {
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "dismissed") {}
+            }
+            dailyBoostVC.saveSharePressed = {
+                self.shareOnIGStory()
+                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "shared") {}
+            }
+        })
+    }
+    
+    private func shareOnIGStory() {
+        Haptics.shared.play(.heavy)
+        if let imageFile = User.current()?.personalPromoImg {
+            imageFile.getDataInBackground { (data, error) in
+                if let imageData = data, let image = UIImage(data: imageData) {
+                    // Use the `image` object to share on Instagram
+                    if let data = image.pngData() {
+                        InstagramStory.sharePhoto(data: data) { bool, string in
+                            //user clicked share, but we really don't have a way to check unless we tell the user to tag us or we check it ourselves
+                        }
+                    }
+                } else {
+                    print("Failed to get user's promo image for Daily Boost. Please take a screenshot and text it to 317-690-5323: \(error?.localizedDescription ?? "unknown error")")
+                }
+            }
+        }
     }
 }

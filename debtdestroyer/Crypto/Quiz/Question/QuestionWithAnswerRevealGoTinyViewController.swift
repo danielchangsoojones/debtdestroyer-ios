@@ -182,14 +182,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                       backgroundColor: .systemYellow,
                       frame: nextFrame)
             
-            let harderFrame = CGRect(x: 30,
-                                   y: 300,
-                                   width: 80,
-                                   height: 60)
-            createBtn(title: "make harder",
-                      selector: #selector(makeHarderPressed),
-                      backgroundColor: .gradOrange,
-                      frame: harderFrame)
+//            let harderFrame = CGRect(x: 30,
+//                                   y: 300,
+//                                   width: 80,
+//                                   height: 60)
+//            createBtn(title: "make harder",
+//                      selector: #selector(makeHarderPressed),
+//                      backgroundColor: .gradOrange,
+//                      frame: harderFrame)
             
             let easierFrame = CGRect(x: questionPromptFrame.minX,
                                    y: 300,
@@ -213,7 +213,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         let alertView = SCLAlertView()
         alertView.addButton("Make Easier") {
             self.dataStore.updateMidQuiz(current_order: self.currentIndex,
-                                         quizDatas_length: self.quizDatas.count, difficulty: "hard") {
+                                         quizDatas_length: self.quizDatas.count, difficulty: "easy") {
                 BannerAlert.show(title: "Success", subtitle: "Increased quiz difficulty", type: .success)
             }
         }
@@ -406,6 +406,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     }
                     self.competing_tie_user_ids = competing_tie_user_ids
                     self.revealAnswer(with: correct_answer_index)
+                    self.checkIfQuizDatasUpdated()
                 } else if let show_question_prompt_time = show_question_prompt_time {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
                 }

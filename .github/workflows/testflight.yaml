@@ -1,4 +1,4 @@
-name: Release to Test Flight 🚀
+name: Release with Wolfia 🚀
 on:
   push:
     branches: [develop_production]
@@ -37,6 +37,16 @@ jobs:
         run: xcode-select -p
       - name: Build archive
         run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
+      - name: Locate dSYM files
+        run: echo "DSYM_PATH=$(xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -configuration Release -showBuildSettings | grep " CONFIGURATION_BUILD_DIR " | awk '{print $3}')/debtdestroyer.app.dSYM" >> $GITHUB_ENV
+      - name: Install sentry-cli
+        run: curl -sL https://sentry.io/get-cli/ | bash
+      - name: Upload dSYM files to Sentry
+        env:
+          SENTRY_AUTH_TOKEN: d1167196413c4c06b2d833b5df28c856c180bb264eea46d7b845bbed0280c758
+          SENTRY_ORG_SLUG: blockstamp-inc
+          SENTRY_PROJECT_SLUG: debtdestroyer-ios
+        run: sentry-cli upload-dif --org $SENTRY_ORG_SLUG --project $SENTRY_PROJECT_SLUG $DSYM_PATH
       - name: Export archive and build IPA
         run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - name: Wolfia Deploy

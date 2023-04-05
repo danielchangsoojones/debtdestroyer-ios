@@ -51,6 +51,7 @@ class CycleVidViewController: UIViewController {
         } else {
             player?.replaceCurrentItem(with: AVPlayerItem(url: URL(string: videoUrls[currentIndex])!))
             player?.play()
+            NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         }
     }
     

@@ -5,6 +5,7 @@
 //  Created by Daniel Jones on 8/3/22.
 //
 
+import Sentry
 import UIKit
 import Parse
 import AVFoundation
@@ -15,6 +16,14 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        SentrySDK.start { options in
+            options.dsn = "https://ae23f1afc59d4b0dab26c5f12b947034@o4504962377777152.ingest.sentry.io/4504962811625472"
+            options.debug = true
+            options.enablePreWarmedAppStartTracing = true
+            options.attachScreenshot = true
+            options.attachViewHierarchy = true
+            options.enableMetricKit = true
+        }
         // Override point for customization after application launch.
         IAPManager.shared.startObserving()
         setupServer()

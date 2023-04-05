@@ -46,11 +46,11 @@ jobs:
       - name: Upload dSYM files to Sentry
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        run: sentry-cli --auth-token $SENTRY_AUTH_TOKEN upload-dsym --org blockstamp-inc --project debtdestroyer-ios $DSYM_PATH
+        run: sentry-cli --auth-token $SENTRY_AUTH_TOKEN upload-dif --org blockstamp-inc --project debtdestroyer-ios $DSYM_PATH
       - name: Export archive and build IPA
         run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - name: Wolfia Deploy
-        uses: wolfia-app/wolfia-deploy@v0.0.4
+        uses: wolfia-app/wolfia-deploy@v0.0.11
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           wolfia-api-key-id: ${{ vars.WOLFIA_API_KEY_ID }}

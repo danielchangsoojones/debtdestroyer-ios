@@ -5,7 +5,6 @@
 //  Created by Daniel Jones on 8/3/22.
 //
 
-import Sentry
 import UIKit
 import Parse
 import AVFoundation
@@ -16,7 +15,6 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         #if RELEASE
         do {
             SentrySDK.start { options in
@@ -36,13 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0.0
         }
-
+        
         let center  = UNUserNotificationCenter.current()
         center.delegate = self
         application.registerForRemoteNotifications()
-
+        
         setUXCam()
-
+        
         // MARK: Code snippet is for Question screen >> audio work in silent mode too.
         var categoryError :NSError?
         var success: Bool
@@ -53,26 +51,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             categoryError = error
             success = false
         }
-
+        
         if !success {
             print("AppDelegate Debug - Error setting AVAudioSession category.  Because of this, there may be no sound. \(categoryError!)")
         }
         //
         return true
     }
-
+    
     private func setUXCam() {
         let configuration = UXCamConfiguration(appKey: "6q4yxoixlvoyww8")
         UXCam.optIntoSchematicRecordings()
         UXCam.start(with: configuration)
     }
-
+    
     private func setupServer() {
         let configuration = ParseClientConfiguration {
             $0.applicationId = Configuration.environment.appID
             $0.server = Configuration.environment.serverURL
         }
-
+        
         Parse.initialize(with: configuration)
         User.registerSubclass()
         TransactionParse.registerSubclass()
@@ -106,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillTerminate(_ application: UIApplication) {
         IAPManager.shared.stopObserving()
     }
-
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let installation = PFInstallation.current()
         installation?.setDeviceTokenFrom(deviceToken)
@@ -126,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         print("\(userInfo)")
     }
-
+    
     // This method will be called when app received push notifications in foreground
     //otherwise when inside the app, you never get push notifications
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

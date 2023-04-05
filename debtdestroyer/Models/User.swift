@@ -19,6 +19,8 @@ class User: PFUser {
     @NSManaged var notificationStatus: String?
     @NSManaged var notificationDesire: String?
     @NSManaged var showConnectAccount: Bool
+    @NSManaged var personalPromoImg: PFFileObject?
+    @NSManaged var socials: [String]?
     
     static var shouldShowEarnings = true
     static var sendMassTextNotification = false

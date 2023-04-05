@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import SCLAlertView
 
 class NewGameStartViewController: UIViewController {
     struct Constants {
@@ -56,7 +57,7 @@ class NewGameStartViewController: UIViewController {
             name: UIApplication.didBecomeActiveNotification, object: nil)
         getDemoQuizData()
         if User.isAdminUser || User.isIpadDemo {
-            prizeBtn.addTarget(self, action: #selector(startQuiz), for: .touchUpInside)
+            prizeBtn.addTarget(self, action: #selector(prizeBtnPressed), for: .touchUpInside)
         }
         runAssignWebReferralCheck()
         updateDailyBoostUserDefaults()
@@ -74,6 +75,26 @@ class NewGameStartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    @objc private func prizeBtnPressed() {
+        let appearance = SCLAlertView.SCLAppearance()
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Real Game", action: {
+            // Handle "Real Game" option
+            self.startQuiz()
+        })
+        alertView.addButton("Cycle Vids", action: {
+            // Handle "Cycle Vids" option
+            let cycleVC = CycleVidViewController()
+            self.navigationController?.pushViewController(cycleVC, animated: true)
+        })
+        alertView.addButton("Tiebreaker", action: {
+            // Handle "Tiebreaker" option
+            let tieVC = TieBreakerViewController(competing_tie_user_ids: [])
+            self.navigationController?.pushViewController(tieVC, animated: true)
+        })
+        alertView.showInfo("Choose Option", subTitle: "Please choose an option to continue.")
     }
 
     private func logUserSocials() {

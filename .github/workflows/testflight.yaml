@@ -1,11 +1,11 @@
 name: Release with Wolfia 🚀
 on:
   push:
-    branches: [setup-sentry]
+    branches: [develop_production]
 jobs:
   macos:
     runs-on: macos-latest
-#    if: ${{ contains(github.event.head_commit.message, 'Bump version') }}
+    if: ${{ contains(github.event.head_commit.message, 'Bump version') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -45,22 +45,22 @@ jobs:
         run: echo DSYM_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.dSYM") >> $GITHUB_ENV
       - name: Upload dSYM files to Sentry
         env:
-          SENTRY_AUTH_TOKEN: d1167196413c4c06b2d833b5df28c856c180bb264eea46d7b845bbed0280c758 # ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: sentry-cli --auth-token $SENTRY_AUTH_TOKEN upload-dsym --org blockstamp-inc --project debtdestroyer-ios $DSYM_PATH
-#      - name: Export archive and build IPA
-#        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
-#      - name: Wolfia Deploy
-#        uses: wolfia-app/wolfia-deploy@v0.0.4
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          wolfia-api-key-id: ${{ vars.WOLFIA_API_KEY_ID }}
-#          wolfia-api-key-secret: ${{ secrets.WOLFIA_API_KEY_SECRET }}
-#          app-path: "./output/debtdestroyer.ipa"
-#          app-store-connect-api-key-id: ${{ vars.APP_CONNECT_API_KEY }}
-#          app-store-connect-api-issuer: ${{ vars.APP_CONNECT_API_ISSUER }}
-#          app-store-connect-secret-base64: ${{ secrets.APP_CONNECT_API_PRIVATE_KEY_BASE64 }}
-#      - name: Clean up (Delete keychain and provisioning profile)
-#        if: ${{ always() }}
-#        run: |
-#          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-#          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+      - name: Export archive and build IPA
+        run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
+      - name: Wolfia Deploy
+        uses: wolfia-app/wolfia-deploy@v0.0.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          wolfia-api-key-id: ${{ vars.WOLFIA_API_KEY_ID }}
+          wolfia-api-key-secret: ${{ secrets.WOLFIA_API_KEY_SECRET }}
+          app-path: "./output/debtdestroyer.ipa"
+          app-store-connect-api-key-id: ${{ vars.APP_CONNECT_API_KEY }}
+          app-store-connect-api-issuer: ${{ vars.APP_CONNECT_API_ISSUER }}
+          app-store-connect-secret-base64: ${{ secrets.APP_CONNECT_API_PRIVATE_KEY_BASE64 }}
+      - name: Clean up (Delete keychain and provisioning profile)
+        if: ${{ always() }}
+        run: |
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision

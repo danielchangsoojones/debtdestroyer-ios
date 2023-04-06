@@ -415,18 +415,16 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         }
     }
     
-    //This would break if it wasn't a consistent 2 options.
-    //Also hard difficulty would operate differently than this.
+    //we do a check to see if there is a mismatch of data from the client side to the server one
+    //if there is, then lets do an update.
     private func checkQuizChanged(updated_quiz_data_ids: [String]) {
         for id in updated_quiz_data_ids {
-            let targetQuizData = quizDatas.first { quizData in
+            let isInCurrrentArray = quizDatas.contains { quizData in
                 return quizData.objectId == id
             }
-            if let targetQuizData = targetQuizData, let answers = targetQuizData.answers {
-                if answers.count > 2 {
-                    //these quizdatas still have 4 answers. We need to fix this. Do an update
-                    self.checkIfQuizDatasUpdated()
-                }
+            if !isInCurrrentArray {
+                self.checkIfQuizDatasUpdated()
+                break
             }
         }
     }

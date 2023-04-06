@@ -214,7 +214,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         alertView.addButton("Make Easier") {
             self.dataStore.updateMidQuiz(current_order: self.currentIndex,
                                          quizDatas_length: self.quizDatas.count, difficulty: "easy") {
-                BannerAlert.show(title: "Success", subtitle: "Increased quiz difficulty", type: .success)
+                BannerAlert.show(title: "Success", subtitle: "The quiz is now easier", type: .success)
             }
         }
         

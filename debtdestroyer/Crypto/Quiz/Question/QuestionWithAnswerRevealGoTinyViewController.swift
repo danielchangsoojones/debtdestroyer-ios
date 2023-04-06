@@ -393,7 +393,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                               currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData, inTieMode: inTieMode) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer, competing_tie_user_ids, won_array, lost_array    in
+            dataStore.checkLiveQuizPosition(quizData: currentData, inTieMode: inTieMode) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer, competing_tie_user_ids, won_array, lost_array, updated_quiz_data_ids    in
                 if !self.inTieMode {
                     self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 }
@@ -406,9 +406,26 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     }
                     self.competing_tie_user_ids = competing_tie_user_ids
                     self.revealAnswer(with: correct_answer_index)
-                    self.checkIfQuizDatasUpdated()
                 } else if let show_question_prompt_time = show_question_prompt_time {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
+                }
+                
+                self.checkQuizChanged(updated_quiz_data_ids: updated_quiz_data_ids)
+            }
+        }
+    }
+    
+    //This would break if it wasn't a consistent 2 options.
+    //Also hard difficulty would operate differently than this.
+    private func checkQuizChanged(updated_quiz_data_ids: [String]) {
+        for id in updated_quiz_data_ids {
+            let targetQuizData = quizDatas.first { quizData in
+                return quizData.objectId == id
+            }
+            if let targetQuizData = targetQuizData, let answers = targetQuizData.answers {
+                if answers.count > 2 {
+                    //these quizdatas still have 4 answers. We need to fix this. Do an update
+                    self.checkIfQuizDatasUpdated()
                 }
             }
         }

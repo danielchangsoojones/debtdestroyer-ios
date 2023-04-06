@@ -20,7 +20,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     var endTime: Date?
     var timeLabel =  UILabel()
     var timer = Timer()
-    private let quizDatas: [QuizDataParse]
+    private var quizDatas: [QuizDataParse]
     private let currentIndex: Int
     private var answerViews: [AnswerChoiceNewUIView] = []
     var answerStackView = UIStackView()
@@ -161,11 +161,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     private func showControlBtns() {
         if (User.current()?.isAdminUser ?? false) {
-            let questionPromptFrame = CGRect(x: 100, y: 100, width: 300, height: 100)
+            let questionPromptFrame = CGRect(x: 150, y: 100, width: 200, height: 65)
             createBtn(title: "Start Question Prompt", selector: #selector(startQuestionPromptControl), backgroundColor: .purple, frame: questionPromptFrame)
             
             let revealAnswerFrame = CGRect(x: questionPromptFrame.minX,
-                                           y: 265,
+                                           y: 200,
                                            width: questionPromptFrame.width,
                                            height: questionPromptFrame.height)
             createBtn(title: "Reveal Answer",
@@ -179,9 +179,46 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                    height: 60)
             createBtn(title: "skip",
                       selector: #selector(adminNextBtn),
-                      backgroundColor: .yellow,
+                      backgroundColor: .systemYellow,
                       frame: nextFrame)
+            
+//            let harderFrame = CGRect(x: 30,
+//                                   y: 300,
+//                                   width: 80,
+//                                   height: 60)
+//            createBtn(title: "make harder",
+//                      selector: #selector(makeHarderPressed),
+//                      backgroundColor: .gradOrange,
+//                      frame: harderFrame)
+            
+            let easierFrame = CGRect(x: questionPromptFrame.minX,
+                                   y: 300,
+                                   width: 60,
+                                   height: 40)
+            createBtn(title: "easier",
+                      selector: #selector(makeEasierPressed),
+                      backgroundColor: .fuchsiaPink,
+                      frame: easierFrame)
         }
+    }
+    
+    @objc private func makeHarderPressed() {
+        dataStore.updateMidQuiz(current_order: currentIndex,
+                                quizDatas_length: quizDatas.count, difficulty: "hard") {
+            BannerAlert.show(title: "Success", subtitle: "Increased quiz difficulty", type: .success)
+        }
+    }
+    
+    @objc private func makeEasierPressed() {
+        let alertView = SCLAlertView()
+        alertView.addButton("Make Easier") {
+            self.dataStore.updateMidQuiz(current_order: self.currentIndex,
+                                         quizDatas_length: self.quizDatas.count, difficulty: "easy") {
+                BannerAlert.show(title: "Success", subtitle: "The quiz is now easier", type: .success)
+            }
+        }
+        
+        alertView.showWait("Make Easier?", subTitle: "Are you sure that you want to make the quiz easier?")
     }
     
     @objc private func startQuestionPromptControl() {
@@ -197,7 +234,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                 shouldStartQuestionPrompt: true,
                                                 currentIndex: nil,
                                                 currentQuizData: currentData, completion: { _ in
-                
+                self.checkIfQuizDatasUpdated()
             })
         }
     }
@@ -232,9 +269,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             let now = Date()
             if currentData.quizTopic.start_time > now {
                 //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
-                self.answer_video_url = AnswerKeysViewController.answer_video_urls[currentIndex]
-                self.revealAnswer(with: AnswerKeysViewController.correct_indices[currentIndex])
-                self.playVideoAnswer()
+                if let item = AnswerKeysViewController.getItem(withId: currentData.objectId ?? "") {
+                    self.answer_video_url = item.answer_url
+                    self.revealAnswer(with: item.correct_answer_index)
+                    self.playVideoAnswer()
+                }
             } else {
                 let quizManagerDataStore = CryptoSettingsDataStore()
                 quizManagerDataStore.markQuizStatus(quizDatas: quizDatas,
@@ -242,7 +281,25 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                     currentIndex: currentIndex,
                                                     currentQuizData: currentData) { quizTopic in
                     self.competing_tie_user_ids =  quizTopic.competing_tie_user_ids
+                    self.checkIfQuizDatasUpdated()
                 }
+            }
+        }
+    }
+    
+    //we update the quizdatas because sometimes can be updated mid quiz
+    private func checkIfQuizDatasUpdated() {
+        dataStore.getQuizData { result, error in
+            if let quizDatas = result as? [QuizDataParse] {
+                self.quizDatas = quizDatas
+            } else if let error = error {
+                if error.localizedDescription.contains("error-force-update") {
+                    ForceUpdate.showAlert()
+                } else {
+                    BannerAlert.show(with: error)
+                }
+            } else {
+                BannerAlert.showUnknownError(functionName: "getQuizData")
             }
         }
     }
@@ -256,6 +313,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         btn.backgroundColor = backgroundColor
         btn.setTitle(title, for: .normal)
         btn.addTarget(self, action: selector, for: .touchUpInside)
+        btn.titleLabel?.numberOfLines = 2
         self.view.addSubview(btn)
     }
     
@@ -335,7 +393,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                               currentQuizDataID: currentData.objectId ?? "")
             }
             
-            dataStore.checkLiveQuizPosition(quizData: currentData, inTieMode: inTieMode) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer, competing_tie_user_ids, won_array, lost_array    in
+            dataStore.checkLiveQuizPosition(quizData: currentData, inTieMode: inTieMode) { show_question_prompt_time, correct_answer_index, current_quiz_seconds, answer_video_url, current_quiz_data_id, shouldRevealAnswer, competing_tie_user_ids, won_array, lost_array, updated_quiz_data_ids    in
                 if !self.inTieMode {
                     self.jumpToCurrentVideoMoment(current_quiz_seconds: current_quiz_seconds, current_quiz_data_id: current_quiz_data_id)
                 }
@@ -351,6 +409,22 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 } else if let show_question_prompt_time = show_question_prompt_time {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
                 }
+                
+                self.checkQuizChanged(updated_quiz_data_ids: updated_quiz_data_ids)
+            }
+        }
+    }
+    
+    //we do a check to see if there is a mismatch of data from the client side to the server one
+    //if there is, then lets do an update.
+    private func checkQuizChanged(updated_quiz_data_ids: [String]) {
+        for id in updated_quiz_data_ids {
+            let isInCurrrentArray = quizDatas.contains { quizData in
+                return quizData.objectId == id
+            }
+            if !isInCurrrentArray {
+                self.checkIfQuizDatasUpdated()
+                break
             }
         }
     }

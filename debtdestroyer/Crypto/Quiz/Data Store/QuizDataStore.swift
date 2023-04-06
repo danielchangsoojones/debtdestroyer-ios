@@ -10,7 +10,7 @@ import Parse
 import SwiftyJSON
 
 class QuizDataStore {
-    func checkLiveQuizPosition(quizData: QuizDataParse, inTieMode: Bool, completion: @escaping (Date?, Int?, Double, String?, String, Bool, [String], [String], [String]) -> Void) {
+    func checkLiveQuizPosition(quizData: QuizDataParse, inTieMode: Bool, completion: @escaping (Date?, Int?, Double, String?, String, Bool, [String], [String], [String], [String]) -> Void) {
         let parameters: [String : Any] = ["quizDataID" : quizData.objectId ?? "", "isInTieMode": inTieMode]
         PFCloud.callFunction(inBackground: "checkLiveQuizPosition", withParameters: parameters) { (result, error) in
             if let result = result {
@@ -31,6 +31,9 @@ class QuizDataStore {
                 let lost_array: [String] = json["lost_tie_array"].arrayValue.map { json in
                     return json.stringValue
                 }
+                let updated_quiz_data_ids: [String] = json["updated_quiz_data_ids"].arrayValue.map { json in
+                    return json.stringValue
+                }
                 completion(show_question_prompt_time,
                            correct_answer_index,
                            current_time_seconds,
@@ -39,7 +42,8 @@ class QuizDataStore {
                            shouldRevealAnswer,
                            competing_tie_user_ids,
                            won_array,
-                           lost_array
+                           lost_array,
+                           updated_quiz_data_ids
                 )
             } else if let error = error {
                 BannerAlert.show(with: error)
@@ -270,6 +274,22 @@ class QuizDataStore {
     func logUserSocials(socials: [String], completion: @escaping () -> Void) {
         let parameters: [String : Any] = ["userSocials": socials]
         PFCloud.callFunction(inBackground: "logUserSocials", withParameters: parameters) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "logUserSocials")
+            }
+        }
+    }
+    
+    func updateMidQuiz(current_order: Int, quizDatas_length: Int, difficulty: String, completion: @escaping () -> Void) {
+        let parameters: [String : Any] = ["current_order": current_order,
+                                          "quizDatas_length": quizDatas_length,
+                                          "difficulty": difficulty
+        ]
+        PFCloud.callFunction(inBackground: "updateMidQuiz", withParameters: parameters) { (result, error) in
             if result != nil {
                 completion()
             } else if let error = error {

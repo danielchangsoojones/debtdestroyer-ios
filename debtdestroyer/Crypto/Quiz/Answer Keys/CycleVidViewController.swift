@@ -24,7 +24,7 @@ class CycleVidViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let answer_urls = AnswerKeysViewController.answer_video_urls
+        let answer_urls = Array(AnswerKeysViewController.answer_dict.values.map { $0.answer_url })
         self.videoUrls.append(contentsOf: answer_urls)
         getVidURLS()
     }

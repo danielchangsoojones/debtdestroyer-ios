@@ -45,6 +45,7 @@ class CycleVidViewController: UIViewController {
     }
     
     // MARK: - Helper Methods
+    var observerStatus: NSKeyValueObservation?
     @objc func playerDidFinishPlaying() {
         currentIndex += 1
         
@@ -53,9 +54,18 @@ class CycleVidViewController: UIViewController {
         } else {
             let url = videoUrls[currentIndex]
             print(url)
-            player?.replaceCurrentItem(with: AVPlayerItem(url: URL(string: url)!))
+            let item = AVPlayerItem(url: URL(string: url)!)
+            player?.replaceCurrentItem(with: item)
             player?.play()
             NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+            
+            observerStatus = item.observe(\.status, changeHandler: { (item, value) in
+                debugPrint("status: \(item.status.rawValue)")
+                if item.status == .failed {
+                    // enqueue new asset with diff url
+                    print("failed")
+                }
+            })
         }
     }
     

@@ -32,7 +32,9 @@ class CycleVidViewController: UIViewController {
     // MARK: - Configuration
     
     func configurePlayer() {
-        let videoURL = URL(string: videoUrls[currentIndex])
+        let url = videoUrls[currentIndex]
+        print(url)
+        let videoURL = URL(string: url)
         player = AVPlayer(url: videoURL!)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = view.bounds
@@ -49,7 +51,9 @@ class CycleVidViewController: UIViewController {
         if currentIndex >= videoUrls.count {
             showAllVideosFinishedAlert()
         } else {
-            player?.replaceCurrentItem(with: AVPlayerItem(url: URL(string: videoUrls[currentIndex])!))
+            let url = videoUrls[currentIndex]
+            print(url)
+            player?.replaceCurrentItem(with: AVPlayerItem(url: URL(string: url)!))
             player?.play()
             NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         }

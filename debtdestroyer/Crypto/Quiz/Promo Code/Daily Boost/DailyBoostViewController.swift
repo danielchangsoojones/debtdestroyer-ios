@@ -18,12 +18,18 @@ class DailyBoostViewController: UIViewController {
     private var valuePropStackView: UIStackView!
     private var titleLabel: UILabel!
     private var subtitleLabel: UILabel!
-    var saveModalDismissed: (() -> Void)?
-    var saveSharePressed: (() -> Void)?
+    var saveModalDismissed: ((String) -> Void)?
+    var saveSharePressed: ((String) -> Void)?
     private var titleLabelText: String
     private var valuePropsText: [String]
+    private var userSocials: [String]
+    private var selectedSocial = "Instagram"
+    private var socialsStackView: UIStackView!
+    private var instagramSelection: UIButton!
+    private var twitterSelection: UIButton!
     
-    init(titleLabelText: String, valuePropsText: [String]) {
+    init(userSocials: [String], titleLabelText: String, valuePropsText: [String]) {
+        self.userSocials = userSocials
         self.titleLabelText = titleLabelText
         self.valuePropsText = valuePropsText
         super.init(nibName: nil, bundle: nil)
@@ -42,6 +48,7 @@ class DailyBoostViewController: UIViewController {
         setupShareButton()
         setupValuePropStackView()
         setUpLabels()
+        setUpSocialSelectionButtons()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -85,26 +92,21 @@ class DailyBoostViewController: UIViewController {
     }
     
     private func setupShareButton() {
-        if let image = UIImage(named: "instagram_icon") {
-            shareButton = UIButton()
-            shareButton.setTitle("Share for Boost", for: .normal)
-            shareButton.setTitleColor(UIColor(red: 223/255, green: 0/255, blue: 181/255, alpha: 1), for: .normal)
-            shareButton.backgroundColor = .white
-            shareButton.layer.cornerRadius = 30
-            shareButton.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
-            shareButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: -5, bottom: 10, right: 10)
-            boostView.addSubview(shareButton)
-            shareButton.snp.makeConstraints { (make) in
-                make.leading.trailing.equalToSuperview().inset(15)
-                make.bottom.equalToSuperview().inset(20)
-                make.height.equalTo(60)
-            }
-            
-            shareButton.setImage(image, for: .normal)
-            shareButton.imageView?.contentMode = .scaleAspectFit
-            shareButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: -10)
-            shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
+        shareButton = UIButton()
+        shareButton.setTitleColor(.white, for: .normal)
+        shareButton.backgroundColor = UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1)
+        shareButton.layer.cornerRadius = 30
+        shareButton.layer.borderColor = UIColor.white.cgColor
+        shareButton.layer.borderWidth = 2
+        shareButton.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
+        boostView.addSubview(shareButton)
+        shareButton.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview().inset(15)
+            make.bottom.equalToSuperview().inset(20)
+            make.height.equalTo(60)
         }
+        
+        shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
     }
     
     private func setupValuePropStackView() {
@@ -122,13 +124,6 @@ class DailyBoostViewController: UIViewController {
         setupStackContent(valuePropsText: valuePropsText)
     }
     
-//    private func setupStackContent() {
-//        let valuePropOneView = createValueProp(number: "1", value: "Share your promo code to 2X your Top 5 Prize to $20 today! 🎉")
-//        let valuePropTwoView = createValueProp(number: "2", value: "Your referred friends also get a 2X boost in today’s Top 5 prize! 🤑")
-//        valuePropStackView.addArrangedSubview(valuePropOneView)
-//        valuePropStackView.addArrangedSubview(valuePropTwoView)
-//    }
-    
     private func setupStackContent(valuePropsText: [String]) {
         for (index, value) in valuePropsText.enumerated() {
             let valuePropView = createValueProp(number: "\(index + 1)", value: value)
@@ -141,18 +136,6 @@ class DailyBoostViewController: UIViewController {
         let valuePropView = UIView()
         valuePropView.backgroundColor = .black
         
-//        let numberButton = UIButton()
-//        numberButton.setTitle(number, for: .normal)
-//        numberButton.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 39/255)
-//        numberButton.layer.cornerRadius = 15
-//        numberButton.layer.borderWidth = 2
-//        numberButton.layer.borderColor = UIColor.white.cgColor
-//        valuePropView.addSubview(numberButton)
-//        numberButton.snp.makeConstraints { make in
-//            make.leading.top.equalToSuperview()
-//            make.height.width.equalTo(30)
-//        }
-        
         let valueLabel = UILabel()
         valueLabel.numberOfLines = 0
         valueLabel.textColor = .white
@@ -160,26 +143,11 @@ class DailyBoostViewController: UIViewController {
         valueLabel.textAlignment = .left
         valuePropView.addSubview(valueLabel)
         valueLabel.snp.makeConstraints { (make) in
-//            make.top.equalTo(numberButton)
             make.trailing.equalToSuperview()
-//            make.leading.equalTo(numberButton.snp.trailing).offset(15)
             make.leading.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         valueLabel.text = value
-//        let blueColor = UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1)
-//        if number == "1" {
-//            let attributedString = NSMutableAttributedString(string: value)
-//            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: blueColor, range: NSRange(location: 24, length: 34))
-//            valueLabel.attributedText = attributedString
-//        } else if number == "2" {
-//            let attributedString = NSMutableAttributedString(string: value)
-//            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: blueColor, range: NSRange(location: 33, length: 32))
-//            valueLabel.attributedText = attributedString
-//        } else {
-//            valueLabel.text = value
-//        }
-        
         return valuePropView
     }
 
@@ -201,9 +169,6 @@ class DailyBoostViewController: UIViewController {
         titleLabel.textColor = .white
         titleLabel.numberOfLines = 1
         titleLabel.font = .systemFont(ofSize: 30, weight: .semibold)
-//        let attributedString = NSMutableAttributedString(string: "2X ", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .semibold)])
-//        attributedString.append(NSAttributedString(string: "Top 5 Prize", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .semibold)]))
-//        titleLabel.attributedText = attributedString
         titleLabel.textAlignment = .center
         boostView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
@@ -225,14 +190,84 @@ class DailyBoostViewController: UIViewController {
         }
     }
     
+    private func setUpSocialSelectionButtons() {
+        //set up two buttons so that the user can toggle
+        socialsStackView = UIStackView()
+        socialsStackView.spacing = 15
+        socialsStackView.axis = .horizontal
+        socialsStackView.distribution = .fillEqually
+        socialsStackView.alignment = .center
+        view.addSubview(socialsStackView)
+        socialsStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(50)
+            make.bottom.equalTo(boostView.snp.top).offset(-15)
+        }
+        instagramSelection = createButton(imageName: "instagram_white")
+        twitterSelection = createButton(imageName: "twitter_icon")
+        instagramSelection.addTarget(self, action: #selector(instagramSelected), for: .touchUpInside)
+        twitterSelection.addTarget(self, action: #selector(twitterSelected), for: .touchUpInside)
+        
+        //we only show the stackview when both the IG + Twitter apps exist. Otherwise, we don't need to show the stackview
+        if userSocials.contains("Instagram") && userSocials.contains("Twitter") {
+            socialsStackView.addArrangedSubview(instagramSelection)
+            socialsStackView.addArrangedSubview(twitterSelection)
+            toggleSocialButton(platform: "instagram")
+        } else if userSocials.contains("Instagram") && !userSocials.contains("Twitter") {
+            toggleSocialButton(platform: "instagram")
+        } else if !userSocials.contains("Instagram") && userSocials.contains("Twitter") {
+            toggleSocialButton(platform: "twitter")
+        }
+    }
+    
+    @objc private func instagramSelected() {
+        toggleSocialButton(platform: "instagram")
+    }
+    
+    @objc private func twitterSelected() {
+        toggleSocialButton(platform: "twitter")
+    }
+    
+    private func toggleSocialButton(platform: String) {
+        selectedSocial = platform == "instagram" ? "Instagram" : "Twitter"
+        
+        //update background color of selected button
+        instagramSelection.backgroundColor = platform == "instagram" ? UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1) : UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1)
+        instagramSelection.layer.borderColor = platform == "instagram" ? UIColor.white.cgColor : .none
+        instagramSelection.layer.borderWidth = platform == "instagram" ? 3 : 0
+        
+        //update background color of unselected button
+        twitterSelection.backgroundColor = platform == "instagram" ? UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1) : UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1)
+        twitterSelection.layer.borderColor = platform == "instagram" ? .none : UIColor.white.cgColor
+        twitterSelection.layer.borderWidth = platform == "instagram" ? 0 : 3
+        
+        //update tht title of the share button
+        shareButton.setTitle("Share on \(selectedSocial)", for: .normal)
+    }
+    
+    private func createButton(imageName: String) -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1)
+        button.layer.cornerRadius = 20
+        let horizontalInset: CGFloat = 5
+        let verticalInset: CGFloat = 10
+        button.contentEdgeInsets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate) {
+            button.setImage(image, for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
+            button.tintColor = .white
+        }
+        
+        return button
+    }
+    
     @objc func declineButtonPressed() {
         dismiss(animated: true, completion: nil)
-        saveModalDismissed?()
+        saveModalDismissed?(selectedSocial)
     }
     
     @objc func shareButtonPressed() {
         dismiss(animated: true, completion: nil)
-        saveSharePressed?()
+        saveSharePressed?(selectedSocial)
     }
 }
 

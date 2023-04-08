@@ -234,7 +234,6 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                 shouldStartQuestionPrompt: true,
                                                 currentIndex: nil,
                                                 currentQuizData: currentData, completion: { _ in
-                self.checkIfQuizDatasUpdated()
             })
         }
     }
@@ -281,7 +280,6 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                     currentIndex: currentIndex,
                                                     currentQuizData: currentData) { quizTopic in
                     self.competing_tie_user_ids =  quizTopic.competing_tie_user_ids
-                    self.checkIfQuizDatasUpdated()
                 }
             }
         }

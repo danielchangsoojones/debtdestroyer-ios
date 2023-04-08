@@ -408,7 +408,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     self.startQuestionPrompt(start_time: show_question_prompt_time)
                 }
                 
-                self.checkQuizChanged(updated_quiz_data_ids: updated_quiz_data_ids)
+                if !self.inTieMode {
+                    self.checkQuizChanged(updated_quiz_data_ids: updated_quiz_data_ids)
+                }
             }
         }
     }

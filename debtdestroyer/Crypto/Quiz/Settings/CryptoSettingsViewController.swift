@@ -7,6 +7,7 @@
 
 import UIKit
 import SCLAlertView
+import StoreKit
 
 class CryptoSettingsViewController: UIViewController {
     enum CellType: String {
@@ -21,6 +22,7 @@ class CryptoSettingsViewController: UIViewController {
         case textNoti = "Send Text Notification"
         case answerKeys = "Answer Keys"
         case quizQuestions = "Quiz Questions"
+        case rateUs = "Rate Us on App Store"
         
         var imageName: String {
             switch self {
@@ -38,6 +40,8 @@ class CryptoSettingsViewController: UIViewController {
                 return "bell"
             case .promoCode:
                 return "invite"
+            case .rateUs:
+                return "feedback"
             }
         }
     }
@@ -57,7 +61,7 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .rateUs, .legaDisclosure, .logOut, .deleteAcc]
         
         if (User.current()?.showConnectAccount ?? false) {
             dataArr.insert(.connectedAccounts, at: 2)
@@ -201,7 +205,16 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 // MARK: Answer Keys
                 let vc = QuizQuestionsViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
-                
+        case .rateUs:
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            } else {
+                //TODO: need to confirm in production if this takes you to the app store review page
+                let appID = "1639968618"
+                let urlStr = "itms-apps://itunes.apple.com/us/app/itunes-u/id\(appID)?ls=1&mt=8&action=write-review"
+                guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
         }
     }
     

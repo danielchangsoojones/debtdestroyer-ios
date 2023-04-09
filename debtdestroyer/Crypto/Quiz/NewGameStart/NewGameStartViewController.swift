@@ -128,8 +128,10 @@ class NewGameStartViewController: UIViewController {
                 }
             }
             dailyBoostVC.saveSharePressed = { selectedSocial in
+                dailyBoostVC.shareButton.isEnabled = false
                 self.shareOnSocial(selectedSocial: selectedSocial)
                 self.quizDataStore.saveSpecialReferral(socialType: selectedSocial, actionType: "shared") {
+                    dailyBoostVC.shareButton.isEnabled = true
                     shownOnQuizTopics.append(self.quizTopicID)
                     UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
                 }

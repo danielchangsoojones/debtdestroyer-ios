@@ -14,7 +14,7 @@ class DailyBoostViewController: UIViewController {
     private var backdropView: UIView!
     private var boostView: UIView!
     private var declineButton: UIButton!
-    private var shareButton: UIButton!
+    var shareButton: UIButton!
     private var valuePropStackView: UIStackView!
     private var titleLabel: UILabel!
     private var subtitleLabel: UILabel!

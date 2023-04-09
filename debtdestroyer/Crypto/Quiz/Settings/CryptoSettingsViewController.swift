@@ -23,6 +23,7 @@ class CryptoSettingsViewController: UIViewController {
         case answerKeys = "Answer Keys"
         case quizQuestions = "Quiz Questions"
         case rateUs = "Rate Us on App Store"
+        case orderSwag = "Buy Swag"
         
         var imageName: String {
             switch self {
@@ -42,6 +43,8 @@ class CryptoSettingsViewController: UIViewController {
                 return "invite"
             case .rateUs:
                 return "feedback"
+            case .orderSwag:
+                return "swag"
             }
         }
     }
@@ -61,7 +64,7 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.promoCode, .notification, .contactUs, .winnerInfo, .rateUs, .legaDisclosure, .logOut, .deleteAcc]
+        dataArr = [.promoCode, .notification, .orderSwag, .contactUs, .rateUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
         
         if (User.current()?.showConnectAccount ?? false) {
             dataArr.insert(.connectedAccounts, at: 2)
@@ -215,6 +218,10 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
+            
+        case .orderSwag:
+            let swagPage = NotionViewController(notionURL: "https://dankwun.notion.site/Debt-Destroyer-Swag-aeec29bb9b4948db9dffa105ebba7a12")
+            self.navigationController?.pushViewController(swagPage.self, animated: true)
         }
     }
     

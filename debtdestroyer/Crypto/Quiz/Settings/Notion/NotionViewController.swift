@@ -26,16 +26,24 @@ class NotionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
-        let url = URL(string: appUrl)!
-        webView.load(URLRequest(url: url))
-        navigationController?.navigationBar.tintColor = .white
+        
+        DispatchQueue.main.async {
+            if let url = URL(string: self.appUrl) {
+                self.webView.load(URLRequest(url: url))
+            }
+        }
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.backgroundColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.tabBarController?.tabBar.isHidden = true
     }
 
     override func loadView() {

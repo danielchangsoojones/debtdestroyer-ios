@@ -80,7 +80,7 @@ class PromoCodeUsedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Your Code: \(User.current()?.personalPromo) ?? """
+        self.title = "Your Code: \(User.current()?.personalPromo ?? "")"
         navigationController?.navigationBar.topItem?.title = ""
         messageHelper = MessageHelper(currentVC: self)
         messageHelper?.messageDelegate = self

@@ -177,6 +177,7 @@
 		C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F629CD0E6700858D2E /* InviteContactCell.swift */; };
 		C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F829CD802400858D2E /* InviteHeaderCell.swift */; };
 		C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */; };
+		C0C9E4A629E2406600BABAB6 /* WebsiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* WebsiteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -356,6 +357,7 @@
 		C07369F629CD0E6700858D2E /* InviteContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteContactCell.swift; sourceTree = "<group>"; };
 		C07369F829CD802400858D2E /* InviteHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteHeaderCell.swift; sourceTree = "<group>"; };
 		C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteJoinedCell.swift; sourceTree = "<group>"; };
+		C0C9E4A529E2406600BABAB6 /* WebsiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,6 +646,7 @@
 			children = (
 				0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */,
 				0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */,
+				C0C9E4A529E2406600BABAB6 /* WebsiteViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1232,6 +1235,7 @@
 				92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
+				C0C9E4A629E2406600BABAB6 /* WebsiteViewController.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,

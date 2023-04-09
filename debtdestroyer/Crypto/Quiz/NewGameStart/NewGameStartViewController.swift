@@ -128,12 +128,10 @@ class NewGameStartViewController: UIViewController {
                 }
             }
             dailyBoostVC.saveSharePressed = { selectedSocial in
-                dailyBoostVC.shareButton.isEnabled = false
                 dailyBoostVC.shareButton.startSpinning()
                 dailyBoostVC.shareButton.setTitle("", for: .normal)
                 self.shareOnSocial(selectedSocial: selectedSocial)
                 self.quizDataStore.saveSpecialReferral(socialType: selectedSocial, actionType: "shared") {
-                    dailyBoostVC.shareButton.isEnabled = true
                     dailyBoostVC.shareButton.stopSpinning()
                     dailyBoostVC.shareButton.setTitle(selectedSocial == "Instagram" ? "Share on Instagram" : "Share on Twitter", for: .normal)
                     shownOnQuizTopics.append(self.quizTopicID)

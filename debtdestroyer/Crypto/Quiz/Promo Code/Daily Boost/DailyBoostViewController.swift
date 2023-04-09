@@ -14,7 +14,7 @@ class DailyBoostViewController: UIViewController {
     private var backdropView: UIView!
     private var boostView: UIView!
     private var declineButton: UIButton!
-    var shareButton: UIButton!
+    var shareButton: SpinningButton!
     private var valuePropStackView: UIStackView!
     private var titleLabel: UILabel!
     private var subtitleLabel: UILabel!
@@ -92,7 +92,7 @@ class DailyBoostViewController: UIViewController {
     }
     
     private func setupShareButton() {
-        shareButton = UIButton()
+        shareButton = SpinningButton()
         shareButton.setTitleColor(.white, for: .normal)
         shareButton.backgroundColor = UIColor(red: 58/255, green: 130/255, blue: 247/255, alpha: 1)
         shareButton.layer.cornerRadius = 30

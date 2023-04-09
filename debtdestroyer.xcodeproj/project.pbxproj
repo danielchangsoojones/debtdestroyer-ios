@@ -177,7 +177,8 @@
 		C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F629CD0E6700858D2E /* InviteContactCell.swift */; };
 		C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F829CD802400858D2E /* InviteHeaderCell.swift */; };
 		C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */; };
-		C0C9E4A629E2406600BABAB6 /* WebsiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* WebsiteViewController.swift */; };
+		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
+		C0C9E4A929E2641100BABAB6 /* NotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A829E2641100BABAB6 /* NotionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -357,7 +358,8 @@
 		C07369F629CD0E6700858D2E /* InviteContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteContactCell.swift; sourceTree = "<group>"; };
 		C07369F829CD802400858D2E /* InviteHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteHeaderCell.swift; sourceTree = "<group>"; };
 		C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteJoinedCell.swift; sourceTree = "<group>"; };
-		C0C9E4A529E2406600BABAB6 /* WebsiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteViewController.swift; sourceTree = "<group>"; };
+		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
+		C0C9E4A829E2641100BABAB6 /* NotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,9 +646,9 @@
 		0A59ACE328E183F4001B774A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				C0C9E4A729E263D900BABAB6 /* Notion */,
 				0A59ACE428E183F4001B774A /* CryptoSettingsViewController.swift */,
 				0A16A73E2937506000B2647B /* CryptoSettingsDataStore.swift */,
-				C0C9E4A529E2406600BABAB6 /* WebsiteViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1077,6 +1079,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C0C9E4A729E263D900BABAB6 /* Notion */ = {
+			isa = PBXGroup;
+			children = (
+				C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */,
+				C0C9E4A829E2641100BABAB6 /* NotionView.swift */,
+			);
+			path = Notion;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1235,7 +1246,7 @@
 				92FF0EB82972322200ED029D /* WaitlistViewController.swift in Sources */,
 				0A718C3F28A0D94D0086B27C /* GalleryCollectionViewCell.swift in Sources */,
 				0AE126B1291AAA5700E11003 /* ConfirmInfoView.swift in Sources */,
-				C0C9E4A629E2406600BABAB6 /* WebsiteViewController.swift in Sources */,
+				C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */,
 				0A9E94A128B62F2A00985179 /* TransactionHistoryCell.swift in Sources */,
 				0AB3F58728BCF9910081758C /* SubscriptionViewController.swift in Sources */,
 				0A25F65328A28B7600D5D183 /* EarnTicketCell.swift in Sources */,
@@ -1345,6 +1356,7 @@
 				92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,
 				0A6049F229890137002CC0B4 /* QuizQuestionTableViewCell.swift in Sources */,
+				C0C9E4A929E2641100BABAB6 /* NotionView.swift in Sources */,
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,

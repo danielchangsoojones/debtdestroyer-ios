@@ -8,14 +8,14 @@
 import UIKit
 import WebKit
 
-class WebsiteViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
+class NotionViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     private var webView: WKWebView!
     // the handler name injected into the web app for iOS webviews.
     let vouchedHandler = "onVouchedVerify"
     let appUrl: String!
     
-    init(webURL: String!) {
-        self.appUrl = webURL
+    init(notionURL: String!) {
+        self.appUrl = notionURL
         super.init(nibName: nil, bundle: nil)
     }
     

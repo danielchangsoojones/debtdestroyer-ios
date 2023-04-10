@@ -582,7 +582,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             self.showIntervieweePhoto(shouldShow: false)
             
             if User.isAppleTester || User.isIpadDemo {
-                let video_answer_id = currentData.videoAnswer.objectId ?? ""
+                let video_answer_id = currentData.videoAnswer?.objectId ?? ""
                 dataStore.loadVideoAnswer(video_answer_id: video_answer_id) { videoAnswer in
                     self.answer_video_url = videoAnswer.video_url_string
                     self.revealAnswer(with: self.currentData.correct_answer_index)

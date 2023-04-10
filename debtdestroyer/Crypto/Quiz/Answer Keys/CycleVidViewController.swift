@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import AVFoundation
 import SCLAlertView
 
 class CycleVidViewController: UIViewController {
@@ -14,78 +15,30 @@ class CycleVidViewController: UIViewController {
     // MARK: - Properties
     
     var videoUrls: [String] = []
-    
-    var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
-    var currentIndex = 0
     private let dataStore = QuizDataStore()
-    
-    init(videoURLs: [String], currentIndex: Int) {
-        self.currentIndex = currentIndex
-        self.videoUrls = videoURLs
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    let queuePlayer = AVQueuePlayer()
     
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if videoUrls.isEmpty {
-            let answer_urls = Array(AnswerKeysViewController.answer_dict.values.map { $0.answer_url })
-            self.videoUrls.append(contentsOf: answer_urls)
-            getVidURLS()
-        } else {
-            Timer.runThisAfterDelay(seconds: 3.0) {
-                self.configurePlayer()
-            }
-        }
+        let answer_urls = Array(AnswerKeysViewController.answer_dict.values.map { $0.answer_url })
+        self.videoUrls.append(contentsOf: answer_urls)
+        getVidURLS()
     }
     
-    // MARK: - Configuration
-    
     func configurePlayer() {
-        let url = videoUrls[currentIndex]
-        print(url)
-        let videoURL = URL(string: url)
-        player = AVPlayer(url: videoURL!)
-        playerLayer = AVPlayerLayer(player: player)
+        let playerItems = self.videoUrls.map { AVPlayerItem(url: URL(string: $0)!) }
+        for playerItem in playerItems {
+            self.queuePlayer.insert(playerItem, after: nil)
+        }
+        
+        playerLayer =  AVPlayerLayer(player: queuePlayer)
         playerLayer.frame = view.bounds
         playerLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(playerLayer)
-        player.play()
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
-    }
-    
-    // MARK: - Helper Methods
-    var observerStatus: NSKeyValueObservation?
-    @objc func playerDidFinishPlaying() {
-        currentIndex += 1
-        
-        if currentIndex >= videoUrls.count {
-            showAllVideosFinishedAlert()
-        } else {
-            let url = videoUrls[currentIndex]
-            print(url)
-            let item = AVPlayerItem(url: URL(string: url)!)
-            player?.replaceCurrentItem(with: item)
-            player?.play()
-            NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
-            
-            observerStatus = item.observe(\.status, changeHandler: { (item, value) in
-                debugPrint("status: \(item.status.rawValue)")
-                if item.status == .failed {
-                    // enqueue new asset with diff url
-                    print("failed")
-                    //we make it push to a new viewcontroller because I have no idea what is wrong with apple. But, sometimes it can't load a url, even though the url is fine. This seems to fix it. I'm not sure yet.
-                    let vc = CycleVidViewController(videoURLs: self.videoUrls, currentIndex: self.currentIndex)
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            })
-        }
+        queuePlayer.play()
     }
     
     func showAllVideosFinishedAlert() {
@@ -103,10 +56,7 @@ class CycleVidViewController: UIViewController {
     private func getVidURLS() {
         dataStore.getQuizData { result, error  in
             if let quizDatas = result as? [QuizDataParse] {
-                let questionURLS = quizDatas.map { quizData in
-                    return quizData.video_url_string
-                }
-                self.videoUrls.append(contentsOf: questionURLS)
+                self.addToVids(quizDatas: quizDatas)
                 self.getSwitchQuizData()
             } else if let error = error {
                 if error.localizedDescription.contains("error-force-update") {
@@ -124,14 +74,24 @@ class CycleVidViewController: UIViewController {
         }
     }
     
+    private func addToVids(quizDatas: [QuizDataParse]) {
+        let questionURLS = quizDatas.map { quizData in
+            return quizData.video_url_string
+        }
+        self.videoUrls.append(contentsOf: questionURLS)
+        let answerVideoURLs: [String] = quizDatas.map { quizData in
+            return quizData.videoAnswer?.video_url_string ?? ""
+        }.filter { str in
+            return !str.isEmpty
+        }
+        self.videoUrls.append(contentsOf: answerVideoURLs)
+    }
+    
     func getSwitchQuizData() {
         dataStore.getSwitchQuizDatas { result, error  in
             if let quizDatas = result as? [QuizDataParse] {
-                let questionURLS = quizDatas.map { quizData in
-                    return quizData.video_url_string
-                }
-                self.videoUrls.append(contentsOf: questionURLS)
-                self.configurePlayer()
+                self.addToVids(quizDatas: quizDatas)
+                self.getTieBreakerQuestions()
             } else if let error = error {
                 if error.localizedDescription.contains("error-force-update") {
                     let forceUpdateShown  = ForceUpdate.forceUpdateShown?.withAddedMinutes(minutes: 2)
@@ -145,6 +105,14 @@ class CycleVidViewController: UIViewController {
             } else {
                 BannerAlert.showUnknownError(functionName: "getSwitchQuizDatas")
             }
+        }
+    }
+    
+    func getTieBreakerQuestions() {
+        let tieDataStore = TieBreakerDataStore()
+        tieDataStore.getTieQuizDatas { quizDatas in
+            self.addToVids(quizDatas: quizDatas)
+            self.configurePlayer()
         }
     }
     

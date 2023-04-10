@@ -36,6 +36,7 @@ class NewGameStartViewController: UIViewController {
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
     private let dailyBoostKey = "dailyBoostShownOn" // UserDefaults key for storing dates
     private var shouldCheckForDailyBoost = true
+    private var userSocials:[String] = []
     
     override func loadView() {
         super.loadView()
@@ -98,7 +99,6 @@ class NewGameStartViewController: UIViewController {
     }
 
     private func logUserSocials() {
-        var userSocials:[String] = []
         let socialApps = [("instagram-stories", "Instagram"), ("snapchat", "Snapchat"), ("twitter", "Twitter"), ("fb", "Facebook"), ("whatsapp", "Whatsapp")]
         for app in socialApps {
             if Helpers.checkIfAppOnPhone(appName: app.0) {
@@ -120,7 +120,8 @@ class NewGameStartViewController: UIViewController {
     private func showDailyBoostPopUpIfVisible() {
         //we only want to show this pop up for users who have IG on their phone, hasn't shared for upcoming quiz yet, and if it's more than 2 min or less than 23 hrs before the start of the next game
         let hasUserAlreadySeenBoost = checkIfUserSawBoost()
-        if InstagramStory.checkIfAppOnPhone() && !hasUserAlreadySeenBoost && User.current()?.personalPromoImg != nil && !(User.isAppleTester || User.isIpadDemo) {
+        let hasInstagramOrTwitter = userSocials.contains(where: { $0 == "Instagram" || $0 == "Twitter" })
+        if hasInstagramOrTwitter && !hasUserAlreadySeenBoost && User.current()?.personalPromoImg != nil && !(User.isAppleTester || User.isIpadDemo) {
             self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
                 //i have to add the time check constraint here b/c if I do this in the line where we check for IG app being on the user's phone, the timeLeft gets fetched as 0.
                 if self.timeLeft > 30 && self.timeLeft < 72000 {
@@ -138,18 +139,22 @@ class NewGameStartViewController: UIViewController {
     
     private func showDailyBoostPopUp(titleLabelText: String, valuePropsText: [String]) {
         var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
-        let dailyBoostVC = DailyBoostViewController(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
+        let dailyBoostVC = DailyBoostViewController(userSocials: userSocials, titleLabelText: titleLabelText, valuePropsText: valuePropsText)
         dailyBoostVC.modalPresentationStyle = .custom
         present(dailyBoostVC, animated: true, completion: {
-            dailyBoostVC.saveModalDismissed = {
-                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "dismissed") {
+            dailyBoostVC.saveModalDismissed = { selectedSocial in
+                self.quizDataStore.saveSpecialReferral(socialType: selectedSocial, actionType: "dismissed") {
                     shownOnQuizTopics.append(self.quizTopicID)
                     UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
                 }
             }
-            dailyBoostVC.saveSharePressed = {
-                self.shareOnIGStory()
-                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "shared") {
+            dailyBoostVC.saveSharePressed = { selectedSocial in
+                dailyBoostVC.shareButton.startSpinning()
+                dailyBoostVC.shareButton.setTitle("", for: .normal)
+                self.shareOnSocial(selectedSocial: selectedSocial)
+                self.quizDataStore.saveSpecialReferral(socialType: selectedSocial, actionType: "shared") {
+                    dailyBoostVC.shareButton.stopSpinning()
+                    dailyBoostVC.shareButton.setTitle(selectedSocial == "Instagram" ? "Share on Instagram" : "Share on Twitter", for: .normal)
                     shownOnQuizTopics.append(self.quizTopicID)
                     UserDefaults.standard.set(shownOnQuizTopics, forKey: self.dailyBoostKey)
                 }
@@ -157,23 +162,41 @@ class NewGameStartViewController: UIViewController {
         })
     }
     
-    private func shareOnIGStory() {
+    private func shareOnSocial(selectedSocial: String) {
         Haptics.shared.play(.heavy)
-        if let imageFile = User.current()?.personalPromoImg {
-            imageFile.getDataInBackground { (data, error) in
-                if let imageData = data, let image = UIImage(data: imageData) {
-                    // Use the `image` object to share on Instagram
-                    if let data = image.pngData() {
-                        InstagramStory.sharePhoto(data: data) { bool, string in
-                            //user clicked share, but we really don't have a way to check unless we tell the user to tag us or we check it ourselves
+        if selectedSocial == "Instagram" {
+            if let imageFile = User.current()?.personalPromoImg {
+                imageFile.getDataInBackground { (data, error) in
+                    if let imageData = data, let image = UIImage(data: imageData) {
+                        // Use the `image` object to share on Instagram
+                        if let data = image.pngData() {
+                            InstagramStory.sharePhoto(data: data) { bool, string in
+                                //user clicked share, but we really don't have a way to check unless we tell the user to tag us or we check it ourselves
+                            }
                         }
+                    } else {
+                        BannerAlert.show(title: "Failed to fetch promo image.", subtitle: "Please take a screenshot and text it to 317-690-5323", type: .error)
                     }
-                } else {
-                    print("Failed to get user's promo image for Daily Boost. Please take a screenshot and text it to 317-690-5323: \(error?.localizedDescription ?? "unknown error")")
+                }
+            }
+        }
+
+        if selectedSocial == "Twitter" {
+            let firstName = User.current()?.firstName ?? ""
+            let personalPromo = User.current()?.personalPromo ?? ""
+            //TODO: for some reason twitter ignores the values that come after the &. Cant figure out how to prevent this
+            let referralLink = "https://debt-destroyer-production.herokuapp.com/referral?code=\(personalPromo)&name=\(firstName)"
+            let tweetText = "Play Debt Destroyer (@debtdestroyer_) with me! There's a $15,000 trivia at 9PM EST daily! Sign up using my referral code via this link and download the app!\n\n\(referralLink)"
+            let encodedTweetText = tweetText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            let urlString = "twitter://post?message=\(encodedTweetText)"
+            if let url = URL(string: urlString) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
         }
     }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

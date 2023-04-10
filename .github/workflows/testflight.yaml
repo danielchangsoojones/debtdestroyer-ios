@@ -1,4 +1,4 @@
-name: Release to Test Flight 🚀
+name: Release with Wolfia 🚀
 on:
   push:
     branches: [develop_production]
@@ -36,11 +36,21 @@ jobs:
       - name: Show Xcode version
         run: xcode-select -p
       - name: Build archive
-        run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS"
+        run: xcodebuild -workspace "./debtdestroyer.xcworkspace" -scheme "debtdestroyer" -archivePath "./archives/archive.xcarchive" archive -destination "generic/platform=iOS" CODE_SIGN_STYLE="Manual" PROVISIONING_PROFILE_SPECIFIER="91b582c4-70e6-439e-b705-6427b07ac8f9" DEVELOPMENT_TEAM="WGU25444T9" CODE_SIGN_IDENTITY="Apple Distribution"
+      - name: Install sentry-cli
+        run: curl -sL https://sentry.io/get-cli/ | bash
+      - name: Localize dSYM files
+        run: find ~/Library/Developer/Xcode/DerivedData -name "*.dSYM"
+      - name: Find dSYM files
+        run: echo DSYM_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.dSYM") >> $GITHUB_ENV
+      - name: Upload dSYM files to Sentry
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        run: sentry-cli --auth-token $SENTRY_AUTH_TOKEN upload-dif --org blockstamp-inc --project debtdestroyer-ios $DSYM_PATH
       - name: Export archive and build IPA
         run: xcodebuild -exportArchive -archivePath "./archives/archive.xcarchive" -exportPath "./output" -exportOptionsPlist ./export.plist
       - name: Wolfia Deploy
-        uses: wolfia-app/wolfia-deploy@v0.0.10
+        uses: wolfia-app/wolfia-deploy@v0.0.11
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           wolfia-api-key-id: ${{ vars.WOLFIA_API_KEY_ID }}

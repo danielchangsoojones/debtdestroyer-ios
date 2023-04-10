@@ -18,7 +18,7 @@ class SpinningButton: UIButton {
         setTitleColor(.babyPurple, for: .normal)
         layer.cornerRadius = 20
         
-        setOriginalInsets()
+//        setOriginalInsets()
     }
     
     private func setOriginalInsets() {

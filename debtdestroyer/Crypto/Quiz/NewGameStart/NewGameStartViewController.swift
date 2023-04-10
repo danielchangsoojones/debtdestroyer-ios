@@ -86,7 +86,7 @@ class NewGameStartViewController: UIViewController {
         })
         alertView.addButton("Cycle Vids", action: {
             // Handle "Cycle Vids" option
-            let cycleVC = CycleVidViewController(videoURLs: [], currentIndex: 0)
+            let cycleVC = CycleVidViewController()
             self.navigationController?.pushViewController(cycleVC, animated: true)
         })
         alertView.addButton("Tiebreaker", action: {

@@ -38,7 +38,7 @@ class CryptoSettingsViewController: UIViewController {
             case .deleteAcc:
                 return "deleteAcc"
             case .notification, .textNoti:
-                return "bell"
+                return "Bell"
             case .promoCode:
                 return "invite"
             case .rateUs:
@@ -64,7 +64,12 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.promoCode, .notification, .orderSwag, .contactUs, .rateUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        dataArr = [.notification, .contactUs, .rateUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        
+        if !(User.isAppleTester) {
+            dataArr.insert(.promoCode, at: 0)
+            dataArr.insert(.orderSwag, at: 1)
+        }
         
         if (User.current()?.showConnectAccount ?? false) {
             dataArr.insert(.connectedAccounts, at: 2)

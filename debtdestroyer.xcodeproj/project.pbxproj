@@ -154,6 +154,7 @@
 		9208AD4D28E69B0700D5546E /* QuizScoreParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */; };
 		9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */; };
 		9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */; };
+		921FA5E829DE3929006FA036 /* CycleVidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FA5E729DE3929006FA036 /* CycleVidViewController.swift */; };
 		9228AF042908D8E200CF2F90 /* TicketsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228AF032908D8E200CF2F90 /* TicketsCountView.swift */; };
 		924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */; };
 		9249DC7829ABE89500E66170 /* ConfigurationParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249DC7729ABE89500E66170 /* ConfigurationParse.swift */; };
@@ -331,6 +332,7 @@
 		9208AD4C28E69B0700D5546E /* QuizScoreParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizScoreParse.swift; sourceTree = "<group>"; };
 		9208AD4E28E69BD400D5546E /* LeaderboardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableCell.swift; sourceTree = "<group>"; };
 		9208AD5028E69F3A00D5546E /* LeaderboardDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardDataStore.swift; sourceTree = "<group>"; };
+		921FA5E729DE3929006FA036 /* CycleVidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleVidViewController.swift; sourceTree = "<group>"; };
 		9228AF032908D8E200CF2F90 /* TicketsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCountView.swift; sourceTree = "<group>"; };
 		924022CB28E5E6DC00DF9F49 /* NumberExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		9249DC7729ABE89500E66170 /* ConfigurationParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationParse.swift; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 			isa = PBXGroup;
 			children = (
 				0A892652297FB24C002C71C1 /* AnswerKeysViewController.swift */,
+				921FA5E729DE3929006FA036 /* CycleVidViewController.swift */,
 			);
 			path = "Answer Keys";
 			sourceTree = "<group>";
@@ -1271,6 +1274,7 @@
 				0A50659128C346D200207759 /* SubscriptionView.swift in Sources */,
 				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
+				921FA5E829DE3929006FA036 /* CycleVidViewController.swift in Sources */,
 				0A16A73F2937506000B2647B /* CryptoSettingsDataStore.swift in Sources */,
 				0A59AD1128E19727001B774A /* QuizTopicParse.swift in Sources */,
 				C07369F229CD0B8800858D2E /* Haptics.swift in Sources */,

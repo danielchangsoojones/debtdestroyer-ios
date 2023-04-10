@@ -17,7 +17,7 @@ class QuizDataParse: SuperParseObject, PFSubclassing {
     @NSManaged var video_url_string: String
     @NSManaged var start_question_prompt_seconds: Double
     @NSManaged var intervieweePhoto: PFFileObject?
-    @NSManaged var videoAnswer: VideoAnswerParse
+    @NSManaged var videoAnswer: VideoAnswerParse?
 
     class func parseClassName() -> String {
         return "QuizData"

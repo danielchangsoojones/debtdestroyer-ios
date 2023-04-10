@@ -7,13 +7,13 @@
 
 import UIKit
 import SCLAlertView
+import StoreKit
 
 class CryptoSettingsViewController: UIViewController {
     enum CellType: String {
         case winnerInfo = "Enter Winner Information"
         case connectedAccounts = "Verify Identity"
         case promoCode = "Promo Code"
-        case prizeBoost = "Prize Boost"
         case contactUs = "Contact Us or Leave Feedback"
         case legaDisclosure = "Legal Disclosures"
         case notification = "Notifications"
@@ -22,6 +22,8 @@ class CryptoSettingsViewController: UIViewController {
         case textNoti = "Send Text Notification"
         case answerKeys = "Answer Keys"
         case quizQuestions = "Quiz Questions"
+        case rateUs = "Rate Us on App Store"
+        case orderSwag = "Buy Swag"
         
         var imageName: String {
             switch self {
@@ -37,8 +39,12 @@ class CryptoSettingsViewController: UIViewController {
                 return "deleteAcc"
             case .notification, .textNoti:
                 return "bell"
-            case .promoCode, .prizeBoost:
+            case .promoCode:
                 return "invite"
+            case .rateUs:
+                return "feedback"
+            case .orderSwag:
+                return "swag"
             }
         }
     }
@@ -58,7 +64,7 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.promoCode, .prizeBoost, .notification, .contactUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        dataArr = [.promoCode, .notification, .orderSwag, .contactUs, .rateUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
         
         if (User.current()?.showConnectAccount ?? false) {
             dataArr.insert(.connectedAccounts, at: 2)
@@ -138,13 +144,6 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
                 Haptics.shared.play(.heavy)
                 self.navigationController?.pushViewController(vc.self, animated: true)
-        case .prizeBoost:
-            if (User.current()?.personalPromoImg != nil) {
-                let quizDataStore = QuizDataStore()
-                self.quizDataStore.getSpecialReferralInfo { titleLabelText, valuePropsText in
-                    self.showDailyBoostPopUp(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
-                }
-            }
         case .contactUs:
                 // MARK: Contact Us
                 // MARK: Leave Feedback
@@ -209,7 +208,20 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 // MARK: Answer Keys
                 let vc = QuizQuestionsViewController()
                 self.navigationController?.pushViewController(vc.self, animated: true)
-                
+        case .rateUs:
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            } else {
+                //TODO: need to confirm in production if this takes you to the app store review page
+                let appID = "1639968618"
+                let urlStr = "itms-apps://itunes.apple.com/us/app/itunes-u/id\(appID)?ls=1&mt=8&action=write-review"
+                guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
+        case .orderSwag:
+            let swagPage = NotionViewController(notionURL: "https://dankwun.notion.site/Debt-Destroyer-Swag-aeec29bb9b4948db9dffa105ebba7a12")
+            self.navigationController?.pushViewController(swagPage.self, animated: true)
         }
     }
     
@@ -233,39 +245,5 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         return 70
-    }
-}
-
-extension CryptoSettingsViewController {
-    private func showDailyBoostPopUp(titleLabelText: String, valuePropsText: [String]) {
-        let dailyBoostVC = DailyBoostViewController(titleLabelText: titleLabelText, valuePropsText: valuePropsText)
-        dailyBoostVC.modalPresentationStyle = .custom
-        present(dailyBoostVC, animated: true, completion: {
-            dailyBoostVC.saveModalDismissed = {
-                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "dismissed") {}
-            }
-            dailyBoostVC.saveSharePressed = {
-                self.shareOnIGStory()
-                self.quizDataStore.saveSpecialReferral(socialType: "Instagram", actionType: "shared") {}
-            }
-        })
-    }
-    
-    private func shareOnIGStory() {
-        Haptics.shared.play(.heavy)
-        if let imageFile = User.current()?.personalPromoImg {
-            imageFile.getDataInBackground { (data, error) in
-                if let imageData = data, let image = UIImage(data: imageData) {
-                    // Use the `image` object to share on Instagram
-                    if let data = image.pngData() {
-                        InstagramStory.sharePhoto(data: data) { bool, string in
-                            //user clicked share, but we really don't have a way to check unless we tell the user to tag us or we check it ourselves
-                        }
-                    }
-                } else {
-                    print("Failed to get user's promo image for Daily Boost. Please take a screenshot and text it to 317-690-5323: \(error?.localizedDescription ?? "unknown error")")
-                }
-            }
-        }
     }
 }

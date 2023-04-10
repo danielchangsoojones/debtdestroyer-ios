@@ -38,7 +38,7 @@ class CryptoSettingsViewController: UIViewController {
             case .deleteAcc:
                 return "deleteAcc"
             case .notification, .textNoti:
-                return "bell"
+                return "Bell"
             case .promoCode:
                 return "invite"
             case .rateUs:

@@ -56,14 +56,16 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private var won_user_ids: [String] = []
     private var lost_user_ids: [String] = []
     private var competing_tie_user_ids: [String] = []
+    private let inTestTieMode: Bool
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
     }
     
-    init(quizDatas: [QuizDataParse], currentIndex: Int, competing_tie_user_ids: [String], inTieMode: Bool) {
+    init(quizDatas: [QuizDataParse], currentIndex: Int, competing_tie_user_ids: [String], inTieMode: Bool, inTestTieMode: Bool) {
         self.quizDatas = quizDatas
         self.inTieMode = inTieMode
+        self.inTestTieMode = inTestTieMode
         self.competing_tie_user_ids = competing_tie_user_ids
         self.currentIndex = currentIndex
         super.init(nibName: nil, bundle: nil)
@@ -660,9 +662,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             if inTieMode {
                 let hasWon = won_user_ids.contains(User.current()?.objectId ?? "")
                 let hasLost = lost_user_ids.contains(User.current()?.objectId ?? "")
-                
                 let hasOfficiallyEnded = won_user_ids.count == currentData.quizTopic.winner_tie_spots
-                if hasOfficiallyEnded || hasWon || hasLost || isLastQuestion {
+                if (hasOfficiallyEnded || hasWon || hasLost || isLastQuestion) && !inTestTieMode {
                     //the tiebreaker is over
                     //or the users who won or lost go to the leaderboard
                     self.popBackToLeaderboard()
@@ -671,7 +672,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                           currentIndex: nextIndex,
                                                                           competing_tie_user_ids: competing_tie_user_ids,
-                                                                          inTieMode: inTieMode)
+                                                                          inTieMode: inTieMode,
+                                                                          inTestTieMode: inTestTieMode)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             } else if isLastQuestion {
@@ -679,7 +681,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 UserDefaults.standard.synchronize()
                 let shouldGoTieBreaker = competing_tie_user_ids.contains(User.current()?.objectId ?? "")
                 if shouldGoTieBreaker || (User.isAdminUser && !competing_tie_user_ids.isEmpty){
-                    let tiebreakerVC = TieBreakerViewController(competing_tie_user_ids: competing_tie_user_ids)
+                    let tiebreakerVC = TieBreakerViewController(competing_tie_user_ids: competing_tie_user_ids, inTestTieMode: false)
                     self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
                     self.popBackToLeaderboard()
@@ -692,7 +694,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                       currentIndex: nextIndex,
                                                                       competing_tie_user_ids: competing_tie_user_ids,
-                                                                      inTieMode: inTieMode)
+                                                                      inTieMode: inTieMode,
+                                                                      inTestTieMode: inTestTieMode)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }

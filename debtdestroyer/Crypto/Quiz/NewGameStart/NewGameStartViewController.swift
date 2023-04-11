@@ -92,7 +92,7 @@ class NewGameStartViewController: UIViewController {
         })
         alertView.addButton("Tiebreaker", action: {
             // Handle "Tiebreaker" option
-            let tieVC = TieBreakerViewController(competing_tie_user_ids: [])
+            let tieVC = TieBreakerViewController(competing_tie_user_ids: [], inTestTieMode: true)
             self.navigationController?.pushViewController(tieVC, animated: true)
         })
         alertView.showInfo("Choose Option", subTitle: "Please choose an option to continue.")
@@ -383,7 +383,8 @@ class NewGameStartViewController: UIViewController {
         let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                       currentIndex: quizStartIndex,
                                                                       competing_tie_user_ids: [],
-                                                                      inTieMode: false)
+                                                                      inTieMode: false,
+                                                                      inTestTieMode: false)
         let navController = UINavigationController(rootViewController: questionVC)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)

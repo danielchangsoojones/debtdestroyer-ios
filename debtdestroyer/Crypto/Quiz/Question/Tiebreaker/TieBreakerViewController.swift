@@ -13,9 +13,11 @@ class TieBreakerViewController: UIViewController {
     private var quizDatas: [QuizDataParse] = []
     private let competing_tie_user_ids: [String]
     private var timer: Timer?
+    private let inTestTieMode: Bool
     private var count = 0
     
-    init(competing_tie_user_ids: [String]) {
+    init(competing_tie_user_ids: [String], inTestTieMode: Bool) {
+        self.inTestTieMode = inTestTieMode
         self.competing_tie_user_ids = competing_tie_user_ids
         super.init(nibName: nil, bundle: nil)
     }
@@ -66,7 +68,8 @@ class TieBreakerViewController: UIViewController {
         let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
                                                                       currentIndex: 0,
                                                                       competing_tie_user_ids: competing_tie_user_ids,
-                                                                      inTieMode: true)
+                                                                      inTieMode: true,
+                                                                      inTestTieMode: inTestTieMode)
         self.navigationController?.pushViewController(questionVC, animated: true)
     }
 }

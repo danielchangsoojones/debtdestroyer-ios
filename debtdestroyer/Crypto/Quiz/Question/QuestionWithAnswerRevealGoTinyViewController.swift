@@ -289,17 +289,13 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     //we update the quizdatas because sometimes can be updated mid quiz
     private func checkIfQuizDatasUpdated() {
-        dataStore.getQuizData { result, error in
+        dataStore.getMidQuizData() { result, error in
             if let quizDatas = result as? [QuizDataParse] {
                 self.quizDatas = quizDatas
             } else if let error = error {
-                if error.localizedDescription.contains("error-force-update") {
-                    ForceUpdate.showAlert()
-                } else {
-                    BannerAlert.show(with: error)
-                }
+                BannerAlert.show(with: error)
             } else {
-                BannerAlert.showUnknownError(functionName: "getQuizData")
+                BannerAlert.showUnknownError(functionName: "getMidQuizData")
             }
         }
     }

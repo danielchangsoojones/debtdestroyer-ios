@@ -85,6 +85,12 @@ class QuizDataStore {
         }
     }
     
+    func getMidQuizData(completion: @escaping (Any?, Error?) -> Void) {
+        PFCloud.callFunction(inBackground: "getMidQuizData", withParameters: [:]) { (result, error) in
+           completion(result, error)
+        }
+    }
+    
     func shouldShowEarnings(completion: @escaping (Bool) -> Void) {
         let versionStr = Helpers.getVersionStr() ?? ""
         let parameters: [String : Any] = ["app_version" : versionStr, "deviceType": "ios"]

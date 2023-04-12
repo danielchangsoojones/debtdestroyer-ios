@@ -39,6 +39,17 @@ class CycleVidViewController: UIViewController {
         playerLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(playerLayer)
         queuePlayer.play()
+        
+        // Observe the AVPlayerItemDidPlayToEndTime notification for the current player item
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: queuePlayer.currentItem, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            if self.queuePlayer.items().count == 1 {
+                // Display the alert view when the player has finished playing all items in the queue
+                let alertController = UIAlertController(title: "Queue ended", message: "All videos in the queue have been played", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     func showAllVideosFinishedAlert() {

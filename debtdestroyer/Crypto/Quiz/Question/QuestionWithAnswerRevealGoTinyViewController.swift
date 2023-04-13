@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import AVFoundation
 import SCLAlertView
+import YLProgressBar
 
 class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     struct Constants {
@@ -57,6 +58,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private var lost_user_ids: [String] = []
     private var competing_tie_user_ids: [String] = []
     private let inTestTieMode: Bool
+    private var moneyLabel: UILabel!
+    // Set the total size of the progress bar
+    private let totalSize: CGFloat = 15000
+    // Set the current progress to 0
+    private var currentProgress: CGFloat = 0
+    // Create a UIProgressView
+    private var progressView: UIView!
+    private var progressBar: YLProgressBar!
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -103,7 +112,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         self.yourAnswerHeading = questionView.yourAnswerHeading
         self.correctAnswerHeading = questionView.correctAnswerHeading
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
@@ -123,6 +132,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         showControlBtns()
         intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
         helpButton.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
+        addProgressBarToView()
+        getScore()
     }
     
     deinit {
@@ -140,6 +151,56 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         self.timeLabel.stopBlink()
         self.progressBarContainer.stopBlink()
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func getScore() {
+        if !inTieMode && currentIndex > 0 {
+            dataStore.getScore(quiz_topic_id: currentData.quizTopic.objectId ?? "") { quizScore in
+                let amount = CGFloat(quizScore.score * 1000)
+                self.addProgress(byAmount: amount)
+            }
+        }
+    }
+    
+    let screenHeight:CGFloat = 800
+
+    func addProgressBarToView() {
+        if !inTieMode {
+            let screen = UIScreen.main.bounds
+            self.progressBar = YLProgressBar(frame: CGRect(x: -screenHeight / 4, y: 300, width: screenHeight / 2, height: 50))
+            progressBar.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+            progressBar.clipsToBounds = false
+            progressBar.progressTintColor = UIColor.green
+            progressBar.trackTintColor = UIColor.lightGray
+            progressBar.progress = 0.0
+            view.addSubview(progressBar)
+            
+            progressView = UIView(frame: CGRect(x: 0, y: screenHeight - 300, width: 80, height: 20))
+            progressView.backgroundColor = UIColor.systemGreen
+            view.addSubview(progressView)
+            
+            moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 20))
+            moneyLabel.textColor = .white
+            moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            moneyLabel.textAlignment = .center
+            //        moneyLabel.text = "$0"
+            moneyLabel.text = "0"
+            progressView.addSubview(moneyLabel)
+        }
+    }
+
+    
+    // Call the addProgress function to add increments
+    // Add 1000 increments to the progress bar
+    func addProgress(byAmount: CGFloat) {
+        currentProgress += byAmount
+//        moneyLabel.text = "$\(Int(currentProgress))"
+        moneyLabel.text = "\(Int(currentProgress / 1000)) points"
+        let progress = currentProgress / totalSize
+        progressBar.setProgress(progress, animated: true)
+        UIView.animate(withDuration: 1.0, animations: {
+            self.progressView.frame.origin.y = self.screenHeight - 300 - self.progressBar.frame.size.height * progress
+        })
     }
     
     @objc private func applicationDidBecomeActive() {
@@ -489,6 +550,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
                     }
                 } else {
+                    self.addProgress(byAmount: 1000)
                     doCorrectAnswerHaptic()
                     self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
                     yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)

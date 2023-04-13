@@ -25,6 +25,7 @@ PODS:
   - SwiftyJSON (4.3.0)
   - TTTAttributedLabel (2.0.0)
   - UXCam (3.4.5)
+  - YLProgressBar (3.11.0)
 
 DEPENDENCIES:
   - BRYXBanner
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - SwiftyJSON (~> 4.0)
   - TTTAttributedLabel
   - UXCam (~> 3.4.2)
+  - YLProgressBar (~> 3.11.0)
 
 SPEC REPOS:
   trunk:
@@ -54,6 +56,7 @@ SPEC REPOS:
     - SwiftyJSON
     - TTTAttributedLabel
     - UXCam
+    - YLProgressBar
 
 EXTERNAL SOURCES:
   Sentry:
@@ -79,7 +82,8 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UXCam: c24a71093f9051c553380e647a0c55ee0c586091
+  YLProgressBar: 0c0796a6e9b5e5d5040d15c8911e802b67ccb939
 
-PODFILE CHECKSUM: e55bd52fab77d14a2614955e97a145454743d9b9
+PODFILE CHECKSUM: 3c7ca785de866fd88a70ffe129c2c6af87a24b73
 
 COCOAPODS: 1.11.3

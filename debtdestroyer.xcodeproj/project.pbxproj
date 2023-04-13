@@ -146,7 +146,7 @@
 		0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */; };
 		0AED8959294AEC6E00D6576F /* ScholarshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */; };
 		0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */; };
-		892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */; };
+		2D123293513A70F57F7F4D52 /* Pods_debtdestroyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B7717B69042CD4708B07E0 /* Pods_debtdestroyer.framework */; };
 		92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCC289B07A4007901A6 /* AppDelegate.swift */; };
 		92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92021FCE289B07A4007901A6 /* SceneDelegate.swift */; };
 		92021FD6289B07A6007901A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92021FD5289B07A6007901A6 /* Assets.xcassets */; };
@@ -324,7 +324,8 @@
 		0AE126B2291AAA6A00E11003 /* ConfirmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmInfoViewController.swift; sourceTree = "<group>"; };
 		0AED8958294AEC6E00D6576F /* ScholarshipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipViewController.swift; sourceTree = "<group>"; };
 		0AED895B294AF79900D6576F /* ScholarshipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipTableViewCell.swift; sourceTree = "<group>"; };
-		1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		405E7EFDBD684B459FC621C5 /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
+		72B7717B69042CD4708B07E0 /* Pods_debtdestroyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debtdestroyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FC9289B07A4007901A6 /* debtdestroyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = debtdestroyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92021FCC289B07A4007901A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92021FCE289B07A4007901A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -350,8 +351,7 @@
 		92C8498E296CBAE40091422E /* VideoAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnswer.swift; sourceTree = "<group>"; };
 		92FF0EB72972322200ED029D /* WaitlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistViewController.swift; sourceTree = "<group>"; };
 		92FF0EB92972323100ED029D /* WaitlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitlistView.swift; sourceTree = "<group>"; };
-		970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.release.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.release.xcconfig"; sourceTree = "<group>"; };
-		9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
+		B91654B1C5725E51B0A73664 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
 		C008877D29D5580C00FDF7E0 /* InstagramStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramStory.swift; sourceTree = "<group>"; };
 		C008878029D67A7D00FDF7E0 /* DailyBoostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoostViewController.swift; sourceTree = "<group>"; };
 		C0374BCC29CE5C4200D40E78 /* InviteInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteInfoCell.swift; sourceTree = "<group>"; };
@@ -369,8 +369,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				892FF06EB4C3BBEB37C14076 /* Pods_debtdestroyer.framework in Frameworks */,
 				0A421C0628DB3AED008792B8 /* StoreKit.framework in Frameworks */,
+				2D123293513A70F57F7F4D52 /* Pods_debtdestroyer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				0A421C0528DB3AED008792B8 /* StoreKit.framework */,
-				1290530BCE28420414642EDF /* Pods_debtdestroyer.framework */,
+				72B7717B69042CD4708B07E0 /* Pods_debtdestroyer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -952,8 +952,8 @@
 		18F686FBEE11973D8590571D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */,
-				970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */,
+				B91654B1C5725E51B0A73664 /* Pods-debtdestroyer.debug.xcconfig */,
+				405E7EFDBD684B459FC621C5 /* Pods-debtdestroyer.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1098,19 +1098,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92021FDD289B07A6007901A6 /* Build configuration list for PBXNativeTarget "debtdestroyer" */;
 			buildPhases = (
-				158D76CA9E96FC2A0DC2C852 /* [CP] Check Pods Manifest.lock */,
+				FA6E356AF83E0D0F0A0FEEE6 /* [CP] Check Pods Manifest.lock */,
 				92021FC5289B07A4007901A6 /* Sources */,
 				92021FC6289B07A4007901A6 /* Frameworks */,
 				92021FC7289B07A4007901A6 /* Resources */,
-				AE94C48CAF45DD82FB0194F0 /* [CP] Embed Pods Frameworks */,
+				A7767A3F22740358B444505E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = debtdestroyer;
-			packageProductDependencies = (
-			);
 			productName = debtdestroyer;
 			productReference = 92021FC9289B07A4007901A6 /* debtdestroyer.app */;
 			productType = "com.apple.product-type.application";
@@ -1139,8 +1137,6 @@
 				Base,
 			);
 			mainGroup = 92021FC0289B07A4007901A6;
-			packageReferences = (
-			);
 			productRefGroup = 92021FCA289B07A4007901A6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1184,7 +1180,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		158D76CA9E96FC2A0DC2C852 /* [CP] Check Pods Manifest.lock */ = {
+		A7767A3F22740358B444505E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA6E356AF83E0D0F0A0FEEE6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1204,23 +1217,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE94C48CAF45DD82FB0194F0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1512,7 +1508,7 @@
 		};
 		92021FDE289B07A6007901A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9813F9FE88D02C5B6B12B010 /* Pods-debtdestroyer.debug.xcconfig */;
+			baseConfigurationReference = B91654B1C5725E51B0A73664 /* Pods-debtdestroyer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1552,7 +1548,7 @@
 		};
 		92021FDF289B07A6007901A6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 970542EB451DB5DBCD0B0D4F /* Pods-debtdestroyer.release.xcconfig */;
+			baseConfigurationReference = 405E7EFDBD684B459FC621C5 /* Pods-debtdestroyer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

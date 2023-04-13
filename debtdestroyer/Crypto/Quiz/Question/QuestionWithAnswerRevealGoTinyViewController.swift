@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import AVFoundation
 import SCLAlertView
+import YLProgressBar
 
 class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     struct Constants {
@@ -103,7 +104,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         self.yourAnswerHeading = questionView.yourAnswerHeading
         self.correctAnswerHeading = questionView.correctAnswerHeading
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
@@ -123,6 +124,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         showControlBtns()
         intervieweeImageView.loadFromFile(currentData.intervieweePhoto)
         helpButton.addTarget(self, action: #selector(helpPressed), for: .touchUpInside)
+        addProgressBarToView()
     }
     
     deinit {
@@ -142,6 +144,53 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // Set the total size of the progress bar
+    let totalSize: CGFloat = 15000
+
+    // Set the current progress to 0
+    var currentProgress: CGFloat = 0
+    // Create a UIProgressView
+    var progressView: UIView!
+    
+    var progressBar: YLProgressBar!
+    
+    let y = 0
+
+    func addProgressBarToView() {
+        let screen = UIScreen.main.bounds
+        self.progressBar = YLProgressBar(frame: CGRect(x: -screen.height / 4, y: 300, width: screen.height / 2, height: 50))
+        progressBar.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        progressBar.clipsToBounds = false
+
+//        progressBar.center = CGPoint(x: progressBar.center.x + progressBar.bounds.height / 2,
+//                                      y: progressBar.center.y - progressBar.bounds.width / 2)
+        progressBar.progressTintColor = UIColor.green
+        progressBar.trackTintColor = UIColor.lightGray
+        view.addSubview(progressBar)
+        
+        progressView = UIView(frame: CGRect(x: 0, y: 550, width: 80, height: 10))
+        progressView.backgroundColor = .red
+        view.addSubview(progressView)
+    }
+
+    
+    // Call the addProgress function to add increments
+    // Add 1000 increments to the progress bar
+    func addProgress() {
+        currentProgress += 1000
+        let progress = currentProgress / totalSize
+        progressBar.setProgress(progress, animated: true)
+//        UIView.animate(withDuration: 5.0, animations: {
+//
+//        })
+        
+        self.progressView.frame.origin.y = 550 - self.progressBar.frame.size.height * progress
+        
+//        progressBar.progress += 1000.0
+//        if progressBar.progress >= progressBar.maxValue {
+//        }
+    }
+    
     @objc private func applicationDidBecomeActive() {
         //whenever the user leaves the app, it pauses the video, so we have to play again.
         //https://stackoverflow.com/questions/48473144/swift-ios-avplayer-video-freezes-pauses-when-app-comes-back-from-background
@@ -158,7 +207,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc private func helpPressed() {
-        messageHelper?.text(MessageHelper.customerServiceNum)
+        addProgress()
+//        messageHelper?.text(MessageHelper.customerServiceNum)
     }
     
     private func showControlBtns() {
@@ -301,7 +351,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc private func adminNextBtn() {
-        segueToNextVC(index: nil)
+        self.addProgress()
+//        segueToNextVC(index: nil)
     }
     
     private func createBtn(title: String, selector: Selector, backgroundColor: UIColor, frame: CGRect) {

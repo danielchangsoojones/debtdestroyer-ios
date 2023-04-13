@@ -58,7 +58,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private var lost_user_ids: [String] = []
     private var competing_tie_user_ids: [String] = []
     private let inTestTieMode: Bool
-    private var moneyLabel: UILabel!
+    private var moneyLabel: UILabel?
     // Set the total size of the progress bar
     private let totalSize: CGFloat = 15000
     // Set the current progress to 0
@@ -180,12 +180,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             view.addSubview(progressView)
             
             moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 20))
-            moneyLabel.textColor = .white
-            moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-            moneyLabel.textAlignment = .center
-            //        moneyLabel.text = "$0"
-            moneyLabel.text = "0"
-            progressView.addSubview(moneyLabel)
+            if let moneyLabel = moneyLabel {
+                moneyLabel.textColor = .white
+                moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+                moneyLabel.textAlignment = .center
+                //        moneyLabel.text = "$0"
+                moneyLabel.text = "0"
+                progressView.addSubview(moneyLabel)
+            }
         }
     }
 
@@ -195,7 +197,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     func addProgress(byAmount: CGFloat) {
         currentProgress += byAmount
 //        moneyLabel.text = "$\(Int(currentProgress))"
-        moneyLabel.text = "\(Int(currentProgress / 1000)) points"
+        moneyLabel?.text = "\(Int(currentProgress / 1000)) points"
         let progress = currentProgress / totalSize
         progressBar.setProgress(progress, animated: true)
         UIView.animate(withDuration: 1.0, animations: {
@@ -550,7 +552,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                         self.yourAnswerView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
                     }
                 } else {
-                    self.addProgress(byAmount: 1000)
+                    if !inTieMode {
+                        self.addProgress(byAmount: 1000)
+                    }
                     doCorrectAnswerHaptic()
                     self.questionView.setGifImage(gifImgView: self.questionView.gifImgViewXmark, subviewTo: yourAnswerView, bottomTo: yourAnswerLabel, imageName: "checkmark")
                     yourAnswerView.setGradientBackground(color1: self.hexStringToUIColor(hex: "E9D845"), color2: self.hexStringToUIColor(hex: "B5C30F"), radi: 25)

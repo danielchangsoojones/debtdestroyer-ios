@@ -58,6 +58,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private var lost_user_ids: [String] = []
     private var competing_tie_user_ids: [String] = []
     private let inTestTieMode: Bool
+    private var moneyLabel: UILabel!
+    // Set the total size of the progress bar
+    private let totalSize: CGFloat = 15000
+    // Set the current progress to 0
+    private var currentProgress: CGFloat = 0
+    // Create a UIProgressView
+    private var progressView: UIView!
+    private var progressBar: YLProgressBar!
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -143,34 +151,27 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         self.progressBarContainer.stopBlink()
         NotificationCenter.default.removeObserver(self)
     }
-    
-    // Set the total size of the progress bar
-    let totalSize: CGFloat = 15000
-
-    // Set the current progress to 0
-    var currentProgress: CGFloat = 0
-    // Create a UIProgressView
-    var progressView: UIView!
-    
-    var progressBar: YLProgressBar!
-    
-    let y = 0
 
     func addProgressBarToView() {
         let screen = UIScreen.main.bounds
         self.progressBar = YLProgressBar(frame: CGRect(x: -screen.height / 4, y: 300, width: screen.height / 2, height: 50))
         progressBar.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
         progressBar.clipsToBounds = false
-
-//        progressBar.center = CGPoint(x: progressBar.center.x + progressBar.bounds.height / 2,
-//                                      y: progressBar.center.y - progressBar.bounds.width / 2)
         progressBar.progressTintColor = UIColor.green
         progressBar.trackTintColor = UIColor.lightGray
+        progressBar.progress = 0.0
         view.addSubview(progressBar)
         
-        progressView = UIView(frame: CGRect(x: 0, y: 550, width: 80, height: 10))
-        progressView.backgroundColor = .red
+        progressView = UIView(frame: CGRect(x: 0, y: 550, width: 80, height: 20))
+        progressView.backgroundColor = UIColor.systemGreen
         view.addSubview(progressView)
+        
+        moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 20))
+        moneyLabel.textColor = .white
+        moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        moneyLabel.textAlignment = .center
+        moneyLabel.text = "$0"
+        progressView.addSubview(moneyLabel)
     }
 
     
@@ -178,17 +179,12 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     // Add 1000 increments to the progress bar
     func addProgress() {
         currentProgress += 1000
+        moneyLabel.text = "$\(Int(currentProgress))"
         let progress = currentProgress / totalSize
         progressBar.setProgress(progress, animated: true)
-//        UIView.animate(withDuration: 5.0, animations: {
-//
-//        })
-        
-        self.progressView.frame.origin.y = 550 - self.progressBar.frame.size.height * progress
-        
-//        progressBar.progress += 1000.0
-//        if progressBar.progress >= progressBar.maxValue {
-//        }
+        UIView.animate(withDuration: 1.0, animations: {
+            self.progressView.frame.origin.y = 550 - self.progressBar.frame.size.height * progress
+        })
     }
     
     @objc private func applicationDidBecomeActive() {

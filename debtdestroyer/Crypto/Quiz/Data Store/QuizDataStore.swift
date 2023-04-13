@@ -311,4 +311,18 @@ class QuizDataStore {
             }
         }
     }
+    
+    func getScore(quiz_topic_id: String, completion: @escaping (QuizScoreParse) -> Void) {
+        let parameters: [String : Any] = ["quiz_topic_id": quiz_topic_id
+        ]
+        PFCloud.callFunction(inBackground: "getScore", withParameters: parameters) { (result, error) in
+            if let quizScore = result as? QuizScoreParse {
+                completion(quizScore)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getScore")
+            }
+        }
+    }
 }

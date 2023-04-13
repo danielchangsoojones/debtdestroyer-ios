@@ -362,8 +362,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     @objc private func adminNextBtn() {
-        self.addProgress(byAmount: 1000)
-//        segueToNextVC(index: nil)
+        segueToNextVC(index: nil)
     }
     
     private func createBtn(title: String, selector: Selector, backgroundColor: UIColor, frame: CGRect) {

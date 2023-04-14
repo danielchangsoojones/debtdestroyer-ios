@@ -8,34 +8,35 @@
 import UIKit
 
 class AnswerKeysViewController: UIViewController {
-    static let answer_dict: [String: (answer_url: String, correct_answer_index: Int)] = [
-        "ePXH3QP9EE": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/intro_exp_meal_2p52vda41w1ulip467wz32rd6m73hf8.mp4?ik-t=1681287299&ik-s=a95af83b656d365d27d271faa885fa617b1ab8dc", correct_answer_index: 1),
-        "IwTTvAi3xg": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/exp_meal_why_2537ftca9odcq87ucly43ya3w6icufk.mp4?ik-t=1681287299&ik-s=30350c80384e2c7ccf04b1e10a9b9be37560332b", correct_answer_index: 1),
-        "hB0WqItU3B": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/red_flag_29ju0jfq90b3o0e4wzp3pwdpg41kxcz.mp4?ik-t=1681287299&ik-s=f1f70c991cc566fbaf4f8e9e8beaf20e8e457067", correct_answer_index: 3),
-        "wiOpAKUzK0": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/red_flag_why_2t3no1xwu32rok9v0sbi03kbncjaiin.mp4?ik-t=1681287300&ik-s=6d185b357e9d34921b12ebce2bd165f6904c90cb", correct_answer_index: 3),
-        "eNphwv59gD": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/boss_2aqwuxvqn76ver2cqj9ru20z7tq799k.mp4?ik-t=1681287300&ik-s=2581d6ec78a34d06c0914bdc935bc89b79d8fd10", correct_answer_index: 0),
-        "IHLQwTjbzo": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/city_cali_2f1p870meepse7cseoegxkw1av6jsdz.mp4?ik-t=1681287300&ik-s=5eb8999abb5e9a74f033366eeacc8bc42cdcd387", correct_answer_index: 2),
-        "pSjZ5kaZFv": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/crush_santa_2xpf2kcr09j2ws70fyrxujgnpb1y5qj.mp4?ik-t=1681287300&ik-s=2ccf58d4ee64121c61d6e64602eb1864f38d0d4f", correct_answer_index: 0),
-        "aAY7KFEGtG": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/exp_ice_2ftf95s5jnja5n9nm414skcb0yq4xiv.mp4?ik-t=1681287301&ik-s=13ebbaf62a404059aeed15c8c1ad6676d69c9a08", correct_answer_index: 2),
-        "PoCCjijNwD": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/fear_268rsizh7sjz4b4pg8duzhc7vkx593z.mp4?ik-t=1681287301&ik-s=e5dbb5cbe25cf6f8d653e3007575383041555f94", correct_answer_index: 3),
-        "a2cp543XJH": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/lottery_exp_22j6woqqwvbbpjldmmxwewaepiscoz2.mp4?ik-t=1681287301&ik-s=e0203c7647393fe033813496bdc41d346b953718", correct_answer_index: 0),
-        "ckc9ndPs5i": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/movie_remade_27h3urmxoxn4hvdt3ybxjpqndo44ear.mp4?ik-t=1681287301&ik-s=c646d57c5d44bd4f50f621ce396606e5456a4bdb", correct_answer_index: 2),
-        "6bGofQzh2a": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/other_red_flag_2966a4rlfuv65bz8a24td946ail3d1z.mp4?ik-t=1681287301&ik-s=ed7303622382c1f08853a78bfac91299444dcfa0", correct_answer_index: 3),
-        "SPrgRSjqOC": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/s_city_2cryzir67xo7vz7cnjkwcv3tod4rszl.mp4?ik-t=1681287302&ik-s=13d861eb6b44416c3351c17c519e3024fc29fc30", correct_answer_index: 2),
-        "XUKZFxq6ko": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/sleepover_2l4zumxm6kdqzptpx9tcyfe1bl0gv16.mp4?ik-t=1681287302&ik-s=a8f30e151b5933ccdd5ec346ed96b56381b64910", correct_answer_index: 3),
-        "p7U5dGzy90": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/5pdbk8HRbd/vampires_27mefnrffonfc09ra067ibuc08gq1ky.mp4?ik-t=1681287302&ik-s=f6450ff3b853d6cd77b106eb28819d64b8cf89e1", correct_answer_index: 0),
-        "yARXfrbE9N": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/tv_show_24sl3gmm0xcr2g4odwnjv7hahfo2byh.mp4?ik-t=1681287306&ik-s=f276f3187bf44385683b4ba6d90b93459e69260f", correct_answer_index: 1),
-        "DRgSKMZvTq": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/trends_2poy0bkj048ql6mhul9tnvbolvj4lr2.mp4?ik-t=1681287306&ik-s=3dfddfe3dccff1149e84db6f7467e7e52c713223", correct_answer_index: 0),
-        "B8actO1Bmy": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/switch_career_2aohs0o1lmras2k76vkuw2x2xbmke92.mp4?ik-t=1681287306&ik-s=e9a194df9610845751a88d485215746d3e3484ec", correct_answer_index: 1),
-        "xTztYvefYF": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/pop_culture_2skq21hhwts27yfq2glrmuf6nhvkces.mp4?ik-t=1681287307&ik-s=b60ff7ab61111b2df767b06d22a353d92c85fa3e", correct_answer_index: 0),
-        "VS7Y418GEM": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/other_switch_career_2ax7apeakk0sauk9hh82ydulzw7luwo.mp4?ik-t=1681287307&ik-s=0454e70a8afe481818abcc64ad8b602070602ba5", correct_answer_index: 1),
-        "tSnIpGyvqn": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/mental_health_245dbq5yy3sxhql5hwfg0m6t2ut01gp.mp4?ik-t=1681287307&ik-s=fc4341e54f745b29216f2575ad151cf5b04fbba5", correct_answer_index: 1),
-        "bcTfF0AXLx": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/fucked_over_2qbwuqi893y9c7k82afu91a6asjdmlo.mp4?ik-t=1681287307&ik-s=c03d616a73e090c3717df2976bd552d9abc59a41", correct_answer_index: 0),
-        "x4yW0zMXVQ": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/finance_matter_2u9mte8ufpv8zdob7bug3gwpciw433b.mp4?ik-t=1681287307&ik-s=51dca4b62b37a574d25e5b0ccbcffde638393015", correct_answer_index: 1),
-        "8uSlZBVoJd": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/dumb_money_2o1aryqx1hy0v76uqarb147wqjlcf8g.mp4?ik-t=1681287308&ik-s=5bddedcf16bcd4b9c6e2ef8e963e62d842733710", correct_answer_index: 0),
-        "oqUoGrunfh": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/brand_2gnzl6mkzymxvwepjzi3fb5hf2vbqyv.mp4?ik-t=1681287308&ik-s=a27e2a91032595a95c3b6019b742ee102e56d78c", correct_answer_index: 0),
-        "XLNF622EZt": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/bath_2tdj99tqryhjcu9z6mvh3803zp48hfs.mp4?ik-t=1681287308&ik-s=eb5ea9a91f8fe7e823cc64000390b376db3a5045", correct_answer_index: 0)
-    ]
+    static let answer_dict: [String: (answer_url: String, correct_answer_index: Int)] =
+    [
+    "2QtmcNwbIF": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/intro_dangerous_city_2cn3ozp1lwf5864mxy5czvuh2fsua2l.mp4?ik-t=1682105645&ik-s=89b3ed41c0fef4d00fbc08bcf63c544a9c16bbb0", correct_answer_index: 2),
+    "bDFNOEoafO": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/money_sport_why_20vzpc29w0ewbolaburaicait3rpveq.mp4?ik-t=1682105645&ik-s=05edd169cd71d54a86e338dd71f01e6a9330e2dd", correct_answer_index: 3),
+    "VIH9abp6fq": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/money_sport_why_20vzpc29w0ewbolaburaicait3rpveq.mp4?ik-t=1682105645&ik-s=05edd169cd71d54a86e338dd71f01e6a9330e2dd", correct_answer_index: 3),
+    "AOEwRIVcJz": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/rhyme_car_2ke0mk71ctiu8s3k4yuz6snypv5wwqm.mp4?ik-t=1682105646&ik-s=efcf9b4f15fb699bea7ad4be01c40a1b99542d17", correct_answer_index: 0),
+    "DISP8AYi7W": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/school_meal_29ig8zbedpkwradjyxj60cw1uiy7giz.mp4?ik-t=1682105646&ik-s=1790e5dc70df580a2f930a96744bf9994a2c0da8", correct_answer_index: 1),
+    "IftlRg4Nlq": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/sleepover_act_2un1jsedlfzcesz7tgwfhjq6mk0whvg.mp4?ik-t=1682105646&ik-s=f61f844097d6afc72005b6ff4024bcf4cdbcc200", correct_answer_index: 1),
+    "0qx8yq8V9v": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/souvenir_2667qj5nst5c1degziyk8iqzll4owb7.mp4?ik-t=1682105646&ik-s=66dae32fb7d5969ff7591cbedbeac29575890967", correct_answer_index: 3),
+    "KNxN0Za3zK": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/state_m_2hn1qcxix7wziz520bh8fd2ji9v5y3r.mp4?ik-t=1682105647&ik-s=870ff0bc1e573cec5f1520849e8070a07be0c472", correct_answer_index: 0),
+    "Ya1eUwQoIG": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/underwear_2lhu9uhocl0vtag74u5j8cch1uj20w9.mp4?ik-t=1682105647&ik-s=8a29bc0138b77e2b78b67f338da17dfef34eb9ab", correct_answer_index: 0),
+    "BG6uAc9nw6": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/worst_friend_2h3ht1cdj8qdlodlybhpblumc2xl4ll.mp4?ik-t=1682105647&ik-s=24ec637ea2c4565d26931ad6e87c313acdae19ef", correct_answer_index: 1),
+    "NRHTByTGdR": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/breakfast_buffet_2zawcn5w17ea39kgcvkvcw067b5h9yf.mp4?ik-t=1682105647&ik-s=3b45f151c2bb8fa67e12588ae83be0fa0beca468", correct_answer_index: 3),
+    "N21BfaSZML": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/french_country_2wzaylq6ukw09qpbirm810jz8o1e6bs.mp4?ik-t=1682105648&ik-s=52a07d1265e6a282578911a0af351ce55633e77a", correct_answer_index: 0),
+    "4zhSVx9Oqz": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/kids_2h7gqgutgk0rzwfjg3nkem4v74i351g.mp4?ik-t=1682105648&ik-s=215820d43c2b021d6102f66eb2dcc4293f2e4700", correct_answer_index: 1),
+    "1jBHHtOiPs": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/kids_why_2jk9tue7x1l8rjtcunaoydwd8ydyv6w.mp4?ik-t=1682105648&ik-s=5c8e501deeaacde4a601a4ce1199cf432e7a80ba", correct_answer_index: 1),
+    "abKOEMOpGd": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/mj_song_2w7ldhsugmahj2wixsqxtjzzvtb9djg.mp4?ik-t=1682105648&ik-s=2fd6aecb6579122f42bf0dccf48589b0a56e40cf", correct_answer_index: 3),
+    "dJBy4GdzVr": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/a_sex_sport_2ma457drdwr468exr6uoxpzswyd6i75.mp4?ik-t=1682105653&ik-s=1abe2747cf40fc45f578b9218743b7b3313bb5fd", correct_answer_index: 0),
+    "eZFyM2DUwU": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/a_stars_24am625tlpamvkb2j80xkxxwxfivy63.mp4?ik-t=1682105653&ik-s=12c1e02bd854c3e29ba72bb4f76c89dec351ff48", correct_answer_index: 0),
+    "ZfthoIefTA": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_attractive_alive_2f3vpt1lijnewiccorc39g5mocije6b.mp4?ik-t=1682105654&ik-s=fc60f7d609a9c94ad668eb710d449e9387ca9f92", correct_answer_index: 0),
+    "HfRbg9ULSs": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_bank_2yf73a7lde7h5kwo47s49bixtulv385.mp4?ik-t=1682105654&ik-s=bf686c6940067117b13775d5f50663cd328abfe1", correct_answer_index: 0),
+    "Lqs0hiE5kv": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_fashion_2yzngr5owhlzrr780zus6ykhoahu3im.mp4?ik-t=1682105654&ik-s=860c5bd7622371d879c61c19b52e03201abe0b40", correct_answer_index: 0),
+    "CMX0CNuYs3": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_fav_food_22yfc0rpc36j1vc59ox3l3lm94pqyoa.mp4?ik-t=1682105654&ik-s=fecfa04818fcf97fec50a0c5178ff7fcff679432", correct_answer_index: 0),
+    "rAvOB1PLjx": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_lang_21xphvjh8rkoh2133h8q9v54ihjwnz6.mp4?ik-t=1682105655&ik-s=cd521d26bafd93a01c5f4e05c65274d6b8f0626f", correct_answer_index: 0),
+    "4gKeHg6Afr": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_plane_crash_279yja1znmqmng00eq4dh0zw8xomovj.mp4?ik-t=1682105655&ik-s=5309f1a2ab301be7bffb6b59ae25746289ca4ef1", correct_answer_index: 1),
+    "2yhEoXMJyT": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_rate_self_27ujahuw3mxcpjqwwas17yuqp3bd1nx.mp4?ik-t=1682105655&ik-s=dc5d2a8b46ea42284a72ce74f123ba2bec3d3719", correct_answer_index: 0),
+    "UBMoQ4Z3HE": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_sex_sport_2avu7ka0ycsmxe10y2seakskpnv2qcr.mp4.mp4?ik-t=1682105656&ik-s=d8df320ae1c91031db669b8871cbd6e87a423c06", correct_answer_index: 1),
+    "3viEAJtORt": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_snap_score_2ozl6z3ziguticb3xltvbm5ieow5xey.mp4?ik-t=1682105656&ik-s=19fd6c5769031ca23b6d5d473afffe8f465bf21d", correct_answer_index: 0)
+]
     
     static func getItem(withId id: String) -> (answer_url: String, correct_answer_index: Int)? {
         if let item = answer_dict[id] {

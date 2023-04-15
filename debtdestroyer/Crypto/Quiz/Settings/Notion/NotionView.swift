@@ -13,6 +13,7 @@ class NotionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         setUpNotionView()
     }
     
@@ -24,9 +25,8 @@ class NotionView: UIView {
         webView = WKWebView()
         addSubview(webView)
         webView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.snp.topMargin)
-            make.bottom.equalToSuperview()
         }
     }
 }

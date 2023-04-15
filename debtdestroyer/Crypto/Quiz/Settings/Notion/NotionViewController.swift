@@ -33,19 +33,17 @@ class NotionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
             }
         }
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
     }
-
+    
     override func loadView() {
         super.loadView()
         let notionView = NotionView(frame: self.view.bounds)
@@ -58,27 +56,17 @@ class NotionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
         webView.navigationDelegate = self
     }
     
-    // implements WKScriptMessageHandler. For our callback, we will look
-    // for messages sent by the vouchedHandler, and operate on them
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == vouchedHandler {
-            
             guard let verifyData =
                     convertResponseToDict(payload: message.body as! String),
                   let results = verifyData["result"] as? [String: AnyObject],
                   let successCode = results["success"] as? Bool  else {
-                print("Unable to process verification result")
                 return
             }
-            // todo: navigate according to success code, and/or results
-            print("User was successfully verified: \(successCode)")
-            print(results)
         }
     }
     
-    // if using the iOS SDK, you can decode the payload into SDK objects,
-    // but given we are bridging between two platforms, we'll create a
-    // generic dictionary from the payload
     func convertResponseToDict(payload: String) -> [String:AnyObject]? {
         if let data = payload.data(using: .utf8) {
             do {

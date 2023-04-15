@@ -85,14 +85,15 @@ class CryptoSettingsViewController: UIViewController {
         }
         
         self.navigationItem.title = "Settings"
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.topItem?.title = ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -101,6 +102,7 @@ class CryptoSettingsViewController: UIViewController {
     }
     
     private func setTableView() {
+        view.backgroundColor = .white
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -109,7 +111,8 @@ class CryptoSettingsViewController: UIViewController {
         tableView.register(cellType: SettingsTableViewCell.self)
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
-            make.left.right.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.view.snp.topMargin)
         }
     }
 }
@@ -158,6 +161,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.navigationController?.pushViewController(vc.self, animated: true)
                 }
             }
+            
         case .promoCode:
             // MARK: Promo Code
             let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
@@ -176,7 +180,6 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             // MARK: Notification
             let vc = NotificationViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
-            
             
         case .logOut:
             // MARK: Logout
@@ -233,6 +236,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                 return
             }
             UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        
         case .orderSwag:
             let swagPage = NotionViewController(notionURL: "https://dankwun.notion.site/Debt-Destroyer-Swag-aeec29bb9b4948db9dffa105ebba7a12")
             self.navigationController?.pushViewController(swagPage.self, animated: true)

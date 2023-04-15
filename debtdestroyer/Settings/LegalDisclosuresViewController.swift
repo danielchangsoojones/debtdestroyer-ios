@@ -21,29 +21,14 @@ class LegalDisclosuresViewController: UIViewController {
         super.viewDidLoad()
         dataArr = ["Privacy Policy", "Terms of Service", "Game Rules"]
         imgNameArr = ["legal", "legal","legal"]
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationItem.title = "Legal Disclosures"
         self.navigationController?.navigationBar.tintColor = .black
-        
-        setNavBarBtns()
-
+        tabBarController?.tabBar.isHidden = true
     }
-    
-    private func setNavBarBtns() {
-        navigationItem.hidesBackButton = true
-        var backImg = UIImage.init(named: "arrow-left-alt")
-        backImg = backImg?.withRenderingMode(.alwaysOriginal)
-        let back = UIBarButtonItem(image: backImg , style: .plain, target: self, action: #selector(backPressed))
-        navigationItem.leftBarButtonItem = back
-        
-        navigationController?.navigationBar.backgroundColor = .clear
-    }
-    
-    @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
     
     private func setTableView() {
         tableView = UITableView()

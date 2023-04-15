@@ -97,13 +97,10 @@ class PromoCodeUsedViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.tintColor = .white
         self.tabBarController?.tabBar.isHidden = false
     }
     
     @objc func refreshData(_ sender: UIRefreshControl) {
-        //commenting out loadContacts b/c this interferes with a user searching for a friend name
-//        loadContacts()
         Haptics.shared.play(.heavy)
         sender.endRefreshing()
     }

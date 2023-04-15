@@ -39,12 +39,13 @@ class NotificationViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
-        
-        //        self.navigationItem.title = "Notification"
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.isHidden = false
-        setNavBarBtns()
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSegmentForNotification(_:)), name: NSNotification.Name(rawValue: "toggleSegmentForNotification"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .black
+        tabBarController?.tabBar.isHidden = true
     }
     
     @objc func toggleSegmentForNotification(_ notification: Notification) {
@@ -57,20 +58,6 @@ class NotificationViewController: UIViewController {
                 DDNotification.saveNotificationDesire(desire: "off")
             }
         }
-    }
-    
-    private func setNavBarBtns() {
-        navigationItem.hidesBackButton = true
-        var backImg = UIImage.init(named: "arrow-left-alt")
-        backImg = backImg?.withRenderingMode(.alwaysOriginal)
-        let back = UIBarButtonItem(image: backImg , style: .plain, target: self, action: #selector(backPressed))
-        navigationItem.leftBarButtonItem = back
-        
-        navigationController?.navigationBar.backgroundColor = .clear
-    }
-    
-    @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
     }
     
     private func setTableView() {

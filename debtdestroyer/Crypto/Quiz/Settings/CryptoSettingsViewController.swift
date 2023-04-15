@@ -43,11 +43,11 @@ class CryptoSettingsViewController: UIViewController {
             case .promoCode:
                 return "invite"
             case .rateUs:
-                return "feedback"
+                return "rateBtn"
             case .orderSwag:
-                return "swag"
+                return "swagBtn"
             case .socials:
-                return "socialsBtnImage"
+                return "followBtn"
             }
         }
     }

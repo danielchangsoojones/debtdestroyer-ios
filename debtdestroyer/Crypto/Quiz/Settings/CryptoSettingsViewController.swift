@@ -240,7 +240,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         case .socials:
             let alertController = UIAlertController(title: "Socials", message: nil, preferredStyle: .actionSheet)
             
-            let socials = ["TikTok": "https://www.tiktok.com/@debtdestroyer", "Twitter": "https://www.twitter.com/debtdestroyer_"]
+            let socials = ["TikTok": "https://www.tiktok.com/@debtdestroyer", "Instagram": "https://www.instagram.com/debtdestroyer_/", "Twitter": "https://www.twitter.com/debtdestroyer_"]
             for (title, link) in socials {
                 let action = UIAlertAction(title: title, style: .default) { (_) in
                     if let url = URL(string: link) {

@@ -179,7 +179,6 @@
 		C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F829CD802400858D2E /* InviteHeaderCell.swift */; };
 		C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */; };
 		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
-		C0C9E4A929E2641100BABAB6 /* NotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A829E2641100BABAB6 /* NotionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -361,7 +360,6 @@
 		C07369F829CD802400858D2E /* InviteHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteHeaderCell.swift; sourceTree = "<group>"; };
 		C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteJoinedCell.swift; sourceTree = "<group>"; };
 		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
-		C0C9E4A829E2641100BABAB6 /* NotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1086,7 +1084,6 @@
 			isa = PBXGroup;
 			children = (
 				C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */,
-				C0C9E4A829E2641100BABAB6 /* NotionView.swift */,
 			);
 			path = Notion;
 			sourceTree = "<group>";
@@ -1356,7 +1353,6 @@
 				92C8498F296CBAE40091422E /* VideoAnswer.swift in Sources */,
 				924022CC28E5E6DC00DF9F49 /* NumberExtension.swift in Sources */,
 				0A6049F229890137002CC0B4 /* QuizQuestionTableViewCell.swift in Sources */,
-				C0C9E4A929E2641100BABAB6 /* NotionView.swift in Sources */,
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,

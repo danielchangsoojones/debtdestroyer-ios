@@ -41,8 +41,10 @@ class NotionViewController: UIViewController {
             make.center.equalToSuperview()
         }
         
-        if let url = URL(string: appUrl) {
-            webView.load(URLRequest(url: url))
+        DispatchQueue.main.async {
+            if let url = URL(string: self.appUrl) {
+                self.webView.load(URLRequest(url: url))
+            }
         }
         
         webView.navigationDelegate = self

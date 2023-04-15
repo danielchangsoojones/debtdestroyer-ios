@@ -15,8 +15,7 @@ class CryptoTabBarViewController: UITabBarController, UITabBarControllerDelegate
         super.viewDidLoad()
         self.delegate = self
         self.setTabs()
-        tabBar.tintColor = .black
-        tabBar.backgroundColor = .white
+        tabBar.backgroundColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {

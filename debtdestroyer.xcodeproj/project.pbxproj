@@ -178,6 +178,7 @@
 		C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F629CD0E6700858D2E /* InviteContactCell.swift */; };
 		C07369F929CD802400858D2E /* InviteHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F829CD802400858D2E /* InviteHeaderCell.swift */; };
 		C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */; };
+		C0AEBC2329EB605B001F001F /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2229EB605B001F001F /* HeaderTableViewCell.swift */; };
 		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -359,6 +360,7 @@
 		C07369F629CD0E6700858D2E /* InviteContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteContactCell.swift; sourceTree = "<group>"; };
 		C07369F829CD802400858D2E /* InviteHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteHeaderCell.swift; sourceTree = "<group>"; };
 		C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteJoinedCell.swift; sourceTree = "<group>"; };
+		C0AEBC2229EB605B001F001F /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -931,6 +933,7 @@
 		0ACAE9272935F0AD0054E0A3 /* NewGameStart */ = {
 			isa = PBXGroup;
 			children = (
+				C0AEBC2129EB604F001F001F /* Cell */,
 				0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */,
 				0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */,
 				0A363D812975C6C00012468B /* silverCup.mp4 */,
@@ -1076,6 +1079,14 @@
 				C07369F829CD802400858D2E /* InviteHeaderCell.swift */,
 				C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */,
 				C0374BCC29CE5C4200D40E78 /* InviteInfoCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		C0AEBC2129EB604F001F001F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C0AEBC2229EB605B001F001F /* HeaderTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1319,6 +1330,7 @@
 				0A59AD1228E19727001B774A /* CryptoAddressParse.swift in Sources */,
 				0A47F89128F00DD000B11D5F /* NotificationPermissionViewController.swift in Sources */,
 				0A9E94A328B64B6200985179 /* BankDataStore.swift in Sources */,
+				C0AEBC2329EB605B001F001F /* HeaderTableViewCell.swift in Sources */,
 				0A892653297FB24C002C71C1 /* AnswerKeysViewController.swift in Sources */,
 				0A7A4A0228A3D384009EDE5E /* RegisterView.swift in Sources */,
 				0AC23D3128ACDDE7006301DE /* DeleteAccountView.swift in Sources */,

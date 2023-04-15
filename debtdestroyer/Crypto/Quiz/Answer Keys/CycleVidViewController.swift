@@ -31,6 +31,10 @@ class CycleVidViewController: UIViewController {
     func configurePlayer() {
         let playerItems = self.videoUrls.map { AVPlayerItem(url: URL(string: $0)!) }
         for playerItem in playerItems {
+            // Add observer for AVPlayerItemDidPlayToEndTime for each item in the player's items array
+            NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidFinishPlaying(_:)), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
+            // Add observer for AVPlayerItemFailedToPlayToEndTime
+            NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidFailToPlayToEnd(_:)), name: .AVPlayerItemFailedToPlayToEndTime, object: playerItem)
             self.queuePlayer.insert(playerItem, after: nil)
         }
         
@@ -40,15 +44,39 @@ class CycleVidViewController: UIViewController {
         view.layer.addSublayer(playerLayer)
         queuePlayer.play()
         
-        // Observe the AVPlayerItemDidPlayToEndTime notification for the current player item
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: queuePlayer.currentItem, queue: .main) { [weak self] _ in
-            guard let self = self else { return }
-            if self.queuePlayer.items().count == 1 {
-                // Display the alert view when the player has finished playing all items in the queue
-                let alertController = UIAlertController(title: "Queue ended", message: "All videos in the queue have been played", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+        let nextButton = UIButton(frame: CGRect(x: 0, y: 300, width: 100, height: 50))
+        nextButton.backgroundColor = .blue
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        view.addSubview(nextButton)
+    }
+    
+    @objc func playerItemDidFinishPlaying(_ notification: Notification) {
+            if let playerItem = notification.object as? AVPlayerItem {
+                if let avAsset = playerItem.asset as? AVURLAsset {
+                    if self.videoUrls.last == avAsset.url.absoluteString {
+                        showAllVideosFinishedAlert()
+                    }
+                    print("Finished playing: \(avAsset.url.absoluteString)")
+                }
+                NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
+        }
+    }
+    
+    @objc func nextButtonTapped() {
+        if let player = self.playerLayer?.player as? AVQueuePlayer {
+            player.advanceToNextItem()
+        }
+    }
+    
+    @objc func playerItemDidFailToPlayToEnd(_ notification: Notification) {
+        if let playerItem = notification.object as? AVPlayerItem {
+            // Handle the error of the player item here
+            if let avAsset = playerItem.asset as? AVURLAsset {
+                print("Error playing: \(avAsset.url.absoluteString)")
             }
+            print("Failed to play: \(playerItem.error?.localizedDescription ?? "Unknown error")")
+            NotificationCenter.default.removeObserver(self, name: .AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         }
     }
     
@@ -125,6 +153,20 @@ class CycleVidViewController: UIViewController {
             self.addToVids(quizDatas: quizDatas)
             self.configurePlayer()
         }
+    }
+    
+    private func removePlayer() {
+        // Remove observer
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        
+        // Pause player
+        playerLayer?.player?.pause()
+        
+        // Remove playerLayer from superlayer
+        playerLayer?.removeFromSuperlayer()
+        
+        // Set playerLayer player to nil
+        playerLayer?.player = nil
     }
     
 }

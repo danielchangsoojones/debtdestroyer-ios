@@ -228,16 +228,11 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             let vc = QuizQuestionsViewController()
             self.navigationController?.pushViewController(vc.self, animated: true)
         case .rateUs:
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            } else {
-                //TODO: need to confirm in production if this takes you to the app store review page
-                let appID = "1639968618"
-                let urlStr = "itms-apps://itunes.apple.com/us/app/itunes-u/id\(appID)?ls=1&mt=8&action=write-review"
-                guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1639968618?action=write-review") else {
+                BannerAlert.show(title: "Invalid URL for App Store Review", subtitle: "Please take a screenshot and text it to 317-690-5323", type: .error)
+                return
             }
-            
+            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         case .orderSwag:
             let swagPage = NotionViewController(notionURL: "https://dankwun.notion.site/Debt-Destroyer-Swag-aeec29bb9b4948db9dffa105ebba7a12")
             self.navigationController?.pushViewController(swagPage.self, animated: true)

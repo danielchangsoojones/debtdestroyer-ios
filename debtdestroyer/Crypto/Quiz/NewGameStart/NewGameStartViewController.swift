@@ -13,7 +13,6 @@ class NewGameStartViewController: UIViewController {
     struct Constants {
         static let originalStartTime: TimeInterval = 36000
     }
-    private var settingsButton: UIButton!
     private var messageHelper: MessageHelper?
     var quizKickoffTime: Date?
     var timeLabel =  UILabel()
@@ -42,8 +41,8 @@ class NewGameStartViewController: UIViewController {
         super.loadView()
         let newGameStartView = NewGameStartView(frame: self.view.frame)
         self.view = newGameStartView
-        self.settingsButton = newGameStartView.settingsButton
         newGameStartView.settingsButton.addTarget(self, action: #selector(showSettingsVC), for: .touchUpInside)
+        newGameStartView.inviteButton.addTarget(self, action: #selector(showInviteVC), for: .touchUpInside)
         self.dayDateLbl = newGameStartView.dayDateLbl
         self.timeLabel = newGameStartView.countDownTimerLbl
         self.descriptionLbl = newGameStartView.descriptionLbl
@@ -88,8 +87,15 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc private func showSettingsVC() {
+        Haptics.shared.play(.light)
         let settingsVC = CryptoSettingsViewController()
         self.navigationController?.pushViewController(settingsVC.self, animated: true)
+    }
+    
+    @objc private func showInviteVC() {
+        Haptics.shared.play(.light)
+        let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
+        self.navigationController?.pushViewController(vc.self, animated: true)
     }
     
     @objc private func prizeBtnPressed() {
@@ -464,16 +470,6 @@ class NewGameStartViewController: UIViewController {
             descriptionLbl.text = "Come play our trivia daily to see if you will win!"
             self.prizeBtn.isHidden = true
         }
-    }
-    
-    @objc private func helpPressed() {
-        messageHelper?.text(MessageHelper.customerServiceNum)
-    }
-    
-    @objc private func invitePressed() {
-        Haptics.shared.play(.heavy)
-        let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
-        self.navigationController?.pushViewController(vc.self, animated: true)
     }
     
     @objc func updateTime() {

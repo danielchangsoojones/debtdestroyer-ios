@@ -10,6 +10,7 @@ import TTTAttributedLabel
 
 class NewGameStartView: UIView, TTTAttributedLabelDelegate {
     var settingsButton: UIButton!
+    var inviteButton: UIButton!
     var descContainer = UIView()
     var startLbl = UILabel()
     var countDownTimerLbl = UILabel()
@@ -25,6 +26,7 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         backgroundColor = .clear
         setContainerForVideo()
         setSettingsButton()
+        setInviteButton()
         setStartLabel()
         setCountDownTimerLabel()
         setDayDateLabel()
@@ -70,6 +72,26 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
                 make.leading.equalToSuperview().inset(20)
                 make.top.equalTo(self.snp.topMargin).inset(20)
             }
+        }
+    }
+    
+    private func setInviteButton() {
+        inviteButton = UIButton()
+        inviteButton.setTitle("Invite", for: .normal)
+        inviteButton.backgroundColor = .clear
+        inviteButton.setTitleColor(.white, for: .normal)
+        inviteButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        inviteButton.layer.cornerRadius = 14
+        inviteButton.clipsToBounds = true
+        inviteButton.layer.borderWidth = 1
+        inviteButton.layer.borderColor = UIColor.white.cgColor
+        let horizontalInset: CGFloat = 15
+        let verticalInset: CGFloat = 4
+        inviteButton.contentEdgeInsets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        videoContainer.addSubview(inviteButton)
+        inviteButton.snp.makeConstraints { make in
+            make.centerY.equalTo(settingsButton)
+            make.trailing.equalToSuperview().inset(20)
         }
     }
     

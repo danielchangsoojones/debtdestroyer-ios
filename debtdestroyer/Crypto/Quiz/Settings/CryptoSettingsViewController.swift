@@ -86,6 +86,17 @@ class CryptoSettingsViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.topItem?.title = ""
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     private func setTableView() {
         tableView = UITableView()
         tableView.delegate = self

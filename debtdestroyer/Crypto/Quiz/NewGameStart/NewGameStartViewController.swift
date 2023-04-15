@@ -13,7 +13,7 @@ class NewGameStartViewController: UIViewController {
     struct Constants {
         static let originalStartTime: TimeInterval = 36000
     }
-    
+    private var settingsButton: UIButton!
     private var messageHelper: MessageHelper?
     var quizKickoffTime: Date?
     var timeLabel =  UILabel()
@@ -42,6 +42,8 @@ class NewGameStartViewController: UIViewController {
         super.loadView()
         let newGameStartView = NewGameStartView(frame: self.view.frame)
         self.view = newGameStartView
+        self.settingsButton = newGameStartView.settingsButton
+        newGameStartView.settingsButton.addTarget(self, action: #selector(showSettingsVC), for: .touchUpInside)
         self.dayDateLbl = newGameStartView.dayDateLbl
         self.timeLabel = newGameStartView.countDownTimerLbl
         self.descriptionLbl = newGameStartView.descriptionLbl
@@ -53,7 +55,6 @@ class NewGameStartViewController: UIViewController {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         loopVideo()
-        setNavBarBtns()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
             name: UIApplication.didBecomeActiveNotification, object: nil)
         getDemoQuizData()
@@ -75,7 +76,20 @@ class NewGameStartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        checkStartTimer.invalidate()
+        timer.invalidate()
+    }
+    
+    @objc private func showSettingsVC() {
+        let settingsVC = CryptoSettingsViewController()
+        self.navigationController?.pushViewController(settingsVC.self, animated: true)
     }
     
     @objc private func prizeBtnPressed() {
@@ -203,12 +217,6 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func applicationDidBecomeActive() {
         playerLayer?.player?.play()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        checkStartTimer.invalidate()
-        timer.invalidate()
     }
     
     private func runAssignWebReferralCheck() {
@@ -456,19 +464,6 @@ class NewGameStartViewController: UIViewController {
             descriptionLbl.text = "Come play our trivia daily to see if you will win!"
             self.prizeBtn.isHidden = true
         }
-    }
-    
-    private func setNavBarBtns() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.backgroundColor = .clear
-        navigationItem.hidesBackButton = true
-        
-        let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
-        navigationItem.rightBarButtonItem = help
-        
-        let inviteBtn = UIBarButtonItem.init(title: "Invite", style: .done, target: self, action: #selector(invitePressed))
-        navigationItem.leftBarButtonItem = inviteBtn
     }
     
     @objc private func helpPressed() {

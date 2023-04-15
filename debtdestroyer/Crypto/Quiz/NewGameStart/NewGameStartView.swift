@@ -9,6 +9,7 @@ import UIKit
 import TTTAttributedLabel
 
 class NewGameStartView: UIView, TTTAttributedLabelDelegate {
+    var settingsButton: UIButton!
     var descContainer = UIView()
     var startLbl = UILabel()
     var countDownTimerLbl = UILabel()
@@ -23,6 +24,7 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         super.init(frame: frame)
         backgroundColor = .clear
         setContainerForVideo()
+        setSettingsButton()
         setStartLabel()
         setCountDownTimerLabel()
         setDayDateLabel()
@@ -57,6 +59,20 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         }
     }
     
+    private func setSettingsButton() {
+        if let image = UIImage(named: "menu")?.withRenderingMode(.alwaysTemplate) {
+            settingsButton = UIButton()
+            settingsButton.tintColor = .white
+            settingsButton.setImage(image, for: .normal)
+            settingsButton.imageView?.contentMode = .scaleAspectFit
+            videoContainer.addSubview(settingsButton)
+            settingsButton.snp.makeConstraints { make in
+                make.leading.equalToSuperview().inset(20)
+                make.top.equalTo(self.snp.topMargin).inset(20)
+            }
+        }
+    }
+    
     private func setDescriptionContainer() {
         descContainer.backgroundColor = .clear
         descContainer.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -85,7 +101,7 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         startLbl.font = UIFont.MontserratSemiBold(size: 25)
         videoContainer.addSubview(startLbl)
         startLbl.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview()
+            make.top.equalTo(settingsButton.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(10)
         }
     }

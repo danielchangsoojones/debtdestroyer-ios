@@ -14,7 +14,7 @@ class CryptoSettingsViewController: UIViewController {
         case winnerInfo = "Enter Winner Information"
         case connectedAccounts = "Verify Identity"
         case promoCode = "Promo Code"
-        case contactUs = "Contact Us or Leave Feedback"
+        case contactUs = "Share Feedback"
         case legaDisclosure = "Legal Disclosures"
         case notification = "Notifications"
         case logOut = "Log Out"
@@ -24,6 +24,7 @@ class CryptoSettingsViewController: UIViewController {
         case quizQuestions = "Quiz Questions"
         case rateUs = "Rate Us on App Store"
         case orderSwag = "Buy Swag"
+        case socials = "Follow Us"
         
         var imageName: String {
             switch self {
@@ -45,6 +46,8 @@ class CryptoSettingsViewController: UIViewController {
                 return "feedback"
             case .orderSwag:
                 return "swag"
+            case .socials:
+                return "socialsBtnImage"
             }
         }
     }
@@ -55,7 +58,7 @@ class CryptoSettingsViewController: UIViewController {
     private let quizDataStore = QuizDataStore()
     private let cryptoSettingsDataStore = CryptoSettingsDataStore()
     private let prizeDataStore = PrizeDataStore()
-
+    
     override func loadView() {
         super.loadView()
         setTableView()
@@ -64,7 +67,7 @@ class CryptoSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.notification, .contactUs, .rateUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        dataArr = [.notification, .contactUs, .rateUs, .socials, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
         
         if !(User.isAppleTester) {
             dataArr.insert(.promoCode, at: 0)
@@ -74,13 +77,13 @@ class CryptoSettingsViewController: UIViewController {
         if (User.current()?.showConnectAccount ?? false) {
             dataArr.insert(.connectedAccounts, at: 2)
         }
-
+        
         if User.isAdminUser {
             dataArr.append(.textNoti)
             dataArr.append(.answerKeys)
             dataArr.append(.quizQuestions)
         }
-              
+        
         self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isHidden = false
@@ -139,13 +142,13 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellType = dataArr[indexPath.row]
         switch cellType {
-            case .winnerInfo:
-                // MARK: Enter Winner Information
-                let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
-                UIApplication.shared.open(url)
-                
-            case .connectedAccounts:
-                // MARK: Connected Accounts
+        case .winnerInfo:
+            // MARK: Enter Winner Information
+            let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
+            UIApplication.shared.open(url)
+            
+        case .connectedAccounts:
+            // MARK: Connected Accounts
             prizeDataStore.checkIfMethodAuthed { isAuthed in
                 if isAuthed {
                     let connectedAccountsVC = ConnectedAccountsViewController()
@@ -155,75 +158,75 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.navigationController?.pushViewController(vc.self, animated: true)
                 }
             }
-            case .promoCode:
-                // MARK: Promo Code
-                let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
-                Haptics.shared.play(.heavy)
-                self.navigationController?.pushViewController(vc.self, animated: true)
+        case .promoCode:
+            // MARK: Promo Code
+            let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
+            Haptics.shared.play(.heavy)
+            self.navigationController?.pushViewController(vc.self, animated: true)
         case .contactUs:
-                // MARK: Contact Us
-                // MARK: Leave Feedback
+            // MARK: Contact Us
+            // MARK: Leave Feedback
             messageHelper?.text(MessageHelper.customerServiceNum, body: "")
+            
+        case .legaDisclosure:
+            let vc = LegalDisclosuresViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .notification:
+            // MARK: Notification
+            let vc = NotificationViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+            
+        case .logOut:
+            // MARK: Logout
+            User.logOutInBackground { error in
+                if let error = error {
+                    BannerAlert.show(with: error)
+                } else {
+                    //successfully logged out
+                    let welcomeVC = WelcomeViewController()
+                    let navController = UINavigationController(rootViewController: welcomeVC)
+                    navController.modalPresentationStyle = .fullScreen
+                    self.present(navController, animated: true)
+                }
+            }
+            
+        case .deleteAcc:
+            // MARK: Delete Account
+            let vc = DeleteAccountViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .textNoti:
+            // MARK: Send Text Notification
+            if User.sendMassTextNotification == false {
                 
-            case .legaDisclosure:
-                let vc = LegalDisclosuresViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alertView = SCLAlertView(appearance: appearance)
                 
-            case .notification:
-                // MARK: Notification
-                let vc = NotificationViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
-                
-            case .logOut:
-                // MARK: Logout
-                User.logOutInBackground { error in
-                    if let error = error {
-                        BannerAlert.show(with: error)
-                    } else {
-                        //successfully logged out
-                        let welcomeVC = WelcomeViewController()
-                        let navController = UINavigationController(rootViewController: welcomeVC)
-                        navController.modalPresentationStyle = .fullScreen
-                        self.present(navController, animated: true)
+                alertView.addButton("Send") {
+                    self.cryptoSettingsDataStore.sendMassNotification {
+                        User.sendMassTextNotification = true
                     }
                 }
                 
-            case .deleteAcc:
-                // MARK: Delete Account
-                let vc = DeleteAccountViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
-            case .textNoti:
-                // MARK: Send Text Notification
-                if User.sendMassTextNotification == false {
+                alertView.addButton("Cancel") {
                     
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alertView = SCLAlertView(appearance: appearance)
-                    
-                    alertView.addButton("Send") {
-                        self.cryptoSettingsDataStore.sendMassNotification {
-                            User.sendMassTextNotification = true
-                        }
-                    }
-                    
-                    alertView.addButton("Cancel") {
-                        
-                    }
-                    alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
                 }
-                
-            case .answerKeys:
-                // MARK: Answer Keys
-                let vc = AnswerKeysViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
-            case .quizQuestions:
-                // MARK: Answer Keys
-                let vc = QuizQuestionsViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
+                alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
+            }
+            
+        case .answerKeys:
+            // MARK: Answer Keys
+            let vc = AnswerKeysViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .quizQuestions:
+            // MARK: Answer Keys
+            let vc = QuizQuestionsViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
         case .rateUs:
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
@@ -238,6 +241,29 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
         case .orderSwag:
             let swagPage = NotionViewController(notionURL: "https://dankwun.notion.site/Debt-Destroyer-Swag-aeec29bb9b4948db9dffa105ebba7a12")
             self.navigationController?.pushViewController(swagPage.self, animated: true)
+            
+        case .socials:
+            let alertController = UIAlertController(title: "Socials", message: nil, preferredStyle: .actionSheet)
+            
+            let socials = ["TikTok": "https://www.tiktok.com/@debtdestroyer", "Twitter": "https://www.twitter.com/debtdestroyer_"]
+            for (title, link) in socials {
+                let action = UIAlertAction(title: title, style: .default) { (_) in
+                    if let url = URL(string: link) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                alertController.addAction(action)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            if let popoverController = alertController.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = (self as AnyObject).bounds
+            }
+            
+            present(alertController, animated: true, completion: nil)
         }
     }
     

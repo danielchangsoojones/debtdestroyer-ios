@@ -10,6 +10,7 @@ import UIKit
 class ReferralViewController: UIViewController {
     private var shouldShowSkipBtn: Bool!
     private var inviteButton: UIButton!
+    private var skipButton: UIButton!
     
     init(shouldShowSkipBtn: Bool) {
         self.shouldShowSkipBtn = shouldShowSkipBtn
@@ -27,6 +28,8 @@ class ReferralViewController: UIViewController {
         referralView.skipButton.isHidden = !shouldShowSkipBtn
         self.inviteButton = referralView.inviteButton
         inviteButton.addTarget(self, action: #selector(inviteButtonPressed), for: .touchUpInside)
+        self.skipButton = referralView.skipButton
+        skipButton.addTarget(self, action: #selector(skipButtonPressed), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -52,7 +55,16 @@ class ReferralViewController: UIViewController {
 
     @objc private func inviteButtonPressed() {
         Haptics.shared.play(.heavy)
-        let vc = InviteFriendViewController()
+        var vc = InviteFriendViewController(shouldShowCloseBtn: false)
+        if shouldShowSkipBtn {
+            vc = InviteFriendViewController(shouldShowCloseBtn: true)
+        }
         self.navigationController?.pushViewController(vc.self, animated: true)
+    }
+    
+    @objc private func skipButtonPressed() {
+        let tabBarVC = presentingViewController as? UITabBarController
+        tabBarVC?.selectedIndex = 1
+        dismiss(animated: true)
     }
 }

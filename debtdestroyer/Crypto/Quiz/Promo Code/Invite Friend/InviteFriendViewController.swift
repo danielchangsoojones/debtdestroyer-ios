@@ -27,6 +27,7 @@ class InviteFriendViewController: UIViewController {
     private var theSpinnerContainer: UIView!
     private var shareButton: UIButton!
     private var infoSections = [InfoSection]()
+    private var shouldShowCloseBtn: Bool!
     
     class PromoUser {
         let user: User
@@ -48,6 +49,15 @@ class InviteFriendViewController: UIViewController {
             self.options = options
             self.isOpened = isOpened
         }
+    }
+    
+    init(shouldShowCloseBtn: Bool) {
+        self.shouldShowCloseBtn = shouldShowCloseBtn
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func loadView() {
@@ -77,6 +87,7 @@ class InviteFriendViewController: UIViewController {
         messageHelper?.messageDelegate = self
         getContactAccess()
         hideKeyboardWhenTappedAround()
+        setCloseButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,9 +127,17 @@ class InviteFriendViewController: UIViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc func skipPressed(_ sender: UIRefreshControl) {
+    private func setCloseButton() {
+        if shouldShowCloseBtn {
+            let closeBtn = UIBarButtonItem.init(title: "Close", style: .done, target: self, action: #selector(closeBtnPressed))
+            navigationItem.rightBarButtonItem = closeBtn
+            self.navigationController?.navigationBar.isHidden = false
+            self.navigationItem.hidesBackButton = true
+        }
+    }
+    
+    @objc func closeBtnPressed(_ sender: UIRefreshControl) {
         Haptics.shared.play(.light)
-        //TODO: Will need to test if the screen will properly pop to show the leaderboard screen (we show this screen after the last question + offer a skip button)
         let tabBarVC = presentingViewController as? UITabBarController
         tabBarVC?.selectedIndex = 1
         dismiss(animated: true)

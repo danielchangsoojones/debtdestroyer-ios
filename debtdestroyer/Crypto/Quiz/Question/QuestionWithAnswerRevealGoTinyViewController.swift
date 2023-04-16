@@ -153,6 +153,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private func getScore() {
         if !inTieMode && currentIndex > 0 {
             dataStore.getScore(quiz_topic_id: currentData.quizTopic.objectId ?? "") { quizScore in
@@ -728,7 +732,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                 if (hasOfficiallyEnded || hasWon || hasLost || isLastQuestion) && !inTestTieMode {
                     //the tiebreaker is over
                     //or the users who won or lost go to the leaderboard
-                    self.popBackToLeaderboard()
+                    self.showReferralVC()
                 } else {
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                     let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
@@ -746,10 +750,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     let tiebreakerVC = TieBreakerViewController(competing_tie_user_ids: competing_tie_user_ids, inTestTieMode: false)
                     self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
-                    self.popBackToLeaderboard()
-                    //TODO: uncomment the following lines --> at the last question, land the user on the PromoCodeUsed. The user will be able to click on the skip button to land on the leaderboard
-//                    let promoVC = PromoCodeUsedViewController(shouldShowSkipBtn: true)
-//                    self.navigationController?.pushViewController(promoVC, animated: true)
+                    self.showReferralVC()
                 }
             } else {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -763,10 +764,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         }
     }
     
-    private func popBackToLeaderboard() {
-        //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
-        let tabBarVC = presentingViewController as? UITabBarController
-        tabBarVC?.selectedIndex = 1
-        dismiss(animated: true)
+    private func showReferralVC() {
+        let referralVC = ReferralViewController(shouldShowSkipBtn: true)
+        self.navigationController?.pushViewController(referralVC, animated: true)
     }
 }

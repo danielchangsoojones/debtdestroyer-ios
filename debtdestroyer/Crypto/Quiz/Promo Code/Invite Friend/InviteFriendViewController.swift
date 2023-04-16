@@ -9,7 +9,7 @@ import UIKit
 import Contacts
 import MessageUI
 
-class PromoCodeUsedViewController: UIViewController {
+class InviteFriendViewController: UIViewController {
     private let dataStore = PromoDataStore()
 //    private var promoAttributedText: NSAttributedString!
     private var promoInfoLabelText: String!
@@ -25,7 +25,6 @@ class PromoCodeUsedViewController: UIViewController {
     private var hasAccessPermission: Bool = false
     private var selectedContact: FriendContactParse? = nil
     private var theSpinnerContainer: UIView!
-    private var shouldShowSkipBtn: Bool!
     private var shareButton: UIButton!
     private var infoSections = [InfoSection]()
     
@@ -51,18 +50,9 @@ class PromoCodeUsedViewController: UIViewController {
         }
     }
     
-    init(shouldShowSkipBtn: Bool) {
-        self.shouldShowSkipBtn = shouldShowSkipBtn
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func loadView() {
         super.loadView()
-        let promoCodeView = PromoCodeUsedView(frame: self.view.frame)
+        let promoCodeView = InviteFriendView(frame: self.view.frame)
         self.view = promoCodeView
         self.theSpinnerContainer = promoCodeView.theSpinnerContainer
         self.tableView = promoCodeView.tableView
@@ -81,23 +71,27 @@ class PromoCodeUsedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Your Code: \(User.current()?.personalPromo ?? "")"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.topItem?.title = ""
         messageHelper = MessageHelper(currentVC: self)
         messageHelper?.messageDelegate = self
         getContactAccess()
-        setSkipBtn()
         hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.tintColor = .white
         tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     @objc func refreshData(_ sender: UIRefreshControl) {
@@ -120,13 +114,6 @@ class PromoCodeUsedViewController: UIViewController {
         }
         
         self.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    private func setSkipBtn() {
-        if shouldShowSkipBtn {
-            let skipBtn = UIBarButtonItem.init(title: "Skip", style: .done, target: self, action: #selector(skipPressed))
-            navigationItem.rightBarButtonItem = skipBtn
-        }
     }
     
     @objc func skipPressed(_ sender: UIRefreshControl) {
@@ -205,7 +192,7 @@ class PromoCodeUsedViewController: UIViewController {
     }
 }
 
-extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegate {
+extension InviteFriendViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return infoSections.count
     }
@@ -298,7 +285,7 @@ extension PromoCodeUsedViewController: UITableViewDataSource, UITableViewDelegat
     }
 }
 
-extension PromoCodeUsedViewController: UISearchBarDelegate {
+extension InviteFriendViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         infoSections[1].isOpened = searchText.isEmpty
         filteredRetrievedContacts = searchText.isEmpty ? retrievedContacts : retrievedContacts.filter({ (retrievedContact: RetrievedContact) -> Bool in
@@ -309,7 +296,7 @@ extension PromoCodeUsedViewController: UISearchBarDelegate {
     }
 }
 
-extension PromoCodeUsedViewController: MFMessageComposeViewControllerDelegate {
+extension InviteFriendViewController: MFMessageComposeViewControllerDelegate {
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch result {
         case .sent:

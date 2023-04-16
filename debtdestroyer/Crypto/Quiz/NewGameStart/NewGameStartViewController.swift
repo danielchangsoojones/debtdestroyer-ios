@@ -127,7 +127,7 @@ class NewGameStartViewController: UIViewController {
     
     @objc private func showInviteVC() {
         Haptics.shared.play(.light)
-        let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
+        let vc = ReferralViewController(shouldShowSkipBtn: false)
         self.navigationController?.pushViewController(vc.self, animated: true)
     }
     

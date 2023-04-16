@@ -164,7 +164,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             
         case .promoCode:
             // MARK: Promo Code
-            let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
+            let vc = ReferralViewController(shouldShowSkipBtn: false)
             Haptics.shared.play(.heavy)
             self.navigationController?.pushViewController(vc.self, animated: true)
         case .contactUs:

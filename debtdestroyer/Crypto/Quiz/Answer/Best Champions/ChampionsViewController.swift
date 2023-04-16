@@ -101,7 +101,7 @@ class ChampionsViewController: UIViewController {
     
     @objc private func invitePressed() {
         Haptics.shared.play(.heavy)
-        let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
+        let vc = ReferralViewController(shouldShowSkipBtn: false)
         self.navigationController?.pushViewController(vc.self, animated: true)
     }
     

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A0707AD29A7366400684521 /* PromoCodeUsedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0707AC29A7366400684521 /* PromoCodeUsedViewController.swift */; };
-		0A0707AF29A7367C00684521 /* PromoCodeUsedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0707AE29A7367C00684521 /* PromoCodeUsedView.swift */; };
+		0A0707AD29A7366400684521 /* InviteFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0707AC29A7366400684521 /* InviteFriendViewController.swift */; };
+		0A0707AF29A7367C00684521 /* InviteFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0707AE29A7367C00684521 /* InviteFriendView.swift */; };
 		0A11C82B289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */; };
 		0A11C82C289BBB9B00AEF89D /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C827289BBB9B00AEF89D /* HomeTabBarViewController.swift */; };
 		0A11C82D289BBB9B00AEF89D /* RoundUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A11C828289BBB9B00AEF89D /* RoundUpView.swift */; };
@@ -182,12 +182,14 @@
 		C0AEBC2529EB65DD001F001F /* GameInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2429EB65DD001F001F /* GameInfoTableViewCell.swift */; };
 		C0AEBC2729EB7D2F001F001F /* PastWinnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2629EB7D2F001F001F /* PastWinnerTableViewCell.swift */; };
 		C0AEBC2929EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2829EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift */; };
+		C0AEBC2C29EB9EE2001F001F /* ReferralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2B29EB9EE2001F001F /* ReferralViewController.swift */; };
+		C0AEBC2E29EB9EED001F001F /* ReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2D29EB9EED001F001F /* ReferralView.swift */; };
 		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A0707AC29A7366400684521 /* PromoCodeUsedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeUsedViewController.swift; sourceTree = "<group>"; };
-		0A0707AE29A7367C00684521 /* PromoCodeUsedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeUsedView.swift; sourceTree = "<group>"; };
+		0A0707AC29A7366400684521 /* InviteFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendViewController.swift; sourceTree = "<group>"; };
+		0A0707AE29A7367C00684521 /* InviteFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendView.swift; sourceTree = "<group>"; };
 		0A11C826289BBB9B00AEF89D /* HowDoesRoundUpWorksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowDoesRoundUpWorksViewController.swift; sourceTree = "<group>"; };
 		0A11C827289BBB9B00AEF89D /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		0A11C828289BBB9B00AEF89D /* RoundUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundUpView.swift; sourceTree = "<group>"; };
@@ -367,6 +369,8 @@
 		C0AEBC2429EB65DD001F001F /* GameInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C0AEBC2629EB7D2F001F001F /* PastWinnerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWinnerTableViewCell.swift; sourceTree = "<group>"; };
 		C0AEBC2829EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWinnerCollectionTableViewCell.swift; sourceTree = "<group>"; };
+		C0AEBC2B29EB9EE2001F001F /* ReferralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralViewController.swift; sourceTree = "<group>"; };
+		C0AEBC2D29EB9EED001F001F /* ReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralView.swift; sourceTree = "<group>"; };
 		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -395,12 +399,12 @@
 		0A0707AB29A7362D00684521 /* Promo Code */ = {
 			isa = PBXGroup;
 			children = (
+				C0AEBC2A29EB9EAB001F001F /* Invite Friend */,
 				C008877F29D679B800FDF7E0 /* Daily Boost */,
 				C008877C29D557FA00FDF7E0 /* Share on Social */,
-				C07369F529CD0E4900858D2E /* Cell */,
-				0A0707AC29A7366400684521 /* PromoCodeUsedViewController.swift */,
-				0A0707AE29A7367C00684521 /* PromoCodeUsedView.swift */,
 				925E650929B556F800BBF572 /* PromoDataStore.swift */,
+				C0AEBC2B29EB9EE2001F001F /* ReferralViewController.swift */,
+				C0AEBC2D29EB9EED001F001F /* ReferralView.swift */,
 			);
 			path = "Promo Code";
 			sourceTree = "<group>";
@@ -1100,6 +1104,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C0AEBC2A29EB9EAB001F001F /* Invite Friend */ = {
+			isa = PBXGroup;
+			children = (
+				C07369F529CD0E4900858D2E /* Cell */,
+				0A0707AC29A7366400684521 /* InviteFriendViewController.swift */,
+				0A0707AE29A7367C00684521 /* InviteFriendView.swift */,
+			);
+			path = "Invite Friend";
+			sourceTree = "<group>";
+		};
 		C0C9E4A729E263D900BABAB6 /* Notion */ = {
 			isa = PBXGroup;
 			children = (
@@ -1250,12 +1264,14 @@
 				0A50659528C7496F00207759 /* WinnerParse.swift in Sources */,
 				0ABB56D2299F3DC70078051D /* NotificationViewController.swift in Sources */,
 				0AE126AB291A699000E11003 /* ConnectDisclosureView.swift in Sources */,
+				C0AEBC2E29EB9EED001F001F /* ReferralView.swift in Sources */,
 				0A2E73A8289CD211006E67F9 /* ViewControllerExtension.swift in Sources */,
 				0A59AD0C28E183F4001B774A /* QuizDataStore.swift in Sources */,
-				0A0707AF29A7367C00684521 /* PromoCodeUsedView.swift in Sources */,
+				0A0707AF29A7367C00684521 /* InviteFriendView.swift in Sources */,
 				C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */,
 				0AE126AF291AA39B00E11003 /* NavigationControllerExtension.swift in Sources */,
 				0A4594AC28B7435B00F6B232 /* SuperParseObject.swift in Sources */,
+				C0AEBC2C29EB9EE2001F001F /* ReferralViewController.swift in Sources */,
 				0AED895C294AF79900D6576F /* ScholarshipTableViewCell.swift in Sources */,
 				0A51501C292355B5001B028C /* ResetPasswordViewController.swift in Sources */,
 				0ACAE9242935F0920054E0A3 /* NewGameStartView.swift in Sources */,
@@ -1380,7 +1396,7 @@
 				0AB396102918E8EB00A5AF44 /* HBSegmentedControl.swift in Sources */,
 				0A2E739D289BD941006E67F9 /* BankViewController.swift in Sources */,
 				0A7A49F528A38886009EDE5E /* TimerExtension.swift in Sources */,
-				0A0707AD29A7366400684521 /* PromoCodeUsedViewController.swift in Sources */,
+				0A0707AD29A7366400684521 /* InviteFriendViewController.swift in Sources */,
 				0A76B59428F996530084A629 /* CustomNavigationViewController.swift in Sources */,
 				0A59AD1828E1D575001B774A /* CircularProgressCountdownTimerView.swift in Sources */,
 				0A9E94A928B6623100985179 /* LoanAccountCell.swift in Sources */,

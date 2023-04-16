@@ -31,13 +31,15 @@ class HeaderTableViewCell: UITableViewCell, Reusable {
     
     private func setupHeaderLabel() {
         headerLabel = UILabel()
-        headerLabel.font = .systemFont(ofSize: 23, weight: .regular)
+        headerLabel.numberOfLines = 0
+        headerLabel.textAlignment = .center
+        headerLabel.font = .systemFont(ofSize: 23, weight: .bold)
         headerLabel.textColor = .white
         headerLabel.textAlignment = .left
         contentView.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(10)
-            make.top.bottom.equalToSuperview().inset(5)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.bottom.equalToSuperview().inset(10)
         }
     }
 }

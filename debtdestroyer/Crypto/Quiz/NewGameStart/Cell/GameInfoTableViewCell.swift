@@ -24,6 +24,7 @@ class GameInfoTableViewCell: UITableViewCell, Reusable {
         setUpTimeLeftLabel()
         setUpPrizeStackView()
         addPrizes()
+        setPrizeInfoLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -100,7 +101,6 @@ class GameInfoTableViewCell: UITableViewCell, Reusable {
             make.trailing.equalTo(timeLeftLabel.snp.leading).offset(-5)
             make.top.bottom.equalTo(timeLeftLabel)
         }
-        
     }
     
     private func setUpPrizeStackView() {
@@ -111,9 +111,22 @@ class GameInfoTableViewCell: UITableViewCell, Reusable {
         prizeStackView.alignment = .fill
         backgroundContainer.addSubview(prizeStackView)
         prizeStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(15)
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalTo(rulesButton.snp.top).offset(-10)
+        }
+    }
+    
+    private func setPrizeInfoLabel() {
+        let prizeInfoLabel = UILabel()
+        prizeInfoLabel.text = "Today's Prizes"
+        prizeInfoLabel.textColor = .white
+        prizeInfoLabel.textAlignment = .center
+        prizeInfoLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        backgroundContainer.addSubview(prizeInfoLabel)
+        prizeInfoLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(prizeStackView)
+            make.bottom.equalTo(prizeStackView.snp.top).offset(-10)
+            make.top.equalToSuperview().inset(15)
         }
     }
     

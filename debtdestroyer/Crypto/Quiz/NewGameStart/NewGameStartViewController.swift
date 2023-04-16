@@ -616,7 +616,11 @@ extension NewGameStartViewController: UITableViewDataSource, UITableViewDelegate
             return UITableView.automaticDimension
         } else {
             //TODO: this is hard coded -- weird that we're not able to dynamically size the cell based on its content
-            return 235
+            if indexPath.section == 0 {
+                return 270
+            } else {
+                return 235
+            }
         }
     }
     

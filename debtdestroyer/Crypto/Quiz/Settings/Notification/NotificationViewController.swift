@@ -44,8 +44,9 @@ class NotificationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.tintColor = .black
         tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
     }
     
     @objc func toggleSegmentForNotification(_ notification: Notification) {
@@ -97,8 +98,6 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -106,6 +105,4 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-    
 }

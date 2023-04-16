@@ -66,6 +66,7 @@ class CryptoSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
         messageHelper = MessageHelper(currentVC: self)
         dataArr = [.notification, .contactUs, .rateUs, .socials, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
         
@@ -84,16 +85,14 @@ class CryptoSettingsViewController: UIViewController {
             dataArr.append(.quizQuestions)
         }
         
-        self.navigationItem.title = "Settings"
         self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.navigationBar.barTintColor = .white
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.backgroundColor = .black
+        self.navigationController?.navigationBar.tintColor = .white
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -101,13 +100,18 @@ class CryptoSettingsViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private func setTableView() {
-        view.backgroundColor = .white
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .black
         tableView.separatorStyle = .none
+        tableView.alwaysBounceVertical = true
+        tableView.indicatorStyle = .white
         tableView.register(cellType: SettingsTableViewCell.self)
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
@@ -183,18 +187,22 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             
         case .logOut:
             // MARK: Logout
-            User.logOutInBackground { error in
-                if let error = error {
-                    BannerAlert.show(with: error)
-                } else {
-                    //successfully logged out
-                    let welcomeVC = WelcomeViewController()
-                    let navController = UINavigationController(rootViewController: welcomeVC)
-                    navController.modalPresentationStyle = .fullScreen
-                    self.present(navController, animated: true)
+            let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { action in
+                User.logOutInBackground { error in
+                    if let error = error {
+                        BannerAlert.show(with: error)
+                    } else {
+                        //successfully logged out
+                        let welcomeVC = WelcomeViewController()
+                        let navController = UINavigationController(rootViewController: welcomeVC)
+                        navController.modalPresentationStyle = .fullScreen
+                        self.present(navController, animated: true)
+                    }
                 }
-            }
-            
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         case .deleteAcc:
             // MARK: Delete Account
             let vc = DeleteAccountViewController()
@@ -272,7 +280,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        footer.backgroundColor = UIColor.white
+        footer.backgroundColor = UIColor.black
         let titleLabel = UILabel(frame: CGRect(x:10,y: 10 ,width:footer.frame.width - 20,height:50))
         titleLabel.textColor = .systemGray2
         titleLabel.textAlignment = .center

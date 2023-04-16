@@ -49,6 +49,8 @@ class NotionViewController: UIViewController {
         
         webView.navigationDelegate = self
         navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {

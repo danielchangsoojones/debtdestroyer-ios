@@ -62,14 +62,17 @@ extension PastWinnerTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: PastWinnerCollectionTableViewCell.self)
-        if let winnerContent = winnerContent {
-            //set winner name, amount, and picture
-            cell.set(name: winnerContent[indexPath.row].user.fullName,
-                     amountWon: self.numberToDollar(amount: winnerContent[indexPath.row].prizeWon))
+        if let winner = winnerContent?[indexPath.row] {
+            let name = winner.user.fullName
+            let amountWon = self.numberToDollar(amount: winner.prizeWon)
+            let image = winner.user.objectId == "KlcsxyBBZb" ? UIImage(named: "winner_img") : nil
+            cell.set(name: name, amountWon: amountWon, winnerImage: image)
         }
-
+        
         return cell
     }
+    
+    //TODO: make the cells clickable so that we show a video of the winner prize (esp for the $15k winner)
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //TODO: hardcoded but should be sized dynamically 

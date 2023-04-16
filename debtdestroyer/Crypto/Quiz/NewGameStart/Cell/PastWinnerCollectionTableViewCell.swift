@@ -26,15 +26,27 @@ class PastWinnerCollectionTableViewCell: UICollectionViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func resetImg() {
-//        defaultImageView.image = nil
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        defaultImageView.image = nil
     }
     
-    func set(name: String, amountWon: String, winnerImage: AnyObject? = nil) {
+    func set(name: String, amountWon: String, winnerImage: UIImage? = nil) {
         nameLabel.text = name
         winningsLabel.text = amountWon
-        if winnerImage != nil {
-//            newsletterImageView.loadFromFile(winnerImage)
+        let image = winnerImage ?? UIImage(named: "logo")
+        defaultImageView.image = image
+        defaultImageView.layer.cornerRadius = winnerImage == nil ? 35 : 10
+        defaultImageView.snp.remakeConstraints { make in
+            make.top.equalToSuperview().offset(25)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(winnerImage == nil ? 70 : 100)
+            make.height.equalTo(winnerImage == nil ? 70 : 130)
+        }
+        winningsLabel.snp.remakeConstraints { make in
+            make.top.equalTo(defaultImageView.snp.bottom).offset(25)
+            make.leading.trailing.equalToSuperview().inset(15)
+            make.bottom.equalTo(container).inset(15)
         }
     }
     
@@ -58,7 +70,6 @@ class PastWinnerCollectionTableViewCell: UICollectionViewCell, Reusable {
     private func setUpDefaultImg() {
         defaultImageView = UIImageView()
         defaultImageView.contentMode = .scaleAspectFit
-        defaultImageView.layer.cornerRadius = 25
         defaultImageView.clipsToBounds = true
         container.addSubview(defaultImageView)
         defaultImageView.snp.makeConstraints { (make) in
@@ -66,11 +77,7 @@ class PastWinnerCollectionTableViewCell: UICollectionViewCell, Reusable {
             make.centerX.equalToSuperview()
             make.width.height.equalTo(50)
         }
-        if let image = UIImage(named: "logo") {
-            defaultImageView.image = image
-        }
     }
-    
     
     private func setUpWinningLabel() {
         winningsLabel = UILabel()

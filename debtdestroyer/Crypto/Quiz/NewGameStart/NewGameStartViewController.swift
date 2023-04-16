@@ -586,7 +586,6 @@ extension NewGameStartViewController: UITableViewDataSource, UITableViewDelegate
                 //show game info
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameInfoTableViewCell.self)
                 cell.selectionStyle = .none
-//                cell.set(timeLeftLabel: self.timeLabel.text ?? "")
                 cell.showGameRules = {
                     let urlString = "https://www.debtdestroyer.app/tie-breaker-rules"
                     if let url = URL(string: urlString) {
@@ -616,11 +615,7 @@ extension NewGameStartViewController: UITableViewDataSource, UITableViewDelegate
             return UITableView.automaticDimension
         } else {
             //TODO: this is hard coded -- weird that we're not able to dynamically size the cell based on its content
-            if indexPath.section == 0 {
-                return 270
-            } else {
-                return 235
-            }
+            return 280
         }
     }
     

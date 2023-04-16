@@ -9,8 +9,11 @@ import UIKit
 import TTTAttributedLabel
 
 class NewGameStartView: UIView, TTTAttributedLabelDelegate {
+    var videoContainer = UIView()
     var settingsButton: UIButton!
     var inviteButton: UIButton!
+    var tableView: UITableView!
+    
     var descContainer = UIView()
     var startLbl = UILabel()
     var countDownTimerLbl = UILabel()
@@ -19,37 +22,25 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
     var descriptionLbl = UILabel()
     var tiebreakerRuleLbl : TTTAttributedLabel!
     var prizeBtn = GradientBlueButton()
-    var videoContainer = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clear
+        backgroundColor = .black
         setContainerForVideo()
         setSettingsButton()
         setInviteButton()
-        setStartLabel()
-        setCountDownTimerLabel()
-        setDayDateLabel()
-        setDescriptionContainer()
-      
-        setPrizeButton()
-        setTiebreakerRuleLabel()
-        setHeadingLabel()
-        setDescriptionLabel()
-       
+        setTableView()
+        
+//        setStartLabel()
+//        setCountDownTimerLabel()
+//        setDayDateLabel()
+//        setDescriptionContainer()
+//        setPrizeButton()
+//        setTiebreakerRuleLabel()
+//        setHeadingLabel()
+//        setDescriptionLabel()
     }
     
-    private func addImgView() {
-//        let img = UIImage(named: "backgroundShadow")
-//        let imgView = UIImageView(image: img)
-//        imgView.contentMode = .scaleAspectFill
-//        self.addSubview(imgView)
-//        imgView.snp.makeConstraints { make in
-//            make.leading.trailing.bottomMargin.equalToSuperview()
-//            make.top.equalTo(650)
-//        }
-    }
-  
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,6 +83,16 @@ class NewGameStartView: UIView, TTTAttributedLabelDelegate {
         inviteButton.snp.makeConstraints { make in
             make.centerY.equalTo(settingsButton)
             make.trailing.equalToSuperview().inset(20)
+        }
+    }
+    
+    private func setTableView() {
+        tableView = UITableView()
+        tableView.backgroundColor = .black
+        videoContainer.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.leading.bottom.trailing.equalToSuperview()
+            make.top.equalTo(inviteButton.snp.bottom).offset(10)
         }
     }
     

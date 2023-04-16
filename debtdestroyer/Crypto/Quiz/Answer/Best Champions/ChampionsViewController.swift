@@ -230,7 +230,7 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
             let name = pastWinner.user.fullName.capitalized
             cell.numberLabel.text = String(indexPath.row + 1) + ". "
             cell.nameLabel.text = name
-            cell.pointsLabel.text = numberToDollar(amount: pastWinner.prizeWon)
+            cell.pointsLabel.text = self.numberToDollar(amount: pastWinner.prizeWon)
             if pastWinner.user.objectId == "KlcsxyBBZb" {
                 cell.winnerPhoto.image = UIImage(named: "winner_img")
                 cell.addImg()
@@ -292,7 +292,7 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
         let headerView = LeaderboardTableCell()
         headerView.backgroundColor = .systemGray6
         headerView.numberLabel.text = ""
-        headerView.nameLabel.text = toggleSegment.selectedIndex == 0 ? "" : numberToDollar(amount: totalAmountWon) + "\nTotal Debt Destroyed"
+        headerView.nameLabel.text = toggleSegment.selectedIndex == 0 ? "" : self.numberToDollar(amount: totalAmountWon) + "\nTotal Debt Destroyed"
         headerView.pointsLabel.text = toggleSegment.selectedIndex == 0 ? "Points" : ""
         headerView.nameLabel.font = UIFont.MontserratSemiBold(size: 20)
         headerView.nameLabel.textAlignment = .center
@@ -304,15 +304,6 @@ extension ChampionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let height = toggleSegment.selectedIndex == 0 ? 70 : 100
         return CGFloat(height)
-    }
-    
-    func numberToDollar(amount: Double) -> String {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.numberStyle = .currency
-        formatter.maximumFractionDigits = 0
-        let formattedAmount = formatter.string(from: NSNumber(value: amount)) ?? "$\(Int(amount))"
-        return formattedAmount
     }
 }
 

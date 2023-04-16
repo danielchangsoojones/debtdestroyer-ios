@@ -180,6 +180,8 @@
 		C07369FB29CD83A100858D2E /* InviteJoinedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */; };
 		C0AEBC2329EB605B001F001F /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2229EB605B001F001F /* HeaderTableViewCell.swift */; };
 		C0AEBC2529EB65DD001F001F /* GameInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2429EB65DD001F001F /* GameInfoTableViewCell.swift */; };
+		C0AEBC2729EB7D2F001F001F /* PastWinnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2629EB7D2F001F001F /* PastWinnerTableViewCell.swift */; };
+		C0AEBC2929EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2829EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift */; };
 		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -363,6 +365,8 @@
 		C07369FA29CD83A100858D2E /* InviteJoinedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteJoinedCell.swift; sourceTree = "<group>"; };
 		C0AEBC2229EB605B001F001F /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C0AEBC2429EB65DD001F001F /* GameInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoTableViewCell.swift; sourceTree = "<group>"; };
+		C0AEBC2629EB7D2F001F001F /* PastWinnerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWinnerTableViewCell.swift; sourceTree = "<group>"; };
+		C0AEBC2829EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWinnerCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1090,6 +1094,8 @@
 			children = (
 				C0AEBC2229EB605B001F001F /* HeaderTableViewCell.swift */,
 				C0AEBC2429EB65DD001F001F /* GameInfoTableViewCell.swift */,
+				C0AEBC2629EB7D2F001F001F /* PastWinnerTableViewCell.swift */,
+				C0AEBC2829EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1305,6 +1311,7 @@
 				C07369F729CD0E6700858D2E /* InviteContactCell.swift in Sources */,
 				9208AD5128E69F3A00D5546E /* LeaderboardDataStore.swift in Sources */,
 				0A421C0C28DB4E5F008792B8 /* ViewModel.swift in Sources */,
+				C0AEBC2729EB7D2F001F001F /* PastWinnerTableViewCell.swift in Sources */,
 				C008877E29D5580C00FDF7E0 /* InstagramStory.swift in Sources */,
 				0A59ACFC28E183F4001B774A /* CryptoTabBarViewController.swift in Sources */,
 				0A3AA797290A63C900E94165 /* ConnectAccountsCell.swift in Sources */,
@@ -1328,6 +1335,7 @@
 				0A5F2E5F28C228DE00F7D70D /* SubscriptionCurrentView.swift in Sources */,
 				0A86D111299B9FCE00C4A77E /* ReminderTextNotificationView.swift in Sources */,
 				C0AEBC2529EB65DD001F001F /* GameInfoTableViewCell.swift in Sources */,
+				C0AEBC2929EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift in Sources */,
 				92021FCD289B07A4007901A6 /* AppDelegate.swift in Sources */,
 				0A5FD51E28F848DD00B995C8 /* FontExtension.swift in Sources */,
 				0A7A4A0B28A3E2A2009EDE5E /* Textfield.swift in Sources */,

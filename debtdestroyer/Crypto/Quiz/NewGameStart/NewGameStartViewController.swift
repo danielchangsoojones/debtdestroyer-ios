@@ -18,47 +18,55 @@ class NewGameStartViewController: UIViewController {
     var timeLabel =  UILabel()
     private var timer = Timer()
     private var timeLeft: TimeInterval = Constants.originalStartTime
-    var dayDateLbl = UILabel()
-    var descriptionLbl = UILabel()
+//    var dayDateLbl = UILabel()
+//    var descriptionLbl = UILabel()
     var prizeBtn = GradientBlueButton()
-    var rippleContainer = UIView()
     private var quizDatas: [QuizDataParse] = []
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
-    var headingLbl: UILabel!
+//    var headingLbl: UILabel!
     private var queuePlayer: AVQueuePlayer?
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
     private var quizTopicID = ""
     private var mux_playback_id: String?
+    
     //visibility conditions for daily boost VC
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
     private let dailyBoostKey = "dailyBoostShownOn" // UserDefaults key for storing dates
     private var shouldCheckForDailyBoost = true
     private var userSocials:[String] = []
     
+    //Home Redesign
+    private var tableView: UITableView!
+    private var infoSections = [InfoSection]()
+    private var gameContent: [String] = [] // we can use this if we want to have multiple mini games
+    private var winnerContent: [WinnerInfo] = [] //to showcase winners
+    
     override func loadView() {
         super.loadView()
         let newGameStartView = NewGameStartView(frame: self.view.frame)
         self.view = newGameStartView
+        tableView = newGameStartView.tableView
+        setup(newGameStartView.tableView)
         newGameStartView.settingsButton.addTarget(self, action: #selector(showSettingsVC), for: .touchUpInside)
         newGameStartView.inviteButton.addTarget(self, action: #selector(showInviteVC), for: .touchUpInside)
-        self.dayDateLbl = newGameStartView.dayDateLbl
-        self.timeLabel = newGameStartView.countDownTimerLbl
-        self.descriptionLbl = newGameStartView.descriptionLbl
-        self.prizeBtn = newGameStartView.prizeBtn
-        self.headingLbl = newGameStartView.headingLbl
+//        self.dayDateLbl = newGameStartView.dayDateLbl
+//        self.timeLabel = newGameStartView.countDownTimerLbl
+//        self.descriptionLbl = newGameStartView.descriptionLbl
+//        self.prizeBtn = newGameStartView.prizeBtn
+//        self.headingLbl = newGameStartView.headingLbl
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
-        loopVideo()
+//        loopVideo()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
             name: UIApplication.didBecomeActiveNotification, object: nil)
         getDemoQuizData()
         if User.isAdminUser || User.isIpadDemo {
-            prizeBtn.addTarget(self, action: #selector(prizeBtnPressed), for: .touchUpInside)
+//            prizeBtn.addTarget(self, action: #selector(prizeBtnPressed), for: .touchUpInside)
         }
         runAssignWebReferralCheck()
         updateDailyBoostUserDefaults()
@@ -69,7 +77,7 @@ class NewGameStartViewController: UIViewController {
         super.viewDidAppear(animated)
         User.current()?.fetchInBackground()
         checkWaitlist()
-        addStartQuizBtn()
+//        addStartQuizBtn()
         showGameReminderPopUp()
     }
     
@@ -77,6 +85,22 @@ class NewGameStartViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         setNeedsStatusBarAppearanceUpdate()
+        loadContent()
+    }
+    
+    private func loadContent() {
+        quizDataStore.loadPastWinners { pastWinners, totalAmountWon in
+            let totalWinnings = self.numberToDollar(amount: totalAmountWon)
+            self.winnerContent = pastWinners
+            self.infoSections = [
+                InfoSection(title: "🌟️ GAME STARTS AT 9PM EST DAILY!", content: self.gameContent.compactMap({ return "Cell \($0)"
+                })),
+                
+                InfoSection(title: "🤑️ Total Won: \(totalWinnings)", content: self.winnerContent.compactMap({ return "Cell \($0)"
+                }))
+            ]
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,6 +108,15 @@ class NewGameStartViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         checkStartTimer.invalidate()
         timer.invalidate()
+    }
+    
+    private func setup(_ tableView: UITableView) {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(cellType: HeaderTableViewCell.self)
+        tableView.register(cellType: GameInfoTableViewCell.self)
+        tableView.register(cellType: PastWinnerTableViewCell.self)
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
     
     @objc private func showSettingsVC() {
@@ -437,16 +470,16 @@ class NewGameStartViewController: UIViewController {
 
  
         let finalDate = stringArr.joined(separator: " ")
-        self.dayDateLbl.text = finalDate
+//        self.dayDateLbl.text = finalDate
         
         let prizeAmount = Int(quizTopic.prize_amount / 100).withCommas()
         let prizeAmountStr = "$\(prizeAmount)"
         let descriptionLblText = quizTopic.ticker
-        if descriptionLblText != descriptionLbl.text {
-            descriptionLbl.text = descriptionLblText
-        }
+//        if descriptionLblText != descriptionLbl.text {
+//            descriptionLbl.text = descriptionLblText
+//        }
         
-        headingLbl.text = quizTopic.name
+//        headingLbl.text = quizTopic.name
         
         let titletxt = "      " + prizeAmountStr + " Prize      "
         if titletxt != prizeBtn.titleLabel?.text {
@@ -461,33 +494,42 @@ class NewGameStartViewController: UIViewController {
                 }
                 
             } else {
-                self.prizeBtn.setTitleColor(.white, for: .normal)
-                self.prizeBtn.setTitle(titletxt, for: .normal)
+//                self.prizeBtn.setTitleColor(.white, for: .normal)
+//                self.prizeBtn.setTitle(titletxt, for: .normal)
             }
         }
         
         if !User.shouldShowEarnings {
-            descriptionLbl.text = "Come play our trivia daily to see if you will win!"
-            self.prizeBtn.isHidden = true
+//            descriptionLbl.text = "Come play our trivia daily to see if you will win!"
+//            self.prizeBtn.isHidden = true
         }
     }
     
     @objc func updateTime() {
+        var timeLeftLabelText = "00"
         if timeLeft >= 3600 {
             timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
-            timeLabel.text = timeString(time: TimeInterval(timeLeft))
-            
+//            timeLabel.text = timeString(time: TimeInterval(timeLeft))
+            timeLeftLabelText = timeString(time: TimeInterval(timeLeft))
         } else if timeLeft <= 3600 && timeLeft >= 60 {
             timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
-            timeLabel.text = timeStringMinSec(time: TimeInterval(timeLeft))
-            
+//            timeLabel.text = timeStringMinSec(time: TimeInterval(timeLeft))
+            timeLeftLabelText = timeStringMinSec(time: TimeInterval(timeLeft))
         } else if timeLeft <= 60 && timeLeft >= 0 {
             timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
-            timeLabel.text = timeStringSec(time: TimeInterval(timeLeft))
+//            timeLabel.text = timeStringSec(time: TimeInterval(timeLeft))
+            timeLeftLabelText = timeStringSec(time: TimeInterval(timeLeft))
         } else {
             // Time to start game
-            timeLabel.text = "00"
+//            timeLabel.text = "00"
+            timeLeftLabelText = "00"
 //            timer.invalidate()
+        }
+        
+        //updating the time
+        let indexPath = IndexPath(row: 1, section: 0)
+        if let cell = tableView.cellForRow(at: indexPath) as? GameInfoTableViewCell {
+            cell.set(timeLeftLabel: timeLeftLabelText)
         }
     }
     
@@ -510,4 +552,75 @@ class NewGameStartViewController: UIViewController {
     }
     
     
+}
+
+//Home Redesign
+class InfoSection {
+    let title: String
+    let content: [String] //refers to the content within the section
+    
+    init(title: String,
+         content: [String]) {
+        self.title = title
+        self.content = content
+    }
+}
+
+extension NewGameStartViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return infoSections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2 //header row + content row
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HeaderTableViewCell.self)
+            cell.set(label: infoSections[indexPath.section].title)
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            if indexPath.section == 0 {
+                //show game info
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameInfoTableViewCell.self)
+                cell.selectionStyle = .none
+//                cell.set(timeLeftLabel: self.timeLabel.text ?? "")
+                cell.showGameRules = {
+                    let urlString = "https://www.debtdestroyer.app/tie-breaker-rules"
+                    if let url = URL(string: urlString) {
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
+                }
+                return cell
+            } else {
+                //show winners
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWinnerTableViewCell.self)
+                cell.updateCellWith(row: winnerContent)
+                cell.selectionStyle = .none
+                return cell 
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+     
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return UITableView.automaticDimension
+        } else {
+            //TODO: this is hard coded -- weird that we're not able to dynamically size the cell based on its content
+            return 235
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }

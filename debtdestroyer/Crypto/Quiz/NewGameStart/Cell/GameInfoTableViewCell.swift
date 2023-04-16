@@ -48,7 +48,6 @@ class GameInfoTableViewCell: UITableViewCell, Reusable {
         backgroundContainer.layer.shadowOffset = CGSize(width: 0, height: 0)
         backgroundContainer.layer.shadowOpacity = 0.4
         backgroundContainer.layer.shadowRadius = 10
-        backgroundContainer.layoutIfNeeded()
         contentView.addSubview(backgroundContainer)
         backgroundContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)

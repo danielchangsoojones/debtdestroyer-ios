@@ -32,10 +32,9 @@ class HeaderTableViewCell: UITableViewCell, Reusable {
     private func setupHeaderLabel() {
         headerLabel = UILabel()
         headerLabel.numberOfLines = 0
-        headerLabel.textAlignment = .center
-        headerLabel.font = .systemFont(ofSize: 23, weight: .bold)
-        headerLabel.textColor = .white
         headerLabel.textAlignment = .left
+        headerLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        headerLabel.textColor = .white
         contentView.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)

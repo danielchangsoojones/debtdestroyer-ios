@@ -95,6 +95,23 @@ class NewGameStartViewController: UIViewController {
             let tieVC = TieBreakerViewController(competing_tie_user_ids: [], inTestTieMode: true)
             self.navigationController?.pushViewController(tieVC, animated: true)
         })
+        
+        alertView.addButton("Easy Questions", action: {
+            // Handle "Tiebreaker" option
+            self.checkStartTimer.invalidate()
+            self.playerLayer?.player?.pause()
+            self.quizDataStore.getEasyQuizData { quizDatas in
+                self.quizDatas = quizDatas
+                let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
+                                                                              currentIndex: 0,
+                                                                              competing_tie_user_ids: [],
+                                                                              inTieMode: false,
+                                                                              inTestTieMode: false)
+                let navController = UINavigationController(rootViewController: questionVC)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true)
+            }
+        })
         alertView.showInfo("Choose Option", subTitle: "Please choose an option to continue.")
     }
 
@@ -286,7 +303,11 @@ class NewGameStartViewController: UIViewController {
             if User.isAppleTester || User.isIpadDemo {
                 self.quizDataStore.getDemoQuizData { quizDatas in
                     self.quizDatas = quizDatas
-                    self.setData(quizTopic: quizDatas.first!.quizTopic)
+                    if let quizTopic = quizDatas.first?.quizTopic {
+                        self.setData(quizTopic: quizTopic)
+                    } else {
+                        BannerAlert.show(title: "Error", subtitle: "Could not find the first quiz data", type: .error)
+                    }
                 }
             }
         }
@@ -317,11 +338,11 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
-        if self.mux_playback_id != quizDatas.first?.quizTopic.mux_playback_id {
+        if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
             //hasn't set the playback id or it has changed on the backend
             //or we have switched quizDatas
-            self.mux_playback_id = quizDatas.first?.quizTopic.mux_playback_id
-            if let mux_playback_id = quizDatas.first?.quizTopic.mux_playback_id {
+            self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
+            if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
                 if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
                     let playerItem = AVPlayerItem(url: url)
                     self.queuePlayer?.replaceCurrentItem(with: playerItem)
@@ -339,14 +360,10 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func checkIfStartQuiz() {
-        if let quizData = quizDatas.first {
-            let quizTopic = quizData.quizTopic
+        if let quizData = quizDatas.first, let quizTopic = quizData.quizTopic {
             self.quizKickoffTime = quizTopic.start_time
             setData(quizTopic: quizTopic)
             let now = Date()
-            
-
-
             if quizTopic.start_time < now {
                 //time to start the game
                 startQuiz()
@@ -356,6 +373,8 @@ class NewGameStartViewController: UIViewController {
                 showDailyBoostPopUpIfVisible()
                 shouldCheckForDailyBoost = false
             }
+        } else {
+            BannerAlert.show(title: "Error", subtitle: "The quiz data does not have a quiz topic", type: .error)
         }
     }
     
@@ -373,7 +392,7 @@ class NewGameStartViewController: UIViewController {
         playerLayer?.player?.pause()
         var quizStartIndex = 0
         let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
-            return quizData.objectId == quizData.quizTopic.currentQuizDataID
+            return quizData.objectId == quizData.quizTopic?.currentQuizDataID
         }
         //if we need to start them off in the middle of the quiz because they came late.
         if let currentQuizTopicIndex = currentQuizTopicIndex {

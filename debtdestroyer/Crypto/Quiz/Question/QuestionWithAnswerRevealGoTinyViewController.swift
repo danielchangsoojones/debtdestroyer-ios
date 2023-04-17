@@ -154,8 +154,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     private func getScore() {
-        if !inTieMode && currentIndex > 0 {
-            dataStore.getScore(quiz_topic_id: currentData.quizTopic?.objectId ?? "") { quizScore in
+        if let quizTopic = currentData.quizTopic, !inTieMode && currentIndex > 0 {
+            dataStore.getScore(quiz_topic_id: quizTopic.objectId) { quizScore in
                 let amount = CGFloat(quizScore.score * 1000)
                 self.addProgress(byAmount: amount)
             }

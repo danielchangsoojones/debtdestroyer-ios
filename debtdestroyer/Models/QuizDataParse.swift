@@ -9,7 +9,7 @@ import Foundation
 import Parse
 
 class QuizDataParse: SuperParseObject, PFSubclassing {
-    @NSManaged var quizTopic: QuizTopicParse
+    @NSManaged var quizTopic: QuizTopicParse?
     @NSManaged var question: String
     @NSManaged var answers: [String]?
     @NSManaged var correct_answer_index: Int

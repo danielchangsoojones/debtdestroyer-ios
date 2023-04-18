@@ -8,29 +8,35 @@
 import UIKit
 
 class AnswerKeysViewController: UIViewController {
-    static let answer_dict: [String: (answer_url: String, correct_answer_index: Int)] =
-    [
-        "QT3WlnCvau": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/money_sport_why_20vzpc29w0ewbolaburaicait3rpveq.mp4?ik-t=1682018738&ik-s=a6ac14722078fb9116ed7c5eadc25a3919404447", correct_answer_index: 2),
-        "dDI4se4LyS": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/money_sport_why_20vzpc29w0ewbolaburaicait3rpveq.mp4?ik-t=1682018739&ik-s=fae1ffe25efa4b2ad51a5248120ac44ee97a2bb8", correct_answer_index: 3),
-        "WBSTKpmfcn": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/rhyme_car_2ke0mk71ctiu8s3k4yuz6snypv5wwqm.mp4?ik-t=1682018739&ik-s=a0e65120e8936902853cbc0e8b0234fef3edac02", correct_answer_index: 2),
-        "Pl0DLYXAGP": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/school_meal_29ig8zbedpkwradjyxj60cw1uiy7giz.mp4?ik-t=1682018739&ik-s=22c858e79a617659e56e3bb937f3513410a23f25", correct_answer_index: 0),
-        "1F5g6TKIM6": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/sleepover_act_2un1jsedlfzcesz7tgwfhjq6mk0whvg.mp4?ik-t=1682018740&ik-s=014486b456c84d6e58429951f02ec2e82a03ec73", correct_answer_index: 3),
-        "vA3dEWIHIp": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/souvenir_2667qj5nst5c1degziyk8iqzll4owb7.mp4?ik-t=1682018740&ik-s=e3865d51257bbdcc8e45d06c59bd62b30035abe2", correct_answer_index: 2),
-        "UTKcbWyNuq": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/state_m_2hn1qcxix7wziz520bh8fd2ji9v5y3r.mp4?ik-t=1682018740&ik-s=2d13fdc3ef430cf1ba926cc82d639a6986dc74fd", correct_answer_index: 2),
-        "HyhqtUkbIJ": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/underwear_2lhu9uhocl0vtag74u5j8cch1uj20w9.mp4?ik-t=1682018740&ik-s=e994aa73162fc86d5ae2b6dcc2999b06d570cf14", correct_answer_index: 3),
-        "h1KBSaTdIE": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Mw50xIv28L/worst_friend_2h3ht1cdj8qdlodlybhpblumc2xl4ll.mp4?ik-t=1682018741&ik-s=2019b71052742514866c137e40272978697eedeb", correct_answer_index: 3),
-        "mJUWXbmWQo": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/a_sex_sport_2ma457drdwr468exr6uoxpzswyd6i75.mp4?ik-t=1682018747&ik-s=5c498ab10ea5eab581949ac7c40e5b0ed813b293", correct_answer_index: 1),
-        "wSbXjao171": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/a_stars_24am625tlpamvkb2j80xkxxwxfivy63.mp4?ik-t=1682018747&ik-s=86d6529c073ddcb521eef2c25bb54cf3b481266c", correct_answer_index: 1),
-        "5pE6GMloES": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_attractive_alive_2f3vpt1lijnewiccorc39g5mocije6b.mp4?ik-t=1682018747&ik-s=366f30fc7857d7cb1758158bc17a4e77132bb810", correct_answer_index: 1),
-        "3sjihIh4oQ": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_bank_2yf73a7lde7h5kwo47s49bixtulv385.mp4?ik-t=1682018748&ik-s=12d002152c99358869264d3d45e4ed19e44b5249", correct_answer_index: 1),
-        "ko3as2mPD0": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_fashion_2yzngr5owhlzrr780zus6ykhoahu3im.mp4?ik-t=1682018748&ik-s=dce6933b26a1698970459e37ba39b8fbc3213cb2", correct_answer_index: 1),
-        "n0CoxWTGDp": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_fav_food_22yfc0rpc36j1vc59ox3l3lm94pqyoa.mp4?ik-t=1682018748&ik-s=f458a807dd616cb8fc811b065b2e9945a8a5bbdb", correct_answer_index: 0),
-        "ddrqFzthPA": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_lang_21xphvjh8rkoh2133h8q9v54ihjwnz6.mp4?ik-t=1682018748&ik-s=ca3487170ed5a0544ca085798900ea5f6fcbadf1", correct_answer_index: 0),
-        "YnIt5kXJuL": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_plane_crash_279yja1znmqmng00eq4dh0zw8xomovj.mp4?ik-t=1682018749&ik-s=73bb3abe846989f7a2097ec21b8f128344c7d3e2", correct_answer_index: 0),
-        "WHqhviojeo": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_rate_self_27ujahuw3mxcpjqwwas17yuqp3bd1nx.mp4?ik-t=1682018749&ik-s=9809b23e795fa149cca4633c7e0100ea67cbaad9", correct_answer_index: 0),
-        "OklZdJfF9F": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_sex_sport_2avu7ka0ycsmxe10y2seakskpnv2qcr.mp4.mp4?ik-t=1682018749&ik-s=7a624f356d37624664fad261b9e28fae9140e478", correct_answer_index: 0),
-        "LU4i5zKyiJ": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/b_snap_score_2ozl6z3ziguticb3xltvbm5ieow5xey.mp4?ik-t=1682018750&ik-s=156be82a5ea30623a8c9ebfbe82dc5670a8b6f95", correct_answer_index: 0)
-    ]
+    static let answer_dict: [String: (answer_url: String, correct_answer_index: Int)] = [
+    "Ag1X4g6K2I": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/intro_n_state_212fe0mn2ft6abtx85qemuzpc9u9vuz.mp4?ik-t=1682380758&ik-s=a720180582c2604d7bd17da9ee7ba3bd6571dd47", correct_answer_index: 0),
+    "pX2vCcPXTM": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/worst_date_26ro7k0n03sguzfrgt5xeu88e343poq.mp4?ik-t=1682380758&ik-s=d62744e1ae79f73edce599726adf22ba100b26da", correct_answer_index: 1),
+    "Ifs0BooqS1": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/carnival_food_2w7ng62ktz1qn3xngjz7wjugx3al84j.mp4?ik-t=1682380758&ik-s=b517b1f52b53992d033706dd4b70aca44fd5ba46", correct_answer_index: 2),
+    "5cbqtQiAGp": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/exp_meal_23gsmcly1qxf3gu3k0uo6hvzkwivlbn.mp4?ik-t=1682380759&ik-s=fdfc9cd00e2e457c0b22a3f0ea340e5812e78d1d", correct_answer_index: 2),
+    "4yOKGsEJgv": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/fav_object_2fr70qdkrnjdkfgki7sonhkpy9sbgh2.mp4?ik-t=1682380759&ik-s=8bba17aef7d499877325422ecc478a81b2ab5f8c", correct_answer_index: 0),
+    "ujSGdPawyg": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/h_body_2qxajjqptk6a32cad6pc8ck2f44ltih.mp4?ik-t=1682380759&ik-s=535d076b4e2e455a27a4910f0ccd232b445dd8fd", correct_answer_index: 0),
+    "vcB9jaIqrV": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/mfuckkill_2ss6nlma6b61zny43035j2osigxi7ij.mp4?ik-t=1682380759&ik-s=a48454b11a25f34b4f14e09db775ab6e1508d039", correct_answer_index: 3),
+    "r9giPCLDeC": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/time_line_2unef2loj2f4wfdjuj68ow0twfch41r.mp4?ik-t=1682380759&ik-s=d6477ff2ee75a2ef1c8abc297a981f147a1f3e3e", correct_answer_index: 2),
+    "Sg39nH7Pss": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/hair_dye_2nvn9v72r21z87eh7rgx06zrtn1dsvx.mp4?ik-t=1682380760&ik-s=3281fc3980391df3cbe150c0bc984e97cc14dc79", correct_answer_index: 3),
+    "F0KAWkRk9C": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/danger_city_2th1mmfbivunueluo8zr09k0zykovxc.mp4?ik-t=1682380760&ik-s=49eb7343f6faeaf9a73def94b1134d4c6b1fce29", correct_answer_index: 0),
+    "hIKZHoY7Uj": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/mj_song_2j9o42pz0l4pornthciiqkvnmu2rzf5.mp4?ik-t=1682380760&ik-s=fb96c9534a9c3c018508c3f9d61bfed860e15e2c", correct_answer_index: 2),
+    "Z26tAEmGHr": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/souvenir_2tljv5jzh285kz03d9uprwuyv7ojngw.mp4?ik-t=1682380760&ik-s=8e98963c2dee71ecf148511db2be88a25ab82827", correct_answer_index: 3),
+    "w0P5YOUYB7": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/rapper_dead_2w8vo505gbks3rbucrv3e3tojb5dqif.mp4?ik-t=1682380760&ik-s=47ecb186217a5a8d3782260266fd6be9aac9378d", correct_answer_index: 2),
+    "U3POlKAi6Q": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/sport_money_2vsk43995lfcq8h3r33m2l2jayvz7po.mp4?ik-t=1682380761&ik-s=416a2368c800d473c4b572a80e26c3b6841b6f0f", correct_answer_index: 3),
+    "SMyAS0JEYu": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/Q4kNIr6rTB/special_closet_2crxzc6axjq6525p5ar3fd4ff1lyt4q.mp4?ik-t=1682380761&ik-s=206efa185d887e04ca93fb67d14a165f182d31ef", correct_answer_index: 1),
+    "KOoCqvwI6I": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/d_wallpaper_2tcrge9q8y74y2qswg5xizb66ersnq5.mp4?ik-t=1682380765&ik-s=a002dbe92961b5d498ca6172761bc74d051498af", correct_answer_index: 0),
+    "QBtLPGW48e": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/d_rf_24cvocszd8j2nwl7ilh5je1zbjfnqwq.mp4?ik-t=1682380765&ik-s=9d44586ad3863621d06a618dd3d6e1e1a3f51b60", correct_answer_index: 1),
+    "qP7apKcFze": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/d_wall_other_21qzqso6we6ph9grrx9c5cfhfqxe87c.mp4?ik-t=1682380765&ik-s=27ec7fbc70cfd22012c0cf64f8565bca6b97d2fc", correct_answer_index: 0),
+    "8HQybt3w1P": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_money_2497tnm7o40axizjm2i9i7p0udijj9z.mp4?ik-t=1682380765&ik-s=cd232397c44fa5197656ee090397435ec61b8162", correct_answer_index: 1),
+    "b6QbPsgF5E": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_body_count_2jetnuelgn4z2sxiaoezxbhegbcbc99.mp4?ik-t=1682380766&ik-s=4675ecce15a57816fbcd2560ce834dadf876c886", correct_answer_index: 1),
+    "mYAEfAHF3W": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_for_a_living_2ru47cktxh857b9q022e6pc54dagjk5.mp4?ik-t=1682380766&ik-s=ccdaad085ad4a5b2dea1d6ef648c347efafa4045", correct_answer_index: 0),
+    "VTTTgnNeQY": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_language_22x4dfsox065wchxvgg0uvcj6m0qkhe.mp4?ik-t=1682380766&ik-s=283e64df68b8ad1483a209a4ea49e6b7800943a6", correct_answer_index: 1),
+    "TZE4ElQdQd": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_mean_guys_22sjstcy9su4uipqr254mxp3pnh6tbd.mp4?ik-t=1682380766&ik-s=8bfdfacafd7c649e280451935d91b156a688d433", correct_answer_index: 1),
+    "B1zrjj5var": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_red_flag_2en0qh248p740b1uhbft4qcw4i2j7rc.mp4?ik-t=1682380766&ik-s=ba8aa7f42c45c2546d612b05648648eec1ee4e42", correct_answer_index: 0),
+    "G5Y4bX77ji": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_too_short_2hvcxsdkecy8nhswfsz7ztzdrv4q1hs.mp4?ik-t=1682380767&ik-s=782521f0083461e9553234b5e881b42ca6ea1edb", correct_answer_index: 0),
+    "xAzyPEDwA7": (answer_url: "https://ik.imagekit.io/3fe3wzdkk/difficulty/e_two_items_2fjlkdgjklidlg.mp4?ik-t=1682380767&ik-s=0cada9cb076d0b546ec4959268b454439742d5b3", correct_answer_index: 1)
+]
+
     
     static func getItem(withId id: String) -> (answer_url: String, correct_answer_index: Int)? {
         if let item = answer_dict[id] {

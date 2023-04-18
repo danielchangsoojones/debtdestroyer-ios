@@ -60,7 +60,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private let inTestTieMode: Bool
     private var moneyLabel: UILabel?
     // Set the total size of the progress bar
-    private let totalSize: CGFloat = 14000
+    private let totalSize: CGFloat = 15000
     // Set the current progress to 0
     private var currentProgress: CGFloat = 0
     // Create a UIProgressView
@@ -195,12 +195,12 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     // Call the addProgress function to add increments
     // Add 1000 increments to the progress bar
     func addProgress(byAmount: CGFloat) {
+        currentProgress += byAmount
         let progress = currentProgress / totalSize
         if progress > 1 {
             //something is bugging out, you shouldn't be able to go over 15/15
             BannerAlert.show(title: "Error", subtitle: "Bug issues. Meter can not move over 15/15", type: .error)
         } else {
-            currentProgress += byAmount
             moneyLabel?.text = "$\(Int(currentProgress))"
     //        moneyLabel?.text = "\(Int(currentProgress / 1000)) points"
             progressBar.setProgress(progress, animated: true)
@@ -342,6 +342,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     self.answer_video_url = item.answer_url
                     self.revealAnswer(with: item.correct_answer_index)
                     self.playVideoAnswer()
+                } else {
+                    BannerAlert.show(title: "Error", subtitle: "Can't find the current data id in the answer arrays", type: .error)
                 }
             } else {
                 let quizManagerDataStore = CryptoSettingsDataStore()

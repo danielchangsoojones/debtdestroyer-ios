@@ -485,10 +485,18 @@ class AppleTesterViewController: UIViewController {
         
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
+        
+        let settingsBtn = UIBarButtonItem.init(title: "Settings", style: .done, target: self, action: #selector(settingsBtnPressed))
+        navigationItem.leftBarButtonItem = settingsBtn
     }
     
     @objc private func helpPressed() {
         messageHelper?.text(MessageHelper.customerServiceNum)
+    }
+    
+    @objc private func settingsBtnPressed() {
+        let settingsVC = CryptoSettingsViewController()
+        self.navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     @objc func updateTime() {

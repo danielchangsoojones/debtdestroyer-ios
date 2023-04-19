@@ -17,11 +17,11 @@ class NewGameStartViewController: UIViewController {
     var quizKickoffTime: Date?
     private var timer = Timer()
     private var timeLeft: TimeInterval = Constants.originalStartTime
-
+    
     private var quizDatas: [QuizDataParse] = []
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
-
+    
     private var queuePlayer: AVQueuePlayer?
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
@@ -58,7 +58,7 @@ class NewGameStartViewController: UIViewController {
         super.viewDidLoad()
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
-            name: UIApplication.didBecomeActiveNotification, object: nil)
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
         callTimer()
         getDemoQuizData()
         runAssignWebReferralCheck()
@@ -150,7 +150,11 @@ class NewGameStartViewController: UIViewController {
             if User.isAppleTester || User.isIpadDemo {
                 self.quizDataStore.getDemoQuizData { quizDatas in
                     self.quizDatas = quizDatas
-                    self.setData(quizTopic: quizDatas.first!.quizTopic)
+                    if let quizTopic = quizDatas.first?.quizTopic {
+                        self.setData(quizTopic: quizTopic)
+                    } else {
+                        BannerAlert.show(title: "Error", subtitle: "Could not find the first quiz data", type: .error)
+                    }
                 }
             }
         }
@@ -181,17 +185,17 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
-        if self.mux_playback_id != quizDatas.first?.quizTopic.mux_playback_id {
+        if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
             //hasn't set the playback id or it has changed on the backend
             //or we have switched quizDatas
-            self.mux_playback_id = quizDatas.first?.quizTopic.mux_playback_id
-            if let mux_playback_id = quizDatas.first?.quizTopic.mux_playback_id {
+            self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
+            if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
                 if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
                     let playerItem = AVPlayerItem(url: url)
                     self.queuePlayer?.replaceCurrentItem(with: playerItem)
                 }
             } else if let playerItem = getTrophyPlayerItem() {
-               //the next quiz has switched, so quiztopic is empty
+                //the next quiz has switched, so quiztopic is empty
                 self.queuePlayer?.replaceCurrentItem(with: playerItem)
                 self.queuePlayer?.play()
             } else {
@@ -211,12 +215,10 @@ class NewGameStartViewController: UIViewController {
     }
     
     private func checkIfStartQuiz() {
-        if let quizData = quizDatas.first {
-            let quizTopic = quizData.quizTopic
+        if let quizData = quizDatas.first, let quizTopic = quizData.quizTopic {
             self.quizKickoffTime = quizTopic.start_time
             setData(quizTopic: quizTopic)
             let now = Date()
-            
             if quizTopic.start_time < now {
                 //time to start the game
                 startQuiz()
@@ -226,6 +228,8 @@ class NewGameStartViewController: UIViewController {
                 showDailyBoostPopUpIfVisible()
                 shouldCheckForDailyBoost = false
             }
+        } else {
+            BannerAlert.show(title: "Error", subtitle: "The quiz data does not have a quiz topic", type: .error)
         }
     }
     
@@ -234,7 +238,7 @@ class NewGameStartViewController: UIViewController {
         playerLayer?.player?.pause()
         var quizStartIndex = 0
         let currentQuizTopicIndex = quizDatas.firstIndex { quizData in
-            return quizData.objectId == quizData.quizTopic.currentQuizDataID
+            return quizData.objectId == quizData.quizTopic?.currentQuizDataID
         }
         //if we need to start them off in the middle of the quiz because they came late.
         if let currentQuizTopicIndex = currentQuizTopicIndex {
@@ -272,7 +276,7 @@ class NewGameStartViewController: UIViewController {
         } else {
             // Time to start game
             timeLeftLabelText = "00"
-//            timer.invalidate()
+            //            timer.invalidate()
         }
         
         //updating the time
@@ -318,7 +322,7 @@ extension NewGameStartViewController {
     func updateDailyBoostUserDefaults() {
         var shownOnQuizTopics = UserDefaults.standard.array(forKey: dailyBoostKey) as? [String] ?? []
         shownOnQuizTopics = shownOnQuizTopics.suffix(2)
-//        shownOnQuizTopics = []
+        //        shownOnQuizTopics = []
         UserDefaults.standard.set(shownOnQuizTopics, forKey: dailyBoostKey)
     }
     
@@ -385,7 +389,7 @@ extension NewGameStartViewController {
                 }
             }
         }
-
+        
         if selectedSocial == "Twitter" {
             let firstName = User.current()?.firstName ?? ""
             let personalPromo = User.current()?.personalPromo ?? ""
@@ -458,14 +462,14 @@ extension NewGameStartViewController: UITableViewDataSource, UITableViewDelegate
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWinnerTableViewCell.self)
                 cell.updateCellWith(row: winnerContent)
                 cell.selectionStyle = .none
-                return cell 
+                return cell
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-     
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -77,8 +77,10 @@ class ChampionsViewController: UIViewController {
         let help = UIBarButtonItem.init(title: "help?", style: .done, target: self, action: #selector(helpPressed))
         navigationItem.rightBarButtonItem = help
         
-        let inviteBtn = UIBarButtonItem.init(title: "Invite", style: .done, target: self, action: #selector(invitePressed))
-        navigationItem.leftBarButtonItem = inviteBtn
+        if !(User.isAppleTester || User.isIpadDemo) {
+            let inviteBtn = UIBarButtonItem.init(title: "Invite", style: .done, target: self, action: #selector(invitePressed))
+            navigationItem.leftBarButtonItem = inviteBtn
+        }
     }
     
     @objc func segmentValueChanged(_ sender: AnyObject?){

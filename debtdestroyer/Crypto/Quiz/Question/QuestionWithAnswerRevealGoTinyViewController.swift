@@ -64,8 +64,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     // Set the current progress to 0
     private var currentProgress: CGFloat = 0
     // Create a UIProgressView
-    private var progressView: UIView!
-    private var progressBar: YLProgressBar!
+    private var progressView: UIView?
+    private var progressBar: YLProgressBar?
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -153,13 +153,9 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     private func getScore() {
-        if !inTieMode && currentIndex > 0 {
-            dataStore.getScore(quiz_topic_id: currentData.quizTopic.objectId ?? "") { quizScore in
+        if let quizTopic = currentData.quizTopic, !inTieMode && currentIndex > 0 {
+            dataStore.getScore(quiz_topic_id: quizTopic.objectId ?? "") { quizScore in
                 let amount = CGFloat(quizScore.score * 1000)
                 self.addProgress(byAmount: amount)
             }
@@ -170,27 +166,30 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
 
     func addProgressBarToView() {
         if !inTieMode {
-            let screen = UIScreen.main.bounds
-            self.progressBar = YLProgressBar(frame: CGRect(x: -screenHeight / 4, y: 300, width: screenHeight / 2, height: 50))
-            progressBar.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-            progressBar.clipsToBounds = false
-            progressBar.progressTintColor = UIColor.green
-            progressBar.trackTintColor = UIColor.lightGray
-            progressBar.progress = 0.0
-            view.addSubview(progressBar)
-            
-            progressView = UIView(frame: CGRect(x: 0, y: screenHeight - 300, width: 80, height: 20))
-            progressView.backgroundColor = UIColor.systemGreen
-            view.addSubview(progressView)
-            
-            moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 20))
-            if let moneyLabel = moneyLabel {
-                moneyLabel.textColor = .white
-                moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-                moneyLabel.textAlignment = .center
-                //        moneyLabel.text = "$0"
-                moneyLabel.text = "0"
-                progressView.addSubview(moneyLabel)
+            self.progressBar = YLProgressBar(frame: CGRect(x: -screenHeight / 4, y: 230, width: screenHeight / 2, height: 25))
+            if let progressBar = progressBar {
+                progressBar.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+                progressBar.clipsToBounds = false
+                progressBar.progressTintColor = UIColor.green
+                progressBar.trackTintColor = UIColor.lightGray
+                progressBar.progress = 0.0
+                view.addSubview(progressBar)
+                
+                progressView = UIView(frame: CGRect(x: 0, y: progressBar.frame.maxY, width: 80, height: 20))
+                if let progressView = progressView {
+                    progressView.backgroundColor = UIColor.systemGreen
+                    view.addSubview(progressView)
+                    
+                    moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 20))
+                    if let moneyLabel = moneyLabel {
+                        moneyLabel.textColor = .white
+                        moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+                        moneyLabel.textAlignment = .center
+                        moneyLabel.text = "$0"
+        //                moneyLabel.text = "0"
+                        progressView.addSubview(moneyLabel)
+                    }
+                }
             }
         }
     }
@@ -200,13 +199,21 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     // Add 1000 increments to the progress bar
     func addProgress(byAmount: CGFloat) {
         currentProgress += byAmount
-//        moneyLabel.text = "$\(Int(currentProgress))"
-        moneyLabel?.text = "\(Int(currentProgress / 1000)) points"
         let progress = currentProgress / totalSize
-        progressBar.setProgress(progress, animated: true)
-        UIView.animate(withDuration: 1.0, animations: {
-            self.progressView.frame.origin.y = self.screenHeight - 300 - self.progressBar.frame.size.height * progress
-        })
+        if progress > 1 {
+            //something is bugging out, you shouldn't be able to go over 15/15
+            BannerAlert.show(title: "Error", subtitle: "Bug issues. Meter can not move over 15/15", type: .error)
+        } else {
+            moneyLabel?.text = "$\(Int(currentProgress))"
+    //        moneyLabel?.text = "\(Int(currentProgress / 1000)) points"
+            progressBar?.setProgress(progress, animated: true)
+            UIView.animate(withDuration: 1.0, animations: {
+                if let progressBar = self.progressBar {
+                    self.progressView?.frame.origin.y = progressBar.frame.maxY - progressBar.frame.size.height * progress
+                }
+                
+            })
+        }
     }
     
     @objc private func applicationDidBecomeActive() {
@@ -292,7 +299,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     @objc private func startQuestionPromptControl() {
         if inTieMode {
-            let total_tie_spots = quizDatas.first?.quizTopic.winner_tie_spots
+            let total_tie_spots = quizDatas.first?.quizTopic?.winner_tie_spots
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: true,
                                         total_tie_slots: total_tie_spots ?? 0,
@@ -309,12 +316,12 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     
     @objc private func revealAnswerControl() {
         if inTieMode {
-            let total_tie_spots = quizDatas.first?.quizTopic.winner_tie_spots
+            let total_tie_spots = quizDatas.first?.quizTopic?.winner_tie_spots
             dataStore.markQuizTieStatus(quizDatas: quizDatas,
                                         shouldStartQuestionPrompt: false,
                                         total_tie_slots: total_tie_spots ?? 0,
                                         currentQuizData: currentData)
-        } else {
+        } else if let quizTopic = currentData.quizTopic {
             if User.isAdminUser {
                 if quizDatas.count == (currentIndex + 1) {
                     
@@ -324,7 +331,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     let alertView = SCLAlertView(appearance: appearance)
                     
                     alertView.addButton("Officially End Quiz") {
-                        self.dataStore.officiallyEndQuiz(for: self.currentData.quizTopic)
+                        self.dataStore.officiallyEndQuiz(for: quizTopic)
                     }
                     
                     alertView.addButton("No") {
@@ -335,12 +342,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             }
             
             let now = Date()
-            if currentData.quizTopic.start_time > now {
+            if quizTopic.start_time > now {
                 //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
                 if let item = AnswerKeysViewController.getItem(withId: currentData.objectId ?? "") {
                     self.answer_video_url = item.answer_url
                     self.revealAnswer(with: item.correct_answer_index)
                     self.playVideoAnswer()
+                } else {
+                    BannerAlert.show(title: "Error", subtitle: "Can't find the current data id in the answer arrays", type: .error)
                 }
             } else {
                 let quizManagerDataStore = CryptoSettingsDataStore()
@@ -350,6 +359,14 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                                                     currentQuizData: currentData) { quizTopic in
                     self.competing_tie_user_ids =  quizTopic.competing_tie_user_ids
                 }
+            }
+        } else {
+            //when I am testing the easy quizData
+            //when I am just previewing the quiz, I don't want it to hit the server with the revealed answer.
+            if let item = AnswerKeysViewController.getItem(withId: currentData.objectId ?? "") {
+                self.answer_video_url = item.answer_url
+                self.revealAnswer(with: item.correct_answer_index)
+                self.playVideoAnswer()
             }
         }
     }
@@ -381,11 +398,19 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     private func questionPromptAnimate() {
+        self.showProgressBar(show: false)
         UIView.animate(withDuration: 1.0) {
             self.bottomView.alpha = 1.0
         }
         
         showIntervieweePhoto(shouldShow: true)
+    }
+    
+    private func showProgressBar(show: Bool) {
+        if !inTieMode {
+            self.progressBar?.alpha = show ? 1.0 : 0.0
+            self.progressView?.alpha = show ? 1.0 : 0.0
+        }
     }
     
     private func showIntervieweePhoto(shouldShow: Bool) {
@@ -530,6 +555,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private func revealAnswer(with correct_answer_index: Int) {
         if !hasRevealedAnswerOnce {
             playVideoAnswer()
+            self.showProgressBar(show: true)
             hasRevealedAnswerOnce = true
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen
@@ -670,8 +696,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             if inTieMode {
                 dataStore.saveTieAnswer(chosen_answer_index: selectedAnswerIndex,
                                         quizData: currentData)
-            } else {
-                dataStore.saveAnswer(for: currentData.quizTopic,
+            } else if let quizTopic = currentData.quizTopic {
+                dataStore.saveAnswer(for: quizTopic,
                                      chosen_answer_index: selectedAnswerIndex,
                                      quizData: currentData)
             }
@@ -728,11 +754,11 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
             if inTieMode {
                 let hasWon = won_user_ids.contains(User.current()?.objectId ?? "")
                 let hasLost = lost_user_ids.contains(User.current()?.objectId ?? "")
-                let hasOfficiallyEnded = won_user_ids.count == currentData.quizTopic.winner_tie_spots
+                let hasOfficiallyEnded = won_user_ids.count == currentData.quizTopic?.winner_tie_spots
                 if (hasOfficiallyEnded || hasWon || hasLost || isLastQuestion) && !inTestTieMode {
                     //the tiebreaker is over
                     //or the users who won or lost go to the leaderboard
-                    self.showReferralVC()
+                    self.popBackToLeaderboard()
                 } else {
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                     let vc = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
@@ -750,7 +776,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
                     let tiebreakerVC = TieBreakerViewController(competing_tie_user_ids: competing_tie_user_ids, inTestTieMode: false)
                     self.navigationController?.pushViewController(tiebreakerVC, animated: true)
                 } else if Helpers.getTopViewController() is UINavigationController {
-                    self.showReferralVC()
+                    self.popBackToLeaderboard()
+                    //TODO: uncomment the following lines --> at the last question, land the user on the PromoCodeUsed. The user will be able to click on the skip button to land on the leaderboard
+//                    let promoVC = PromoCodeUsedViewController(shouldShowSkipBtn: true)
+//                    self.navigationController?.pushViewController(promoVC, animated: true)
                 }
             } else {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -764,8 +793,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         }
     }
     
-    private func showReferralVC() {
-        let referralVC = ReferralViewController(shouldShowSkipBtn: true)
-        self.navigationController?.pushViewController(referralVC, animated: true)
+    private func popBackToLeaderboard() {
+        //the quizVC was shown in a modal, so pop to the leaderboard in the tab bar.
+        let tabBarVC = presentingViewController as? UITabBarController
+        tabBarVC?.selectedIndex = 1
+        dismiss(animated: true)
     }
 }

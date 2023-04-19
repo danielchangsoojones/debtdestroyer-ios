@@ -185,6 +185,8 @@
 		C0AEBC2C29EB9EE2001F001F /* ReferralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2B29EB9EE2001F001F /* ReferralViewController.swift */; };
 		C0AEBC2E29EB9EED001F001F /* ReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2D29EB9EED001F001F /* ReferralView.swift */; };
 		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
+		C0E9C7D629EF835E0049351D /* AppleTesterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9C7D529EF835E0049351D /* AppleTesterView.swift */; };
+		C0E9C7D829EF83770049351D /* AppleTesterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -372,6 +374,8 @@
 		C0AEBC2B29EB9EE2001F001F /* ReferralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralViewController.swift; sourceTree = "<group>"; };
 		C0AEBC2D29EB9EED001F001F /* ReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralView.swift; sourceTree = "<group>"; };
 		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
+		C0E9C7D529EF835E0049351D /* AppleTesterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTesterView.swift; sourceTree = "<group>"; };
+		C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTesterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -943,6 +947,7 @@
 		0ACAE9272935F0AD0054E0A3 /* NewGameStart */ = {
 			isa = PBXGroup;
 			children = (
+				C0E9C7D429EF83500049351D /* Apple Tester */,
 				C0AEBC2129EB604F001F001F /* Cell */,
 				0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */,
 				0ACAE9252935F0A40054E0A3 /* NewGameStartViewController.swift */,
@@ -1120,6 +1125,15 @@
 				C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */,
 			);
 			path = Notion;
+			sourceTree = "<group>";
+		};
+		C0E9C7D429EF83500049351D /* Apple Tester */ = {
+			isa = PBXGroup;
+			children = (
+				C0E9C7D529EF835E0049351D /* AppleTesterView.swift */,
+				C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */,
+			);
+			path = "Apple Tester";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1339,6 +1353,7 @@
 				9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */,
 				0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
+				C0E9C7D629EF835E0049351D /* AppleTesterView.swift in Sources */,
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,
 				0A4536DF28B8DFF200F4A8CA /* PastWeeksPrizeCell.swift in Sources */,
 				0A59AD0928E183F4001B774A /* ProvideFeedbackView.swift in Sources */,
@@ -1370,6 +1385,7 @@
 				0A7A4A0E28A3E848009EDE5E /* LogInViewController.swift in Sources */,
 				0A6049F02988ECE8002CC0B4 /* QuizQuestionsViewController.swift in Sources */,
 				0AC23D2728ABB10F006301DE /* LegalDisclosuresViewController.swift in Sources */,
+				C0E9C7D829EF83770049351D /* AppleTesterViewController.swift in Sources */,
 				92021FCF289B07A4007901A6 /* SceneDelegate.swift in Sources */,
 				0A86D113299B9FE100C4A77E /* ReminderTextNotificationViewController.swift in Sources */,
 				0AC23D2F28ACD422006301DE /* DeleteAccountViewController.swift in Sources */,

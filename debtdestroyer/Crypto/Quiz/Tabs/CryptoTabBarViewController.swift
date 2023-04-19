@@ -34,8 +34,10 @@ class CryptoTabBarViewController: UITabBarController, UITabBarControllerDelegate
     private func setTabs(){
         let vc1 = NewGameStartViewController()
         let vc2 = ChampionsViewController()
+        let vc3 = AppleTesterViewController()
         
-        let controllers = [vc1, vc2]
+        let controllers: [UIViewController] = User.isAppleTester || User.isIpadDemo ? [vc3, vc2] : [vc1, vc2]
+        
         self.viewControllers = controllers.map { CustomNavigationViewController(rootViewController: $0)}
         
         let tabQuiz = tabBar.items![0]

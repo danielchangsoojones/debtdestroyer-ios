@@ -392,11 +392,17 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     private func questionPromptAnimate() {
+        self.showProgressBar(show: false)
         UIView.animate(withDuration: 1.0) {
             self.bottomView.alpha = 1.0
         }
         
         showIntervieweePhoto(shouldShow: true)
+    }
+    
+    private func showProgressBar(show: Bool) {
+        self.progressBar.alpha = show ? 1.0 : 0.0
+        self.progressView.alpha = show ? 1.0 : 0.0
     }
     
     private func showIntervieweePhoto(shouldShow: Bool) {
@@ -541,6 +547,7 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     private func revealAnswer(with correct_answer_index: Int) {
         if !hasRevealedAnswerOnce {
             playVideoAnswer()
+            self.showProgressBar(show: true)
             hasRevealedAnswerOnce = true
             let selectedAnswerIndex = self.answerViews.firstIndex { answerView in
                 return answerView.isChosen

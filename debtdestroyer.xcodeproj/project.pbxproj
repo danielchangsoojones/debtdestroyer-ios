@@ -187,6 +187,7 @@
 		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
 		C0E9C7D629EF835E0049351D /* AppleTesterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9C7D529EF835E0049351D /* AppleTesterView.swift */; };
 		C0E9C7D829EF83770049351D /* AppleTesterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */; };
+		C0E9C7DB29EF8E4D0049351D /* LiveChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9C7DA29EF8E4D0049351D /* LiveChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -376,6 +377,7 @@
 		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
 		C0E9C7D529EF835E0049351D /* AppleTesterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTesterView.swift; sourceTree = "<group>"; };
 		C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTesterViewController.swift; sourceTree = "<group>"; };
+		C0E9C7DA29EF8E4D0049351D /* LiveChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -947,6 +949,7 @@
 		0ACAE9272935F0AD0054E0A3 /* NewGameStart */ = {
 			isa = PBXGroup;
 			children = (
+				C0E9C7D929EF8E3F0049351D /* Live Chat */,
 				C0E9C7D429EF83500049351D /* Apple Tester */,
 				C0AEBC2129EB604F001F001F /* Cell */,
 				0ACAE9232935F0920054E0A3 /* NewGameStartView.swift */,
@@ -1134,6 +1137,14 @@
 				C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */,
 			);
 			path = "Apple Tester";
+			sourceTree = "<group>";
+		};
+		C0E9C7D929EF8E3F0049351D /* Live Chat */ = {
+			isa = PBXGroup;
+			children = (
+				C0E9C7DA29EF8E4D0049351D /* LiveChatView.swift */,
+			);
+			path = "Live Chat";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1352,6 +1363,7 @@
 				0A32178B290115A200A414CA /* ScoreViewController.swift in Sources */,
 				9208AD4F28E69BD400D5546E /* LeaderboardTableCell.swift in Sources */,
 				0A44EFA728E5BA50006305B8 /* ChampionsView.swift in Sources */,
+				C0E9C7DB29EF8E4D0049351D /* LiveChatView.swift in Sources */,
 				0A2E73B1289D427E006E67F9 /* PrizeViewController.swift in Sources */,
 				C0E9C7D629EF835E0049351D /* AppleTesterView.swift in Sources */,
 				0A9E949F28B603A400985179 /* TapGestureRecognizerExtension.swift in Sources */,

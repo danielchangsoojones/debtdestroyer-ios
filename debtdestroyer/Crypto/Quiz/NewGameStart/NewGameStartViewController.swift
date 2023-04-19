@@ -22,11 +22,13 @@ class NewGameStartViewController: UIViewController {
     private let quizDataStore = QuizDataStore()
     private var checkStartTimer = Timer()
     
+    //live stream
     private var queuePlayer: AVQueuePlayer?
     private var playerLayer: AVPlayerLayer?
     private var playbackLooper: AVPlayerLooper?
     private var quizTopicID = ""
     private var mux_playback_id: String?
+    private var timeLeftLabelText = "00"
     
     //visibility conditions for daily boost VC
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
@@ -59,6 +61,7 @@ class NewGameStartViewController: UIViewController {
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
+        loopVideo()
         callTimer()
         getDemoQuizData()
         runAssignWebReferralCheck()
@@ -184,36 +187,6 @@ class NewGameStartViewController: UIViewController {
         }
     }
     
-    private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
-        if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
-            //hasn't set the playback id or it has changed on the backend
-            //or we have switched quizDatas
-            self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
-            if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
-                if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
-                    let playerItem = AVPlayerItem(url: url)
-                    self.queuePlayer?.replaceCurrentItem(with: playerItem)
-                }
-            } else if let playerItem = getTrophyPlayerItem() {
-                //the next quiz has switched, so quiztopic is empty
-                self.queuePlayer?.replaceCurrentItem(with: playerItem)
-                self.queuePlayer?.play()
-            } else {
-                BannerAlert.show(title: "Error", subtitle: "could not load the trophy background", type: .error)
-            }
-        }
-    }
-    
-    private func getTrophyPlayerItem() -> AVPlayerItem? {
-        let file = "silverCup.mp4".components(separatedBy: ".")
-        if let path = Bundle.main.path(forResource: file[0], ofType:file[1]) {
-            let playerItem = AVPlayerItem(url: URL(fileURLWithPath: path))
-            return playerItem
-        }
-        
-        return nil
-    }
-    
     private func checkIfStartQuiz() {
         if let quizData = quizDatas.first, let quizTopic = quizData.quizTopic {
             self.quizKickoffTime = quizTopic.start_time
@@ -263,7 +236,6 @@ class NewGameStartViewController: UIViewController {
     }
     
     @objc func updateTime() {
-        var timeLeftLabelText = "00"
         if timeLeft >= 3600 {
             timeLeft = quizKickoffTime?.timeIntervalSinceNow ?? 0
             timeLeftLabelText = timeString(time: TimeInterval(timeLeft))
@@ -302,6 +274,59 @@ class NewGameStartViewController: UIViewController {
     func timeStringSec(time:TimeInterval) -> String {
         let seconds = Int(time) % 60
         return String(format: "%02i", seconds)
+    }
+}
+
+extension NewGameStartViewController {
+    //trophy + live video chat
+    private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
+        if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
+            //hasn't set the playback id or it has changed on the backend
+            //or we have switched quizDatas
+            self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
+            if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
+                if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
+                    let playerItem = AVPlayerItem(url: url)
+                    self.queuePlayer?.replaceCurrentItem(with: playerItem)
+                }
+            } else if let playerItem = getTrophyPlayerItem() {
+                //the next quiz has switched, so quiztopic is empty
+                self.queuePlayer?.replaceCurrentItem(with: playerItem)
+                self.queuePlayer?.play()
+            } else {
+                BannerAlert.show(title: "Error", subtitle: "could not load the trophy background", type: .error)
+            }
+        }
+    }
+    
+    func loopVideo() {
+        if let playerItem = getTrophyPlayerItem() {
+            self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
+            self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
+            guard let playerLayer = self.playerLayer else {return}
+            guard let queuePlayer = self.queuePlayer else {return}
+            self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
+
+            self.tabBarController?.tabBar.isHidden = true
+            let liveChatView = LiveChatView(frame: self.view.frame)
+            self.view = liveChatView
+            liveChatView.timerLabel.text = timeLeftLabelText
+            
+            playerLayer.videoGravity = .resizeAspectFill
+            playerLayer.frame = self.view.frame
+            self.view.layer.insertSublayer(playerLayer, at: 0)
+            playerLayer.player?.play()
+        }
+    }
+    
+    private func getTrophyPlayerItem() -> AVPlayerItem? {
+        let file = "silverCup.mp4".components(separatedBy: ".")
+        if let path = Bundle.main.path(forResource: file[0], ofType:file[1]) {
+            let playerItem = AVPlayerItem(url: URL(fileURLWithPath: path))
+            return playerItem
+        }
+        
+        return nil
     }
 }
 

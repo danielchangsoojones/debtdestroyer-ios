@@ -64,8 +64,8 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     // Set the current progress to 0
     private var currentProgress: CGFloat = 0
     // Create a UIProgressView
-    private var progressView: UIView!
-    private var progressBar: YLProgressBar!
+    private var progressView: UIView?
+    private var progressBar: YLProgressBar?
     
     private var currentData: QuizDataParse {
         return quizDatas[currentIndex]
@@ -166,27 +166,30 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
 
     func addProgressBarToView() {
         if !inTieMode {
-            let screen = UIScreen.main.bounds
             self.progressBar = YLProgressBar(frame: CGRect(x: -screenHeight / 4, y: 230, width: screenHeight / 2, height: 25))
-            progressBar.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-            progressBar.clipsToBounds = false
-            progressBar.progressTintColor = UIColor.green
-            progressBar.trackTintColor = UIColor.lightGray
-            progressBar.progress = 0.0
-            view.addSubview(progressBar)
-            
-            progressView = UIView(frame: CGRect(x: 0, y: self.progressBar.frame.maxY, width: 80, height: 20))
-            progressView.backgroundColor = UIColor.systemGreen
-            view.addSubview(progressView)
-            
-            moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 20))
-            if let moneyLabel = moneyLabel {
-                moneyLabel.textColor = .white
-                moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-                moneyLabel.textAlignment = .center
-                moneyLabel.text = "$0"
-//                moneyLabel.text = "0"
-                progressView.addSubview(moneyLabel)
+            if let progressBar = progressBar {
+                progressBar.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+                progressBar.clipsToBounds = false
+                progressBar.progressTintColor = UIColor.green
+                progressBar.trackTintColor = UIColor.lightGray
+                progressBar.progress = 0.0
+                view.addSubview(progressBar)
+                
+                progressView = UIView(frame: CGRect(x: 0, y: progressBar.frame.maxY, width: 80, height: 20))
+                if let progressView = progressView {
+                    progressView.backgroundColor = UIColor.systemGreen
+                    view.addSubview(progressView)
+                    
+                    moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 20))
+                    if let moneyLabel = moneyLabel {
+                        moneyLabel.textColor = .white
+                        moneyLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+                        moneyLabel.textAlignment = .center
+                        moneyLabel.text = "$0"
+        //                moneyLabel.text = "0"
+                        progressView.addSubview(moneyLabel)
+                    }
+                }
             }
         }
     }
@@ -203,9 +206,12 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
         } else {
             moneyLabel?.text = "$\(Int(currentProgress))"
     //        moneyLabel?.text = "\(Int(currentProgress / 1000)) points"
-            progressBar.setProgress(progress, animated: true)
+            progressBar?.setProgress(progress, animated: true)
             UIView.animate(withDuration: 1.0, animations: {
-                self.progressView.frame.origin.y = self.progressBar.frame.maxY - self.progressBar.frame.size.height * progress
+                if let progressBar = self.progressBar {
+                    self.progressView?.frame.origin.y = progressBar.frame.maxY - progressBar.frame.size.height * progress
+                }
+                
             })
         }
     }
@@ -401,8 +407,10 @@ class QuestionWithAnswerRevealGoTinyViewController: UIViewController {
     }
     
     private func showProgressBar(show: Bool) {
-        self.progressBar.alpha = show ? 1.0 : 0.0
-        self.progressView.alpha = show ? 1.0 : 0.0
+        if !inTieMode {
+            self.progressBar?.alpha = show ? 1.0 : 0.0
+            self.progressView?.alpha = show ? 1.0 : 0.0
+        }
     }
     
     private func showIntervieweePhoto(shouldShow: Bool) {

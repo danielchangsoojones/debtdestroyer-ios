@@ -300,8 +300,8 @@ class NewGameStartViewController: UIViewController {
 
 extension NewGameStartViewController {
     //trophy + live video chat
-    //TODO just have this automatically pop up if the timer has less than 5 min left
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
+        //automatically pops up live chat if T-10 min til game. 
         if timeLeft <= 600 && timeLeft > 0 {
             if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
                 loopVideo()

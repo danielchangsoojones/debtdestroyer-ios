@@ -69,7 +69,6 @@ class NewGameStartViewController: UIViewController {
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
-        loopVideo()
         callTimer()
         getDemoQuizData()
         runAssignWebReferralCheck()
@@ -273,6 +272,11 @@ class NewGameStartViewController: UIViewController {
         if let cell = tableView.cellForRow(at: indexPath) as? GameInfoTableViewCell {
             cell.set(timeLeftLabel: timeLeftLabelText)
         }
+        if (isLiveChatOn) {
+            if let view = view as? LiveChatView {
+                view.timerLabel.text = timeLeftLabelText
+            }
+        }
     }
     
     func timeString(time:TimeInterval) -> String {
@@ -295,10 +299,11 @@ class NewGameStartViewController: UIViewController {
 }
 
 extension NewGameStartViewController {
-    //trophy + live video chat    
+    //trophy + live video chat
     //TODO just have this automatically pop up if the timer has less than 5 min left
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
-        if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
+        if timeLeft <= 300 && self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
+            loopVideo()
             //hasn't set the playback id or it has changed on the backend
             //or we have switched quizDatas
             self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
@@ -334,7 +339,6 @@ extension NewGameStartViewController {
             setKeyboardDetector()
             setChatTableView()
             
-            liveChatView.timerLabel.text = timeLeftLabelText
             playerLayer.videoGravity = .resizeAspectFill
             playerLayer.frame = self.view.frame
             self.view.layer.insertSublayer(playerLayer, at: 0)

@@ -35,7 +35,8 @@ class NewGameStartViewController: UIViewController {
     private let liveChatBgGradient = CAGradientLayer()
     private var sendMessageButton: UIButton!
     private var liveChatTableView: UITableView!
-    private var liveChatMessages: [String] = []
+    private var liveChatMessages: [LiveChatParse] = []
+    private var isLiveChatOn = false
     
     //visibility conditions for daily boost VC
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
@@ -191,6 +192,15 @@ class NewGameStartViewController: UIViewController {
                     BannerAlert.showUnknownError(functionName: "getQuizData")
                 }
             }
+            
+            //we are fetching live chat messages
+            if (isLiveChatOn) {
+                quizDataStore.getLiveChatMessages(quizTopicID: quizTopicID) { liveChatMessageParses in
+                    self.liveChatMessages = liveChatMessageParses
+                    self.liveChatTableView.reloadData()
+                    self.scrollToLastMessage()
+                }
+            }
         }
     }
     
@@ -292,6 +302,7 @@ extension NewGameStartViewController {
             //hasn't set the playback id or it has changed on the backend
             //or we have switched quizDatas
             self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
+            self.isLiveChatOn = true
             if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
                 if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
                     let playerItem = AVPlayerItem(url: url)
@@ -359,13 +370,13 @@ extension NewGameStartViewController {
     @objc private func pressedSendMsgBtn() {
         //TODO: we want to send off the message + show it to all users
         if let localMessage = liveChatInputView.textView.text, !localMessage.isEmpty {
-            liveChatMessages.append(localMessage)
+            let liveChatParse = LiveChatParse()
+            liveChatParse.message = localMessage
+            liveChatMessages.append(liveChatParse)
             liveChatTableView.reloadData()
             liveChatInputView.textView.text = ""
             scrollToLastMessage()
-            quizDataStore.sendLiveChatMessage(message: localMessage, quizTopicID: quizTopicID) {
-                
-            }
+            quizDataStore.sendLiveChatMessage(message: localMessage, quizTopicID: quizTopicID) {}
         }
     }
     
@@ -559,7 +570,7 @@ extension NewGameStartViewController: UITableViewDataSource, UITableViewDelegate
         if tableView == liveChatTableView {
             //this is the tableView for the live chat
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LiveChatTableViewCell.self)
-            cell.set(name: User.current()?.firstName ?? "", message: liveChatMessages[indexPath.row])
+            cell.set(name: liveChatMessages[indexPath.row].user.firstName , message: liveChatMessages[indexPath.row].message)
             cell.isUserInteractionEnabled = false
             return cell
         } else {

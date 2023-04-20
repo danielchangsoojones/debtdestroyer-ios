@@ -11,12 +11,17 @@ class LiveChatView: UIView {
     var videoContainer = UIView()
     private var titleLabel: UILabel!
     var timerLabel: UILabel!
+    var tableView: UITableView!
+    var liveChatInputView = InputChatView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
         setContainerForVideo()
         setLabels()
+        setUpLiveChatInputView()
+        setUpLine()
+        setTableView()
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +56,36 @@ class LiveChatView: UIView {
         timerLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(30)
+        }
+    }
+    
+    private func setUpLiveChatInputView() {
+        addSubview(liveChatInputView)
+        liveChatInputView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setUpLine() {
+        let line = UIView()
+        line.backgroundColor = UIColor(red: 51/255, green: 51/255, blue: 52/255, alpha: 1)
+        addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(liveChatInputView.snp.top)
+            make.height.equalTo(1.5)
+        }
+    }
+    
+    private func setTableView() {
+        tableView = UITableView()
+//        tableView.backgroundColor = .clear
+        tableView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
+        addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(liveChatInputView.snp.top)
+            make.height.equalTo(200)
         }
     }
 }

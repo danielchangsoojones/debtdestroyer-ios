@@ -185,6 +185,7 @@
 		C0AEBC2929EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2829EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift */; };
 		C0AEBC2C29EB9EE2001F001F /* ReferralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2B29EB9EE2001F001F /* ReferralViewController.swift */; };
 		C0AEBC2E29EB9EED001F001F /* ReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEBC2D29EB9EED001F001F /* ReferralView.swift */; };
+		C0B19B0929F0D5ED00941A9A /* LiveChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B19B0829F0D5ED00941A9A /* LiveChatTableViewCell.swift */; };
 		C0C9E4A629E2406600BABAB6 /* NotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */; };
 		C0E9C7D629EF835E0049351D /* AppleTesterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9C7D529EF835E0049351D /* AppleTesterView.swift */; };
 		C0E9C7D829EF83770049351D /* AppleTesterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */; };
@@ -376,6 +377,7 @@
 		C0AEBC2829EB7F52001F001F /* PastWinnerCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastWinnerCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		C0AEBC2B29EB9EE2001F001F /* ReferralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralViewController.swift; sourceTree = "<group>"; };
 		C0AEBC2D29EB9EED001F001F /* ReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralView.swift; sourceTree = "<group>"; };
+		C0B19B0829F0D5ED00941A9A /* LiveChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatTableViewCell.swift; sourceTree = "<group>"; };
 		C0C9E4A529E2406600BABAB6 /* NotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionViewController.swift; sourceTree = "<group>"; };
 		C0E9C7D529EF835E0049351D /* AppleTesterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTesterView.swift; sourceTree = "<group>"; };
 		C0E9C7D729EF83770049351D /* AppleTesterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTesterViewController.swift; sourceTree = "<group>"; };
@@ -1146,6 +1148,7 @@
 			children = (
 				C0E9C7DA29EF8E4D0049351D /* LiveChatView.swift */,
 				C02A925329F0CC8800EE5AEF /* InputChatView.swift */,
+				C0B19B0829F0D5ED00941A9A /* LiveChatTableViewCell.swift */,
 			);
 			path = "Live Chat";
 			sourceTree = "<group>";
@@ -1325,6 +1328,7 @@
 				0A421C1028DB4F11008792B8 /* SettingsManageable.swift in Sources */,
 				0A4F80A028E6C6C6001B573E /* NameViewController.swift in Sources */,
 				0A5F2E6128C228F900F7D70D /* SubscriptionDiamondView.swift in Sources */,
+				C0B19B0929F0D5ED00941A9A /* LiveChatTableViewCell.swift in Sources */,
 				0AE126B3291AAA6A00E11003 /* ConfirmInfoViewController.swift in Sources */,
 				0A5B58FA28A579B6001EFBB2 /* ForceUpdate.swift in Sources */,
 				0AAAB98D28B4ABCE00D41A7B /* PrizeDataStore.swift in Sources */,

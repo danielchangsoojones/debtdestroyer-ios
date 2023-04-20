@@ -38,17 +38,18 @@ class InputChatView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clear
+//        backgroundColor = .clear
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
         addSubview(sendButton)
         addSubview(textView)
         sendButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(14)
+            make.trailing.equalToSuperview().inset(10)
             make.centerY.equalTo(textView)
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(60)
         }
         textView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
-            make.trailing.equalTo(sendButton.snp.leading).offset(-8)
+            make.trailing.equalTo(sendButton.snp.leading).offset(-10)
             make.top.equalToSuperview().inset(topOffset)
             self.bottomConstraint = make.bottom.equalToSuperview().inset(originalBottomConstraint).constraint
         }

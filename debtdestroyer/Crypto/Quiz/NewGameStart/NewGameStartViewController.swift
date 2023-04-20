@@ -32,7 +32,10 @@ class NewGameStartViewController: UIViewController {
     private var timeLeftLabelText = "00"
     private var bottomConstraint: Constraint?
     private var liveChatInputView = InputChatView()
+    private let liveChatBgGradient = CAGradientLayer()
     private var sendMessageButton: UIButton!
+    private var liveChatTableView: UITableView!
+    private var liveChatMessages: [String] = []
     
     //visibility conditions for daily boost VC
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
@@ -282,7 +285,7 @@ class NewGameStartViewController: UIViewController {
 }
 
 extension NewGameStartViewController {
-    //trophy + live video chat
+    //trophy + live video chat    
     //TODO just have this automatically pop up if the timer has less than 5 min left
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
         if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
@@ -311,12 +314,14 @@ extension NewGameStartViewController {
             guard let playerLayer = self.playerLayer else {return}
             guard let queuePlayer = self.queuePlayer else {return}
             self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
-
+            
             self.tabBarController?.tabBar.isHidden = true
             let liveChatView = LiveChatView(frame: self.view.frame)
             self.view = liveChatView
-            setLiveChatInputView(view: liveChatView)
+            self.liveChatTableView = liveChatView.tableView
+            setLiveChatInputView()
             setKeyboardDetector()
+            setChatTableView()
             
             liveChatView.timerLabel.text = timeLeftLabelText
             playerLayer.videoGravity = .resizeAspectFill
@@ -336,22 +341,34 @@ extension NewGameStartViewController {
         return nil
     }
     
-    private func setLiveChatInputView(view: LiveChatView) {
-        view.addSubview(liveChatInputView)
-        liveChatInputView.snp.remakeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            self.bottomConstraint = make.bottom.equalToSuperview().constraint
+    private func setLiveChatInputView() {
+        if let view = view as? LiveChatView {
+            liveChatInputView = view.liveChatInputView
+            liveChatInputView.snp.remakeConstraints { make in
+                make.leading.trailing.equalToSuperview()
+                self.bottomConstraint = make.bottom.equalToSuperview().constraint
+            }
+            sendMessageButton = liveChatInputView.sendButton
+            sendMessageButton.addTarget(self, action: #selector(pressedSendMsgBtn), for: .touchUpInside)
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+            view.addGestureRecognizer(tap)
         }
-        sendMessageButton = liveChatInputView.sendButton
-        sendMessageButton.addTarget(self, action: #selector(pressedSendMsgBtn), for: .touchUpInside)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tap)
     }
     
     @objc private func pressedSendMsgBtn() {
-        //TODO: we want to send off the message + show it to all users 
-        print("hello world~")
+        //TODO: we want to send off the message + show it to all users
+        if let localMessage = liveChatInputView.textView.text, !localMessage.isEmpty {
+            liveChatMessages.append(localMessage)
+            liveChatTableView.reloadData()
+            liveChatInputView.textView.text = ""
+            scrollToLastMessage()
+        }
+    }
+    
+    private func scrollToLastMessage() {
+        let indexPath = IndexPath(row: self.liveChatMessages.count - 1, section: 0)
+        liveChatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
     }
     
     @objc private func hideKeyboard() {
@@ -379,6 +396,13 @@ extension NewGameStartViewController {
                        options: .curveEaseOut) {
             self.view.layoutIfNeeded()
         } completion: { _ in}
+    }
+    
+    private func setChatTableView() {
+        liveChatTableView.delegate = self
+        liveChatTableView.dataSource = self
+        liveChatTableView.register(cellType: LiveChatTableViewCell.self)
+        liveChatTableView.separatorStyle = .none
     }
 }
 
@@ -505,56 +529,84 @@ class InfoSection {
     }
 }
 
+//we're populating the tableViews for the home screen & live chat screen
 extension NewGameStartViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return infoSections.count
+        if tableView == liveChatTableView {
+            //this is the tableView for the live chat
+            return 1
+        } else {
+            //this is the tableView for the home screen
+            return infoSections.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2 //header row + content row
+        if tableView == liveChatTableView {
+            //this is the tableView for the live chat
+            return liveChatMessages.count
+        } else {
+            //this is the tableView for the home screen
+            return 2 //header row + content row
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HeaderTableViewCell.self)
-            cell.set(label: infoSections[indexPath.section].title)
-            cell.selectionStyle = .none
+        if tableView == liveChatTableView {
+            //this is the tableView for the live chat
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LiveChatTableViewCell.self)
+            cell.set(name: User.current()?.firstName ?? "", message: liveChatMessages[indexPath.row])
+            cell.isUserInteractionEnabled = false
             return cell
         } else {
-            if indexPath.section == 0 {
-                //show game info
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameInfoTableViewCell.self)
+            //this is the tableView for the home screen
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: HeaderTableViewCell.self)
+                cell.set(label: infoSections[indexPath.section].title)
                 cell.selectionStyle = .none
-                cell.showGameRules = {
-                    let urlString = "https://www.debtdestroyer.app/tie-breaker-rules"
-                    if let url = URL(string: urlString) {
-                        if UIApplication.shared.canOpenURL(url) {
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        }
-                    }
-                }
                 return cell
             } else {
-                //show winners
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWinnerTableViewCell.self)
-                cell.updateCellWith(row: winnerContent)
-                cell.selectionStyle = .none
-                return cell
+                if indexPath.section == 0 {
+                    //show game info
+                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameInfoTableViewCell.self)
+                    cell.selectionStyle = .none
+                    cell.showGameRules = {
+                        let urlString = "https://www.debtdestroyer.app/tie-breaker-rules"
+                        if let url = URL(string: urlString) {
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        }
+                    }
+                    return cell
+                } else {
+                    //show winners
+                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PastWinnerTableViewCell.self)
+                    cell.updateCellWith(row: winnerContent)
+                    cell.selectionStyle = .none
+                    return cell
+                }
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if tableView == liveChatTableView {
+            //this is the tableView for the live chat
             return UITableView.automaticDimension
         } else {
-            //TODO: this is hard coded -- weird that we're not able to dynamically size the cell based on its content
-            return 280
+            //this is the tableView for the home screen
+            if indexPath.row == 0 {
+                return UITableView.automaticDimension
+            } else {
+                //TODO: this is hard coded -- weird that we're not able to dynamically size the cell based on its content
+                return 280
+            }
         }
     }
     

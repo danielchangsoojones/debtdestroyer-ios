@@ -302,23 +302,25 @@ extension NewGameStartViewController {
     //trophy + live video chat
     //TODO just have this automatically pop up if the timer has less than 5 min left
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
-        if timeLeft <= 300 && self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
-            loopVideo()
-            //hasn't set the playback id or it has changed on the backend
-            //or we have switched quizDatas
-            self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
-            self.isLiveChatOn = true
-            if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
-                if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
-                    let playerItem = AVPlayerItem(url: url)
+        if timeLeft <= 600 && timeLeft > 0 {
+            if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
+                loopVideo()
+                //hasn't set the playback id or it has changed on the backend
+                //or we have switched quizDatas
+                self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
+                self.isLiveChatOn = true
+                if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
+                    if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
+                        let playerItem = AVPlayerItem(url: url)
+                        self.queuePlayer?.replaceCurrentItem(with: playerItem)
+                    }
+                } else if let playerItem = getTrophyPlayerItem() {
+                    //the next quiz has switched, so quiztopic is empty
                     self.queuePlayer?.replaceCurrentItem(with: playerItem)
+                    self.queuePlayer?.play()
+                } else {
+                    BannerAlert.show(title: "Error", subtitle: "could not load the trophy background", type: .error)
                 }
-            } else if let playerItem = getTrophyPlayerItem() {
-                //the next quiz has switched, so quiztopic is empty
-                self.queuePlayer?.replaceCurrentItem(with: playerItem)
-                self.queuePlayer?.play()
-            } else {
-                BannerAlert.show(title: "Error", subtitle: "could not load the trophy background", type: .error)
             }
         }
     }

@@ -18,6 +18,7 @@ target 'debtdestroyer' do
   pod 'TTTAttributedLabel'
   pod 'UXCam', "~> 3.4.2"
   pod 'YLProgressBar', '~> 3.11.0'
+  pod 'GrowingTextView', '0.7.2'
   pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '8.4.0'
 end
 

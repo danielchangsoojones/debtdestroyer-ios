@@ -53,6 +53,14 @@ struct Helpers {
         return false
     }
     
+    static func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardFrame.height
+            return keyboardHeight
+        }
+        return 0
+    }
+    
     static func loadDataFromURL(string: String, completion: @escaping (Data?, String?) -> Void) {
         if let url = URL(string: string) {
             //must run on the background thread or else it clogs the UI

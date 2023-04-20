@@ -172,6 +172,7 @@
 		92FF0EBA2972323100ED029D /* WaitlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF0EB92972323100ED029D /* WaitlistView.swift */; };
 		C008877E29D5580C00FDF7E0 /* InstagramStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008877D29D5580C00FDF7E0 /* InstagramStory.swift */; };
 		C008878129D67A7D00FDF7E0 /* DailyBoostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008878029D67A7D00FDF7E0 /* DailyBoostViewController.swift */; };
+		C02A925429F0CC8800EE5AEF /* InputChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A925329F0CC8800EE5AEF /* InputChatView.swift */; };
 		C0374BCD29CE5C4200D40E78 /* InviteInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0374BCC29CE5C4200D40E78 /* InviteInfoCell.swift */; };
 		C07369F229CD0B8800858D2E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F129CD0B8800858D2E /* Haptics.swift */; };
 		C07369F429CD0C0E00858D2E /* FriendContactParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07369F329CD0C0E00858D2E /* FriendContactParse.swift */; };
@@ -362,6 +363,7 @@
 		B91654B1C5725E51B0A73664 /* Pods-debtdestroyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debtdestroyer.debug.xcconfig"; path = "Target Support Files/Pods-debtdestroyer/Pods-debtdestroyer.debug.xcconfig"; sourceTree = "<group>"; };
 		C008877D29D5580C00FDF7E0 /* InstagramStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramStory.swift; sourceTree = "<group>"; };
 		C008878029D67A7D00FDF7E0 /* DailyBoostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoostViewController.swift; sourceTree = "<group>"; };
+		C02A925329F0CC8800EE5AEF /* InputChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChatView.swift; sourceTree = "<group>"; };
 		C0374BCC29CE5C4200D40E78 /* InviteInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteInfoCell.swift; sourceTree = "<group>"; };
 		C07369F129CD0B8800858D2E /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		C07369F329CD0C0E00858D2E /* FriendContactParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendContactParse.swift; sourceTree = "<group>"; };
@@ -1143,6 +1145,7 @@
 			isa = PBXGroup;
 			children = (
 				C0E9C7DA29EF8E4D0049351D /* LiveChatView.swift */,
+				C02A925329F0CC8800EE5AEF /* InputChatView.swift */,
 			);
 			path = "Live Chat";
 			sourceTree = "<group>";
@@ -1341,6 +1344,7 @@
 				0A59AD0A28E183F4001B774A /* AddressView.swift in Sources */,
 				0A4536D928B8CE3700F4A8CA /* PowerUpsCell.swift in Sources */,
 				0A50659128C346D200207759 /* SubscriptionView.swift in Sources */,
+				C02A925429F0CC8800EE5AEF /* InputChatView.swift in Sources */,
 				0AB50DD128C0D17300F67857 /* ImageViewExtension.swift in Sources */,
 				0A2E73A6289C35D2006E67F9 /* SettingsTableViewCell.swift in Sources */,
 				921FA5E829DE3929006FA036 /* CycleVidViewController.swift in Sources */,

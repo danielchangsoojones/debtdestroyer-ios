@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import AVKit
 import SCLAlertView
 
@@ -29,6 +30,9 @@ class NewGameStartViewController: UIViewController {
     private var quizTopicID = ""
     private var mux_playback_id: String?
     private var timeLeftLabelText = "00"
+    private var bottomConstraint: Constraint?
+    private var liveChatInputView = InputChatView()
+    private var sendMessageButton: UIButton!
     
     //visibility conditions for daily boost VC
     private let maxStoredDays = 2 // maximum number of days to keep in UserDefaults
@@ -279,6 +283,7 @@ class NewGameStartViewController: UIViewController {
 
 extension NewGameStartViewController {
     //trophy + live video chat
+    //TODO just have this automatically pop up if the timer has less than 5 min left
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
         if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
             //hasn't set the playback id or it has changed on the backend
@@ -310,8 +315,10 @@ extension NewGameStartViewController {
             self.tabBarController?.tabBar.isHidden = true
             let liveChatView = LiveChatView(frame: self.view.frame)
             self.view = liveChatView
-            liveChatView.timerLabel.text = timeLeftLabelText
+            setLiveChatInputView(view: liveChatView)
+            setKeyboardDetector()
             
+            liveChatView.timerLabel.text = timeLeftLabelText
             playerLayer.videoGravity = .resizeAspectFill
             playerLayer.frame = self.view.frame
             self.view.layer.insertSublayer(playerLayer, at: 0)
@@ -327,6 +334,51 @@ extension NewGameStartViewController {
         }
         
         return nil
+    }
+    
+    private func setLiveChatInputView(view: LiveChatView) {
+        view.addSubview(liveChatInputView)
+        liveChatInputView.snp.remakeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            self.bottomConstraint = make.bottom.equalToSuperview().constraint
+        }
+        sendMessageButton = liveChatInputView.sendButton
+        sendMessageButton.addTarget(self, action: #selector(pressedSendMsgBtn), for: .touchUpInside)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func pressedSendMsgBtn() {
+        //TODO: we want to send off the message + show it to all users 
+        print("hello world~")
+    }
+    
+    @objc private func hideKeyboard() {
+        liveChatInputView.textView.endEditing(true)
+    }
+    
+    private func setKeyboardDetector() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func handleKeyboardNotification(notification: NSNotification) {
+        let keyboardHeight = Helpers.getKeyboardHeight(notification: notification)
+        let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
+        if isKeyboardShowing {
+            bottomConstraint?.update(offset: -keyboardHeight)
+            liveChatInputView.bottomConstraint?.update(offset: -liveChatInputView.topOffset)
+        } else {
+            bottomConstraint?.update(offset: 0)
+            liveChatInputView.bottomConstraint?.update(offset: -liveChatInputView.originalBottomConstraint)
+        }
+        
+        UIView.animate(withDuration: 0,
+                       delay: 0,
+                       options: .curveEaseOut) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in}
     }
 }
 

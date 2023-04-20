@@ -359,4 +359,17 @@ class QuizDataStore {
             }
         }
     }
+    
+    func sendLiveChatMessage(message: String, quizTopicID: String, completion: @escaping () -> Void) {
+        let parameters: [String: Any] = ["message": message, "quizTopicID": quizTopicID]
+        PFCloud.callFunction(inBackground: "sendLiveChatMessage", withParameters: parameters) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getEasyQuizDatas")
+            }
+        }
+    }
 }

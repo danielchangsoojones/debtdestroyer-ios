@@ -363,6 +363,9 @@ extension NewGameStartViewController {
             liveChatTableView.reloadData()
             liveChatInputView.textView.text = ""
             scrollToLastMessage()
+            quizDataStore.sendLiveChatMessage(message: localMessage, quizTopicID: quizTopicID) {
+                
+            }
         }
     }
     

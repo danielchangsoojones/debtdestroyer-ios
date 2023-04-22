@@ -69,6 +69,13 @@ class NewGameStartViewController: UIViewController {
         self.messageHelper = MessageHelper(currentVC: self, delegate: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
+        if User.isAdminUser || User.isIpadDemo {
+            if let view = view as? NewGameStartView {
+                view.inviteButton.removeTarget(nil, action: nil, for: .allEvents)
+                view.inviteButton.setTitle("Admin Control", for: .normal)
+                view.inviteButton.addTarget(self, action: #selector(prizeBtnPressed), for: .touchUpInside)
+            }
+        }
         callTimer()
         getDemoQuizData()
         runAssignWebReferralCheck()
@@ -295,6 +302,46 @@ class NewGameStartViewController: UIViewController {
     func timeStringSec(time:TimeInterval) -> String {
         let seconds = Int(time) % 60
         return String(format: "%02i", seconds)
+    }
+}
+
+//Admin controls
+extension NewGameStartViewController {
+    @objc private func prizeBtnPressed() {
+        let appearance = SCLAlertView.SCLAppearance()
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Real Game", action: {
+            // Handle "Real Game" option
+            self.startQuiz()
+        })
+        alertView.addButton("Cycle Vids", action: {
+            // Handle "Cycle Vids" option
+            let cycleVC = CycleVidViewController()
+            self.navigationController?.pushViewController(cycleVC, animated: true)
+        })
+        alertView.addButton("Tiebreaker", action: {
+            // Handle "Tiebreaker" option
+            let tieVC = TieBreakerViewController(competing_tie_user_ids: [], inTestTieMode: true)
+            self.navigationController?.pushViewController(tieVC, animated: true)
+        })
+        
+        alertView.addButton("Easy Questions", action: {
+            // Handle "Tiebreaker" option
+            self.checkStartTimer.invalidate()
+            self.playerLayer?.player?.pause()
+            self.quizDataStore.getEasyQuizData { quizDatas in
+                self.quizDatas = quizDatas
+                let questionVC = QuestionWithAnswerRevealGoTinyViewController(quizDatas: quizDatas,
+                                                                              currentIndex: 0,
+                                                                              competing_tie_user_ids: [],
+                                                                              inTieMode: false,
+                                                                              inTestTieMode: false)
+                let navController = UINavigationController(rootViewController: questionVC)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true)
+            }
+        })
+        alertView.showInfo("Choose Option", subTitle: "Please choose an option to continue.")
     }
 }
 

@@ -301,10 +301,11 @@ class NewGameStartViewController: UIViewController {
 extension NewGameStartViewController {
     //trophy + live video chat
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
-        //automatically pops up live chat if T-10 min til game. 
+        //automatically pops up live chat if T-10 min til game.
         if timeLeft <= 600 && timeLeft > 0 {
             if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
                 loopVideo()
+                setUpLiveChat()
                 //hasn't set the playback id or it has changed on the backend
                 //or we have switched quizDatas
                 self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
@@ -318,8 +319,9 @@ extension NewGameStartViewController {
                     //the next quiz has switched, so quiztopic is empty
                     self.queuePlayer?.replaceCurrentItem(with: playerItem)
                     self.queuePlayer?.play()
-                } else {
-                    BannerAlert.show(title: "Error", subtitle: "could not load the trophy background", type: .error)
+                }
+                else {
+                    BannerAlert.show(title: "Error", subtitle: "could not load live host or trophy background", type: .error)
                 }
             }
         }
@@ -333,19 +335,21 @@ extension NewGameStartViewController {
             guard let queuePlayer = self.queuePlayer else {return}
             self.playbackLooper = AVPlayerLooper.init(player: queuePlayer, templateItem: playerItem)
             
-            self.tabBarController?.tabBar.isHidden = true
-            let liveChatView = LiveChatView(frame: self.view.frame)
-            self.view = liveChatView
-            self.liveChatTableView = liveChatView.tableView
-            setLiveChatInputView()
-            setKeyboardDetector()
-            setChatTableView()
-            
             playerLayer.videoGravity = .resizeAspectFill
             playerLayer.frame = self.view.frame
             self.view.layer.insertSublayer(playerLayer, at: 0)
             playerLayer.player?.play()
         }
+    }
+    
+    func setUpLiveChat() {
+        self.tabBarController?.tabBar.isHidden = true
+        let liveChatView = LiveChatView(frame: self.view.frame)
+        self.view = liveChatView
+        self.liveChatTableView = liveChatView.tableView
+        setLiveChatInputView()
+        setKeyboardDetector()
+        setChatTableView()
     }
     
     private func getTrophyPlayerItem() -> AVPlayerItem? {

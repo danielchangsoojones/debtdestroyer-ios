@@ -298,37 +298,46 @@ class NewGameStartViewController: UIViewController {
     }
 }
 
+//live host + live chat
 extension NewGameStartViewController {
-    //trophy + live video chat
     private func startPlayingGameHost(quizDatas: [QuizDataParse]) {
         //automatically pops up live chat if T-10 min til game.
         if timeLeft <= 600 && timeLeft > 0 {
-            if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
-                loopVideo()
-                setUpLiveChat()
-                //hasn't set the playback id or it has changed on the backend
-                //or we have switched quizDatas
-                self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
+            if !isLiveChatOn {
+                loopDefaultVideo() // we set up trophy default + live chat
                 self.isLiveChatOn = true
+            }
+            
+            if self.mux_playback_id != quizDatas.first?.quizTopic?.mux_playback_id {
+                //so that we run the function below only once
+                self.mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id
                 if let mux_playback_id = quizDatas.first?.quizTopic?.mux_playback_id {
                     if let url = URL(string: "https://stream.mux.com/\(mux_playback_id).m3u8") {
+                        //we show the live host!
+                        self.playbackLooper = nil //otherwise, the live video doesn't show
                         let playerItem = AVPlayerItem(url: url)
                         self.queuePlayer?.replaceCurrentItem(with: playerItem)
                     }
                 } else if let playerItem = getTrophyPlayerItem() {
-                    //the next quiz has switched, so quiztopic is empty
+                    //we revert back to the trophy view when we delete the mux playback id
                     self.queuePlayer?.replaceCurrentItem(with: playerItem)
-                    self.queuePlayer?.play()
-                }
-                else {
+                } else {
                     BannerAlert.show(title: "Error", subtitle: "could not load live host or trophy background", type: .error)
                 }
             }
         }
     }
     
-    func loopVideo() {
+    func loopDefaultVideo() {
         if let playerItem = getTrophyPlayerItem() {
+            self.tabBarController?.tabBar.isHidden = true
+            let liveChatView = LiveChatView(frame: self.view.frame)
+            self.view = liveChatView
+            self.liveChatTableView = liveChatView.tableView
+            setLiveChatInputView()
+            setKeyboardDetector()
+            setChatTableView()
+            
             self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
             self.playerLayer = AVPlayerLayer(player: self.queuePlayer)
             guard let playerLayer = self.playerLayer else {return}
@@ -340,16 +349,6 @@ extension NewGameStartViewController {
             self.view.layer.insertSublayer(playerLayer, at: 0)
             playerLayer.player?.play()
         }
-    }
-    
-    func setUpLiveChat() {
-        self.tabBarController?.tabBar.isHidden = true
-        let liveChatView = LiveChatView(frame: self.view.frame)
-        self.view = liveChatView
-        self.liveChatTableView = liveChatView.tableView
-        setLiveChatInputView()
-        setKeyboardDetector()
-        setChatTableView()
     }
     
     private func getTrophyPlayerItem() -> AVPlayerItem? {

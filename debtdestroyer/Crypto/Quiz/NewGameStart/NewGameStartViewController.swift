@@ -385,8 +385,10 @@ extension NewGameStartViewController {
             setKeyboardDetector()
             setChatTableView()
             //so that DJ can toggle the games
-            liveChatView.adminButton.isHidden = false
-            liveChatView.adminButton.addTarget(self, action: #selector(adminBtnPressed), for: .touchUpInside)
+            if (User.isAdminUser || User.isIpadDemo) {
+                liveChatView.adminButton.isHidden = false
+                liveChatView.adminButton.addTarget(self, action: #selector(adminBtnPressed), for: .touchUpInside)
+            }
             
             self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
             self.playerLayer = AVPlayerLayer(player: self.queuePlayer)

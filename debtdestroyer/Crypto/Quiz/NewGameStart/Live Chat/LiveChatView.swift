@@ -13,6 +13,7 @@ class LiveChatView: UIView {
     var timerLabel: UILabel!
     var tableView: UITableView!
     var liveChatInputView = InputChatView()
+    var adminButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +23,7 @@ class LiveChatView: UIView {
         setUpLiveChatInputView()
         setUpLine()
         setTableView()
+        setUpAdminButton()
     }
     
     required init?(coder: NSCoder) {
@@ -79,13 +81,34 @@ class LiveChatView: UIView {
     
     private func setTableView() {
         tableView = UITableView()
-//        tableView.backgroundColor = .clear
         tableView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
         addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(liveChatInputView.snp.top)
             make.height.equalTo(200)
+        }
+    }
+    
+    private func setUpAdminButton() {
+        //for DJ to toggle buttons pre-game
+        adminButton = UIButton()
+        adminButton.isHidden = true
+        adminButton.setTitle("Admin Control", for: .normal)
+        adminButton.backgroundColor = .black
+        adminButton.setTitleColor(.white, for: .normal)
+        adminButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        adminButton.layer.cornerRadius = 25
+        adminButton.clipsToBounds = true
+        adminButton.layer.borderWidth = 1
+        adminButton.layer.borderColor = UIColor.white.cgColor
+        let horizontalInset: CGFloat = 15
+        let verticalInset: CGFloat = 15
+        adminButton.contentEdgeInsets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        videoContainer.addSubview(adminButton)
+        adminButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(50)
+            make.bottom.equalTo(tableView.snp.top).offset(-10)
         }
     }
 }

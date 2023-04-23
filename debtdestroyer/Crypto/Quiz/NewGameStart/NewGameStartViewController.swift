@@ -73,7 +73,7 @@ class NewGameStartViewController: UIViewController {
             if let view = view as? NewGameStartView {
                 view.inviteButton.removeTarget(nil, action: nil, for: .allEvents)
                 view.inviteButton.setTitle("Admin Control", for: .normal)
-                view.inviteButton.addTarget(self, action: #selector(prizeBtnPressed), for: .touchUpInside)
+                view.inviteButton.addTarget(self, action: #selector(adminBtnPressed), for: .touchUpInside)
             }
         }
         callTimer()
@@ -307,7 +307,7 @@ class NewGameStartViewController: UIViewController {
 
 //Admin controls
 extension NewGameStartViewController {
-    @objc private func prizeBtnPressed() {
+    @objc private func adminBtnPressed() {
         let appearance = SCLAlertView.SCLAppearance()
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Real Game", action: {
@@ -384,6 +384,9 @@ extension NewGameStartViewController {
             setLiveChatInputView()
             setKeyboardDetector()
             setChatTableView()
+            //so that DJ can toggle the games
+            liveChatView.adminButton.isHidden = false
+            liveChatView.adminButton.addTarget(self, action: #selector(adminBtnPressed), for: .touchUpInside)
             
             self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
             self.playerLayer = AVPlayerLayer(player: self.queuePlayer)

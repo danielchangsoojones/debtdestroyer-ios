@@ -435,6 +435,7 @@ extension NewGameStartViewController {
             liveChatTableView.reloadData()
             liveChatInputView.textView.text = ""
             scrollToLastMessage()
+            Haptics.shared.play(.medium)
             quizDataStore.sendLiveChatMessage(message: localMessage, quizTopicID: quizTopicID) {}
         }
     }

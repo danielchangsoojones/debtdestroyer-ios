@@ -326,6 +326,18 @@ class QuizDataStore {
         }
     }
     
+    func getEasyQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
+        PFCloud.callFunction(inBackground: "getEasyQuizDatas", withParameters: [:]) { (result, error) in
+            if let quizDatas = result as? [QuizDataParse] {
+                completion(quizDatas)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getEasyQuizDatas")
+            }
+        }
+    }
+    
     //TODO: delete this function from the} ChampionsViewController screen once we redesign it
     func loadPastWinners(completion: @escaping ([WinnerInfo], Double) -> Void) {
         PFCloud.callFunction(inBackground: "getPastWinners", withParameters: nil) { (result, error) in
@@ -344,18 +356,6 @@ class QuizDataStore {
                 BannerAlert.show(with: error)
             } else {
                 BannerAlert.showUnknownError(functionName: "getPastWinners")
-            }
-        }
-    }
-    
-    func getEasyQuizData(completion: @escaping ([QuizDataParse]) -> Void) {
-        PFCloud.callFunction(inBackground: "getEasyQuizDatas", withParameters: [:]) { (result, error) in
-            if let quizDatas = result as? [QuizDataParse] {
-                completion(quizDatas)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "getEasyQuizDatas")
             }
         }
     }

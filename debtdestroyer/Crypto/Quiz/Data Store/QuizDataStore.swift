@@ -173,22 +173,6 @@ class QuizDataStore {
         }
     }
     
-    func checkWaitlist(completion: @escaping (Bool, String, String) -> Void) {
-        PFCloud.callFunction(inBackground: "checkWaitlist", withParameters: [:]) { (result, error) in
-            if let result = result {
-                let json = JSON(result)
-                let title = json["title"].stringValue
-                let subtitle = json["subtitle"].stringValue
-                let isOnWaitlist = json["isOnWaitlist"].boolValue
-                completion(isOnWaitlist, title, subtitle)
-            } else if let error = error {
-                BannerAlert.show(with: error)
-            } else {
-                BannerAlert.showUnknownError(functionName: "checkWaitlist")
-            }
-        }
-    }
-    
     func officiallyEndQuiz(for quizTopic: QuizTopicParse) {
         let quizTopicID = quizTopic.objectId ?? ""
         

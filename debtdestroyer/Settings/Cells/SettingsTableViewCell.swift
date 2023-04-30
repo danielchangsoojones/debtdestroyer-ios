@@ -43,7 +43,7 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
     
     private func setTitleLabel() {
         titleLabel.font = UIFont.MontserratMedium(size: 20)
-        titleLabel.textColor = .jaguarBlack
+        titleLabel.textColor = .white
         titleLabel.numberOfLines = 0
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -55,6 +55,7 @@ class SettingsTableViewCell: UITableViewCell, Reusable {
     
     func setChevron(imageName: String) {
         chevronImageView = UIImageView(image: UIImage(named: imageName))
+        chevronImageView.tintColor = .white
         chevronImageView.contentMode = .scaleAspectFit
         contentView.addSubview(chevronImageView)
         chevronImageView.snp.makeConstraints { make in

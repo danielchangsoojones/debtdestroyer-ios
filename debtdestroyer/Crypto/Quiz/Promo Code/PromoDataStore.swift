@@ -29,7 +29,7 @@ class PromoDataStore {
         }
     }
     
-    func loadFriendContacts(contacts: [CNContact], completion: @escaping ([PromoCodeUsedViewController.PromoUser], String, String, [RetrievedContact]) -> Void) {
+    func loadFriendContacts(contacts: [CNContact], completion: @escaping ([InviteFriendViewController.PromoUser], String, String, [RetrievedContact]) -> Void) {
         let contactData = contacts.map { contact -> [String: Any] in
             let firstName = contact.givenName
             let lastName = contact.familyName
@@ -63,7 +63,7 @@ class PromoDataStore {
                     }
                 }
                 let promoUsers = users.map { user in
-                    let promoUser = PromoCodeUsedViewController.PromoUser(user: user)
+                    let promoUser = InviteFriendViewController.PromoUser(user: user)
                     return promoUser
                 }
                 

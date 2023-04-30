@@ -14,7 +14,7 @@ class CryptoSettingsViewController: UIViewController {
         case winnerInfo = "Enter Winner Information"
         case connectedAccounts = "Verify Identity"
         case promoCode = "Promo Code"
-        case contactUs = "Contact Us or Leave Feedback"
+        case contactUs = "Share Feedback"
         case legaDisclosure = "Legal Disclosures"
         case notification = "Notifications"
         case logOut = "Log Out"
@@ -24,6 +24,7 @@ class CryptoSettingsViewController: UIViewController {
         case quizQuestions = "Quiz Questions"
         case rateUs = "Rate Us on App Store"
         case orderSwag = "Buy Swag"
+        case socials = "Follow Us"
         
         var imageName: String {
             switch self {
@@ -42,9 +43,11 @@ class CryptoSettingsViewController: UIViewController {
             case .promoCode:
                 return "invite"
             case .rateUs:
-                return "feedback"
+                return "rateBtn"
             case .orderSwag:
-                return "swag"
+                return "swagBtn"
+            case .socials:
+                return "followBtn"
             }
         }
     }
@@ -55,7 +58,7 @@ class CryptoSettingsViewController: UIViewController {
     private let quizDataStore = QuizDataStore()
     private let cryptoSettingsDataStore = CryptoSettingsDataStore()
     private let prizeDataStore = PrizeDataStore()
-
+    
     override func loadView() {
         super.loadView()
         setTableView()
@@ -63,8 +66,9 @@ class CryptoSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
         messageHelper = MessageHelper(currentVC: self)
-        dataArr = [.notification, .contactUs, .rateUs, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
+        dataArr = [.notification, .contactUs, .rateUs, .socials, .winnerInfo, .legaDisclosure, .logOut, .deleteAcc]
         
         if !(User.isAppleTester) {
             dataArr.insert(.promoCode, at: 0)
@@ -74,28 +78,45 @@ class CryptoSettingsViewController: UIViewController {
         if (User.current()?.showConnectAccount ?? false) {
             dataArr.insert(.connectedAccounts, at: 2)
         }
-
+        
         if User.isAdminUser {
             dataArr.append(.textNoti)
             dataArr.append(.answerKeys)
             dataArr.append(.quizQuestions)
         }
-              
-        self.navigationItem.title = "Settings"
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.isHidden = false
+        
+        self.navigationController?.navigationBar.topItem?.title = ""
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.backgroundColor = .black
+        self.navigationController?.navigationBar.tintColor = .white
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     private func setTableView() {
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .black
         tableView.separatorStyle = .none
+        tableView.alwaysBounceVertical = true
+        tableView.indicatorStyle = .white
         tableView.register(cellType: SettingsTableViewCell.self)
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
-            make.left.right.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.view.snp.topMargin)
         }
     }
 }
@@ -128,13 +149,13 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellType = dataArr[indexPath.row]
         switch cellType {
-            case .winnerInfo:
-                // MARK: Enter Winner Information
-                let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
-                UIApplication.shared.open(url)
-                
-            case .connectedAccounts:
-                // MARK: Connected Accounts
+        case .winnerInfo:
+            // MARK: Enter Winner Information
+            let url = URL(string: "https://airtable.com/shr4ZTlvbRUqAGswk")!
+            UIApplication.shared.open(url)
+            
+        case .connectedAccounts:
+            // MARK: Connected Accounts
             prizeDataStore.checkIfMethodAuthed { isAuthed in
                 if isAuthed {
                     let connectedAccountsVC = ConnectedAccountsViewController()
@@ -144,28 +165,30 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                     self.navigationController?.pushViewController(vc.self, animated: true)
                 }
             }
-            case .promoCode:
-                // MARK: Promo Code
-                let vc = PromoCodeUsedViewController(shouldShowSkipBtn: false)
-                Haptics.shared.play(.heavy)
-                self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .promoCode:
+            // MARK: Promo Code
+            let vc = ReferralViewController(shouldShowSkipBtn: false)
+            Haptics.shared.play(.heavy)
+            self.navigationController?.pushViewController(vc.self, animated: true)
         case .contactUs:
-                // MARK: Contact Us
-                // MARK: Leave Feedback
+            // MARK: Contact Us
+            // MARK: Leave Feedback
             messageHelper?.text(MessageHelper.customerServiceNum, body: "")
-                
-            case .legaDisclosure:
-                let vc = LegalDisclosuresViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
-            case .notification:
-                // MARK: Notification
-                let vc = NotificationViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
-                
-            case .logOut:
-                // MARK: Logout
+            
+        case .legaDisclosure:
+            let vc = LegalDisclosuresViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .notification:
+            // MARK: Notification
+            let vc = NotificationViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .logOut:
+            // MARK: Logout
+            let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { action in
                 User.logOutInBackground { error in
                     if let error = error {
                         BannerAlert.show(with: error)
@@ -177,56 +200,77 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
                         self.present(navController, animated: true)
                     }
                 }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        case .deleteAcc:
+            // MARK: Delete Account
+            let vc = DeleteAccountViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .textNoti:
+            // MARK: Send Text Notification
+            if User.sendMassTextNotification == false {
                 
-            case .deleteAcc:
-                // MARK: Delete Account
-                let vc = DeleteAccountViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alertView = SCLAlertView(appearance: appearance)
                 
-            case .textNoti:
-                // MARK: Send Text Notification
-                if User.sendMassTextNotification == false {
-                    
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alertView = SCLAlertView(appearance: appearance)
-                    
-                    alertView.addButton("Send") {
-                        self.cryptoSettingsDataStore.sendMassNotification {
-                            User.sendMassTextNotification = true
-                        }
+                alertView.addButton("Send") {
+                    self.cryptoSettingsDataStore.sendMassNotification {
+                        User.sendMassTextNotification = true
                     }
-                    
-                    alertView.addButton("Cancel") {
-                        
-                    }
-                    alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
                 }
                 
-            case .answerKeys:
-                // MARK: Answer Keys
-                let vc = AnswerKeysViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-                
-            case .quizQuestions:
-                // MARK: Answer Keys
-                let vc = QuizQuestionsViewController()
-                self.navigationController?.pushViewController(vc.self, animated: true)
-        case .rateUs:
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            } else {
-                //TODO: need to confirm in production if this takes you to the app store review page
-                let appID = "1639968618"
-                let urlStr = "itms-apps://itunes.apple.com/us/app/itunes-u/id\(appID)?ls=1&mt=8&action=write-review"
-                guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else { return }
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                alertView.addButton("Cancel") {
+                    
+                }
+                alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
             }
             
+        case .answerKeys:
+            // MARK: Answer Keys
+            let vc = AnswerKeysViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+            
+        case .quizQuestions:
+            // MARK: Answer Keys
+            let vc = QuizQuestionsViewController()
+            self.navigationController?.pushViewController(vc.self, animated: true)
+        case .rateUs:
+            guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1639968618?action=write-review") else {
+                BannerAlert.show(title: "Invalid URL for App Store Review", subtitle: "Please take a screenshot and text it to 317-690-5323", type: .error)
+                return
+            }
+            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        
         case .orderSwag:
             let swagPage = NotionViewController(notionURL: "https://dankwun.notion.site/Debt-Destroyer-Swag-aeec29bb9b4948db9dffa105ebba7a12")
             self.navigationController?.pushViewController(swagPage.self, animated: true)
+            
+        case .socials:
+            let alertController = UIAlertController(title: "Socials", message: nil, preferredStyle: .actionSheet)
+            
+            let socials = ["TikTok": "https://www.tiktok.com/@debtdestroyer", "Instagram": "https://www.instagram.com/debtdestroyer_/", "Twitter": "https://www.twitter.com/debtdestroyer_"]
+            for (title, link) in socials {
+                let action = UIAlertAction(title: title, style: .default) { (_) in
+                    if let url = URL(string: link) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                alertController.addAction(action)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            if let popoverController = alertController.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = (self as AnyObject).bounds
+            }
+            
+            present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -236,7 +280,7 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        footer.backgroundColor = UIColor.white
+        footer.backgroundColor = UIColor.black
         let titleLabel = UILabel(frame: CGRect(x:10,y: 10 ,width:footer.frame.width - 20,height:50))
         titleLabel.textColor = .systemGray2
         titleLabel.textAlignment = .center

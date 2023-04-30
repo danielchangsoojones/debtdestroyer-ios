@@ -188,7 +188,7 @@ class QuizDataStore {
             }
         }
     }
-    
+
     func officiallyEndQuiz(for quizTopic: QuizTopicParse) {
         let quizTopicID = quizTopic.objectId ?? ""
         
@@ -330,6 +330,54 @@ class QuizDataStore {
         PFCloud.callFunction(inBackground: "getEasyQuizDatas", withParameters: [:]) { (result, error) in
             if let quizDatas = result as? [QuizDataParse] {
                 completion(quizDatas)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getEasyQuizDatas")
+            }
+        }
+    }
+    
+    //TODO: delete this function from the} ChampionsViewController screen once we redesign it
+    func loadPastWinners(completion: @escaping ([WinnerInfo], Double) -> Void) {
+        PFCloud.callFunction(inBackground: "getPastWinners", withParameters: nil) { (result, error) in
+            if let winnersDict = result as? [String: Any],
+               let winnersData = winnersDict["winners"] as? [[String: Any]],
+               let totalAmountWon = winnersDict["totalAmountWon"] as? Double
+            {
+                let winners = winnersData.compactMap { dict -> WinnerInfo? in
+                    guard let user = dict["user"] as? User, let amountWon = dict["amountWon"] as? Double else {
+                        return nil
+                    }
+                    return WinnerInfo(user: user, prizeWon: amountWon)
+                }
+                completion(winners, totalAmountWon)
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getPastWinners")
+            }
+        }
+    }
+    
+    func sendLiveChatMessage(message: String, quizTopicID: String, completion: @escaping () -> Void) {
+        let parameters: [String: Any] = ["message": message, "quizTopicID": quizTopicID]
+        PFCloud.callFunction(inBackground: "sendLiveChatMessage", withParameters: parameters) { (result, error) in
+            if result != nil {
+                completion()
+            } else if let error = error {
+                BannerAlert.show(with: error)
+            } else {
+                BannerAlert.showUnknownError(functionName: "getEasyQuizDatas")
+            }
+        }
+    }
+    
+    func getLiveChatMessages(quizTopicID: String, completion: @escaping ([LiveChatParse]) -> Void) {
+        let parameters: [String: Any] = ["quizTopicID": quizTopicID]
+        PFCloud.callFunction(inBackground: "getLiveChatMessages", withParameters: parameters) { (result, error) in
+            if let result = result as? [LiveChatParse] {
+                completion(result)
             } else if let error = error {
                 BannerAlert.show(with: error)
             } else {

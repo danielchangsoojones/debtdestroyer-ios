@@ -16,6 +16,7 @@ class InviteContactCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .black
         setUpTitleLabel()
         setUpSubtitleLabel()
         setUpTextButton()
@@ -32,7 +33,7 @@ class InviteContactCell: UITableViewCell, Reusable {
     private func setUpTitleLabel() {
         titleLabel = UILabel()
         titleLabel.font = .systemFont(ofSize: 20, weight: .regular)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .white
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()
@@ -43,7 +44,7 @@ class InviteContactCell: UITableViewCell, Reusable {
     private func setUpSubtitleLabel() {
         subtitleLabel = UILabel()
         subtitleLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        subtitleLabel.textColor = UIColor(red: 236/255, green: 91/255, blue: 46/255, alpha: 1)
+        subtitleLabel.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1)
         contentView.addSubview(subtitleLabel)
         subtitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(titleLabel)
@@ -60,11 +61,11 @@ class InviteContactCell: UITableViewCell, Reusable {
     private func setUpTextButton() {
         textButton = UIButton()
         textButton.tintColor = .white
-        textButton.setTitle("Invite", for: .normal)
+        textButton.setTitle("Text", for: .normal)
         textButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         textButton.layer.cornerRadius = 8
         textButton.setTitleColor(.white, for: .normal)
-        textButton.backgroundColor = UIColor(red: 236/255, green: 91/255, blue: 46/255, alpha: 1)
+        textButton.backgroundColor = UIColor(red: 95/255, green: 205/255, blue: 236/255, alpha: 1)
         textButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         textButton.addTarget(self, action: #selector(textButtonPressed), for: .touchUpInside)
         contentView.addSubview(textButton)

@@ -8,24 +8,38 @@
 import UIKit
 import WebKit
 
-class NotionViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-    private var webView: WKWebView!
-    // the handler name injected into the web app for iOS webviews.
-    let vouchedHandler = "onVouchedVerify"
+class NotionViewController: UIViewController {
+    private let webView: WKWebView = {
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+    
+    private var theSpinnerContainer: UIView!
     let appUrl: String!
     
-    init(notionURL: String!) {
+    init(notionURL: String) {
         self.appUrl = notionURL
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.isHidden = true
+        view.backgroundColor = .white
+        view.addSubview(webView)
+        theSpinnerContainer = Helpers.showActivityIndicatory(in: webView)
+        view.addSubview(theSpinnerContainer)
+        webView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.view.snp.topMargin)
+        }
+        theSpinnerContainer.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
         
         DispatchQueue.main.async {
             if let url = URL(string: self.appUrl) {
@@ -33,61 +47,20 @@ class NotionViewController: UIViewController, WKNavigationDelegate, WKScriptMess
             }
         }
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        
-        navigationController?.navigationBar.tintColor = .black
+        webView.navigationDelegate = self
         navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
     }
+}
 
-    override func loadView() {
-        super.loadView()
-        let notionView = NotionView(frame: self.view.bounds)
-        self.view = notionView
-        webView = notionView.webView
-        
-        let config = WKWebViewConfiguration()
-        config.userContentController.add(self, name: vouchedHandler)
-        config.allowsInlineMediaPlayback = true
-        webView.navigationDelegate = self
-    }
-    
-    // implements WKScriptMessageHandler. For our callback, we will look
-    // for messages sent by the vouchedHandler, and operate on them
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == vouchedHandler {
-            
-            guard let verifyData =
-                    convertResponseToDict(payload: message.body as! String),
-                  let results = verifyData["result"] as? [String: AnyObject],
-                  let successCode = results["success"] as? Bool  else {
-                print("Unable to process verification result")
-                return
-            }
-            // todo: navigate according to success code, and/or results
-            print("User was successfully verified: \(successCode)")
-            print(results)
-        }
-    }
-    
-    // if using the iOS SDK, you can decode the payload into SDK objects,
-    // but given we are bridging between two platforms, we'll create a
-    // generic dictionary from the payload
-    func convertResponseToDict(payload: String) -> [String:AnyObject]? {
-        if let data = payload.data(using: .utf8) {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
-                return json
-            } catch {
-                print("Unable to convert verification response")
-            }
-        }
-        return nil
+extension NotionViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        theSpinnerContainer.isHidden = true
     }
 }

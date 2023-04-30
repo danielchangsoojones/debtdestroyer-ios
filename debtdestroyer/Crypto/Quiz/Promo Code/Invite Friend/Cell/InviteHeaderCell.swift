@@ -14,6 +14,7 @@ class InviteHeaderCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .black
         setupHeaderLabel()
         setupClickArrow()
     }
@@ -37,6 +38,7 @@ class InviteHeaderCell: UITableViewCell, Reusable {
     
     private func setupHeaderLabel() {
         headerLabel = UILabel()
+        headerLabel.textColor = .white
         headerLabel.font = .systemFont(ofSize: 20, weight: .bold)
         headerLabel.textAlignment = .left
         contentView.addSubview(headerLabel)
@@ -50,7 +52,7 @@ class InviteHeaderCell: UITableViewCell, Reusable {
         if let image = UIImage(named: "chevron_down")?.withRenderingMode(.alwaysTemplate) {
             clickArrowImg = UIButton()
             clickArrowImg.transform = CGAffineTransform(rotationAngle: (CGFloat.pi / 2))
-            clickArrowImg.tintColor = .black
+            clickArrowImg.tintColor = .white
             clickArrowImg.setImage(image, for: .normal)
             clickArrowImg.imageView?.contentMode = .scaleAspectFit
             contentView.addSubview(clickArrowImg)

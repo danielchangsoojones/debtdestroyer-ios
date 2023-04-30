@@ -21,41 +21,32 @@ class LegalDisclosuresViewController: UIViewController {
         super.viewDidLoad()
         dataArr = ["Privacy Policy", "Terms of Service", "Game Rules"]
         imgNameArr = ["legal", "legal","legal"]
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationItem.title = "Legal Disclosures"
-        self.navigationController?.navigationBar.tintColor = .black
-        
-        setNavBarBtns()
-
+        tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.backgroundColor = .black
+        self.navigationController?.navigationBar.tintColor = .white
     }
-    
-    private func setNavBarBtns() {
-        navigationItem.hidesBackButton = true
-        var backImg = UIImage.init(named: "arrow-left-alt")
-        backImg = backImg?.withRenderingMode(.alwaysOriginal)
-        let back = UIBarButtonItem(image: backImg , style: .plain, target: self, action: #selector(backPressed))
-        navigationItem.leftBarButtonItem = back
-        
-        navigationController?.navigationBar.backgroundColor = .clear
-    }
-    
-    @objc private func backPressed() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
     
     private func setTableView() {
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .black
         tableView.separatorStyle = .none
         tableView.register(cellType: SettingsTableViewCell.self)
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ make in
             make.left.right.top.bottom.equalToSuperview()
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }
 

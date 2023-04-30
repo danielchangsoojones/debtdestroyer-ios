@@ -54,5 +54,13 @@ extension UIViewController {
             alpha: CGFloat(1.0)
         )
     }
-
+    
+    func numberToDollar(amount: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        let formattedAmount = formatter.string(from: NSNumber(value: amount)) ?? "$\(Int(amount))"
+        return formattedAmount
+    }
 }

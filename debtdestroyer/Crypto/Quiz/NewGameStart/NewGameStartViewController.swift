@@ -443,8 +443,10 @@ extension NewGameStartViewController {
     }
     
     private func scrollToLastMessage() {
-        let indexPath = IndexPath(row: self.liveChatMessages.count - 1, section: 0)
-        liveChatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+        if (self.liveChatMessages.count > 0) {
+            let indexPath = IndexPath(row: self.liveChatMessages.count - 1, section: 0)
+            liveChatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+        }
     }
     
     @objc private func hideKeyboard() {

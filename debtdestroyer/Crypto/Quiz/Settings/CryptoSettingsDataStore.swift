@@ -58,7 +58,7 @@ class CryptoSettingsDataStore {
         }
     }
     
-    func sendMassNotification(completion: @escaping () -> Void) {
+    func sendMassNotification() {
         PFCloud.callFunction(inBackground: "sendNotification", withParameters: nil) { (result, error) in
             if let msg = result as? String {
                 BannerAlert.show(title: "Sent", subtitle: msg, type: .success)

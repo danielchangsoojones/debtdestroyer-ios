@@ -23,7 +23,6 @@ class User: PFUser {
     @NSManaged var socials: [String]?
     
     static var shouldShowEarnings = true
-    static var sendMassTextNotification = false
     static var hasAccountsConnected = false
 
     var quizPointCounter = 0

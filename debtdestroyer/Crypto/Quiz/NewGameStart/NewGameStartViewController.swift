@@ -16,7 +16,7 @@ class NewGameStartViewController: UIViewController {
     }
     private var messageHelper: MessageHelper?
     var quizKickoffTime: Date?
-    private var timer = Timer()
+    private var timer: Timer?
     private var timeLeft: TimeInterval = Constants.originalStartTime
     
     private var quizDatas: [QuizDataParse] = []
@@ -87,6 +87,9 @@ class NewGameStartViewController: UIViewController {
         super.viewDidAppear(animated)
         User.current()?.fetchInBackground()
         showGameReminderPopUp()
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +103,8 @@ class NewGameStartViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         checkStartTimer.invalidate()
-        timer.invalidate()
+        timer?.invalidate()
+        timer = nil
     }
     
     private func loadPastWinners() {
@@ -324,6 +328,11 @@ extension NewGameStartViewController {
             let tieVC = TieBreakerViewController(competing_tie_user_ids: [], inTestTieMode: true)
             self.navigationController?.pushViewController(tieVC, animated: true)
         })
+        
+        alertView.addButton("Send Mass Notification") {
+            let dataStore = CryptoSettingsDataStore()
+            dataStore.sendMassNotification()
+        }
         
         alertView.addButton("Easy Questions", action: {
             // Handle "Tiebreaker" option

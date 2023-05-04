@@ -210,25 +210,19 @@ extension CryptoSettingsViewController: UITableViewDataSource, UITableViewDelega
             
         case .textNoti:
             // MARK: Send Text Notification
-            if User.sendMassTextNotification == false {
-                
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                let alertView = SCLAlertView(appearance: appearance)
-                
-                alertView.addButton("Send") {
-                    self.cryptoSettingsDataStore.sendMassNotification {
-                        User.sendMassTextNotification = true
-                    }
-                }
-                
-                alertView.addButton("Cancel") {
-                    
-                }
-                alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            let alertView = SCLAlertView(appearance: appearance)
+            
+            alertView.addButton("Send") {
+                self.cryptoSettingsDataStore.sendMassNotification()
             }
             
+            alertView.addButton("Cancel") {
+                
+            }
+            alertView.showNotice("", subTitle: "Are you sure you want to send a mass text notification?")
         case .answerKeys:
             // MARK: Answer Keys
             let vc = AnswerKeysViewController()
